@@ -50,21 +50,21 @@ module.exports = function(grunt) {
     }
   });
   
-  grunt.loadNpmTasks('grunt-bower');
-  
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  
-  // Load the plugin that finds your components and injects them directly into the HTML.
-  grunt.loadNpmTasks('grunt-wiredep');
-  
-  //Load the plugin that provides CSS minification task.
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  
-  // Default task(s).
-  // grunt.registerTask('default', ['uglify','cssmin','bower','wiredep']);
-  
-  grunt.registerTask('default', ['bower','wiredep']);
+  //grunt.loadNpmTasks('grunt-bower');
+  //
+  //// Load the plugin that provides the "uglify" task.
+  //grunt.loadNpmTasks('grunt-contrib-uglify');
+  //
+  //// Load the plugin that finds your components and injects them directly into the HTML.
+  //grunt.loadNpmTasks('grunt-wiredep');
+  //
+  ////Load the plugin that provides CSS minification task.
+  //grunt.loadNpmTasks('grunt-contrib-cssmin');
+  //
+  //// Default task(s).
+  //// grunt.registerTask('default', ['uglify','cssmin','bower','wiredep']);
+  //
+  //grunt.registerTask('default', ['bower','wiredep']);
   
   // grunt.registerTask('default', 'Log some stuff.', function() {
   //   grunt.log.write('Logging some stuff...').ok();
