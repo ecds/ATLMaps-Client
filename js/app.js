@@ -692,7 +692,10 @@ App.MapLayersComponent = Ember.Component.extend({
                         };
                         if (feature.properties.gx_media_links) {
                             popupContent += '<iframe width="375" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>'
-                        }
+                        };
+                        if (feature.properties.images) {
+                            popupContent += feature.properties.images
+                        };
                         //layer.bindPopup(popupContent);
                         layer.on('click', function(marker) {
                             $(".shuffle-items li.item.info").remove();
