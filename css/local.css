@@ -14,16 +14,25 @@ h4, .h4 { font-size: 18px; line-height: 20px; }
 h5, .h5 { font-size: 14px; line-height: 20px; }
 h6, .h6 { font-size: 12px; line-height: 20px; }
 
-.static_content {
-    background: white;
-    width: 65%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2em 5em;
-    box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
-    line-height: 1.5;
-    overflow-y: scroll;
+.body, .static_content{
+  background-color:#f4f4f4;
+  height: 100%;
+}
+
+.static_content.container{
+  padding-left:25px;
+  padding-right:25px;
+}
+
+.static_content.page {
+  background: white;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em 5em;
+  box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
+  line-height: 1.5;
+  overflow-y: scroll;
 }
 
 #base-map{
@@ -156,14 +165,22 @@ a:hover{
   cursor:pointer;
 }
 
+img.logo {
+  height: 45px;
+}
+
+a.site-title {
+  color: #B0BEC5;
+}
+
+a.site-title .alt-dark{
+  color: #78909C;
+}
+
 .content {
   width: 100%;
   position: relative;
   height: 100%;
-  top: 0;
-  left: 0;
-  margin-top: -40px;
-  padding-top: 40px;
 }
 
 .modal-content .modal-body {
@@ -190,10 +207,6 @@ a:hover{
   text-shadow: 2px 2px #666699;
   text-align: center;
   
-}
-
-.container {
-  width: 100%;
 }
 
 .navbar{
@@ -261,7 +274,7 @@ a:hover{
   left: 0%;
   width: 420px;
   margin-left:30px;
-  margin-top:15px;
+  margin-top: 55px;
 }
 
 .card{
@@ -418,7 +431,7 @@ h3 .btn {
   font-size: 2em;
   height: 40px;
   width: 40px;
-  margin: 20px;
+  margin: 20px 20px;
   padding: 7px;
 }
 
@@ -524,6 +537,7 @@ a#show-layer-options {
   z-index: 10;
   background-color: white;
   position: absolute;
+  margin-top: 45px;
 }
 
 a#show-layer-options,
@@ -538,8 +552,6 @@ a#hide-layer-options:hover{
   color: white;
   background-color: rgb(181, 181, 181);
 }
-
-
 
 /*Map items test*/
 .shuffle-items{
@@ -765,7 +777,7 @@ img.layerMarker {
 
 #project_edit_form {
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   top: 30px;
   padding-top: 10px;
   max-width: 500px;
@@ -788,17 +800,17 @@ img.layerMarker {
 }
 
 .publish_check {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 /*.project-group-item {
-  width: 50%;
-  float: left;
-  min-height: 15em;
+width: 50%;
+float: left;
+min-height: 15em;
 }*/
 
 .list-group .list-group-item .row-action-primary i.icon-lg {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 .project-options {
@@ -806,15 +818,21 @@ img.layerMarker {
   
 }
 
+.row-content {
+  position: relative;
+}
+
 .project-options.open {
   display: block;
-  top: 3em;
-  right: 3em;
-  float: right;
-  z-index: 100;
+  top: 25px;
+  right: 25px;
+  left: auto;
   position: absolute;
-  background-color: LightGray;
-  box-shadow: 2.5px 2.5px 1.75px #888888;
+  width:200px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  padding: 0px;
+  border-radius: 0px;
+  border: 1px solid rgb(231, 231, 231);
 }
 
 a.project-options-close {
@@ -830,9 +848,53 @@ a.project-options-close:hover {
 }
 
 div.project-group-item {
-
+  
 }
 
 div.row-content {
   height: 250px;
+}
+
+.project-options.card{
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: 2px;
+  margin: 10px 0;
+  box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+  background: white;
+  vertical-align: top;
+  position: relative;
+  font-weight: 300;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+
+.project-options.card a.action {
+  float: left;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  text-decoration: none;
+  color: rgb(140, 140, 140);
+}
+
+.project-options.card a.action:hover,
+.project-options.card a.action:focus{
+  color: rgb(77, 194, 229);
+}
+
+.project-options.card .action-icon{
+  margin-right: 20px;
+  font-size: 26px;
+  display: block;
+  float: left;
+}
+
+.project-options.card .action-label{
+  font-size: 16px;
+  display: block;
+  margin-top: 3px;
 }

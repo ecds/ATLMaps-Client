@@ -38,7 +38,14 @@ var Counts = Ember.Object.create({
 App.Map = Ember.Object.extend();
 var store = App.Map.create();
 
-//App.ApplicationController = Ember.Controller.extend({});
+App.ApplicationController = Ember.Controller.extend({
+    initMenu: function(){
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        new gnMenu( document.getElementById( 'gn-menu' ) );
+      });
+    }.property()
+  
+});
 
 App.ProjectsIndexController = Ember.ArrayController.extend({
     sortProperties: ['name'],
@@ -76,10 +83,21 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
         },
         
         toggleOptions: function(project) {
-            console.log(project)
-            var target = ".project-group-item[data-project-id='"+project+"'] .project-options";
-            $(".project-group-item .project-options").not(target).removeClass("open");
+            var target = ".project-group-item[data-project-id='"+project+"'] .project-options",
+                project_option = ".project-group-item .project-options"
+            
+            $(project_option).not(target).removeClass("open");
+              
+            $('.projects').off('click.options').on('click.options', function(evt){
+              var $clicked = $(evt.target);
+              if( !$clicked.hasClass('project-options') && $clicked.closest('.project-options').length==0){
+                $(project_option).removeClass("open");
+                $(this).off('click.options');
+              }
+            });
+            
             $(target).toggleClass("open");
+            
         },
         
         deleteProject: function(project) {
@@ -908,9 +926,11 @@ $(document).ready(function(){
   $.material.ripples(".btn, .navbar a");
   $.material.input();
   (function(){
-  // init on shuffle items 
+    // init on shuffle items 
     shuffle.init();
-  })()
+    // init menu
+  })();
+  
   
   // document events
   $(document).on('click','#hide-layer-options',function(){
