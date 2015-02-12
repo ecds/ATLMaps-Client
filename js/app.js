@@ -3,9 +3,11 @@ window.ENV['simple-auth'] = {
     authorizer: 'simple-auth-authorizer:oauth2-bearer',
 };
 
+var apiHost = 'http://api.atlmaps-dev.com:7000';
+
 window.ENV['simple-auth-oauth2'] = {
-    serverTokenEndpoint: 'http://api.atlmaps-dev.com:7000/oauth/token',
-    serverTokenRevocationEndpoint: 'http://api.atlmaps-dev.com:7000/oauth/revoke',
+    serverTokenEndpoint: apiHost+'/oauth/token',
+    serverTokenRevocationEndpoint: apiHost+'/oauth/revoke',
 };
 
 var App = Ember.Application.create({
@@ -73,10 +75,25 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
 
         },
         
+        toggleOptions: function(project_id) {
+            var target = ".project-group-item[data-project-id='"+project_id+"'] .project-options";
+            $(".project-group-item .project-options").not(target).removeClass("open");
+            $(target).toggleClass("open");
+        },
+        
         deleteProject: function(project) {
-            this.store.find('project', project).then(function (project) {
-                project.destroyRecord();
-            });
+            
+            var response = confirm("Are you sure you want to DELETE this project?");
+            
+            if (response == true) {
+            
+                this.store.find('project', project).then(function (project) {
+                    project.destroyRecord();
+                });
+            }
+            else {
+                $(".open").remove();
+            }
             
         }
     }
@@ -441,7 +458,7 @@ App.BaseMapComponent = Ember.Component.extend({
 
         store.set('map', map);
         // save map instance
-        this.controller.set('map', map);
+        //this.controller.set('map', map);
     },
 });
 
@@ -805,7 +822,7 @@ App.SearchTagsComponent = Ember.Component.extend({
 // Adapter
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-    host: 'http://api.atlmaps-dev.com:7000',
+    host: apiHost,
     namespace: 'v1',
     suffix: '.json',
     buildURL: function(record, suffix) {
@@ -859,7 +876,8 @@ App.Institution = DS.Model.extend({
     name: DS.attr('string'),
     slug: DS.attr('string'),
     geoserver: DS.attr('string'),
-    layer_ids: DS.hasMany('layer', {async: true})
+    layer_ids: DS.hasMany('layer', {async: true}),
+    user_ids: DS.hasMany('user', {async: true})
 });
 
 App.Projectlayer = DS.Model.extend({
@@ -879,6 +897,7 @@ App.User = DS.Model.extend({
     displayname: DS.attr('string'),
     avatar: DS.attr('string'),
     project_ids: DS.attr(),
+    institution_id: DS.belongsTo('institution')
 });
 
 // Random JavaScript

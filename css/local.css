@@ -23,6 +23,7 @@ h6, .h6 { font-size: 12px; line-height: 20px; }
     padding: 5em;
     box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
     line-height: 1.5;
+    overflow-y: scroll;
 }
 
 #base-map{
@@ -136,16 +137,19 @@ h6, .h6 { font-size: 12px; line-height: 20px; }
 
 .filter-heading .btn.btn-inverse{
   color:rgb(188, 166, 226);
+  background-color: rgb(119, 67, 208);
 }
 
 .filter-heading .btn.btn-inverse:hover{
   color:rgb(107, 42, 216);
+  background-color: rgb(188, 166, 226);
 }
 
 .filter-heading .btn.active{
   transform: rotateZ(180deg);
   box-shadow:0 -10px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)!important;
   color:rgb(107, 42, 216);
+  background-color: rgb(188, 166, 226);
 }
 
 a:hover{
@@ -498,10 +502,10 @@ h3 .btn {
   line-height: 1.5;
 }
 
-a.action.project-delete {
+a.action.show-options {
   position: absolute;
   top: 3px;
-  right: 3px;
+  right: 1.5em;
   font-size: 19px;
   height: 35px;
   width: 35px;
@@ -526,6 +530,7 @@ a#show-layer-options,
 a#hide-layer-options {
   color: rgb(158, 158, 158);
   transition: color 0.2s, background 0.2s;
+  background-color: #FFF;
 }
 
 a#show-layer-options:hover,
@@ -790,21 +795,44 @@ img.layerMarker {
     margin-top: 2em;
 }
 
-/*img.active_marker {
-height: 100px !important;
+/*.project-group-item {
+  width: 50%;
+  float: left;
+  min-height: 15em;
 }*/
 
+.list-group .list-group-item .row-action-primary i.icon-lg {
+    font-size: 36px;
+}
 
-@-webkit-keyframes blink { 
-  0%, {opacity: 0.25;} 
-  40% {opacity: 0.50;} 
-  60% {opacity: 0.75;}
-  100% {opacity: 1;}
-} 
+.project-options {
+  display: none;
+  
+}
 
-@keyframes blink { 
-  0%, {opacity: 0.25;} 
-  40% {opacity: 0.50;} 
-  60% {opacity: 0.75;}
-  100% {opacity: 1;} 
+.project-options.open {
+  display: block;
+  top: 3em;
+  right: 3em;
+  float: right;
+  z-index: 100;
+  position: absolute;
+  background-color: LightGray;
+  box-shadow: 2.5px 2.5px 1.75px #888888;
+}
+
+a.project-options-close {
+  margin-right: 1em;
+  margin-top: .5em;
+  color: black;
+  
+}
+
+a.project-options-close:hover {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+div.project-group-item {
+  min-height: 300px;
 }

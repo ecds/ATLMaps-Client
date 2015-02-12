@@ -40,6 +40,18 @@ module.exports = function(grunt) {
           // you may pass:
           
           // https://github.com/taptapship/wiredep#configuration
+          exclude: [
+                    'bower_components/ember-simple-auth/simple-auth.amd.js',
+                    'bower_components/ember-simple-auth/simple-auth-cookie-store.js',
+                    'bower_components/ember-simple-auth/simple-auth-cookie-store.amd.js',
+                    'bower_components/ember-simple-auth/simple-auth-devise.js',
+                    'bower_components/ember-simple-auth/simple-auth-devise.amd.js',
+                    'bower_components/ember-simple-auth/simple-auth-oauth2.amd.js',
+                    'bower_components/ember-simple-auth/simple-auth-torii.js',
+                    'bower_components/ember-simple-auth/simple-auth-torii.amd.js',
+                    'bower_components/ember-simple-auth/simple-auth-testing.js',
+                    'bower_components/ember-simple-auth/simple-auth-testing.amd.js'
+                    ],
         }
       }
     },

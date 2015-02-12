@@ -1,19 +1,20 @@
 <html>
     <head>
+        <script src="bower_components/ember/ember-template-compiler.js"></script>
         <!-- bower:js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="../bower_components/bootstrap-material-design/dist/js/material.js"></script>
-        <script src="../bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
-        <script src="../bower_components/handlebars/handlebars.js"></script>
-        <script src="../bower_components/ember/ember.js"></script>
-        <script src="../bower_components/leaflet/dist/leaflet.js"></script>
-        <script src="../bower_components/leaflet/dist/leaflet-src.js"></script>
-        <script src="../bower_components/leaflet-ajax/dist/leaflet.ajax.js"></script>
-        <script src="../bower_components/jquery.easing/js/jquery.easing.js"></script>
-        <script src="../bower_components/ember-simple-auth/simple-auth.js"></script>
-        <script src="../bower_components/ember-simple-auth/simple-auth-oauth2.js"></script>
-        <script src="../bower_components/list.js/dist/list.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+        <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/ember/ember.debug.js"></script>
+        <script src="bower_components/leaflet/dist/leaflet.js"></script>
+        <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+        <script src="bower_components/leaflet-ajax/dist/leaflet.ajax.js"></script>
+        <script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
+        <script src="bower_components/ember-simple-auth/simple-auth.js"></script>
+        <script src="bower_components/ember-simple-auth/simple-auth-oauth2.js"></script>
+        <script src="bower_components/list.js/dist/list.js"></script>
         <!-- endbower -->
         <!--<script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.12/ember-data.prod.js"></script>
@@ -22,10 +23,10 @@
         <script src="js/app.js"></script>
         
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,700,400italic,300' rel='stylesheet' type='text/css'>        <!-- bower:css -->
-        <link rel='stylesheet' href='../bower_components/bootstrap/dist/css/bootstrap.css' />
-        <link rel='stylesheet' href='../bower_components/bootstrap-material-design/dist/css/material.css' />
-        <link rel='stylesheet' href='../bower_components/bootstrap-material-design/dist/css/ripples.css' />
-        <link rel='stylesheet' href='../bower_components/leaflet/dist/leaflet.css' />
+        <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
+        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
+        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
+        <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
         <!-- endbower -->
         <link rel='stylesheet' href='css/bootstrap-slider.css' />
         <link rel='stylesheet' href='css/local.css' />
@@ -67,41 +68,76 @@
         </script>
         
         <script type='text/x-handlebars' data-template-name='projects/index'>
-            <div class="continer" id="create_project">
-                <a class="btn btn-add" {{action 'createProject'}}><span class="mdi-content-add mdi-large"></span>Create New Project</a></h3>
-            </div>
-            <div class="container" class="project-list">
-                {{#if session.isAuthenticated}}
-                    <h2>My Projects</h2>
-                    {{#each project in myProjects}}
-                        {{#if project.saved}}
-                            <div>
-                                <div class="well square">
-                                    <h3 class="heading">{{#link-to 'project' project action='reload'}}{{project.name}}{{/link-to}}</h3>
-                                    {{#if session.isAuthenticated}}
-                                        <a class="btn btn-warning btn-fab action project-delete" {{action 'deleteProject' project.id}}>
-                                            <span class="mdi-action-delete"></span>
-                                        </a>
-                                    {{/if}}
-                                </div>
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                {{/if}}
-            </div>
-            <div class="container" class="project-list">
-                <h2>Projects</h2>
-                {{#each project in this.model}}
-                    {{#if project.published}}
-                        <div>
-                            <div class="well square">
-                            {{mine}}
-                                <h3 class="heading">{{#link-to 'project' project action='reload'}}{{project.name}}{{/link-to}}</h3>
-                                <span>Created by: {{project.user.displayname}}</span>
-                            </div>
+            <div id="banner">
+                <div class="static_content">
+                    <div class="continer" id="create_project">
+                        <h3><a class="btn btn-add" {{action 'createProject'}}><span class="mdi-content-add mdi-large"></span>Create New Project</a></h3>
+                    </div>
+                    {{#if session.isAuthenticated}}
+                        <h2>My Projects</h2>
+                        <hr />
+                        <div class="list-group row">
+                            {{#each project in myProjects}}
+                                {{#if project.saved}}
+                                    <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
+                                        <div class="row-action-primary">
+                                            <i class="mdi-maps-map icon-lg"></i>
+                                        </div>
+                                        <div class="row-content">
+                                            <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                                            <h4 class="list-group-item-heading">
+                                                {{#link-to 'project' project action='reload'}}
+                                                    {{project.name}}
+                                                {{/link-to}}
+                                            </h4>
+                                            <p class="list-group-item-text">{{project.description}}</p>
+                                            <h5>Created by: {{project.user.displayname}}</h5>
+                                            {{#if session.isAuthenticated}}
+                                                <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
+                                                    <span class="mdi-navigation-more-vert"></span>
+                                                </a>
+                                                <div class="project-options">
+                                                    <a class="project-options-close pull-right" title="Close" {{action 'toggleOptions' project.id}}>&times;</a>
+                                                    <br />
+                                                    <a class="btn btn-flat action project-delete" {{action 'deleteProject' project.id}}>
+                                                    <span class="mdi-action-delete"></span> Delete
+                                                </a></div>
+                                            {{/if}}
+                                        </div>
+                                        <div class="list-group-separator"></div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
                         </div>
                     {{/if}}
-                {{/each}}
+                    
+                    <div class="row">
+                        <h2>Projects</h2>
+                        <hr />
+                        <div class="list-group row">
+                            {{#each project in this.model}}
+                                {{#if project.published}}
+                                    <div class="list-group-item col-xs-6 project-group-item">
+                                        <div class="row-action-primary">
+                                            <i class="mdi-maps-map icon-lg"></i>
+                                        </div>
+                                        <div class="row-content">
+                                            <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                                            <h4 class="list-group-item-heading">
+                                                {{#link-to 'project' project action='reload'}}
+                                                    {{project.name}}
+                                                {{/link-to}}
+                                            </h4>
+                                            <p class="list-group-item-text">{{project.description}}</p>
+                                            <h5>Created by: {{project.user.displayname}}</h5>
+                                        </div>
+                                        <div class="list-group-separator"></div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </script>
         
@@ -121,7 +157,7 @@
                             {{input valueBinding='projectName' placeholder='Enter Title for Project' class="form-control floating-label" type="text"}}
                         </div>
                         <div class='col-xs-3'>
-                            <a class="btn btn-info btn-xs pull-right" id="title-button" {{action 'saveProject'}}><span>OK</span mdi-large></a>
+                            <a class="btn btn-info btn-xs pull-right" id="title-button" {{action 'saveProject'}}><span>OK</span></a>
                         </div>
                     </div>
                     {{/if}}
@@ -182,7 +218,7 @@
               </div>
               <div class="form-group">
                 <label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
-                {{textarea valueBinding="description" id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..."}}
+                {{textarea valueBinding="description" id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
                 
                 <div class="publish_check">
                   <label>Publish</label>
@@ -279,7 +315,7 @@
         </script>
         
         <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
-            <span {{bind-attr class="layer.layer_type" }}</span>
+            <span {{bind-attr class="layer.layer_type" }}></span>
             <h4 class="name">{{layer.name}}</h4>
             <p>
               <div class="description">{{layer.description}}</div>
