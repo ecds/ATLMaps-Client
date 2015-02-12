@@ -75,8 +75,9 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
 
         },
         
-        toggleOptions: function(project_id) {
-            var target = ".project-group-item[data-project-id='"+project_id+"'] .project-options";
+        toggleOptions: function(project) {
+            console.log(project)
+            var target = ".project-group-item[data-project-id='"+project+"'] .project-options";
             $(".project-group-item .project-options").not(target).removeClass("open");
             $(target).toggleClass("open");
         },
@@ -86,13 +87,13 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
             var response = confirm("Are you sure you want to DELETE this project?");
             
             if (response == true) {
-            
                 this.store.find('project', project).then(function (project) {
                     project.destroyRecord();
                 });
             }
             else {
-                $(".open").remove();
+                var target = ".project-group-item[data-project-id='"+project+"'] .project-options";
+                $(".project-group-item .project-options").removeClass("open");
             }
             
         }
@@ -870,6 +871,7 @@ App.Project = DS.Model.extend({
     published: DS.attr('boolean'),
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
+    slug: DS.attr('string')
 });
 
 App.Institution = DS.Model.extend({
