@@ -61,21 +61,20 @@
                     <li><a class="gn-icon mdi-image-movie-creation">Videos</a></li>
                   </ul>
                 </li>
-                <li class="logout">
                 {{#if session.isAuthenticated}}
                 <li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>
                 {{else}}
                 <li>{{#link-to 'login' tagName='a' class="gn-icon mdi-navigation-arrow-forward"}}Login{{/link-to}}</li>
                 {{/if}}
-                </li>
               </ul>
             </div><!-- /gn-scroller -->
           </nav>
         </li>
-        <li>{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
+        <li class="home">{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo3.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
         <li class="hidden-xs"></li>
       </ul>
     </div>
+    
     {{initMenu}}
     {{outlet "modal"}}
     {{outlet}}

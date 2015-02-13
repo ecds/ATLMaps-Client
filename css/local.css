@@ -181,6 +181,8 @@ a:hover{
 
 img.logo {
   height: 45px;
+  margin-bottom: 12px;
+  margin-right: 12px;
 }
 
 a.site-title {
@@ -1011,4 +1013,19 @@ h2 .btn-fab+span{
   background: rgb(183, 183, 183);
   color: whitesmoke;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.31) inset;
+}
+
+.no-touch .gn-menu-main .home  a{
+  transition:background 0.2 ease;
+  background: white;
+}
+.no-touch .gn-menu-main .home  a:hover {
+  background: rgb(254,255,255); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
+  background: linear-gradient(135deg,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
