@@ -14,7 +14,7 @@ h4, .h4 { font-size: 18px; line-height: 20px; }
 h5, .h5 { font-size: 14px; line-height: 20px; }
 h6, .h6 { font-size: 12px; line-height: 20px; }
 
-.body, .static_content{
+body, .static_content{
   background-color:#f4f4f4;
   height: 100%;
 }
@@ -863,7 +863,9 @@ div.row-content {
   box-shadow: 0px 2px 4px rgba(0,0,0,.2);
   background: white;
   vertical-align: top;
-  position: relative;
+  position: absolute;
+  right: 25px;
+  top: 25px;
   font-weight: 300;
   cursor: default;
   -webkit-user-select: none;
