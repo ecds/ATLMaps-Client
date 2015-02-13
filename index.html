@@ -71,7 +71,11 @@
           </nav>
         </li>
         <li class="home">{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo3.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
-        <li class="hidden-xs"></li>
+        {{#if session.isAuthenticated}}
+          <li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>
+          {{else}}
+          <li></li>
+        {{/if}}
       </ul>
     </div>
     
@@ -143,11 +147,7 @@
     <div class="banner pink">
       <div class="container">
         <header>
-          {{#if session.isAuthenticated}}
             <h2>Map Projects </h2>
-          {{else}}
-            <h2>Published Projects</h2>
-          {{/if}}
         </header>
       </div>
     </div>
