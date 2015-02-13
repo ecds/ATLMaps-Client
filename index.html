@@ -56,23 +56,24 @@
                 <li>
                   <a class="gn-icon mdi-editor-insert-drive-file">Pages</a>
                   <ul class="gn-submenu">
-                    <li>{{#link-to 'about' tagName='a' class="gn-icon mdi-maps-location-history"}}About{{/link-to}}</li>
+                    <li>{{#link-to 'about' tagName='a' class="gn-icon mdi-maps-location-history"}}About ATLMaps{{/link-to}}</li>
                     <li><a class="gn-icon mdi-image-image">Images</a></li>
                     <li><a class="gn-icon mdi-image-movie-creation">Videos</a></li>
                   </ul>
+                </li>
+                <li class="logout">
+                {{#if session.isAuthenticated}}
+                <li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>
+                {{else}}
+                <li>{{#link-to 'login' tagName='a' class="gn-icon mdi-navigation-arrow-forward"}}Login{{/link-to}}</li>
+                {{/if}}
                 </li>
               </ul>
             </div><!-- /gn-scroller -->
           </nav>
         </li>
         <li>{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
-        <li class="logout">
-          {{#if session.isAuthenticated}}
-          <a {{ action 'invalidateSession' }} class="btn btn-link"><span class="glyphicon glyphicon-log-out"> Logout</span></a>
-          {{else}}
-          {{#link-to 'login' tagName='a' class="btn btn-link"}}<span class="glyphicon glyphicon-log-in"> Login</span>{{/link-to}}
-          {{/if}}
-        </li>
+        <li class="hidden-xs"></li>
       </ul>
     </div>
     {{initMenu}}
@@ -83,35 +84,86 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-    
-  </script>
-
-  <script type='text/x-handlebars' data-template-name='projects/index'>
-    <div id="banner">
-      <div class="container static_content">
-        
-        <header class="row">
-          <div class="col-sm-7">
-            <h2>Projects</h2>
+    <div class="banner blue">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8">
+            <div class="jumbotron text-center">
+              <h1>Redefining bleeding-edge Atlanta maps.</h1>
+              <p>What is smarter, longitude or latitude?<br class="hidden-xs"/>
+                 Longitude, because it has 360 degrees.</p>
+              {{#if session.isAuthenticated}}
+              <p>{{#link-to 'projects' tagName='a' class="btn btn-material-pink-300 btn-lg"}}Go to Projects{{/link-to}}</p>
+              {{else}}
+              <p><a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a></p>
+              {{/if}}
+            </div>
           </div>
-          <div class="col-sm-5">
-            <a class="btn btn-add pull-right" {{action 'createProject'}}><span class="mdi-content-add mdi-large"></span>
-            {{#if session.isAuthenticated}}
-              <span class="action-label">Create New Project</span>
-            {{else}}
-              <span class="action-label">Explore Layers</span>
-            {{/if}}
-            </a>
+        </div>
+      </div>
+    </div>
+    <div class="banner blue blurred">
+    <div class="container">
+      <article>
+        <header class="row">
+          <div class="col-xs-12">
+            <h2>All Published Projects</h2>
           </div>
         </header>
         <hr />
-        {{#if session.isAuthenticated}}
+        <div class="list-group col-sm-10 col-sm-offset-1">
+          {{#each project in this.model}}
+            {{#if project.published}}
+              <div class="list-group-item col-xs-6 project-group-item">
+                <div class="row-action-primary">
+                  <i class="mdi-maps-map icon-lg"></i>
+                </div>
+                <div class="row-content">
+                  <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                  <h4 class="list-group-item-heading">
+                    {{#link-to 'project' project action='reload'}}
+                    {{project.name}}
+                    {{/link-to}}
+                  </h4>
+                  <p class="list-group-item-text">{{project.description}}</p>
+                  <h5>Created by: {{project.user.displayname}}</h5>
+                </div>
+                <div class="list-group-separator"></div>
+              </div>
+            {{/if}}
+          {{else}}
+            <p>There are no projects visible at this time :(</p>
+          {{/each}}
+        </div>
+      </article>
+    </div>
+    </div>
+  </script>
+
+  <script type='text/x-handlebars' data-template-name='projects/index'>
+    <div class="banner pink">
+      <div class="container">
+        <header>
+          {{#if session.isAuthenticated}}
+            <h2>Map Projects </h2>
+          {{else}}
+            <h2>Published Projects</h2>
+          {{/if}}
+        </header>
+      </div>
+    </div>
+    {{#if session.isAuthenticated}}
+    <div class="banner pink blurred">
+      <div class="container">
         <article>
           <header class="row">
             <div class="col-sm-7">
-              <h2>My Projects</h2>
+              <h2>
+              <a class="btn btn-info btn-fab" {{action 'createProject'}}><span class="mdi-content-add"></span></a>
+               <span>My Projects</span></h2>
             </div>
           </header>
+          <hr/>
           <div class="list-group row">
             {{#each project in myProjects}}
             {{#if project.saved}}
@@ -128,7 +180,6 @@
                 </h4>
                 <p class="list-group-item-text">{{project.description}}</p>
                 <h5>Created by: {{project.user.displayname}}</h5>
-                {{#if session.isAuthenticated}}
                   <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
                     <span class="mdi-navigation-more-vert"></span>
                   </a>
@@ -137,7 +188,6 @@
                       <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
                     </a>
                   </div>
-                {{/if}}
                 </div>
                 <div class="list-group-separator"></div>
               </div>
@@ -145,15 +195,21 @@
               {{/each}}
             </div>
           </article>
-        {{/if}}
-        
+        </div>
+      </div>
+      {{/if}}
+      <div class="banner pink blurred">
+        <div class="container">
         <article>
+        {{#if session.isAuthenticated}}
           <header class="row">
             <div class="col-sm-7">
               <h2>All Published Projects</h2>
             </div>
           </header>
           <hr />
+          {{/if}}
+          
           <div class="list-group row">
           {{#each project in this.model}}
             {{#if project.published}}
@@ -199,7 +255,7 @@
             {{input valueBinding='projectName' placeholder='Enter Title for Project' class="form-control floating-label" type="text"}}
           </div>
           <div class='col-xs-3'>
-            <a class="btn btn-info btn-xs pull-right" id="title-button" {{action 'saveProject'}}><span>OK</span></a>
+            <a class="btn btn-info btn-flat pull-right" id="title-button" {{action 'saveProject'}}><span>Set</span></a>
           </div>
         </div>
         {{/if}}
@@ -263,13 +319,16 @@
         {{textarea valueBinding="description" id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
         
         <div class="publish_check">
-          <label>Publish</label>
-          {{input type="checkbox" valueBinding="published" checked=published}}
+          <div class="checkbox">
+            <label>
+            {{input type="checkbox" valueBinding="published" checked=published}}<span class="ripple"></span><span class="check"></span> Publish
+            </label>
+          </div>
         </div>
         
         <div class="text-right">
-          <a class="btn btn-add" {{action 'updateProject'}}>Save</a>
-          <a class="btn btn-danger" {{action 'cancelUpdate'}}>Cancel</a>
+          <a class="btn btn-success btn-flat" {{action 'updateProject'}}>Save</a>
+          <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
       {{ collaborate-users }}

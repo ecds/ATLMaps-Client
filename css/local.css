@@ -14,6 +14,20 @@ h4, .h4 { font-size: 18px; line-height: 20px; }
 h5, .h5 { font-size: 14px; line-height: 20px; }
 h6, .h6 { font-size: 12px; line-height: 20px; }
 
+.jumbotron h1, .jumbotron .h1 {
+  line-height: 1;
+}
+
+.jumbotron p.lead {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+.index .jumbotron {
+  color: rgb(151, 153, 163);
+}
+
+
 body, .static_content{
   background-color:#f4f4f4;
   height: 100%;
@@ -491,6 +505,10 @@ h3 .btn {
   padding-top:20px;
 }
 
+.list-group-item.project-group-item {
+  overflow: visible;
+}
+
 .leaflet-top.leaflet-right {
   top: 40px;
 }
@@ -525,7 +543,7 @@ a.action.show-options {
   margin: 0;
   padding: 8px 9px;
   opacity: 0.5;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 a.action.project-delete:hover, 
@@ -750,6 +768,65 @@ span.institution {
   margin-top: 2em;
 }
 
+.content .banner{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 80px 0 120px;
+}
+
+.content .banner.blurred{
+  padding-bottom: 220px;
+}
+
+.content .banner.blue{
+  background-image: url('../images/backgrounds/bg-blue-map.png');
+}
+
+.content .banner.blue.blurred{
+  background-image: url('../images/backgrounds/bg-blue-map-blurred.png');
+}
+
+.content .banner.pink{
+  background-image: url('../images/backgrounds/bg-pink-map.png');
+}
+
+.content .banner.pink.blurred{
+  background-image: url('../images/backgrounds/bg-pink-map-blurred.png');
+}
+
+.content .banner.orange{
+  background-image: url('../images/backgrounds/bg-orange-map.png');
+}
+
+.content .banner.orange.blurred{
+  background-image: url('../images/backgrounds/bg-orange-map-blurred.png');
+}
+
+.content .banner.light-orange.blurred{
+  background-image: url('../images/backgrounds/bg-lightorange-map-blurred.png');
+}
+
+.projects-index .content .banner.blurred{
+  padding-bottom: 10px;
+}
+
+.projects-index .content .banner.blurred+.banner{
+  padding-bottom: 220px;
+}
+
+
+.index .content .banner.published h2{
+  text-align:center;
+  font-size:3em;
+}
+
+.index .content>.container {
+  margin-top: 40px;
+}
+
+
 .form-control.h1, .form-control.h1:focus {
   height: auto;
   margin-top:0;
@@ -795,6 +872,10 @@ img.layerMarker {
   border-bottom-color: rgb(219, 221, 226);
 }
 
+#project_edit_form .text-right .btn {
+  padding: 10px;
+}
+
 #filter_and_search {
   display: none;
 }
@@ -802,12 +883,6 @@ img.layerMarker {
 .publish_check {
   margin-top: 2em;
 }
-
-/*.project-group-item {
-width: 50%;
-float: left;
-min-height: 15em;
-}*/
 
 .list-group .list-group-item .row-action-primary i.icon-lg {
   font-size: 36px;
@@ -847,12 +922,41 @@ a.project-options-close:hover {
   font-weight: 500;
 }
 
-div.project-group-item {
+.list-group  div.project-group-item {
+  overflow: auto;
   
 }
+h2 .btn.btn-fab{
+  box-shadow: 2px 3px 14px rgba(0, 0, 0, 0.13),-2px 5px 14px rgba(0, 0, 0, 0.13);
+}
 
-div.row-content {
-  height: 250px;
+h2 .btn.btn-fab:hover{
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12), 0 14px 45px rgba(0, 0, 0, 0.15);
+}
+
+h2 .btn-fab+span{
+  margin-left: 12px;
+}
+
+.projects-index header>h2 {
+  font-size: 5em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
+  color: rgb(3, 177, 255);
+  font-weight: 300;
+  color: rgba(3, 177, 255, 0.7);
+}
+
+.projects-index .banner.orange {
+  padding-bottom: 50px;
+  background-position: 50% 0%;
+}
+
+.projects-index .list-group-item-heading {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
 }
 
 .project-options.card{
@@ -865,7 +969,7 @@ div.row-content {
   vertical-align: top;
   position: absolute;
   right: 25px;
-  top: 25px;
+  top: 32px;
   font-weight: 300;
   cursor: default;
   -webkit-user-select: none;
@@ -881,11 +985,13 @@ div.row-content {
   font-size: 14px;
   text-decoration: none;
   color: rgb(140, 140, 140);
+  border-left: 5px solid white;
 }
 
 .project-options.card a.action:hover,
 .project-options.card a.action:focus{
   color: rgb(77, 194, 229);
+  border-left-color: rgb(77, 194, 229);
 }
 
 .project-options.card .action-icon{
@@ -899,4 +1005,10 @@ div.row-content {
   font-size: 16px;
   display: block;
   margin-top: 3px;
+}
+
+.action.show-options.active {
+  background: rgb(183, 183, 183);
+  color: whitesmoke;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.31) inset;
 }

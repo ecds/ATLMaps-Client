@@ -47,6 +47,8 @@ App.ApplicationController = Ember.Controller.extend({
   
 });
 
+
+
 App.ProjectsIndexController = Ember.ArrayController.extend({
     sortProperties: ['name'],
     
@@ -84,19 +86,28 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
         
         toggleOptions: function(project) {
             var target = ".project-group-item[data-project-id='"+project+"'] .project-options",
+                trigger = ".project-group-item[data-project-id='"+project+"'] .action.show-options",
                 project_option = ".project-group-item .project-options"
             
-            $(project_option).not(target).removeClass("open");
-              
+            var $target = $(target),
+                $project_option = $(project_option),
+                $trigger = $(trigger);
+            
+            $project_option.not(target).removeClass("open");
+            
+            
             $('.projects').off('click.options').on('click.options', function(evt){
               var $clicked = $(evt.target);
               if( !$clicked.hasClass('project-options') && $clicked.closest('.project-options').length==0){
-                $(project_option).removeClass("open");
+                $('.action.show-options').removeClass("active");
+                $project_option.removeClass("open");
+                $trigger.removeClass('active');
                 $(this).off('click.options');
               }
             });
             
-            $(target).toggleClass("open");
+            $target.toggleClass("open");
+            $trigger.toggleClass('active');
             
         },
         
@@ -118,6 +129,9 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
     }
     
 });
+
+App.IndexController = App.ProjectsIndexController.extend();
+
 
 App.ProjectController = Ember.ObjectController.extend({
     showLayers: function() {
@@ -273,7 +287,6 @@ Ember.Route.reopen({
 
 App.ApplicationRoute = Ember.Route.extend(SimpleAuth.ApplicationRouteMixin);
 
-App.IndexRoute = Ember.Route.extend({});
 
 // Is this needed?
 App.AddLayerModalRoute = Ember.Route.extend({});
@@ -290,6 +303,9 @@ App.ProjectsIndexRoute = Ember.Route.extend({
     }
     
 });
+
+
+App.IndexRoute = App.ProjectsIndexRoute.extend({});
 
 var color_options = ["amber-300","amber-400","amber-500","amber-600","blue-200","blue-300","blue-400","blue-500","blue-600","blue-700","blue-800","blue-900","cyan-200","cyan-300","cyan-400","cyan-500","cyan-600","cyan-700","cyan-800","cyan-900","deep-orange-300","deep-orange-400","deep-orange-500","deep-orange-600","deep-orange-700","deep-purple-300","deep-purple-400","deep-purple-50","deep-purple-500","deep-purple-600","green-300","green-400","green-500","green-600","indigo-400","indigo-500","indigo-600","indigo-700","light-blue-300","light-blue-400","light-blue-500","light-blue-600","light-blue-700","light-green-300","light-green-400","light-green-500","light-green-600","light-green-700","orange-300","orange-400","orange-500","orange-600","orange-700","pink-400","pink-500","pink-600","pink-700","purple-300","purple-400","purple-500","purple-600","purple-700","red-300","red-400","red-500","red-600","red-700","teal-300","teal-400","teal-500","teal-600","teal-700","yellow-400","yellow-500","yellow-600"];
 
