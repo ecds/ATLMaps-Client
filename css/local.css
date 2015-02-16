@@ -1029,3 +1029,13 @@ h2 .btn-fab+span{
   background: linear-gradient(135deg,  rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+div#hint {
+  width: 100%;
+  background: white;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  opacity: .5;
+  text-align: center;
+}

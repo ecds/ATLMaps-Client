@@ -19,7 +19,6 @@
   <script src="bower_components/blueimp-md5/js/md5.js"></script>
   <!-- endbower -->
   <script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.12/ember-data.prod.js"></script>-->
   <script src="js/bootstrap-slider.js"></script>
   <script src="js/shuffle.js"></script>
   <script src="js/menu/classie.js"></script>
@@ -111,7 +110,7 @@
       <article>
         <header class="row">
           <div class="col-xs-12">
-            <h2>All Published Projects</h2>
+            <h2>Projects</h2>
           </div>
         </header>
         <hr />
@@ -240,6 +239,7 @@
   </script>
   
   <script type='text/x-handlebars' data-template-name='project'>
+    <div id="hint"><span class="mdi-navigation-more-horiz"></span><span class="mdi-navigation-more-horiz"></span></div>
     <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
     <div class="layer-controls">
       <div class="card">
