@@ -426,7 +426,7 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
-    <h4 class="name"><span {{bind-attr class="layer.layer_type"}}></span>{{layer.name}}</h4>
+    <h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
     <p>
       <div class="description">{{layer.description}}</div>
     </p>

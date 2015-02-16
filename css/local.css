@@ -1044,14 +1044,16 @@ li.gravatar {
   padding: 2.5px;
 }
 
+span.description_icon {
+  font-family: Material-Design-Icons;
+}
+
 span.geojson:before,
 span.wfs:before{
-  font-family: Material-Design-Icons;
   content: "\e88b";
 }
 
 span.planningatlanta:before,
 span.wms:before {
-  font-family: Material-Design-Icons;
   content: "\e867";
 }
