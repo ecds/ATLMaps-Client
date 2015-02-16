@@ -847,6 +847,18 @@ App.SearchTagsComponent = Ember.Component.extend({
     },
 });
 
+App.GravatarImageComponent = Ember.Component.extend({
+  size: 200,
+  email: '',
+
+  gravatarUrl: function() {
+    var email = this.get('email'),
+        size = this.get('size');
+
+    return 'http://www.gravatar.com/avatar/' + md5(email) + '?s=' + size;
+  }.property('email', 'size')
+});
+
 //App.CollaborateUsersComponent = Ember.Component.extend({
 //    users: function() {
 //        return App.User.store.find('user');
@@ -863,7 +875,14 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
     buildURL: function(record, suffix) {
       var s = this._super(record, suffix);
       return s + this.get('suffix');
-    }
+    },
+    headers: function() {
+        console.log(this)
+        return {
+            withCredentials: true,
+            "Authorization": "Bearer ab49148e5ed27a0de50b2638a62e9c0be1d38aac554b371f9e16e4ab49569656"// + this.get("session.access_token")
+        };
+    }.property("session.access_token")
 });
 
 

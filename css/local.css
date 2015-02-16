@@ -940,7 +940,7 @@ h2 .btn-fab+span{
   margin-left: 12px;
 }
 
-.projects-index header>h2 {
+.projects-index header>h2, .about header>h2 {
   font-size: 5em;
   margin-bottom: 20px;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
