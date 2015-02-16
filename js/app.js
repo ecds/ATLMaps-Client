@@ -1,9 +1,10 @@
+var apiHost = 'http://api.atlmaps-dev.com:7000';
+
 window.ENV = window.ENV || {};
 window.ENV['simple-auth'] = {
     authorizer: 'simple-auth-authorizer:oauth2-bearer',
+    crossOriginWhitelist: [apiHost]
 };
-
-var apiHost = 'http://api.atlmaps-dev.com:7000';
 
 window.ENV['simple-auth-oauth2'] = {
     serverTokenEndpoint: apiHost+'/oauth/token',

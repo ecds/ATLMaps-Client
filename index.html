@@ -71,7 +71,7 @@
         </li>
         <li class="home">{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo3.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
         {{#if session.isAuthenticated}}
-          <li class="pull-right"><a {{action 'invalidateSession' }} title="Logout">{{gravatar-image email=session.user.email size="60"}}</a></li>
+          <li class="pull-right gravatar"><a {{action 'invalidateSession' }} title="Logout">{{gravatar-image email=session.user.email size="55"}}</a></li>
           <!--<li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>-->
           {{else}}
           <li></li>
@@ -426,8 +426,7 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
-    <span {{bind-attr class="layer.layer_type" }}></span>
-    <h4 class="name">{{layer.name}}</h4>
+    <h4 class="name"><span {{bind-attr class="layer.layer_type"}}></span>{{layer.name}}</h4>
     <p>
       <div class="description">{{layer.description}}</div>
     </p>
