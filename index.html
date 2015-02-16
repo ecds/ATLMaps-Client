@@ -239,7 +239,7 @@
   </script>
   
   <script type='text/x-handlebars' data-template-name='project'>
-    <div id="hint"><span class="mdi-navigation-more-horiz"></span><span class="mdi-navigation-more-horiz"></span></div>
+    <div id="hint"><span class="mdi-navigation-expand-more"></span></div>
     <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
     <div class="layer-controls">
       <div class="card">
@@ -261,7 +261,7 @@
         {{/if}}
         {{/if}}
         {{!--{{#each layer in allLayers}}{{layer.name}}{{/each}}--}}
-        <h3>Active Layers {{#if isMine}}{{partial 'addLayersButton'}}{{/if}}</h3>
+        {{#if isMine}}{{partial 'addLayersButton'}}{{/if}}
         <hr/>
         <a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
         
@@ -534,7 +534,9 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="_addLayersButton">
-    <a class="btn btn-add pull-right" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+    <div class="add_layer_button">
+      <a class="btn btn-add add_layer_butto" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+    </div>
   </script>
   
 </body>

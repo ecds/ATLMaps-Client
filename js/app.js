@@ -294,7 +294,7 @@ App.AddLayerModalRoute = Ember.Route.extend({});
 
 App.EditProjectModalRoute = Ember.Route.extend({
     model: function() {
-        // return this.store.find('layer');
+        return this.store.find('layer');
     }    
 });
 
