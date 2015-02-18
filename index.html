@@ -92,9 +92,8 @@
         <div class="row">
           <div class="col-sm-offset-2 col-sm-8">
             <div class="jumbotron text-center">
-              <h1>Redefining bleeding-edge Atlanta maps.</h1>
-              <p>What is smarter, longitude or latitude?<br class="hidden-xs"/>
-                 Longitude, because it has 360 degrees.</p>
+              <h1>Layers of discovery</h1>
+                 <h2>Mapping the stories of your city</h2>
               {{#if session.isAuthenticated}}
               <p>{{#link-to 'projects' tagName='a' class="btn btn-material-pink-300 btn-lg"}}Go to Projects{{/link-to}}</p>
               {{else}}
@@ -145,96 +144,22 @@
 
   <script type='text/x-handlebars' data-template-name='projects/index'>
     <div class="banner pink">
-      <div class="container">
-        <header>
-            <h2>Map Projects </h2>
-        </header>
-      </div>
-    </div>
-    {{#if session.isAuthenticated}}
-    <div class="banner pink blurred">
-      <div class="container">
-        <article>
-          <header class="row">
-            <div class="col-sm-7">
-              <h2>
-              <a class="btn btn-info btn-fab" {{action 'createProject'}}><span class="mdi-content-add"></span></a>
-               <span>My Projects</span></h2>
-            </div>
-          </header>
-          <hr/>
-          <div class="list-group row">
-            {{#each project in myProjects}}
-            {{#if project.saved}}
-            <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
-              <div class="row-action-primary">
-                <i class="mdi-maps-map icon-lg"></i>
-              </div>
-              <div class="row-content">
-                <div class="action-secondary"><i class="mdi-material-info"></i></div>
-                <h4 class="list-group-item-heading">
-                  {{#link-to 'project' project action='reload'}}
-                  {{project.name}}
-                  {{/link-to}}
-                </h4>
-                <p class="list-group-item-text">{{project.description}}</p>
-                <h5>Created by: {{project.user.displayname}}</h5>
-                  <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
-                    <span class="mdi-navigation-more-vert"></span>
-                  </a>
-                  <div class="project-options card">
-                    <a class="action project-delete" {{action 'deleteProject' project.id}}>
-                      <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
-                    </a>
-                  </div>
-                </div>
-                <div class="list-group-separator"></div>
-              </div>
-              {{/if}}
-              {{/each}}
-            </div>
-          </article>
-        </div>
-      </div>
-      {{/if}}
-      <div class="banner pink blurred">
         <div class="container">
-        <article>
-        {{#if session.isAuthenticated}}
-          <header class="row">
-            <div class="col-sm-7">
-              <h2>All Published Projects</h2>
-            </div>
-          </header>
-          <hr />
-          {{/if}}
-          
-          <div class="list-group row">
-          {{#each project in this.model}}
-            {{#if project.published}}
-            <div class="list-group-item col-xs-6 project-group-item">
-              <div class="row-action-primary">
-                <i class="mdi-maps-map icon-lg"></i>
-              </div>
-              <div class="row-content">
-                <div class="action-secondary"><i class="mdi-material-info"></i></div>
-                <h4 class="list-group-item-heading">
-                  {{#link-to 'project' project action='reload'}}
-                  {{project.name}}
-                  {{/link-to}}
-                </h4>
-                <p class="list-group-item-text">{{project.description}}</p>
-                <h5>Created by: {{project.user.displayname}}</h5>
-              </div>
-              <div class="list-group-separator"></div>
-            </div>
-            {{/if}}
-            {{else}}
-            <p>There are no projects visible at this time :(</p>
-          {{/each}}
-          </div>
-        </article>
-      </div>
+            <header>
+                <h2>Map Projects </h2>
+            </header>
+        </div>
+    </div>
+    <div class="banner pink blurred">
+        <div class="container">
+            <article>
+                {{#if session.isAuthenticated}}
+                    {{my-projects}}
+                    {{my-collaborations}}
+                {{/if}}
+                {{published-projects}}
+            </article>
+        </div>
     </div>
   </script>
   
@@ -244,7 +169,7 @@
     <div class="layer-controls">
       <div class="card">
         {{mine}}
-        {{#if mayEdit}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
+        {{#if isMine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
         {{# if model.saved }}
         <h1>{{model.name}}</h1>
         <p>{{model.description}}</p>
@@ -261,7 +186,7 @@
         {{/if}}
         {{/if}}
         {{!--{{#each layer in allLayers}}{{layer.name}}{{/each}}--}}
-        {{#if isMine}}{{partial 'addLayersButton'}}{{/if}}
+        {{#if mayEdit}}{{partial 'addLayersButton'}}{{/if}}
         <hr/>
         <a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
         
@@ -307,7 +232,7 @@
       {{ base-map }}
     </div>
     
-    
+    {{#if isMine}}
     <div class="card" id='project_edit_form' style="display:none;left:-100%;">
       <h3>Project Options</h3>
       <div class="form-group">
@@ -331,8 +256,9 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{ collaborate-users }}
+      {{ collaborate-users projectID=model.id}}
     </div>
+    {{/if}}
     
   </script>
   
@@ -357,14 +283,14 @@
   
   <script type='text/x-handlebars' data-template-name='about'>
     
-    <div class="banner pink">
+    <div class="banner orange">
       <div class="container">
         <header>
             <h2>About</h2>
         </header>
       </div>
     </div>
-    <div class="banner pink blurred">
+    <div class="banner orange blurred">
       <div class="container">
         <article>
             <p>ATLMaps is a collaboration between Georgia State University and Emory University. The project is in active and heavy development.</p>
@@ -511,12 +437,88 @@
     {{mappedLayers}}
   </script>
   
+  <script type="text/x-handlebars" data-template-name="components/my-projects">
+    <header class="row">
+        <div class="col-sm-7">
+            <h2>
+                <a class="btn btn-info btn-fab" {{action 'createProject'}}><span class="mdi-content-add"></span></a>
+                <span>My Projects</span>
+            </h2>
+        </div>
+    </header>
+    <hr/>
+    <div class="list-group row">
+        {{list-projects projects=projects alt="I need to create some amazing projects."}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/my-collaborations">
+    <header class="row">
+        <div class="col-sm-7">
+            <h2>
+                <span>Collaborations</span>
+            </h2>
+        </div>
+    </header>
+    <hr/>
+    <div class="list-group row">
+        {{list-projects projects=myCollaborations.projects owner=myCollaborations.projects.user alt="No Collaborations"}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/published-projects">
+    {{#if session.isAuthenticated}}
+        <header class="row">
+            <div class="col-sm-7">
+                <h2>All Published Projects</h2>
+            </div>
+        </header>
+        <hr />
+    {{/if}}
+    <div class="list-group row">
+        {{list-projects projects=projects alt="No one has made any projects worth publishing :("}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name='components/list-projects'>
+    {{#each project in projects}}
+        <div class="list-group-item col-xs-6 project-group-item">
+            <div class="row-action-primary">
+                <i class="mdi-maps-map icon-lg"></i>
+            </div>
+            <div class="row-content">
+                <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                <h4 class="list-group-item-heading">
+                    {{#link-to 'project' project action='reload'}}
+                    {{project.name}}
+                    {{/link-to}}
+                </h4>
+                <p class="list-group-item-text">{{project.description}}</p>
+                {{#if project.user.displayname}}<h5>Created by: {{project.user.displayname}}</h5>{{/if}}
+            </div>
+            <div class="list-group-separator"></div>
+        </div>
+    {{else}}
+        <h5>{{alt}}</h5>
+    {{/each}}
+  </script>
+  
   <script type="text/x-handlebars" data-template-name="components/collaborate-users">
-    <!--<hr/>
-    Collaboraters:-->
-    <ul>
-      {{#each user in users}}<li>{{user.displayname}}</li>{{/each}}
-    </ul>
+    <hr/>
+    Collaboraters:
+    <div id="searchableUsers">
+        <input class="usersearch" placeholder="Search" />
+        <ul class="userlist">
+            {{#each user in users}}
+            <li>
+                <div class="name">
+                    <a class="btn btn-fab btn-sm btn-material-lightgrey" {{action 'addCollaborater' user.id projectID}}><span class="mdi-social-person-add"></span></a>
+                    {{user.displayname}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+  </div>
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/gravatar-image">
@@ -525,7 +527,7 @@
   
   <script type="text/x-handlebars" data-template-name='_tags'>
     {{#if layer.tag_ids}}
-    <span class="glyphicon glyphicon-tags tagsIcon"></span><ul class="list-inline">{{#each tag in layer.tag_ids}}<li>{{tag.name}}</li>{{/each}}</ul>
+    <span class="glyphicon glyphicon-tags tagsIcon"></span><ul class="list-inline">{{#each tag in layer.tag_ids}}<li class="tags">{{tag.name}}</li>{{/each}}</ul>
     {{/if}}
   </script>
   

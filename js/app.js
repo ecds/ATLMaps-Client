@@ -48,21 +48,26 @@ App.ApplicationController = Ember.Controller.extend({
   
 });
 
-
-
 App.ProjectsIndexController = Ember.ArrayController.extend({
     sortProperties: ['name'],
     
     myProjects: function() {
         var isMine = this.filterBy('user_id', this.session.get('content.user.id') )
+        console.log(isMine)
         return isMine
     }.property('@each.myProjects'),
+    
+    myCollaborations: function() {
+        var mayEdit = this.filterBy('user_ids[0]', this.session.get('content.user.id') )
+        console.log(mayEdit)
+        return mayEdit
+    }.property('@each.myCollaborations'),
     
     actions : {
         
         createProject: function() {
             
-            time = (new Date()).toTimeString();
+            time = md5((new Date()).toTimeString());
             
             var project = App.Project.store.createRecord('project', {
                 name: time,
@@ -158,23 +163,33 @@ App.ProjectController = Ember.ObjectController.extend({
         currentProject.then(function() {
             // Here we want to allow unauthenticated users to be able to play with adding layers to a map
             // without saveing a project. Basically, if the user isn't authenciated and the project isn't
-            // associated with a user, then show consider the user the owner and show the "Add Layers" button.
+            // associated with a user, then consider the user the owner and show the "Add Layers" button.
+            // if `isMine` is true we show the button to edit the project attributes.
+            // if `mayEdit` is true we show the "+ Layers" button.
             if (_this.session.isAuthenticated == false) {
                 if (currentProject.get('user_id') == null) {
-                    _this.set('isMine', true);
-                    _this.set('mayEdit', false);
+                    _this.set('isMine', false);
+                    _this.set('mayEdit', true);
                 }
                 else {
                     _this.set('isMine', false);
+                    _this.set('mayEdit', false);
                 }
             }
-            else if (currentProject.get('user_id') === _this.session.content.user.id) {
-                _this.set('isMine', true);
-                _this.set('mayEdit', true);
-            }
             else {
-                _this.set('isMine', false);
-                _this.set('mayEdit', false);
+                var isCollaborator = $.inArray(_this.session.content.user.id, currentProject.get('user_ids'));
+                if (currentProject.get('user_id') === _this.session.content.user.id) {
+                    _this.set('isMine', true);
+                    _this.set('mayEdit', true);
+                }
+                else if (isCollaborator > -1 ) {
+                    _this.set('isMine', false);
+                    _this.set('mayEdit', true);
+                }
+                else {
+                    _this.set('isMine', false);
+                    _this.set('mayEdit', false);
+                }
             }
         });
     }.property('model', 'this.session.content.user.id'),
@@ -212,6 +227,12 @@ App.ProjectController = Ember.ObjectController.extend({
         
         showEditForm: function() {
             $("#project_edit_form").show().animate({"left":"10px"},500,"easeOutQuint");
+            var options = {
+            valueNames: [ 'name'],
+            searchClass: 'usersearch',
+            listClass: 'userlist',
+        };
+        var userList = new List('searchableUsers', options);
         },
         
         cancelUpdate: function() {
@@ -860,12 +881,43 @@ App.GravatarImageComponent = Ember.Component.extend({
   }.property('email', 'size')
 });
 
-//App.CollaborateUsersComponent = Ember.Component.extend({
-//    users: function() {
-//        return App.User.store.find('user');
-//    }.property(),
-//    
-//});
+App.CollaborateUsersComponent = Ember.Component.extend({
+    
+    users: function() {        
+        return App.User.store.find('user');
+    }.property('this.session', 'model'),
+    
+    actions : {
+        addCollaborater: function(userID, projectID) {
+            console.log(userID);
+            console.log(projectID)
+            var collaboration = App.User.store.createRecord('collaboration', {
+                project_id: projectID,
+                user_id: userID
+            });
+            collaboration.save()
+        }
+    }
+    
+});
+
+App.MyProjectsComponent = Ember.Component.extend({
+    projects: function() {
+        return App.Project.store.fetch('project', { user_id: this.session.get('content.user.id')});
+    }.property()
+});
+
+App.MyCollaborationsComponent = Ember.Component.extend({
+    myCollaborations: function() {
+        return App.User.store.fetch('user', this.session.get('content.user.id'));
+    }.property()
+});
+
+App.PublishedProjectsComponent = Ember.Component.extend({
+    projects: function() {
+        return App.Project.store.fetch('project', { published: true});
+    }.property()
+});
 
 // Adapter
 
@@ -918,14 +970,15 @@ App.Layer = DS.Model.extend({
 App.Project = DS.Model.extend({
     name: DS.attr('string'),
     description: DS.attr('string'),
-    //user: DS.belongsTo('user'),
     //user_id: DS.belongsTo('user'),
-    user_id: DS.attr('number'),
+    user_id: DS.attr(),
     saved: DS.attr('boolean'),
     published: DS.attr('boolean'),
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
-    slug: DS.attr('string')
+    slug: DS.attr('string'),
+    //user_ids: DS.hasMany('user', {async: true})
+    user_ids: DS.attr()
 });
 
 App.Institution = DS.Model.extend({
@@ -952,9 +1005,17 @@ App.Tag = DS.Model.extend({
 App.User = DS.Model.extend({
     displayname: DS.attr('string'),
     avatar: DS.attr('string'),
+    //project_ids: DS.hasMany('project', {async: true}),
+    institution_id: DS.belongsTo('institution'),
+    institution: DS.attr(),
     project_ids: DS.attr(),
-    institution_id: DS.belongsTo('institution')
+    projects: DS.attr()
 });
+
+App.Collaboration = DS.Model.extend({
+    user_id: DS.attr(),
+    project_id: DS.attr()
+})
 
 // Random JavaScript
 
