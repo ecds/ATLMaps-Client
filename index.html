@@ -155,7 +155,7 @@
             <article>
                 {{#if session.isAuthenticated}}
                     {{my-projects}}
-                    {{my-collaborations}}
+                    {{!--{{my-collaborations}}--}}
                 {{/if}}
                 {{published-projects}}
             </article>
@@ -256,7 +256,7 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{ collaborate-users projectID=model.id}}
+      {{!--{{ collaborate-users projectID=model.id}}--}}
     </div>
     {{/if}}
     
