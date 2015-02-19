@@ -978,7 +978,8 @@ App.Project = DS.Model.extend({
     layer_ids: DS.hasMany('layer', {async: true}),
     slug: DS.attr('string'),
     //user_ids: DS.hasMany('user', {async: true})
-    user_ids: DS.attr()
+    user_ids: DS.attr(),
+    owner: DS.attr()
 });
 
 App.Institution = DS.Model.extend({
