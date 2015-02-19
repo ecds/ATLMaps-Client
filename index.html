@@ -163,7 +163,7 @@
                     </header>
                     <hr/>
                     {{my-projects}}
-                    {{my-collaborations}}
+                    {{!--{{my-collaborations}}--}}
                 {{/if}}
                 {{published-projects}}
             </article>
@@ -264,7 +264,7 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{collaborate-users projectID=model.id}}
+      {{!--{{collaborate-users projectID=model.id}}--}}
     </div>
     {{/if}}
     
@@ -461,7 +461,7 @@
     </header>
     <hr/>
     <div class="list-group row">
-        {{list-projects projects=myCollaborations.projects owner=myCollaborations.projects.user alt="No Collaborations"}}
+        {{list-projects projects=myCollaborations.projects alt="No Collaborations"}}
     </div>
   </script>
   
@@ -493,7 +493,7 @@
                     {{/link-to}}
                 </h4>
                 <p class="list-group-item-text">{{project.description}}</p>
-                <h5>Created by: {{project.owner}}</h5>
+                <h5>Created by: {{project.owner}}{{owner}}</h5>
             </div>
             <div class="list-group-separator"></div>
         </div>
