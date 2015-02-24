@@ -1,5 +1,18 @@
 <html>
 <head>
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' rel='stylesheet' type='text/css'> 
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <!-- endbower -->
+  <link rel='stylesheet' href='css/component.css' />
+  <link rel='stylesheet' href='css/local.css' />
+  <link rel='stylesheet' href='css/marker.css' />
+  
+  
   <script src="js/modernizr.custom.js"></script>
   <script src="bower_components/ember/ember-template-compiler.js"></script>
   <!-- bower:js -->
@@ -18,23 +31,15 @@
   <script src="bower_components/list.js/dist/list.js"></script>
   <script src="bower_components/blueimp-md5/js/md5.js"></script>
   <!-- endbower -->
+
   <script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>
-  <script src="js/bootstrap-slider.js"></script>
+  <script src="js/noUiSlider.min.js"></script>
   <script src="js/shuffle.js"></script>
   <script src="js/menu/classie.js"></script>
   <script src="js/menu/gnmenu.js"></script>
+  
   <script src="js/app.js"></script>
-
-  <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' rel='stylesheet' type='text/css'>        <!-- bower:css -->
-        <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
-        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
-        <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-        <!-- endbower -->
-  <link rel='stylesheet' href='css/bootstrap-slider.css' />
-  <link rel='stylesheet' href='css/component.css' />
-  <link rel='stylesheet' href='css/local.css' />
-  <link rel='stylesheet' href='css/marker.css' />
+  
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
@@ -220,10 +225,12 @@
                 </div>
                 <div class="col-xs-1 pull-right">
                   {{#if isMine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
-                  {{ opacity-slider layer=layer.layer layerID=layer.id }}
                 </div>
               </div>
             </div>
+            <footer class="card-footer"> 
+              {{ opacity-slider layer=layer.layer layerID=layer.id }}
+            </footer>
             {{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
           </li>
           {{else}}
@@ -335,7 +342,8 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/opacity-slider">
-    <input style="display:none;" {{bind-attr class=":slider layer" name=layer}} {{action "opacityChange" on="change" param=layer}} value="10" data-slider-orientation="vertical" type="text"/>
+    <input {{bind-attr class=":value-input layer" }} {{action "opacityChange" on="change" param=layer}}/> 
+    <div {{bind-attr class=":slider :slider-material-orange-300 layer" name=layer}}></div>   
     {{opacityslider}}
   </script>
   

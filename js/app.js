@@ -527,13 +527,16 @@ App.OpacitySliderComponent = Ember.Component.extend({
         });
         
         layer.then(function() {
-            
             var layerName = layer.get('layer');
-            var slider = $("input.slider, input ."+layerName).slider({
-                value: 10,
-                reversed: true,
+            var slider = $(".slider."+layerName).noUiSlider({
+              start: [ 10 ],
+              connect: false,
+              range: {
+                'min': 0,
+                'max': 10
+              }
             });
-        });
+          });
     }.property(),
     
     actions: {
@@ -541,7 +544,7 @@ App.OpacitySliderComponent = Ember.Component.extend({
             var layerName = this.layer
             var value = $("input."+layerName).val();
             var opacity = value / 10;
-            $("div."+layerName+",img."+layerName).css({'opacity': opacity});
+            $("#map div."+layerName+",#map img."+layerName).css({'opacity': opacity});
         }
     }
 });
@@ -1040,12 +1043,23 @@ $(document).ready(function(){
     $(".layer-controls").animate({"left":"0%"},500,"easeOutQuint");
     $("#show-layer-options").fadeOut(500);
   })
-  .on('click','.shuffle-items li.item',function(){
+  .on('click','.shuffle-items li.item',function(evt){
+    var $target = $(evt.target),
+        $target_slider = $target.parents('.slider');
+    
+    if( $target_slider.length>0 ){
+      return false;
+    }
     if ($(this).hasClass('info') == false){
       $(".shuffle-items li.item.info").remove();
       $(".active_marker").removeClass("active_marker");
     }
     shuffle.click(this);
+  })
+  .on('slide','.shuffle-items li.item .slider',function(evt){
+    var $this = $(this);
+    $this.siblings('input').val($this.val()).change();
+    
   });
   
   //var options = {

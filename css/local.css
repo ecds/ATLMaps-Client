@@ -322,6 +322,23 @@ a.site-title .alt-dark{
   margin-top: 5px;
 }
 
+.shuffle-items li.item.collapsed footer.card-footer{
+  position:relative;
+  bottom:0;
+  width:100%;
+  height: 0px;
+  float: left;
+  top: -18px;
+}
+
+.shuffle-items li.item.collapsed footer.card-footer div {
+  display: block;
+}
+
+.shuffle-items li.item.collapsed footer.card-footer div input{
+  display:none;
+}
+
 .modal-body label {
   color: rgb(155, 82, 163);
   font-weight: normal;
@@ -1078,4 +1095,18 @@ li.tags:last-of-type:after {
 ul.userlist {
   list-style: none;
   padding-left: 0;
+}
+
+.noUi-base {
+  background: rgb(255, 208, 163);
+}
+
+input.value-input {
+  width: 100%;
+  text-align: center;
+  border: none;
+  color: rgb(129, 129, 129);
+  padding: 0;
+  margin: 0;
+  display: none;
 }
