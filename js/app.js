@@ -1060,7 +1060,17 @@ $(document).ready(function(){
     var $this = $(this);
     $this.siblings('input').val($this.val()).change();
     
-  });
+  })
+  .on('mouseup','.togglebutton.opacity label',function(){
+    var active = $(".togglebutton label input[type=checkbox]:first-child:checked").length>0;
+    
+    if (active){
+      $('.value-input, .slider').val(0).change();
+    }
+    else{
+      $('.value-input, .slider').val(10).change();
+    }
+  })
   
   //var options = {
   //  valueNames: [ 'name', 'description' ],

@@ -198,8 +198,12 @@
         </div>
         {{/if}}
         {{/if}}
-        {{!--{{#each layer in allLayers}}{{layer.name}}{{/each}}--}}
         {{#if mayEdit}}{{partial 'addLayersButton'}}{{/if}}
+        <div class="togglebutton opacity">
+          <label>
+            <input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> Opacity
+          </label>
+        </div>
         <hr/>
         <a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
         
