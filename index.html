@@ -1,5 +1,18 @@
 <html>
 <head>
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' rel='stylesheet' type='text/css'> 
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <!-- endbower -->
+  <link rel='stylesheet' href='css/component.css' />
+  <link rel='stylesheet' href='css/local.css' />
+  <link rel='stylesheet' href='css/marker.css' />
+  
+  
   <script src="js/modernizr.custom.js"></script>
   <script src="bower_components/ember/ember-template-compiler.js"></script>
   <!-- bower:js -->
@@ -18,23 +31,15 @@
   <script src="bower_components/list.js/dist/list.js"></script>
   <script src="bower_components/blueimp-md5/js/md5.js"></script>
   <!-- endbower -->
+
   <script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>
-  <script src="js/bootstrap-slider.js"></script>
+  <script src="js/noUiSlider.min.js"></script>
   <script src="js/shuffle.js"></script>
   <script src="js/menu/classie.js"></script>
   <script src="js/menu/gnmenu.js"></script>
+  
   <script src="js/app.js"></script>
-
-  <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' rel='stylesheet' type='text/css'>        <!-- bower:css -->
-        <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/material.css' />
-        <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
-        <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-        <!-- endbower -->
-  <link rel='stylesheet' href='css/bootstrap-slider.css' />
-  <link rel='stylesheet' href='css/component.css' />
-  <link rel='stylesheet' href='css/local.css' />
-  <link rel='stylesheet' href='css/marker.css' />
+  
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
@@ -163,7 +168,7 @@
                     </header>
                     <hr/>
                     {{my-projects}}
-                    {{!--{{my-collaborations}}--}}
+                    {{my-collaborations}}
                 {{/if}}
                 {{published-projects}}
             </article>
@@ -176,8 +181,7 @@
     <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
     <div class="layer-controls">
       <div class="card">
-        {{mine}}
-        {{#if isMine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
+        {{#if model.is_mine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
         {{# if model.saved }}
         <h1>{{model.name}}</h1>
         <p>{{model.description}}</p>
@@ -193,8 +197,12 @@
         </div>
         {{/if}}
         {{/if}}
-        {{!--{{#each layer in allLayers}}{{layer.name}}{{/each}}--}}
-        {{#if mayEdit}}{{partial 'addLayersButton'}}{{/if}}
+        {{#if may_edit}}{{partial 'addLayersButton'}}{{/if}}
+        <div class="togglebutton opacity">
+          <label>
+            <input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+          </label>
+        </div>
         <hr/>
         <a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
         
@@ -214,16 +222,18 @@
                   {{ layer-marker projectID=model.id layerID=layer.id }}
                 </div>
                 <div class="row-content">
-                  <h4 class="list-group-item-heading">{{layer.name}}</h4>
+                  <h4 class="list-group-item-heading">{{layer.name}}{{layer.marker}}</h4>
                   <p class="list-group-item-text">{{layer.description}}</p>
                   <div class="text-muted">{{partial 'citation'}}</div>
                 </div>
                 <div class="col-xs-1 pull-right">
-                  {{#if isMine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
-                  {{ opacity-slider layer=layer.layer layerID=layer.id }}
+                  {{#if model.is_mine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
                 </div>
               </div>
             </div>
+            <footer class="card-footer"> 
+              {{ opacity-slider layer=layer.layer layerID=layer.id }}
+            </footer>
             {{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
           </li>
           {{else}}
@@ -240,7 +250,7 @@
       {{ base-map }}
     </div>
     
-    {{#if isMine}}
+    {{#if is_mine}}
     <div class="card" id='project_edit_form' style="display:none;left:-100%;">
       <h3>Project Options</h3>
       <div class="form-group">
@@ -264,7 +274,7 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{!--{{collaborate-users projectID=model.id}}--}}
+      {{collaborate-users projectID=model.id}}
     </div>
     {{/if}}
     
@@ -335,7 +345,8 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/opacity-slider">
-    <input style="display:none;" {{bind-attr class=":slider layer" name=layer}} {{action "opacityChange" on="change" param=layer}} value="10" data-slider-orientation="vertical" type="text"/>
+    <input {{bind-attr class=":value-input layer" }} {{action "opacityChange" on="change" param=layer}}/> 
+    <div {{bind-attr class=":slider :slider-material-orange-300 layer" name=layer}}></div>   
     {{opacityslider}}
   </script>
   
@@ -447,7 +458,7 @@
   
   <script type="text/x-handlebars" data-template-name="components/my-projects">
     <div class="list-group row">
-        {{list-projects projects=projects alt="I need to create some amazing projects."}}
+        {{list-projects projects=projects alt="I need to create some amazing projects." mine=true}}
     </div>
   </script>
   
@@ -461,7 +472,7 @@
     </header>
     <hr/>
     <div class="list-group row">
-        {{list-projects projects=myCollaborations.projects alt="No Collaborations"}}
+        {{list-projects projects=myCollaborations alt="No Collaborations"}}
     </div>
   </script>
   
@@ -481,7 +492,7 @@
   
   <script type="text/x-handlebars" data-template-name='components/list-projects'>
     {{#each project in projects}}
-        <div class="list-group-item col-xs-6 project-group-item">
+        <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
             <div class="row-action-primary">
                 <i class="mdi-maps-map icon-lg"></i>
             </div>
@@ -494,6 +505,16 @@
                 </h4>
                 <p class="list-group-item-text">{{project.description}}</p>
                 <h5>Created by: {{project.owner}}{{owner}}</h5>
+                {{#if mine}}
+                <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
+                    <span class="mdi-navigation-more-vert"></span>
+                  </a>
+                  <div class="project-options card">
+                    <a class="action project-delete" {{action 'deleteProject' project.id}}>
+                      <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
+                    </a>
+                  </div>
+                  {{/if}}
             </div>
             <div class="list-group-separator"></div>
         </div>
@@ -509,15 +530,24 @@
         <input class="usersearch" placeholder="Search" />
         <ul class="userlist">
             {{#each user in users}}
-            <li>
-                <div class="name">
-                    <a class="btn btn-fab btn-sm btn-material-lightgrey" {{action 'addCollaborater' user.id projectID}}><span class="mdi-social-person-add"></span></a>
-                    {{user.displayname}}
-                </div>
-            </li>
+              {{is-collaborator projectID=projectID userID=user.id user=user}}
             {{/each}}
         </ul>
   </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="components/is-collaborator">
+      <li class="collaboration-list">
+          <div class="name">
+          <h4>
+            {{#if isCollaborator}}
+              <a class="btn rotate btn-added btn-fab btn-xs" {{action 'removeCollaborater' user.id projectID}}><span class="mdi-content-clear"></span></a>
+              {{else}}
+              <a class="btn rotate btn-fab btn-xs btn-add" {{action 'addCollaborater' user.id projectID}}><span class="mdi-content-add "></span></a>
+              {{/if}}
+              {{user.displayname}}{{isCollaborator}}</h4><hr />
+          </div>
+      </li>
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/gravatar-image">
