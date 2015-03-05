@@ -27,7 +27,8 @@ App.Router.map(function() {
 // Objects
 
 var layersStore = Ember.Object.create({
-  loaded: []
+  loaded: [],
+  id: undefined
 });
 
 var Counts = Ember.Object.create({
@@ -88,12 +89,9 @@ App.IndexController = App.ProjectsIndexController.extend();
 App.ProjectController = Ember.ObjectController.extend({
     showLayers: function() {
         // This isn't working under the newest Ember Data.
-        var layers = this.get("model.layer_ids.content.content");
-        var added_layers = [];
-        $(layers).each(function(){
-            added_layers.push(this.id);
-        });
-        layersStore.set("loaded",added_layers);
+        var id = this.get("model.id");
+        layersStore.set("id",id);
+        
         // This still does.
         return this.get('model.layer_ids');
     
@@ -110,6 +108,10 @@ App.ProjectController = Ember.ObjectController.extend({
     
     // Does this do anything?
     savedStatus: function() {}.property(),
+    
+    users: function() {        
+      return App.User.store.find('user', {project_id: this.projectID});
+    }.property('this.session', 'model'),
     
     actions: {
         reload: function() {
@@ -339,6 +341,29 @@ App.ProjectRoute = Ember.Route.extend({
 
         },
         
+        addCollaborator: function(userID, projectID){
+          console.log('added '+userID);
+          var collaboration = App.User.store.createRecord('collaboration', {
+            project_id: projectID,
+            user_id: userID
+          });
+          collaboration.save();
+        },
+        
+        removeCollaborator: function(userID,projectID){
+          console.log('removed '+userID);
+          var _this = this;
+          var collaboration = DS.PromiseObject.create({
+            promise: App.Collaboration.store.fetch('collaboration', {user_id: userID, project_id: projectID})
+            
+          });
+          collaboration.then(function(){
+            App.Collaboration.store.find('collaboration', collaboration.get('content.content.0.id')).then(function (collaboration) {
+              collaboration.destroyRecord();
+            });
+          });
+        },
+        
         // Modal
         showModal: function(name) {
             
@@ -485,7 +510,7 @@ App.AddRemoveLayerButtonComponent = Ember.Component.extend({
     layerAdded: function(layer){
       return false;
     }.property(),
-
+    
     actions: {
         buttonAddLayer: function(layer) {
           this.toggleProperty("layerAdded");
@@ -501,15 +526,29 @@ App.AddRemoveLayerButtonComponent = Ember.Component.extend({
 });
 
 Ember.Handlebars.helper('is_active', function(layer) {
-    // var loaded_layers = layersStore.get("loaded"),
-    //     this_layer = this.get("param.id");
-        
-    // if (loaded_layers.indexOf(this_layer) > -1){
-    //   this.set("layerAdded",true);
-    //   return
-    // }
-    // this.set("layerAdded",false);
-    // return
+    var project_id = layersStore.get("id"),
+        this_layer = this.get("param").get("id");
+      
+    var _this = this;
+    
+    var layer = DS.PromiseObject.create({
+      promise: App.Layer.store.find('layer', this_layer )
+    });
+    
+    layer.then(function() {
+        var project_lists = layer.get('content').get('project_ids').get('content').currentState;
+        if (project_lists.length==0){
+          return;
+        }
+        $(project_lists).each(function(){
+          if (project_id == this.id){
+            _this.set("layerAdded",true);
+            return;
+          }
+        });
+    });
+    
+    
 });
 
 App.RemoveLayerButtonComponent = Ember.Component.extend({
@@ -793,23 +832,6 @@ App.GravatarImageComponent = Ember.Component.extend({
   }.property('email', 'size')
 });
 
-App.CollaborateUsersComponent = Ember.Component.extend({
-    
-    users: function() {        
-        return App.User.store.find('user', {project_id: this.projectID});
-    }.property('this.session', 'model'),
-    
-    // actions : {
-    //     addCollaborater: function(userID, projectID) {
-    //         var collaboration = App.User.store.createRecord('collaboration', {
-    //             project_id: projectID,
-    //             user_id: userID
-    //         });
-    //         collaboration.save()
-    //     }
-    // }
-    
-});
 
 App.MyProjectsComponent = Ember.Component.extend({
     projects: function() {
@@ -877,45 +899,21 @@ App.ListProjectsComponent = Ember.Component.extend({
     }
 });
 
-App.IsCollaboratorComponent = Ember.Component.extend({
-    isCollaborator: function() {
-        var isCollaborator = false;
-        var _this = this;
-        var collab = DS.PromiseObject.create({
-            promise: App.Project.store.find('collaboration', {project_id: this.projectID, user_id: this.userID})
-        });
-
-        collab.then(function(){
-            if (collab.content.get('content.length') > 0){
-                _this.set('isCollaborator', true);
-            }
-        });
-        return isCollaborator;
-
-    }.property('isCollaborator'),
-
-    actions : {
-        addCollaborater: function(userID, projectID) {
-            var collaboration = App.User.store.createRecord('collaboration', {
-                project_id: projectID,
-                user_id: userID
-            });
-            collaboration.save();
-        },
-
-        removeCollaborater: function(userID, projectID) {
-            var _this = this;
-            var collaboration = DS.PromiseObject.create({
-                promise: App.Collaboration.store.fetch('collaboration', {user_id: userID, project_id: projectID})
-
-            });
-            collaboration.then(function(){
-                App.Collaboration.store.find('collaboration', collaboration.get('content.content.0.id')).then(function (collaboration) {
-                    collaboration.destroyRecord();
-                });
-            });
-
-        }
+App.AddRemoveCollaboratorButtonComponent = Ember.Component.extend({
+    
+    collaboratorAdded: false,
+    
+    actions: {
+      buttonAddCollaborator: function(userID, projectID) {
+        this.toggleProperty("collaboratorAdded");
+        this.set('action','addCollaborator');
+        this.sendAction('action', this.get('userID'), this.get('projectID'));
+      },
+      buttonRemoveCollaborator: function(userID, projectID) {
+        this.toggleProperty("collaboratorAdded");
+        this.set('action','removeCollaborator');
+        this.sendAction('action', this.get('userID'), this.get('projectID') );
+      },
     }
 });
 

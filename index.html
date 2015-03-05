@@ -8,7 +8,6 @@
   <link rel='stylesheet' href='bower_components/bootstrap-material-design/dist/css/ripples.css' />
   <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
   <!-- endbower -->
-  <link rel="stylesheet" href="css/jquery.nouislider.all.min.css"/>
   <link rel='stylesheet' href='css/component.css' />
   <link rel='stylesheet' href='css/local.css' />
   <link rel='stylesheet' href='css/marker.css' />
@@ -275,7 +274,16 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{collaborate-users projectID=model.id}}
+      <hr/>
+      collaborators:
+      <div id="searchableUsers">
+      <input class="usersearch" placeholder="Search" />
+        <ul class="userlist">
+          {{#each user in users}}
+            {{add-remove-collaborator-button title='Add' action='addcollaborator' projectID=model.id userID=user.id user=user}}
+          {{/each}}
+        </ul>
+      </div>
     </div>
     {{/if}}
     
@@ -285,7 +293,6 @@
     {{#layer-modal title='Add Layers' close='removeModal'}}
     <div class="list">
       {{#each layer in this}}
-      {{#if layer.active}}
       <div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
         <div class="col-xs-2">
           {{add-remove-layer-button title='Add' action='addLayer' param=layer model=model}}
@@ -294,7 +301,6 @@
           {{ list-avaliable-layers layer=layer}}
         </div>
       </div>
-      {{/if}}
       {{/each}}
     </div>
     {{/layer-modal}}
@@ -373,6 +379,11 @@
   
   <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
     <h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+    <span class="hidden">
+    {{#each p in layer.project_ids}}
+    {{p.id}},
+    {{/each}}
+    </span>
     <p>
       <div class="description">{{layer.description}}</div>
     </p>
@@ -523,31 +534,19 @@
         <h5>{{alt}}</h5>
     {{/each}}
   </script>
-  
-  <script type="text/x-handlebars" data-template-name="components/collaborate-users">
-    <hr/>
-    Collaboraters:
-    <div id="searchableUsers">
-        <input class="usersearch" placeholder="Search" />
-        <ul class="userlist">
-            {{#each user in users}}
-              {{is-collaborator projectID=projectID userID=user.id user=user}}
-            {{/each}}
-        </ul>
-  </div>
-  </script>
 
-  <script type="text/x-handlebars" data-template-name="components/is-collaborator">
+  <script type="text/x-handlebars" data-template-name="components/add-remove-collaborator-button">
       <li class="collaboration-list">
-          <div class="name">
-          <h4>
-            {{#if isCollaborator}}
-              <a class="btn rotate btn-added btn-fab btn-xs" {{action 'removeCollaborater' user.id projectID}}><span class="mdi-content-clear"></span></a>
-              {{else}}
-              <a class="btn rotate btn-fab btn-xs btn-add" {{action 'addCollaborater' user.id projectID}}><span class="mdi-content-add "></span></a>
-              {{/if}}
-              {{user.displayname}}{{isCollaborator}}</h4><hr />
-          </div>
+      
+      {{collaboratorAdded}}
+      {{#if collaboratorAdded}}
+            <a class="btn rotate btn-added btn-fab btn-xs" {{action 'buttonRemoveCollaborator' user.id projectID}}><span class="mdi-content-clear"></span></a>
+      {{else}}
+            <a class="btn rotate btn-fab btn-xs btn-add" {{action 'buttonAddCollaborator' user.id projectID}}><span class="mdi-content-add "></span></a>
+      {{/if}}
+            <h4 class="name">
+                {{user.displayname}}
+            </h4>
       </li>
   </script>
   
@@ -567,7 +566,7 @@
   
   <script type="text/x-handlebars" data-template-name="_addLayersButton">
     <div class="add_layer_button">
-      <a class="btn btn-add add_layer_butto" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+      <a class="btn btn-add add_layer_button" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
     </div>
   </script>
   
