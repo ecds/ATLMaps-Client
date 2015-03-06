@@ -470,7 +470,7 @@ App.OpacitySliderComponent = Ember.Component.extend({
               }
             });
           });
-    }.property(),
+    }.property('layer'),
     
     actions: {
         opacityChange: function() {
