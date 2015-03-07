@@ -603,20 +603,20 @@ a#hide-layer-options:hover{
 }
 
 .shuffle-items li.item {
-  width:100%;
-  float:left;
-  background-color:#fff;
+  width: 100%;
+  float: left;
+  background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
   box-sizing: border-box;
   color: black;
   line-height: 1.5;
-  margin:0;
+  margin: 0;
   padding: 15px 20px 15px 25px;
   top: 0;
   left: 0;
   z-index: 4;
-  position:absolute;
+  position: absolute;
   transition-property: height, top, margin-top;
   transition-duration: 0.2s;
   transition-timing-function: ease;
@@ -628,8 +628,8 @@ a#hide-layer-options:hover{
 }
 
 .shuffle-items li.item.collapsed{
-  padding: 5px 15px 0px 15px;
-  height:40px;
+  padding: 5px 15px 15px 15px;
+  height :55px;
   z-index: 3;
   position:relative;
   top:160px;
@@ -942,7 +942,7 @@ a.project-options-close:hover {
   font-weight: 500;
 }
 
-.list-group  div.project-group-item {
+.list-group  div.project-group-item {
   overflow: auto;
   
 }
@@ -1122,4 +1122,16 @@ input.value-input {
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
   background-color: rgb(255, 183, 77);
   margin-top:-1px;
+}
+
+span.toggle_label:after {
+  content: 'Hide All';
+}
+
+span.toggle_label.off:after {
+  content: 'Show All';
+}
+
+li.collaboration-list {
+  margin: .5em;
 }

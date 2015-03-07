@@ -33,7 +33,11 @@
   <!-- endbower -->
 
   <script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>
+<<<<<<< HEAD
   <script src="js/noUiSlider.min.js"></script>
+=======
+  <script src="js/jquery.nouislider.min.js"></script>
+>>>>>>> develop
   <script src="js/shuffle.js"></script>
   <script src="js/menu/classie.js"></script>
   <script src="js/menu/gnmenu.js"></script>
@@ -168,7 +172,7 @@
                     </header>
                     <hr/>
                     {{my-projects}}
-                    {{!--{{my-collaborations}}--}}
+                    {{my-collaborations}}
                 {{/if}}
                 {{published-projects}}
             </article>
@@ -181,8 +185,7 @@
     <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
     <div class="layer-controls">
       <div class="card">
-        {{mine}}
-        {{#if isMine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
+        {{#if model.is_mine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
         {{# if model.saved }}
         <h1>{{model.name}}</h1>
         <p>{{model.description}}</p>
@@ -198,10 +201,17 @@
         </div>
         {{/if}}
         {{/if}}
+<<<<<<< HEAD
         {{#if mayEdit}}{{partial 'addLayersButton'}}{{/if}}
         <div class="togglebutton opacity">
           <label>
             <input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> Opacity
+=======
+        {{#if may_edit}}{{partial 'addLayersButton'}}{{/if}}
+        <div class="togglebutton opacity">
+          <label>
+            <input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+>>>>>>> develop
           </label>
         </div>
         <hr/>
@@ -223,12 +233,12 @@
                   {{ layer-marker projectID=model.id layerID=layer.id }}
                 </div>
                 <div class="row-content">
-                  <h4 class="list-group-item-heading">{{layer.name}}</h4>
+                  <h4 class="list-group-item-heading">{{layer.name}}{{layer.marker}}</h4>
                   <p class="list-group-item-text">{{layer.description}}</p>
                   <div class="text-muted">{{partial 'citation'}}</div>
                 </div>
                 <div class="col-xs-1 pull-right">
-                  {{#if isMine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
+                  {{#if model.is_mine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
                 </div>
               </div>
             </div>
@@ -251,7 +261,7 @@
       {{ base-map }}
     </div>
     
-    {{#if isMine}}
+    {{#if is_mine}}
     <div class="card" id='project_edit_form' style="display:none;left:-100%;">
       <h3>Project Options</h3>
       <div class="form-group">
@@ -275,7 +285,16 @@
           <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
         </div>
       </div>
-      {{!--{{collaborate-users projectID=model.id}}--}}
+      <hr/>
+      collaborators:
+      <div id="searchableUsers">
+      <input class="usersearch" placeholder="Search" />
+        <ul class="userlist">
+          {{#each user in users}}
+            {{add-remove-collaborator-button title='Add' action='addcollaborator' projectID=model.id userID=user.id user=user}}
+          {{/each}}
+        </ul>
+      </div>
     </div>
     {{/if}}
     
@@ -285,7 +304,6 @@
     {{#layer-modal title='Add Layers' close='removeModal'}}
     <div class="list">
       {{#each layer in this}}
-      {{#if layer.active}}
       <div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
         <div class="col-xs-2">
           {{add-remove-layer-button title='Add' action='addLayer' param=layer model=model}}
@@ -294,7 +312,6 @@
           {{ list-avaliable-layers layer=layer}}
         </div>
       </div>
-      {{/if}}
       {{/each}}
     </div>
     {{/layer-modal}}
@@ -373,6 +390,11 @@
   
   <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
     <h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+    <span class="hidden">
+    {{#each p in layer.project_ids}}
+    {{p.id}},
+    {{/each}}
+    </span>
     <p>
       <div class="description">{{layer.description}}</div>
     </p>
@@ -459,7 +481,7 @@
   
   <script type="text/x-handlebars" data-template-name="components/my-projects">
     <div class="list-group row">
-        {{list-projects projects=projects alt="I need to create some amazing projects."}}
+        {{list-projects projects=projects alt="I need to create some amazing projects." mine=true}}
     </div>
   </script>
   
@@ -473,7 +495,7 @@
     </header>
     <hr/>
     <div class="list-group row">
-        {{list-projects projects=myCollaborations.projects alt="No Collaborations"}}
+        {{list-projects projects=myCollaborations alt="No Collaborations"}}
     </div>
   </script>
   
@@ -493,7 +515,7 @@
   
   <script type="text/x-handlebars" data-template-name='components/list-projects'>
     {{#each project in projects}}
-        <div class="list-group-item col-xs-6 project-group-item">
+        <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
             <div class="row-action-primary">
                 <i class="mdi-maps-map icon-lg"></i>
             </div>
@@ -506,6 +528,16 @@
                 </h4>
                 <p class="list-group-item-text">{{project.description}}</p>
                 <h5>Created by: {{project.owner}}{{owner}}</h5>
+                {{#if mine}}
+                <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
+                    <span class="mdi-navigation-more-vert"></span>
+                  </a>
+                  <div class="project-options card">
+                    <a class="action project-delete" {{action 'deleteProject' project.id}}>
+                      <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
+                    </a>
+                  </div>
+                  {{/if}}
             </div>
             <div class="list-group-separator"></div>
         </div>
@@ -513,23 +545,20 @@
         <h5>{{alt}}</h5>
     {{/each}}
   </script>
-  
-  <script type="text/x-handlebars" data-template-name="components/collaborate-users">
-    <hr/>
-    Collaboraters:
-    <div id="searchableUsers">
-        <input class="usersearch" placeholder="Search" />
-        <ul class="userlist">
-            {{#each user in users}}
-            <li>
-                <div class="name">
-                    <a class="btn btn-fab btn-sm btn-material-lightgrey" {{action 'addCollaborater' user.id projectID}}><span class="mdi-social-person-add"></span></a>
-                    {{user.displayname}}
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-  </div>
+
+  <script type="text/x-handlebars" data-template-name="components/add-remove-collaborator-button">
+      <li class="collaboration-list">
+      
+      {{collaboratorAdded}}
+      {{#if collaboratorAdded}}
+            <a class="btn rotate btn-added btn-fab btn-xs" {{action 'buttonRemoveCollaborator' user.id projectID}}><span class="mdi-content-clear"></span></a>
+      {{else}}
+            <a class="btn rotate btn-fab btn-xs btn-add" {{action 'buttonAddCollaborator' user.id projectID}}><span class="mdi-content-add "></span></a>
+      {{/if}}
+            <h4 class="name">
+                {{user.displayname}}
+            </h4>
+      </li>
   </script>
   
   <script type="text/x-handlebars" data-template-name="components/gravatar-image">
@@ -548,7 +577,7 @@
   
   <script type="text/x-handlebars" data-template-name="_addLayersButton">
     <div class="add_layer_button">
-      <a class="btn btn-add add_layer_butto" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+      <a class="btn btn-add add_layer_button" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
     </div>
   </script>
   

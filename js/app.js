@@ -20,20 +20,22 @@ App.Router.map(function() {
         this.resource('project', { path: '/:project_id' });
     });
     this.resource('about');
-    this.resource('user')
+    this.resource('user');
     this.route('login');
 });
 
 // Objects
 
 var layersStore = Ember.Object.create({
-  loaded: []
+  loaded: [],
+  id: undefined
 });
 
 var Counts = Ember.Object.create({
     vectorLayer: 1,
     marker: 0,
-    lastAdded: 0
+    lastAdded: 0,
+    project: ''
 });
 
 App.Map = Ember.Object.extend();
@@ -50,18 +52,6 @@ App.ApplicationController = Ember.Controller.extend({
 
 App.ProjectsIndexController = Ember.ArrayController.extend({
     sortProperties: ['name'],
-    
-    myProjects: function() {
-        var isMine = this.filterBy('user_id', this.session.get('content.user.id') )
-        console.log(isMine)
-        return isMine
-    }.property('@each.myProjects'),
-    
-    myCollaborations: function() {
-        var mayEdit = this.filterBy('user_ids[0]', this.session.get('content.user.id') )
-        console.log(mayEdit)
-        return mayEdit
-    }.property('@each.myCollaborations'),
     
     actions : {
         
@@ -89,49 +79,6 @@ App.ProjectsIndexController = Ember.ArrayController.extend({
             project.save().then(onSuccess);
 
         },
-        
-        toggleOptions: function(project) {
-            var target = ".project-group-item[data-project-id='"+project+"'] .project-options",
-                trigger = ".project-group-item[data-project-id='"+project+"'] .action.show-options",
-                project_option = ".project-group-item .project-options"
-            
-            var $target = $(target),
-                $project_option = $(project_option),
-                $trigger = $(trigger);
-            
-            $project_option.not(target).removeClass("open");
-            
-            
-            $('.projects').off('click.options').on('click.options', function(evt){
-              var $clicked = $(evt.target);
-              if( !$clicked.hasClass('project-options') && $clicked.closest('.project-options').length==0){
-                $('.action.show-options').removeClass("active");
-                $project_option.removeClass("open");
-                $trigger.removeClass('active');
-                $(this).off('click.options');
-              }
-            });
-            
-            $target.toggleClass("open");
-            $trigger.toggleClass('active');
-            
-        },
-        
-        deleteProject: function(project) {
-            
-            var response = confirm("Are you sure you want to DELETE this project?");
-            
-            if (response == true) {
-                this.store.find('project', project).then(function (project) {
-                    project.destroyRecord();
-                });
-            }
-            else {
-                var target = ".project-group-item[data-project-id='"+project+"'] .project-options";
-                $(".project-group-item .project-options").removeClass("open");
-            }
-            
-        }
     }
     
 });
@@ -141,64 +88,30 @@ App.IndexController = App.ProjectsIndexController.extend();
 
 App.ProjectController = Ember.ObjectController.extend({
     showLayers: function() {
-        var layers = this.get("model.layer_ids.content.content")
-        var added_layers = [];
-        $(layers).each(function(){
-            added_layers.push(this.id)
-        })
-        layersStore.set("loaded",added_layers)
-        return this.get('model.layer_ids')
+        // This isn't working under the newest Ember Data.
+        var id = this.get("model.id");
+        layersStore.set("id",id);
+        
+        // This still does.
+        return this.get('model.layer_ids');
     
     }.property('model.layer_ids.@each'),
-    
-    isMine: false,
-    mayEdit: false,
-    
-    mine: function() {
-        var _this = this;
-        var currentProject = DS.PromiseObject.create({
-            promise: this.store.find('project', this.model.id)
-        });
+
+    projectLayers: function() {
+
+        var layers = App.Project.store.fetch('projectlayer', { project_id: this.model.id});
+        return layers;
         
-        currentProject.then(function() {
-            // Here we want to allow unauthenticated users to be able to play with adding layers to a map
-            // without saveing a project. Basically, if the user isn't authenciated and the project isn't
-            // associated with a user, then consider the user the owner and show the "Add Layers" button.
-            // if `isMine` is true we show the button to edit the project attributes.
-            // if `mayEdit` is true we show the "+ Layers" button.
-            if (_this.session.isAuthenticated == false) {
-                if (currentProject.get('user_id') == null) {
-                    _this.set('isMine', false);
-                    _this.set('mayEdit', true);
-                }
-                else {
-                    _this.set('isMine', false);
-                    _this.set('mayEdit', false);
-                }
-            }
-            else {
-                var isCollaborator = $.inArray(_this.session.content.user.id, currentProject.get('user_ids'));
-                if (currentProject.get('user_id') === _this.session.content.user.id) {
-                    _this.set('isMine', true);
-                    _this.set('mayEdit', true);
-                }
-                else if (isCollaborator > -1 ) {
-                    _this.set('isMine', false);
-                    _this.set('mayEdit', true);
-                }
-                else {
-                    _this.set('isMine', false);
-                    _this.set('mayEdit', false);
-                }
-            }
-        });
-    }.property('model', 'this.session.content.user.id'),
+    }.property('model.layer_ids.@each'),
     
-    // Empty property for the input filed so we can clear it later.
     projectName: '',
     
     // Does this do anything?
     savedStatus: function() {}.property(),
+    
+    users: function() {        
+      return App.User.store.find('user', {project_id: this.projectID});
+    }.property('this.session', 'model'),
     
     actions: {
         reload: function() {
@@ -207,13 +120,13 @@ App.ProjectController = Ember.ObjectController.extend({
         },
       
         saveProject: function() {
-            var project = this.get('model')
-            var submittedName = this.get('projectName')
+            var project = this.get('model');
+            var submittedName = this.get('projectName');
             if(submittedName === '') {
-                alert('Please add a title for you project.')
+                alert('Please add a title for you project.');
             }
             else {
-                project.set('name', submittedName)
+                project.set('name', submittedName);
                 project.set('saved', true);
                 
                 // perserve this so we can clear the projectName field after save.
@@ -247,7 +160,7 @@ App.ProjectController = Ember.ObjectController.extend({
             var submittedDescription = project.get('description');
             var submittedPublished = project.get('published');
 
-            project.set('name', submittedName)
+            project.set('name', submittedName);
             project.set('description', submittedDescription);
             project.set('published', submittedPublished);
             
@@ -336,13 +249,13 @@ var color_options = ["amber-300","amber-400","amber-500","amber-600","blue-200",
 App.ProjectRoute = Ember.Route.extend({
     
     model: function(params) {
-        return this.store.fetch('project', params.project_id);
+        return this.store.find('project', params.project_id);
     },
     
     // This was causing an extra trip to the database and `fetch` seemes to be
     // doing what we need. I just left this here as an example for the future.
     afterModel: function(model) {
-        //model.reload();
+        model.reload();
     },
 
     actions: {
@@ -369,7 +282,7 @@ App.ProjectRoute = Ember.Route.extend({
             if (layer.get('layer_type') === 'geojson'){
                 Counts.set('lastAdded', Counts.vectorLayer);
                 // Now increment `Counts.vectorLayer
-                Counts.vectorLayer++
+                Counts.vectorLayer++;
             }
 
             projectlayer.save().then(function(){
@@ -377,7 +290,9 @@ App.ProjectRoute = Ember.Route.extend({
                 // otherwise they will added again
                 $(".vectorData, .wmsLayer").addClass('remove_layer');
                 Ember.run.later(this, function() {
-                    $(".remove_layer").fadeOut(3000,function(){$(this).remove()});
+                    $(".remove_layer").fadeOut(3000,function(){
+                        $(this).remove();
+                    });
                 }, 1500);
                 
                 // We need to set `Counts.vectorLayer` back to zero becuase it will increment
@@ -407,7 +322,9 @@ App.ProjectRoute = Ember.Route.extend({
                         $(".vectorData, .wmsLayer").addClass('remove_layer');
                         _this.get("controller.model").reload();
                         Ember.run.later(this, function() {
-                            $(".remove_layer").fadeOut(3000,function(){$(this).remove()});
+                            $(".remove_layer").fadeOut(3000,function(){
+                                $(this).remove();
+                            });
                         }, 1500);
                     });
                 });
@@ -422,6 +339,29 @@ App.ProjectRoute = Ember.Route.extend({
                 $(this).remove();
             });
 
+        },
+        
+        addCollaborator: function(userID, projectID){
+          console.log('added '+userID);
+          var collaboration = App.User.store.createRecord('collaboration', {
+            project_id: projectID,
+            user_id: userID
+          });
+          collaboration.save();
+        },
+        
+        removeCollaborator: function(userID,projectID){
+          console.log('removed '+userID);
+          var _this = this;
+          var collaboration = DS.PromiseObject.create({
+            promise: App.Collaboration.store.fetch('collaboration', {user_id: userID, project_id: projectID})
+            
+          });
+          collaboration.then(function(){
+            App.Collaboration.store.find('collaboration', collaboration.get('content.content.0.id')).then(function (collaboration) {
+              collaboration.destroyRecord();
+            });
+          });
         },
         
         // Modal
@@ -442,19 +382,12 @@ App.ProjectRoute = Ember.Route.extend({
                     into: 'application',
                     outlet: 'modal'
                 });
-                $loading.fadeOut(1500, function(){$(this).remove()});
+                $loading.fadeOut(1500, function(){
+                    $(this).remove();
+                });
                 
                 
-            });
-            
-            // Non promise version
-            //var content = this.store.find('layer');
-            //this.controllerFor(name).set('content', content);
-            //this.render(name, {
-            //    into: 'application',
-            //    outlet: 'modal'
-            //});
-            
+            });            
             
         },
         removeModal: function() {
@@ -471,7 +404,7 @@ App.LoginRoute = Ember.Route.extend(SimpleAuth.UnauthenticatedRouteMixin);
 
 App.Projectlayer = Ember.Route.extend({
     model: function() {
-        return App.Projectlayer.find()
+        return App.Projectlayer.find();
     }
 });
 
@@ -537,11 +470,11 @@ App.OpacitySliderComponent = Ember.Component.extend({
               }
             });
           });
-    }.property(),
+    }.property('layer'),
     
     actions: {
         opacityChange: function() {
-            var layerName = this.layer
+            var layerName = this.layer;
             var value = $("input."+layerName).val();
             var opacity = value / 10;
             $("#map div."+layerName+",#map img."+layerName).css({'opacity': opacity});
@@ -561,22 +494,23 @@ App.LayerMarkerComponent = Ember.Component.extend({
         
         layerMarker.then(function() {
             if (layerMarker.content.content[0]._data.layer_type == 'geojson') {
-                _this.set('markerClass', 'map-marker layer-' + color_options[layerMarker.content.content[0]._data.marker] )
+                _this.set('markerClass', 'map-marker layer-' + color_options[layerMarker.content.content[0]._data.marker] );
             }
             else {
-                _this.set('markerClass', 'map-marker layer-marker')
+                _this.set('markerClass', 'map-marker layer-marker');
             }
         });
 
-        return 'map-marker loading'
+        return 'map-marker loading';
     
     }.property('markerClass.@each')
 });
 
 App.AddRemoveLayerButtonComponent = Ember.Component.extend({
     layerAdded: function(layer){
-      return false
+      return false;
     }.property(),
+    
     actions: {
         buttonAddLayer: function(layer) {
           this.toggleProperty("layerAdded");
@@ -584,7 +518,7 @@ App.AddRemoveLayerButtonComponent = Ember.Component.extend({
           this.sendAction('action', this.get('param'));
         },
         buttonRemoveLayer: function(layer) {
-          this.toggleProperty("layerAdded")
+          this.toggleProperty("layerAdded");
           this.set('action','removeLayer');
           this.sendAction('action', this.get('param'));
         },
@@ -592,15 +526,29 @@ App.AddRemoveLayerButtonComponent = Ember.Component.extend({
 });
 
 Ember.Handlebars.helper('is_active', function(layer) {
-    var loaded_layers = layersStore.get("loaded"),
-        this_layer = this.get("param.id");
-        
-    if (loaded_layers.indexOf(this_layer) > -1){
-      this.set("layerAdded",true)
-      return
-    }
-    this.set("layerAdded",false)
-    return
+    var project_id = layersStore.get("id"),
+        this_layer = this.get("param").get("id");
+      
+    var _this = this;
+    
+    var layer = DS.PromiseObject.create({
+      promise: App.Layer.store.find('layer', this_layer )
+    });
+    
+    layer.then(function() {
+        var project_lists = layer.get('content').get('project_ids').get('content').currentState;
+        if (project_lists.length==0){
+          return;
+        }
+        $(project_lists).each(function(){
+          if (project_id == this.id){
+            _this.set("layerAdded",true);
+            return;
+          }
+        });
+    });
+    
+    
 });
 
 App.RemoveLayerButtonComponent = Ember.Component.extend({
@@ -623,7 +571,7 @@ App.LayerModalComponent = Ember.Component.extend({
         
         toggleFilters: function() {
             this.toggleProperty("showFilters");
-            if (this.showFilters == true) {
+            if (this.showFilters === true) {
                 $("#filter_and_search").show();
             }
             else {
@@ -647,7 +595,7 @@ App.LayerModalComponent = Ember.Component.extend({
         // This binds the search all event to the "All" filter button.
         $("#filter_and_search .clear").on('click',function(){
             layerList.search();
-        })
+        });
         // Start Alpha sort
         var $tags = $('ul.tags-dropdown'),
         $tagsli = $tags.children('li');
@@ -675,7 +623,7 @@ App.LayerModalComponent = Ember.Component.extend({
 App.MapLayersComponent = Ember.Component.extend({
     mappedLayers: function() {
         
-        var markerFor = ''//Counts.vectorLayer;
+        var markerFor = '';//Counts.vectorLayer;
         var _this = this;
 
         var savedMarker = DS.PromiseObject.create({
@@ -684,7 +632,7 @@ App.MapLayersComponent = Ember.Component.extend({
 
         savedMarker.then(function() {
             if(typeof savedMarker.content.content[0]._data.marker !== "undefined") {
-                _this.set('markerFor', savedMarker.content.content[0]._data.marker)
+                _this.set('markerFor', savedMarker.content.content[0]._data.marker);
                 markerFor = savedMarker.content.content[0]._data.marker;
             }
         });
@@ -756,29 +704,29 @@ App.MapLayersComponent = Ember.Component.extend({
                 
                 case 'geojson':
                     
-                    var slug = mappedLayer.get('layer')
+                    var slug = mappedLayer.get('layer');
                     
                     function viewData(feature, layer) {
-                        var popupContent = "<h2>"+feature.properties.name+"</h2>"
+                        var popupContent = "<h2>"+feature.properties.name+"</h2>";
                         if (feature.properties.image) {
                             popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
                                             "<span>Photo Credit: "+feature.properties.image.credit+"</span>";
-                        };
+                        }
                         if (feature.properties.description) {
                             popupContent += "<p>" + feature.properties.description + "</p>";
-                        };
+                        }
                         if (feature.properties.gx_media_links) {
-                            popupContent += '<iframe width="375" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>'
-                        };
+                            popupContent += '<iframe width="375" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
+                        }
                         if (feature.properties.images) {
-                            popupContent += feature.properties.images
-                        };
+                            popupContent += feature.properties.images;
+                        }
                         //layer.bindPopup(popupContent);
                         layer.on('click', function(marker) {
                             $(".shuffle-items li.item.info").remove();
-                            var $content = $("<div/>").attr("class","content").html(popupContent)
+                            var $content = $("<div/>").attr("class","content").html(popupContent);
                             var $info = $('<li/>').attr("class","item info").append($content);
-                            $info.appendTo($(".shuffle-items"))
+                            $info.appendTo($(".shuffle-items"));
                             shuffle.click($info);
 
                             $(".active_marker").removeClass("active_marker");
@@ -787,7 +735,7 @@ App.MapLayersComponent = Ember.Component.extend({
                         
                     }
                     function setIcon(url, class_name){
-                        return iconObj = L.icon({
+                        return iconObj == L.icon({
                             iconUrl: url,
                             iconSize: [25, 35],
                             iconAnchor: [16, 37],
@@ -819,7 +767,7 @@ App.MapLayersComponent = Ember.Component.extend({
                           //   
                           //   
                             
-                            return marker
+                            return marker;
                           },
                           
                           
@@ -884,25 +832,6 @@ App.GravatarImageComponent = Ember.Component.extend({
   }.property('email', 'size')
 });
 
-App.CollaborateUsersComponent = Ember.Component.extend({
-    
-    users: function() {        
-        return App.User.store.find('user');
-    }.property('this.session', 'model'),
-    
-    actions : {
-        addCollaborater: function(userID, projectID) {
-            console.log(userID);
-            console.log(projectID)
-            var collaboration = App.User.store.createRecord('collaboration', {
-                project_id: projectID,
-                user_id: userID
-            });
-            collaboration.save()
-        }
-    }
-    
-});
 
 App.MyProjectsComponent = Ember.Component.extend({
     projects: function() {
@@ -912,7 +841,7 @@ App.MyProjectsComponent = Ember.Component.extend({
 
 App.MyCollaborationsComponent = Ember.Component.extend({
     myCollaborations: function() {
-        return App.User.store.fetch('user', this.session.get('content.user.id'));
+        return App.Project.store.fetch('project', {collaborations: this.session.get('content.user.id')});
     }.property()
 });
 
@@ -920,6 +849,72 @@ App.PublishedProjectsComponent = Ember.Component.extend({
     projects: function() {
         return App.Project.store.fetch('project', { published: true});
     }.property()
+});
+
+App.ListProjectsComponent = Ember.Component.extend({
+    actions: {
+
+        toggleOptions: function(project) {
+            var target = ".project-group-item[data-project-id='"+project+"'] .project-options",
+                trigger = ".project-group-item[data-project-id='"+project+"'] .action.show-options",
+                project_option = ".project-group-item .project-options";
+            
+            var $target = $(target),
+                $project_option = $(project_option),
+                $trigger = $(trigger);
+            
+            $project_option.not(target).removeClass("open");
+            
+            
+            $('.projects').off('click.options').on('click.options', function(evt){
+              var $clicked = $(evt.target);
+              if( !$clicked.hasClass('project-options') && $clicked.closest('.project-options').length===0){
+                $('.action.show-options').removeClass("active");
+                $project_option.removeClass("open");
+                $trigger.removeClass('active');
+                $(this).off('click.options');
+              }
+            });
+            
+            $target.toggleClass("open");
+            $trigger.toggleClass('active');
+            
+        },
+
+        deleteProject: function(project) {
+            
+            var response = confirm("Are you sure you want to DELETE this project?");
+            
+            if (response === true) {
+                App.Project.store.find('project', project).then(function (project) {
+                    project.destroyRecord();
+                });
+            }
+            else {
+                var target = ".project-group-item[data-project-id='"+project+"'] .project-options";
+                $(".project-group-item .project-options").removeClass("open");
+            }
+            
+        }
+    }
+});
+
+App.AddRemoveCollaboratorButtonComponent = Ember.Component.extend({
+    
+    collaboratorAdded: false,
+    
+    actions: {
+      buttonAddCollaborator: function(userID, projectID) {
+        this.toggleProperty("collaboratorAdded");
+        this.set('action','addCollaborator');
+        this.sendAction('action', this.get('userID'), this.get('projectID'));
+      },
+      buttonRemoveCollaborator: function(userID, projectID) {
+        this.toggleProperty("collaboratorAdded");
+        this.set('action','removeCollaborator');
+        this.sendAction('action', this.get('userID'), this.get('projectID') );
+      },
+    }
 });
 
 // Adapter
@@ -932,13 +927,6 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
       var s = this._super(record, suffix);
       return s + this.get('suffix');
     },
-    //headers: function() {
-    //    console.log(this)
-    //    return {
-    //        withCredentials: true,
-    //        "Authorization": "Bearer ab49148e5ed27a0de50b2638a62e9c0be1d38aac554b371f9e16e4ab49569656"// + this.get("session.access_token")
-    //    };
-    //}.property("session.access_token")
 });
 
 
@@ -967,7 +955,8 @@ App.Layer = DS.Model.extend({
     institution: DS.attr(),
     institution_id: DS.belongsTo('institution'),
     tag_slugs: DS.attr('string'),
-    active: DS.attr('boolean')
+    active: DS.attr('boolean'),
+    marker: DS.attr()
 });
 
 App.Project = DS.Model.extend({
@@ -982,7 +971,9 @@ App.Project = DS.Model.extend({
     slug: DS.attr('string'),
     //user_ids: DS.hasMany('user', {async: true})
     user_ids: DS.attr(),
-    owner: DS.attr()
+    owner: DS.attr(),
+    is_mine: DS.attr('boolean'),
+    may_edit: DS.attr('boolean'),
 });
 
 App.Institution = DS.Model.extend({
@@ -1019,7 +1010,7 @@ App.User = DS.Model.extend({
 App.Collaboration = DS.Model.extend({
     user_id: DS.attr(),
     project_id: DS.attr()
-})
+});
 
 // Random JavaScript
 
@@ -1050,7 +1041,7 @@ $(document).ready(function(){
     if( $target_slider.length>0 ){
       return false;
     }
-    if ($(this).hasClass('info') == false){
+    if ($(this).hasClass('info') === false){
       $(".shuffle-items li.item.info").remove();
       $(".active_marker").removeClass("active_marker");
     }
@@ -1062,6 +1053,9 @@ $(document).ready(function(){
     
   })
   .on('mouseup','.togglebutton.opacity label',function(){
+
+    $( "span.toggle_label" ).toggleClass( "off" );
+
     var active = $(".togglebutton label input[type=checkbox]:first-child:checked").length>0;
     
     if (active){
@@ -1070,7 +1064,7 @@ $(document).ready(function(){
     else{
       $('.value-input, .slider').val(10).change();
     }
-  })
+  });
   
   //var options = {
   //  valueNames: [ 'name', 'description' ],
