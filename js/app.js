@@ -97,12 +97,13 @@ App.ProjectController = Ember.ObjectController.extend({
     
     }.property('model.layer_ids.@each'),
 
-    projectLayers: function() {
+    // projectLayers: function() {
 
-        var layers = App.Project.store.fetch('projectlayer', { project_id: this.model.id});
-        return layers;
+    //     var layers = App.Project.store.fetch('projectlayer', { project_id: this.model.id});
+
+    //     return layers;
         
-    }.property('model.layer_ids.@each'),
+    // }.property('model.layer_ids.@each'),
     
     projectName: '',
     
@@ -235,26 +236,39 @@ App.EditProjectModalRoute = Ember.Route.extend({
 App.ProjectsIndexRoute = Ember.Route.extend({
     model: function() {
         return this.store.find('project');
+    },
+
+    setupController: function() {
+        $(document).attr('title', 'ATLMaps: Projects');
     }
     
 });
 
 
-App.IndexRoute = App.ProjectsIndexRoute.extend({});
+App.IndexRoute = App.ProjectsIndexRoute.extend({
+    setupController: function() {
+        $(document).attr('title', 'ATLMaps');
+    }
+});
 
 var color_options = ["amber-300","amber-400","amber-500","amber-600","blue-200","blue-300","blue-400","blue-500","blue-600","blue-700","blue-800","blue-900","cyan-200","cyan-300","cyan-400","cyan-500","cyan-600","cyan-700","cyan-800","cyan-900","deep-orange-300","deep-orange-400","deep-orange-500","deep-orange-600","deep-orange-700","deep-purple-300","deep-purple-400","deep-purple-50","deep-purple-500","deep-purple-600","green-300","green-400","green-500","green-600","indigo-400","indigo-500","indigo-600","indigo-700","light-blue-300","light-blue-400","light-blue-500","light-blue-600","light-blue-700","light-green-300","light-green-400","light-green-500","light-green-600","light-green-700","orange-300","orange-400","orange-500","orange-600","orange-700","pink-400","pink-500","pink-600","pink-700","purple-300","purple-400","purple-500","purple-600","purple-700","red-300","red-400","red-500","red-600","red-700","teal-300","teal-400","teal-500","teal-600","teal-700","yellow-400","yellow-500","yellow-600"];
+
+
 
 
 //App.ProjectRoute = Ember.Route.extend(SimpleAuth.AuthenticatedRouteMixin,{
 App.ProjectRoute = Ember.Route.extend({
     
     model: function(params) {
-        return this.store.find('project', params.project_id);
+        project = this.store.find('project', params.project_id);
+        return project;
     },
     
     // This was causing an extra trip to the database and `fetch` seemes to be
     // doing what we need. I just left this here as an example for the future.
     afterModel: function(model) {
+        var projectTitle = this.modelFor('project').get('name');
+        $(document).attr('title', 'ATLMaps: ' + projectTitle);
         model.reload();
     },
 
@@ -398,6 +412,12 @@ App.ProjectRoute = Ember.Route.extend({
         }
     },
     
+});
+
+App.AboutRoute = Ember.Route.extend({
+    setupController: function() {
+        $(document).attr('title', 'ATLMaps: About');
+    }
 });
 
 App.LoginRoute = Ember.Route.extend(SimpleAuth.UnauthenticatedRouteMixin);
