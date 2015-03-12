@@ -122,8 +122,8 @@
         </header>
         <hr />
         <div class="list-group col-sm-10 col-sm-offset-1">
-          {{#each project in this.model}}
-            {{#if project.published}}
+          {{#each project in projects}}
+
               <div class="list-group-item col-xs-6 project-group-item">
                 <div class="row-action-primary">
                   <i class="mdi-maps-map icon-lg"></i>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="list-group-separator"></div>
               </div>
-            {{/if}}
+
           {{else}}
             <p>There are no projects visible at this time :(</p>
           {{/each}}
