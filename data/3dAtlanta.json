@@ -1,0 +1,95 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.39186728275308,
+                    33.75211367704554,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Doll head at Keely's Department Store",
+                "description": "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/ke9EWgEZpyU\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38987651089002,
+                    33.754755355692,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Toothbrush at Liggett's Drug Co.",
+                "description": "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/nAmXCJEOcdY\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38922246942788,
+                    33.75384716425039,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Swamp Root at Lane Drugs",
+                "description": "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/GfiU2Z_mUOs\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38769392475726,
+                    33.753122341931,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Decatur & Central",
+                "description": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/GfBD4AVa-xk\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38987877183912,
+                    33.75436876834506,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "3d Overview",
+                "description": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Kah7NqpBW4M\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38879160791147,
+                    33.75586012066306,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Flatiron",
+                "description": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Wp5Z8pIUqis\" frameborder=\"0\" allowfullscreen></iframe>"
+            }
+        }
+    ]
+}

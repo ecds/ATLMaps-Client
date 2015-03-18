@@ -24,6 +24,10 @@ App.Router.map(function() {
     this.route('login');
 });
 
+// App.Router.reopen({
+//     location: 'history'
+// });
+
 // Objects
 
 var layersStore = Ember.Object.create({
@@ -113,8 +117,12 @@ App.ProjectController = Ember.ObjectController.extend({
     
     // Does this do anything?
     savedStatus: function() {}.property(),
-    
-    users: function() {        
+
+    // collaberators: function() {        
+    //   return App.Project.store.find('collaboration', {project_id: this.projectID});
+    // }.property('model'),
+
+    users: function() {      
       return App.User.store.find('user', {project_id: this.projectID});
     }.property('this.session', 'model'),
     
@@ -147,10 +155,19 @@ App.ProjectController = Ember.ObjectController.extend({
             $("#project_edit_form").show().animate({"left":"10px"},500,"easeOutQuint");
             var options = {
             valueNames: [ 'name'],
-            searchClass: 'usersearch',
-            listClass: 'userlist',
-        };
-        var userList = new List('searchableUsers', options);
+                searchClass: 'usersearch',
+                listClass: 'userlist',
+            };
+            var userList = new List('searchableUsers', options);
+        },
+
+        showList: false,
+
+        showCollaborators : function() {
+            this.toggleProperty("showlist");
+            $("#searchableUsers").slideToggle();
+            $(".hidding").toggle();
+            $(".showing").toggle();
         },
         
         cancelUpdate: function() {
@@ -530,51 +547,6 @@ App.LayerMarkerComponent = Ember.Component.extend({
     }.property('markerClass.@each')
 });
 
-App.AddRemoveLayerButtonComponent = Ember.Component.extend({
-    layerAdded: function(layer){
-      return false;
-    }.property(),
-    
-    actions: {
-        buttonAddLayer: function(layer) {
-          this.toggleProperty("layerAdded");
-          this.set('action','addLayer');
-          this.sendAction('action', this.get('param'));
-        },
-        buttonRemoveLayer: function(layer) {
-          this.toggleProperty("layerAdded");
-          this.set('action','removeLayer');
-          this.sendAction('action', this.get('param'));
-        },
-    }
-});
-
-Ember.Handlebars.helper('is_active', function(layer) {
-    var project_id = layersStore.get("id"),
-        this_layer = this.get("param").get("id");
-      
-    var _this = this;
-    
-    var layer = DS.PromiseObject.create({
-      promise: App.Layer.store.find('layer', this_layer )
-    });
-    
-    layer.then(function() {
-        var project_lists = layer.get('content').get('project_ids').get('content').currentState;
-        if (project_lists.length==0){
-          return;
-        }
-        $(project_lists).each(function(){
-          if (project_id == this.id){
-            _this.set("layerAdded",true);
-            return;
-          }
-        });
-    });
-    
-    
-});
-
 App.RemoveLayerButtonComponent = Ember.Component.extend({
     actions: {
         removeLayer: function() {
@@ -923,22 +895,96 @@ App.ListProjectsComponent = Ember.Component.extend({
     }
 });
 
-App.AddRemoveCollaboratorButtonComponent = Ember.Component.extend({
+App.AddRemoveLayerButtonComponent = Ember.Component.extend({
+    layerAdded: function(layer){
+      return false;
+    }.property(),
     
-    collaboratorAdded: false,
+    actions: {
+        buttonAddLayer: function(layer) {
+          this.toggleProperty("layerAdded");
+          this.set('action','addLayer');
+          this.sendAction('action', this.get('param'));
+        },
+        buttonRemoveLayer: function(layer) {
+          this.toggleProperty("layerAdded");
+          this.set('action','removeLayer');
+          this.sendAction('action', this.get('param'));
+        },
+    }
+});
+
+App.AddRemoveCollaboratorButtonComponent = Ember.Component.extend({
+
+    collaboratorAdded: function(){
+        return false;
+    }.property("collaboratorAdded"),
     
     actions: {
       buttonAddCollaborator: function(userID, projectID) {
+        console.log('adding ' + this.collaboratorAdded)
         this.toggleProperty("collaboratorAdded");
+        console.log('added ' + this.collaboratorAdded)
         this.set('action','addCollaborator');
         this.sendAction('action', this.get('userID'), this.get('projectID'));
       },
       buttonRemoveCollaborator: function(userID, projectID) {
+        console.log('removing ' + this.collaboratorAdded)
         this.toggleProperty("collaboratorAdded");
+        console.log('removed ' + this.collaboratorAdded)
         this.set('action','removeCollaborator');
         this.sendAction('action', this.get('userID'), this.get('projectID') );
       },
     }
+});
+
+// Handlebars Helpers
+
+Ember.Handlebars.helper('is_active', function(layer) {
+    var project_id = layersStore.get("id"),
+        this_layer = this.get("param").get("id");
+      
+    var _this = this;
+    
+    var layer = DS.PromiseObject.create({
+      promise: App.Layer.store.find('layer', this_layer )
+    });
+    
+    layer.then(function() {
+        var project_lists = layer.get('content').get('project_ids').get('content').currentState;
+        if (project_lists.length === 0){
+          return;
+        }
+        $(project_lists).each(function(){
+          if (project_id == this.id){
+            _this.set("layerAdded",true);
+            return;
+          }
+        });
+    });
+    
+    
+});
+
+Ember.Handlebars.helper('is_collaborator', function() {
+
+    var project = this.projectID;
+    var user = this.user.id;
+
+    var _this = this;
+    
+    var collaborator = DS.PromiseObject.create({
+        promise: App.Project.store.find('collaboration', {project_id: this.projectID, user_id: this.userID})
+    });
+
+    collaborator.then(function(){
+        if (collaborator.get('content').get('content.length') > 0) {
+            _this.set("collaboratorAdded", true);
+            return;
+        }
+    });
+    
+    
 });
 
 // Adapter
@@ -1033,7 +1079,8 @@ App.User = DS.Model.extend({
 
 App.Collaboration = DS.Model.extend({
     user_id: DS.attr(),
-    project_id: DS.attr()
+    project_id: DS.attr(),
+    user: DS.attr()
 });
 
 // Random JavaScript

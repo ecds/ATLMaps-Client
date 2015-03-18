@@ -278,9 +278,12 @@
         </div>
       </div>
       <hr/>
-      collaborators:
+      <div class="collaborators">
+
+        <h4 id="showCollaborators"><a {{action 'showCollaborators'}}>Collaborators:<span class="mdi-navigation-expand-more hidding"></span><span class="mdi-navigation-expand-less showing"></span></a></h4>
+      </div>
       <div id="searchableUsers">
-      <input class="usersearch" placeholder="Search" />
+        <input class="usersearch form-control" placeholder="Search" />
         <ul class="userlist">
           {{#each user in users}}
             {{add-remove-collaborator-button title='Add' action='addcollaborator' projectID=model.id userID=user.id user=user}}
@@ -541,15 +544,21 @@
   <script type="text/x-handlebars" data-template-name="components/add-remove-collaborator-button">
       <li class="collaboration-list">
       
-      {{collaboratorAdded}}
+      {{is_collaborator}}
+      <div class="row">
+      <div class="col-xs-1">
       {{#if collaboratorAdded}}
             <a class="btn rotate btn-added btn-fab btn-xs" {{action 'buttonRemoveCollaborator' user.id projectID}}><span class="mdi-content-clear"></span></a>
       {{else}}
             <a class="btn rotate btn-fab btn-xs btn-add" {{action 'buttonAddCollaborator' user.id projectID}}><span class="mdi-content-add "></span></a>
       {{/if}}
-            <h4 class="name">
+      </div>
+      <div class="col-xs-6">
+            <h5 class="name">
                 {{user.displayname}}
-            </h4>
+            </h5>
+      </div>
+      </div>
       </li>
   </script>
   

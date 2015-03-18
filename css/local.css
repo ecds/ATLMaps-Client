@@ -1135,3 +1135,20 @@ span.toggle_label.off:after {
 li.collaboration-list {
   margin: .5em;
 }
+
+.collaborators {
+  text-align: center;
+}
+
+#searchableUsers {
+  display: none;
+}
+
+.showing {
+  display: none;
+}
+
+h4#showCollaborators a {
+  text-decoration: none;
+  color: rgb(119, 67, 208);
+}
