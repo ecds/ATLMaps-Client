@@ -22,7 +22,7 @@ module.exports = function(environment) {
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
@@ -42,6 +42,18 @@ module.exports = function(environment) {
   if (environment === 'production') {
 
   }
+
+  // var apiHost = 'https://api.atlmaps.com/';
+
+  // ENV['simple-auth'] = {
+  //   authorizer: 'simple-auth-authorizer:oauth2-bearer',
+  //   crossOriginWhitelist: [apiHost]
+  // };
+
+  // ENV['simple-auth-oauth2'] = {
+  //   serverTokenEndpoint: apiHost+'/oauth/token',
+  //   serverTokenRevocationEndpoint: apiHost+'/oauth/revoke',
+  // };
 
   return ENV;
 };
