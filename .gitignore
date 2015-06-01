@@ -7,3 +7,5 @@ atlmaps/Gemfile.lock
 node_modules
 bower_components
 js/app-diffcontrol.js
+dist
+tmp
