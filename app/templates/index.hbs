@@ -1,0 +1,54 @@
+{{outlet}}
+<div class="banner blue">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8">
+            <div class="jumbotron text-center">
+              <h1>Layers of discovery</h1>
+                 <h2>Mapping the stories of your city</h2>
+              {{#if session.isAuthenticated}}
+              <p>{{#link-to 'projects' tagName='a' class="btn btn-material-pink-300 btn-lg"}}Go to Projects{{/link-to}}</p>
+              {{else}}
+              <p><a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a></p>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="banner blue blurred">
+    <div class="container">
+      <article>
+        <header class="row">
+          <div class="col-xs-12">
+            <h2>Projects</h2>
+          </div>
+        </header>
+        <hr />
+        <div class="list-group col-sm-10 col-sm-offset-1">
+          {{#each project in this.model}}
+            {{#if project.published}}
+              <div class="list-group-item col-xs-6 project-group-item">
+                <div class="row-action-primary">
+                  <i class="mdi-maps-map icon-lg"></i>
+                </div>
+                <div class="row-content">
+                  <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                  <h4 class="list-group-item-heading">
+                    {{#link-to 'project' project action='reload'}}
+                    {{project.name}}
+                    {{/link-to}}
+                  </h4>
+                  <p class="list-group-item-text">{{project.description}}</p>
+                  <h5>Created by: {{project.user.displayname}}</h5>
+                </div>
+                <div class="list-group-separator"></div>
+              </div>
+            {{/if}}
+          {{else}}
+            <p>There are no projects visible at this time :(</p>
+          {{/each}}
+        </div>
+      </article>
+    </div>
+    </div>
