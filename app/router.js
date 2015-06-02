@@ -7,7 +7,9 @@ var Router = Ember.Router.extend({
 
 export default Router.map(function() {
   this.route('edit-project-modal');
-  this.route('projects');
+  this.resource('projects', function() {
+        this.resource('project', { path: '/:project_id' });
+    });
   this.route('about');
   this.route('project-layer');
 });

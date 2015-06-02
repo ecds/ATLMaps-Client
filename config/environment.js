@@ -43,7 +43,7 @@ module.exports = function(environment) {
     'default-src': "'none'",
     'script-src': "'self' 'unsafe-eval'",
     'font-src': "'self'",
-    'connect-src': "'self'",
+    'connect-src': "'self' http://api.atlmaps-dev.com:3000",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'"
   };
