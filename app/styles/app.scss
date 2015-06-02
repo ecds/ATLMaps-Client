@@ -1,3 +1,7 @@
+@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import '../../bower_components/bootstrap-material-design/sass/material.scss';
+@import 'gn-menu.scss';
+
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -1152,3 +1156,5 @@ h4#showCollaborators a {
   text-decoration: none;
   color: rgb(119, 67, 208);
 }
+
+
