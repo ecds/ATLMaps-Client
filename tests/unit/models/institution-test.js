@@ -5,7 +5,7 @@ import {
 
 moduleForModel('institution', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:layer', 'model:user', 'model:project', 'model:tag']
 });
 
 test('it exists', function(assert) {

@@ -17,8 +17,30 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+var funnel = require('broccoli-funnel');
+var mergeTrees = require('broccoli-merge-trees');
+
+var leafletImages = funnel('bower_components/leaflet/dist/images', {
+	destDir: 'assets/images',
+});
+
+var materialFonts = funnel('bower_components/bootstrap-material-design/fonts', {
+	destDir: 'assets/material-font-path'
+});
+
+app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
+app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
+app.import('bower_components/leaflet/dist/leaflet.js');
+app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('vendor/js/menu/classie.js');
 app.import('vendor/js/menu/gnmenu.js');
+app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
 
-module.exports = app.toTree();
+module.exports = mergeTrees([
+	app.toTree(),
+		leafletImages,
+		materialFonts
+	],{
+		overwrite: true
+	});
