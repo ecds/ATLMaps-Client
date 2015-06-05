@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 
 var container, application;
 
-module('GlobalsInitializer', {
+module('Unit | Initializer | globals', {
   beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();

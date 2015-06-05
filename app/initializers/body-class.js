@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+/* global L */
+
 export function initialize(/* container, application */) {
 	Ember.Route.reopen({
 		activate: function() {

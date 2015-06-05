@@ -60,3 +60,5 @@ $(document).ready(function(){
   //var layerList = new List('searchableLayers', options);
   
 });
+
+//var map = '';

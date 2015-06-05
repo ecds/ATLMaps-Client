@@ -1,0 +1,131 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.309039,
+                    33.765413,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Musical Family",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/C3E66YaEbJg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.465916,
+                    33.650146,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- King Collins",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/BxyyWvX8bQY"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.37878,
+                    33.748442,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Artist",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/S3E3_IJv5Wg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3786,
+                    33.746921,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Web Designer",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/4fnnWNJlLdo"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.396715,
+                    33.719557,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Scientist",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/8Bdwe5nRC_U"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.449814,
+                    33.649632,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Software Engineer",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/t-_5VU9kFgU"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.411896,
+                    33.715407,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Urban Sounds- Architect",
+                "styleUrl": "#icon-22",
+                "styleHash": "-5d895390",
+                "description": "Dave Jimison's 2010 Urban Sounds project records \"seven attempts to reproduce and react to the urban noises found in Atlanta GA\"",
+                "gx_media_links": "//www.youtube.com/embed/G-PFgP6yoR0"
+            }
+        }
+    ]
+}

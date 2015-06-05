@@ -7,7 +7,7 @@ export default DS.Model.extend({
     saved: DS.attr('boolean'),
     published: DS.attr('boolean'),
     user: DS.attr(),
-    layer_ids: DS.hasMany('layer', {async: true}),
+    layer_ids: DS.attr(),
     slug: DS.attr('string'),
     user_ids: DS.attr(),
     owner: DS.attr(),

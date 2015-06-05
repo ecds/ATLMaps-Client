@@ -31,11 +31,13 @@ var materialFonts = funnel('bower_components/bootstrap-material-design/fonts', {
 app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
 app.import('bower_components/leaflet/dist/leaflet.js');
+app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('vendor/js/menu/classie.js');
 app.import('vendor/js/menu/gnmenu.js');
 app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
+app.import('vendor/js/addLayers.js');
 
 module.exports = mergeTrees([
 	app.toTree(),
