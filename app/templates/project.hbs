@@ -63,9 +63,8 @@
 	</div>
 	</div>
 	</div>
-	<footer class="card-footer"> 
-	<input {{bind-attr class=":value-input layer" }} {{action "opacityChange" on="change" param=layer}}/> 
-    <div {{bind-attr class=":slider layer.layer :slider-material-orange-300 " name=layer.layer}}></div>
+	<footer class="card-footer">
+	{{ opacity-slider layer=layer.layer layerID=layer.id }} 
 	</footer>
 	{{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
 	</li>

@@ -3,7 +3,6 @@
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import 'gn-menu.scss';
 @import 'marker.scss';
-@import 'noUiSlider.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
@@ -449,6 +448,12 @@ a.site-title .alt-dark{
 
 .slider.slider-vertical .slider-track {
   background: rgb(66, 169, 247);
+}
+
+.slider-material-orange-300 .noUi-handle {
+  background-color: #ffb74d;
+  border: none;
+  cursor: ew-resize;
 }
 
 .layer-list .item .slider.slider-vertical {
@@ -1079,7 +1084,7 @@ li.gravatar {
 }
 
 span.description_icon {
-  font-family: Material-Design-Icons;
+  font-family: Design-Icons;
 }
 
 span.geojson:before,

@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
 					new L.GeoJSON.AJAX(layer.get('url'), {
 
 						pointToLayer: function (feature, latlng) {
-							var layerClass = 'marker' + slug + ' vectorData map-marker layer-' + markerColor;
+							var layerClass = slug + ' vectorData map-marker layer-' + markerColor;
 							var icon = L.divIcon({
 								className: layerClass,
 								iconSize: null,
@@ -127,7 +127,6 @@ export default Ember.Controller.extend({
 
 		opacitySlider: function(layer){
 
-			console.log(layer);
         	Ember.$(".slider."+layer).noUiSlider({
             	start: [ 10 ],
             	connect: false,
@@ -136,7 +135,8 @@ export default Ember.Controller.extend({
                 	'max': 10
               	}
             });
-            //$(".slider.livingwalls_2013").noUiSlider({ start: [ 10 ], connect: false, range: {'min': 0,'max': 10}});
-		}
+		},
+
+		
 	}
 });

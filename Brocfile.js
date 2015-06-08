@@ -42,8 +42,8 @@ app.import('vendor/js/noUiSlider.min.js');
 
 module.exports = mergeTrees([
 	app.toTree(),
-		leafletImages,
-		materialFonts
-	],{
-		overwrite: true
-	});
+	leafletImages,
+	materialFonts
+],{
+	overwrite: true
+});
