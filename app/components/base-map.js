@@ -4,8 +4,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 	didInsertElement: function() {
-
-        console.log(this.globals.mapObject);
         
         var _map = L.map('map', {
             center: [33.7489954,-84.3879824],
@@ -32,13 +30,8 @@ export default Ember.Component.extend({
         L.control.zoom({ position: 'topright' }).addTo(_map);
         L.control.layers(baseMaps).addTo(_map);
 
-        //map = _map;
-        //console.log(map)
-        //Ember.store.set('map', map);
-        // save map instance
-        console.log('map set up');
+        // Sets the global variable in /app/initializers/globals.js
         this.globals.set('mapObject', _map);
-        console.log(this.globals.mapObject);
-        //map = _map;
+
     },
 });

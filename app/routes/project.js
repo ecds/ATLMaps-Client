@@ -47,7 +47,7 @@ export default Ember.Route.extend({
         		Ember.RSVP.allSettled(promises).then(function(){
 
         			// Good lord I hate this.
-        			var marker = savedMarker.content.content[0]._data.id;
+        			var marker = savedMarker.content.content[0]._data.marker;
 
         			controller.send('mapLayer',
 	        			layer,
