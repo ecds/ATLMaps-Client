@@ -1,6 +1,9 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
+
+  var apiHost = 'http://api.atlmaps-dev.com:3000'
+
   var ENV = {
     modulePrefix: 'atlmaps',
     environment: environment,
@@ -39,6 +42,10 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (environment === 'production') {
+
+  }
+
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
     'script-src': "'self' 'unsafe-eval'",
@@ -46,12 +53,19 @@ module.exports = function(environment) {
     'connect-src': "'self' http://api.atlmaps-dev.com:3000",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'",
-    'img-src': "*"
+    'img-src': "*",
+    'frame-src': "'self' http://www.youtube.com https://www.youtube.com"
   };
 
-  if (environment === 'production') {
+  ENV['simple-auth'] = {
+    //authorizer: 'simple-auth-authorizer:oauth2-bearer',
+    crossOriginWhitelist: [apiHost]
+  };
 
-  }
+  ENV['simple-auth-oauth2'] = {
+    serverTokenEndpoint: apiHost+'/oauth/token',
+    serverTokenRevocationEndpoint: apiHost+'/oauth/revoke',
+  };
 
   // var apiHost = 'https://api.atlmaps.com/';
 

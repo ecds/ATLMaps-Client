@@ -8,14 +8,23 @@ export default Ember.Route.extend({
     },
 
     afterModel: function() {
+    	// Update the page title:
         var projectTitle = this.modelFor('project').get('name');
         Ember.$(document).attr('title', 'ATLMaps: ' + projectTitle);
-
     },
 
     actions: {
     	didTransition: function() {
-	    	var layers = this.modelFor('project').get('layer_ids');
+    		/*
+			The json representation for a project has two arrays
+			for the associated layers. `layers` is just a simple
+			array and `layer_ids` represents the association.
+			This is awesome, but as we are looking up the layers
+			twice. The way that Ember Data represents the association
+			here makes it hard to iterate over them to send to the 
+			`mapLayer` action. :(
+    		*/
+	    	var layers = this.modelFor('project').get('layers');
 	        var project_id = this.modelFor('project').get('id');
 
 	        var _this = this;
@@ -28,8 +37,6 @@ export default Ember.Route.extend({
 	        	var layer = DS.PromiseObject.create({
             		promise: _this.store.find('layer', layer_id)
         		});
-        
-        		layer.then(function() {});
 
         		var savedMarker = DS.PromiseObject.create({
             		promise: _this.store.find('projectlayer', {
@@ -37,7 +44,11 @@ export default Ember.Route.extend({
             		})
         		});
 
-        		savedMarker.then(function() {}); 
+        		/*
+					If we need to do anything to the promise objects we
+					will need to add a `then` function. eg:
+					`layer.then(function() {});`
+        		*/
 
         		// Make an array of the above promise objects.
         		var promises = [layer, savedMarker];
@@ -53,10 +64,19 @@ export default Ember.Route.extend({
 	        			layer,
 	        			marker
 	        		);
+
+                    var layer_class = layer.get('layer');
+
+	        		Ember.run.scheduleOnce('afterRender', function() {
+	        			//var layer_class = this.layer.get('layer');
+
+	        			controller.send('opacitySlider', layer_class);
+	        		});
+
+	        		
         		});
 
 	        });
-	        
 	    },
 
     },

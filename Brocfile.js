@@ -38,6 +38,7 @@ app.import('vendor/js/menu/gnmenu.js');
 app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
 app.import('vendor/js/addLayers.js');
+app.import('vendor/js/noUiSlider.min.js');
 
 module.exports = mergeTrees([
 	app.toTree(),

@@ -12,4 +12,5 @@ export default Router.map(function() {
     });
   this.route('about');
   this.route('project-layer');
+  this.route('login');
 });

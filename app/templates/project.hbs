@@ -1,6 +1,86 @@
 {{outlet}}
 
 <div id="hint"><span class="mdi-navigation-expand-more"></span></div>
+
+<a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
+
+<div class="layer-controls">
+	<div class="card">
+		{{#if model.is_mine}}
+			<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>
+		{{/if}}
+
+		{{# if model.saved }}
+			<h1>{{model.name}}</h1>
+			<p>{{model.description}}</p>
+		{{ else }}
+			{{#if session.isAuthenticated}}
+				<div class="row">
+					<div class='col-xs-7' id="title-input">
+						{{input valueBinding='projectName' placeholder='Enter Title for Project' class="form-control floating-label" type="text"}}
+					</div>
+					<div class='col-xs-3'>
+						<a class="btn btn-info btn-flat pull-right" id="title-button" {{action 'saveProject'}}><span>Set</span></a>
+					</div>
+				</div>
+			{{/if}}
+		{{/if}}
+	
+		{{#if may_edit}}addLayersButton{{/if}}
+		<div class="togglebutton opacity">
+			<label>
+				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+			</label>
+		</div>
+		<hr/>
+		<a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
+
+	</div>
+
+	<div class="layer-list">
+
+	<ul class="shuffle-items">
+	{{#each layer in model.layer_ids}}
+	<li class="item">
+	<p class="alt text-muted">
+	<span class="layer_marker">{{ layer-marker projectID=model.id layerID=layer.id layerType=layer.name }}</span>
+	{{layer.name}}
+	</p>
+	<div class="list-group row">
+	<div class="list-group-item">
+	<div class="row-action-primary">
+	{{ layer-marker projectID=model.id layerID=layer.id }}
+	</div>
+	<div class="row-content">
+	<h4 class="list-group-item-heading">{{layer.name}}{{layer.marker}}</h4>
+	<p class="list-group-item-text">{{layer.description}}</p>
+	<div class="text-muted">
+	<p>Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></p>
+	</div>
+	</div>
+	<div class="col-xs-1 pull-right">
+	{{#if model.is_mine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
+	</div>
+	</div>
+	</div>
+	<footer class="card-footer"> 
+	<input {{bind-attr class=":value-input layer" }} {{action "opacityChange" on="change" param=layer}}/> 
+    <div {{bind-attr class=":slider layer.layer :slider-material-orange-300 " name=layer.layer}}></div>
+	</footer>
+	{{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
+	</li>
+	{{else}}
+	<li class="item">
+	<h4 class="media-heading">No Layers yet</h4>
+	<p class="alt text-muted">No Layers yet</p>
+	</li>
+	{{/each}}
+	</ul>
+	</div>
+</div>
+
+
+
 <div class="row" id="base-map">
     {{ base-map }}
 </div>

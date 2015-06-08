@@ -47,27 +47,27 @@ export default Ember.Controller.extend({
 
 				break;
 
-			case 'wfs':
-				//http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
-				//http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
-				var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('layer') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
+			// case 'wfs':
+			// 	//http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
+			// 	//http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
+			// 	var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('layer') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
 
-				Ember.$.ajax(wfsLayer,
-					{ dataType: 'jsonp' }
-					).done(function ( data ) {});
+			// 	Ember.$.ajax(wfsLayer,
+			// 		{ dataType: 'jsonp' }
+			// 		).done(function ( data ) {});
 
-				// This part is the magic that makes the JSONP work
-				// The string at the beginning of the JSONP is processJSON
-				function processJSON(data) {
-					points = wfsLayer(data,{
-						//onEachFeature: onEachFeature,
-						pointToLayer: function (feature, latlng) {
-							return L.marker(latlng);
-						}
-					}).addTo(map);
-				}
+			// 	// This part is the magic that makes the JSONP work
+			// 	// The string at the beginning of the JSONP is processJSON
+			// 	function processJSON(data) {
+			// 		points = wfsLayer(data,{
+			// 			//onEachFeature: onEachFeature,
+			// 			pointToLayer: function (feature, latlng) {
+			// 				return L.marker(latlng);
+			// 			}
+			// 		}).addTo(map);
+			// 	}
 
-				break;
+			// 	break;
 
 			case 'geojson':                    
 				function viewData(feature, layer) {
@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
 						popupContent += feature.properties.images;
 					}
 					//layer.bindPopup(popupContent);
-					layer.on('click', function(marker) {
+					layer.on('click', function() {
 						Ember.$(".shuffle-items li.item.info").remove();
 						var $content = Ember.$("<div/>").attr("class","content").html(popupContent);
 						var $info = Ember.$('<li/>').attr("class","item info").append($content);
@@ -99,18 +99,8 @@ export default Ember.Controller.extend({
 
 				}
 
-				function setIcon(url, class_name){
-					return iconObj === L.icon({
-					iconUrl: url,
-					iconSize: [25, 35],
-					iconAnchor: [16, 37],
-					//popupAnchor: [0, -28],
-					className: class_name
-					});
-				}
-
 				if(layer.get('url')){
-					var points = new L.GeoJSON.AJAX(layer.get('url'), {
+					new L.GeoJSON.AJAX(layer.get('url'), {
 
 						pointToLayer: function (feature, latlng) {
 							var layerClass = 'marker' + slug + ' vectorData map-marker layer-' + markerColor;
@@ -134,5 +124,19 @@ export default Ember.Controller.extend({
 		shuffle.init();
 
 		},
+
+		opacitySlider: function(layer){
+
+			console.log(layer);
+        	Ember.$(".slider."+layer).noUiSlider({
+            	start: [ 10 ],
+            	connect: false,
+             	range: {
+                	'min': 0,
+                	'max': 10
+              	}
+            });
+            //$(".slider.livingwalls_2013").noUiSlider({ start: [ 10 ], connect: false, range: {'min': 0,'max': 10}});
+		}
 	}
 });
