@@ -3,6 +3,7 @@
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import 'gn-menu.scss';
 @import 'marker.scss';
+@import 'toggle_button.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
@@ -482,10 +483,10 @@ h3 .btn {
 
 .btn-fab.btn-sm {
   font-size: 2em;
-  height: 40px;
-  width: 40px;
-  margin: 20px 20px;
-  padding: 7px;
+  height: 1.5em;
+  width: 1.5em;
+  margin: .5em;
+  padding: 0;
 }
 
 .btn .mdi-large {
@@ -1173,4 +1174,18 @@ h4#showCollaborators a {
   color: rgb(119, 67, 208);
 }
 
+.btn.btn-fab, .btn.btn-fab .ripple-wrapper {
+  border-radius: 100%;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)
+}
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border-radius: 2px;
+  color: rgba(0, 0, 0, 0.84);
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+}
 

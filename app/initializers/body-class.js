@@ -1,13 +1,9 @@
 import Ember from 'ember';
 
-/* global L */
-
 export function initialize(/* container, application */) {
 	Ember.Route.reopen({
 		activate: function() {
 			var cssClass = this.toCssClass();
-			// you probably don't need the application class
-			// to be added to the body
 			if (cssClass !== 'application') {
 				Ember.$('body').addClass(cssClass);
 			}
@@ -24,6 +20,6 @@ export function initialize(/* container, application */) {
 }
 
 export default {
-  name: 'body-class',
-  initialize: initialize
+	name: 'body-class',
+	initialize: initialize
 };

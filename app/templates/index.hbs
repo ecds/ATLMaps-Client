@@ -41,8 +41,9 @@
             <div class="row-content">
               <div class="action-secondary"><i class="mdi-material-info"></i></div>
               <h4 class="list-group-item-heading">
-                {{#link-to 'project' project action='reload'}}
-                  {{project.name}}
+                {{#link-to 'project' project}}
+                  <span>
+                  {{project.name}}</span>
                 {{/link-to}}
               </h4>
               <p class="list-group-item-text">{{project.description}}</p>

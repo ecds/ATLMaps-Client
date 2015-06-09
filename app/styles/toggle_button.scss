@@ -1,0 +1,52 @@
+.togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
+  background-color: rgba(255, 183, 77, 0.5);
+}
+.togglebutton label input[type=checkbox]:first-child:checked + .toggle {
+  background-color: rgba(0, 149, 135, 0.5);
+}
+.togglebutton label .toggle, .togglebutton label input[type=checkbox][disabled]:first-child + .toggle {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+  background-color: rgba(80, 80, 80, 0.7);
+  border-radius: 15px;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+  vertical-align: middle;
+}
+
+.togglebutton, .togglebutton * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
+  background-color: rgb(255, 183, 77);
+  margin-top: -1px;
+}
+.togglebutton label input[type=checkbox]:first-child:checked + .toggle:after {
+  left: 15px;
+}
+.togglebutton label input[type=checkbox]:first-child:checked + .toggle:after {
+  background-color: #009587;
+}
+.togglebutton label .toggle:after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #F1F1F1;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+  left: -5px;
+  top: -2px;
+  transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
+}
+
+#toggle-layer-opacity{
+  display: none;
+}

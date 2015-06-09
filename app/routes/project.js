@@ -2,8 +2,13 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default Ember.Route.extend({
-	model: function(params) {
-        var project = this.store.find('project', params.project_id);
+	beforeModel: function(){
+
+    },
+
+    model: function(params) {
+        var project = this.store.fetchById('project', params.project_id);
+        //project.reload();
         return project;
     },
 
@@ -15,32 +20,25 @@ export default Ember.Route.extend({
 
     actions: {
     	didTransition: function() {
-    		/*
-			The json representation for a project has two arrays
-			for the associated layers. `layers` is just a simple
-			array and `layer_ids` represents the association.
-			This is awesome, but as we are looking up the layers
-			twice. The way that Ember Data represents the association
-			here makes it hard to iterate over them to send to the 
-			`mapLayer` action. :(
-    		*/
-	    	var layers = this.modelFor('project').get('layers');
+	    	var layers = this.modelFor('project').get('layer_ids');
+
 	        var project_id = this.modelFor('project').get('id');
 
 	        var _this = this;
+
 	        var controller = this.controllerFor('project');
 
 	        // Send some info to the ProjectController to 
 	        // add the layers to the map.
-	        
-	        Ember.$.each(layers, function(index, layer_id) {
+            // And oh my, this is ugly!
+	        Ember.$.each(layers.content.currentState, function(index, layer_id) {
 	        	var layer = DS.PromiseObject.create({
-            		promise: _this.store.find('layer', layer_id)
+            		promise: _this.store.find('layer', layer_id.id)
         		});
 
         		var savedMarker = DS.PromiseObject.create({
             		promise: _this.store.find('projectlayer', {
-            			project_id: project_id, layer_id: layer_id
+            			project_id: project_id, layer_id: layer_id.id
             		})
         		});
 
@@ -57,7 +55,7 @@ export default Ember.Route.extend({
         		// action on the controler.
         		Ember.RSVP.allSettled(promises).then(function(){
 
-        			// Good lord I hate this.
+        			// Good lord this is also really ugly.
         			var marker = savedMarker.content.content[0]._data.marker;
 
         			controller.send('mapLayer',
@@ -68,8 +66,6 @@ export default Ember.Route.extend({
                     var layer_class = layer.get('layer');
 
 	        		Ember.run.scheduleOnce('afterRender', function() {
-	        			//var layer_class = this.layer.get('layer');
-
 	        			controller.send('opacitySlider', layer_class);
 	        		});
 
