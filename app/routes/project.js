@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+/* global shuffle */
 
 export default Ember.Route.extend({
+
 	beforeModel: function(){
 
     },
@@ -67,6 +69,7 @@ export default Ember.Route.extend({
 
 	        		Ember.run.scheduleOnce('afterRender', function() {
 	        			controller.send('opacitySlider', layer_class);
+                        shuffle.init();
 	        		});
 
 	        		
@@ -74,6 +77,28 @@ export default Ember.Route.extend({
 
 	        });
 	    },
+
+        addLayer: function(layer){
+
+            var controller = this.controllerFor('project');
+            var colors = this.globals.color_options;
+            var marker = Math.floor((Math.random() * colors.length) + 1);
+            var projectID = this.get('controller.model.id');
+
+            var projectlayer = this.store.createRecord('projectlayer', {
+                project_id: projectID,
+                layer_id: layer.get('id'),
+                marker: marker,
+                layer_type: layer.get('layer_type')
+            });
+
+            projectlayer.save();
+
+            controller.send('mapLayer',
+                layer,
+                marker
+            );
+        }
 
     },
 

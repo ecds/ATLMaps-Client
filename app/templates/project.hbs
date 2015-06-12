@@ -6,6 +6,7 @@
 
 <div class="layer-controls">
 	<div class="card">
+		{{model.is_mine}}
 		{{#if model.is_mine}}
 			<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>
 		{{/if}}
@@ -26,7 +27,10 @@
 			{{/if}}
 		{{/if}}
 	
-		{{#if may_edit}}addLayersButton{{/if}}
+		<div class="add_layer_button">
+      <a class="btn btn-add add_layer_button" {{action 'toggleModal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+    </div>
+
 		<div class="togglebutton opacity">
 			<label>
 				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
@@ -83,3 +87,47 @@
 <div class="row" id="base-map">
     {{ base-map }}
 </div>
+
+
+{{#if isShowingModal}}
+
+  {{#modal-dialog close="toggleModal" alignment="center" translucentOverlay=true}}
+    
+<div class="list">
+	{{#if layers.isPending}}
+		Loading...
+	{{else}}
+		{{#each layer in layers.content}}
+			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+				<div class="col-xs-2">
+					{{add-remove-layer-button action='addLayer' param=layer}}
+					
+				</div>
+				<div class="col-xs-9">
+					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+					<p>
+      					<div class="description">{{layer.description}}</div>
+    				</p>
+    				<p>
+    					{{!--{{#if layer.tag_ids}}--}}
+    						<span class="tagsIcon"></span>
+							<ul class="list-inline">
+								{{#each tag in layer.tag_ids}}
+									<li class="tags">
+										{{tag.name}}
+									</li>
+								{{else}}
+									<li>none</li>
+								{{/each}}
+							</ul>
+    					{{!--{{/if}--}}
+    				</p>
+				</div>
+			</div>
+		{{/each}}
+	{{/if}}
+</div>
+
+
+  {{/modal-dialog}}
+{{/if}}

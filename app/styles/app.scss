@@ -1,6 +1,8 @@
 @import '../../bower_components/bootstrap-material-design/sass/material.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
+@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
 @import 'gn-menu.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
@@ -873,9 +875,14 @@ span.institution {
   margin-top:0;
 }
 
+.tagsIcon:before {
+  content: "\e888";
+}
 .tagsIcon {
   float: left;
   margin-right: .5em;
+  font-family: Material-Design-Icons;
+  
 }
 
 img.layerMarker {
@@ -1085,17 +1092,17 @@ li.gravatar {
 }
 
 span.description_icon {
-  font-family: Design-Icons;
+  font-family: Material-Design-Icons;
 }
 
 span.geojson:before,
 span.wfs:before{
-  content: "\e88b";
+  content: $marker-icon;
 }
 
 span.planningatlanta:before,
 span.wms:before {
-  content: "\e867";
+  content: $layer-icon;
 }
 
 div.add_layer_button {
@@ -1189,3 +1196,6 @@ h4#showCollaborators a {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
 }
 
+.ember-modal-dialog {
+  height: none;
+}

@@ -9,8 +9,8 @@ export default DS.Model.extend({
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
     slug: DS.attr('string'),
-    user_ids: DS.attr(),
+    //user_ids: DS.attr(),
     owner: DS.attr(),
     is_mine: DS.attr('boolean'),
-    may_edit: DS.attr('boolean')
+    //may_edit: DS.attr('boolean')
 });

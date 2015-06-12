@@ -1,4 +1,7 @@
 /*General marker style*/
+
+@import "variables.scss";
+
 .map-marker .map-marker {
   position: absolute;
   width: 26px;
@@ -43,11 +46,11 @@
 }
 
 .map-marker div.icon:before{
-  content:"\e6ed";
+  content:$marker-icon;
 }
 
 .layer-marker div.icon:before {
-  content: "\e867";
+  content: $layer-icon;
 }
 
 .laoding div.icon:before {
@@ -75,7 +78,7 @@
 }
 
 .map-marker.active_marker div.icon:before{
-  content: "\e6ed";
+  content: $marker-icon;
   position: absolute;
   top: -22px;
   left: -18px;

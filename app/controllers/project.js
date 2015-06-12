@@ -1,15 +1,43 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 /* global L */
 /* global shuffle */
 
 
 export default Ember.Controller.extend({
+	isShowingModal: false,
 
-	actions: {
+	layers: function() {
+
+            var $loading_gif = Ember.$("<img/>").attr({'src':'/assets/images/loaders/Preloader_19.gif'});
+            var $loading_message = Ember.$("<div/>").addClass("modal-loading-content").append($loading_gif);
+            var $loading = Ember.$("<div/>").addClass("modal-loading").append($loading_message);
+
+            var layers = DS.PromiseObject.create({
+                promise: this.store.find('layer')
+            });
+
+            layers.then(function(){
+                $loading.fadeOut(1500, function(){
+                        Ember.$(this).remove();
+                    });
+            });
+
+            return layers;
+
+
+        }.property(),
+
+		
+  actions: {
+   	toggleModal: function(){
+      this.toggleProperty('isShowingModal');
+    },
 		// mapLayer expects `layer` to be a layer object.
 		mapLayer: function(layer, marker_color){
 
+	    console.log('made it');
 		var slug = layer.get('layer');
 		var map = this.globals.mapObject;
 
@@ -75,6 +103,10 @@ export default Ember.Controller.extend({
 					if (feature.properties.image) {
 						popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
 						"<span>Photo Credit: "+feature.properties.image.credit+"</span>";
+
+						Ember.$('<img />').load( function(){
+  							shuffle.init();
+						}).attr('src', feature.properties.image.url);
 					}
 					if (feature.properties.description) {
 						popupContent += "<p>" + feature.properties.description + "</p>";

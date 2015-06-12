@@ -69,10 +69,10 @@ module.exports = function(environment) {
 
   // var apiHost = 'https://api.atlmaps.com/';
 
-  // ENV['simple-auth'] = {
-  //   authorizer: 'simple-auth-authorizer:oauth2-bearer',
-  //   crossOriginWhitelist: [apiHost]
-  // };
+  ENV['simple-auth'] = {
+    authorizer: 'simple-auth-authorizer:oauth2-bearer',
+    crossOriginWhitelist: [apiHost]
+  };
 
   // ENV['simple-auth-oauth2'] = {
   //   serverTokenEndpoint: apiHost+'/oauth/token',
