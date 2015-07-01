@@ -1,3 +1,5 @@
+/* NOT USING ANYMORE????????
+
 import Ember from 'ember';
 import DS from 'ember-data';
 
@@ -24,10 +26,10 @@ export default Ember.Component.extend({
 	}.property(),
 
 	actions: {
-		addLayer: function(layer){
-			console.log(layer);
+		addLayer: function(){
 
 			this.sendAction('action', this.get('param'));
 		}
 	}
 });
+*/

@@ -27,6 +27,10 @@ h4, .h4 { font-size: 18px; line-height: 20px; }
 h5, .h5 { font-size: 14px; line-height: 20px; }
 h6, .h6 { font-size: 12px; line-height: 20px; }
 
+span {
+  font-family: Material-Design-Icons;
+}
+
 #html-validator-loading {
   content: "LOADING";
 }
@@ -310,7 +314,7 @@ a.site-title .alt-dark{
   margin-top: 55px;
 }
 
-.card{
+.card, .info{
   background-color: white;
   border-radius: 2px;
   box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
@@ -323,6 +327,10 @@ a.site-title .alt-dark{
   top: 0;
   left: 0;
   z-index: 4;
+}
+
+.info {
+  margin: 0;
 }
 
 .layer-controls .card{
@@ -597,7 +605,7 @@ a#show-layer-options {
   z-index: 10;
   background-color: white;
   position: absolute;
-  margin-top: 45px;
+  margin-top: 70px;
 }
 
 a#show-layer-options,
@@ -1194,8 +1202,15 @@ h4#showCollaborators a {
   color: rgba(0, 0, 0, 0.84);
   background: #ffffff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  display: none;
 }
 
 .ember-modal-dialog {
-  height: none;
+  overflow: scroll;
+}
+
+.list-group-item {
+  border-bottom-color: rgb(219, 221, 226);
+  width: 100%;
+  padding: .25em !important;
 }

@@ -21,6 +21,7 @@
     "list.js": "~1.1.1",
     "blueimp-md5": "~1.1.0",
     "bootstrap-material-design": "~0.3.0",
-    "bootstrap-sass": "~3.3.4"
+    "bootstrap-sass": "~3.3.4",
+    "Sortable": "~1.2.0"
   }
 }

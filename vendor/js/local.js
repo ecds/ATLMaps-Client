@@ -3,11 +3,11 @@
 $(document).ready(function(){
   $.material.ripples(".btn, .navbar a");
   $.material.input();
-  (function(){
-    // init on shuffle items 
-    shuffle.init();
-    // init menu
-  })();
+  // (function(){
+  //   // init on shuffle items 
+  //   shuffle.init();
+  //   // init menu
+  // })();
   
   
   // document events
@@ -27,11 +27,11 @@ $(document).ready(function(){
     if( $target_slider.length>0 ){
       return false;
     }
-    if ($(this).hasClass('info') === false){
-      $(".shuffle-items li.item.info").remove();
-      $(".active_marker").removeClass("active_marker");
-    }
-    shuffle.click(this);
+    // if ($(this).hasClass('info') === false){
+    //   $(".shuffle-items li.item.info").remove();
+    //   $(".active_marker").removeClass("active_marker");
+    // }
+    // shuffle.click(this);
   })
   .on('slide','.shuffle-items li.item .slider',function(evt){
     var $this = $(this);

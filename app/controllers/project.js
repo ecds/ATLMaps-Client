@@ -10,18 +10,12 @@ export default Ember.Controller.extend({
 
 	layers: function() {
 
-            var $loading_gif = Ember.$("<img/>").attr({'src':'/assets/images/loaders/Preloader_19.gif'});
-            var $loading_message = Ember.$("<div/>").addClass("modal-loading-content").append($loading_gif);
-            var $loading = Ember.$("<div/>").addClass("modal-loading").append($loading_message);
-
             var layers = DS.PromiseObject.create({
-                promise: this.store.find('layer')
+                promise: this.store.find('layer', {projectID: this.model.get('id')})
             });
 
             layers.then(function(){
-                $loading.fadeOut(1500, function(){
-                        Ember.$(this).remove();
-                    });
+                // Maybe remove a laoding gif?
             });
 
             return layers;
@@ -30,20 +24,24 @@ export default Ember.Controller.extend({
         }.property(),
 
 		
-  actions: {
-   	toggleModal: function(){
-      this.toggleProperty('isShowingModal');
-    },
-		// mapLayer expects `layer` to be a layer object.
-		mapLayer: function(layer, marker_color){
+	actions: {
+	   	toggleModal: function(){
+	    	this.toggleProperty('isShowingModal');
+	    },
 
-	    console.log('made it');
+		// mapLayer expects `layer` to be a layer object.
+		mapLayer: function(layer, marker_color, position){
+
 		var slug = layer.get('layer');
 		var map = this.globals.mapObject;
 
 		var institution = layer.get('institution');
 
-		var markerColor = this.globals.color_options[Math.floor(marker_color)];
+		var markerColor = this.globals.color_options[marker_color];
+
+		Ember.$("#layer-list").append("<div>"+layer.get('name')+"</div>");
+
+		var zIndex = position + 10;
 
 		switch(layer.get('layer_type')) {
 		
@@ -57,7 +55,7 @@ export default Ember.Controller.extend({
 					detectRetina: true
 				}).addTo(map).setZIndex(10).getContainer();
 
-				Ember.$(tile).addClass(slug).addClass('wmsLayer');
+				Ember.$(tile).addClass(slug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
 
 				break;
 
@@ -71,7 +69,7 @@ export default Ember.Controller.extend({
 					detectRetina: true
 				}).addTo(map).bringToFront().getContainer();
 
-				Ember.$(wmsLayer).addClass(slug);
+				Ember.$(wmsLayer).addClass(slug).zIndex(zIndex).addClass('atLayer').css("zIndex", zIndex);
 
 				break;
 
@@ -117,13 +115,13 @@ export default Ember.Controller.extend({
 					if (feature.properties.images) {
 						popupContent += feature.properties.images;
 					}
-					//layer.bindPopup(popupContent);
+
 					layer.on('click', function() {
-						Ember.$(".shuffle-items li.item.info").remove();
-						var $content = Ember.$("<div/>").attr("class","content").html(popupContent);
-						var $info = Ember.$('<li/>').attr("class","item info").append($content);
-						$info.appendTo(Ember.$(".shuffle-items"));
-						shuffle.click($info);
+						Ember.$("div.data").empty();
+						Ember.$(".card").hide();
+						var $content = Ember.$("<div/>").attr("class","info").html(popupContent);
+						console.log($content);
+						Ember.$('div.data').append($content);
 
 						Ember.$(".active_marker").removeClass("active_marker");
 						Ember.$(this._icon).addClass('active_marker');
@@ -135,7 +133,7 @@ export default Ember.Controller.extend({
 					new L.GeoJSON.AJAX(layer.get('url'), {
 
 						pointToLayer: function (feature, latlng) {
-							var layerClass = slug + ' vectorData map-marker layer-' + markerColor;
+							var layerClass = slug + ' atLayer vectorData map-marker layer-' + markerColor;
 							var icon = L.divIcon({
 								className: layerClass,
 								iconSize: null,
@@ -153,13 +151,11 @@ export default Ember.Controller.extend({
 
 			}
 
-		shuffle.init();
-
 		},
 
-		opacitySlider: function(layer){
+		opacitySlider: function(layer, marker){
 
-        	Ember.$(".slider."+layer).noUiSlider({
+        	Ember.$(".slider."+layer.get('layer')).noUiSlider({
             	start: [ 10 ],
             	connect: false,
              	range: {
@@ -167,7 +163,22 @@ export default Ember.Controller.extend({
                 	'max': 10
               	}
             });
+
+            Ember.$(document).on('slide','.card .slider',function(){
+			    var $this = Ember.$(this);
+			    $this.siblings('input').val($this.val()).change();
+			 });
+
+            Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
+
+
 		},
+
+		showActiveLayers: function(){
+			Ember.$("div.data").empty();
+			Ember.$(".active_marker").removeClass("active_marker");
+            Ember.$(".card").slideToggle();
+        }
 
 		
 	}

@@ -48,7 +48,8 @@ module.exports = function(environment) {
 
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
-    'script-src': "'self' 'unsafe-eval'",
+    // 'script-src': "'self' 'unsafe-eval'",
+    'script-src': "*",
     'font-src': "'self'",
     'connect-src': "'self' http://api.atlmaps-dev.com:3000",
     'style-src': "'self' 'unsafe-inline'",

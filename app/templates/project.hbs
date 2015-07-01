@@ -4,9 +4,24 @@
 
 <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
 
+
 <div class="layer-controls">
+	
+	<div class="btn-group btn-group-justified">
+		<a class="btn btn-default" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
+	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+	    	<span class="mdi-maps-place"></span>
+	    </a>
+	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+	    	<span class="mdi-maps-layers"></span>
+	    </a>
+	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+	    	<span class="mdi-image-tune"></span>
+	    </a>
+	    <!--<a href="javascript:void(0)" class="btn btn-default">Edit</a>-->
+	</div>
+	<div class="data"></div>
 	<div class="card">
-		{{model.is_mine}}
 		{{#if model.is_mine}}
 			<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>
 		{{/if}}
@@ -14,7 +29,7 @@
 		{{# if model.saved }}
 			<h1>{{model.name}}</h1>
 			<p>{{model.description}}</p>
-		{{ else }}
+		{{ else }}	
 			{{#if session.isAuthenticated}}
 				<div class="row">
 					<div class='col-xs-7' id="title-input">
@@ -26,59 +41,30 @@
 				</div>
 			{{/if}}
 		{{/if}}
-	
+
 		<div class="add_layer_button">
-      <a class="btn btn-add add_layer_button" {{action 'toggleModal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
-    </div>
+			<a class="btn btn-add add_layer_button" {{action 'toggleModal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+		</div>
 
 		<div class="togglebutton opacity">
 			<label>
 				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
 			</label>
 		</div>
-		<hr/>
-		<a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
+	
+		{{!--<a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>--}}
 
-	</div>
 
-	<div class="layer-list">
-
-	<ul class="shuffle-items">
-	{{#each layer in model.layer_ids}}
-	<li class="item">
-	<p class="alt text-muted">
-	<span class="layer_marker">{{ layer-marker projectID=model.id layerID=layer.id layerType=layer.name }}</span>
-	{{layer.name}}
-	</p>
-	<div class="list-group row">
-	<div class="list-group-item">
-	<div class="row-action-primary">
-	{{ layer-marker projectID=model.id layerID=layer.id }}
-	</div>
-	<div class="row-content">
-	<h4 class="list-group-item-heading">{{layer.name}}{{layer.marker}}</h4>
-	<p class="list-group-item-text">{{layer.description}}</p>
-	<div class="text-muted">
-	<p>Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></p>
-	</div>
-	</div>
-	<div class="col-xs-1 pull-right">
-	{{#if model.is_mine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
-	</div>
-	</div>
-	</div>
-	<footer class="card-footer">
-	{{ opacity-slider layer=layer.layer layerID=layer.id }} 
-	</footer>
-	{{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
-	</li>
-	{{else}}
-	<li class="item">
-	<h4 class="media-heading">No Layers yet</h4>
-	<p class="alt text-muted">No Layers yet</p>
-	</li>
-	{{/each}}
-	</ul>
+		<div class="layer-list list-group" id="layer_sort">
+			{{#each layer in model.layer_ids}}
+				<div class="list-group-item">
+					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
+					{{layer.name}}
+					<span class="handle pull-right">&varr;</span>
+					{{ opacity-slider layer=layer.layer layerID=layer.id }}
+				</div>
+			{{/each}}
+		</div>
 	</div>
 </div>
 
