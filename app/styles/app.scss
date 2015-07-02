@@ -314,7 +314,7 @@ a.site-title .alt-dark{
   margin-top: 55px;
 }
 
-.card, .info{
+.card, .marker-data{
   background-color: white;
   border-radius: 2px;
   box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
@@ -329,12 +329,8 @@ a.site-title .alt-dark{
   z-index: 4;
 }
 
-.info {
-  margin: 0;
-}
-
 .layer-controls .card{
-  margin:0;
+  //margin:0;
   padding-bottom: 0;
 }
 
@@ -1161,11 +1157,11 @@ input.value-input {
 }
 
 span.toggle_label:after {
-  content: 'Hide All';
+  content: 'Hide All Layers';
 }
 
 span.toggle_label.off:after {
-  content: 'Show All';
+  content: 'Show All Layers';
 }
 
 li.collaboration-list {
@@ -1194,7 +1190,7 @@ h4#showCollaborators a {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)
 }
 
-.card {
+.project-info, .vector-data, .raster-layers, .controls {
   display: inline-block;
   position: relative;
   width: 100%;
@@ -1203,6 +1199,12 @@ h4#showCollaborators a {
   background: #ffffff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
   display: none;
+  margin: -10px 0 0 1px;
+}
+
+.project-info {
+  visibility: visible;
+  display: inline-block;
 }
 
 .ember-modal-dialog {
@@ -1213,4 +1215,69 @@ h4#showCollaborators a {
   border-bottom-color: rgb(219, 221, 226);
   width: 100%;
   padding: .25em !important;
+}
+
+.project-title {
+  width: 99.5%;
+  background-color: #f4f4f4;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin: 2px 0 -10px 2px;
+  border-radius: .25em;
+
+  h1 {
+    padding-left: .5em;
+    font-size: 1.5em;
+  }
+}
+
+.leaflet-control-layers {
+  box-shadow: none
+}
+
+.project-info{
+  article {
+    padding: 1em 1em 3em 0;
+  }
+}
+
+.transparent-button {
+  opacity: 0.8;
+}
+
+.active-button {
+  opacity: 1;
+}
+
+.marker-data {
+  display: none;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  height: 50em;
+
+  .marker-content {
+    padding: 1.5em;
+    display:inline-block;
+    height: inherit;
+  }
+
+
+  .panel-controls{
+    background-color: lightgrey;
+    padding: .25em 1em;
+
+    .mdi-action-open-with {
+      cursor: -webkit-grab;
+      cursor: -moz-grab;
+    }
+
+    a {
+      color: black;
+    }
+
+  }
+}
+
+div.marker-content:after {
+  //height: 50em;
 }

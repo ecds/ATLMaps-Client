@@ -8,6 +8,8 @@ export default DS.Model.extend({
     published: DS.attr('boolean'),
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
+    raster_layer_ids: DS.hasMany('raster_layer', {async: true}),
+    vector_layer_ids: DS.hasMany('vector_layer', {async: true}),
     slug: DS.attr('string'),
     //user_ids: DS.attr(),
     owner: DS.attr(),

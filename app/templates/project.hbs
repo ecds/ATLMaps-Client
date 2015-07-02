@@ -6,57 +6,53 @@
 
 
 <div class="layer-controls">
-	
+	<div class="project-title"><h1>{{model.name}}</h1></div>
 	<div class="btn-group btn-group-justified">
-		<a class="btn btn-default" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
-	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+		<a {{action 'backToProjects' }} class="btn btn-default transparent-button">
+			<span class="mdi-navigation-arrow-back"></span>
+		</a>
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
+			<span class="mdi-action-info-outline"></span>
+		</a>
+	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
 	    	<span class="mdi-maps-place"></span>
 	    </a>
-	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers">
 	    	<span class="mdi-maps-layers"></span>
 	    </a>
-	    <a {{action 'showActiveLayers'}} class="btn btn-default">
+	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls">
 	    	<span class="mdi-image-tune"></span>
 	    </a>
 	    <!--<a href="javascript:void(0)" class="btn btn-default">Edit</a>-->
 	</div>
-	<div class="data"></div>
-	<div class="card">
-		{{#if model.is_mine}}
-			<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>
-		{{/if}}
 
-		{{# if model.saved }}
-			<h1>{{model.name}}</h1>
-			<p>{{model.description}}</p>
-		{{ else }}	
-			{{#if session.isAuthenticated}}
-				<div class="row">
-					<div class='col-xs-7' id="title-input">
-						{{input valueBinding='projectName' placeholder='Enter Title for Project' class="form-control floating-label" type="text"}}
-					</div>
-					<div class='col-xs-3'>
-						<a class="btn btn-info btn-flat pull-right" id="title-button" {{action 'saveProject'}}><span>Set</span></a>
-					</div>
+	<div class="marker-data draggable">
+		<div class="panel-controls">
+			<span class="mdi-action-open-with"></span>
+			<a {{action "closeMarkerInfo" }}><span class="mdi-content-clear"></span></a>
+		</div>
+		<div class="marker-content"></div>
+	</div>
+
+
+	<div class="project-info card">
+		<article>{{model.description}}</article>
+	</div>
+	<div class="vector-data card">
+
+		<div class="layer-list list-group">
+			{{#each layer in model.vector_layer_ids}}
+				<div class="list-group-item">
+					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
+					{{layer.name}}
 				</div>
-			{{/if}}
-		{{/if}}
-
-		<div class="add_layer_button">
-			<a class="btn btn-add add_layer_button" {{action 'toggleModal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+			{{/each}}
 		</div>
 
-		<div class="togglebutton opacity">
-			<label>
-				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
-			</label>
-		</div>
-	
-		{{!--<a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>--}}
-
-
+	</div>
+	<div class="raster-layers card">
 		<div class="layer-list list-group" id="layer_sort">
-			{{#each layer in model.layer_ids}}
+			{{#each layer in model.raster_layer_ids}}
 				<div class="list-group-item">
 					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 					{{layer.name}}
@@ -66,6 +62,16 @@
 			{{/each}}
 		</div>
 	</div>
+
+	<div class="controls card">
+		<div class="togglebutton opacity">
+			<label>
+				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+			</label>
+			<h3>Select Base Map</h3>
+		</div>
+	</div>
+	
 </div>
 
 

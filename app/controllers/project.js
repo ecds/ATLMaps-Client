@@ -117,11 +117,14 @@ export default Ember.Controller.extend({
 					}
 
 					layer.on('click', function() {
-						Ember.$("div.data").empty();
+						Ember.$(".project-nav").removeClass('active-button');
+						Ember.$("div.marker-content").empty();
+						Ember.$("div.marker-data").hide();
 						Ember.$(".card").hide();
-						var $content = Ember.$("<div/>").attr("class","info").html(popupContent);
+						var $content = Ember.$("<article/>").html(popupContent);
 						console.log($content);
-						Ember.$('div.data').append($content);
+						Ember.$("div.marker-data").show();
+						Ember.$('div.marker-content').append($content);
 
 						Ember.$(".active_marker").removeClass("active_marker");
 						Ember.$(this._icon).addClass('active_marker');
@@ -153,7 +156,7 @@ export default Ember.Controller.extend({
 
 		},
 
-		opacitySlider: function(layer, marker){
+		opacitySlider: function(layer){
 
         	Ember.$(".slider."+layer.get('layer')).noUiSlider({
             	start: [ 10 ],
@@ -169,15 +172,41 @@ export default Ember.Controller.extend({
 			    $this.siblings('input').val($this.val()).change();
 			 });
 
-            Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
-
-
 		},
 
-		showActiveLayers: function(){
-			Ember.$("div.data").empty();
-			Ember.$(".active_marker").removeClass("active_marker");
-            Ember.$(".card").slideToggle();
+		colorIcons: function(layer, marker){
+			Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
+		},
+
+		navigateProject: function(card){
+
+			Ember.$("div.marker-data").hide();
+
+			Ember.$(".project-nav").removeClass('active-button');
+
+			Ember.$(".project-nav").addClass('transparent-button');
+			
+			if (Ember.$('.'+card).is(":visible")) {
+				Ember.$('.'+card).slideToggle();
+				Ember.$('#'+card).removeClass('active-button');
+				Ember.$('#'+card).addClass('transparent-button');
+			}
+			else {
+				Ember.$(".card").hide();
+				Ember.$(".active_marker").removeClass("active_marker");
+	            Ember.$("."+card).slideToggle();
+	            Ember.$('#'+card).addClass('active-button');
+				Ember.$('#'+card).removeClass('transparent-button');
+        	}
+        },
+
+        backToProjects: function(){
+        	this.transitionToRoute('projects');
+        },
+
+        closeMarkerInfo: function() {
+            Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass("active_marker");
         }
 
 		

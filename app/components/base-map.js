@@ -28,7 +28,12 @@ export default Ember.Component.extend({
         };        
         
         L.control.zoom({ position: 'topright' }).addTo(_map);
-        L.control.layers(baseMaps).addTo(_map);
+        var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
+        control._map = _map;
+
+        var controlDiv = control.onAdd(_map);
+
+        Ember.$('.controls').append(controlDiv);
 
         // Sets the global variable in /app/initializers/globals.js
         this.globals.set('mapObject', _map);

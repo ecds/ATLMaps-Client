@@ -22,6 +22,7 @@
     "blueimp-md5": "~1.1.0",
     "bootstrap-material-design": "~0.3.0",
     "bootstrap-sass": "~3.3.4",
-    "Sortable": "~1.2.0"
+    "Sortable": "~1.2.0",
+    "draggabilly": "~1.2.4"
   }
 }
