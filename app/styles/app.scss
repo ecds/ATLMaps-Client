@@ -311,7 +311,7 @@ a.site-title .alt-dark{
   left: 0%;
   width: 420px;
   margin-left:30px;
-  margin-top: 55px;
+  //margin-top: 55px;
 }
 
 .card, .marker-data{
@@ -1252,19 +1252,35 @@ h4#showCollaborators a {
   display: none;
   margin: 0;
   padding: 0;
-  overflow: scroll;
-  height: 50em;
+  max-height: 50em;
+  resize: both;
+  overflow: auto;
 
   .marker-content {
     padding: 1.5em;
     display:inline-block;
     height: inherit;
+    overflow: auto;
+
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0,0,0,.5);
+      -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+
   }
 
 
   .panel-controls{
     background-color: lightgrey;
     padding: .25em 1em;
+    position:absolute;
+    top: 0;
+    width: 100%;
 
     .mdi-action-open-with {
       cursor: -webkit-grab;

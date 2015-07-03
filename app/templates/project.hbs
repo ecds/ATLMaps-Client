@@ -1,6 +1,6 @@
 {{outlet}}
 
-<div id="hint"><span class="mdi-navigation-expand-more"></span></div>
+{{!--<div id="hint"><span class="mdi-navigation-expand-more"></span></div>--}}
 
 <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
 
@@ -46,19 +46,23 @@
 					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 					{{layer.name}}
 				</div>
+			{{else}}
+				No data layers have been added.
 			{{/each}}
 		</div>
 
 	</div>
 	<div class="raster-layers card">
-		<div class="layer-list list-group" id="layer_sort">
+		<div class="layer-list list-group raster-list" id="layer_sort">
 			{{#each layer in model.raster_layer_ids}}
-				<div class="list-group-item">
-					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
+				<div class="list-group-item raster-layer" {{ bind-attr id="layer.layer"}}>
+					{{!--<span {{bind-attr class="layer.layer_type layer.layer"}}></span>--}}
 					{{layer.name}}
 					<span class="handle pull-right">&varr;</span>
 					{{ opacity-slider layer=layer.layer layerID=layer.id }}
 				</div>
+			{{else}}
+				No scanned maps have been added.
 			{{/each}}
 		</div>
 	</div>

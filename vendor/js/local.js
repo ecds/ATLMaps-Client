@@ -42,6 +42,8 @@ $(document).ready(function(){
 
     $( "span.toggle_label" ).toggleClass( "off" );
 
+    $(".vectorData").toggle();
+
     var active = $(".togglebutton label input[type=checkbox]:first-child:checked").length>0;
     
     if (active){

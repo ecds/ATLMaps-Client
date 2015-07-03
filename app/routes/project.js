@@ -46,8 +46,16 @@ export default Ember.Route.extend({
                 Sortable.create(el, {
                     handle: '.handle',
                     animation: 150,
-                    onUpdate: function (/**Event*/evt) {
-                        console.log(evt.newIndex);
+                    onUpdate: function () {
+                        var IDs = [];
+                        Ember.$(".raster-list").find(".raster-layer").each(function(){
+                            IDs.push(this.id);
+                        });
+                        var layerLength = IDs.length;
+                        Ember.$.each(IDs, function(index, value){
+                            var zIndex = layerLength - index + 10;
+                            Ember.$("."+value).css("zIndex", zIndex);
+                        });
                     }
                 });
 
@@ -218,8 +226,8 @@ export default Ember.Route.extend({
 
         },
 
-        reorderItems: function(newOrder) {
-            console.log(newOrder.reverse());
+        reorderItems: function() {
+            
         }
 
     },
