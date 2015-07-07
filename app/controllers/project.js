@@ -56,10 +56,9 @@ export default Ember.Controller.extend({
 	    },
 
 	    init: function() {
-	    	//Ember.run.later((function() {
 	    	Ember.run.scheduleOnce('afterRender', function() {
-	    	console.log('sweet');
-	    	var el = document.getElementById("layer_sort");
+
+	    		var el = document.getElementById("layer_sort");
                 Sortable.create(el, {
                     handle: '.handle',
                     animation: 150,
