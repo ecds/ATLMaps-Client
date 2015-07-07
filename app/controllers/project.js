@@ -207,8 +207,7 @@ export default Ember.Controller.extend({
         closeMarkerInfo: function() {
             Ember.$("div.marker-data").hide();
             Ember.$(".active_marker").removeClass("active_marker");
-        }
-
+        },
 		
 	}
 });

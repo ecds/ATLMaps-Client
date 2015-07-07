@@ -1,6 +1,6 @@
+@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '../../bower_components/bootstrap-material-design/sass/material.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
 @import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
 @import 'gn-menu.scss';
@@ -250,6 +250,7 @@ a.site-title .alt-dark{
   position: relative;
   z-index:100;
   margin: 0;
+  min-height: 0px;
 }
 
 .navbar .nav > li {
@@ -293,6 +294,38 @@ a.site-title .alt-dark{
 .layer-list{
   position: relative;
   width:100%;
+
+  .sorting {
+    background-color: lightgrey;
+  }
+
+  li, div.raster-layer {
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgrey;
+    border-radius: .25em;
+    padding: .25em;
+    margin: .25em 0;
+
+    p {
+      font-size: .75em;
+      margin-left: 25px;
+      margin-right: 5px;
+      padding-top: 1em;
+    }
+
+    .citation {
+      color: #777;
+      font-size: .75em;
+      margin-left: 25px;
+      padding-top: 1em;
+
+      img {
+        width: 15px;
+        height: auto;
+      }
+    }
+  }
 }
 
 .layer-list-item:nth-child(even){
@@ -323,7 +356,7 @@ a.site-title .alt-dark{
   line-height: 1.5;
   margin: 1.5em;
   max-width: 640px;
-  padding: 15px 20px 15px 25px;
+  padding: 15px 10px;
   top: 0;
   left: 0;
   z-index: 4;
@@ -467,6 +500,10 @@ a.site-title .alt-dark{
   float: right;
   height: 100px;
   margin-right: 3px;
+}
+
+.slider {
+  margin: .75em;
 }
 
 h3 .btn {
@@ -720,11 +757,6 @@ a#hide-layer-options:hover{
 
 img.geojson {
   width: 100%;
-  height: auto;
-}
-
-img.institution_logo {
-  width: 16px;
   height: auto;
 }
 
@@ -1164,6 +1196,10 @@ span.toggle_label.off:after {
   content: 'Show All Layers';
 }
 
+.toggle:after {
+  top: -8px;
+}
+
 li.collaboration-list {
   margin: .5em;
 }
@@ -1200,6 +1236,15 @@ h4#showCollaborators a {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
   display: none;
   margin: -10px 0 0 1px;
+  font-size: 1.5em;
+  ul {
+    list-style-type: none;
+    padding: 0 0 1em 0;
+    li {
+      padding-top: .25em;
+    }
+  }
+  
 }
 
 .project-info {
@@ -1227,6 +1272,13 @@ h4#showCollaborators a {
   h1 {
     padding-left: .5em;
     font-size: 1.5em;
+    display: inline-block;
+    max-width: 80%;
+  }
+
+  span {
+    float: right;
+    padding: 1em .5em 0 0;
   }
 }
 
@@ -1296,4 +1348,16 @@ h4#showCollaborators a {
 
 div.marker-content:after {
   //height: 50em;
+}
+
+.handle {
+  cursor: ns-resize;
+}
+
+.layer-info-detail {
+  display: none;
+}
+
+.raster-layers {
+  padding-bottom: .75em !important;
 }

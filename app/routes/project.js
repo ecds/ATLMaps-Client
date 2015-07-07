@@ -46,13 +46,18 @@ export default Ember.Route.extend({
                 Sortable.create(el, {
                     handle: '.handle',
                     animation: 150,
+                    ghostClass: "sorting",
                     onUpdate: function () {
                         var IDs = [];
+                        // Get the raster layers in the project by the id.
                         Ember.$(".raster-list").find(".raster-layer").each(function(){
                             IDs.push(this.id);
                         });
                         var layerLength = IDs.length;
                         Ember.$.each(IDs, function(index, value){
+                            // So here we are taking the length of the array, subtracting 
+                            // the index of the layer and then adding 10 to reorder them.
+                            // It's just that easy.
                             var zIndex = layerLength - index + 10;
                             Ember.$("."+value).css("zIndex", zIndex);
                         });
@@ -228,6 +233,17 @@ export default Ember.Route.extend({
 
         reorderItems: function() {
             
+        },
+
+        showLayerInfoDetals: function(layer) {
+            console.log(layer);
+            if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+            }
+            else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+                Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
+            }
         }
 
     },

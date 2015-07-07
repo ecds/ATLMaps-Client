@@ -1,8 +1,15 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var env = EmberApp.env();
+var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 
-var app = new EmberApp();
+var app = new EmberApp({
+	fingerprint: {
+		enabled: isProductionLikeBuild,
+    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
+	}
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

@@ -9,3 +9,4 @@ bower_components
 js/app-diffcontrol.js
 dist
 tmp
+config/deploy.js
