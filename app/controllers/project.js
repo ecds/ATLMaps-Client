@@ -3,30 +3,88 @@ import DS from 'ember-data';
 
 /* global L */
 /* global shuffle */
+/* global Sortable */
+/* global Draggabilly */
 
 
 export default Ember.Controller.extend({
-	isShowingModal: false,
+	
+	isShowingRasterModal: false,
 
-	layers: function() {
+	isShowingVectorModal: false,
 
-            var layers = DS.PromiseObject.create({
-                promise: this.store.find('layer', {projectID: this.model.get('id')})
-            });
+	rasterLayers: function() {
 
-            layers.then(function(){
-                // Maybe remove a laoding gif?
-            });
+        var rasterLayers = DS.PromiseObject.create({
+            promise: this.store.find('raster-layer', {projectID: this.model.get('id')})
+        });
 
-            return layers;
+        rasterLayers.then(function(){
+            // Maybe remove a laoding gif?
+        });
+
+        return rasterLayers;
 
 
-        }.property(),
+    }.property(),
 
+    vectorLayers: function() {
+
+        var vectorLayers = DS.PromiseObject.create({
+            promise: this.store.find('vector-layer', {projectID: this.model.get('id')})
+        });
+
+        vectorLayers.then(function(){
+            // Maybe remove a laoding gif?
+        });
+
+        return vectorLayers;
+
+
+    }.property(),
+
+    isEditing: false,
 		
 	actions: {
-	   	toggleModal: function(){
-	    	this.toggleProperty('isShowingModal');
+
+		toggleRasterModal: function(){
+	    	this.toggleProperty('isShowingRasterModal');
+	    },
+
+	   	toggleVectorModal: function(){
+	    	this.toggleProperty('isShowingVectorModal');
+	    },
+
+	    init: function() {
+	    	//Ember.run.later((function() {
+	    	Ember.run.scheduleOnce('afterRender', function() {
+	    	console.log('sweet');
+	    	var el = document.getElementById("layer_sort");
+                Sortable.create(el, {
+                    handle: '.handle',
+                    animation: 150,
+                    ghostClass: "sorting",
+                    onUpdate: function () {
+                        var IDs = [];
+                        // Get the raster layers in the project by the id.
+                        Ember.$(".raster-list").find(".raster-layer").each(function(){
+                            IDs.push(this.id);
+                        });
+                        var layerLength = IDs.length;
+                        Ember.$.each(IDs, function(index, value){
+                            // So here we are taking the length of the array, subtracting 
+                            // the index of the layer and then adding 10 to reorder them.
+                            // It's just that easy.
+                            var zIndex = layerLength - index + 10;
+                            Ember.$("."+value).css("zIndex", zIndex);
+                        });
+                    }
+                });
+
+                new Draggabilly( '.draggable', {
+                    handle: '.mdi-action-open-with'
+                });
+            });
 	    },
 
 		// mapLayer expects `layer` to be a layer object.
@@ -122,7 +180,6 @@ export default Ember.Controller.extend({
 						Ember.$("div.marker-data").hide();
 						Ember.$(".card").hide();
 						var $content = Ember.$("<article/>").html(popupContent);
-						console.log($content);
 						Ember.$("div.marker-data").show();
 						Ember.$('div.marker-content').append($content);
 
@@ -207,6 +264,25 @@ export default Ember.Controller.extend({
         closeMarkerInfo: function() {
             Ember.$("div.marker-data").hide();
             Ember.$(".active_marker").removeClass("active_marker");
+        },
+
+        editProject: function() {
+            this.toggleProperty('isEditing');
+            this.send('init');
+        },
+
+        cancelUpdate: function(model) {
+            this.toggleProperty('isEditing');
+            // This will change to `model.rollbackAttributes()`
+            // in the near future.
+            this.send('init');
+            model.rollback();
+            
+
+        },
+        
+        updateProjectInfo: function(model) {
+            model.save();
         },
 		
 	}

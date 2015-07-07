@@ -11,8 +11,7 @@ export default DS.Model.extend({
     raster_layer_ids: DS.hasMany('raster_layer', {async: true}),
     vector_layer_ids: DS.hasMany('vector_layer', {async: true}),
     slug: DS.attr('string'),
-    //user_ids: DS.attr(),
     owner: DS.attr(),
     is_mine: DS.attr('boolean'),
-    //may_edit: DS.attr('boolean')
+    may_edit: DS.attr('boolean')
 });

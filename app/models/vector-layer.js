@@ -20,5 +20,6 @@ export default DS.Model.extend({
     institution_id: DS.belongsTo('institution'),
     tag_slugs: DS.attr('string'),
     active: DS.attr('boolean'),
-    marker: DS.attr()
+    marker: DS.attr(),
+    active_in_project: DS.attr('boolean')
 });

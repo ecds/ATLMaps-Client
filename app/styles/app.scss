@@ -427,6 +427,9 @@ a.site-title .alt-dark{
 .planningatlanta .mdi-maps-place:before,
 .wms .mdi-maps-place:before {
   content: "\e867";
+  display: block;
+  width: 25px;
+  float: left;
 }
 
 .slider .tooltip.top,
@@ -1254,12 +1257,21 @@ h4#showCollaborators a {
 
 .ember-modal-dialog {
   overflow: scroll;
+  max-width: 50%;
 }
 
 .list-group-item {
   border-bottom-color: rgb(219, 221, 226);
   width: 100%;
   padding: .25em !important;
+
+  a {
+    display: inline-block;
+    padding-left: 0;
+    clear: both;
+    vertical-align: top;
+    width: 340px;
+  }
 }
 
 .project-title {
@@ -1288,7 +1300,8 @@ h4#showCollaborators a {
 
 .project-info{
   article {
-    padding: 1em 1em 3em 0;
+    padding: 1em 1em 3em 1em;
+    font-size: .75em
   }
 }
 
@@ -1360,4 +1373,11 @@ div.marker-content:after {
 
 .raster-layers {
   padding-bottom: .75em !important;
+}
+
+a.edit-project-button {
+  color: darkgray;
+}
+a.is-editing-project-button {
+  color: green;
 }

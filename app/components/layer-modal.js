@@ -33,3 +33,13 @@ export default Ember.Component.extend({
 	}
 });
 */
+import Ember from 'ember';
+
+export default Ember.Component.extend({
+	actions: {
+		addLayer: function(){
+			console.log(this.get('layer'));
+			this.sendAction('addLayer', this.get('layer'));
+		}
+	}
+});

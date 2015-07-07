@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* global Sortable */
-/* global Draggabilly */
 
 export default Ember.Route.extend({
 
@@ -42,31 +40,9 @@ export default Ember.Route.extend({
                     Ember.$(".active_marker").removeClass("active_marker");
                 });
 
-                var el = document.getElementById("layer_sort");
-                Sortable.create(el, {
-                    handle: '.handle',
-                    animation: 150,
-                    ghostClass: "sorting",
-                    onUpdate: function () {
-                        var IDs = [];
-                        // Get the raster layers in the project by the id.
-                        Ember.$(".raster-list").find(".raster-layer").each(function(){
-                            IDs.push(this.id);
-                        });
-                        var layerLength = IDs.length;
-                        Ember.$.each(IDs, function(index, value){
-                            // So here we are taking the length of the array, subtracting 
-                            // the index of the layer and then adding 10 to reorder them.
-                            // It's just that easy.
-                            var zIndex = layerLength - index + 10;
-                            Ember.$("."+value).css("zIndex", zIndex);
-                        });
-                    }
-                });
+                var controller = _this.controllerFor('project');
 
-                new Draggabilly( '.draggable', {
-                    handle: '.mdi-action-open-with'
-                });
+                controller.send('init');
 
                 console.log(map.getBounds());
 
@@ -236,7 +212,6 @@ export default Ember.Route.extend({
         },
 
         showLayerInfoDetals: function(layer) {
-            console.log(layer);
             if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
                 Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
             }
