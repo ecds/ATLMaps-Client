@@ -76,7 +76,7 @@
 
 		<div class="layer-list">
 			<div class="add_layer_button">
-				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal'}}><span class="mdi-large"></span>Manage Layers</a>
 			</div>
 			<ul>
 			{{#each layer in model.vector_layer_ids}}
@@ -96,6 +96,9 @@
 
 	</div>
 	<div class="raster-layers raster-layers-edit card">
+		<div class="add_layer_button">
+			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal'}}><span class="mdi-large"></span>Manage Layers</a>
+		</div>
 		<div class="layer-list list-group raster-list" id="layer_sort">
 			{{#each layer in model.raster_layer_ids}}
 				<div class="list-group-item raster-layer" {{ bind-attr id="layer.layer"}}>
@@ -106,7 +109,7 @@
 						<p class="list-group-item-text">{{layer.description}}</p>
 						<div class="citation">Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
 					</div>
-					{{ opacity-slider layer=layer.layer layerID=layer.id }}
+					{{ opacity-slider layer=layer.slug layerID=layer.id }}
 				</div>
 			{{else}}
 				No scanned maps have been added.
@@ -221,6 +224,54 @@
 </div>
 
 
+{{#if isShowingRasterModal}}
+
+  {{#modal-dialog close="toggleRasterModal" alignment="center" translucentOverlay=true}}
+    
+  <div class="list">
+	{{#if layers.isPending}}
+		Loading...
+	{{else}}
+		{{#each layer in rasterLayers.content}}
+			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+				<div class="col-xs-2">
+					{{#if layer.active_in_project}}
+						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeRasterLayer" layer }}><span class="mdi-content-clear"></span></a>
+					{{else}}
+						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
+					{{/if}}
+					
+				</div>
+				<div class="col-xs-9">
+					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+					<p>
+      					<div class="description">{{layer.description}}</div>
+    				</p>
+    				<p>
+    					{{!--{{#if layer.tag_ids}}--}}
+    						<span class="tagsIcon"></span>
+							<ul class="list-inline">
+								{{#each tag in layer.tag_ids}}
+									<li class="tags">
+										{{tag.name}}
+									</li>
+								{{else}}
+									<li>none</li>
+								{{/each}}
+							</ul>
+    					{{!--{{/if}--}}
+    				</p>
+				</div>
+			</div>
+		{{/each}}
+	{{/if}}
+</div>
+
+
+  {{/modal-dialog}}
+{{/if}}
+
+
 {{#if isShowingVectorModal}}
 
   {{#modal-dialog close="toggleVectorModal" alignment="center" translucentOverlay=true}}
@@ -233,9 +284,9 @@
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{#if layer.active_in_project}}
-						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" layer="layer"}}><span class="mdi-content-clear"></span></a>
+						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeVectorLayer" layer }}><span class="mdi-content-clear"></span></a>
 					{{else}}
-						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" layer }}><span class="mdi-content-add"></span></a>
+						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addVectorLayer" layer }}><span class="mdi-content-add"></span></a>
 					{{/if}}
 					
 				</div>

@@ -129,65 +129,125 @@ export default Ember.Route.extend({
 
 	    },
 
-        addLayer: function(layer){
-
+        addRasterLayer: function(layer) {
             var project_id = this.modelFor('project').get('id');
+
+            layer.set('active_in_project', true);
+            //this.toggleProperty('active_in_project');
 
             // Here we use `unshiftObject` instead of `pushObject` to prepend
             // the new layer to the list of layers.
-            this.modelFor('project').get('layer_ids').unshiftObject(layer);
+            this.modelFor('project').get('raster_layer_ids').unshiftObject(layer);
 
             var _this = this;
 
             var addedLayers = DS.PromiseObject.create({
-                promise: _this.store.find('projectlayer', {
+                promise: _this.store.find('raster-layer-project', {
                     project_id: project_id
                 })
             });
 
             addedLayers.then(function() {
+                
+                // Get the length of the layers and use that as
+                // the position.
                 var position = addedLayers.get('length');
 
-                var controller = _this.controllerFor('project');
-                var colors = _this.globals.color_options;
-                var marker = Math.floor((Math.random() * colors.length) + 1);
-                var projectID = _this.get('controller.model.id');
-
-                var projectlayer = _this.store.createRecord('projectlayer', {
-                    project_id: projectID,
-                    layer_id: layer.get('id'),
-                    marker: marker,
+                var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
+                    project_id: project_id,
+                    raster_layer_id: layer.get('id'),
                     layer_type: layer.get('layer_type'),
                     position: position
                 });
 
-                //projectlayer.save();
+                rasterLayerProject.save();
 
+
+                // Send the layer to the action on the controller
+                // to add it to the map.
+                // The `mapLayer` action expects a parameter for
+                // the marker so the `0` is a placeholder.
+                var controller = _this.controllerFor('project');
                 controller.send('mapLayer',
                     layer,
-                    marker,
+                    0,
                     position
                 );
+
+                // Init the opacity slider for the new layer.
+                controller.send('opacitySlider', layer);
+
+                // This is unfortunate but we have to re-init the sliders for each layer
+                // Ember.$.each(addedLayers.content.content, function(index, layer_id) {
+                //     var projectLayer = DS.PromiseObject.create({
+                //         promise: _this.store.find('layer', layer_id._data.raster_layer_id)
+                //     });
+
+                //     projectLayer.then(function() {
+                //         controller.send('opacitySlider', projectLayer);
+                //     });
+                // });
+
+            });
+        },
+
+        addVectorLayer: function(layer){
+
+            var project_id = this.modelFor('project').get('id');
+
+            layer.set('active_in_project', true);
+
+            // Here we use `unshiftObject` instead of `pushObject` to prepend
+            // the new layer to the list of layers.
+            this.modelFor('project').get('vector_layer_ids').unshiftObject(layer);
+
+            var _this = this;
+
+            var controller = _this.controllerFor('project');
+            var colors = _this.globals.color_options;
+            var marker = Math.floor((Math.random() * colors.length) + 1);
+            var projectID = _this.get('controller.model.id');
+
+            var vectorLayerProject = _this.store.createRecord('vector_layer_project', {
+                project_id: projectID,
+                vector_layer_id: layer.get('id'),
+                marker: marker,
+                layer_type: layer.get('layer_type'),
+            });
+
+            vectorLayerProject.save();
+
+            controller.send('mapLayer',
+                layer,
+                marker,
+                0
+            );
+
+            var addedLayers = DS.PromiseObject.create({
+                promise: _this.store.find('vector_layer_project', {
+                    project_id: project_id
+                })
+            });
+
+            addedLayers.then(function() {
 
                 Ember.$.each(addedLayers.content.content, function(index, layer_id) {
 
                     var layer = DS.PromiseObject.create({
-                        promise: _this.store.find('layer', layer_id._data.layer_id)
+                        promise: _this.store.find('layer', layer_id._data.vector_layer_id)
                     });
 
                     var savedMarker = DS.PromiseObject.create({
-                        promise: _this.store.find('projectlayer', {
-                            project_id: project_id, layer_id: layer_id._data.layer_id
+                        promise: _this.store.find('vector_layer_project', {
+                            project_id: project_id, vector_layer_id: layer_id._data.vector_layer_id
                         })
                     });
 
                     var promises = [layer, savedMarker];
 
-
-
                     Ember.RSVP.allSettled(promises).then(function(){
                         var marker = savedMarker.content.content[0]._data.marker;
-                        controller.send('opacitySlider', layer, marker);
+                        controller.send('colorIcons', layer, marker);
                     });
                 });
 
@@ -196,13 +256,100 @@ export default Ember.Route.extend({
                 });
 
                 newLayer.then(function(){
-
-                    controller.send('opacitySlider', layer, marker);
-
+                    controller.send('colorIcons', layer, marker);
                 });
 
-                
+            });
 
+        },
+
+        remvoeRasterLayer: function(layer){
+            layer.set('active_in_project', false);
+            var projectID = this.modelFor('project').get('id');
+            var layerID = layer.get('id');
+            var layerClass = layer.get('layer');
+            var _this = this;
+
+            this.modelFor('project').get('raster_layer_ids').removeObject(layer);
+
+            var rasterLayerProject = DS.PromiseObject.create({
+                promise: this.store.find('raster_layer_project', {
+                    raster_layer_id: layerID, project_id: projectID
+                })
+            });
+
+            rasterLayerProject.then(function(){
+                var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
+
+                _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+                    rasterLayerProject.destroyRecord().then(function(){});
+                });
+            });
+
+            // Remove the layer from the map
+            Ember.$("."+layerClass).fadeOut( 500, function() {
+                Ember.$(this).remove();
+            });
+
+        },
+
+        removeRasterLayer: function(layer){
+            layer.set('active_in_project', false);
+            var projectID = this.modelFor('project').get('id');
+            var layerID = layer.get('id');
+            var layerClass = layer.get('layer');
+
+            var _this = this;
+
+            this.modelFor('project').get('raster_layer_ids').removeObject(layer);
+
+            var rasterLayerProject = DS.PromiseObject.create({
+                promise: this.store.find('raster_layer_project', {
+                    raster_layer_id: layerID, project_id: projectID
+                })
+            });
+
+            rasterLayerProject.then(function(){
+                var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
+
+                _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+                    rasterLayerProject.destroyRecord().then(function(){});
+                });
+            });
+
+            // Remove the layer from the map
+            Ember.$("."+layerClass).fadeOut( 500, function() {
+                Ember.$(this).remove();
+            });
+
+        },
+
+        removeVectorLayer: function(layer){
+            var projectID = this.modelFor('project').get('id');
+            var layerID = layer.get('id');
+            var layerClass = layer.get('layer');
+
+            var _this = this;
+
+            this.modelFor('project').get('vector_layer_ids').removeObject(layer);
+
+            var vectorLayerProject = DS.PromiseObject.create({
+                promise: this.store.find('vector_layer_project', {
+                    vector_layer_id: layerID, project_id: projectID
+                })
+            });
+
+            vectorLayerProject.then(function(){
+                var vectorLayerProjectID = vectorLayerProject.get('content.content.0.id');
+
+                _this.store.find('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
+                    vectorLayerProject.destroyRecord().then(function(){});
+                });
+            });
+
+            // Remove the layer from the map
+            Ember.$("."+layerClass).fadeOut( 500, function() {
+                Ember.$(this).remove();
             });
 
         },
