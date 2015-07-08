@@ -2,7 +2,6 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 /* global L */
-/* global shuffle */
 /* global Sortable */
 /* global Draggabilly */
 
@@ -55,7 +54,7 @@ export default Ember.Controller.extend({
 	    	this.toggleProperty('isShowingVectorModal');
 	    },
 
-	    init: function() {
+	    initProjectUI: function() {
 	    	Ember.run.scheduleOnce('afterRender', function() {
 
 	    		var el = document.getElementById("layer_sort");
@@ -159,9 +158,7 @@ export default Ember.Controller.extend({
 						popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
 						"<span>Photo Credit: "+feature.properties.image.credit+"</span>";
 
-						Ember.$('<img />').load( function(){
-  							shuffle.init();
-						}).attr('src', feature.properties.image.url);
+						Ember.$('<img />').load( function(){}).attr('src', feature.properties.image.url);
 					}
 					if (feature.properties.description) {
 						popupContent += "<p>" + feature.properties.description + "</p>";
@@ -265,18 +262,18 @@ export default Ember.Controller.extend({
             Ember.$(".active_marker").removeClass("active_marker");
         },
 
-        editProject: function() {
+        editProject: function(model) {
             this.toggleProperty('isEditing');
-            this.send('init');
+            this.send('initProjectUI');
+            model.rollback();
         },
 
         cancelUpdate: function(model) {
             this.toggleProperty('isEditing');
             // This will change to `model.rollbackAttributes()`
             // in the near future.
-            this.send('init');
             model.rollback();
-            
+            this.send('initProjectUI');
 
         },
         

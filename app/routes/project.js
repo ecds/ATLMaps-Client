@@ -42,7 +42,7 @@ export default Ember.Route.extend({
 
                 var controller = _this.controllerFor('project');
 
-                controller.send('init');
+                controller.send('initProjectUI');
 
                 console.log(map.getBounds());
 
