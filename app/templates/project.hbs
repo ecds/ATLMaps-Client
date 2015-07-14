@@ -76,10 +76,10 @@
 
 		<div class="layer-list">
 			<div class="add_layer_button">
-				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal'}}><span class="mdi-large"></span>Manage Layers</a>
+				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal'}}><span class="mdi-large"></span>Add/Remove Layers</a>
 			</div>
 			<ul>
-			{{#each layer in model.vector_layer_ids}}
+			{{#each model.vector_layer_ids key="@index" as |layer|}}
 					<li>
 						<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
@@ -97,10 +97,10 @@
 	</div>
 	<div class="raster-layers raster-layers-edit card">
 		<div class="add_layer_button">
-			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal'}}><span class="mdi-large"></span>Manage Layers</a>
+			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal'}}><span class="mdi-large"></span>Add/Remove Layers</a>
 		</div>
 		<div class="layer-list list-group raster-list" id="layer_sort">
-			{{#each layer in model.raster_layer_ids}}
+			{{#each model.raster_layer_ids key="@index" as |layer|}}
 				<div class="list-group-item raster-layer" {{ bind-attr id="layer.layer"}}>
 					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
@@ -109,7 +109,7 @@
 						<p class="list-group-item-text">{{layer.description}}</p>
 						<div class="citation">Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
 					</div>
-					{{ opacity-slider layer=layer.slug layerID=layer.id }}
+					{{ opacity-slider layer=layer }}
 				</div>
 			{{else}}
 				No scanned maps have been added.
@@ -167,7 +167,7 @@
 
 		<div class="layer-list">
 			<ul>
-			{{#each layer in model.vector_layer_ids}}
+			{{#each model.vector_layer_ids key="@index" as |layer|}}
 					<li>
 						<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
@@ -185,7 +185,7 @@
 	</div>
 	<div class="raster-layers card">
 		<div class="layer-list list-group raster-list" id="layer_sort">
-			{{#each layer in model.raster_layer_ids}}
+		{{#each model.raster_layer_ids key="@index" as |layer|}}
 				<div class="list-group-item raster-layer" {{ bind-attr id="layer.layer"}}>
 					<span {{bind-attr class="layer.layer_type layer.layer"}}></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
@@ -194,7 +194,7 @@
 						<p class="list-group-item-text">{{layer.description}}</p>
 						<div class="citation">Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
 					</div>
-					{{ opacity-slider layer=layer.layer layerID=layer.id }}
+					{{ opacity-slider layer=layer }}
 				</div>
 			{{else}}
 				No scanned maps have been added.
@@ -232,7 +232,7 @@
 	{{#if layers.isPending}}
 		Loading...
 	{{else}}
-		{{#each layer in rasterLayers.content}}
+	{{#each rasterLayers.content key="@index" as |layer|}}
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{#if layer.active_in_project}}
@@ -251,7 +251,7 @@
     					{{!--{{#if layer.tag_ids}}--}}
     						<span class="tagsIcon"></span>
 							<ul class="list-inline">
-								{{#each tag in layer.tag_ids}}
+							{{#each layer.tag_ids key="@index" as |tag|}}
 									<li class="tags">
 										{{tag.name}}
 									</li>
@@ -280,7 +280,7 @@
 	{{#if layers.isPending}}
 		Loading...
 	{{else}}
-		{{#each layer in vectorLayers.content}}
+		{{#each vectorLayers.content key="@index" as |layer|}}
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{#if layer.active_in_project}}
@@ -299,7 +299,7 @@
     					{{!--{{#if layer.tag_ids}}--}}
     						<span class="tagsIcon"></span>
 							<ul class="list-inline">
-								{{#each tag in layer.tag_ids}}
+								{{#each layer.tag_ids key="@index" as |tag|}}
 									<li class="tags">
 										{{tag.name}}
 									</li>

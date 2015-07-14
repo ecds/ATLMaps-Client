@@ -270,28 +270,36 @@ export default Ember.Controller.extend({
 
 		opacitySlider: function(layer){
 
-        	console.log("'"+".slider."+layer.get('layer')+"'");
+			Ember.run.later(this, function() {
 
-        	var options = {
-            	start: [ 10 ],
-            	connect: false,
-             	range: {
-                	'min': 0,
-                	'max': 10
-              	}
-              };
-            //console.log(Ember.$(".slider."+layer.get('layer')).noUiSlider.get());
-        	var slider = Ember.$(".slider."+layer.get('layer'));
+		        var options = {
+		            start: [ 10 ],
+		            connect: false,
+		            range: {
+		                'min': 0,
+		                'max': 10
+		            }
+		        };
+		        var slider = document.getElementById(layer.get('slider_id'));
 
-        	console.log(slider);
+	            try {
+	            	slider.noUiSlider.destroy();
+	            }
+	            catch(err){}
 
-        	noUiSlider.create(slider, options, true);
+	            noUiSlider.create(slider, options, true);
 
-            Ember.$(document).on('slide','.card .slider',function(){
-			    var $this = Ember.$(this);
-			    $this.siblings('input').val($this.val()).change();
-			 });
-
+	            var valueInput = document.getElementById(layer.get('slider_value_id'));
+	            slider.noUiSlider.on('update', function(values, handle){
+	                valueInput.value = values[handle];
+	                var opacity = values[handle] / 10;
+	                Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+	            });
+	            valueInput.addEventListener('change', function(){
+	                console.log(this.value);
+	                slider.noUiSlider.set(this.value);
+	            });
+	        }, 1500);
 		},
 
 		colorIcons: function(layer, marker){
@@ -330,37 +338,28 @@ export default Ember.Controller.extend({
         },
 
         editProject: function(model) {
+        	var _this = this;
+        	var rasterLayers = model.get('raster_layer_ids');
+        	Ember.$.each(rasterLayers.content.currentState, function(index, raster_layer_id){
+                var rasterLayer = DS.PromiseObject.create({
+                    promise: _this.store.find('raster_layer', raster_layer_id.id)
+                });
+
+                rasterLayer.then(function() {
+                	_this.send('opacitySlider', rasterLayer);
+                });
+            });
             this.toggleProperty('isEditing');
             this.send('initProjectUI');
-			var _this = this;
-            var rasterLayerIDs = model.get('raster_layer_ids');
-
-				Ember.$.each(rasterLayerIDs.content.currentState, function(index, layer_id) {
-	                var rasterLayer = DS.PromiseObject.create({
-	                    promise: _this.store.find('raster_layer', layer_id.id)
-	                });
-
-	                rasterLayer.then(function() {
-	                	//Ember.$(".slider."+rasterLayer.get('layer'))[0].destroy();
-	                    _this.send('opacitySlider', rasterLayer);
-	                });
-	            });
-
-	   //          var vectorLayerIDs = this.model.get('vector_layer_ids');
-
-				// Ember.$.each(vectorLayerIDs.content.currentState, function(index, layer_id) {
-				// 	console.log(layer_id.id);
-				// });
-
-
             model.rollback();
         },
 
         cancelUpdate: function(model) {
-            this.toggleProperty('isEditing');
+            //this.toggleProperty('isEditing');
             // This will change to `model.rollbackAttributes()`
             // in the near future.
             model.rollback();
+            this.send('editProject', model);
             this.send('initProjectUI');
 
         },

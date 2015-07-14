@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+/* globals noUiSlider */
+
 export default Ember.Route.extend({
 
 	beforeModel: function(){
@@ -8,8 +10,8 @@ export default Ember.Route.extend({
     },
 
     model: function(params) {
-        var project = this.store.fetchById('project', params.project_id);
-        //project.reload();
+        //var project = this.store.fetchById('project', params.project_id);
+        var project = this.store.findRecord('project', params.project_id);
         return project;
     },
 
@@ -46,47 +48,43 @@ export default Ember.Route.extend({
 
                 console.log(map.getBounds());
 
-            });
+    	        // Send some info to the ProjectController to 
+    	        // add the raster layers.
+                // And oh my, this is ugly!
+                Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
+                    var rasterLayer = DS.PromiseObject.create({
+                        promise: _this.store.find('raster_layer', raster_layer_id.id)
+                    });
 
-	        // Send some info to the ProjectController to 
-	        // add the raster layers.
-            // And oh my, this is ugly!
-            Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
-                var rasterLayer = DS.PromiseObject.create({
-                    promise: _this.store.find('raster_layer', raster_layer_id.id)
-                });
+                    var rasterLayerProjectInfo = DS.PromiseObject.create({
+                        promise: _this.store.query('raster_layer_project', {
+                            project_id: project_id, raster_layer_id: raster_layer_id.id
+                        })
+                    });
 
-                var rasterLayerProjectInfo = DS.PromiseObject.create({
-                    promise: _this.store.find('raster_layer_project', {
-                        project_id: project_id, raster_layer_id: raster_layer_id.id
-                    })
-                });
+                    /*
+                        If we need to do anything to the promise objects we
+                        will need to add a `then` function. eg:
+                        `layer.then(function() {});`
+                    */
 
-                /*
-                    If we need to do anything to the promise objects we
-                    will need to add a `then` function. eg:
-                    `layer.then(function() {});`
-                */
+                    // Make an array of the above promise objects.
+                    var rasterPromises = [rasterLayer, rasterLayerProjectInfo];
 
-                // Make an array of the above promise objects.
-                var rasterPromises = [rasterLayer, rasterLayerProjectInfo];
+                    // Once the promisies have been resolved, send them to the `mapLayer`
+                    // action on the controler.
+                    Ember.RSVP.allSettled(rasterPromises).then(function(){
+                        var position = rasterLayerProjectInfo.content.content[0]._data.position;
 
-                // Once the promisies have been resolved, send them to the `mapLayer`
-                // action on the controler.
-                Ember.RSVP.allSettled(rasterPromises).then(function(){
-                    var position = rasterLayerProjectInfo.content.content[0]._data.position;
+                        controller.send('mapLayer',
+                            rasterLayer,
+                            0,
+                            position
+                        );
 
-                    controller.send('mapLayer',
-                        rasterLayer,
-                        0,
-                        position
-                    );
-
-                    Ember.run.scheduleOnce('afterRender', function() {
                         controller.send('opacitySlider', rasterLayer);
                     });
                 });
-
 
             });
 
@@ -97,7 +95,7 @@ export default Ember.Route.extend({
         		});
 
         		var vectorLayerProjectInfo = DS.PromiseObject.create({
-            		promise: _this.store.find('vector_layer_project', {
+            		promise: _this.store.query('vector_layer_project', {
             			project_id: project_id, vector_layer_id: vector_layer_id.id
             		})
         		});
@@ -177,16 +175,16 @@ export default Ember.Route.extend({
                 // Init the opacity slider for the new layer.
                 controller.send('opacitySlider', layer);
 
-                // This is unfortunate but we have to re-init the sliders for each layer
-                // Ember.$.each(addedLayers.content.content, function(index, layer_id) {
-                //     var projectLayer = DS.PromiseObject.create({
-                //         promise: _this.store.find('layer', layer_id._data.raster_layer_id)
-                //     });
+                //This is unfortunate but we have to re-init the sliders for each layer
+                Ember.$.each(addedLayers.content.content, function(index, layer_id) {
+                    var projectLayer = DS.PromiseObject.create({
+                        promise: _this.store.find('raster_layer', layer_id._data.raster_layer_id)
+                    });
 
-                //     projectLayer.then(function() {
-                //         controller.send('opacitySlider', projectLayer);
-                //     });
-                // });
+                    projectLayer.then(function() {
+                        controller.send('opacitySlider', projectLayer);
+                    });
+                });
 
             });
         },

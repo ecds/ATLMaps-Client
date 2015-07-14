@@ -8,8 +8,8 @@ var globals = Ember.Object.extend({
 export default {
   name: "Globals",
 
-  initialize: function(container, application) {
-    container.typeInjection('component', 'store', 'store:main');
+  initialize: function(registry, application) {
+    registry.typeInjection('component', 'store', 'store:main');
     application.register('global:variables', globals, {singleton: true});
     application.inject('route', 'globals', 'global:variables');
     application.inject('component', 'globals', 'global:variables');
