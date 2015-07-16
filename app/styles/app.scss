@@ -1230,7 +1230,7 @@ h4#showCollaborators a {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)
 }
 
-.project-info, .vector-data, .raster-layers, .controls {
+.project-info, .vector-data, .raster-layers, .controls, .collaborations {
   display: inline-block;
   position: relative;
   width: 100%;
@@ -1381,4 +1381,10 @@ a.edit-project-button {
 }
 a.is-editing-project-button {
   color: green;
+}
+
+.edit-info-success, .reorder-success {
+  display: none;
+  font-size: .75em;
+  border-radius: .5em;
 }

@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-/* globals noUiSlider */
-
 export default Ember.Route.extend({
 
 	beforeModel: function(){
@@ -23,6 +21,7 @@ export default Ember.Route.extend({
 
     actions: {
     	didTransition: function() {
+
 	    	var raster_layers = this.modelFor('project').get('raster_layer_ids');
 
             var vector_layers = this.modelFor('project').get('vector_layer_ids');
@@ -44,7 +43,7 @@ export default Ember.Route.extend({
 
                 var controller = _this.controllerFor('project');
 
-                controller.send('initProjectUI');
+                controller.send('initProjectUI', _this.modelFor('project'));
 
                 console.log(map.getBounds());
 
@@ -82,7 +81,6 @@ export default Ember.Route.extend({
                             position
                         );
 
-                        controller.send('opacitySlider', rasterLayer);
                     });
                 });
 
@@ -108,7 +106,8 @@ export default Ember.Route.extend({
         		Ember.RSVP.allSettled(vectorPromises).then(function(){
 
         			// Good lord this is also really ugly.
-        			var marker = vectorLayerProjectInfo.content.content[0]._data.marker;
+        			//var marker = vectorLayerProjectInfo.content.content[0]._data.marker;
+                    var marker = vectorLayerProjectInfo.get('firstObject')._internalModel._data.marker;
 
         			controller.send('mapLayer',
 	        			vectorLayer,
@@ -116,9 +115,9 @@ export default Ember.Route.extend({
                         0
 	        		);
 
-	        		Ember.run.scheduleOnce('afterRender', function() {
+	        		//Ember.run.scheduleOnce('afterRender', function() {
 	        			controller.send('colorIcons', vectorLayer, marker);
-	        		});
+	        		//});
 
 	        		
         		});
@@ -171,22 +170,10 @@ export default Ember.Route.extend({
                     0,
                     position
                 );
-
-                // Init the opacity slider for the new layer.
-                controller.send('opacitySlider', layer);
-
-                //This is unfortunate but we have to re-init the sliders for each layer
-                Ember.$.each(addedLayers.content.content, function(index, layer_id) {
-                    var projectLayer = DS.PromiseObject.create({
-                        promise: _this.store.find('raster_layer', layer_id._data.raster_layer_id)
-                    });
-
-                    projectLayer.then(function() {
-                        controller.send('opacitySlider', projectLayer);
-                    });
-                });
+                controller.send('initProjectUI', _this.modelFor('project'));
 
             });
+        
         },
 
         addVectorLayer: function(layer){
@@ -258,6 +245,8 @@ export default Ember.Route.extend({
                 });
 
             });
+            
+            controller.send('initProjectUI', this.modelFor('project'));
 
         },
 
@@ -323,6 +312,7 @@ export default Ember.Route.extend({
         },
 
         removeVectorLayer: function(layer){
+            layer.set('active_in_project', false);
             var projectID = this.modelFor('project').get('id');
             var layerID = layer.get('id');
             var layerClass = layer.get('layer');
@@ -353,7 +343,7 @@ export default Ember.Route.extend({
         },
 
         reorderItems: function() {
-            
+            console.log('hello');
         },
 
         showLayerInfoDetals: function(layer) {

@@ -32,7 +32,7 @@
       <hr />
   
       <div class="list-group col-sm-10 col-sm-offset-1">
-        {{#each project in this.model}}
+        {{#each this.model key="@index" as |project|}}
 
           <div class="list-group-item col-xs-6 project-group-item">
             <div class="row-action-primary">
