@@ -1,0 +1,45 @@
+{{#if this.edit}}
+
+	<div class="btn-group btn-group-justified">
+
+		<a {{action 'navigateProject' 'project-info-edit'}} class="btn btn-default active-button project-nav" id="project-info-edit">
+			<span class="mdi-action-info-outline"></span>
+		</a>
+	    <a {{action 'navigateProject' 'vector-data-edit'}} class="btn btn-default transparent-button project-nav" id='vector-data-edit'>
+	    	<span class="mdi-maps-place"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'raster-layers-edit'}} class="btn btn-default transparent-button project-nav" id="raster-layers-edit">
+	    	<span class="mdi-maps-layers"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'controls-edit'}} class="btn btn-default transparent-button project-nav" id="controls-edit">
+	    	<span class="mdi-image-tune"></span>
+	    </a>
+	    {{#if model.is_mine}}
+	    	<a {{action 'navigateProject' 'collaborations-edit'}} class="btn btn-default transparent-button project-nav" id="collaborations-edit">
+	    		<span class="mdi-social-group"></span>
+	    	</a>
+	    {{/if}}
+
+	</div>
+
+{{else}}
+
+	<div class="btn-group btn-group-justified">
+		<a {{action 'backToProjects' }} class="btn btn-default transparent-button">
+			<span class="mdi-navigation-arrow-back"></span>
+		</a>
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
+			<span class="mdi-action-info-outline"></span>
+		</a>
+	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
+	    	<span class="mdi-maps-place"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers">
+	    	<span class="mdi-maps-layers"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls">
+	    	<span class="mdi-image-tune"></span>
+	    </a>
+	</div>
+	
+{{/if}}

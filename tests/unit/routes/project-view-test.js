@@ -1,9 +1,6 @@
-import {
-  moduleFor,
-  test
-} from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:project-layer', {
+moduleFor('route:project-view', 'Unit | Route | project view', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

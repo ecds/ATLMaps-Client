@@ -1,0 +1,82 @@
+	<div class="project-title">
+		<h1>{{model.name}}</h1>
+
+		{{#if model.may_edit}}
+			{{#if isEditing}}
+				<a {{action 'editProject' model }} class="is-editing-project-button">
+					<span class="mdi-editor-mode-edit"></span>
+				</a>
+			{{else}}
+				<a {{action 'editProject' model }} class="edit-project-button">
+					<span class="mdi-editor-mode-edit"></span>
+				</a>
+			{{/if}}
+		{{/if}}
+	</div>
+
+{{!-- START VIEW PROJECT --}}
+
+	{{project-nav}}
+
+	<div class="marker-data draggable">
+		<div class="panel-controls">
+			<span class="mdi-action-open-with"></span>
+			<a {{action "closeMarkerInfo" }}><span class="mdi-content-clear"></span></a>
+		</div>
+		<div class="marker-content"></div>
+	</div>
+
+
+	<div class="project-info card">
+		<article>{{model.description}}</article>
+	</div>
+	<div class="vector-data card">
+
+		<div class="layer-list">
+			<ul>
+			{{#each model.vector_layer_ids key="@index" as |layer|}}
+					<li>
+						<span class="{{layer.layer_type}} {{layer.layer}}"></span>
+						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
+						<div class="layer-info-detail {{layer.slug}}">
+							<p class="list-group-item-text">{{layer.description}}</p>
+							<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+						</div>
+					</li>
+			{{else}}
+				No data layers have been added.
+			{{/each}}
+			</ul>
+		</div>
+
+	</div>
+	<div class="raster-layers card">
+		<div class="layer-list list-group raster-list" id="layer_sort">
+		{{#each model.raster_layer_ids key="@index" as |layer|}}
+				<div class="list-group-item raster-layer" id="{{layer.layer}}">
+					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
+					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.id}}: {{layer.name}}</a>
+					<span class="handle pull-right">&varr;</span>
+					<div class="layer-info-detail {{layer.layer}}">
+						<p class="list-group-item-text">{{layer.description}}</p>
+						<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+					</div>
+					<input class="value-input {{layer.layer}}" id="{{layer.slider_value_id}}" />
+					<div class="slider {{layer.layer}} slider-material-orange-300" id="{{layer.slider_id}}" name="{{layer.layer}}"></div>
+				</div>
+			{{else}}
+				No scanned maps have been added.
+			{{/each}}
+		</div>
+	</div>
+
+	<div class="controls card">
+		<div class="togglebutton opacity">
+			<label>
+				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+			</label>
+			<h3>Select Base Map</h3>
+		</div>
+	</div>
+
+	{{!-- END VIEW PROJECT --}}
