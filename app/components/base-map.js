@@ -3,7 +3,7 @@ import Ember from 'ember';
 /* global L */
 
 export default Ember.Component.extend({
-	didInsertElement: function() {
+    didInsertElement: function() {
         
         // Most of the map set up is in the `initProjectUI` action
         // in the `project` controller.

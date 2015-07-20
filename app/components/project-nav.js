@@ -32,5 +32,9 @@ export default Ember.Component.extend({
                 Ember.$('#'+card).removeClass('transparent-button');
             }
         },
+
+        backToProjects: function(){
+            this.transitionToRoute('projects');
+        }
 	}
 });

@@ -5,10 +5,6 @@ import DS from 'ember-data';
 
 
 export default Ember.Controller.extend({
-    
-    isShowingRasterModal: false,
-
-    isShowingVectorModal: false,
 
     rasterLayers: function() {
 
@@ -40,17 +36,9 @@ export default Ember.Controller.extend({
 
     }.property(),
 
-    isEditing: false,
+    showingAllLayers: true,
         
     actions: {
-
-        toggleRasterModal: function(){
-            this.toggleProperty('isShowingRasterModal');
-        },
-
-        toggleVectorModal: function(){
-            this.toggleProperty('isShowingVectorModal');
-        },
 
         initProjectUI: function(model) {
 
@@ -82,40 +70,11 @@ export default Ember.Controller.extend({
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
                 control._map = map;
 
-                var controlDiv = control.onAdd(map);
-
-                Ember.$('.controls').append(controlDiv);
-
-                // Initiate the sorting
-                var el = document.getElementById("layer_sort");
-                Sortable.create(el, {
-                    handle: '.handle',
-                    animation: 150,
-                    ghostClass: "sorting",
-                    onUpdate: function () {
-                        var IDs = [];
-                        var layerIDs = [];
-                        // Get the raster layers in the project by the id.
-                        Ember.$(".raster-list").find(".raster-layer").each(function(){
-                            IDs.push(this.id);
-                        });
-                        var layerLength = IDs.length;
-                        Ember.$.each(IDs, function(index, value){
-                            // So here we are taking the length of the array, subtracting 
-                            // the index of the layer and then adding 10 to reorder them.
-                            // It's just that easy.
-                            var zIndex = layerLength - index + 10;
-                            Ember.$("."+value).css("zIndex", zIndex);
-
-                        });
-                        if (_this.isEditing === true) {
-                            Ember.$(".raster-list").find(".raster-layer").each(function(){
-                                layerIDs.push(Ember.$(this).attr("layer-id"));
-                            });
-                            _this.send('updateOrder', layerIDs, layerIDs.length);
-                        }
-                    }
-                });
+                // We need to check if the layer controls are already added to the DOM.
+                if (Ember.$('.leaflet-control-layers').length === 0) {
+                    var controlDiv = control.onAdd(map);
+                    Ember.$('.controls').append(controlDiv);
+                }
 
                 // Initiate the dragging of the marker info.
                 Ember.$('.draggable').draggabilly({
@@ -201,7 +160,7 @@ export default Ember.Controller.extend({
                         detectRetina: true
                     }).addTo(map).bringToFront().getContainer();
 
-                    Ember.$(wmsLayer).addClass(slug).zIndex(zIndex).addClass('atLayer').css("zIndex", zIndex);
+                    Ember.$(wmsLayer).addClass(slug).addClass('atLayer').css("zIndex", zIndex);
 
                     break;
 
@@ -286,6 +245,7 @@ export default Ember.Controller.extend({
         },
 
         opacitySlider: function(layer){
+            var _this = this;
 
             Ember.run.later(this, function() {
 
@@ -315,17 +275,30 @@ export default Ember.Controller.extend({
                 valueInput.addEventListener('change', function(){
                     slider.noUiSlider.set(this.value);
                 });
-            }, 1500);
+
+                var hideLayersButton = document.getElementById('hide-layers');
+                    hideLayersButton.addEventListener('click', function(){
+                        slider.noUiSlider.set(0);
+                        Ember.$('button#hide-layers').hide();
+                        Ember.$('button#show-layers').show();
+                        _this.set('showingAllLayers', false);
+                });
+
+                var showLayersButton = document.getElementById('show-layers');
+                    showLayersButton.addEventListener('click', function(){
+                        slider.noUiSlider.set(10);
+                        Ember.$('button#hide-layers').show();
+                        Ember.$('button#show-layers').hide();
+                        _this.set('showingAllLayers', true);
+                });
+
+            }, 2000);
         },
 
         colorIcons: function(layer, marker){
             Ember.run.later(this, function() {
                 Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
             }, 1500);
-        },
-
-        backToProjects: function(){
-            this.transitionToRoute('projects');
         },
 
         closeMarkerInfo: function() {
@@ -349,37 +322,6 @@ export default Ember.Controller.extend({
             this.send('initProjectUI', model);
             model.rollback();
         },
-
-        cancelUpdate: function(model) {
-            //this.toggleProperty('isEditing');
-            model.rollbackAttributes();
-            this.send('editProject', model);
-            this.send('initProjectUI', model);
-
-        },
-        
-        updateProjectInfo: function(model) {
-            model.save();
-            Ember.$(".edit-info-success").slideToggle().delay(5000).slideToggle();
-        },
-
-        updateOrder: function(layers, layerCount) {
-            var _this = this;
-            Ember.$.each(layers, function(index, value){
-                var position = layerCount - index;
-                console.log(value+" => "+position);
-
-                _this.store.find('raster_layer_project', {
-                    project_id: _this.model.get('id'),
-                    raster_layer_id: value
-                }).then(function(rasterLayerProject){
-                    var  bar = rasterLayerProject.get('firstObject');
-                    bar.set('position', position);
-                    bar.save();
-                });
-            });
-            Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
-        }
         
     }
 });

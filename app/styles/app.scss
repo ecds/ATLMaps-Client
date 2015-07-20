@@ -1147,8 +1147,10 @@ span.wms:before {
 
 div.add_layer_button {
   display: block;
-  width: 100%;
+  //width: 70%;
   height: 3em;
+  position: relative;
+  z-index: 11;
 }
 
 /*Seperate the list of tags with commas.*/
@@ -1181,6 +1183,26 @@ input.value-input {
 
 .togglebutton.opacity{
   margin-top:10px;
+  width: 20%;
+  z-index: 10;
+  position: relative;
+  min-height: 60px;
+  border-radius: .5em;
+  //font-size: .75em;
+  margin-bottom: 1em;
+  font-weight: 400;
+
+  #hide-layers {
+    background-color: #ffb74d;
+  }
+
+  #show-layers {
+    display: none;
+  }
+}
+
+.toggle {
+  margin: 0 .5em;
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
@@ -1192,12 +1214,16 @@ input.value-input {
   margin-top:-1px;
 }
 
+span.toggle_label {
+  font-size: .5em;
+}
+
 span.toggle_label:after {
-  content: 'Hide All Layers';
+  content: 'Hide Layers';
 }
 
 span.toggle_label.off:after {
-  content: 'Show All Layers';
+  content: 'Show Layers';
 }
 
 .toggle:after {
@@ -1392,3 +1418,44 @@ a.is-editing-project-button {
 .fail {
   text-align: center;
 }
+
+#all-raster-layers {
+  display: none;
+}
+
+.project-view {
+  a {
+    .mdi-editor-mode-edit {
+      color: darkgrey;
+    }
+  }
+}
+
+.project-edit {
+  a {
+    .mdi-editor-mode-edit {
+      color: lightgrey;
+    }
+  }
+}
+.project-title.project-edit {
+  background-color: #03a9f4;
+  h1 {
+    color: black;
+  }
+}
+
+
+// .list {
+//   display: block;
+//   z-index: 19;
+//   width: 65%;
+//   right: 0;
+//   background-color: white;
+//   float: right;
+//   position: relative;
+//   top: 0;
+//   clear: both;
+//   overflow: scroll;
+//   max-height: 100%;
+// }

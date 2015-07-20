@@ -25,9 +25,9 @@
 {{else}}
 
 	<div class="btn-group btn-group-justified">
-		<a {{action 'backToProjects' }} class="btn btn-default transparent-button">
-			<span class="mdi-navigation-arrow-back"></span>
-		</a>
+
+		{{#link-to 'projects' tagName='a' class="btn btn-default transparent-button"}}<span class="mdi-navigation-arrow-back"></span>{{/link-to}}
+
 		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
 			<span class="mdi-action-info-outline"></span>
 		</a>

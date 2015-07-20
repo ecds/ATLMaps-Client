@@ -1,7 +1,18 @@
+
 {{#if model.may_edit}}
+
+<div class="layer-controls">
+	<div class="project-title project-edit">
+		<h1>{{model.name}}</h1>
+
+			{{#link-to 'project.view' model}}
+				<span class="mdi-editor-mode-edit"></span>
+			{{/link-to}}
+	</div>
 {{!-- START EDIT PROJECT --}}
 
-	{{ project-nav mode='edit'}}
+	{{ project-nav mode='edit' model=model}}
+	{{ reorder-layers mode='edit' }}
 	
 
 	<div class="project-info project-info-edit card">
@@ -38,12 +49,12 @@
 
 		<div class="layer-list">
 			<div class="add_layer_button">
-				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal'}}><span class="mdi-large"></span>Add/Remove Layers</a>
+				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
 			</div>
 			<ul>
 			{{#each model.vector_layer_ids key="@index" as |layer|}}
 					<li>
-						<span class="{{layer.layer_type}} {{layer.layer}}">
+						<span class="geojson {{layer.layer}}">
 						</span>
 						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 						<div class="layer-info-detail {{layer.slug}}">
@@ -62,14 +73,15 @@
 		<div class="alert alert-success reorder-success">
 		    New Order Saved!
 		</div>
-		<div class="add_layer_button">
-			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal'}}><span class="mdi-large"></span>Add/Remove Layers</a>
+		<div class="add_layer_button pull-left">
+			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
 		</div>
+		{{ hide-all-raster-layers }}
 		<div class="layer-list list-group raster-list" id="layer_sort">
 			{{#each model.raster_layer_ids key="@index" as |layer|}}
-				<div class="list-group-item raster-layer" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+				<div class="list-group-item raster-layer {{layer.layer}}" id="{{layer.layer}}"  layer-id="{{layer.id}}">
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
-					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.id}}: {{layer.name}}</a>
+					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
 					<span class="handle pull-right">&varr;</span>
 					<div class="layer-info-detail {{layer.layer}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
@@ -85,12 +97,7 @@
 	</div>
 
 	<div class="controls controls-edit card">
-		<div class="togglebutton opacity">
-			<label>
-				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
-			</label>
-			<h3>Select Base Map</h3>
-		</div>
+		<h3>Select Base Map</h3>
 	</div>
 
 	<div class="collaborations collaborations-edit card">
@@ -99,53 +106,61 @@
 
 
 	{{!-- END EDIT PROJECT --}}
-
-
-	{{#if isShowingRasterModal}}
-
-  {{#modal-dialog close="toggleRasterModal" alignment="center" translucentOverlay=true}}
-    
-  <div class="list">
-	{{#if layers.isPending}}
-		Loading...
-	{{else}}
-	{{#each rasterLayers.content key="@index" as |layer|}}
-			<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
-				<div class="col-xs-2">
-					{{#if layer.active_in_project}}
-						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeRasterLayer" layer }}><span class="mdi-content-clear"></span></a>
-					{{else}}
-						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
-					{{/if}}
-					
-				</div>
-				<div class="col-xs-9">
-					<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.name}}</h4>
-					<p>
-      					<div class="description">{{layer.description}}</div>
-    				</p>
-    				<p>
-    					{{!--{{#if layer.tag_ids}}--}}
-    						<span class="tagsIcon"></span>
-							<ul class="list-inline">
-							{{#each layer.tag_ids key="@index" as |tag|}}
-									<li class="tags">
-										{{tag.name}}
-									</li>
-								{{else}}
-									<li>none</li>
-								{{/each}}
-							</ul>
-    					{{!--{{/if}--}}
-    				</p>
-				</div>
-			</div>
-		{{/each}}
-	{{/if}}
 </div>
 
 
-  {{/modal-dialog}}
+{{else}}
+<div class="card fail">
+<h2>You can't edit this!</h2>
+<img src="/assets/images/disappointed-face.png" alt="Disappointed Face"/>
+</div>
+{{/if}}
+
+
+    
+{{#if isShowingRasterModal}}
+
+	{{#modal-dialog close="toggleRasterModal" alignment="center" translucentOverlay=true}}
+
+		<div class="list">
+			{{#if layers.isPending}}
+				Loading...
+			{{else}}
+				{{#each rasterLayers.content key="@index" as |layer|}}
+					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+						<div class="col-xs-2">
+							{{#if layer.active_in_project}}
+								{{partial 'project/remove-raster-layer-button'}}
+							{{else}}
+								<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
+							{{/if}}
+
+						</div>
+						<div class="col-xs-9">
+							<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+							<p>
+								<div class="description">{{layer.description}}</div>
+							</p>
+							<p>
+								{{!--{{#if layer.tag_ids}}--}}
+									<span class="tagsIcon"></span>
+									<ul class="list-inline">
+										{{#each layer.tag_ids key="@index" as |tag|}}
+											<li class="tags">{{tag.name}}</li>
+										{{else}}
+											<li>none</li>
+										{{/each}}
+									</ul>
+								{{!--{{/if}--}}
+							</p>
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+	</div>
+
+
+	{{/modal-dialog}}
 {{/if}}
 
 
@@ -158,7 +173,7 @@
 		Loading...
 	{{else}}
 		{{#each vectorLayers.content key="@index" as |layer|}}
-			<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
+			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{#if layer.active_in_project}}
 						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeVectorLayer" layer }}><span class="mdi-content-clear"></span></a>
@@ -168,7 +183,7 @@
 					
 				</div>
 				<div class="col-xs-9">
-					<h4 class="name"><span class="{{layer.layer_type}} description_icon}}"></span> {{layer.name}}</h4>
+					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
 					<p>
       					<div class="description">{{layer.description}}</div>
     				</p>
@@ -194,10 +209,4 @@
 
 
   {{/modal-dialog}}
-{{/if}}
-{{else}}
-<div class="card fail">
-<h2>You can't edit this!</h2>
-<img src="/assets/images/disappointed-face.png" alt="Disappointed Face"/>
-</div>
 {{/if}}
