@@ -1,1 +1,36 @@
-{{yield}}
+{{#each projects key="@index" as |project|}}
+    <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
+        <div class="row-action-primary">
+            <i class="mdi-maps-map icon-lg"></i>
+        </div>
+        <div class="row-content">
+            <div class="action-secondary">
+
+            <i class="mdi-material-info"></i></div>
+            {{#if project.is_mine}}
+            	{{#if manageable}}
+	            <a class="btn show-options pull-right" {{action 'toggleOptions' project.id}}>
+	                <span class="mdi-navigation-more-vert"></span>
+	              </a>
+	              <div class="project-options card">
+	                <a class="action project-delete" {{action 'deleteProject' project.id}}>
+	                  <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
+	                </a>
+	              </div>
+	              {{/if}}
+              {{/if}}
+              <div class="pull-left">
+            <h4 class="list-group-item-heading">
+                {{#link-to 'project.view' project}}
+                {{project.name}}
+                {{/link-to}}
+            </h4>
+            <p class="list-group-item-text">{{project.description}}</p>
+            <h5>Created by: {{project.owner}}{{owner}}</h5>
+        </div>
+        </div>
+        <div class="list-group-separator"></div>
+    </div>
+{{else}}
+    <h5>{{alt}}</h5>
+{{/each}}

@@ -1251,9 +1251,18 @@ h4#showCollaborators a {
   color: rgb(119, 67, 208);
 }
 
+.btn.btn-info.btn-fab {
+  padding: 10px;
+}
+
 .btn.btn-fab, .btn.btn-fab .ripple-wrapper {
   border-radius: 100%;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)
+}
+
+.btn.show-options {
+  width: 5%;
+  padding: 0;
 }
 
 .project-info, .vector-data, .raster-layers, .controls, .collaborations {
@@ -1289,7 +1298,6 @@ h4#showCollaborators a {
 
 .list-group-item {
   border-bottom-color: rgb(219, 221, 226);
-  width: 100%;
   padding: .25em !important;
 
   a {
@@ -1299,6 +1307,10 @@ h4#showCollaborators a {
     vertical-align: top;
     width: 340px;
   }
+}
+
+.raster-layer {
+  width: 100%;
 }
 
 .project-title {

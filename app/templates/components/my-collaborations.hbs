@@ -1,1 +1,11 @@
-{{yield}}
+<header class="row">
+        <div class="col-sm-7">
+            <h2>
+                <span>Collaborations</span>
+            </h2>
+        </div>
+    </header>
+    <hr/>
+    <div class="list-group row">
+        {{list-projects projects=myCollaborations alt="No Collaborations"}}
+    </div>

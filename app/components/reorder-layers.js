@@ -6,11 +6,9 @@ export default Ember.Component.extend({
 	edit: false,
 
 	didInsertElement: function(){
-		console.log(this.get('edit'));
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}
-		console.log(this.get('edit'));
 		var el = document.getElementById("layer_sort");
 		var _this = this;
         Sortable.create(el, {
@@ -46,12 +44,9 @@ export default Ember.Component.extend({
 
 	actions: {
 		updateOrder: function(layers, layerCount) {
-			console.log(layers);
-			console.log(layerCount);
             var _this = this;
             Ember.$.each(layers, function(index, value){
                 var position = layerCount - index;
-                console.log(value+" => "+position);
 
                 _this.store.find('raster_layer_project', {
                     project_id: 24,
