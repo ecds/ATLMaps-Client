@@ -40,85 +40,85 @@ export default Ember.Controller.extend({
         
     actions: {
 
-        initProjectUI: function(model) {
+      //   initProjectUI: function(model) {
 
-            var _this = this;
+      //       var _this = this;
 
-            Ember.run.scheduleOnce('afterRender', function() {
+      //       Ember.run.scheduleOnce('afterRender', function() {
 
-                // Set up the map
-                var map = _this.globals.mapObject;
+      //           // Set up the map
+      //           var map = _this.globals.mapObject;
 
-                var osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-                    detectRetina: true
-                });
+      //           var osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      //               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
+      //               detectRetina: true
+      //           });
                 
-                var MapQuestOpen_Aerial = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-                    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-                    subdomains: '1234',
-                    detectRetina: true
-                });
+      //           var MapQuestOpen_Aerial = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+      //               attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
+      //               subdomains: '1234',
+      //               detectRetina: true
+      //           });
 
-                osm.addTo(map);
+      //           osm.addTo(map);
                         
-                var baseMaps = {
-                    "Street": osm,
-                    "Satellite": MapQuestOpen_Aerial
-                };        
+      //           var baseMaps = {
+      //               "Street": osm,
+      //               "Satellite": MapQuestOpen_Aerial
+      //           };        
                 
-                var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
-                control._map = map;
+      //           var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
+      //           control._map = map;
 
-                // We need to check if the layer controls are already added to the DOM.
-                if (Ember.$('.leaflet-control-layers').length === 0) {
-                    var controlDiv = control.onAdd(map);
-                    Ember.$('.controls').append(controlDiv);
-                }
+      //           // We need to check if the layer controls are already added to the DOM.
+      //           if (Ember.$('.leaflet-control-layers').length === 0) {
+      //               var controlDiv = control.onAdd(map);
+      //               Ember.$('.controls').append(controlDiv);
+      //           }
 
-                // Initiate the dragging of the marker info.
-                Ember.$('.draggable').draggabilly({
-                    handle: '.mdi-action-open-with'
-                });
+      //           // Initiate the dragging of the marker info.
+      //           Ember.$('.draggable').draggabilly({
+      //               handle: '.mdi-action-open-with'
+      //           });
 
-                var raster_layers = model.get('raster_layer_ids');
+      //           var raster_layers = model.get('raster_layer_ids');
 
-                Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
-                    var projectLayer = DS.PromiseObject.create({
-                        promise: _this.store.find('raster_layer', raster_layer_id.id)
-                    });
-
-                    projectLayer.then(function() {
-                        _this.send('opacitySlider', projectLayer);
-                    });
-                });
-
-            });
-
-            // Ember.run.later(this, function() {
-
-            //  var rasterLayerIDs = this.model.get('raster_layer_ids');
-
-            //  console.log(rasterLayerIDs.content.currentState);
-
-            //  Ember.$.each(rasterLayerIDs.content.currentState, function(index, layer_id) {
-      //               var rasterLayer = DS.PromiseObject.create({
-      //                   promise: _this.store.find('raster_layer', layer_id.id)
+      //           Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
+      //               var projectLayer = DS.PromiseObject.create({
+      //                   promise: _this.store.find('raster_layer', raster_layer_id.id)
       //               });
 
-      //               rasterLayer.then(function() {
-      //                //Ember.$(".slider."+rasterLayer.get('layer'))[0].destroy();
-      //                   _this.send('opacitySlider', rasterLayer);
+      //               projectLayer.then(function() {
+      //                   _this.send('opacitySlider', projectLayer);
       //               });
       //           });
 
-      //           var vectorLayerIDs = this.model.get('vector_layer_ids');
+      //       });
 
-            //  Ember.$.each(vectorLayerIDs.content.currentState, function(index, layer_id) {
-            //      console.log(layer_id.id);
-            //  });
-            // }, 1500);
-        },
+      //       // Ember.run.later(this, function() {
+
+      //       //  var rasterLayerIDs = this.model.get('raster_layer_ids');
+
+      //       //  console.log(rasterLayerIDs.content.currentState);
+
+      //       //  Ember.$.each(rasterLayerIDs.content.currentState, function(index, layer_id) {
+      // //               var rasterLayer = DS.PromiseObject.create({
+      // //                   promise: _this.store.find('raster_layer', layer_id.id)
+      // //               });
+
+      // //               rasterLayer.then(function() {
+      // //                //Ember.$(".slider."+rasterLayer.get('layer'))[0].destroy();
+      // //                   _this.send('opacitySlider', rasterLayer);
+      // //               });
+      // //           });
+
+      // //           var vectorLayerIDs = this.model.get('vector_layer_ids');
+
+      //       //  Ember.$.each(vectorLayerIDs.content.currentState, function(index, layer_id) {
+      //       //      console.log(layer_id.id);
+      //       //  });
+      //       // }, 1500);
+      //   },
 
         // mapLayer expects `layer` to be a layer object.
         mapLayer: function(layer, marker_color, position){
@@ -244,84 +244,58 @@ export default Ember.Controller.extend({
 
         },
 
-        opacitySlider: function(layer){
-            var _this = this;
+        // opacitySlider: function(layer){
+        //     var _this = this;
 
-            Ember.run.later(this, function() {
+        //     Ember.run.later(this, function() {
 
-                var options = {
-                    start: [ 10 ],
-                    connect: false,
-                    range: {
-                        'min': 0,
-                        'max': 10
-                    }
-                };
-                var slider = document.getElementById(layer.get('slider_id'));
+        //         var options = {
+        //             start: [ 10 ],
+        //             connect: false,
+        //             range: {
+        //                 'min': 0,
+        //                 'max': 10
+        //             }
+        //         };
+        //         var slider = document.getElementById(layer.get('slider_id'));
 
-                try {
-                    slider.noUiSlider.destroy();
-                }
-                catch(err){}
+        //         try {
+        //             slider.noUiSlider.destroy();
+        //         }
+        //         catch(err){}
 
-                noUiSlider.create(slider, options, true);
+        //         noUiSlider.create(slider, options, true);
 
-                var valueInput = document.getElementById(layer.get('slider_value_id'));
-                slider.noUiSlider.on('update', function(values, handle){
-                    valueInput.value = values[handle];
-                    var opacity = values[handle] / 10;
-                    Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
-                });
-                valueInput.addEventListener('change', function(){
-                    slider.noUiSlider.set(this.value);
-                });
+        //         var valueInput = document.getElementById(layer.get('slider_value_id'));
+        //         slider.noUiSlider.on('update', function(values, handle){
+        //             valueInput.value = values[handle];
+        //             var opacity = values[handle] / 10;
+        //             Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+        //         });
+        //         valueInput.addEventListener('change', function(){
+        //             slider.noUiSlider.set(this.value);
+        //         });
 
-                var hideLayersButton = document.getElementById('hide-layers');
-                    hideLayersButton.addEventListener('click', function(){
-                        slider.noUiSlider.set(0);
-                        Ember.$('button#hide-layers').hide();
-                        Ember.$('button#show-layers').show();
-                        _this.set('showingAllLayers', false);
-                });
+        //         var hideLayersButton = document.getElementById('hide-layers');
+        //             hideLayersButton.addEventListener('click', function(){
+        //                 slider.noUiSlider.set(0);
+        //                 Ember.$('button#hide-layers').hide();
+        //                 Ember.$('button#show-layers').show();
+        //                 _this.set('showingAllLayers', false);
+        //         });
 
-                var showLayersButton = document.getElementById('show-layers');
-                    showLayersButton.addEventListener('click', function(){
-                        slider.noUiSlider.set(10);
-                        Ember.$('button#hide-layers').show();
-                        Ember.$('button#show-layers').hide();
-                        _this.set('showingAllLayers', true);
-                });
+        //         var showLayersButton = document.getElementById('show-layers');
+        //             showLayersButton.addEventListener('click', function(){
+        //                 slider.noUiSlider.set(10);
+        //                 Ember.$('button#hide-layers').show();
+        //                 Ember.$('button#show-layers').hide();
+        //                 _this.set('showingAllLayers', true);
+        //         });
 
-            }, 2000);
-        },
+        //     }, 2000);
+        // },
 
-        colorIcons: function(layer, marker){
-            Ember.run.later(this, function() {
-                Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
-            }, 1500);
-        },
-
-        closeMarkerInfo: function() {
-            Ember.$("div.marker-data").hide();
-            Ember.$(".active_marker").removeClass("active_marker");
-        },
-
-        editProject: function(model) {
-            var _this = this;
-            var rasterLayers = model.get('raster_layer_ids');
-            Ember.$.each(rasterLayers.content.currentState, function(index, raster_layer_id){
-                var rasterLayer = DS.PromiseObject.create({
-                    promise: _this.store.find('raster_layer', raster_layer_id.id)
-                });
-
-                rasterLayer.then(function() {
-                    _this.send('opacitySlider', rasterLayer);
-                });
-            });
-            this.toggleProperty('isEditing');
-            this.send('initProjectUI', model);
-            model.rollback();
-        },
+        
         
     }
 });

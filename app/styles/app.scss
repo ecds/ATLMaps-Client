@@ -320,6 +320,7 @@ a.site-title .alt-dark{
       font-size: .75em;
       margin-left: 25px;
       padding-top: 1em;
+      min-height: 100px;
 
       img {
         width: 15px;
@@ -345,7 +346,14 @@ a.site-title .alt-dark{
   left: 0%;
   width: 420px;
   margin-left:30px;
-  //margin-top: 55px;
+  margin-top: 48px;
+
+  .btn-group{
+    &, & .btn{
+      border-radius:0;
+    }
+  }
+
 }
 
 .card, .marker-data{
@@ -965,7 +973,7 @@ img.layerMarker {
 }
 
 #filter_and_search {
-  display: none;
+  //display: none;
 }
 
 .publish_check {
@@ -1270,6 +1278,8 @@ h4#showCollaborators a {
   position: relative;
   width: 100%;
   border-radius: 2px;
+  border-top-left-radius:0;
+  border-top-right-radius:0;
   color: rgba(0, 0, 0, 0.84);
   background: #ffffff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
@@ -1293,7 +1303,28 @@ h4#showCollaborators a {
 
 .ember-modal-dialog {
   overflow: scroll;
-  max-width: 50%;
+  width: 50%;
+
+  .ember-view{
+    height: 25px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0px;
+  }
+
+  .list {
+    margin-top: 60px;
+  }
+
+  nav {
+    padding: 1em;
+
+    .search-field {
+      width: 500px;
+      left: 7px;
+    }
+  }
 }
 
 .list-group-item {
@@ -1307,6 +1338,28 @@ h4#showCollaborators a {
     vertical-align: top;
     width: 340px;
   }
+
+  .btn {
+    width: auto;
+    padding: .5em;
+  }
+
+  .edit-footer {
+    background-color: #F4F4F4;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin-left: -5px;
+    border-top-style: solid;
+    border-top-color: rgb(221, 221, 221);
+    border-top-width: thin;
+    //padding: .1em;
+
+    .btn-group {
+      margin: 0 !important;
+    }
+
+  }
 }
 
 .raster-layer {
@@ -1314,11 +1367,13 @@ h4#showCollaborators a {
 }
 
 .project-title {
-  width: 99.5%;
+  width: 100%;
   background-color: #f4f4f4;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 2px 0 -10px 2px;
+  margin: 2px 0 -10px 1px;
   border-radius: .25em;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
 
   h1 {
     padding-left: .5em;
@@ -1353,18 +1408,25 @@ h4#showCollaborators a {
 }
 
 .marker-data {
+
+  $max-height-marker-content:50em;
+
   display: none;
   margin: 0;
+  margin-top: -10px;
   padding: 0;
-  max-height: 50em;
-  resize: both;
+  max-height: $max-height-marker-content;
   overflow: auto;
+  resize: both;
+  z-index: 10000;
+
 
   .marker-content {
     padding: 1.5em;
     display:inline-block;
     height: inherit;
-    overflow: auto;
+    max-height: $max-height-marker-content;
+    overflow: scroll;
 
     ::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -1380,10 +1442,11 @@ h4#showCollaborators a {
 
 
   .panel-controls{
-    background-color: lightgrey;
-    padding: .25em 1em;
-    position:absolute;
+    background-color: white;
+    padding: .5em 1em;
+    position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
 
     .mdi-action-open-with {
@@ -1454,6 +1517,24 @@ a.is-editing-project-button {
   background-color: #03a9f4;
   h1 {
     color: black;
+  }
+}
+
+.remove-layer-button {
+  padding-right: 9px;
+  padding-top: 25px;
+
+  .btn-added.btn-fab.btn-sm {
+    width: 20px;
+    height: 20px;
+
+    .mdi-content-clear {
+      font-size: .75em;
+  margin: -2px;
+  top: 4px;
+  left: 5px;
+  position: absolute;
+    }
   }
 }
 

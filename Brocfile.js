@@ -43,6 +43,7 @@ app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
 app.import('bower_components/Sortable/Sortable.min.js');
 app.import('bower_components/draggabilly/dist/draggabilly.pkgd.min.js');
 app.import('bower_components/nouislider/distribute/nouislider.min.js');
+app.import('bower_components/list.js/dist/list.min.js');
 app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('vendor/js/menu/classie.js');
 app.import('vendor/js/menu/gnmenu.js');

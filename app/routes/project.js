@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals noUiSlider */
+/* globals noUiSlider, L */
 
 export default Ember.Route.extend({
 
@@ -88,8 +88,8 @@ export default Ember.Route.extend({
 
                         var list = Ember.$('#layer_sort');
                         var listItems = list.find('div.raster-layer').sort(function(a,b){
-                                return Ember.$(b).attr('data-position') - Ember.$(a).attr('data-position');
-                            });
+                            return Ember.$(b).attr('data-position') - Ember.$(a).attr('data-position');
+                        });
                         list.find('div.raster-layer').remove();
                         list.append(listItems);
                     });
@@ -117,7 +117,7 @@ export default Ember.Route.extend({
         		Ember.RSVP.allSettled(vectorPromises).then(function(){
 
         			// Good lord this is also really ugly.
-        			//var marker = vectorLayerProjectInfo.content.content[0]._data.marker;
+        			// var marker = vectorLayerProjectInfo.content.content[0]._data.marker;
                     var marker = vectorLayerProjectInfo.get('firstObject')._internalModel._data.marker;
 
         			controller.send('mapLayer',
@@ -126,9 +126,7 @@ export default Ember.Route.extend({
                         0
 	        		);
 
-	        		//Ember.run.scheduleOnce('afterRender', function() {
-	        			controller.send('colorIcons', vectorLayer, marker);
-	        		//});
+	        		_this.send('colorIcons', vectorLayer, marker);
 
 	        		
         		});
@@ -159,7 +157,7 @@ export default Ember.Route.extend({
                 
                 // Get the length of the layers and use that as
                 // the position.
-                var position = addedLayers.get('length');
+                var position = addedLayers.get('length') + 1;
 
                 var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
                     project_id: project_id,
@@ -181,7 +179,7 @@ export default Ember.Route.extend({
                     0,
                     position
                 );
-                // controller.send('initProjectUI', _this.modelFor('project'));
+
                 _this.send('initProjectUI', _this.modelFor('project'));
 
             });
@@ -244,7 +242,7 @@ export default Ember.Route.extend({
 
                     Ember.RSVP.allSettled(promises).then(function(){
                         var marker = savedMarker.content.content[0]._data.marker;
-                        controller.send('colorIcons', layer, marker);
+                        _this.send('colorIcons', layer, marker);
                     });
                 });
 
@@ -253,7 +251,7 @@ export default Ember.Route.extend({
                 });
 
                 newLayer.then(function(){
-                    controller.send('colorIcons', layer, marker);
+                    _this.send('colorIcons', layer, marker);
                 });
 
             });
@@ -291,7 +289,7 @@ export default Ember.Route.extend({
                 Ember.$(this).remove();
             });
 
-            var controller = _this.controllerFor('project');
+            //var controller = _this.controllerFor('project');
             // controller.send('initProjectUI', _this.modelFor('project'));
             this.send('initProjectUI', this.modelFor('project'));
 
@@ -463,6 +461,7 @@ export default Ember.Route.extend({
                     slider.noUiSlider.set(this.value);
                 });
 
+                // Watch the toggle check box to show/hide all raster layers.
                 var showHideSwitch = document.getElementById('toggle-layer-opacity');
                 showHideSwitch.addEventListener('click', function(){
                     if (Ember.$("input#toggle-layer-opacity").prop("checked")){
@@ -484,6 +483,34 @@ export default Ember.Route.extend({
                 Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
                 Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
             }
+        },
+
+        closeMarkerInfo: function() {
+            Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass("active_marker");
+        },
+
+        colorIcons: function(layer, marker){
+            Ember.run.later(this, function() {
+                Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
+            }, 1500);
+        },
+
+        editProject: function(model) {
+            var _this = this;
+            var rasterLayers = model.get('raster_layer_ids');
+            Ember.$.each(rasterLayers.content.currentState, function(index, raster_layer_id){
+                var rasterLayer = DS.PromiseObject.create({
+                    promise: _this.store.find('raster_layer', raster_layer_id.id)
+                });
+
+                rasterLayer.then(function() {
+                    _this.send('opacitySlider', rasterLayer);
+                });
+            });
+            this.toggleProperty('isEditing');
+            this.send('initProjectUI', model);
+            model.rollback();
         },
 
 

@@ -80,15 +80,23 @@
 		<div class="layer-list list-group raster-list" id="layer_sort">
 			{{#each model.raster_layer_ids key="@index" as |layer|}}
 				<div class="list-group-item raster-layer {{layer.layer}}" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
 					<span class="handle pull-right">&varr;</span>
+					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
-						<p class="list-group-item-text">{{layer.description}}</p>
+						
+						<article class="list-group-item-text">{{layer.description}}</article>
 						<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+
+						<div class="edit-footer">
+							<div class="text-right btn-group pull-right">
+								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeRasterLayer' layer}}><span class="mdi-action-delete"></span></a>
+							</div>
+						</div>
+
 					</div>
-					<input class="value-input {{layer.layer}}" id="{{layer.slider_value_id}}" />
-					<div class="slider {{layer.layer}} slider-material-orange-300" id="{{layer.slider_id}}" name="{{layer.layer}}"></div>
 				</div>
 			{{else}}
 				No scanned maps have been added.
@@ -121,7 +129,9 @@
 {{#if isShowingRasterModal}}
 
 	{{#modal-dialog close="toggleRasterModal" alignment="center" translucentOverlay=true}}
-
+	<div id="searchableRasterLayers">
+	{{filter-layers}}
+  {{filter-layers}}
 		<div class="list">
 			{{#if layers.isPending}}
 				Loading...
@@ -158,6 +168,7 @@
 				{{/each}}
 			{{/if}}
 	</div>
+	</div>
 
 
 	{{/modal-dialog}}
@@ -167,7 +178,8 @@
 {{#if isShowingVectorModal}}
 
   {{#modal-dialog close="toggleVectorModal" alignment="center" translucentOverlay=true}}
-    
+  <div id="searchableVectorLayers">  
+  {{filter-layers}}
   <div class="list">
 	{{#if layers.isPending}}
 		Loading...
@@ -206,7 +218,8 @@
 		{{/each}}
 	{{/if}}
 </div>
-
+</div>
 
   {{/modal-dialog}}
+
 {{/if}}
