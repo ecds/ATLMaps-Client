@@ -364,6 +364,7 @@ a.site-title .alt-dark{
   color: black;
   line-height: 1.5;
   margin: 1.5em;
+  min-width: 420px;
   max-width: 640px;
   padding: 15px 10px;
   top: 0;
@@ -1419,6 +1420,8 @@ h4#showCollaborators a {
   overflow: auto;
   resize: both;
   z-index: 10000;
+  margin: 163px 0 0 31px;
+  width: 420px;
 
 
   .marker-content {
@@ -1530,25 +1533,56 @@ a.is-editing-project-button {
 
     .mdi-content-clear {
       font-size: .75em;
-  margin: -2px;
-  top: 4px;
-  left: 5px;
-  position: absolute;
+      margin: -2px;
+      top: 4px;
+      left: 5px;
+      position: absolute;
     }
   }
+
 }
 
+#html-validator-loading {
+  width: 100% !important;
+  height: 100%;
+}
 
-// .list {
-//   display: block;
-//   z-index: 19;
-//   width: 65%;
-//   right: 0;
-//   background-color: white;
-//   float: right;
-//   position: relative;
-//   top: 0;
-//   clear: both;
-//   overflow: scroll;
-//   max-height: 100%;
-// }
+.loading {
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 0;
+    background-color: rgba(87, 84, 59, 0.46);
+    z-index: 2;
+    text-align: center;
+    margin-top: 0em;
+    height: 100%;
+
+    .ui-loader {
+      top: 30%;
+    width: 12.5em;
+    opacity: .88;
+    box-shadow: 0 1px 1px -1px #fff;
+    height: auto;
+    margin: 0 auto .625em;
+    padding: 1em;
+    background-color: #fff;
+    border-color: #ddd;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+    position: relative;
+    border-radius: .3125em;
+    }
+}
+
+.loading-icon {
+  background-image: url(/assets/images/ajax-loader.gif);
+  content: '';
+  width: 2.75em;
+  height: 2.75em;
+  display: block;
+  background-size: 2.875em 2.875em;
+  border-radius: 2.25em;
+  margin: 0 auto .625em;
+}

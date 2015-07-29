@@ -11,10 +11,12 @@ Router.map(function() {
         this.resource('project', { path: '/:project_id' }, function(){
             this.route('view');
             this.route('edit');
+            this.route('explore', {path: '/explore'});
         });
     });
   this.route('about');
   this.route('login');
+
 });
 
 export default Router;

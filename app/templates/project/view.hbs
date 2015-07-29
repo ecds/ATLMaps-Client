@@ -14,17 +14,11 @@
 	{{ project-nav mode='view' }}
 	{{ reorder-layers mode='view' }}
 
-	<div class="marker-data draggable">
-		<div class="panel-controls">
-			<span class="mdi-action-open-with"></span>
-			<a {{action "closeMarkerInfo" }}><span class="mdi-content-clear"></span></a>
-		</div>
-		<div class="marker-content"></div>
-	</div>
+	
 
 
 	<div class="project-info card">
-		<article>{{model.description}}</article>
+		<article>{{{model.description}}}</article>
 	</div>
 	<div class="vector-data card">
 
@@ -67,13 +61,16 @@
 	</div>
 
 	<div class="controls card">
-		<div class="togglebutton opacity">
-			<label>
-				<input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
-			</label>
-			<h3>Select Base Map</h3>
-		</div>
+		<h3>Select Base Map</h3>
 	</div>
 
 	{{!-- END VIEW PROJECT --}}
 </div>
+<div class="marker-data draggable">
+		<div class="panel-controls">
+			<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
+			<span class="mdi-action-open-with"></span>
+			<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
+		</div>
+		<div class="marker-content"></div>
+	</div>

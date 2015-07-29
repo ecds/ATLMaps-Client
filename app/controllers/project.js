@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-/* global L, Sortable, noUiSlider */
+/* globals L */
 
 
 export default Ember.Controller.extend({

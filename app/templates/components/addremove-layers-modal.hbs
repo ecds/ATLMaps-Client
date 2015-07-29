@@ -1,61 +1,68 @@
-	{{#if isShowingRasterModal}}
+<a {{action 'toggleModal'}}>Toggle modal</a>
+{{#if isShowingRasterModal}}
 
-  {{#modal-dialog close="toggleRasterModal" alignment="center" translucentOverlay=true}}
-    
-  <div class="list">
-	{{#if layers.isPending}}
-		Loading...
-	{{else}}
-	{{#each rasterLayers.content key="@index" as |layer|}}
-			<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
-				<div class="col-xs-2">
-					{{#if layer.active_in_project}}
-						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeRasterLayer" layer }}><span class="mdi-content-clear"></span></a>
-					{{else}}
-						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
-					{{/if}}
-					
-				</div>
-				<div class="col-xs-9">
-					<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.name}}</h4>
-					<p>
-      					<div class="description">{{layer.description}}</div>
-    				</p>
-    				<p>
-    					{{!--{{#if layer.tag_ids}}--}}
-    						<span class="tagsIcon"></span>
-							<ul class="list-inline">
-							{{#each layer.tag_ids key="@index" as |tag|}}
-									<li class="tags">
-										{{tag.name}}
-									</li>
-								{{else}}
-									<li>none</li>
-								{{/each}}
-							</ul>
-    					{{!--{{/if}--}}
-    				</p>
-				</div>
-			</div>
-		{{/each}}
-	{{/if}}
-</div>
+	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true}}
+	<div id="searchableRasterLayers">
+	{{filter-layers}}
+  {{filter-layers}}
+		<div class="list">
+			{{#if layers.isPending}}
+				Loading...
+			{{else}}
+				{{#each rasterLayers.content key="@index" as |layer|}}
+					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+						<div class="col-xs-2">
+							{{#if layer.active_in_project}}
+								{{partial 'project/remove-raster-layer-button'}}
+							{{else}}
+								<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
+							{{/if}}
+
+							<a class="btn rotate btn-added btn-fab btn-sm" {{action "add" layer='layer' }}><span class="mdi-content-clear"></span>!</a>
+
+							{{add-remove-layer-button action="addRasterLayer" layer=layer}}
+
+						</div>
+						<div class="col-xs-9">
+							<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+							<p>
+								<div class="description">{{layer.description}}</div>
+							</p>
+							<p>
+								{{!--{{#if layer.tag_ids}}--}}
+									<span class="tagsIcon"></span>
+									<ul class="list-inline">
+										{{#each layer.tag_ids key="@index" as |tag|}}
+											<li class="tags">{{tag.name}}</li>
+										{{else}}
+											<li>none</li>
+										{{/each}}
+									</ul>
+								{{!--{{/if}--}}
+							</p>
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+	</div>
+	</div>
 
 
-  {{/modal-dialog}}
+	{{/modal-dialog}}
 {{/if}}
 
 
 {{#if isShowingVectorModal}}
 
-  {{#modal-dialog close="toggleVectorModal" alignment="center" translucentOverlay=true}}
-    
+  {{#modal-dialog close="closeVectorModal" alignment="center" translucentOverlay=true}}
+  <div id="searchableVectorLayers">  
+  {{filter-layers}}
   <div class="list">
 	{{#if layers.isPending}}
 		Loading...
 	{{else}}
 		{{#each vectorLayers.content key="@index" as |layer|}}
-			<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
+			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{#if layer.active_in_project}}
 						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeVectorLayer" layer }}><span class="mdi-content-clear"></span></a>
@@ -65,7 +72,7 @@
 					
 				</div>
 				<div class="col-xs-9">
-					<h4 class="name"><span class="{{layer.layer_type}} description_icon}}"></span> {{layer.name}}</h4>
+					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
 					<p>
       					<div class="description">{{layer.description}}</div>
     				</p>
@@ -88,7 +95,8 @@
 		{{/each}}
 	{{/if}}
 </div>
-
+</div>
 
   {{/modal-dialog}}
+
 {{/if}}

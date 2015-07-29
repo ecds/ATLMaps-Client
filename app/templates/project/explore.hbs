@@ -1,48 +1,25 @@
 
-{{#if model.may_edit}}
-
 <div class="layer-controls">
-	<div class="project-title project-edit">
-		<h1>{{model.name}}{{layer-marker}}</h1>
-
-			{{#link-to 'project.view' model}}
-				<span class="mdi-editor-mode-edit"></span>
-			{{/link-to}}
+	<div class="project-title">
+		<h1>Explore</h1>
 	</div>
 {{!-- START EDIT PROJECT --}}
 
-	{{ project-nav mode='edit' model=model}}
-	{{ reorder-layers mode='edit' }}
+	{{ project-nav mode='explore' model=model}}
+	{{ reorder-layers mode='view' }}
 	
 
-	<div class="project-info project-info-edit card">
-
-		<div class="alert alert-success edit-info-success">
-		    Project Updated!
+<div class="marker-data draggable">
+		<div class="panel-controls">
+			<span class="mdi-action-open-with"></span>
+			<a {{action "closeMarkerInfo" }}><span class="mdi-content-clear"></span></a>
 		</div>
+		<div class="marker-content"></div>
+	</div>
 
-		<div class="form-group">
-			<label for="edit_name">Title for the Project</label>
-			{{input value=model.name name='name' id="edit_name" class="form-control h1"  }}
-		</div>
-		<div class="form-group">
-			<label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
-			{{textarea value=model.description id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
 
-			<div class="publish_check">
-				<div class="checkbox">
-					<label>
-						{{input type="checkbox" checked=model.published}}
-						<span class="check"></span>
-						Publish
-					</label>
-				</div>
-			</div>
-			<div class="text-right">
-				<a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
-				<a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
-			</div>
-		</div>
+	<div class="project-info card">
+		<article>Write something here about exploring the layers.</article>
 	</div>
 
 	<div class="vector-data vector-data-edit card">
@@ -50,7 +27,6 @@
 		<div class="layer-list">
 			<div class="add_layer_button">
 				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
-				{{addremove-layers-modal model=model type='vector' action='initProjectUI' add='addVectorLayer' remove='removeVectorLayer'}}
 			</div>
 			<ul>
 			{{#each model.vector_layer_ids key="@index" as |layer|}}
@@ -76,8 +52,6 @@
 		</div>
 		<div class="add_layer_button pull-left">
 			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
-
-			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}
 		</div>
 		{{ hide-all-raster-layers }}
 		<div class="layer-list list-group raster-list" id="layer_sort">
@@ -118,15 +92,6 @@
 
 	{{!-- END EDIT PROJECT --}}
 </div>
-
-
-{{else}}
-<div class="card fail">
-<h2>You can't edit this!</h2>
-<img src="/assets/images/disappointed-face.png" alt="Disappointed Face"/>
-</div>
-{{/if}}
-
 
     
 {{#if isShowingRasterModal}}

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals noUiSlider, L */
+/* globals noUiSlider, L, Draggabilly*/
 
 export default Ember.Route.extend({
 
@@ -9,9 +9,13 @@ export default Ember.Route.extend({
     },
 
     model: function(params) {
-        //var project = this.store.fetchById('project', params.project_id);
-        var project = this.store.findRecord('project', params.project_id);
-        return project;
+        if (params.project_id === 'explore') {
+            return this.store.findRecord('project', 24);
+        }
+        else {
+            return this.store.findRecord('project', params.project_id);
+        }
+        //return project;
     },
 
     afterModel: function() {
@@ -35,6 +39,7 @@ export default Ember.Route.extend({
 	        var controller = this.controllerFor('project');
 
             Ember.run.scheduleOnce('afterRender', function() {
+                console.log('yup');
 
                 var map = _this.globals.mapObject;
                 map.on('click', function(){
@@ -64,11 +69,10 @@ export default Ember.Route.extend({
                         })
                     });
 
-                    /*
-                        If we need to do anything to the promise objects we
-                        will need to add a `then` function. eg:
-                        `layer.then(function() {});`
-                    */
+
+                    // If we need to do anything to the promise objects we
+                    // will need to add a `then` function. eg:
+                    // `layer.then(function() {});`
 
                     // Make an array of the above promise objects.
                     var rasterPromises = [rasterLayer, rasterLayerProjectInfo];
@@ -78,12 +82,20 @@ export default Ember.Route.extend({
                     Ember.RSVP.allSettled(rasterPromises).then(function(){
                         var position = rasterLayerProjectInfo.content.content[0]._data.position;
 
-                        controller.send('mapLayer',
-                            rasterLayer,
-                            0,
-                            position
-                        );
+                        // Only add the to the map if it donesn't already exixt in the DOM
+                        // This is to prevent layers from adding more than one instance when
+                        // transitioning between veiw and edit.
+                        if (Ember.$('.atLayer.'+rasterLayer.get('layer')).length === 0) {
+                            controller.send('mapLayer',
+                                rasterLayer,
+                                0,
+                                position
+                            );
+                        }
 
+                        // Ember pulls from the cache and the so the order of the layers gets
+                        // messed up. So we add a `data-position` attribute that is with the
+                        // layer's positon in the current project and sort by it.
                         Ember.$('.raster-layer#'+rasterLayer.get('layer')).attr('data-position', position);
 
                         var list = Ember.$('#layer_sort');
@@ -120,11 +132,16 @@ export default Ember.Route.extend({
         			// var marker = vectorLayerProjectInfo.content.content[0]._data.marker;
                     var marker = vectorLayerProjectInfo.get('firstObject')._internalModel._data.marker;
 
-        			controller.send('mapLayer',
-	        			vectorLayer,
-	        			marker,
-                        0
-	        		);
+                    // Only add the to the map if it donesn't already exixt in the DOM
+                    // This is to prevent layers from adding more than one instance when
+                    // transitioning between veiw and edit.
+                    if (Ember.$('.atLayer.'+vectorLayer.get('layer')).length === 0) {
+            			controller.send('mapLayer',
+    	        			vectorLayer,
+    	        			marker,
+                            0
+    	        		);
+                    }
 
 	        		_this.send('colorIcons', vectorLayer, marker);
 
@@ -136,6 +153,7 @@ export default Ember.Route.extend({
 	    },
 
         addRasterLayer: function(layer) {
+            console.log(layer);
             var project_id = this.modelFor('project').get('id');
 
             layer.set('active_in_project', true);
@@ -256,7 +274,6 @@ export default Ember.Route.extend({
 
             });
             
-            // controller.send('initProjectUI', this.modelFor('project'));
             this.send('initProjectUI', this.modelFor('project'));
 
         },
@@ -369,7 +386,11 @@ export default Ember.Route.extend({
 
             var _this = this;
 
+            console.log('dang');
+
             Ember.run.scheduleOnce('afterRender', function() {
+
+                console.log('oh hi there');
 
                 // Set up the map
                 var map = _this.globals.mapObject;
@@ -401,10 +422,17 @@ export default Ember.Route.extend({
                     Ember.$('.controls').append(controlDiv);
                 }
 
-                // Initiate the dragging of the marker info.
-                Ember.$('.draggable').draggabilly({
+                // Iniatate the dragging
+                var draggie = new Draggabilly( '.draggable', {
                     handle: '.mdi-action-open-with'
                 });
+
+                // Draggabilly adds a style of position = relative to the
+                // element. This prevents the abality to click through where
+                // the div was. So we change it to absolute.
+                draggie.element.style.position = 'absolute';
+
+                draggie.on( 'dragStart', function( event, pointer ) {console.log(pointer);});
 
                 var raster_layers = model.get('raster_layer_ids');
 
@@ -423,14 +451,10 @@ export default Ember.Route.extend({
                     Ember.$( "span.toggle_label" ).toggleClass( "off" );
                 });
 
-                
-
-
             });
         },
 
         opacitySlider: function(layer){
-            //var _this = this;
 
             Ember.run.later(this, function() {
 
@@ -444,6 +468,9 @@ export default Ember.Route.extend({
                 };
                 var slider = document.getElementById(layer.get('slider_id'));
 
+                // The slider drops out when we transition but noUiSlider thinks
+                // the slider has already been initialized. So, if the slider is 
+                // "initalized", we destroy. Otherwise, we just initalize it.
                 try {
                     slider.noUiSlider.destroy();
                 }
@@ -451,6 +478,7 @@ export default Ember.Route.extend({
 
                 noUiSlider.create(slider, options, true);
 
+                // Change the opactity when a user moves the slider.
                 var valueInput = document.getElementById(layer.get('slider_value_id'));
                 slider.noUiSlider.on('update', function(values, handle){
                     valueInput.value = values[handle];
@@ -513,10 +541,10 @@ export default Ember.Route.extend({
             model.rollback();
         },
 
+        snapBack: function(){
+            Ember.$(".draggable").animate({left: '0', top:'0'}, 500);
+        }
 
     },
-
-    
-
     
 });

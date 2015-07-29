@@ -1,17 +1,67 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 export default Ember.Component.extend({
 	isShowingRasterModal: false,
 
     isShowingVectorModal: false,
 
+    sortProperties: ['name'],
+
+    rasterLayers: function() {
+
+        var rasterLayers = DS.PromiseObject.create({
+            promise: this.store.find('raster-layer', {projectID: this.get('model.id')})
+        });
+
+        rasterLayers.then(function(){
+            // Maybe remove a laoding gif?
+        });
+
+        return rasterLayers;
+
+
+    }.property(),
+
+    vectorLayers: function() {
+
+        var vectorLayers = DS.PromiseObject.create({
+            promise: this.store.find('vector-layer', {projectID: this.get('model.id')})
+        });
+
+        vectorLayers.then(function(){
+            // Maybe remove a laoding gif?
+        });
+
+        return vectorLayers;
+
+
+    }.property(),
+
     actions: {
-    	toggleRasterModal: function(){
-            this.toggleProperty('isShowingRasterModal');
+    	toggleModal: function(){
+
+            if (this.get('type') === 'raster') {
+                this.toggleProperty('isShowingRasterModal');
+            }
+            else if (this.get('type') === 'vector'){
+                this.toggleProperty('isShowingVectorModal');
+            }
+            this.sendAction('action', this.get('model'));
         },
 
-        toggleVectorModal: function(){
-            this.toggleProperty('isShowingVectorModal');
+        closeRasterModal: function(){
+            this.set('isShowingRasterModal', false);
         },
+
+        closeVectorModal: function(){
+            this.set('isShowingVectorModal', false);
+        },
+
+        addRasterLayer: function(layers){
+            console.log(layers);
+            this.sendAction('add', this.get('layer'));
+        }
+
     }
 });

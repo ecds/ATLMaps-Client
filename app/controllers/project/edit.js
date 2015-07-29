@@ -39,6 +39,7 @@ export default Ember.Controller.extend({
     actions: {
 
         toggleRasterModal: function(){
+            console.log('what');
             this.toggleProperty('isShowingRasterModal');
             var parentController = this.controllerFor('project');
             parentController.send('initProjectUI', this.model);
@@ -49,8 +50,8 @@ export default Ember.Controller.extend({
             this.toggleProperty('isShowingVectorModal');
             var parentController = this.controllerFor('project');
             Ember.run.later(this, function() {
-            parentController.send('initProjectUI', this.model);
-        }, 1500);
+                parentController.send('initProjectUI', this.model);
+            });
         }
     }
 });
