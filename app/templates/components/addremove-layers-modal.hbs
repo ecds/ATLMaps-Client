@@ -12,15 +12,8 @@
 				{{#each rasterLayers.content key="@index" as |layer|}}
 					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 						<div class="col-xs-2">
-							{{#if layer.active_in_project}}
-								{{partial 'project/remove-raster-layer-button'}}
-							{{else}}
-								<a class="btn rotate btn-add btn-fab btn-sm" {{action "addRasterLayer" layer }}><span class="mdi-content-add"></span></a>
-							{{/if}}
 
-							<a class="btn rotate btn-added btn-fab btn-sm" {{action "add" layer='layer' }}><span class="mdi-content-clear"></span>!</a>
-
-							{{add-remove-layer-button action="addRasterLayer" layer=layer}}
+							{{add-remove-layer-button action="sendRasterLayer" layer=layer}}
 
 						</div>
 						<div class="col-xs-9">

@@ -1,1 +1,5 @@
-<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" }}><span class="mdi-content-add"></span></a>
+{{#if layer.active_in_project}}
+remove
+{{else}}
+<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" layer="layer"}}><span class="mdi-content-add"></span></a>
+{{/if}}

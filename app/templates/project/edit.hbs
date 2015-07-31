@@ -1,9 +1,9 @@
-
+{{init-project-ui model=model}}
 {{#if model.may_edit}}
 
 <div class="layer-controls">
 	<div class="project-title project-edit">
-		<h1>{{model.name}}{{layer-marker}}</h1>
+		<h1>{{model.name}}</h1>
 
 			{{#link-to 'project.view' model}}
 				<span class="mdi-editor-mode-edit"></span>
@@ -226,3 +226,12 @@
   {{/modal-dialog}}
 
 {{/if}}
+
+<div class="marker-data draggable">
+	<div class="panel-controls">
+		<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
+		<span class="mdi-action-open-with"></span>
+		<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
+	</div>
+	<div class="marker-content"></div>
+</div>

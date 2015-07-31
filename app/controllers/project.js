@@ -150,6 +150,22 @@ export default Ember.Controller.extend({
 
                     break;
 
+                case 'atlTopo':
+
+                    console.log('***********hello***********');
+
+                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + layer.get('layer') + '/{z}/{x}/{y}.jpg', {
+                        layer: layer.get('layer'),
+                        tms: true,
+                        minZoom: 13,
+                        maxZoom: 19,
+                        detectRetina: true
+                    }).addTo(map).setZIndex(10).getContainer();
+
+                    Ember.$(topoTile).addClass(slug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+
+                    break;
+
                 case 'wms':
 
                     var wmsLayer = L.tileLayer.wms(institution.geoserver + layer.get('url') + '/wms', {

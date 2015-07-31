@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals noUiSlider, L, Draggabilly*/
 
 export default Ember.Route.extend({
 
@@ -41,19 +40,14 @@ export default Ember.Route.extend({
             Ember.run.scheduleOnce('afterRender', function() {
                 console.log('yup');
 
+                // just leaving this here so I remember how to do it.
                 var map = _this.globals.mapObject;
-                map.on('click', function(){
-                    Ember.$("div.info").remove();
-                    Ember.$("div.marker-data").hide();
-                    Ember.$(".active_marker").removeClass("active_marker");
-                });
+                console.log(map.getBounds());
 
                 var controller = _this.controllerFor('project');
 
                 // controller.send('initProjectUI', _this.modelFor('project'));
-                _this.send('initProjectUI', _this.modelFor('project'));
-
-                console.log(map.getBounds());
+                //_this.send('initProjectUI', _this.modelFor('project'));
 
     	        // Send some info to the ProjectController to 
     	        // add the raster layers.
@@ -153,6 +147,7 @@ export default Ember.Route.extend({
 	    },
 
         addRasterLayer: function(layer) {
+            console.log("print layer");
             console.log(layer);
             var project_id = this.modelFor('project').get('id');
 
@@ -384,123 +379,56 @@ export default Ember.Route.extend({
 
         initProjectUI: function(model) {
 
-            var _this = this;
-
-            console.log('dang');
-
-            Ember.run.scheduleOnce('afterRender', function() {
-
-                console.log('oh hi there');
-
-                // Set up the map
-                var map = _this.globals.mapObject;
-
-                var osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-                    detectRetina: true
-                });
-                
-                var MapQuestOpen_Aerial = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-                    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-                    subdomains: '1234',
-                    detectRetina: true
-                });
-
-                osm.addTo(map);
-                        
-                var baseMaps = {
-                    "Street": osm,
-                    "Satellite": MapQuestOpen_Aerial
-                };        
-                
-                var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
-                control._map = map;
-
-                // We need to check if the layer controls are already added to the DOM.
-                if (Ember.$('.leaflet-control-layers').length === 0) {
-                    var controlDiv = control.onAdd(map);
-                    Ember.$('.controls').append(controlDiv);
-                }
-
-                // Iniatate the dragging
-                var draggie = new Draggabilly( '.draggable', {
-                    handle: '.mdi-action-open-with'
-                });
-
-                // Draggabilly adds a style of position = relative to the
-                // element. This prevents the abality to click through where
-                // the div was. So we change it to absolute.
-                draggie.element.style.position = 'absolute';
-
-                draggie.on( 'dragStart', function( event, pointer ) {console.log(pointer);});
-
-                var raster_layers = model.get('raster_layer_ids');
-
-                Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
-                    var projectLayer = DS.PromiseObject.create({
-                        promise: _this.store.find('raster_layer', raster_layer_id.id)
-                    });
-
-                    projectLayer.then(function() {
-                        _this.send('opacitySlider', projectLayer);
-                    });
-                });
-
-                // Toggle the label for the show/hide all layers switch
-                Ember.$("input#toggle-layer-opacity").change(function(){
-                    Ember.$( "span.toggle_label" ).toggleClass( "off" );
-                });
-
-            });
+            
         },
 
         opacitySlider: function(layer){
 
-            Ember.run.later(this, function() {
+            // Ember.run.later(this, function() {
 
-                var options = {
-                    start: [ 10 ],
-                    connect: false,
-                    range: {
-                        'min': 0,
-                        'max': 10
-                    }
-                };
-                var slider = document.getElementById(layer.get('slider_id'));
+            //     var options = {
+            //         start: [ 10 ],
+            //         connect: false,
+            //         range: {
+            //             'min': 0,
+            //             'max': 10
+            //         }
+            //     };
+            //     var slider = document.getElementById(layer.get('slider_id'));
 
-                // The slider drops out when we transition but noUiSlider thinks
-                // the slider has already been initialized. So, if the slider is 
-                // "initalized", we destroy. Otherwise, we just initalize it.
-                try {
-                    slider.noUiSlider.destroy();
-                }
-                catch(err){}
+            //     // The slider drops out when we transition but noUiSlider thinks
+            //     // the slider has already been initialized. So, if the slider is 
+            //     // "initalized", we destroy. Otherwise, we just initalize it.
+            //     try {
+            //         slider.noUiSlider.destroy();
+            //     }
+            //     catch(err){}
 
-                noUiSlider.create(slider, options, true);
+            //     noUiSlider.create(slider, options, true);
 
-                // Change the opactity when a user moves the slider.
-                var valueInput = document.getElementById(layer.get('slider_value_id'));
-                slider.noUiSlider.on('update', function(values, handle){
-                    valueInput.value = values[handle];
-                    var opacity = values[handle] / 10;
-                    Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
-                });
-                valueInput.addEventListener('change', function(){
-                    slider.noUiSlider.set(this.value);
-                });
+            //     // Change the opactity when a user moves the slider.
+            //     var valueInput = document.getElementById(layer.get('slider_value_id'));
+            //     slider.noUiSlider.on('update', function(values, handle){
+            //         valueInput.value = values[handle];
+            //         var opacity = values[handle] / 10;
+            //         Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+            //     });
+            //     valueInput.addEventListener('change', function(){
+            //         slider.noUiSlider.set(this.value);
+            //     });
 
-                // Watch the toggle check box to show/hide all raster layers.
-                var showHideSwitch = document.getElementById('toggle-layer-opacity');
-                showHideSwitch.addEventListener('click', function(){
-                    if (Ember.$("input#toggle-layer-opacity").prop("checked")){
-                        slider.noUiSlider.set(10);
-                    }
-                    else{
-                        slider.noUiSlider.set(0);
-                    }
-                });
+            //     // Watch the toggle check box to show/hide all raster layers.
+            //     var showHideSwitch = document.getElementById('toggle-layer-opacity');
+            //     showHideSwitch.addEventListener('click', function(){
+            //         if (Ember.$("input#toggle-layer-opacity").prop("checked")){
+            //             slider.noUiSlider.set(10);
+            //         }
+            //         else{
+            //             slider.noUiSlider.set(0);
+            //         }
+            //     });
 
-            }, 2000);
+            // }, 2000);
         },
 
         showLayerInfoDetals: function(layer) {
@@ -524,25 +452,25 @@ export default Ember.Route.extend({
             }, 1500);
         },
 
-        editProject: function(model) {
-            var _this = this;
-            var rasterLayers = model.get('raster_layer_ids');
-            Ember.$.each(rasterLayers.content.currentState, function(index, raster_layer_id){
-                var rasterLayer = DS.PromiseObject.create({
-                    promise: _this.store.find('raster_layer', raster_layer_id.id)
-                });
+        // editProject: function(model) {
+        //     var _this = this;
+        //     var rasterLayers = model.get('raster_layer_ids');
+        //     Ember.$.each(rasterLayers.content.currentState, function(index, raster_layer_id){
+        //         var rasterLayer = DS.PromiseObject.create({
+        //             promise: _this.store.find('raster_layer', raster_layer_id.id)
+        //         });
 
-                rasterLayer.then(function() {
-                    _this.send('opacitySlider', rasterLayer);
-                });
-            });
-            this.toggleProperty('isEditing');
-            this.send('initProjectUI', model);
-            model.rollback();
-        },
+        //         rasterLayer.then(function() {
+        //             _this.send('opacitySlider', rasterLayer);
+        //         });
+        //     });
+        //     this.toggleProperty('isEditing');
+        //     this.send('initProjectUI', model);
+        //     model.rollback();
+        // },
 
         snapBack: function(){
-            Ember.$(".draggable").animate({left: '0', top:'0'}, 500);
+            Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
         }
 
     },

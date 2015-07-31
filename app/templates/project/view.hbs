@@ -1,3 +1,4 @@
+{{init-project-ui model=model}}
 <div class="layer-controls">
 	<div class="project-title project-view">
 		<h1>{{model.name}}</h1>
@@ -66,11 +67,12 @@
 
 	{{!-- END VIEW PROJECT --}}
 </div>
+
 <div class="marker-data draggable">
-		<div class="panel-controls">
-			<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
-			<span class="mdi-action-open-with"></span>
-			<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
-		</div>
-		<div class="marker-content"></div>
+	<div class="panel-controls">
+		<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
+		<span class="mdi-action-open-with"></span>
+		<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
 	</div>
+	<div class="marker-content"></div>
+</div>
