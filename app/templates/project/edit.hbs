@@ -49,7 +49,7 @@
 
 		<div class="layer-list">
 			<div class="add_layer_button">
-				<a class="btn btn-add add_layer_button" {{action 'toggleVectorModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
+				<!-- <a class="btn btn-add add_layer_button" {{action 'toggleVectorModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a> -->
 				{{addremove-layers-modal model=model type='vector' action='initProjectUI' add='addVectorLayer' remove='removeVectorLayer'}}
 			</div>
 			<ul>
@@ -75,7 +75,7 @@
 		    New Order Saved!
 		</div>
 		<div class="add_layer_button pull-left">
-			<a class="btn btn-add add_layer_button" {{action 'toggleRasterModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
+			<!-- <a class="btn btn-add add_layer_button" {{action 'toggleRasterModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a> -->
 
 			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}
 		</div>

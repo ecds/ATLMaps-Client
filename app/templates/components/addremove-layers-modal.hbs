@@ -1,4 +1,4 @@
-<a {{action 'toggleModal'}}>Toggle modal</a>
+<a class="btn btn-add add_layer_button" {{action 'toggleModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
 {{#if isShowingRasterModal}}
 
 	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true}}
@@ -13,7 +13,7 @@
 					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 						<div class="col-xs-2">
 
-							{{add-remove-layer-button action="sendRasterLayer" layer=layer}}
+							{{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=layer}}
 
 						</div>
 						<div class="col-xs-9">
@@ -57,11 +57,7 @@
 		{{#each vectorLayers.content key="@index" as |layer|}}
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
-					{{#if layer.active_in_project}}
-						<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeVectorLayer" layer }}><span class="mdi-content-clear"></span></a>
-					{{else}}
-						<a class="btn rotate btn-add btn-fab btn-sm" {{action "addVectorLayer" layer }}><span class="mdi-content-add"></span></a>
-					{{/if}}
+					{{add-remove-layer-button add="sendVectorLayerToAdd" remove="sendVectorLayerToRemove" layer=layer}}
 					
 				</div>
 				<div class="col-xs-9">

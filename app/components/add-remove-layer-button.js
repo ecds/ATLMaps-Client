@@ -6,7 +6,14 @@ export default Ember.Component.extend({
 			
 			var layer = this.get('layer');
 
-			this.sendAction('action', layer);
+			this.sendAction('add', layer);
+		},
+
+		removeLayer: function(){
+			
+			var layer = this.get('layer');
+
+			this.sendAction('remove', layer);
 		}
 	}
 });

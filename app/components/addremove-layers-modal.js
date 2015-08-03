@@ -58,8 +58,20 @@ export default Ember.Component.extend({
             this.set('isShowingVectorModal', false);
         },
 
-        sendRasterLayer: function(layer){
+        sendRasterLayerToAdd: function(layer){
             this.sendAction('add', layer);
+        },
+
+        sendRasterLayerToRemove: function(layer){
+            this.sendAction('remove', layer);
+        },
+
+        sendVectorLayerToAdd: function(layer){
+            this.sendAction('add', layer);
+        },
+
+        sendVectorLayerToRemove: function(layer){
+            this.sendAction('remove', layer);
         }
 
     }
