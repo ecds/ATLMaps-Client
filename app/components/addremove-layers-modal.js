@@ -48,6 +48,7 @@ export default Ember.Component.extend({
                 this.toggleProperty('isShowingVectorModal');
             }
             this.sendAction('action', this.get('model'));
+
         },
 
         closeRasterModal: function(){
@@ -66,7 +67,7 @@ export default Ember.Component.extend({
             this.sendAction('remove', layer);
         },
 
-        sendVectorLayerToAdd: function(layer){
+        sendRasterVectorLayerToAdd: function(layer){
             this.sendAction('add', layer);
         },
 

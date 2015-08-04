@@ -87,17 +87,7 @@ export default Ember.Route.extend({
                             );
                         }
 
-                        // Ember pulls from the cache and the so the order of the layers gets
-                        // messed up. So we add a `data-position` attribute that is with the
-                        // layer's positon in the current project and sort by it.
-                        Ember.$('.raster-layer#'+rasterLayer.get('layer')).attr('data-position', position);
-
-                        var list = Ember.$('#layer_sort');
-                        var listItems = list.find('div.raster-layer').sort(function(a,b){
-                            return Ember.$(b).attr('data-position') - Ember.$(a).attr('data-position');
-                        });
-                        list.find('div.raster-layer').remove();
-                        list.append(listItems);
+                        _this.send('orderRasterLayers');
                     });
                 });
 
@@ -145,59 +135,6 @@ export default Ember.Route.extend({
 	        });
 
 	    },
-
-        addRasterLayer: function(layer) {
-            console.log("print layer");
-            console.log(layer);
-            var project_id = this.modelFor('project').get('id');
-
-            layer.set('active_in_project', true);
-            //this.toggleProperty('active_in_project');
-
-            // Here we use `unshiftObject` instead of `pushObject` to prepend
-            // the new layer to the list of layers.
-            this.modelFor('project').get('raster_layer_ids').unshiftObject(layer);
-
-            var _this = this;
-
-            var addedLayers = DS.PromiseObject.create({
-                promise: _this.store.find('raster-layer-project', {
-                    project_id: project_id
-                })
-            });
-
-            addedLayers.then(function() {
-                
-                // Get the length of the layers and use that as
-                // the position.
-                var position = addedLayers.get('length') + 1;
-
-                var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
-                    project_id: project_id,
-                    raster_layer_id: layer.get('id'),
-                    layer_type: layer.get('layer_type'),
-                    position: position
-                });
-
-                rasterLayerProject.save();
-
-
-                // Send the layer to the action on the controller
-                // to add it to the map.
-                // The `mapLayer` action expects a parameter for
-                // the marker so the `0` is a placeholder.
-                var controller = _this.controllerFor('project');
-                controller.send('mapLayer',
-                    layer,
-                    0,
-                    position
-                );
-
-                _this.send('initProjectUI', _this.modelFor('project'));
-
-            });
-        
-        },
 
         addVectorLayer: function(layer){
 
@@ -269,43 +206,43 @@ export default Ember.Route.extend({
 
             });
             
-            this.send('initProjectUI', this.modelFor('project'));
+            //this.send('initProjectUI', this.modelFor('project'));
 
         },
 
-        remvoeRasterLayer: function(layer){
-            layer.set('active_in_project', false);
-            var projectID = this.modelFor('project').get('id');
-            var layerID = layer.get('id');
-            var layerClass = layer.get('layer');
-            var _this = this;
+        // remvoeRasterLayer: function(layer){
+        //     layer.set('active_in_project', false);
+        //     var projectID = this.modelFor('project').get('id');
+        //     var layerID = layer.get('id');
+        //     var layerClass = layer.get('layer');
+        //     var _this = this;
 
-            this.modelFor('project').get('raster_layer_ids').removeObject(layer);
+        //     this.modelFor('project').get('raster_layer_ids').removeObject(layer);
 
-            var rasterLayerProject = DS.PromiseObject.create({
-                promise: this.store.find('raster_layer_project', {
-                    raster_layer_id: layerID, project_id: projectID
-                })
-            });
+        //     var rasterLayerProject = DS.PromiseObject.create({
+        //         promise: this.store.find('raster_layer_project', {
+        //             raster_layer_id: layerID, project_id: projectID
+        //         })
+        //     });
 
-            rasterLayerProject.then(function(){
-                var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
+        //     rasterLayerProject.then(function(){
+        //         var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
 
-                _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
-                    rasterLayerProject.destroyRecord().then(function(){});
-                });
-            });
+        //         _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+        //             rasterLayerProject.destroyRecord().then(function(){});
+        //         });
+        //     });
 
-            // Remove the layer from the map
-            Ember.$("."+layerClass).fadeOut( 500, function() {
-                Ember.$(this).remove();
-            });
+        //     // Remove the layer from the map
+        //     Ember.$("."+layerClass).fadeOut( 500, function() {
+        //         Ember.$(this).remove();
+        //     });
 
-            //var controller = _this.controllerFor('project');
-            // controller.send('initProjectUI', _this.modelFor('project'));
-            this.send('initProjectUI', this.modelFor('project'));
+        //     //var controller = _this.controllerFor('project');
+        //     // controller.send('initProjectUI', _this.modelFor('project'));
+        //     this.send('initProjectUI', this.modelFor('project'));
 
-        },
+        // },
 
         removeRasterLayer: function(layer){
             layer.set('active_in_project', false);
@@ -377,12 +314,9 @@ export default Ember.Route.extend({
 
         },
 
-        initProjectUI: function(model) {
+        
 
-            
-        },
-
-        opacitySlider: function(layer){
+        //opacitySlider: function(layer){
 
             // Ember.run.later(this, function() {
 
@@ -429,7 +363,7 @@ export default Ember.Route.extend({
             //     });
 
             // }, 2000);
-        },
+        //},
 
         showLayerInfoDetals: function(layer) {
             if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
@@ -471,6 +405,16 @@ export default Ember.Route.extend({
 
         snapBack: function(){
             Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
+        },
+
+        orderRasterLayers: function(){
+            // This sorts all the raster layers by the `data-position` attribute.
+            var list = Ember.$('#layer_sort');
+            var listItems = list.find('div.raster-layer').sort(function(a,b){
+                return Ember.$(b).attr('data-position') - Ember.$(a).attr('data-position');
+            });
+            list.find('div.raster-layer').remove();
+            list.append(listItems);
         }
 
     },

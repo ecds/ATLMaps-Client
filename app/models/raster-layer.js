@@ -23,5 +23,6 @@ export default DS.Model.extend({
     marker: DS.attr(),
     active_in_project: DS.attr('boolean'),
     slider_id: DS.attr('string'),
-    slider_value_id: DS.attr('string')
+    slider_value_id: DS.attr('string'),
+    position_in_project: DS.attr('')
 });

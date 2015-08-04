@@ -126,6 +126,11 @@ export default Ember.Controller.extend({
             var slug = layer.get('layer');
             var map = this.globals.mapObject;
 
+            // Ember pulls from the cache and the so the order of the layers gets
+            // messed up. So we add a `data-position` attribute that is with the
+            // layer's positon in the current project and sort by it.
+            Ember.$('.raster-layer#'+slug).attr('data-position', position);
+
             var institution = layer.get('institution');
 
             var markerColor = this.globals.color_options[marker_color];
@@ -151,8 +156,6 @@ export default Ember.Controller.extend({
                     break;
 
                 case 'atlTopo':
-
-                    console.log('***********hello***********');
 
                     var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + layer.get('layer') + '/{z}/{x}/{y}.jpg', {
                         layer: layer.get('layer'),

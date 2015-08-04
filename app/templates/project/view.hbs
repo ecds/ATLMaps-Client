@@ -1,4 +1,3 @@
-{{init-project-ui model=model}}
 <div class="layer-controls">
 	<div class="project-title project-view">
 		<h1>{{model.name}}</h1>
@@ -47,7 +46,7 @@
 		{{#each model.raster_layer_ids key="@index" as |layer|}}
 				<div class="list-group-item raster-layer" id="{{layer.layer}}">
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
-					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
+					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.id}}: {{layer.name}}</a>
 					<span class="handle pull-right">&varr;</span>
 					<div class="layer-info-detail {{layer.layer}}">
 						<p class="list-group-item-text">{{layer.description}}</p>

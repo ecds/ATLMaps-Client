@@ -6,6 +6,7 @@
 @import 'gn-menu.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
+@import 'modal.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
@@ -1585,4 +1586,13 @@ a.is-editing-project-button {
   background-size: 2.875em 2.875em;
   border-radius: 2.25em;
   margin: 0 auto .625em;
+}
+
+// sytle the lines, we need to add some class to the svgs
+.foo {
+  &> g{
+   &> path {
+    stroke: green;
+   }
+  }
 }

@@ -8,6 +8,8 @@ export default Ember.Component.extend({
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}
+
+        this.sendAction('action', this.get('model'));
 	},
 
 	actions: {

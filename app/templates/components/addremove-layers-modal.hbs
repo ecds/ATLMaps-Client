@@ -3,8 +3,7 @@
 
 	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true}}
 	<div id="searchableRasterLayers">
-	{{filter-layers}}
-  {{filter-layers}}
+		{{filter-layers}}
 		<div class="list">
 			{{#if layers.isPending}}
 				Loading...
@@ -37,7 +36,7 @@
 					</div>
 				{{/each}}
 			{{/if}}
-	</div>
+		</div>
 	</div>
 
 
@@ -89,3 +88,5 @@
   {{/modal-dialog}}
 
 {{/if}}
+
+{{init-project-ui model=model}}
