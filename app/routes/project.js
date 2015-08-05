@@ -38,7 +38,7 @@ export default Ember.Route.extend({
 	        var controller = this.controllerFor('project');
 
             Ember.run.scheduleOnce('afterRender', function() {
-                console.log('yup');
+                _this.send('initProjectUI', _this.modelFor('project'));
 
                 // just leaving this here so I remember how to do it.
                 var map = _this.globals.mapObject;

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 			this.set('edit', true);
 		}
 
-        this.sendAction('action', this.get('model'));
+        // this.sendAction('action', this.get('model'));
 	},
 
 	actions: {

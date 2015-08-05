@@ -4,9 +4,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     didInsertElement: function() {
-        
-        // Most of the map set up is in the `initProjectUI` action
-        // in the `project` controller.
 
         var _map = L.map('map', {
             center: [33.7489954,-84.3879824],

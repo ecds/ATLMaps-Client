@@ -4,6 +4,7 @@ export default Ember.Route.extend({
 
 
 	actions: {
+
 		updateProjectInfo: function(model) {
             model.save();
             Ember.$(".edit-info-success").slideToggle().delay(2500).slideToggle();

@@ -9,7 +9,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 		initProjectUI: function(model) {
             var _this = this;
 
-            Ember.run.scheduleOnce('afterRender', function() {
+            //Ember.run.scheduleOnce('afterRender', function() {
 
 
                 // Set up the map
@@ -80,7 +80,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     Ember.$( "span.toggle_label" ).toggleClass( "off" );
                 });
 
-            });
+            //});
             
         },
 
@@ -135,18 +135,24 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 try {
                 	noUiSlider.create(slider, options, true);
                 }
-            catch(err){/* again, don't care*/}
+            	catch(err){/* again, don't care*/}
 
                 // Change the opactity when a user moves the slider.
                 var valueInput = document.getElementById(layer.get('slider_value_id'));
-                slider.noUiSlider.on('update', function(values, handle){
-                    valueInput.value = values[handle];
-                    var opacity = values[handle] / 10;
-                    Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
-                });
-                valueInput.addEventListener('change', function(){
-                    slider.noUiSlider.set(this.value);
-                });
+                try {
+	                slider.noUiSlider.on('update', function(values, handle){
+	                    valueInput.value = values[handle];
+	                    var opacity = values[handle] / 10;
+	                    Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+	                });
+	            }
+	        	catch(err){/* still don't care */}
+	        	try {
+	                valueInput.addEventListener('change', function(){
+	                    slider.noUiSlider.set(this.value);
+	                });
+	            }
+	        	catch(err){/* still no fucks to give */}
 
                 // Watch the toggle check box to show/hide all raster layers.
                 var showHideSwitch = document.getElementById('toggle-layer-opacity');
@@ -185,8 +191,12 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // Get the length of the layers and use that as
                 // the position.
                 //var position = addedLayers.get('length') + 1;
-                var position = parseInt(Ember.$("[data-position]").attr('data-position')) + 1;
-
+                var position = 0;
+                var newPosition = parseInt(Ember.$("[data-position]").attr('data-position')) + 1;
+                if (!isNaN(newPosition)) {
+                    position = newPosition;
+                }
+                console.log(position);
                 var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
                     project_id: project_id,
                     raster_layer_id: layer.get('id'),

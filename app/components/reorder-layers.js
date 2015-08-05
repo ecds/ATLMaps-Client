@@ -36,20 +36,20 @@ export default Ember.Component.extend({
                         layerIDs.push(Ember.$(this).attr("layer-id"));
                     });
 
-                    _this.send('updateOrder', layerIDs, layerIDs.length);
+                    _this.send('updateOrder', layerIDs, layerIDs.length, _this.get('model'));
                 }
             }
         });
 	},
 
 	actions: {
-		updateOrder: function(layers, layerCount) {
+		updateOrder: function(layers, layerCount, model) {
             var _this = this;
             Ember.$.each(layers, function(index, value){
                 var position = layerCount - index;
 
                 _this.store.find('raster_layer_project', {
-                    project_id: 24,
+                    project_id: model.id,
                     raster_layer_id: value
                 }).then(function(rasterLayerProject){
                     var  bar = rasterLayerProject.get('firstObject');

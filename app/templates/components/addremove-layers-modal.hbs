@@ -2,15 +2,18 @@
 {{#if isShowingRasterModal}}
 
 	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true}}
+
 	<div id="searchableRasterLayers">
-		{{filter-layers}}
+		{{filter-layers action="closeRasterModal"}}
 		<div class="list">
-			{{#if layers.isPending}}
-				Loading...
+			{{#if rasterLayers.isPending}}
+				<div class="modal-loading" id="raster-modal">
+					<img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
+				</div>
 			{{else}}
 				{{#each rasterLayers.content key="@index" as |layer|}}
 					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
-						<div class="col-xs-2">
+						<div class="col-xs-2 remove-layer-button">
 
 							{{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=layer}}
 
@@ -46,13 +49,16 @@
 
 {{#if isShowingVectorModal}}
 
-  {{#modal-dialog close="closeVectorModal" alignment="center" translucentOverlay=true}}
+  {{#modal-dialog close="closeVectorModal" alignment="left" translucentOverlay=true}}
   <div id="searchableVectorLayers">  
-  {{filter-layers}}
+  {{filter-layers action="closeVectorModal"}}
+  
   <div class="list">
-	{{#if layers.isPending}}
-		Loading...
-	{{else}}
+  		{{#if vectorLayers.isPending}}
+  			<div class="modal-loading" id="vector-modal">
+				<img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
+			</div>
+  		{{else}}
 		{{#each vectorLayers.content key="@index" as |layer|}}
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
@@ -81,12 +87,10 @@
 				</div>
 			</div>
 		{{/each}}
-	{{/if}}
+		{{/if}}
 </div>
 </div>
 
   {{/modal-dialog}}
 
 {{/if}}
-
-{{init-project-ui model=model}}

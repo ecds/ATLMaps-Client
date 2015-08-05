@@ -8,8 +8,6 @@ export default Ember.Component.extend({
         // 
         Ember.$(".layer-search").focus(function(){
 
-            console.log("hello");
-
             var options = {
                 valueNames: [ 'name', 'description' ],
             };
@@ -22,7 +20,9 @@ export default Ember.Component.extend({
     },
 
     actions: {
-
+        close: function() {
+            this.sendAction('action');
+        }
     }
 
 });

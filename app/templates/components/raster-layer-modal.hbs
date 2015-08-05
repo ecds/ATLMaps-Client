@@ -1,0 +1,41 @@
+<a class="btn btn-add add_layer_button" {{action 'show' model}}><span class="mdi-large"></span>{{showingRasterList}}</a>
+
+<div class="modal">
+
+	<div class="modal-loading">
+		Loading...
+	</div>
+	<a {{action 'closeModal'}} title="Close">X</a>
+	<div id="searchableRasterLayers">
+		{{filter-layers}}
+		<div class="list">
+				{{#each rasterLayers.content key="@index" as |layer|}}
+					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+						<div class="col-xs-2">
+
+							{{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=layer}}
+
+						</div>
+						<div class="col-xs-9">
+							<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+							<p>
+								<div class="description">{{layer.description}}</div>
+							</p>
+							<p>
+								{{!--{{#if layer.tag_ids}}--}}
+									<span class="tagsIcon"></span>
+									<ul class="list-inline">
+										{{#each layer.tag_ids key="@index" as |tag|}}
+											<li class="tags">{{tag.name}}</li>
+										{{else}}
+											<li>none</li>
+										{{/each}}
+									</ul>
+								{{!--{{/if}--}}
+							</p>
+						</div>
+					</div>
+				{{/each}}
+		</div>
+	</div>
+</div>
