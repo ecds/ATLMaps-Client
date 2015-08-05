@@ -169,14 +169,20 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
-            var project_id = this.modelFor('project').get('id');
+            // Get the current route so we handel requests coming from both
+            // `explore` and `project.edit`
+            var route = this.controller.currentRouteName;
+            // But we don't want the `.edit` junk on `route` when doing lookups.
+            route = route.replace('\.edit', '');
+            
+            var project_id = this.modelFor(route).get('id');
 
             layer.set('active_in_project', true);
             //this.toggleProperty('active_in_project');
 
             // Here we use `unshiftObject` instead of `pushObject` to prepend
             // the new layer to the list of layers.
-            this.modelFor('project').get('raster_layer_ids').unshiftObject(layer);
+            this.modelFor(route).get('raster_layer_ids').unshiftObject(layer);
 
             var _this = this;
 
@@ -188,9 +194,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             addedLayers.then(function() {
                 
-                // Get the length of the layers and use that as
-                // the position.
-                //var position = addedLayers.get('length') + 1;
+                // To get the position, 
                 var position = 0;
                 var newPosition = parseInt(Ember.$("[data-position]").attr('data-position')) + 1;
                 if (!isNaN(newPosition)) {
@@ -223,5 +227,191 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             });
         
         },
+
+        addVectorLayer: function(layer){
+
+            // Get the current route so we handel requests coming from both
+            // `explore` and `project.edit`
+            var route = this.controller.currentRouteName;
+            // But we don't want the `.edit` junk on `route` when doing lookups.
+            route = route.replace('\.edit', '');
+
+            var project_id = this.modelFor(route).get('id');
+
+            layer.set('active_in_project', true);
+
+            // Here we use `unshiftObject` instead of `pushObject` to prepend
+            // the new layer to the list of layers.
+            this.modelFor(route).get('vector_layer_ids').unshiftObject(layer);
+
+            var _this = this;
+
+            var controller = _this.controllerFor('project');
+            var colors = _this.globals.color_options;
+            var marker = Math.floor((Math.random() * colors.length) + 1);
+            var projectID = _this.get('controller.model.id');
+
+            var vectorLayerProject = _this.store.createRecord('vector_layer_project', {
+                project_id: projectID,
+                vector_layer_id: layer.get('id'),
+                marker: marker,
+                layer_type: layer.get('layer_type'),
+            });
+
+            vectorLayerProject.save();
+
+            controller.send('mapLayer',
+                layer,
+                marker,
+                0
+            );
+
+            var addedLayers = DS.PromiseObject.create({
+                promise: _this.store.find('vector_layer_project', {
+                    project_id: project_id
+                })
+            });
+
+            addedLayers.then(function() {
+
+                Ember.$.each(addedLayers.content.content, function(index, layer_id) {
+
+                    var layer = DS.PromiseObject.create({
+                        promise: _this.store.find('layer', layer_id._data.vector_layer_id)
+                    });
+
+                    var savedMarker = DS.PromiseObject.create({
+                        promise: _this.store.find('vector_layer_project', {
+                            project_id: project_id, vector_layer_id: layer_id._data.vector_layer_id
+                        })
+                    });
+
+                    var promises = [layer, savedMarker];
+
+                    Ember.RSVP.allSettled(promises).then(function(){
+                        var marker = savedMarker.content.content[0]._data.marker;
+                        _this.send('colorIcons', layer, marker);
+                    });
+                });
+
+                var newLayer = DS.PromiseObject.create({
+                    promise: _this.store.find('layer', layer.get('id'))
+                });
+
+                newLayer.then(function(){
+                    _this.send('colorIcons', layer, marker);
+                });
+
+            });
+
+        },
+
+        removeRasterLayer: function(layer){
+            // Get the current route so we handel requests coming from both
+            // `explore` and `project.edit`
+            var route = this.controller.currentRouteName;
+            // But we don't want the `.edit` junk on `route` when doing lookups.
+            route = route.replace('\.edit', '');
+
+            layer.set('active_in_project', false);
+            var projectID = this.modelFor(route).get('id');
+            var layerID = layer.get('id');
+            var layerClass = layer.get('layer');
+
+            var _this = this;
+
+            this.modelFor(route).get('raster_layer_ids').removeObject(layerID);
+
+            var rasterLayerProject = DS.PromiseObject.create({
+                promise: this.store.find('raster_layer_project', {
+                    raster_layer_id: layerID, project_id: projectID
+                })
+            });
+
+            rasterLayerProject.then(function(){
+                var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
+
+                _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+                    rasterLayerProject.destroyRecord().then(function(){});
+                });
+            });
+
+            // Remove the layer from the map
+            Ember.$("."+layerClass).fadeOut( 500, function() {
+                Ember.$(this).remove();
+            });
+
+            // var controller = _this.controllerFor('project');
+            // controller.send('initProjectUI', _this.modelFor('project'));
+            this.send('initProjectUI', this.modelFor('project'));
+
+        },
+
+        removeVectorLayer: function(layer){
+            // Get the current route so we handel requests coming from both
+            // `explore` and `project.edit`
+            var route = this.controller.currentRouteName;
+            // But we don't want the `.edit` junk on `route` when doing lookups.
+            route = route.replace('\.edit', '');
+
+            var projectID = this.modelFor(route).get('id');
+            layer.set('active_in_project', false);
+            var layerID = layer.get('id');
+            var layerClass = layer.get('layer');
+
+            var _this = this;
+
+            this.modelFor(route).get('vector_layer_ids').removeObject(layer);
+
+            var vectorLayerProject = DS.PromiseObject.create({
+                promise: this.store.find('vector_layer_project', {
+                    vector_layer_id: layerID, project_id: projectID
+                })
+            });
+
+            vectorLayerProject.then(function(){
+                var vectorLayerProjectID = vectorLayerProject.get('content.content.0.id');
+
+                _this.store.find('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
+                    vectorLayerProject.destroyRecord().then(function(){});
+                });
+            });
+
+            // Remove the layer from the map
+            Ember.$(".leaflet-marker-icon."+layerClass).fadeOut( 500, function() {
+                Ember.$(this).remove();
+            });
+
+            // var controller = _this.controllerFor('project');
+            // controller.send('initProjectUI', _this.modelFor('project'));
+            this.send('initProjectUI', this.modelFor('project'));
+
+        },
+
+        showLayerInfoDetals: function(layer) {
+            if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+            }
+            else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+                Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
+            }
+        },
+
+        closeMarkerInfo: function() {
+            Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass("active_marker");
+        },
+
+        colorIcons: function(layer, marker){
+            Ember.run.later(this, function() {
+                Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
+            }, 1500);
+        },
+
+        snapBack: function(){
+            Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
+        },
+
  	}
 });

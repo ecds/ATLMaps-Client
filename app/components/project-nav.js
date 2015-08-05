@@ -8,6 +8,12 @@ export default Ember.Component.extend({
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}
+        else if (this.get('mode') === 'view'){
+            this.set('view', true);
+        }
+        else if (this.get('mode') === 'explore'){
+            this.set('explore', true);
+        }
 
         // this.sendAction('action', this.get('model'));
 	},

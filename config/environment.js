@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
 
-  var apiHost = 'http://api.atlmaps-dev.org';
+  var apiHost = 'http://api.atlmaps-dev.com:3000';
 
   var ENV = {
     modulePrefix: 'atlmaps',

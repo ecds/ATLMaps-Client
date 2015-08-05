@@ -22,7 +22,9 @@
 
 	</div>
 
-{{else}}
+{{/if}}
+
+{{#if this.view}}
 
 	<div class="btn-group btn-group-justified">
 
@@ -31,6 +33,29 @@
 		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
 			<span class="mdi-action-info-outline"></span>
 		</a>
+	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
+	    	<span class="mdi-maps-place"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers">
+	    	<span class="mdi-maps-layers"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls">
+	    	<span class="mdi-image-tune"></span>
+	    </a>
+	</div>
+	
+{{/if}}
+
+{{#if this.explore}}
+
+	<div class="btn-group btn-group-justified">
+
+		{{#link-to 'projects' tagName='a' class="btn btn-default transparent-button"}}<span class="mdi-navigation-arrow-back"></span>{{/link-to}}
+
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
+			<span class="mdi-action-info-outline"></span>
+		</a>
+
 	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
 	    	<span class="mdi-maps-place"></span>
 	    </a>
