@@ -12,7 +12,10 @@
             </p>
           {{else}}
             <p>
-              <a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a>
+              {{#link-to 'explore' tagName='a' class="btn btn-info btn-lg"}}
+                Start Exploring
+              {{/link-to}}
+     <!--          <a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a> -->
             </p>
           {{/if}}
         </div>
