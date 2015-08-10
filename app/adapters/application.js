@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.RESTAdapter.extend({
-	host: 'http://api.atlmaps-dev.com:3000',
+	host: 'http://api.atlmaps-dev.org',
     namespace: 'v1',
     suffix: '.json',
     buildURL: function(record, suffix) {
