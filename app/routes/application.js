@@ -237,6 +237,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             route = route.replace('\.edit', '');
 
             var project_id = this.modelFor(route).get('id');
+            console.log(project_id);
 
             layer.set('active_in_project', true);
 
@@ -251,8 +252,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var marker = Math.floor((Math.random() * colors.length) + 1);
             var projectID = _this.get('controller.model.id');
 
-            var vectorLayerProject = _this.store.createRecord('vector_layer_project', {
-                project_id: projectID,
+            var vectorLayerProject = _this.store.createRecord('vector-layer-project', {
+                project_id: project_id,
                 vector_layer_id: layer.get('id'),
                 marker: marker,
                 layer_type: layer.get('layer_type'),

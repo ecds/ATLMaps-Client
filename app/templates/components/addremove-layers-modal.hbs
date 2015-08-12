@@ -1,7 +1,7 @@
 <a class="btn btn-add add_layer_button" {{action 'toggleModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
 {{#if isShowingRasterModal}}
 
-	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true}}
+	{{#modal-dialog close="closeRasterModal" alignment="left" translucentOverlay=true}}
 
 	<div id="searchableRasterLayers">
 		{{filter-layers action="closeRasterModal"}}

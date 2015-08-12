@@ -75,10 +75,5 @@ module.exports = function(environment) {
     crossOriginWhitelist: [apiHost]
   };
 
-  // ENV['simple-auth-oauth2'] = {
-  //   serverTokenEndpoint: apiHost+'/oauth/token',
-  //   serverTokenRevocationEndpoint: apiHost+'/oauth/revoke',
-  // };
-
   return ENV;
 };
