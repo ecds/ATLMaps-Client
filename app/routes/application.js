@@ -250,7 +250,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var controller = _this.controllerFor('project');
             var colors = _this.globals.color_options;
             var marker = Math.floor((Math.random() * colors.length) + 1);
-            var projectID = _this.get('controller.model.id');
 
             var vectorLayerProject = _this.store.createRecord('vector-layer-project', {
                 project_id: project_id,

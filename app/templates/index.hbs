@@ -8,7 +8,7 @@
           <h2>Mapping the stories of your city</h2>
           {{#if session.isAuthenticated}}
             <p>
-              {{#link-to 'projects' tagName='a' class="btn btn-material-pink-300 btn-lg"}}Go to Projects{{/link-to}}
+              {{#link-to 'projects' tagName='a' class="btn btn-lg"}}Go to Projects{{/link-to}}
             </p>
           {{else}}
             <p>
@@ -44,7 +44,7 @@
             <div class="row-content">
               <div class="action-secondary"><i class="mdi-material-info"></i></div>
               <h4 class="list-group-item-heading">
-                {{#link-to 'project' project}}
+                {{#link-to 'project.view' project}}
                   <span>
                   {{project.name}}</span>
                 {{/link-to}}

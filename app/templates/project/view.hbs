@@ -22,21 +22,19 @@
 	</div>
 	<div class="vector-data card">
 
-		<div class="layer-list">
-			<ul>
+		<div class="layer-list list-group">
 			{{#each model.vector_layer_ids key="@index" as |layer|}}
-					<li>
+					<div class="list-group-item {{layer.layer}} vector-layer">
 						<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 						<div class="layer-info-detail {{layer.slug}}">
 							<p class="list-group-item-text">{{layer.description}}</p>
 							<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
 						</div>
-					</li>
+					</div>
 			{{else}}
 				No data layers have been added.
 			{{/each}}
-			</ul>
 		</div>
 
 	</div>
@@ -50,7 +48,7 @@
 					<span class="handle pull-right">&varr;</span>
 					<div class="layer-info-detail {{layer.layer}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
-						<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+						<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
 					</div>
 					{{opacity-slider layer=layer}}
 				</div>
