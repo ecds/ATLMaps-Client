@@ -1440,6 +1440,7 @@ h4#showCollaborators a {
     height: inherit;
     max-height: $max-height-marker-content;
     overflow: scroll;
+    width: 100%;
 
     ::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -1449,6 +1450,10 @@ h4#showCollaborators a {
       border-radius: 4px;
       background-color: rgba(0,0,0,.5);
       -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+
+    iframe{
+      max-width: 100%;
     }
 
   }
