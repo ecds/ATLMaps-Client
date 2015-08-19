@@ -1,7 +1,8 @@
 import DS from 'ember-data';
+import ENV from "../config/environment";
 
 export default DS.RESTAdapter.extend({
-	host: 'http://api.atlmaps-dev.org',
+	host: ENV.APP.API_HOST,
     namespace: 'v1',
     suffix: '.json',
     buildURL: function(record, suffix) {

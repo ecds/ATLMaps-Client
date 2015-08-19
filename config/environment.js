@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
 
-  var apiHost = 'http://api.atlmaps-dev.org';
+  //var apiHost = 'http://api.atlmaps-dev.org';
 
   var ENV = {
     modulePrefix: 'atlmaps',
@@ -19,6 +19,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      API_HOST: 'http://api.atlmaps-dev.com:3000'
     }
   };
 
@@ -28,6 +29,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.API_HOST = 'http://api.atlmaps-dev.com:3000';
   }
 
   if (environment === 'test') {
@@ -40,6 +42,10 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+  }
+
+  if (environment === 'staging') {
+    ENV.APP.API_HOST = 'http://api.atlmaps-dev.org';
   }
 
   if (environment === 'production') {
@@ -60,19 +66,19 @@ module.exports = function(environment) {
 
   ENV['simple-auth'] = {
     //authorizer: 'simple-auth-authorizer:oauth2-bearer',
-    crossOriginWhitelist: [apiHost]
+    crossOriginWhitelist: [ENV.APP.API_HOST]
   };
 
   ENV['simple-auth-oauth2'] = {
-    serverTokenEndpoint: apiHost+'/oauth/token',
-    serverTokenRevocationEndpoint: apiHost+'/oauth/revoke',
+    serverTokenEndpoint: ENV.APP.API_HOST+'/oauth/token',
+    serverTokenRevocationEndpoint: ENV.APP.API_HOST+'/oauth/revoke',
   };
 
   // var apiHost = 'https://api.atlmaps.com/';
 
   ENV['simple-auth'] = {
     authorizer: 'simple-auth-authorizer:oauth2-bearer',
-    crossOriginWhitelist: [apiHost]
+    crossOriginWhitelist: [ENV.APP.API_HOST]
   };
 
   return ENV;
