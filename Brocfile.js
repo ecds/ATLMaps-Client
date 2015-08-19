@@ -2,25 +2,25 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = EmberApp.env();
-var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+//var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 
 var app = new EmberApp({
-	fingerprint: {
-		enabled: isProductionLikeBuild,
-    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
-	}
+	// fingerprint: {
+	// 	enabled: isProductionLikeBuild,
+ //    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
+	// }
 });
 
-// var config = {
-//   "prod":"ok",
-//   "staging": "nope"
-// };
+var config = {
+  "production":"https://s3.amazonaws.com/atlmaps-prod/",
+  "staging": "https://s3.amazonaws.com/atlmaps-staging/"
+};
 
-// if (config[env]){
-//   app.fingerprint.enabled = true;
-//   app.fingerprint.prepend = config[env];
+if (config[env]){
+  app.fingerprint.enabled = true;
+  app.fingerprint.prepend = config[env];
   
-// }
+}
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
