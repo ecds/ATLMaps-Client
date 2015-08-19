@@ -2,12 +2,17 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = EmberApp.env();
-var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+var isProduction = ['production'].indexOf(env) > -1;
+var isStaging = ['staging'].indexOf(env) > -1;
 
 var app = new EmberApp({
 	fingerprint: {
-		enabled: isProductionLikeBuild,
-    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
+		enabled: isProduction,
+    	prepend: 'https://s3.amazonaws.com/atlmaps-prod/'
+	},
+	fingerprint: {
+		enabled: isStaging,
+		prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
 	}
 });
 
