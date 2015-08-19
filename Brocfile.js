@@ -17,9 +17,10 @@ var config = {
 };
 
 if (config[env]){
-  app.fingerprint.enabled = true;
-  app.fingerprint.prepend = config[env];
-  
+	app.fingerprint = {
+		enabled: true,
+		prepend: config["staging"]
+	};
 }
 
 // Use `app.import` to add additional libraries to the generated
