@@ -7,9 +7,20 @@ var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 var app = new EmberApp({
 	fingerprint: {
 		enabled: isProductionLikeBuild,
-    	prepend: 'https://s3.amazonaws.com/atlmaps-prod/'
+    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
 	}
 });
+
+// var config = {
+//   "prod":"ok",
+//   "staging": "nope"
+// };
+
+// if (config[env]){
+//   app.fingerprint.enabled = true;
+//   app.fingerprint.prepend = config[env];
+  
+// }
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
