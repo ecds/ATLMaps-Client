@@ -62,6 +62,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
                 draggie.on( 'dragStart', function( event, pointer ) {console.log(pointer);});
 
+                Ember.$('.marker-data').resizeThis({ noNative: true });
+
                 var raster_layers = model.get('raster_layer_ids');
 
                 Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){

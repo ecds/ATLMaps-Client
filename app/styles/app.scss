@@ -328,9 +328,19 @@ a.site-title .alt-dark{
       padding-top: 1em;
       min-height: 100px;
 
+      div.provided {
+        padding-top: 5px;
+      }
+      div.institution {
+        font-style: italic;
+        display: block;
+        max-width: 12em;
+      }
+
       img {
-        width: 15px;
+        width: 80px;
         height: auto;
+        padding-right: 15px
       }
     }
   }
@@ -790,10 +800,6 @@ img.geojson {
   margin: auto;
   width: 80%!important;
   padding: 0;
-}
-
-span.institution {
-  font-style: italic;
 }
 
 .nav-btn {
@@ -1428,7 +1434,7 @@ h4#showCollaborators a {
   padding: 0;
   max-height: $max-height-marker-content;
   overflow: auto;
-  resize: both;
+  //resize: both;
   z-index: 10000;
   margin: 163px 0 0 31px;
   width: 420px;
@@ -1611,6 +1617,18 @@ a.is-editing-project-button {
   a {
     color: white;
   }
+}
+
+.rt-handle {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url(/assets/images/resize_handle2.png);
+    opacity: 0.25;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
 }
 
 // sytle the lines, we need to add some class to the svgs

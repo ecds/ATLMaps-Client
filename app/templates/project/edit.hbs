@@ -62,7 +62,7 @@
 					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 					<div class="layer-info-detail {{layer.slug}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
-						<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+						{{partial 'citation'}}
 
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">
@@ -100,7 +100,7 @@
 					<div class="layer-info-detail {{layer.layer}}">
 						
 						<article class="list-group-item-text">{{layer.description}}</article>
-						<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+						{{partial 'citation'}}
 
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">

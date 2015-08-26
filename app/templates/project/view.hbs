@@ -29,7 +29,7 @@
 						<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 						<div class="layer-info-detail {{layer.slug}}">
 							<p class="list-group-item-text">{{layer.description}}</p>
-							<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+							{{partial 'citation'}}
 						</div>
 					</div>
 			{{else}}
@@ -46,11 +46,11 @@
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.id}}: {{layer.name}}</a>
 					<span class="handle pull-right">&varr;</span>
+					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
-						<div class="citation">Provided by: <img src='https://s3.amazonaws.com/atlmaps-staging/assets/images/institutions/{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+						{{partial 'citation'}}
 					</div>
-					{{opacity-slider layer=layer}}
 				</div>
 			{{else}}
 				No scanned maps have been added.
@@ -72,4 +72,5 @@
 		<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
 	</div>
 	<div class="marker-content"></div>
+
 </div>

@@ -63,6 +63,7 @@ app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
 app.import('vendor/js/addLayers.js');
 app.import('bower_components/blueimp-md5/js/md5.js');
+app.import('bower_components/resizeThis/resizeThis.js');
 
 module.exports = mergeTrees([
 	app.toTree(),
