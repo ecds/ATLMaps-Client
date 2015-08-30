@@ -49,15 +49,22 @@ export default Ember.Component.extend({
                 var position = layerCount - index;
 
                 _this.store.find('raster_layer_project', {
-                    project_id: model.id,
-                    raster_layer_id: value
+                    project_id: 9999999,
+                    raster_layer_id: 9999999
                 }).then(function(rasterLayerProject){
-                    var  bar = rasterLayerProject.get('firstObject');
-                    bar.set('position', position);
-                    bar.save();
+                    var  layerToUpdate = rasterLayerProject.get('firstObject');
+                    layerToUpdate.set('position', position);
+                    layerToUpdate.save().then(function() {
+                        // Success callback
+                        // Show confirmation.
+                        Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
+                        }, function() {
+                            // Error callback
+                            Ember.$(".reorder-fail").stop().slideToggle().delay(3000).slideToggle();
+
+                    });
                 });
             });
-            Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
         }
 	}
 });

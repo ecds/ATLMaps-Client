@@ -152,7 +152,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 	                    slider.noUiSlider.set(this.value);
 	                });
 	            }
-	        	catch(err){/* still no fucks to give */}
+	        	catch(err){/* for real don't care */}
 
                 // Watch the toggle check box to show/hide all raster layers.
                 var showHideSwitch = document.getElementById('toggle-layer-opacity');

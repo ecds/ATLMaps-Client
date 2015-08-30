@@ -26,9 +26,6 @@ export default Ember.Route.extend({
             var _this = this;
             
             var onSuccess = function() {
-
-            	
-
                 
                 var newProject = DS.PromiseObject.create({
                     promise: _this.store.query('project', { name: newProjectName })
@@ -36,7 +33,6 @@ export default Ember.Route.extend({
     
                 newProject.then(function() {
                 	newProject.get('firstObject').set('name', 'Please enter a title.');
-               		console.log(newProject.get('firstObject').id);
                     _this.transitionTo('project.edit', newProject.get('firstObject').id);
                 });
             };

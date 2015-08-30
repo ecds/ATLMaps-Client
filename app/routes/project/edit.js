@@ -6,33 +6,23 @@ export default Ember.Route.extend({
 	actions: {
 
 		updateProjectInfo: function(model) {
-            model.save();
-            Ember.$(".edit-info-success").slideToggle().delay(2500).slideToggle();
+            /* Action that updates the title, description and
+            published status of a project. */
+            model.save().then(function() {
+                // Success callback
+                // Show confirmation.
+                Ember.$(".edit-info-success").slideToggle().delay(2500).slideToggle();
+                }, function() {
+                    // Error callback
+                    Ember.$(".edit-info-fail").stop().slideToggle().delay(3000).slideToggle();
+
+            });
         },
 
         cancelUpdate: function(model) {
-            //this.toggleProperty('isEditing');
+            /* Action that rolls back any updates that have changed
+            in the local store but haven't been pushed to the API. */
             model.rollbackAttributes();
-        },
-
-        updateOrder: function(layers, layerCount) {
-			console.log(layers);
-			console.log(layerCount);
-            var _this = this;
-            Ember.$.each(layers, function(index, value){
-                var position = layerCount - index;
-                console.log(value+" => "+position);
-
-                _this.store.find('raster_layer_project', {
-                    project_id: 24,
-                    raster_layer_id: value
-                }).then(function(rasterLayerProject){
-                    var  newPosition = rasterLayerProject.get('firstObject');
-                    newPosition.set('position', position);
-                    newPosition.save();
-                });
-            });
-            Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
         },
 
         setCenterAndZoom: function(){
@@ -40,12 +30,23 @@ export default Ember.Route.extend({
 
             var project = this.modelFor('project');
 
+            
             project.set('center_lat', map.getCenter().lat);
             project.set('center_lng', map.getCenter().lng);
             project.set('zoom_level', map.getZoom());
-            project.save();
+            project.save().then(function() {
+                // Success callback
+                // Show confirmation.
+                Ember.$(".recenter-success").stop().slideToggle().delay(1500).slideToggle();
+                }, function() {
+                    // Error callback
+                    Ember.$(".recenter-fail").stop().slideToggle().delay(3000).slideToggle();
 
-            Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
+            });
+
         }
+
+        // The action for updateing the order of raster layers is in the 
+        // `reorder-layers` component.
 	}
 });

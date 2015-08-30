@@ -21,6 +21,9 @@
 		<div class="alert alert-success edit-info-success">
 		    Project Updated!
 		</div>
+		<div class="alert alert-danger edit-info-fail">
+		    Something went worng. Info was not updated.
+		</div>
 
 		<div class="form-group">
 			<label for="edit_name">Title for the Project</label>
@@ -82,6 +85,9 @@
 		<div class="alert alert-success reorder-success">
 		    New Order Saved!
 		</div>
+		<div class="alert alert-danger reorder-fail">
+		    Something went worng. The new order was not saved.
+		</div>
 		<div class="add_layer_button pull-left">
 
 			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}
@@ -117,8 +123,12 @@
 	</div>
 
 	<div class="controls controls-edit card">
-		<div class="alert alert-success reorder-success">
+		<div class="alert alert-success recenter-success">
 		    Center and Zoom Level Set!
+		</div>
+
+		<div class="alert alert-danger recenter-fail">
+		    Something went worng. The new center and zoom level were not set.
 		</div>
 
 		<a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom'}}>Set Center and Zoom Level</a>
@@ -130,8 +140,6 @@
 		<p>Collaborations will return soon.</p>
 	</div>
 
-
-	{{!-- END EDIT PROJECT --}}
 </div>
 
 

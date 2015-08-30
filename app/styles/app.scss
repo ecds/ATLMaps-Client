@@ -1527,10 +1527,11 @@ a.is-editing-project-button {
   color: green;
 }
 
-.edit-info-success, .reorder-success {
+.edit-info-success, .edit-info-fail, .reorder-success, .reorder-fail, .recenter-success, .recenter-fail {
   display: none;
   font-size: .75em;
   border-radius: .5em;
+  color: whitesmoke;
 }
 
 .fail {
