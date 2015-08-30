@@ -5,6 +5,10 @@ import DS from 'ember-data';
 
 export default Ember.Route.extend({
 	actions : {
+
+        didTransition: function() {
+            Ember.$(document).attr('title', 'ATLMaps: Projects');
+        },
         
         createProject: function() {
             
@@ -13,7 +17,10 @@ export default Ember.Route.extend({
             var project = this.store.createRecord('project', {
                 name: newProjectName,
                 user_id: this.session.get('content.secure.user.id'),
-                published: false
+                published: false,
+                center_lat: 33.75440100,
+                center_lng: -84.3898100,
+                zoom_level: 13
             });
             
             var _this = this;

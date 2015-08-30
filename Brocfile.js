@@ -58,7 +58,7 @@ app.import('bower_components/nouislider/distribute/nouislider.min.js');
 app.import('bower_components/list.js/dist/list.min.js');
 app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('vendor/js/menu/classie.js');
-app.import('vendor/js/menu/gnmenu.js');
+
 app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
 app.import('vendor/js/addLayers.js');

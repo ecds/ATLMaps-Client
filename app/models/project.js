@@ -3,6 +3,9 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 	name: DS.attr('string'),
     description: DS.attr('string'),
+    center_lat: DS.attr('number'),
+    center_lng: DS.attr('number'),
+    zoom_level: DS.attr('number'),
     user_id: DS.attr(),
     saved: DS.attr('boolean'),
     published: DS.attr('boolean'),

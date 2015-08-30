@@ -3,9 +3,11 @@
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
 @import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
 @import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
-@import 'gn-menu.scss';
+//@import 'gn-menu.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
+@import 'main-navbar.scss';
+@import 'back-to-project-button.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
@@ -1048,13 +1050,13 @@ h2 .btn-fab+span{
   margin-left: 12px;
 }
 
-.projects-index header>h2, .about header>h2 {
+.projects-index header>h2, .about header>h2, .terms header>h2, .support header>h2 {
   font-size: 5em;
   margin-bottom: 20px;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
-  color: rgb(3, 177, 255);
-  font-weight: 300;
+  font-weight: 400;
   color: rgba(3, 177, 255, 0.7);
+  line-height: normal;
 }
 
 .projects-index .banner.orange {
@@ -1287,7 +1289,7 @@ h4#showCollaborators a {
   padding: 0;
 }
 
-.project-info, .vector-data, .raster-layers, .controls, .collaborations {
+.project-info, .vector-data, .raster-layers, .controls, .collaborations, .help {
   display: inline-block;
   position: relative;
   width: 100%;
@@ -1425,6 +1427,11 @@ h4#showCollaborators a {
   opacity: 1;
 }
 
+.marker-data .is-pointer-down{
+    box-shadow: none;
+    padding: 0;
+  }
+
 .marker-data {
 
   $max-height-marker-content:50em;
@@ -1448,6 +1455,7 @@ h4#showCollaborators a {
     max-height: $max-height-marker-content;
     overflow: scroll;
     width: 100%;
+    margin-top: 30px;
 
     ::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -1465,7 +1473,6 @@ h4#showCollaborators a {
 
   }
 
-
   .panel-controls{
     background-color: white;
     padding: .5em 1em;
@@ -1473,6 +1480,10 @@ h4#showCollaborators a {
     top: 0;
     left: 0;
     width: 100%;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+
 
     .mdi-action-open-with {
       cursor: -webkit-grab;
@@ -1482,8 +1493,11 @@ h4#showCollaborators a {
     a {
       color: black;
     }
-
   }
+}
+
+.shadow-z-3 {
+  box-shadow: none;
 }
 
 div.marker-content:after {
@@ -1491,7 +1505,11 @@ div.marker-content:after {
 }
 
 .handle {
-  cursor: ns-resize;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  position: absolute;
+  margin: 0px;
+  right: 5px;
 }
 
 .layer-info-detail {
@@ -1631,6 +1649,7 @@ a.is-editing-project-button {
     right: 0;
     cursor: nwse-resize;
 }
+
 
 // sytle the lines, we need to add some class to the svgs
 .foo {

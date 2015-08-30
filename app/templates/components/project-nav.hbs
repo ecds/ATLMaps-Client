@@ -2,23 +2,26 @@
 
 	<div class="btn-group btn-group-justified">
 
-		<a {{action 'navigateProject' 'project-info-edit'}} class="btn btn-default active-button project-nav" id="project-info-edit">
-			<span class="mdi-action-info-outline"></span>
+		<a {{action 'navigateProject' 'project-info-edit'}} class="btn btn-default active-button project-nav" id="project-info-edit" title="Edit Project Description">
+			<span class="mdi-action-info"></span>
 		</a>
-	    <a {{action 'navigateProject' 'vector-data-edit'}} class="btn btn-default transparent-button project-nav" id='vector-data-edit'>
+	    <a {{action 'navigateProject' 'vector-data-edit'}} class="btn btn-default transparent-button project-nav" id='vector-data-edit' title="Manage Pinpoint Layers">
 	    	<span class="mdi-maps-place"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'raster-layers-edit'}} class="btn btn-default transparent-button project-nav" id="raster-layers-edit">
+	    <a {{action 'navigateProject' 'raster-layers-edit'}} class="btn btn-default transparent-button project-nav" id="raster-layers-edit" title="Manage Archival Map Layers">
 	    	<span class="mdi-maps-layers"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'controls-edit'}} class="btn btn-default transparent-button project-nav" id="controls-edit">
+	    <a {{action 'navigateProject' 'controls-edit'}} class="btn btn-default transparent-button project-nav" id="controls-edit" title="Change Base Map">
 	    	<span class="mdi-image-tune"></span>
 	    </a>
 	    {{#if model.is_mine}}
-	    	<a {{action 'navigateProject' 'collaborations-edit'}} class="btn btn-default transparent-button project-nav" id="collaborations-edit">
+	    	<a {{action 'navigateProject' 'collaborations-edit'}} class="btn btn-default transparent-button project-nav" id="collaborations-edit" title="Manage Collaborations">
 	    		<span class="mdi-social-group"></span>
 	    	</a>
 	    {{/if}}
+	    <a {{action 'navigateProject' 'help'}} class="btn btn-default transparent-button project-nav" id="help" title="Show Help Window">
+	    	<span class="mdi-action-help"></span>
+	    </a>
 
 	</div>
 
@@ -28,19 +31,20 @@
 
 	<div class="btn-group btn-group-justified">
 
-		{{#link-to 'projects' tagName='a' class="btn btn-default transparent-button"}}<span class="mdi-navigation-arrow-back"></span>{{/link-to}}
-
-		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
-			<span class="mdi-action-info-outline"></span>
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" title="Project Description">
+			<span class="mdi-action-info"></span>
 		</a>
-	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
+	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
 	    	<span class="mdi-maps-place"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers">
+	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Map Layers">
 	    	<span class="mdi-maps-layers"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls">
+	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls" title="Change Base Map">
 	    	<span class="mdi-image-tune"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'help'}} class="btn btn-default transparent-button project-nav" id="help" title="Show Help Window">
+	    	<span class="mdi-action-help"></span>
 	    </a>
 	</div>
 	
@@ -50,20 +54,21 @@
 
 	<div class="btn-group btn-group-justified">
 
-		{{#link-to 'projects' tagName='a' class="btn btn-default transparent-button"}}<span class="mdi-navigation-arrow-back"></span>{{/link-to}}
-
-		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info">
-			<span class="mdi-action-info-outline"></span>
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" title="About Exploring">
+			<span class="mdi-action-info"></span>
 		</a>
 
-	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data'>
+	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
 	    	<span class="mdi-maps-place"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers">
+	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
 	    	<span class="mdi-maps-layers"></span>
 	    </a>
-	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls">
+	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls" title="Select Base Layer">
 	    	<span class="mdi-image-tune"></span>
+	    </a>
+	    <a {{action 'navigateProject' 'help'}} class="btn btn-default transparent-button project-nav" id="help" title="Show Help Window">
+	    	<span class="mdi-action-help"></span>
 	    </a>
 	</div>
 	

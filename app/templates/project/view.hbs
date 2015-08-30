@@ -3,7 +3,7 @@
 		<h1>{{model.name}}</h1>
 
 		{{#if model.may_edit}}
-			{{#link-to 'project.edit' model}}
+			{{#link-to 'project.edit' model title="Switch to Edit Mode"}}
 				<span class="mdi-editor-mode-edit"></span>
 			{{/link-to}}
 		{{/if}}
@@ -45,7 +45,7 @@
 				<div class="list-group-item raster-layer" id="{{layer.layer}}">
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.id}}: {{layer.name}}</a>
-					<span class="handle pull-right">&varr;</span>
+					<span class="handle pull-right mdi-navigation-unfold-more"></span>
 					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
@@ -62,15 +62,12 @@
 		<h3>Select Base Map</h3>
 	</div>
 
+	<div class="help card">
+		<h3>Help</h3>
+		Here is some help :)
+	</div>
+
 	{{!-- END VIEW PROJECT --}}
 </div>
 
-<div class="marker-data draggable">
-	<div class="panel-controls">
-		<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
-		<span class="mdi-action-open-with"></span>
-		<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
-	</div>
-	<div class="marker-content"></div>
-
-</div>
+{{partial 'marker-data-window'}}

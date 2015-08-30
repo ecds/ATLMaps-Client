@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+/* global L */
+
 export default Ember.Route.extend({
 
 	beforeModel: function(){
@@ -25,7 +27,9 @@ export default Ember.Route.extend({
 
             var vector_layers = this.modelFor('project').get('vector_layer_ids');
 
-	        var project_id = this.modelFor('project').get('id');
+            var project = this.modelFor('project');
+
+            var project_id = project.get('id');
 
 	        var _this = this;
 
@@ -37,6 +41,8 @@ export default Ember.Route.extend({
                 // just leaving this here so I remember how to do it.
                 var map = _this.globals.mapObject;
                 console.log(map.getBounds());
+                map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
+                map.setZoom(project.get('zoom_level'));
 
                 var controller = _this.controllerFor('project');
 

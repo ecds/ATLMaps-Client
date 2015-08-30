@@ -6,13 +6,11 @@
 	<div class="project-title project-edit">
 		<h1>{{model.name}}</h1>
 
-			{{#link-to 'project.view' model}}
+			{{#link-to 'project.view' model title="Back to View Mode"}}
 				<span class="mdi-editor-mode-edit"></span>
 			{{/link-to}}
 	</div>
-{{!-- START EDIT PROJECT --}}
 
-<!-- 	{{ project-nav mode='edit' model=model action='initProjectUI'}}-->
 		{{ project-nav mode='edit' model=model}}
 
 	{{ reorder-layers mode='edit' model=model}}
@@ -63,6 +61,7 @@
 					<div class="layer-info-detail {{layer.slug}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
 						{{partial 'citation'}}
+						<div>&nbsp;</div>
 
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">
@@ -95,12 +94,13 @@
 
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
-					<span class="handle pull-right">&varr;</span>
+					<span class="handle pull-right mdi-navigation-unfold-more"></span>
 					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
 						
 						<article class="list-group-item-text">{{layer.description}}</article>
 						{{partial 'citation'}}
+						<div>&nbsp;</div>
 
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">
@@ -117,6 +117,12 @@
 	</div>
 
 	<div class="controls controls-edit card">
+		<div class="alert alert-success reorder-success">
+		    Center and Zoom Level Set!
+		</div>
+
+		<a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom'}}>Set Center and Zoom Level</a>
+
 		<h3>Select Base Map</h3>
 	</div>
 
@@ -135,13 +141,4 @@
 		<img src="/assets/images/disappointed-face.png" alt="Disappointed Face"/>
 	</div>
 {{/if}}
-
-
-<div class="marker-data draggable">
-	<div class="panel-controls">
-		<a {{action "snapBack" }} title="Snap Back"><span class="mdi-navigation-arrow-back"></span></a>
-		<span class="mdi-action-open-with"></span>
-		<a {{action "closeMarkerInfo" }} title="Close"><span class="mdi-content-clear"></span></a>
-	</div>
-	<div class="marker-content"></div>
-</div>
+{{partial 'marker-data-window'}}

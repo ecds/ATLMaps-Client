@@ -13,8 +13,8 @@
             },
             "properties": {
                 "name": "The Eiffel Tower",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in Paris, France"
             },
             "id": "eiffel"
@@ -31,8 +31,8 @@
             },
             "properties": {
                 "name": "Christ the Redeemer",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in Rio, Brazil"
             },
             "id": "christ"
@@ -49,8 +49,8 @@
             },
             "properties": {
                 "name": "The Grand Canyon",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in Arizona, USA"
             },
             "id": "canyon"
@@ -67,8 +67,8 @@
             },
             "properties": {
                 "name": "Sydney",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "New South Wales, Australia"
             },
             "id": "sydney"
@@ -85,8 +85,8 @@
             },
             "properties": {
                 "name": "St Peters Basilica",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in Vatican City"
             },
             "id": "peters"
@@ -103,8 +103,8 @@
             },
             "properties": {
                 "name": "The London Eye",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in London, England"
             },
             "id": "london"
@@ -121,8 +121,8 @@
             },
             "properties": {
                 "name": "The Titanic",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in the North Atlantic Ocean"
             },
             "id": "titanic"
@@ -139,8 +139,8 @@
             },
             "properties": {
                 "name": "The Forbidden City",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in China"
             },
             "id": "forbidden"
@@ -157,8 +157,8 @@
             },
             "properties": {
                 "name": "Mount Fuji",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located near Tokyo, Japan"
             },
             "id": "fuji"
@@ -175,8 +175,8 @@
             },
             "properties": {
                 "name": "Google Headquarters",
-                "styleUrl": "#sn_noicon",
-                "styleHash": "5fed9f79",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
                 "description": "Located in Mountain View, California"
             },
             "id": "google"
@@ -253,7 +253,7 @@
             },
             "properties": {
                 "name": "972 Peachtree St.: Atlanta Art Workers Coalition",
-                "description": "<iframe src=\"https://player.vimeo.com/video/134791150\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892624\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nFaculty from the Atlanta College of Art and Atlanta-based artists incorporated the Atlanta Art Workers Coalition in 1976 to \"promote, protect, and aid the visual arts of Atlanta through programs focused on the needs of individual artists and art groups.\" The organization was very consciously grassroots. It supported local artists through a slide registry program, library, and gallery space. Members also published the Atlanta Art Workers Coalition Newspaper, which offered reviews of area shows, critical takes on the local art scene, interviews with nationally and internationally known artists, and reports on funding. The AAWC also published a directory of area artists. It folded in 1983. Julia A. Fenton, who served as executive director of the AAWC for a time, describes the beginnings of the organization. JoAnne Paschall speaks more broadly to a changing attitude among young artists of the 1970s who wanted to reassess and even overturn traditional conventions of the art world. \n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20360921740/in/datetaken/\" title=\"art_workers\"><img src=\"https://farm6.staticflickr.com/5764/20360921740_5e8e26ef88_n.jpg\" width=\"320\" height=\"257\" alt=\"art_workers\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+                "description": "<iframe src=\"https://player.vimeo.com/video/134791150\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892624\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nFaculty from the Atlanta College of Art and Atlanta-based artists incorporated the Atlanta Art Workers Coalition in 1976 to \"promote, protect, and aid the visual arts of Atlanta through programs focused on the needs of individual artists and art groups.\" The organization was very consciously grassroots. It supported local artists through a slide registry program, library, and gallery space. Members also published the Atlanta Art Workers Coalition Newspaper, which offered reviews of area shows, critical takes on the local art scene, interviews with nationally and internationally known artists, and reports on funding. The AAWC also published a directory of area artists. The organization folded in 1983. Julia A. Fenton, who served as executive director of the AAWC for a time, describes the beginnings of the organization. JoAnne Paschall speaks more broadly to a changing attitude among young artists of the 1970s who wanted to reassess and even overturn traditional conventions of the art world. \n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20360921740/in/datetaken/\" title=\"art_workers\"><img src=\"https://farm6.staticflickr.com/5764/20360921740_5e8e26ef88_n.jpg\" width=\"320\" height=\"257\" alt=\"art_workers\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
             }
         },
         {
@@ -462,8 +462,8 @@
                 ]
             },
             "properties": {
-                "name": "1759 Indiana Ave: home of Callahan McDonough and first home of the Women's Art Collective",
-                "description": "<iframe src=\"https://player.vimeo.com/video/136227896\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe first headquarters of the Women's Art Collective was in Callahan McDonough's home in the Lake Claire neighborhood. Lake Claire, Candler Park, and Little Five Points housed artists in the 1970s."
+                "name": "1759 Indiana Ave: 1970s home of Callahan McDonough and first home of the Women's Art Collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227896\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe first headquarters of the Women's Art Collective was in Callahan McDonough's former home in the Lake Claire neighborhood. Lake Claire, Candler Park, and Little Five Points housed artists in the 1970s."
             }
         },
         {
@@ -538,7 +538,7 @@
             },
             "properties": {
                 "name": "223 James P. Brawley Dr.: Clark Atlanta University Art Galleries",
-                "description": "<iframe src=\"https://player.vimeo.com/video/136225345\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nOver the course of the twentieth century, Atlanta University (now Clark Atlanta University) built an important collection of the work of African American artists as well as those of the African diaspora. Tina Dunkley describes first learning of the collection, which she describes as being \"under the radar\" of the art world. Dunkley went on to curate the collection for thirty-five years and is now curator emeritus of the Clark Atlanta University Art Galleries."
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225345\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nOver the course of the twentieth century, Atlanta University (now Clark Atlanta University) built an important collection of the work of African American artists as well as those of the African diaspora. Tina Dunkley remembers first learning of the collection, which she describes as being \"under the radar\" of the art world. Dunkley went on to curate the collection for thirty-five years and is now curator emeritus of the Clark Atlanta University Art Galleries."
             }
         },
         {
@@ -567,7 +567,7 @@
             },
             "properties": {
                 "name": "1931 Peachtree St: Image South Gallery",
-                "description": "Image South Gallery was a commercial gallery owened by Dean Gillette and Jere Frutchey and that often showed members of the 1970s arts organizations such as the Atlanta Art Workers Coalition."
+                "description": "Image South Gallery was a commercial gallery owned by Dean Gillette and Jere Frutchey and often showed members of the 1970s arts organizations such as the Atlanta Art Workers Coalition."
             }
         },
         {
@@ -596,7 +596,8 @@
                 ]
             },
             "properties": {
-                "name": "Georgia State University: GSU Art Gallery"
+                "name": "Georgia State University: GSU Art Gallery",
+                "description": "Georgia State University had a gallery for faculty and student shows in the 1970s (today the Ernest G. Welch Galleries). ATLas narrator Louise Shaw remembered that GSU once forbade exhibition of faculty work that featured nudes, thus helping to spur the founding of the Nexus photography collective in the early 1970s."
             }
         },
         {
@@ -640,7 +641,7 @@
             },
             "properties": {
                 "name": "951 Peachtree St.: Storefront exhibitions",
-                "description": "<iframe src=\"https://player.vimeo.com/video/136227887\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892623\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nArtists in the 1970s claimed alternative exhibit spaces, including storefronts along Peachtree Street. Peachtree Walk hosted one such exhibition on October 28, 1977. Callahan McDonough and JoAnne Paschall speak to the practice of \"pop-up\" exhibitions in the 1970s."
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227887\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892623\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nArtists in the 1970s claimed alternative exhibit spaces, including storefronts along Peachtree Street. Businesses in this section of Peachtree hosted one such exhibition on October 28, 1977. Callahan McDonough and JoAnne Paschall speak to the practice of \"pop-up\" exhibitions in the 1970s."
             }
         },
         {
@@ -746,6 +747,216 @@
             "properties": {
                 "name": "980 Briarcliff Road: Callanwolde Fine Arts Center",
                 "description": "The DeKalb County Recreation, Parks, and Cultural Affairs Department opened the Callanwolde Fine Arts Center in the mid-1970s. The home was the estate of Charles Howard Candler and built in 1920."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.295967680887427,
+                    48.85780097266282,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Eiffel Tower",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Paris, France"
+            },
+            "id": "eiffel"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.20953574843956,
+                    -22.95040715767599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Christ the Redeemer",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Rio, Brazil"
+            },
+            "id": "christ"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.839335188889,
+                    36.14936973429993,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Grand Canyon",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Arizona, USA"
+            },
+            "id": "canyon"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.2122001847845,
+                    -33.85543600090152,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Sydney",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "New South Wales, Australia"
+            },
+            "id": "sydney"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.45863229278517,
+                    41.90238356414683,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "St Peters Basilica",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Vatican City"
+            },
+            "id": "peters"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.1208037863755851,
+                    51.50295856070689,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The London Eye",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in London, England"
+            },
+            "id": "london"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -49.94881009327763,
+                    41.72834170105288,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Titanic",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in the North Atlantic Ocean"
+            },
+            "id": "titanic"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.3908088768236,
+                    39.91379916102216,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Forbidden City",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in China"
+            },
+            "id": "forbidden"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    138.7818265722904,
+                    35.34063009043844,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Mount Fuji",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located near Tokyo, Japan"
+            },
+            "id": "fuji"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.0857031353512,
+                    37.42169546752972,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Google Headquarters",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Mountain View, California"
+            },
+            "id": "google"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3490984,
+                    33.7799988,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1185 Virginia Ave NE"
+            },
+            "id": "1.2.1"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.34911264625019,
+                    33.77990801661279,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1185 Virginia Ave. NE, first location of Nexus photography collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792737\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href=\"https://vimeo.com/134792737\">Louise Shaw on the beginnings of Nexus</a> from <a href=\"https://vimeo.com/mhhe\">KSU MHHE</a> on <a href=\"https://vimeo.com\">Vimeo</a>.</p>\n\n<img src=\"https://photos.google.com/photo/AF1QipNf_f2-HBMXQzFrJjqEDKSaQD_wSjBay65RndVZ\"/>"
             }
         }
     ]

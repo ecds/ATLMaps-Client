@@ -1,46 +1,50 @@
 {{outlet 'modal'}}
 <div class="content">
 
-    <div class="menu-container">
+    <!-- <div class="menu-container">
       <ul id="gn-menu" class="gn-menu-main">
-        <li class="gn-trigger">
-          <a class="gn-icon gn-icon-menu mdi-navigation-expand-more"><span>Menu</span></a>
-          <nav class="gn-menu-wrapper">
-            <div class="gn-scroller">
-              <ul class="gn-menu">
-                <!--<li class="gn-search-item">
-                  <input placeholder="Search" type="search" class="gn-search">
-                  <a class="gn-icon gn-icon-search mdi-action-search"><span>Search</span></a>
-                </li>-->
-                <!--<li><a class="gn-icon mdi-action-settings">Settings</a></li>-->
-                <li>{{#link-to 'projects' tagName='a' class="gn-icon mdi-image-collections"}}Projects{{/link-to}}</li>
-                <li>
-                  <a class="gn-icon mdi-editor-insert-drive-file">Pages</a>
-                  <ul class="gn-submenu">
-                    <li>{{#link-to 'about' tagName='a' class="gn-icon mdi-action-info"}}About ATLMaps{{/link-to}}</li>
-                    <!--<li><a class="gn-icon mdi-image-image">Images</a></li>
-                    <li><a class="gn-icon mdi-image-movie-creation">Videos</a></li>-->
-                  </ul>
-                </li>
-                {{#if session.isAuthenticated}}
-                <!--<li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>-->
-                {{else}}
-                <li>{{#link-to 'login' tagName='a' class="gn-icon mdi-navigation-arrow-forward"}}Login{{/link-to}}</li>
-                {{/if}}
-              </ul>
-            </div><!-- /gn-scroller -->
-          </nav>
-        </li>
+        
         <li class="home">{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="/assets/images/am-logo3.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
+
+        <li>{{#link-to 'about' tagName='a'}}About{{/link-to}}</li>
+        <li>{{#link-to 'help' tagName='a'}}Help{{/link-to}}</li>
+        <li>{{#link-to 'terms' tagName='a'}}Terms of Use{{/link-to}}</li>
+
+
         {{#if session.isAuthenticated}}
           <li class="pull-right gravatar"><a {{action 'invalidateSession' }} title="Logout">{{gravatar-image email=this.session.content.secure.user.email}}</a></li>
           {{else}}
           <li></li>
         {{/if}}
       </ul>
+    </div> -->
+
+    <div class="navbar main-navbar">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        {{#link-to 'index' tagName='a' class='site-title navbar-brand'}}
+          <img class="logo" src="/assets/images/am-logo3.png"/><span class="alt-dark">ATL</span><span>Maps</span>
+        {{/link-to}}
     </div>
-    
-    {{initMenu}}
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav">
+            <li>{{#link-to 'projects' tagName='a'}}Projects{{/link-to}}</li>
+            <li>{{#link-to 'about' tagName='a'}}About{{/link-to}}</li>
+            <li>{{#link-to 'support' tagName='a'}}Help{{/link-to}}</li>
+            <li>{{#link-to 'terms' tagName='a'}}Terms of Use{{/link-to}}</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {{#if session.isAuthenticated}}
+              <li><a {{action 'invalidateSession' }} title="Logout">Logout</a></li>
+            {{else}}
+              <li>{{#link-to 'login' tagName='a'}}Login{{/link-to}}</li>
+            {{/if}}
+        </ul>
+    </div>
+</div>
     {{outlet}}
-    
   </div>

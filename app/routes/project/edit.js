@@ -27,11 +27,24 @@ export default Ember.Route.extend({
                     project_id: 24,
                     raster_layer_id: value
                 }).then(function(rasterLayerProject){
-                    var  bar = rasterLayerProject.get('firstObject');
-                    bar.set('position', position);
-                    bar.save();
+                    var  newPosition = rasterLayerProject.get('firstObject');
+                    newPosition.set('position', position);
+                    newPosition.save();
                 });
             });
+            Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
+        },
+
+        setCenterAndZoom: function(){
+            var map = this.globals.mapObject;
+
+            var project = this.modelFor('project');
+
+            project.set('center_lat', map.getCenter().lat);
+            project.set('center_lng', map.getCenter().lng);
+            project.set('zoom_level', map.getZoom());
+            project.save();
+
             Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
         }
 	}

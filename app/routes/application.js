@@ -60,7 +60,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // the div was originally. So we change it to absolute.
                 draggie.element.style.position = 'absolute';
 
-                draggie.on( 'dragStart', function( event, pointer ) {console.log(pointer);});
+                draggie.on( 'dragStart', function( event, pointer ) {});
 
                 Ember.$('.marker-data').resizeThis({ noNative: true });
 
@@ -88,7 +88,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
         sort: function(layer){
         	Ember.run.later(this, function() {
-        		console.log('hello');
 	        	var project_id = this.modelFor('project').get('id');
 
 	        	var projectLayer = DS.PromiseObject.create({
@@ -97,7 +96,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
 	            projectLayer.then(function() {
 	            	var position = projectLayer.get('firstObject')._internalModel._data.position;
-	            	console.log(layer.get('id') + " => " + layer.get('layer') + " => " + position);
 	            	Ember.$('.raster-layer#'+layer.get('layer')).attr('data-position', position);
 
 	            	// This sorts all the raster layers by the `data-position` attribute.
@@ -202,7 +200,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 if (!isNaN(newPosition)) {
                     position = newPosition;
                 }
-                console.log(position);
+                
                 var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
                     project_id: project_id,
                     raster_layer_id: layer.get('id'),
@@ -239,7 +237,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             route = route.replace('\.edit', '');
 
             var project_id = this.modelFor(route).get('id');
-            console.log(project_id);
 
             layer.set('active_in_project', true);
 
