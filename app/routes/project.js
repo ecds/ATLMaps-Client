@@ -87,7 +87,7 @@ export default Ember.Route.extend({
                             );
                         }
 
-                        _this.send('orderRasterLayers');
+                        //_this.send('orderRasterLayers');
                     });
                 });
 

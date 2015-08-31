@@ -42,6 +42,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     Ember.$("div.info").remove();
                     Ember.$("div.marker-data").hide();
                     Ember.$(".active_marker").removeClass("active_marker");
+                    _this.send('activateVectorCard');
                 });
 
                 // We need to check if the layer controls are already added to the DOM.
@@ -400,6 +401,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         closeMarkerInfo: function() {
             Ember.$("div.marker-data").hide();
             Ember.$(".active_marker").removeClass("active_marker");
+            Ember.$(".vector-data.card").slideToggle();
+            this.sendAction('activateVectorCard');
         },
 
         colorIcons: function(layer, marker){
@@ -411,6 +414,20 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         snapBack: function(){
             Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
         },
+
+        activateVectorCard: function(){
+
+            Ember.$(".project-nav").removeClass('active-button');
+
+            Ember.$(".project-nav").addClass('transparent-button');
+            
+            if (Ember.$(".card:visible").length === 0) {
+                Ember.$('.vector-data').slideToggle();
+                Ember.$('#vector-data').removeClass('transparent-button');
+                Ember.$('#vector-data').addClass('active-button');
+            }
+        },
+
 
  	}
 });

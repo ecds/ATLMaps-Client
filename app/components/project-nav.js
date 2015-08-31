@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 	edit: false,
 
 	didInsertElement: function(){
+        // Set which group to show from the template.
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}
@@ -15,7 +16,6 @@ export default Ember.Component.extend({
             this.set('explore', true);
         }
 
-        // this.sendAction('action', this.get('model'));
 	},
 
 	actions: {
@@ -41,8 +41,5 @@ export default Ember.Component.extend({
             }
         },
 
-        backToProjects: function(){
-            this.transitionToRoute('projects');
-        }
 	}
 });

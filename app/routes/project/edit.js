@@ -15,6 +15,7 @@ export default Ember.Route.extend({
                 }, function() {
                     // Error callback
                     Ember.$(".edit-info-fail").stop().slideToggle().delay(3000).slideToggle();
+                    model.rollbackAttributes();
 
             });
         },
@@ -47,6 +48,7 @@ export default Ember.Route.extend({
         }
 
         // The action for updateing the order of raster layers is in the 
-        // `reorder-layers` component.
+        // `reorder-layers` component. It was put there so we could reuse
+        // it on the explore route.
 	}
 });

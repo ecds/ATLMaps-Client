@@ -207,6 +207,7 @@ export default Ember.Controller.extend({
 
                 case 'geojson':                    
                     function viewData(feature, layer) {
+
                         var popupContent = "<h2>"+feature.properties.name+"</h2>";
                         if (feature.properties.image) {
                             popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
@@ -226,6 +227,8 @@ export default Ember.Controller.extend({
 
                         layer.on('click', function() {
                             Ember.$(".project-nav").removeClass('active-button');
+                            Ember.$(".project-nav").addClass('transparent-button');
+                            Ember.$('#vector-data').addClass('active-button');
                             Ember.$("div.marker-content").empty();
                             Ember.$("div.marker-data").hide();
                             Ember.$(".card").hide();
