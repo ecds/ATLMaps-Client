@@ -26,7 +26,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     detectRetina: true
                 });
 
-                osm.addTo(map);
+                //osm.addTo(map);
+
+                if (model.get('name') === 'Neat Project!') {
+                    MapQuestOpen_Aerial.addTo(map);
+                }
+                else {
+                    osm.addTo(map);
+                }
                         
                 var baseMaps = {
                     "Street": osm,
@@ -167,6 +174,12 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 });
 
             }, 2000);
+            
+            // var map = this.globals.mapObject;
+            
+            // map.eachLayer(function (layer) {
+            //     console.log(layer);
+            // });
         },
 
         addRasterLayer: function(layer) {
