@@ -51,10 +51,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 });
 
                 // We need to check if the layer controls are already added to the DOM.
-                // if (Ember.$('.leaflet-control-layers').length === 0) {
+                if (Ember.$('.leaflet-control-layers').length === 0) {
                     var controlDiv = control.onAdd(map);
-                    Ember.$('.controls').append(controlDiv);
-                // }
+                    Ember.$('.base-layer-controls').append(controlDiv);
+                }
 
                 // Iniatate the dragging
                 var draggie = new Draggabilly( '.draggable', {
