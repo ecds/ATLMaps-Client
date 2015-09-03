@@ -1528,7 +1528,7 @@ a.is-editing-project-button {
   color: green;
 }
 
-.edit-info-success, .edit-info-fail, .reorder-success, .reorder-fail, .recenter-success, .recenter-fail {
+.save-success, .save-fail {
   display: none;
   font-size: .75em;
   border-radius: .5em;
@@ -1652,6 +1652,30 @@ a.is-editing-project-button {
     cursor: nwse-resize;
 }
 
+.base-preview {
+  width: 48%;
+  height: 10em;
+  // padding: 1em;
+  text-align: center;
+
+  a &:hover, a &:focus{
+    border-color: deeppink;
+    border-bottom-width: thick;
+  }
+
+}
+
+.leaflet-control-layers-list {
+  //display: none !important;
+}
+
+.base-preview.satellite {
+  background-image: url(/assets/images/satellite.png);
+}
+
+.base-preview.street {
+    background-image: url(/assets/images/street_map.png);
+}
 
 // sytle the lines, we need to add some class to the svgs
 .foo {

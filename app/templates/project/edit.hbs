@@ -18,10 +18,10 @@
 
 	<div class="project-info project-info-edit card">
 
-		<div class="alert alert-success edit-info-success">
+		<div class="alert alert-success edit-info-success save-success">
 		    Project Updated!
 		</div>
-		<div class="alert alert-danger edit-info-fail">
+		<div class="alert alert-danger edit-info-fail save-fail">
 		    Something went worng. Info was not updated.
 		</div>
 
@@ -82,10 +82,10 @@
 
 	</div>
 	<div class="raster-layers raster-layers-edit card">
-		<div class="alert alert-success reorder-success">
+		<div class="alert alert-success reorder-success save-success">
 		    New Order Saved!
 		</div>
-		<div class="alert alert-danger reorder-fail">
+		<div class="alert alert-danger reorder-fail save-fail">
 		    Something went worng. The new order was not saved.
 		</div>
 		<div class="add_layer_button pull-left">
@@ -123,17 +123,26 @@
 	</div>
 
 	<div class="controls controls-edit card">
-		<div class="alert alert-success recenter-success">
+		<div class="alert alert-success recenter-success save-success">
 		    Center and Zoom Level Set!
 		</div>
 
-		<div class="alert alert-danger recenter-fail">
+		<div class="alert alert-danger recenter-fail save-fail">
 		    Something went worng. The new center and zoom level were not set.
+		</div>
+
+		<div class="alert alert-success base-set-success save-success">
+		    New base map set!
+		</div>
+
+		<div class="alert alert-danger base-set-fail save-fail">
+		    Something went worng. Base map was not set for the project.
 		</div>
 
 		<a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom'}}>Set Center and Zoom Level</a>
 
 		<h3>Select Base Map</h3>
+		{{select-base-layer mode='edit' model=model}}
 	</div>
 
 	<div class="collaborations collaborations-edit card">

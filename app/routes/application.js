@@ -26,9 +26,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     detectRetina: true
                 });
 
-                //osm.addTo(map);
-
-                if (model.get('name') === 'Neat Project!') {
+                if (model.get('default_base_map') === 'satellite') {
                     MapQuestOpen_Aerial.addTo(map);
                 }
                 else {
@@ -36,8 +34,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 }
                         
                 var baseMaps = {
-                    "Street": osm,
-                    "Satellite": MapQuestOpen_Aerial
+                    "street": osm,
+                    "satellite": MapQuestOpen_Aerial
                 };        
                 
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
@@ -53,10 +51,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 });
 
                 // We need to check if the layer controls are already added to the DOM.
-                if (Ember.$('.leaflet-control-layers').length === 0) {
+                // if (Ember.$('.leaflet-control-layers').length === 0) {
                     var controlDiv = control.onAdd(map);
                     Ember.$('.controls').append(controlDiv);
-                }
+                // }
 
                 // Iniatate the dragging
                 var draggie = new Draggabilly( '.draggable', {

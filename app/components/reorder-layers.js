@@ -49,8 +49,8 @@ export default Ember.Component.extend({
                 var position = layerCount - index;
 
                 _this.store.find('raster_layer_project', {
-                    project_id: 9999999,
-                    raster_layer_id: 9999999
+                    project_id: model.get('id'),
+                    raster_layer_id: value
                 }).then(function(rasterLayerProject){
                     var  layerToUpdate = rasterLayerProject.get('firstObject');
                     layerToUpdate.set('position', position);

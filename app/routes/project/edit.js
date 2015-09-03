@@ -5,6 +5,11 @@ export default Ember.Route.extend({
 
 	actions: {
 
+        // didTransition: function(){
+        //     var map = this.globals.mapObject;
+        //     map.redraw();
+        // },
+
 		updateProjectInfo: function(model) {
             /* Action that updates the title, description and
             published status of a project. */
@@ -53,7 +58,10 @@ export default Ember.Route.extend({
         }
 
         // The action for updateing the order of raster layers is in the 
-        // `reorder-layers` component. It was put there so we could reuse
+        // `reorder-layer` component. It was put there so we could reuse
         // it on the explore route.
+
+        // The action for setting the base map is in the `select-base-layer`
+        // component. It was put there so we could reuse it on the explore route.
 	}
 });
