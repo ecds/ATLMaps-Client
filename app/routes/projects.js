@@ -20,7 +20,8 @@ export default Ember.Route.extend({
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,
-                zoom_level: 13
+                zoom_level: 13,
+                default_base_map: 'street'
             });
             
             var _this = this;
