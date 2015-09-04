@@ -26,6 +26,16 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     detectRetina: true
                 });
 
+                var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                    subdomains: '1234',
+                    mapID: 'newest',
+                    app_id: '1Igi60ZMWDeRNyjXqTZo',
+                    app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+                    base: 'base',
+                    maxZoom: 20
+                });
+
                 if (model.get('default_base_map') === 'satellite') {
                     MapQuestOpen_Aerial.addTo(map);
                 }
