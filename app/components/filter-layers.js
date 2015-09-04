@@ -9,7 +9,7 @@ export default Ember.Component.extend({
         Ember.$(".layer-search").focus(function(){
 
             var options = {
-                valueNames: [ 'name', 'description' ],
+                valueNames: [ 'name', 'description', 'tags', 'institution' ],
             };
 
             new List('searchableRasterLayers', options);

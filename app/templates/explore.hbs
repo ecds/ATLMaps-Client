@@ -7,6 +7,17 @@
 
 	<div class="project-info card">
 		<article>Here we will say something thoughtful about how one can "explore" the layers. It will be lovely.</article>
+		{{#rl-dropdown-container class="dropdown"}}
+  {{#rl-dropdown-toggle class="btn btn-default"}}
+    Toggle <span class="caret"></span>
+  {{/rl-dropdown-toggle}}
+ 
+  {{#rl-dropdown tagName="ul" class="dropdown-menu" closeOnChildClick="a:link"}}
+    <li><a href="#">Link 1</a></li>
+    <li><a href="#">Link 2</a></li>
+    <li><a href="#">Link 3</a></li>
+  {{/rl-dropdown}}
+{{/rl-dropdown-container}}
 	</div>
 
 	<div class="vector-data vector-data-edit card">
@@ -41,9 +52,6 @@
 
 	</div>
 	<div class="raster-layers raster-layers-edit card">
-		<div class="alert alert-success reorder-success">
-		    New Order Saved!
-		</div>
 		<div class="add_layer_button pull-left">
 
 			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}

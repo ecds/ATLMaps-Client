@@ -24,16 +24,18 @@
 								<div class="description">{{layer.description}}</div>
 							</p>
 							<p>
-								{{!--{{#if layer.tag_ids}}--}}
+								{{!-- not sure why i can't wrap the whole thing in a single if but doing so results in a build error :( --}}
+								{{#if layer.tag_ids}}
 									<span class="tagsIcon"></span>
-									<ul class="list-inline">
-										{{#each layer.tag_ids key="@index" as |tag|}}
-											<li class="tags">{{tag.name}}</li>
-										{{else}}
-											<li>none</li>
-										{{/each}}
-									</ul>
-								{{!--{{/if}--}}
+								{{/if}}
+								<ul class="list-inline">
+									{{#each layer.tag_ids key="@index" as |tag|}}
+									{{#if layer.tag_ids}}
+										<li class="tags">{{tag.name}}</li>
+										{{/if}}
+									{{/each}}
+								</ul>
+								<div class="institution">Provided by: <em>{{layer.institution.name}}</em></div>
 							</p>
 						</div>
 					</div>
@@ -82,7 +84,7 @@
 									<li>none</li>
 								{{/each}}
 							</ul>
-    					{{!--{{/if}--}}
+    					{{layer.institution.name}}
     				</p>
 				</div>
 			</div>

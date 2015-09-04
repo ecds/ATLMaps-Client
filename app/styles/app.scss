@@ -8,6 +8,7 @@
 @import 'toggle_button.scss';
 @import 'main-navbar.scss';
 @import 'back-to-project-button.scss';
+//@import 'filter-bar.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', sans-serif;
@@ -1320,6 +1321,7 @@ h4#showCollaborators a {
 .ember-modal-dialog {
   overflow: scroll;
   width: 50%;
+  top: 0;
 
   .ember-view{
     height: 25px;
@@ -1630,10 +1632,12 @@ a.is-editing-project-button {
 }
 
 .navbar.navbar-inverse {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 
   a {
     color: white;
