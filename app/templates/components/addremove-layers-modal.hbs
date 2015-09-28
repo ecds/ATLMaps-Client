@@ -4,14 +4,22 @@
 	{{#modal-dialog close="closeRasterModal" alignment="left" translucentOverlay=true}}
 
 	<div id="searchableRasterLayers">
-		{{filter-layers action="closeRasterModal"}}
+		<nav class="navbar navbar-inverse" id="filter_and_search">
+			<a {{action 'closeRasterModal'}}><span class="mdi-action-highlight-remove pull-right"></span></a>
+		<form class="navbar-form navbar-left layer-search" role="search">
+		  <div class="form-group">
+		    <input type="text" class="form-control" id="raster-search" placeholder="Search">
+		  </div>
+		  <button {{action "search"}} type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</nav>
 		<div class="list">
-			{{#if rasterLayers.isPending}}
+			{{#if results.isPending}}
 				<div class="modal-loading" id="raster-modal">
 					<img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
 				</div>
 			{{else}}
-				{{#each rasterLayers.content key="@index" as |layer|}}
+				{{#each results key="@index" as |layer|}}
 					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 						<div class="col-xs-2 remove-layer-button">
 
@@ -39,8 +47,11 @@
 							</p>
 						</div>
 					</div>
+					{{else}}
 				{{/each}}
 			{{/if}}
+			<h3 class="use_search">Use the search bar to find avaliable layers.</h3>
+			<h3 class="no_results">Search returned no results.</h3>
 		</div>
 	</div>
 
@@ -52,9 +63,9 @@
 {{#if isShowingVectorModal}}
 
   {{#modal-dialog close="closeVectorModal" alignment="left" translucentOverlay=true}}
-  <div id="searchableVectorLayers">  
+  <div id="searchableVectorLayers">
   {{filter-layers action="closeVectorModal"}}
-  
+
   <div class="list">
   		{{#if vectorLayers.isPending}}
   			<div class="modal-loading" id="vector-modal">
@@ -65,7 +76,7 @@
 			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 				<div class="col-xs-2">
 					{{add-remove-layer-button add="sendVectorLayerToAdd" remove="sendVectorLayerToRemove" layer=layer}}
-					
+
 				</div>
 				<div class="col-xs-9">
 					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>

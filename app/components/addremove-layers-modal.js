@@ -8,6 +8,10 @@ export default Ember.Component.extend({
 
     sortProperties: ['name'],
 
+		results: function() {
+	    return [];
+	  }.property(),
+
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({
@@ -51,8 +55,25 @@ export default Ember.Component.extend({
 
         },
 
+				search: function(){
+		      var searchTerm = Ember.$("input#raster-search").val();
+		      var searchResults = this.store.query('rasterLayer', {query: searchTerm});
+		      this.setProperties({results: searchResults});
+					searchResults.then(function(){
+						if (searchResults.get('length') === 0) {
+							Ember.$('h3.use_search').hide();
+							Ember.$('h3.no_results').show();
+						}
+						else {
+							Ember.$('h3.use_search').hide();
+							Ember.$('h3.no_results').hide();
+						}
+					});
+		    },
+
         closeRasterModal: function(){
             this.set('isShowingRasterModal', false);
+						this.set('results', []);
         },
 
         closeVectorModal: function(){

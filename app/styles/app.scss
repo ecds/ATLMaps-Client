@@ -8,6 +8,7 @@
 @import 'toggle_button.scss';
 @import 'main-navbar.scss';
 @import 'back-to-project-button.scss';
+@import 'searchbar.scss';
 //@import 'filter-bar.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
@@ -251,7 +252,7 @@ a.site-title .alt-dark{
   font-weight: 700;
   text-shadow: 2px 2px #666699;
   text-align: center;
-  
+
 }
 
 .navbar{
@@ -662,7 +663,7 @@ a.action.show-options {
   transition: all 0.2s ease;
 }
 
-a.action.project-delete:hover, 
+a.action.project-delete:hover,
 a.action.project-delete:focus{
   opacity:1;
 }
@@ -947,7 +948,7 @@ img.geojson {
   float: left;
   margin-right: .5em;
   font-family: Material-Design-Icons;
-  
+
 }
 
 img.layerMarker {
@@ -1003,7 +1004,7 @@ img.layerMarker {
 
 .project-options {
   display: none;
-  
+
 }
 
 .row-content {
@@ -1027,7 +1028,7 @@ a.project-options-close {
   margin-right: 1em;
   margin-top: .5em;
   color: black;
-  
+
 }
 
 a.project-options-close:hover {
@@ -1037,7 +1038,7 @@ a.project-options-close:hover {
 
 .list-group  div.project-group-item {
   overflow: auto;
-  
+
 }
 h2 .btn.btn-fab{
   box-shadow: 2px 3px 14px rgba(0, 0, 0, 0.13),-2px 5px 14px rgba(0, 0, 0, 0.13);
@@ -1310,7 +1311,7 @@ h4#showCollaborators a {
       padding-top: .25em;
     }
   }
-  
+
 }
 
 .project-info {
@@ -1332,7 +1333,7 @@ h4#showCollaborators a {
   }
 
   .list {
-    margin-top: 60px;
+    margin-top: 7em;
   }
 
   nav {
@@ -1689,4 +1690,3 @@ a.is-editing-project-button {
    }
   }
 }
-
