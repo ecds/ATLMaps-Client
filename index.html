@@ -1,0 +1,586 @@
+<html>
+<head>
+
+<title>ATLMaps</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' rel='stylesheet' type='text/css'> 
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
+  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+  <!-- endbower -->
+  <link rel='stylesheet' href='css/component.css' />
+  <link rel='stylesheet' href='css/local.css' />
+  <link rel='stylesheet' href='css/marker.css' />
+  
+  
+  <script src="js/modernizr.custom.js"></script>
+  <script src="bower_components/ember/ember-template-compiler.js"></script>
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+  <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+  <script src="bower_components/handlebars/handlebars.js"></script>
+  <script src="bower_components/ember/ember.debug.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+  <script src="bower_components/leaflet-ajax/dist/leaflet.ajax.js"></script>
+  <script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
+  <script src="bower_components/ember-simple-auth/simple-auth.js"></script>
+  <script src="bower_components/ember-simple-auth/simple-auth-oauth2.js"></script>
+  <script src="bower_components/list.js/dist/list.js"></script>
+  <script src="bower_components/blueimp-md5/js/md5.js"></script>
+  <!-- endbower -->
+
+  <script src="http://builds.emberjs.com/beta/ember-data.min.js"></script>
+  <script src="js/jquery.nouislider.min.js"></script>
+  <script src="js/shuffle.js"></script>
+  <script src="js/menu/classie.js"></script>
+  <script src="js/menu/gnmenu.js"></script>
+  
+  <script src="js/app.js"></script>
+
+  <link rel="icon" href="images/favicon.ico">
+  
+</head>
+<body>
+  <script type="text/x-handlebars" data-template-name="application">
+  <div class="content">
+    <div class="menu-container">
+      <ul id="gn-menu" class="gn-menu-main">
+        <li class="gn-trigger">
+          <a class="gn-icon gn-icon-menu mdi-navigation-expand-more"><span>Menu</span></a>
+          <nav class="gn-menu-wrapper">
+            <div class="gn-scroller">
+              <ul class="gn-menu">
+                <!--<li class="gn-search-item">
+                  <input placeholder="Search" type="search" class="gn-search">
+                  <a class="gn-icon gn-icon-search mdi-action-search"><span>Search</span></a>
+                </li>-->
+                <!--<li><a class="gn-icon mdi-action-settings">Settings</a></li>-->
+                <li>{{#link-to 'projects' tagName='a' class="gn-icon mdi-image-collections"}}Projects{{/link-to}}</li>
+                <li>
+                  <a class="gn-icon mdi-editor-insert-drive-file">Pages</a>
+                  <ul class="gn-submenu">
+                    <li>{{#link-to 'about' tagName='a' class="gn-icon mdi-action-info"}}About ATLMaps{{/link-to}}</li>
+                    <!--<li><a class="gn-icon mdi-image-image">Images</a></li>
+                    <li><a class="gn-icon mdi-image-movie-creation">Videos</a></li>-->
+                  </ul>
+                </li>
+                {{#if session.isAuthenticated}}
+                <!--<li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>-->
+                {{else}}
+                <li>{{#link-to 'login' tagName='a' class="gn-icon mdi-navigation-arrow-forward"}}Login{{/link-to}}</li>
+                {{/if}}
+              </ul>
+            </div><!-- /gn-scroller -->
+          </nav>
+        </li>
+        <li class="home">{{#link-to 'index' tagName='a' class='site-title'}}<img class="logo" src="images/am-logo3.png"/><span class="alt-dark">ATL</span>Maps{{/link-to}}</li>
+        {{#if session.isAuthenticated}}
+          <li class="pull-right gravatar"><a {{action 'invalidateSession' }} title="Logout">{{gravatar-image email=session.user.email size="55"}}</a></li>
+          <!--<li><a class="gn-icon mdi-notification-do-not-disturb" {{ action 'invalidateSession' }}>Logout</a></li>-->
+          {{else}}
+          <li></li>
+        {{/if}}
+      </ul>
+    </div>
+    
+    {{initMenu}}
+    {{outlet "modal"}}
+    {{outlet}}
+    
+  </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="index">
+    <div class="banner blue">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8">
+            <div class="jumbotron text-center">
+              <h1>Layers of discovery</h1>
+                 <h2>Mapping the stories of your city</h2>
+              {{#if session.isAuthenticated}}
+              <p>{{#link-to 'projects' tagName='a' class="btn btn-material-pink-300 btn-lg"}}Go to Projects{{/link-to}}</p>
+              {{else}}
+              <p><a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a></p>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="banner blue blurred">
+    <div class="container">
+      <article>
+        <header class="row">
+          <div class="col-xs-12">
+            <h2>Projects</h2>
+          </div>
+        </header>
+        <hr />
+        <div class="list-group col-sm-10 col-sm-offset-1">
+          {{#each project in projects}}
+
+              <div class="list-group-item col-xs-6 project-group-item">
+                <div class="row-action-primary">
+                  <i class="mdi-maps-map icon-lg"></i>
+                </div>
+                <div class="row-content">
+                  <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                  <h4 class="list-group-item-heading">
+                    {{#link-to 'project' project action='reload'}}
+                    {{project.name}}
+                    {{/link-to}}
+                  </h4>
+                  <p class="list-group-item-text">{{project.description}}</p>
+                  <h5>Created by: {{project.user.displayname}}</h5>
+                </div>
+                <div class="list-group-separator"></div>
+              </div>
+
+          {{else}}
+            <p>There are no projects visible at this time :(</p>
+          {{/each}}
+        </div>
+      </article>
+    </div>
+    </div>
+  </script>
+
+  <script type='text/x-handlebars' data-template-name='projects/index'>
+    <div class="banner pink">
+        <div class="container">
+            <header>
+                <h2>Map Projects </h2>
+            </header>
+        </div>
+    </div>
+    <div class="banner pink blurred">
+        <div class="container">
+            <article>
+                {{#if session.isAuthenticated}}
+                    <header class="row">
+                        <div class="col-sm-7">
+                            <h2>
+                                <a class="btn btn-info btn-fab" {{action 'createProject'}}><span class="mdi-content-add"></span></a><span>My Projects</span>
+                            </h2>
+                        </div>
+                    </header>
+                    <hr/>
+                    {{my-projects}}
+                    {{my-collaborations}}
+                {{/if}}
+                {{published-projects}}
+            </article>
+        </div>
+    </div>
+  </script>
+  
+  <script type='text/x-handlebars' data-template-name='project'>
+    <div id="hint"><span class="mdi-navigation-expand-more"></span></div>
+    <a class="btn btn-fab btn-sm pull-left" style="display:none;" id="show-layer-options"><span class="mdi-action-visibility"></span></a>
+    <div class="layer-controls">
+      <div class="card">
+        {{#if model.is_mine}}<a class="btn btn-material-lightblue btn-fab btn-xs btn-flat pull-right" id="config-layers" {{action 'showEditForm'}}><span class="mdi-navigation-more-vert"></span><div class="ripple-wrapper"></div></a>{{/if}}
+        {{# if model.saved }}
+        <h1>{{model.name}}</h1>
+        <p>{{model.description}}</p>
+        {{ else }}
+        {{#if session.isAuthenticated}}
+        <div class="row">
+          <div class='col-xs-7' id="title-input">
+            {{input valueBinding='projectName' placeholder='Enter Title for Project' class="form-control floating-label" type="text"}}
+          </div>
+          <div class='col-xs-3'>
+            <a class="btn btn-info btn-flat pull-right" id="title-button" {{action 'saveProject'}}><span>Set</span></a>
+          </div>
+        </div>
+        {{/if}}
+        {{/if}}
+        {{#if may_edit}}{{partial 'addLayersButton'}}{{/if}}
+        <div class="togglebutton opacity">
+          <label>
+            <input id="toggle-layer-opacity" type="checkbox" checked="checked"/><span class="toggle"></span> <span class="toggle_label"></span>
+          </label>
+        </div>
+        <hr/>
+        <a class="btn btn-fab btn-sm btn-material-lightgrey top-layer-button" id="hide-layer-options"><span class="mdi-action-visibility-off"></span></a>
+        
+      </div>
+      <div class="layer-list">
+        
+        <ul class="shuffle-items">
+          {{#each layer in showLayers}}
+          <li class="item">
+            <p class="alt text-muted">
+              <span class="layer_marker">{{ layer-marker projectID=model.id layerID=layer.id layerType=layer.name }}</span>
+              {{layer.name}}
+            </p>
+            <div class="list-group row">
+              <div class="list-group-item">
+                <div class="row-action-primary">
+                  {{ layer-marker projectID=model.id layerID=layer.id }}
+                </div>
+                <div class="row-content">
+                  <h4 class="list-group-item-heading">{{layer.name}}{{layer.marker}}</h4>
+                  <p class="list-group-item-text">{{layer.description}}</p>
+                  <div class="text-muted">{{partial 'citation'}}</div>
+                </div>
+                <div class="col-xs-1 pull-right">
+                  {{#if model.is_mine}}<a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer' layer model.id}}><span class="mdi-content-clear"></span></a>{{/if}}
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer"> 
+              {{ opacity-slider layer=layer.layer layerID=layer.id }}
+            </footer>
+            {{map-layers layerID=layer.id layerName=layer.layer projectID=model.id}}
+          </li>
+          {{else}}
+          <li class="item">
+            <h4 class="media-heading">No Layers yet</h4>
+            <p class="alt text-muted">No Layers yet</p>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      
+    </div>
+    <div class="row" id="base-map">
+      {{ base-map }}
+    </div>
+    
+    {{#if is_mine}}
+    <div class="card" id='project_edit_form' style="display:none;left:-100%;">
+      <h3>Project Options</h3>
+      <div class="form-group">
+        <label for="edit_name">Title for the Project</label>
+        {{input valueBinding="name" name='name' id="edit_name" class="form-control h1"  }}
+      </div>
+      <div class="form-group">
+        <label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
+        {{textarea valueBinding="description" id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
+        
+        <div class="publish_check">
+          <div class="checkbox">
+            <label>
+            {{input type="checkbox" valueBinding="published" checked=published}}<span class="ripple"></span><span class="check"></span> Publish
+            </label>
+          </div>
+        </div>
+        
+        <div class="text-right">
+          <a class="btn btn-success btn-flat" {{action 'updateProject'}}>Save</a>
+          <a class="btn btn-material-blue-grey-200 btn-flat" {{action 'cancelUpdate'}}>Cancel</a>
+        </div>
+      </div>
+      <hr/>
+      <div class="collaborators">
+
+        <h4 id="showCollaborators"><a {{action 'showCollaborators'}}>Collaborators:<span class="mdi-navigation-expand-more hidding"></span><span class="mdi-navigation-expand-less showing"></span></a></h4>
+      </div>
+      <div id="searchableUsers">
+        <input class="usersearch form-control" placeholder="Search" />
+        <ul class="userlist">
+          {{#each user in users}}
+            {{add-remove-collaborator-button title='Add' action='addcollaborator' projectID=model.id userID=user.id user=user}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    {{/if}}
+    
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="add-layer-modal">
+    {{#layer-modal title='Add Layers' close='removeModal'}}
+    <div class="list">
+      {{#each layer in this}}
+      <div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+        <div class="col-xs-2">
+          {{add-remove-layer-button title='Add' action='addLayer' param=layer model=model}}
+        </div>
+        <div class="col-xs-9">
+          {{ list-avaliable-layers layer=layer}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/layer-modal}}
+  </script>
+  
+  <script type='text/x-handlebars' data-template-name='about'>
+    
+    <div class="banner orange">
+      <div class="container">
+        <header>
+            <h2>About</h2>
+        </header>
+      </div>
+    </div>
+    <div class="banner orange blurred">
+      <div class="container">
+        <article>
+            <p>ATLMaps is a collaboration between Georgia State University and Emory University. The project is in active and heavy development.</p>
+            <p>The ATLmaps project combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta.  This innovative online platform will allow users to layer an increasing number of interdisciplinary data to address the complex issues that cities pose.  The project looks to offer a framework that incorporates storytelling reliant on the geospatial data and for normalizing input across a range of data sets about Atlanta so that material can be cross-compared in novel ways, allowing users to make connections between data sources and ask questions that would not be apparent when only looking at one particular project.  The ATLmaps project will also encourage knowledgeable members of the university and local communities to curate data on the site to demonstrate the possibilities for synthesizing material across projects and data types.</p>
+        </article>
+      </div>
+    </div>          
+  </script>
+  
+  <script type='text/x-handlebars' data-template-name='login'>
+    <header class="text-center alt-header">
+      <h2>Start collaboraing and explore new layers.</h2>
+      <p class="lead">Log in to continue.</p>
+    </header>
+    <div class="well login-form">
+      <form {{action 'authenticate' on='submit'}} class="form" autocomplete="on">
+        <label for="identification" class="sr-only">Login</label>
+        <div class="form-group">
+          {{input value=identification placeholder='Email' class="form-control floating-label" type="text"}}
+        </div>
+        <label for="password" class="sr-only">Password</label>              
+        <div class="form-group">
+          {{input value=password placeholder='Password' type='password' class="form-control floating-label" autocomplete="off"}}
+        </div>
+        <button type="submit" class="btn btn-material-orange btn-block">Login</button>
+      </form>
+    </div>
+  </script>
+  
+  <!-- COMPONENTS -->
+  
+  <script type="text/x-handlebars" data-template-name="components/base-map">
+    <div id='map'></div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/opacity-slider">
+    <input {{bind-attr class=":value-input layer" }} {{action "opacityChange" on="change" param=layer}}/> 
+    <div {{bind-attr class=":slider :slider-material-orange-300 layer" name=layer}}></div>   
+    {{opacityslider}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/layer-marker">
+    
+    <div {{bind-attr class='markerClass'}}>
+      <div class="icon"></div>
+    </div>
+  </script> 
+  
+  <script type="text/x-handlebars" data-template-name="components/add-remove-layer-button">
+    {{is_active}}
+    {{#if layerAdded }}
+    <a class="btn rotate btn-added btn-fab btn-sm" {{action 'buttonRemoveLayer' this.layer this.model.id }}><span class="mdi-action-done"></span></a>
+    {{else}}
+    <a class="btn rotate btn-add btn-fab btn-sm" {{action 'buttonAddLayer' this.layer}}><span class="mdi-content-add"></span></a>
+    {{/if}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/remove-layer-button">
+    <a class="btn rotate btn-added btn-fab btn-sm"{{action 'removeLayer'}}><span class="mdi-content-clear"></span></a>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/list-avaliable-layers">
+    <h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+    <span class="hidden">
+    {{#each p in layer.project_ids}}
+    {{p.id}},
+    {{/each}}
+    </span>
+    <p>
+      <div class="description">{{layer.description}}</div>
+    </p>
+    <p>
+      {{partial 'tags'}}
+    </p>
+    <p>
+      {{partial 'citation'}}
+    </p>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/layer-modal">
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content" id="searchableLayers">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="modal-header">
+            <div {{bind-attr class=":filter-heading showFilters:active"}}>
+              <a {{action 'toggleFilters'}} {{bind-attr class=":btn :rotate :btn-inverse :btn-fab :btn-sm showFilters:active"}}><span class="mdi-content-filter-list"> </span></a>
+              <h2>Available Layers</h2>
+            </div>
+            {{search-tags}}
+            
+          </div>
+          <hr />
+          <div class="modal-body">
+            {{yield}}
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" data-dismiss="modal">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/search-tags">
+    <nav class="navbar navbar-inverse" id="filter_and_search">
+      <ul class="nav navbar-nav">
+        
+        <li class="clear"><a {{action 'sortTags' 'all'}}>All</a></li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tags <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            {{#each tag in tags}}
+            <li><a {{ action 'sortTags' tag.slug }}>{{tag.name}}</a></li>
+            {{/each}}
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
+          <ul class="dropdown-menu tags-dropdown" role="menu">
+            <li><a {{ action 'sortTags' 'geojson'}}>GeoJSON</a></li>
+            <li><a {{ action 'sortTags' 'planningatlanta'}}>GSU Tiles</a></li>
+            <li><a {{ action 'sortTags' 'wms'}}>WMS</a></li>
+            <li><a {{ action 'sortTags' 'wfs'}}>WFS</a></li>
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Provider <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            {{#each institution in institutions}}
+            <li><a {{ action 'sortTags' institution.slug }}>{{institution.name}}</a></li>
+            {{/each}}
+          </ul>
+        </li>
+        
+        <li>
+          <form class="navbar-form navbar-left" role="search">
+            {{input type="text" class="search form-control" placeholder="Search" value=searchTerm}}
+          </form>
+        </li>
+        
+      </ul>          
+    </nav>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/map-layers">
+    {{mappedLayers}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/my-projects">
+    <div class="list-group row">
+        {{list-projects projects=projects alt="I need to create some amazing projects." mine=true}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/my-collaborations">
+    <header class="row">
+        <div class="col-sm-7">
+            <h2>
+                <span>Collaborations</span>
+            </h2>
+        </div>
+    </header>
+    <hr/>
+    <div class="list-group row">
+        {{list-projects projects=myCollaborations alt="No Collaborations"}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/published-projects">
+    {{#if session.isAuthenticated}}
+        <header class="row">
+            <div class="col-sm-7">
+                <h2>All Published Projects</h2>
+            </div>
+        </header>
+        <hr />
+    {{/if}}
+    <div class="list-group row">
+        {{list-projects projects=projects alt="No one has made any projects worth publishing :("}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name='components/list-projects'>
+    {{#each project in projects}}
+        <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
+            <div class="row-action-primary">
+                <i class="mdi-maps-map icon-lg"></i>
+            </div>
+            <div class="row-content">
+                <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                <h4 class="list-group-item-heading">
+                    {{#link-to 'project' project action='reload'}}
+                    {{project.name}}
+                    {{/link-to}}
+                </h4>
+                <p class="list-group-item-text">{{project.description}}</p>
+                <h5>Created by: {{project.owner}}{{owner}}</h5>
+                {{#if mine}}
+                <a class="btn btn-flat action show-options" {{action 'toggleOptions' project.id}}>
+                    <span class="mdi-navigation-more-vert"></span>
+                  </a>
+                  <div class="project-options card">
+                    <a class="action project-delete" {{action 'deleteProject' project.id}}>
+                      <span class="mdi-action-delete action-icon"></span><span class="action-label">Delete</span>
+                    </a>
+                  </div>
+                  {{/if}}
+            </div>
+            <div class="list-group-separator"></div>
+        </div>
+    {{else}}
+        <h5>{{alt}}</h5>
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="components/add-remove-collaborator-button">
+      <li class="collaboration-list">
+      
+      {{is_collaborator}}
+      <div class="row">
+      <div class="col-xs-1">
+      {{#if collaboratorAdded}}
+            <a class="btn rotate btn-added btn-fab btn-xs" {{action 'buttonRemoveCollaborator' user.id projectID}}><span class="mdi-content-clear"></span></a>
+      {{else}}
+            <a class="btn rotate btn-fab btn-xs btn-add" {{action 'buttonAddCollaborator' user.id projectID}}><span class="mdi-content-add "></span></a>
+      {{/if}}
+      </div>
+      <div class="col-xs-6">
+            <h5 class="name">
+                {{user.displayname}}
+            </h5>
+      </div>
+      </div>
+      </li>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/gravatar-image">
+    <img {{bind-attr src=gravatarUrl}}>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name='_tags'>
+    {{#if layer.tag_ids}}
+    <span class="glyphicon glyphicon-tags tagsIcon"></span><ul class="list-inline">{{#each tag in layer.tag_ids}}<li class="tags">{{tag.name}}</li>{{/each}}</ul>
+    {{/if}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name='_citation'>
+    <p>Provided by: <img {{bind-attr src='layer.institution.icon'}} alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></p>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="_addLayersButton">
+    <div class="add_layer_button">
+      <a class="btn btn-add add_layer_button" {{action 'showModal' 'add-layer-modal'}}><span class="mdi-content-add mdi-large"></span> Layers</a>
+    </div>
+  </script>
+  
+</body>
+</html>
