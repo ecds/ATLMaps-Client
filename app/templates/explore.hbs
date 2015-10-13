@@ -1,0 +1,92 @@
+<div class="layer-controls">
+	<div class="project-title">
+		<h1>{{model.name}}</h1>
+	</div>
+	{{ project-nav mode='explore' model=model}}
+	{{ reorder-layers mode='explore' model=model}}
+
+	<div class="project-info card">
+		<article>Here we will say something thoughtful about how one can "explore" the layers. It will be lovely.</article>
+	</div>
+
+	<div class="vector-data vector-data-edit card">
+
+		<div class="layer-list">
+			<div class="add_layer_button">
+				{{addremove-layers-modal model=model type='vector' action='initProjectUI' add='addVectorLayer' remove='removeVectorLayer'}}
+			</div>
+			<div class="layer-list list-group">
+				{{#each model.vector_layer_ids key="@index" as |layer|}}
+					<div class="list-group-item {{layer.layer}} vector-layer" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+					<span class="geojson {{layer.layer}}">
+					</span>
+					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
+					<div class="layer-info-detail {{layer.slug}}">
+						<p class="list-group-item-text">{{layer.description}}</p>
+						{{partial 'citation'}}
+
+						<div class="edit-footer">
+							<div class="text-right btn-group pull-right">
+								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeVectorLayer' layer}}><span class="mdi-action-delete"></span></a>
+							</div>
+						</div>
+					</div>
+					</div>
+
+				{{else}}
+					No data layers have been added.
+				{{/each}}
+			</div>
+		</div>
+
+	</div>
+	<div class="raster-layers raster-layers-edit card">
+		<div class="add_layer_button pull-left">
+
+			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}
+
+		</div>
+		{{ hide-all-raster-layers }}
+		<div class="layer-list list-group raster-list" id="layer_sort">
+			{{#each model.raster_layer_ids key="@index" as |layer|}}
+				<div class="list-group-item raster-layer {{layer.layer}}" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+
+					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
+					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
+					<span class="handle pull-right">&varr;</span>
+					{{opacity-slider layer=layer}}
+					<div class="layer-info-detail {{layer.layer}}">
+
+						<article class="list-group-item-text">{{layer.description}}</article>
+						<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
+
+						<div class="edit-footer">
+							<div class="text-right btn-group pull-right">
+								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeRasterLayer' layer}}><span class="mdi-action-delete"></span></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			{{else}}
+				No scanned maps have been added.
+			{{/each}}
+		</div>
+	</div>
+
+	<div class="controls controls-edit card">
+		<h3>Select Base Map</h3>
+		{{select-base-layer mode='explore' model=model}}
+	</div>
+
+	<div class="help help card">
+		<p>I got your help right here.</p>
+	</div>
+
+</div>
+
+<div class="row" id="base-map">
+    {{ base-map }}
+</div>
+
+{{partial 'marker-data-window'}}

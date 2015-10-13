@@ -1,0 +1,963 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.295967680887427,
+                    48.85780097266282,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Eiffel Tower",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in Paris, France"
+            },
+            "id": "eiffel"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.20953574843956,
+                    -22.95040715767599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Christ the Redeemer",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in Rio, Brazil"
+            },
+            "id": "christ"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.839335188889,
+                    36.14936973429993,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Grand Canyon",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in Arizona, USA"
+            },
+            "id": "canyon"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.2122001847845,
+                    -33.85543600090152,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Sydney",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "New South Wales, Australia"
+            },
+            "id": "sydney"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.45863229278517,
+                    41.90238356414683,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "St Peters Basilica",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in Vatican City"
+            },
+            "id": "peters"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.1208037863755851,
+                    51.50295856070689,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The London Eye",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in London, England"
+            },
+            "id": "london"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -49.94881009327763,
+                    41.72834170105288,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Titanic",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in the North Atlantic Ocean"
+            },
+            "id": "titanic"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.3908088768236,
+                    39.91379916102216,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Forbidden City",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in China"
+            },
+            "id": "forbidden"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    138.7818265722904,
+                    35.34063009043844,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Mount Fuji",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located near Tokyo, Japan"
+            },
+            "id": "fuji"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.0857031353512,
+                    37.42169546752972,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Google Headquarters",
+                "styleUrl": "#sn_noicon0",
+                "styleHash": "534eb523",
+                "description": "Located in Mountain View, California"
+            },
+            "id": "google"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3491336247663,
+                    33.77988256688054,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1185 Virginia Ave: first location of Nexus photography collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792737?byline=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\nFaculty and graduates of Georgia State University founded the Nexus photo collective in 1973. The first gallery was located at 1185 Virginia Avenue in the row of small storefronts that still exists. Louise Shaw, one-time director of the Nexus Center for Contemporary Art and current curator of the David J. Spencer CDC Museum,  describes the beginning of Nexus. \n<br>\n\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20362287409/in/datetaken/\" title=\"photo_gallery\"><img src=\"https://farm6.staticflickr.com/5770/20362287409_0cc1d72a49_n.jpg\" width=\"320\" height=\"256\" alt=\"photo_gallery\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.36720421167826,
+                    33.76407777896517,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "608 Ralph McGill Boulevard: Forrest Avenue Consortium",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227846?byline=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892622?byline=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nLocated in an abandoned school building on Forrest Avenue (now Ralph McGill Boulevard), the  Forrest Avenue Consortium housed a collection of visual artists, dancers, bookmakers, printers, puppetry artists, and photographers, among others. The space had a gallery as well as studios and, like other organizations in the late 1970s, benefited from the city's Bureau of Cultural Affairs (that granted funds from the Comprehensive Employment and Training Act-CETA), the Georgia Arts Council, and other public funding agencies. Located in a then largely African American neighborhood, the mostly white consortium was, in the late seventies, the focus of community consternation when, according to its Neighborhood Planning Unit, it did not fulfill a mandate to be a place for community activity. In the 1984, the Forrest Avenue consortium became the Nexus Contemporary Art Center (now the Atlanta Contemporary Art Center). Annette Cone-Skelton and JoAnne Paschall, artists and art adminstrators at the time, remember the activities and energy of the consortium.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20555461181/in/datetaken/\" title=\"nexus\"><img src=\"https://farm6.staticflickr.com/5638/20555461181_1632815dc1_n.jpg\" width=\"320\" height=\"255\" alt=\"nexus\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38292000115653,
+                    33.78156609795267,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "114 10th St. NE: the Women's Art Collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792717\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/136227919\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nCallahan McDonough and other women artists formed the Women's Art Collective (WAC) in 1975. As a consiously feminist organization, it served as a place for women artists to exhibit, network with artists around the country, participate in workshops, and gain arts administration experience. Exhibitions, such as \"36 Women Artists\" and \"Mappings: A Survey of Atlanta Women Artists,\" supported the work of local women in the arts scene. The WAC ceased operations in the early 1990s, though some of its early members continue to be active in the Women's Caucus for Art in Georgia. Julia A. Fenton and Callahan McDonough, both founding members of the collective, describe the early activities of the WAC.\n<br>\n<img src=\"http://www.callahanmcdonough.com/wp-content/uploads/2014/03/Atlanta-Womens-Art-Collective-1.jpg\"/>\n<br>\nEarly members of the collective. Courtesy Callahan McDonough\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20667575996/in/dateposted-public/\" title=\"mappings ephemera0016\"><img src=\"https://farm6.staticflickr.com/5759/20667575996_019e13413a_n.jpg\" width=\"320\" height=\"217\" alt=\"mappings ephemera0016\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nAn installation image of the \"Mappings\" exhibition, organized in 1978 by Laura Lieberman for the Women's Art Collective. The exhibition featured the words and visual work of southern women artists, whom Lieberman surveyed and interviewed over the course of a year in 1977 and '78. Courtesy Laura Lieberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38419913442169,
+                    33.78106527841882,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "972 Peachtree St.: Art Papers",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227842\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nArt Papers magazine, still in print, grew out of the Atlanta Art Workers Coalition Newspaper in 1979 (the first issue of Art Papers was published in 1980) and also subsumed Contemporary Art/Southeast.  The magazine for a time carried on AAWC Newspaper's format in its publication of reviews, artist-to-artist interviews, critical essays on the arts world, and a \"Who Gets What\" column, which gave a breakdown of arts funding. Julia A. Fenton and Laura Lieberman were both early editors of the magazine; Lieberman remained until 1984. Annette Cone-Skelton, who was managing editor of Contemporary Art/Southeast at the time of the merger, describes the development of Art Papers.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/19934731973/in/dateposted-public/\" title=\"Laura with Dan Talley, Alyson Pou &amp; Bruno the wonder dog 1978\"><img src=\"https://farm6.staticflickr.com/5750/19934731973_8eff90c4a6_n.jpg\" width=\"218\" height=\"320\" alt=\"Laura with Dan Talley, Alyson Pou &amp; Bruno the wonder dog 1978\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nDan Talley (left), Laura Lieberman (center), and Alyson Pou at Berry College in Rome, Georgia. Talley and Lieberman co-edited Art Papers in the magazine's early years. Courtesy Laura Leiberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38437557527895,
+                    33.78106104172569,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "972 Peachtree St.: Atlanta Art Workers Coalition",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134791150\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892624\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nFaculty from the Atlanta College of Art and Atlanta-based artists incorporated the Atlanta Art Workers Coalition in 1976 to \"promote, protect, and aid the visual arts of Atlanta through programs focused on the needs of individual artists and art groups.\" The organization was very consciously grassroots. It supported local artists through a slide registry program, library, and gallery space. Members also published the Atlanta Art Workers Coalition Newspaper, which offered reviews of area shows, critical takes on the local art scene, interviews with nationally and internationally known artists, and reports on funding. The AAWC also published a directory of area artists. The organization folded in 1983. Julia A. Fenton, who served as executive director of the AAWC for a time, describes the beginnings of the organization. JoAnne Paschall speaks more broadly to a changing attitude among young artists of the 1970s who wanted to reassess and even overturn traditional conventions of the art world. \n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20360921740/in/datetaken/\" title=\"art_workers\"><img src=\"https://farm6.staticflickr.com/5764/20360921740_5e8e26ef88_n.jpg\" width=\"320\" height=\"257\" alt=\"art_workers\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38426145960473,
+                    33.78085564885216,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "972 Peachtree St.: Image Film and Video",
+                "description": "Image Film and Video collective founded the Atlanta Film Festival, still in production today. The organization shared the upper floor of 972 Peachtree St. with the Atlanta Art Workers Coalition and, later, Art Papers.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20539969962/in/datetaken/\" title=\"Atlanta Art Workers Coalition Newspaper  Vol. 3, No. 2, March-April, 1979\"><img src=\"https://farm6.staticflickr.com/5642/20539969962_1912521dc7_n.jpg\" width=\"240\" height=\"320\" alt=\"Atlanta Art Workers Coalition Newspaper  Vol. 3, No. 2, March-April, 1979\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nFull-page advertisement for the annual Atlanta Film and Video Festival in the March-April 1979 issue of the Atlanta Art Workers Coalition Newspaper. Courtesy Laura Lieberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.37900046537213,
+                    33.7368952708878,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "252 Georgia Ave: Neighborhood Arts Center",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225142?byline=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/136225337\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/136225250?byline=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe Neighborhood Arts Center (NAC) was, like the Forrest Avenue Consortium, housed in an abandoned school building (the Peter James Bryant school). Created in 1975, the NAC was part of the Black Arts movement of the 1960s and 1970s and tied to the cultural politics of Black Power. Community members attended workshops, lectures, classes, exhibits, and performances led by actors, visual artists, musicians, artisans, and poets. Tina Dunkley was an artist-in-residence and Alice Lovelace was a writer-in-residence, both during the late 1970s; both were funded by the Comprehensive Employment and Training Act (CETA), a jobs program signed into law by President Richard Nixon in 1973. The NAC remained vital long after the early 1980s and the removal of CETA funds, and closed in 1990. The schoolbuilding burned in 1986, after the NAC had moved to a new location on Auburn Avenue. Alice Lovelace and Tina Dunkley share histories with and opinions on the NAC. \n<br>\n<iframe src=\"https://player.vimeo.com/video/134892626\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nSeveral ATLas interviewees remembered that artists perceived the NAC to be the city's \"black\" arts center and the Forrest Avenue Consortium to be a \"white\" art space. According to most women, racial lines were not hardened and all organizations were racially mixed to a (sometimes small) degree. Still, some narrators acknowledged a divide.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20555459981/in/datetaken/\" title=\"neighborhood_art001\"><img src=\"https://farm6.staticflickr.com/5762/20555459981_9116d469ac_n.jpg\" width=\"320\" height=\"258\" alt=\"neighborhood_art001\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.41969152197129,
+                    33.73817298999904,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Gordon St. SW (now Abernathy Blvd): Phoenix Art and Theater Company",
+                "description": "Incorporated in 1976, the Phoenix Arts and Theater Company was an organization and arts center dedicated to supporting African American arts. Its members published the Afro-American Arts newsletter beginning in 1977."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38465001348757,
+                    33.78921884480625,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1280 Peachtree St.: Atlanta College of Art",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134892621\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe Atlanta College of Art, founded in 1905, was housed in what was then known as the Memorial Arts Center (now the Woodruff Arts Center) along with the Alliance Theater and the Atlanta Symphony Orchestra. Members of its faculty were active in the arts scene; some, such as Santo Bruno, were founding members of the Atlanta Art Workers Coalition. In 2005, the ACA merged with the Savannah College of Art and Design, a move that was highly controversial among students and faculty.  JoAnne Paschall worked in the ACA library in the 1970s, helping to build its art book collection. She later became editor of Nexus Press, known for its book art production."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3853905128538,
+                    33.79004235689007,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1280 Peachtree St.: High Museum of Art",
+                "description": "In the 1970s, the High Museum, under the leadership of director Gudmund Vigtel, was growing into a nationally known institution. At the same time, it offered some support to local artists. \"The Avant-Garde: 12 in Atlanta\" exhibition paid tribute, for example, to curator and Emory art historian John Howett's argument for a \"regional avant-garde.\" The show featured local artists Maria Artemis, Julia A. Fenton, and Annette Cone-Skelton, among others. Correspondence during this period between members of the Atlanta Art Workers Coalition suggests, however, that some young artists saw the High as inaccessible and \"stuffy\" and that artist-initiated organizations and exhibitions were the antidote to a hiearchical art world of which the High was a part.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20548968475/in/datetaken/\" title=\"The Avant-Garde: 12 in Atlanta\"><img src=\"https://farm6.staticflickr.com/5703/20548968475_7236127cfd_n.jpg\" width=\"277\" height=\"320\" alt=\"The Avant-Garde: 12 in Atlanta\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20540078122/in/datetaken/\" title=\"&quot;Foreword&quot; in &quot;Avant-Garde: 12 in Atlanta&quot;\"><img src=\"https://farm6.staticflickr.com/5771/20540078122_6aeb69315a_n.jpg\" width=\"277\" height=\"320\" alt=\"&quot;Foreword&quot; in &quot;Avant-Garde: 12 in Atlanta&quot;\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nCover and Gudmund Vigtel foreword for \"The Avante-Garde: 12 in Atlanta\" exhibition catalogue. Courtesy Laura Lieberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.32438882217481,
+                    33.79072066705754,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Emory University Department of Art History",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792711\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nArt historians from Emory, particularly John Howett, were supportive of local contemporary artists. Howett and others were regulars at art openings and events, curated shows dedicated to local artists, and contributed to Contemporary Art/Southeast and the Atlanta Art Workers Coalition Newspaper and, later, Art Papers. Julia A. Fenton remembers John Howett's legacy."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38226984587364,
+                    33.87766697644484,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "135 Wieuca Rd: Chastain Arts Center",
+                "description": "The city's Bureau of Cultural Affairs (now Office of Cultural Affaris) started Chastain Arts Center in 1978 as a contemporary art space."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.41831057262779,
+                    33.73792990810294,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "946 Ralph David Abernathy Blvd: Shrine of the Black Madonna",
+                "description": "An African American church (the Pan African Orthodox Christian Church) founded in Atlanta in 1975, the Shrine of the Black Madonna also has a cultural and educational center with gallery space."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.39052193011226,
+                    33.79871543867485,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1627 Peachtree St. NE: Georgia Council for the Arts and Humanities",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225143\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892629\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/136227852\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nIn 1976, the Georgia legislature passed an act creating the Georgia Council for Arts and Humanities, which grew from the previously named Georgia Commission on the Arts. The Georgia Council was the state's official agency to receive and then grant funds from the National Endowment for the Arts. In addition, it developed its own educational programs, including hiring artists to teach in public schools and the Art Bus program, which took Georgia artists' work around the state. Most of the women interviewed for the ATLas project received funding from the Georgia Council during their early careers. Alice Lovelace, Laura Lieberman, and Annette Cone-Skelton reflect on the importance of the Georgia Council in the larger constellation of public support for the arts in Atlanta.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/19947335243/in/dateposted-public/\" title=\"liebermanimg-002\"><img src=\"https://farm6.staticflickr.com/5710/19947335243_252b09b660_n.jpg\" width=\"320\" height=\"229\" alt=\"liebermanimg-002\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nLaura Lieberman teaching poetry in a Georgia classroom, part of a Georgia Council initiative in the late 1970s. Courtesy Laura Lieberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.39459059999271,
+                    33.75778079992855,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Omni: Bureau of Cultural Affairs",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134791724\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/136227902\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/136227835\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/134892625\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nMayor Maynard Jackson created the Bureau of Cultural Affairs (BCA) in 1974, and, in the late 1970s, it was housed in what was then the Omni complex. Through the BCA, artists and organizations could receive funding from the Comprehensive Employment and Training Act (CETA). CETA was a jobs program created by Congress in 1973 and was meant to supply relief and jobs training to the underemployed during recession. Jackson and the BCA are credited with using CETA funding to support local arts, a trend that began in San Francisco. Most of the women interviewed for the ATLas project received CETA funds during the late 1970s. Julia A. Fenton, Callahan McDonough, Annette Cone-Skelton, and Laura Lieberman remember the importance of Jackson and the BCA. The BCA is now the Office of Cultural Affairs."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38719829331363,
+                    33.75992995602454,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "225 Peachtree St.: Southern Arts Federation",
+                "description": "Founded in 1975, the Southern Arts Federation (now South Arts) was a regional organization that provided grants from the National Endowment for the Arts and maintained a job bank for artists."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.39045487059977,
+                    33.74864626629164,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "68 Mitchell St. SW: Mayor Maynard Jackson's office",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225325\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/136225241\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n\n<iframe src=\"https://player.vimeo.com/video/134792742\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nMaynard Jackson, the first African American mayor of Atlanta, served three terms in that role (1974-82 and 1990-94). Jackson aspired to make Atlanta an international city, and part of that plan was a robust arts scene. To that end, he created the Bureau of Cultural Affairs to fund and organize the arts, and launched other initiatives (such as his Mayor's Week for the Arts) to bring attention to the variety of arts organizations in the city. Jackon can also be credited for bringing artists to the city--both Tina Dunkley and Alice Lovelace came to Atlanta after seeing advertising campaigns during Jackson's reign that touted Atlanta as the seat of a \"New South,\" an image expressly aimed at African Americans. In the 1974 New York Times article referenced by Tina Dunkley (\"Capital of Black-is-Bountiful\") author Peter Ross Range confirmed that Jackson's election \"was widely hailed as the triumph of the black middle class.\" Dunkley, Alice Lovelace, and Louise Shaw remember the importance of Jackson in their own career paths and for the city of Atlanta."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38400442939312,
+                    33.78173734142523,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "10th and Peachtree: Midtown",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134790996\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nBefore Midtown gained its highrises, it was largely made up of strips of small businesses. The neighborhood also had a reputation for being the hangout place for hippies and artists in the 1970s and, later, drug dealers and prostitutes. Julia A. Fenton describes the scene."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3299953227579,
+                    33.76270375288932,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1759 Indiana Ave: 1970s home of Callahan McDonough and first home of the Women's Art Collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227896\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe first headquarters of the Women's Art Collective was in Callahan McDonough's former home in the Lake Claire neighborhood. Lake Claire, Candler Park, and Little Five Points housed artists in the 1970s."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38699050140256,
+                    33.78983330072977,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "34 Lombardy Way: David Heath gallery",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227865\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892628\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134792702\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nATLas interviewees Annette Cone-Skelton, Laura Lieberman, and Julia A. Fenton describe David Heath's gallery as being instrumental to the art scene of the 1970s. Heath represented local artists, including  Fenton and Cone-Skelton. In addition to his gallery space, he began the publication of Contemporary Art/Southeast that was later absorbed by Art Papers. Heath was forced to move his gallery to Buckhead when MARTA acquired land behind the Memorial Arts Center (now Woodruff Arts Center) to build a station."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38825809997138,
+                    33.76826400036396,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "9 Baltimore Place: Chi-Wara Gallery",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225359\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nChrystal Britton owned and operated the Chi-Wara gallery, and she represented black artists from across the African diaspora. Tina Dunkley recalls the importance of Britton's presence in Atlanta."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.37988249677436,
+                    33.8393142447653,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "142 East Paces Ferry Rd: Judith Alexander Gallery",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792744\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nLouise Fenton describes the galleries of the 1970s, part of what she calls the \"ecology\" of any art scene. Judith Alexander was an important gallerist during 1960s and 1970s and into the late twentieth century."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38694400035175,
+                    33.76545799988634,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "401 W. Peachtree St.: Handshake Gallery",
+                "description": "Handshake was a collective of artisans with a gallery and workshop space."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.41333665405897,
+                    33.74984083095958,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "223 James P. Brawley Dr.: Clark Atlanta University Art Galleries",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225345\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nOver the course of the twentieth century, Atlanta University (now Clark Atlanta University) built an important collection of the work of African American artists as well as those of the African diaspora. Tina Dunkley remembers first learning of the collection, which she describes as being \"under the radar\" of the art world. Dunkley went on to curate the collection for thirty-five years and is now curator emeritus of the Clark Atlanta University Art Galleries."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.39250247182805,
+                    33.80127215843489,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1745 Peachtree St.: Atlanta Jewish Community Center gallery"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.393533602286,
+                    33.80751302578433,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1931 Peachtree St: Image South Gallery",
+                "description": "Image South Gallery was a commercial gallery owned by Dean Gillette and Jere Frutchey and often showed members of the 1970s arts organizations such as the Atlanta Art Workers Coalition."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.29609475022617,
+                    33.76703273811898,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "141 E. College Ave: Dalton Gallery at Agnes Scott",
+                "description": "The Dalton Gallery in the Dana Fine Arts Building at Agnes Scott College opened in 1965. This and other university galleries and associated faculty and students helped to create the art world in the 1970s."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38658057453392,
+                    33.75398955387329,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Georgia State University: GSU Art Gallery",
+                "description": "Georgia State University had a gallery for faculty and student shows in the 1970s (today the Ernest G. Welch Galleries). ATLas narrator Louise Shaw remembered that GSU once forbade exhibition of faculty work that featured nudes, thus helping to spur the founding of the Nexus photography collective in the early 1970s."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.33366599843369,
+                    33.87542999910969,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4484 Peachtree Rd: Oglethrorpe University Museum of Art"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38268656131376,
+                    33.78676158421115,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "400 Colony Square: the Goethe Institute Gallery",
+                "description": "The Goethe Institute, still in operation, is a German cultural institute. In the1970s, its center included a gallery. The Atlanta College of Art also operated a gallery in Colony Square."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3870110993443,
+                    33.79385820081607,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "951 Peachtree St.: Storefront exhibitions",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136227887\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n\n<iframe src=\"https://player.vimeo.com/video/134892623\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nArtists in the 1970s claimed alternative exhibit spaces, including storefronts along Peachtree Street. Businesses in this section of Peachtree hosted one such exhibition on October 28, 1977. Callahan McDonough and JoAnne Paschall speak to the practice of \"pop-up\" exhibitions in the 1970s."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.37750259741551,
+                    33.78411464725382,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Piedmont Park: Piedmont Arts Festival",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792731\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe Piedmont Arts Festival began in 1953 and happened annually in Piedmont Park. The Bath House in the park was used  for more formal exhibitions. Louise Shaw describes the festival.\n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/20362239209/in/dateposted-public/\" title=\"art_festival\"><img src=\"https://farm6.staticflickr.com/5648/20362239209_27cff57683_n.jpg\" width=\"320\" height=\"256\" alt=\"art_festival\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nThe Zuckerman Museum of Art commissioned Emily J. Gómez, photographer and associate professor of art at Georgia College and State University, to capture images of five sites where 1970s art initiatives were located. This information is featured in ZMA's physical exhibition Forget Me Not and in ATLas. Gómez used the cyanotype toning process that changes a black-and-white photograph to blue."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38590589936689,
+                    33.75948150077814,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "225 Peachtree St.: Peachtree Center",
+                "description": "Arts organizations used Peachtree Center for exhibitions in the 1970s. The Women's Art Collective held a show in April 1978 in conjunction with the Ninth Women in Law Conference, and the Atlanta Art Workers Coalition organized an exhibition in July 1978 for the U.S. Conference of Mayors. \n<br>\n<a data-flickr-embed=\"true\"  href=\"https://www.flickr.com/photos/134719989@N04/19927931863/in/dateposted-public/\" title=\"4/6/78 36 Women Artists: An invitational exhibition\"><img src=\"https://farm6.staticflickr.com/5664/19927931863_d68742a874_n.jpg\" width=\"238\" height=\"320\" alt=\"4/6/78 36 Women Artists: An invitational exhibition\"></a><script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>\n<br>\nFront page of the catalogue for the Women's Art Collective exhibition \"36 Women Artists,\" held at Peachtree Center. Courtesy Laura Lieberman"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3854053981367,
+                    33.78891150722568,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Woodruff Arts Center",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225269\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nThe city developed the Memorial Arts Center (now Woodruff Arts Center) in 1968 and dedicated it to members of the Atlanta Art Association who had been killed in a plane crash at the French Orly Aiport in 1962. The center housed the Atlanta College of Art, Atlanta Symphony Orchestra, the High Museum of Art, and the Alliance Theater. Alice Lovelace describes protesting to city officials after the discovery that organizations within the center held annual lines in the city budget. Lovelace. a poet and activist, sat on funding panels for the city of Atlanta."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3490251313672,
+                    33.76603432949744,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "430 Moreland Ave: first location of Seven Stages",
+                "description": "<iframe src=\"https://player.vimeo.com/video/136225262\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>\n<br>\nSeven Stages theater began in 1979 and continues today from its current location at 1103 Euclid Ave. Alice Lovelace refers to Seven Stages when arguing for the imporant legacy of the 1970s arts scene--that organizations aquired physical space, \"homes\" that nurture artists and the arts. She also notes that the 1970s led to continued arts activism in the 1980s--specifically the creation of the Arts Exchange, a community-run organization, currently in operation at 750 Kalb St. SE."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.36429910098526,
+                    33.74280270029457,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "750 Kalb St.: The Arts Exchange",
+                "description": "Artists, including ATLas interviewee Alice Lovelace, founded the Arts Exchange, a community-run consortium and gallery space, in 1984--a direct growth from the art activism of the 1970s. It continues operation today."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.34934808957728,
+                    33.76551579125075,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1174 Euclid Ave: Little 5 Points Pub",
+                "description": "The Little 5 Points Pub was a popular hangout and bar and hosted the annual Atlanta Art Workers Coalition fundraisers. It also had a gallery and displayed the work of local artists."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.34506059092165,
+                    33.78189039641906,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "980 Briarcliff Road: Callanwolde Fine Arts Center",
+                "description": "The DeKalb County Recreation, Parks, and Cultural Affairs Department opened the Callanwolde Fine Arts Center in the mid-1970s. The home was the estate of Charles Howard Candler and built in 1920."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.295967680887427,
+                    48.85780097266282,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Eiffel Tower",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Paris, France"
+            },
+            "id": "eiffel"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.20953574843956,
+                    -22.95040715767599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Christ the Redeemer",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Rio, Brazil"
+            },
+            "id": "christ"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.839335188889,
+                    36.14936973429993,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Grand Canyon",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Arizona, USA"
+            },
+            "id": "canyon"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.2122001847845,
+                    -33.85543600090152,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Sydney",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "New South Wales, Australia"
+            },
+            "id": "sydney"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.45863229278517,
+                    41.90238356414683,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "St Peters Basilica",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Vatican City"
+            },
+            "id": "peters"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.1208037863755851,
+                    51.50295856070689,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The London Eye",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in London, England"
+            },
+            "id": "london"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -49.94881009327763,
+                    41.72834170105288,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Titanic",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in the North Atlantic Ocean"
+            },
+            "id": "titanic"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.3908088768236,
+                    39.91379916102216,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "The Forbidden City",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in China"
+            },
+            "id": "forbidden"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    138.7818265722904,
+                    35.34063009043844,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Mount Fuji",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located near Tokyo, Japan"
+            },
+            "id": "fuji"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.0857031353512,
+                    37.42169546752972,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Google Headquarters",
+                "styleUrl": "#sn_noicon",
+                "styleHash": "5fed9f79",
+                "description": "Located in Mountain View, California"
+            },
+            "id": "google"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.3490984,
+                    33.7799988,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1185 Virginia Ave NE"
+            },
+            "id": "1.2.1"
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.34911264625019,
+                    33.77990801661279,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1185 Virginia Ave. NE, first location of Nexus photography collective",
+                "description": "<iframe src=\"https://player.vimeo.com/video/134792737\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href=\"https://vimeo.com/134792737\">Louise Shaw on the beginnings of Nexus</a> from <a href=\"https://vimeo.com/mhhe\">KSU MHHE</a> on <a href=\"https://vimeo.com\">Vimeo</a>.</p>\n\n<img src=\"https://photos.google.com/photo/AF1QipNf_f2-HBMXQzFrJjqEDKSaQD_wSjBay65RndVZ\"/>"
+            }
+        }
+    ]
+}

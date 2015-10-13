@@ -1,0 +1,165 @@
+{{outlet}}
+
+{{#if model.may_edit}}
+
+<div class="layer-controls">
+	<div class="project-title project-edit">
+		<h1>{{model.name}}</h1>
+
+			{{#link-to 'project.view' model title="Back to View Mode"}}
+				<span class="mdi-editor-mode-edit"></span>
+			{{/link-to}}
+	</div>
+
+		{{ project-nav mode='edit' model=model}}
+
+	{{ reorder-layers mode='edit' model=model}}
+	
+
+	<div class="project-info project-info-edit card">
+
+		<div class="alert alert-success edit-info-success save-success">
+		    Project Updated!
+		</div>
+		<div class="alert alert-danger edit-info-fail save-fail">
+		    Something went worng. Info was not updated.
+		</div>
+
+		<div class="form-group">
+			<label for="edit_name">Title for the Project</label>
+			{{input value=model.name name='name' id="edit_name" class="form-control h1"  }}
+		</div>
+		<div class="form-group">
+			<label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
+			{{textarea value=model.description id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
+
+			<div class="publish_check">
+				<div class="checkbox">
+					<label>
+						{{input type="checkbox" checked=model.published}}
+						<span class="check"></span>
+						Publish
+					</label>
+				</div>
+			</div>
+			<div class="text-right">
+				<a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
+				<a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="vector-data vector-data-edit card">
+
+		<div class="layer-list">
+			<div class="add_layer_button">
+				{{addremove-layers-modal model=model type='vector' action='initProjectUI' add='addVectorLayer' remove='removeVectorLayer'}}
+			</div>
+			<div class="layer-list list-group">
+				{{#each model.vector_layer_ids key="@index" as |layer|}}
+					<div class="list-group-item {{layer.layer}} vector-layer" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+					<span class="geojson {{layer.layer}}">
+					</span>
+					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
+					<div class="layer-info-detail {{layer.slug}}">
+						<p class="list-group-item-text">{{layer.description}}</p>
+						{{partial 'citation'}}
+						<div>&nbsp;</div>
+
+						<div class="edit-footer">
+							<div class="text-right btn-group pull-right">
+								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeVectorLayer' layer}}><span class="mdi-action-delete"></span></a>
+							</div>
+						</div>
+					</div>
+					</div>
+				
+				{{else}}
+					No data layers have been added.
+				{{/each}}
+			</div>
+		</div>
+
+	</div>
+	<div class="raster-layers raster-layers-edit card">
+		<div class="alert alert-success reorder-success save-success">
+		    New Order Saved!
+		</div>
+		<div class="alert alert-danger reorder-fail save-fail">
+		    Something went worng. The new order was not saved.
+		</div>
+		<div class="add_layer_button pull-left">
+
+			{{addremove-layers-modal model=model type='raster' action='initProjectUI' add='addRasterLayer' remove='removeRasterLayer'}}
+
+		</div>
+		{{ hide-all-raster-layers }}
+		<div class="layer-list list-group raster-list" id="layer_sort">
+			{{#each model.raster_layer_ids key="@index" as |layer|}}
+				<div class="list-group-item raster-layer {{layer.layer}}" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+
+					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
+					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
+					<span class="handle pull-right mdi-navigation-unfold-more"></span>
+					{{opacity-slider layer=layer}}
+					<div class="layer-info-detail {{layer.layer}}">
+						
+						<article class="list-group-item-text">{{layer.description}}</article>
+						{{partial 'citation'}}
+						<div>&nbsp;</div>
+
+						<div class="edit-footer">
+							<div class="text-right btn-group pull-right">
+								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeRasterLayer' layer}}><span class="mdi-action-delete"></span></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			{{else}}
+				No scanned maps have been added.
+			{{/each}}
+		</div>
+	</div>
+
+	<div class="controls controls-edit card">
+		<div class="alert alert-success recenter-success save-success">
+		    Center and Zoom Level Set!
+		</div>
+
+		<div class="alert alert-danger recenter-fail save-fail">
+		    Something went worng. The new center and zoom level were not set.
+		</div>
+
+		<div class="alert alert-success base-set-success save-success">
+		    New base map set!
+		</div>
+
+		<div class="alert alert-danger base-set-fail save-fail">
+		    Something went worng. Base map was not set for the project.
+		</div>
+
+		<a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom'}}>Set Center and Zoom Level</a>
+
+		<h3>Select Base Map</h3>
+		{{select-base-layer mode='edit' model=model}}
+	</div>
+
+	<div class="collaborations collaborations-edit card">
+		<p>Collaborations will return soon.</p>
+	</div>
+
+	<div class="collaborations help-edit card">
+		<p>Help? You dnon't need help.</p>
+	</div>
+
+</div>
+
+
+{{else}}
+	<div class="card fail">
+		<h2>You can't edit this!</h2>
+		<img src="/assets/images/disappointed-face.png" alt="Disappointed Face"/>
+	</div>
+{{/if}}
+{{partial 'marker-data-window'}}

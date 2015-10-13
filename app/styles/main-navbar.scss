@@ -1,0 +1,99 @@
+
+
+.main-navbar{
+	position: relative;
+	background-color: white;
+	height: 60px;
+	box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.20);
+
+
+	.in{
+
+		margin-top: -8px;
+		width: 100%;
+    	display: inline-block;
+		
+		ul {
+			border-color: none !important;
+		    background-color: white !important;
+    		margin-top: -8px;
+
+		    li {
+		    	width: 100%;
+		    	padding-left: 2em;
+		    	display: inline-block;
+			}
+
+	    	a.active {
+	    		background-color: deeppink;
+	    	}
+
+		}
+	}
+
+	a{
+		color: #4E4E4E !important;
+		font-size: larger;
+		height: 46px;
+		border-top-right-radius: 5%;
+		border-top-left-radius: 5%;
+
+		&:hover, &:focus {
+			background-color: deeppink !important;
+			color: white !important;
+		}
+
+	}
+
+	a.navbar-brand {
+		&:hover, &:focus{
+			background-color: transparent !important;
+		}
+	}
+
+	a span {
+		color: #B0BEC5;
+	}
+
+	li{
+		padding-top: 1em;
+
+		.active {
+			background-color: deepskyblue !important;
+			color: white !important;
+		}
+		a {
+			padding-top: 10px !important;
+		}
+	}
+
+	img {
+		float: left;
+	}
+
+	a.site-title span{
+		font-size: x-large;
+		line-height: 50px;
+	}
+
+	$navbar-toggle-color:gray;
+	$navbar-hover-toggle-color:darkgray;
+	.navbar-toggle {
+		border-color: $navbar-toggle-color;
+
+		.icon-bar {
+			background-color: $navbar-toggle-color;
+		}
+
+		&:hover, &:focus{
+			border-color: $navbar-hover-toggle-color;
+			.icon-bar {
+				background-color: $navbar-hover-toggle-color;
+			}
+		}
+	}
+}
+
+.projects.project .main-navbar, .explore .main-navbar{
+  display: none;
+}

@@ -1,0 +1,11 @@
+{{#if session.isAuthenticated}}
+    <header class="row">
+        <div class="col-sm-7">
+            <h2>All Published Projects</h2>
+        </div>
+    </header>
+    <hr />
+{{/if}}
+<div class="list-group row">
+    {{list-projects projects=projects alt="No one has made any projects worth publishing :("}}
+</div>
