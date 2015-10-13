@@ -2,15 +2,15 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default Ember.Component.extend({
-	isShowingRasterModal: false,
+  isShowingRasterModal: false,
 
     isShowingVectorModal: false,
 
     sortProperties: ['name'],
 
-		results: function() {
-	    return [];
-	  }.property(),
+    results: function() {
+      return [];
+    }.property(),
 
     rasterLayers: function() {
 
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
     }.property(),
 
     actions: {
-    	toggleModal: function(){
+      toggleModal: function(){
 
             if (this.get('type') === 'raster') {
                 this.toggleProperty('isShowingRasterModal');
@@ -55,25 +55,25 @@ export default Ember.Component.extend({
 
         },
 
-				search: function(){
-		      var searchTerm = Ember.$("input#raster-search").val();
-		      var searchResults = this.store.query('rasterLayer', {query: searchTerm});
-		      this.setProperties({results: searchResults});
-					searchResults.then(function(){
-						if (searchResults.get('length') === 0) {
-							Ember.$('h3.use_search').hide();
-							Ember.$('h3.no_results').show();
-						}
-						else {
-							Ember.$('h3.use_search').hide();
-							Ember.$('h3.no_results').hide();
-						}
-					});
-		    },
+        search: function(){
+          var searchTerm = Ember.$("input#raster-search").val();
+          var searchResults = this.store.query('rasterLayer', {query: searchTerm, projectID: this.get('model.id')});
+          this.setProperties({results: searchResults});
+          searchResults.then(function(){
+            if (searchResults.get('length') === 0) {
+              Ember.$('h3.use_search').hide();
+              Ember.$('h3.no_results').show();
+            }
+            else {
+              Ember.$('h3.use_search').hide();
+              Ember.$('h3.no_results').hide();
+            }
+          });
+        },
 
         closeRasterModal: function(){
             this.set('isShowingRasterModal', false);
-						this.set('results', []);
+            this.set('results', []);
         },
 
         closeVectorModal: function(){

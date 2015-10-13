@@ -19,22 +19,22 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
                     detectRetina: true
                 });
-                
+
                 var MapQuestOpen_Aerial = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
                     attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
                     subdomains: '1234',
                     detectRetina: true
                 });
 
-                var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-                    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-                    subdomains: '1234',
-                    mapID: 'newest',
-                    app_id: '1Igi60ZMWDeRNyjXqTZo',
-                    app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-                    base: 'base',
-                    maxZoom: 20
-                });
+                // var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+                //     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+                //     subdomains: '1234',
+                //     mapID: 'newest',
+                //     app_id: '1Igi60ZMWDeRNyjXqTZo',
+                //     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+                //     base: 'base',
+                //     maxZoom: 20
+                // });
 
                 if (model.get('default_base_map') === 'satellite') {
                     MapQuestOpen_Aerial.addTo(map);
@@ -42,16 +42,16 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 else {
                     osm.addTo(map);
                 }
-                        
+
                 var baseMaps = {
                     "street": osm,
                     "satellite": MapQuestOpen_Aerial
-                };        
-                
+                };
+
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
                 control._map = map;
 
-                // Add a listiner for a click on the map to clear the 
+                // Add a listiner for a click on the map to clear the
                 // info window.
                 map.on('click', function(){
                     Ember.$("div.info").remove();
@@ -76,7 +76,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // the div was originally. So we change it to absolute.
                 draggie.element.style.position = 'absolute';
 
-                draggie.on( 'dragStart', function( event, pointer ) {});
+                draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
 
                 Ember.$('.marker-data').resizeThis({ noNative: true });
 
@@ -99,7 +99,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 });
 
             //});
-            
+
         },
 
         sort: function(layer){
@@ -108,7 +108,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
 	        	var projectLayer = DS.PromiseObject.create({
 	                promise: this.store.query('raster_layer_project', {raster_layer_id: layer.get('id'), project_id: project_id})
-	            }); 
+	            });
 
 	            projectLayer.then(function() {
 	            	var position = projectLayer.get('firstObject')._internalModel._data.position;
@@ -141,7 +141,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 var slider = document.getElementById(layer.get('slider_id'));
 
                 // The slider drops out when we transition but noUiSlider thinks
-                // the slider has already been initialized. So, if the slider is 
+                // the slider has already been initialized. So, if the slider is
                 // "initalized", we destroy. Otherwise, we just initalize it.
                 try {
                     slider.noUiSlider.destroy();
@@ -182,9 +182,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 });
 
             }, 2000);
-            
+
             // var map = this.globals.mapObject;
-            
+
             // map.eachLayer(function (layer) {
             //     console.log(layer);
             // });
@@ -196,7 +196,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.
             route = route.replace('\.edit', '');
-            
+
             var project_id = this.modelFor(route).get('id');
 
             layer.set('active_in_project', true);
@@ -215,14 +215,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             });
 
             addedLayers.then(function() {
-                
-                // To get the position, 
+
+                // To get the position,
                 var position = 0;
                 var newPosition = parseInt(Ember.$("[data-position]").attr('data-position')) + 1;
                 if (!isNaN(newPosition)) {
                     position = newPosition;
                 }
-                
+
                 var rasterLayerProject = _this.store.createRecord('raster-layer-project', {
                     project_id: project_id,
                     raster_layer_id: layer.get('id'),
@@ -247,7 +247,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 _this.send('initProjectUI', _this.modelFor('project'));
 
             });
-        
+
         },
 
         addVectorLayer: function(layer){
@@ -441,7 +441,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             Ember.$(".project-nav").removeClass('active-button');
 
             Ember.$(".project-nav").addClass('transparent-button');
-            
+
             if (Ember.$(".card:visible").length === 0) {
                 Ember.$('.vector-data').slideToggle();
                 Ember.$('#vector-data').removeClass('transparent-button');
