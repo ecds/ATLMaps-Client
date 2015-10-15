@@ -1,0 +1,11 @@
+<ul>
+  {{#each results.raster_layer_ids key="@index" as |raster|}}
+    {{raster.name}}
+  {{/each}}
+</ul>
+
+<ul>
+  {{#each results.vector_layer_ids key="@index" as |vector|}}
+    {{vector.name}}
+  {{/each}}
+</ul>
