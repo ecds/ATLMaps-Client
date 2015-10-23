@@ -10,7 +10,7 @@
 	</div>
 
 
-	{{ project-nav mode='view' }}
+	{{ project-nav mode='view' rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
 	{{ reorder-layers mode='view' }}
 
 	<div class="project-info card">

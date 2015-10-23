@@ -37,11 +37,13 @@
     "ember-cli-simple-auth": "0.8.0",
     "ember-cli-simple-auth-oauth2": "0.8.0",
     "ember-cli-uglify": "^1.0.1",
-    "ember-data": "1.0.0-beta.18",
+    "ember-collapsible-panel": "0.2.2",
+    "ember-data": "2,1.0",
     "ember-deploy-redis": "0.0.6",
     "ember-deploy-s3": "0.0.4",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-modal-dialog": "0.7.5"
+    "ember-modal-dialog": "0.7.5",
+    "ember-simple-auth": "1.0.1"
   }
 }

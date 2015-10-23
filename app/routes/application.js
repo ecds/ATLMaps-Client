@@ -51,7 +51,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
                 control._map = map;
 
-                // Add a listiner for a click on the map to clear the
+                // We need to check if the layer controls are already added to the DOM.
+                if (Ember.$('.leaflet-control-layers').length === 0) {
+					console.log('adding layer controls.')
+                    var controlDiv = control.onAdd(map);
+                    Ember.$('.base-layer-controls').append(controlDiv);
+                }
+
+				// Add a listiner for a click on the map to clear the
                 // info window.
                 map.on('click', function(){
                     Ember.$("div.info").remove();
@@ -59,12 +66,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     Ember.$(".active_marker").removeClass("active_marker");
                     _this.send('activateVectorCard');
                 });
-
-                // We need to check if the layer controls are already added to the DOM.
-                if (Ember.$('.leaflet-control-layers').length === 0) {
-                    var controlDiv = control.onAdd(map);
-                    Ember.$('.base-layer-controls').append(controlDiv);
-                }
 
                 // Iniatate the dragging
                 var draggie = new Draggabilly( '.draggable', {

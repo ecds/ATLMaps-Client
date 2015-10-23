@@ -1,11 +1,41 @@
-<ul>
-  {{#each results.raster_layer_ids key="@index" as |raster|}}
-    {{raster.name}}
-  {{/each}}
-</ul>
+<div class="browse-results">
+    {{ project-nav mode='browse' model=model}}
+    <ul>
+      <li>
+        {{#each results.raster_layer_ids key="@index" as |raster|}}
+          {{raster.name}}
+        {{/each}}
+      </li>
+    </ul>
 
-<ul>
-  {{#each results.vector_layer_ids key="@index" as |vector|}}
-    {{vector.name}}
+  <ul>
+    <li>
+      {{#each results.vector_layer_ids key="@index" as |vector|}}
+        {{vector.name}}
+      {{/each}}
+    </li>
+  </ul>
+</div>
+
+{{#cp-panels accordion=true}}
+{{#each categories key="@index" as |category|}}
+  {{#cp-panel}}
+    {{#cp-panel-toggle}}
+      <p>{{category.name}}</p>
+    {{/cp-panel-toggle}}
+    {{#cp-panel-body}}
+      <div>
+          {{#each category.tag_ids key="@index" as |tag|}}
+          <label>
+            <input type="checkbox" class="tags" id="{{tag.slug}}" name="{{tag.name}}" />
+            <span class="check"></span>
+            {{tag.name}}
+          </label>
+          <br />
+          {{/each}}
+      </div>
+    {{/cp-panel-body}}
+
+  {{/cp-panel}}
   {{/each}}
-</ul>
+{{/cp-panels}}

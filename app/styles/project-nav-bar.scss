@@ -1,0 +1,109 @@
+.layer-controls{
+  display:block;
+  float: left;
+  position: relative;
+  z-index: 11;
+  left: 0%;
+  width: 420px;
+  margin-left:30px;
+  margin-top: 48px;
+
+  .btn-group{
+    &, & .btn{
+      border-radius:0;
+      padding: 0;
+      height: 4em;
+
+      span.nav-icon {
+          &:before {
+              font-size: 1.25em;
+          }
+      }
+
+      span.badge {
+          background-color: crimson;
+      }
+    }
+  }
+
+}
+
+.card, .marker-data{
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
+  box-sizing: border-box;
+  color: black;
+  line-height: 1.5;
+  margin: 1.5em;
+  min-width: 420px;
+  max-width: 640px;
+  padding: 15px 10px;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+
+.layer-controls .card{
+  //margin:0;
+  padding-bottom: 0;
+}
+
+.layer-controls .card h3 {
+  margin-bottom: 0;
+}
+
+.layer-controls .card h3+hr,
+.modal-body h3+hr{
+  margin-top: 5px;
+}
+
+.btn.btn-info.btn-fab {
+  padding: 10px;
+}
+
+.btn.btn-fab, .btn.btn-fab .ripple-wrapper {
+  border-radius: 100%;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23), 0 10px 30px rgba(0, 0, 0, 0.19)
+}
+
+.btn.show-options {
+  width: 5%;
+  padding: 0;
+}
+
+.project-info, .vector-data, .raster-layers, .controls, .collaborations, .help, .browse {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border-radius: 2px;
+  border-top-left-radius:0;
+  border-top-right-radius:0;
+  color: rgba(0, 0, 0, 0.84);
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  display: none;
+  margin: -10px 0 0 1px;
+  font-size: 1.5em;
+  ul {
+    list-style-type: none;
+    padding: 0 0 1em 0;
+    li {
+      padding-top: .25em;
+    }
+  }
+
+}
+
+.transparent-button {
+  opacity: 0.8;
+
+  span.badge {
+      opacity: 0.5;
+  }
+}
+
+.active-button {
+  opacity: 1;
+  color: deepskyblue;
+}

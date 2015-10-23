@@ -1,0 +1,17 @@
+.browse-results {
+  position: fixed;
+  left: 480px;
+  width: 50%;
+  overflow-y: scroll;
+  height: 100%;
+  top: 70px;
+
+  .layers {
+
+  }
+
+  ul {
+    padding: 1em !important;
+    background: white;
+  }
+}
