@@ -18,6 +18,9 @@ export default Ember.Component.extend({
 		else if (this.get('mode') === 'browse'){
             this.set('browse', true);
         }
+		else if (this.get('mode') === 'browse-filters'){
+            this.set('browse-filters', true);
+        }
 
 	},
 
@@ -43,6 +46,18 @@ export default Ember.Component.extend({
                 Ember.$('#'+card).removeClass('transparent-button');
             }
         },
+
+		showRasterResults: function(){
+			Ember.$('.raster-results').show();
+			Ember.$('.vector-results').hide();
+			console.log('*hiding vectors')
+		},
+
+		showVectorResults: function(){
+			Ember.$('.vector-results').show();
+			Ember.$('.raster-results').hide();
+			console.log('*hiding rasters')
+		}
 
 	}
 });

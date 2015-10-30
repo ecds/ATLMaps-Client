@@ -192,6 +192,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
+			console.log(layer);
             // Get the current route so we handel requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;

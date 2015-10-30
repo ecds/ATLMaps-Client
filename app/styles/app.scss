@@ -18,7 +18,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-weight: 300;
 }
 
-.ember-view {
+.fullscreen-map {
   height: 100%;
 }
 
@@ -355,6 +355,10 @@ a.site-title .alt-dark{
 
 .layer-list-item:nth-child(even){
   background: #EEE;
+}
+
+.layer-list-item:nth-child(odd){
+  background: white;
 }
 
 #ex1Slider .slider-selection {

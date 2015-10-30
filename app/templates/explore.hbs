@@ -1,7 +1,9 @@
 <div class="layer-controls">
+	<div class="control-headers">
 	<div class="project-title">
 		<h1>{{model.name}}</h1>
 	</div>
+</div>
 	{{ project-nav mode='explore' model=model rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
 	{{ reorder-layers mode='explore' model=model}}
 

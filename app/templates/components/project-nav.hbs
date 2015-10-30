@@ -80,11 +80,19 @@
 {{#if this.browse}}
 	<div class="btn-group btn-group-justified">
 
-		<a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
+		<a {{action 'showVectorResults'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
 			<span class="mdi-maps-place nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
 		</a>
-		<a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
+		<a {{action 'showRasterResults'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
 			<span class="mdi-maps-layers nav-icon"></span><span class="badge">{{this.rasterCount}}</span>
 		</a>
+	</div>
+{{/if}}
+
+{{#if this.browse-filters}}
+	<div class="btn-group-vertical">
+		<a href="javascript:void(0)" class="btn btn-default active"><span class="mdi-image-style"></span><br />Tags</a>
+		<a href="javascript:void(0)" class="btn btn-default"><span class="mdi-action-account-balance"></span><br />Institution</a>
+		<a href="javascript:void(0)" class="btn btn-default"><span class="mdi-notification-event-note"></span><br />Years</a>
 	</div>
 {{/if}}
