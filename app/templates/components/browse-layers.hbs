@@ -6,21 +6,17 @@
 
 <div class="browse-cards">
     <div class="browse-by-tags">
-        {{#cp-panels accordion=true}}
 
         {{#each categories key="@index" as |category|}}
-          {{#cp-panel}}
-            {{#cp-panel-toggle}}
-              <p>{{category.name}}</p>
-            {{/cp-panel-toggle}}
-            {{#cp-panel-body}}
-              <div>
+            <p>
+              <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+              <div id="{{category.slug}}" class="tag-group">
                   {{#if category.tag_ids.isPending}}
                   <div class="modal-loading" id="raster-modal">
                       <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
                   </div>
               {{else}}
-                  {{#each category.tag_ids key="@index" as |tag|}}
+                  {{#each category.sortedTags key="@index" as |tag|}}
                   <label>
                     <input type="checkbox" class="tags" id="{{tag.slug}}" name="{{tag.name}}" />
                     <span class="check"></span>
@@ -30,11 +26,8 @@
                   {{/each}}
                   {{/if}}
               </div>
-            {{/cp-panel-body}}
-
-          {{/cp-panel}}
+          </p>
           {{/each}}
-        {{/cp-panels}}
     </div>
 </div>
 

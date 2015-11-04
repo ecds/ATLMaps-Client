@@ -44,7 +44,6 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
     "ember-modal-dialog": "0.7.5",
-    "ember-simple-auth": "1.0.1",
-    "liquid-fire": "0.21.3"
+    "ember-simple-auth": "1.0.1"
   }
 }

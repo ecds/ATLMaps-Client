@@ -1,11 +1,11 @@
 .browse-results {
   position: fixed;
   left: 480px;
-  width: 35%;
+  width: 45%;
   overflow-y: scroll;
-  background-color: white;
   top: 70px;
   height: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
 
   .layers {
 
@@ -14,6 +14,26 @@
   ul {
     padding: 1em !important;
     background: white;
+  }
+
+  .btn-group {
+      margin-bottom: 0;
+      box-shadow: none;
+
+      .active {
+          background-color: white;
+          opacity: 1;
+      }
+  }
+
+  .name {
+      font-size: 1em;
+  }
+  p {
+      font-size: .75em;
+  }
+  ul {
+      background-color: inherit;
   }
 }
 
@@ -47,6 +67,10 @@
         width: 75%;
         margin-left: 25%;
     }
+}
+
+.tag-group {
+    display: none;
 }
 
 .cp-Panels {

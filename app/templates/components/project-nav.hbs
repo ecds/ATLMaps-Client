@@ -80,10 +80,10 @@
 {{#if this.browse}}
 	<div class="btn-group btn-group-justified">
 
-		<a {{action 'showVectorResults'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
+		<a {{action 'showVectorResults'}} class="btn btn-default transparent-button project-nav vector-result-tab" id='vector-data' title="Pinpoint Layers">
 			<span class="mdi-maps-place nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
 		</a>
-		<a {{action 'showRasterResults'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
+		<a {{action 'showRasterResults'}} class="btn btn-default transparent-button project-nav raster-result-tab" id="raster-layers" title="Archival Maps">
 			<span class="mdi-maps-layers nav-icon"></span><span class="badge">{{this.rasterCount}}</span>
 		</a>
 	</div>

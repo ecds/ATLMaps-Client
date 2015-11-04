@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 
   categories: function(){
     // Return a sorted list of all categories.
+    // The tags are sorted on the model.
     return Ember.ArrayProxy.create({
         content: this.store.findAll('category'),
         sort: function(){
@@ -34,8 +35,6 @@ export default Ember.Component.extend({
           var results = this.store.queryRecord('search', {tags: tags});
           this.setProperties({ checkedTags: tags.length });
           this.setProperties({ resluts: results });
-
-          console.log(results.get('content.raster_layer_ids'));
       }
 
   },
@@ -58,23 +57,37 @@ export default Ember.Component.extend({
         _this.getResults(tags);
       });
 
-      var results = this.get('results')
+      var results = this.get('results');
 
-      var rasterCount = results.get('content.raster_layer_ids.length')
+      var rasterCount = results.get('content.raster_layer_ids.length');
 
-      var vectorCount = results.get('content.vector_layer_ids.length')
+      var vectorCount = results.get('content.vector_layer_ids.length');
 
       if (rasterCount > vectorCount) {
           Ember.$('.vector-results').hide();
-          console.log('hiding vectors')
+          Ember.$('.raster-results').show();
+          Ember.$('.raster-result-tab').addClass("active");
+          Ember.$('.vector-result-tab').removeClass("active");
       }
-      else {
+      else if (rasterCount < vectorCount){
           Ember.$('.raster-results').hide();
-          console.log('hiding rasters')
+          Ember.$('.vector-results').show();
+          Ember.$('.vector-result-tab').addClass("active");
+          Ember.$('.raster-result-tab').removeClass("active");
       }
   },
 
   actions: {
+      showTagGroup: function(tag) {
+          if (Ember.$('#'+tag).is(':visible')) {
+              Ember.$("#"+tag).hide(400);
+          }
+          else {
+            Ember.$(".tag-group").hide(400);
+            Ember.$("#"+tag).show(400);
+          }
+      },
+
       sendRasterLayerToAdd: function(layer){
           this.sendAction('add', layer);
       },

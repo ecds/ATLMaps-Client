@@ -50,13 +50,15 @@ export default Ember.Component.extend({
 		showRasterResults: function(){
 			Ember.$('.raster-results').show();
 			Ember.$('.vector-results').hide();
-			console.log('*hiding vectors')
+			Ember.$('.vector-result-tab').removeClass("active");
+			Ember.$('.raster-result-tab').addClass("active");
 		},
 
 		showVectorResults: function(){
 			Ember.$('.vector-results').show();
 			Ember.$('.raster-results').hide();
-			console.log('*hiding rasters')
+			Ember.$('.raster-result-tab').removeClass("active");
+			Ember.$('.vector-result-tab').addClass("active");
 		}
 
 	}
