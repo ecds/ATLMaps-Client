@@ -1,14 +1,15 @@
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '../../bower_components/bootstrap-material-design/sass/material.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
-@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
-@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
+@import '/Users/azotov/rails_apps/ATLMaps-Client/node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
+@import '/Users/azotov/rails_apps/ATLMaps-Client/node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
 //@import 'gn-menu.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
 @import 'main-navbar.scss';
 @import 'back-to-project-button.scss';
 @import 'searchbar.scss';
+@import 'list-projects.scss';
 //@import 'filter-bar.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{

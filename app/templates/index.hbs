@@ -29,35 +29,13 @@
     <article>
       <header class="row">
         <div class="col-xs-12">
-          <h2>Projects</h2>
+          <h2>Featured Projects</h2>
         </div>
       </header>
       <hr />
   
       <div class="list-group col-sm-10 col-sm-offset-1">
-        {{#each this.model key="@index" as |project|}}
-
-          <div class="list-group-item col-xs-6 project-group-item">
-            <div class="row-action-primary">
-              <i class="mdi-maps-map icon-lg"></i>
-            </div>
-            <div class="row-content">
-              <div class="action-secondary"><i class="mdi-material-info"></i></div>
-              <h4 class="list-group-item-heading">
-                {{#link-to 'project.view' project}}
-                  <span>
-                  {{project.name}}</span>
-                {{/link-to}}
-              </h4>
-              <p class="list-group-item-text">{{project.description}}</p>
-              <h5>Created by: {{project.user.displayname}} {{project.in_mine}}</h5>
-            </div>
-            <div class="list-group-separator"></div>
-          </div>
-
-        {{else}}
-          <p>There are no projects visible at this time :(</p>
-        {{/each}}
+       {{ featured-projects}}
       </div>
     </article>
   </div>

@@ -9,9 +9,9 @@ export default Ember.Route.extend({
 
     },
 
-    model: function(params) {
-        return this.store.findRecord('project', params.project_id);
-    },
+    // model: function(params) {
+    //     return this.store.findRecord('project', params.project_id);
+    // },
 
     afterModel: function() {
     	// Update the page title:

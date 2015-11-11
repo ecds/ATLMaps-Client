@@ -1,5 +1,5 @@
 {{#each projects key="@index" as |project|}}
-    <div {{bind-attr class=":list-group-item :col-xs-6 :project-group-item" }} {{bind-attr data-project-id="project.id"}}>
+    <div class="list-group-item col-xs-6 project-group-item min-height-class" {{bind-attr data-project-id="project.id"}}>
         <div class="row-action-primary">
             <i class="mdi-maps-map icon-lg"></i>
         </div>
@@ -22,14 +22,14 @@
               <div class="pull-left">
             <h4 class="list-group-item-heading">
                 {{#link-to 'project.view' project}}
-                {{project.name}}
+                {{project.name}} {{#if project.featured}}<span class="mdi-maps-beenhere"></span>{{/if}}
                 {{/link-to}}
             </h4>
             <p class="list-group-item-text">{{project.description}}</p>
             <h5>Created by: {{project.owner}}{{owner}}</h5>
         </div>
         </div>
-        <div class="list-group-separator"></div>
+        
     </div>
 {{else}}
     <h5>{{alt}}</h5>
