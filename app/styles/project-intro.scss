@@ -1,0 +1,44 @@
+.project-intro {
+    width: 90% !important;
+    height: 90%;
+    top: 5% !important;
+    left: 5%;
+    overflow: hidden !important;
+
+    h1 {
+        padding: .25em;
+    }
+
+    div {
+        padding: 1em;
+        position: relative;
+    }
+    .title{
+        padding: 0 2em 0 0;
+        a {
+            color: black;
+            text-decoration: none;
+            &:hover {
+                color: lightcoral;
+            }
+        }
+    }
+    .intro-text, .intro-video {
+        width: 45%;
+        height: 70%;
+        overflow-y: scroll;
+    }
+    .intro-video {
+        margin-right: 2em;
+        padding-top: 3em;
+    }
+    .explore-button {
+        top: 1.5em;
+        height: 0px;
+    }
+    .checkbox {
+        padding: 0;
+        top: 2.5em;
+        right: 1.5em;
+    }
+}

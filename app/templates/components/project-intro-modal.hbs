@@ -1,0 +1,34 @@
+<a {{action 'showIntro'}}>Show introduction.</a>
+
+{{#if isShowingIntroModal}}
+	{{#modal-dialog close="closeRasterModal" alignment="left" translucentOverlay=true container-class="project-intro"}}
+        <div class="title">
+            <a {{action 'hideIntro'}} class="mdi-action-highlight-remove pull-right"></a>
+            <h1>I'm From Here</h1>
+        </div>
+        <div class="intro-text pull-left">
+            <article>
+                <p>Microdosing drinking vinegar everyday carry street art flannel. Truffaut seitan echo park, forage locavore occupy austin neutra salvia. Normcore viral typewriter, bushwick YOLO portland disrupt shoreditch intelligentsia. Helvetica seitan mumblecore church-key gluten-free raw denim, authentic small batch tote bag mlkshk asymmetrical pickled twee pabst. Chambray master cleanse tilde, photo booth lomo try-hard hoodie art party hammock thundercats swag. Shoreditch cardigan sriracha intelligentsia, occupy locavore ramps pickled farm-to-table artisan blue bottle tattooed 8-bit. Readymade beard forage mustache bushwick.</p>
+
+                <p>Fingerstache bespoke VHS aesthetic shabby chic, thundercats master cleanse cardigan vegan ennui flexitarian. Chambray austin yuccie, +1 flexitarian tousled cred 8-bit keffiyeh green juice semiotics taxidermy pabst. Semiotics squid YOLO skateboard, XOXO microdosing 90's 3 wolf moon distillery chicharrones sustainable crucifix four loko. Etsy actually pork belly, scenester kitsch everyday carry chartreuse. Chartreuse pop-up keffiyeh post-ironic, pickled craft beer polaroid cred ennui 90's twee ethical small batch seitan etsy. Asymmetrical gentrify selfies before they sold out, bespoke fingerstache truffaut cred kale chips tumblr. Wayfarers williamsburg banjo wolf waistcoat.</p>
+
+                <p>Artisan locavore mustache forage, vegan put a bird on it synth sartorial blog pork belly chambray offal chia pug. Offal meggings deep v, listicle 90's kitsch shabby chic lo-fi vice yr kale chips gastropub pinterest farm-to-table. Venmo cliche tofu, echo park chicharrones crucifix ennui fanny pack scenester bespoke. Tacos ramps plaid narwhal. Locavore green juice pinterest, kinfolk letterpress freegan twee chia disrupt blue bottle trust fund celiac crucifix. Kinfolk single-origin coffee chambray viral, franzen DIY messenger bag polaroid tilde bitters. Chartreuse pabst flexitarian, kitsch sartorial keffiyeh neutra seitan umami tattooed.</p>
+
+                <p>8-bit chartreuse distillery drinking vinegar austin hella. Pork belly pop-up banh mi, typewriter migas farm-to-table echo park drinking vinegar mlkshk distillery ramps actually. Blue bottle brooklyn health goth, meggings iPhone you probably haven't heard of them offal tousled. Wayfarers vice messenger bag, tofu yr four loko disrupt pabst cold-pressed selfies tote bag normcore tumblr jean shorts. Everyday carry etsy cornhole paleo, hoodie pork belly skateboard gluten-free small batch dreamcatcher. VHS squid wolf fap, truffaut 90's pork belly godard pug cray master cleanse mlkshk aesthetic pour-over pabst. Tote bag viral retro, pabst vinyl pinterest thundercats bespoke banh mi messenger bag beard</p>
+            </article>
+        </div>
+        <div class="intro-video pull-right">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1m2cQjNhyaY" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="text-center explore-button">
+            <a class="btn btn-info" {{action 'hideIntro'}}>Explore Project</a>
+        </div>
+        <div class="checkbox pull-right">
+            <label>
+                {{input type="checkbox" checked=model.published}}
+                <span class="check"></span>
+                Don't show me again.
+            </label>
+        </div>
+	{{/modal-dialog}}
+{{/if}}
