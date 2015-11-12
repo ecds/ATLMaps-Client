@@ -5,27 +5,39 @@
     left: 5%;
     overflow: hidden !important;
 
-    h1 {
-        padding: .25em;
-    }
-
     div {
         padding: 1em;
         position: relative;
     }
     .title{
-        padding: 0 2em 0 0;
+        padding: 0;
+        margin: 0;
         a {
             color: black;
             text-decoration: none;
+            margin-top: -20px;
+            margin-right: 25px;
             &:hover {
                 color: lightcoral;
             }
         }
+
+        h1, h2 {
+            padding: 0;
+            margin: 0 0 0 15px;
+        }
+
+        h1 {
+            margin-top: 25px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
     }
     .intro-text, .intro-video {
         width: 45%;
-        height: 70%;
+        height: 75%;
         overflow-y: scroll;
     }
     .intro-video {

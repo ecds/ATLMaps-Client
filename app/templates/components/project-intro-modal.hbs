@@ -5,6 +5,7 @@
         <div class="title">
             <a {{action 'hideIntro'}} class="mdi-action-highlight-remove pull-right"></a>
             <h1>I'm From Here</h1>
+            <h2>By: Hannah Palmer</h2>
         </div>
         <div class="intro-text pull-left">
             <article>
@@ -25,9 +26,9 @@
         </div>
         <div class="checkbox pull-right">
             <label>
-                {{input type="checkbox" checked=model.published}}
+                {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}}
                 <span class="check"></span>
-                Don't show me again.
+                Don't show again {{this.notShowingIntro}}.
             </label>
         </div>
 	{{/modal-dialog}}
