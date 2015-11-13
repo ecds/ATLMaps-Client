@@ -1,0 +1,22 @@
+<a {{action 'openEditModal'}}>Edit Intorduction</a>
+{{#if isShowingEditModal}}
+	{{#modal-dialog close="closeEditModal" alignment="left" translucentOverlay=true container-class="project-intro"}}
+        <div class="container-fluid">
+            <div class="row">
+                {{#if project.template_id}}
+                    Hello
+                {{else}}
+                    <div class="col-md-4">
+                        <a {{action 'setTemplate' 'av'}} title="Select Article and Video" class="btn btn-default select-template select-av"></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a {{action 'setTemplate' 'a'}} title="Select Article Only" class="btn btn-default select-template select-a"></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a {{action 'setTemplate' 'v'}} title="Video Only" class="btn btn-default select-template select-v"></a>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    {{/modal-dialog}}
+{{/if}}

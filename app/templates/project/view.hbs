@@ -15,7 +15,9 @@
 
 	<div class="project-info card">
 		<article>{{{model.description}}}</article>
-		{{project-intro-modal project=model}}
+		{{#if model.intro}}
+			{{project-intro-modal project=model template=model.templateSlug}}
+		{{/if}}
 	</div>
 	<div class="vector-data card">
 

@@ -3,11 +3,12 @@
     height: 90%;
     top: 5% !important;
     left: 5%;
-    overflow: hidden !important;
 
-    div {
-        padding: 1em;
-        position: relative;
+    .container-fluid {
+        height: 100%;
+    }
+    .intro-body {
+        height: 75%;
     }
     .title{
         padding: 0;
@@ -15,16 +16,16 @@
         a {
             color: black;
             text-decoration: none;
-            margin-top: -20px;
-            margin-right: 25px;
+            margin-top: .5em;
             &:hover {
-                color: lightcoral;
+                background-color: lightcoral;
+                border-radius: 50%;
             }
         }
 
         h1, h2 {
             padding: 0;
-            margin: 0 0 0 15px;
+            margin: 0;
         }
 
         h1 {
@@ -35,22 +36,41 @@
             font-size: 1.5em;
         }
     }
-    .intro-text, .intro-video {
-        width: 45%;
-        height: 75%;
+    .intro-text {
         overflow-y: scroll;
+        height: 100%;
     }
+
     .intro-video {
-        margin-right: 2em;
-        padding-top: 3em;
+        height: 100%;
     }
-    .explore-button {
-        top: 1.5em;
-        height: 0px;
+
+    .intro-controls {
+        padding: .75em;
     }
+
     .checkbox {
-        padding: 0;
-        top: 2.5em;
-        right: 1.5em;
+        right: 1em;
     }
+}
+
+.lazyLoad-container {
+    height: 100% !important;
+}
+
+// Edit Modal stuff
+.select-template {
+    background-size: 225px 200px;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    min-width: 225px;
+}
+.select-av {
+    background-image: url(/assets/images/ArticleVideo.png);
+}
+.select-a {
+    background-image: url(/assets/images/ArticleOnly.png);
+}
+.select-v {
+    background-image: url(/assets/images/VideoOnly.png);
 }
