@@ -79,5 +79,11 @@ module.exports = function(environment) {
     crossOriginWhitelist: [ENV.APP.API_HOST]
   };
 
+  ENV.sassOptions = {
+  includePaths: [
+    'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
+  ]
+}
+
   return ENV;
 };

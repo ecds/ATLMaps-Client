@@ -1,11 +1,9 @@
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '../../bower_components/bootstrap-material-design/sass/material.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
-//@import '/Users/azotov/rails_apps/ATLMaps-Client/node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
-//@import '/Users/azotov/rails_apps/ATLMaps-Client/node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
 
-@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-structure.scss';
-@import '../../node_modules/ember-modal-dialog/app/styles/ember-modal-dialog/ember-modal-appearance.scss';
+@import 'ember-modal-structure.scss';
+@import 'ember-modal-appearance.scss';
 //@import 'gn-menu.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
