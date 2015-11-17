@@ -33,7 +33,7 @@
 			<label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
 			{{textarea value=model.description id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
 
-			{{edit-intro-modal project=model}}
+			{{edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
 
 			<div class="publish_check">
 				<div class="checkbox">

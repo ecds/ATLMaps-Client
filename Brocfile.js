@@ -47,6 +47,10 @@ var materialFonts = funnel('bower_components/bootstrap-material-design/fonts', {
 	destDir: 'assets/material-font-path'
 });
 
+var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
+	destDir: 'assets/images',
+});
+
 app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
 app.import('bower_components/leaflet/dist/leaflet.js');
@@ -59,6 +63,7 @@ app.import('bower_components/list.js/dist/list.min.js');
 app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('bower_components/js-cookie/src/js.cookie.js');
 app.import('vendor/js/menu/classie.js');
+app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
 
 app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
@@ -66,10 +71,13 @@ app.import('vendor/js/addLayers.js');
 app.import('bower_components/blueimp-md5/js/md5.js');
 app.import('bower_components/resizeThis/resizeThis.js');
 
+app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
+
 module.exports = mergeTrees([
 	app.toTree(),
 	leafletImages,
-	materialFonts
+	materialFonts,
+	trumbowygImages
 ],{
 	overwrite: true
 });

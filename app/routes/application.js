@@ -7,6 +7,7 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
 		initProjectUI: function(model) {
+			console.log(model)
             var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
@@ -36,12 +37,17 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 //     maxZoom: 20
                 // });
 
-                if (model.get('default_base_map') === 'satellite') {
-                    MapQuestOpen_Aerial.addTo(map);
-                }
-                else {
-                    osm.addTo(map);
-                }
+                try {
+					if (model.get('default_base_map') === 'satellite') {
+                    	MapQuestOpen_Aerial.addTo(map);
+                	}
+	                else {
+	                    osm.addTo(map);
+	                }
+				}
+				catch(err) {
+					osm.addTo(map);
+				}
 
                 var baseMaps = {
                     "street": osm,
@@ -191,7 +197,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
-			console.log(layer);
+			// console.log(layer);
             // Get the current route so we handel requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
@@ -245,7 +251,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     position
                 );
 
-                _this.send('initProjectUI', _this.modelFor('project'));
+                _this.send('initProjectUI', _this.modelFor(route));
 
             });
 
