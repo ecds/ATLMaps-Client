@@ -36,7 +36,7 @@ export default Ember.Route.extend({
 
             var project = this.modelFor('project');
 
-            
+
             project.set('center_lat', map.getCenter().lat);
             project.set('center_lng', map.getCenter().lng);
             project.set('zoom_level', map.getZoom());
@@ -54,10 +54,9 @@ export default Ember.Route.extend({
 
         setBaseMap: function() {
             var base = Ember.$('input[name=leaflet-base-layers]:checked').next().html().trim().toLowerCase();
-            console.log(base);
         }
 
-        // The action for updateing the order of raster layers is in the 
+        // The action for updateing the order of raster layers is in the
         // `reorder-layer` component. It was put there so we could reuse
         // it on the explore route.
 

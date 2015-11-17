@@ -18,5 +18,9 @@ export default DS.Model.extend({
     slug: DS.attr('string'),
     owner: DS.attr(),
     is_mine: DS.attr('boolean'),
-    may_edit: DS.attr('boolean')
+    may_edit: DS.attr('boolean'),
+	templateSlug: DS.attr('string'),
+	intro: DS.attr('string'),
+	media: DS.attr('string'),
+	template_id: DS.attr('number')
 });

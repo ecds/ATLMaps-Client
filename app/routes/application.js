@@ -7,6 +7,7 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
 		initProjectUI: function(model) {
+			console.log(model)
             var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
@@ -36,12 +37,17 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 //     maxZoom: 20
                 // });
 
-                if (model.get('default_base_map') === 'satellite') {
-                    MapQuestOpen_Aerial.addTo(map);
-                }
-                else {
-                    osm.addTo(map);
-                }
+                try {
+					if (model.get('default_base_map') === 'satellite') {
+                    	MapQuestOpen_Aerial.addTo(map);
+                	}
+	                else {
+	                    osm.addTo(map);
+	                }
+				}
+				catch(err) {
+					osm.addTo(map);
+				}
 
                 var baseMaps = {
                     "street": osm,
@@ -51,7 +57,13 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
                 control._map = map;
 
-                // Add a listiner for a click on the map to clear the
+                // We need to check if the layer controls are already added to the DOM.
+                if (Ember.$('.leaflet-control-layers').length === 0) {
+                    var controlDiv = control.onAdd(map);
+                    Ember.$('.base-layer-controls').append(controlDiv);
+                }
+
+				// Add a listiner for a click on the map to clear the
                 // info window.
                 map.on('click', function(){
                     Ember.$("div.info").remove();
@@ -59,12 +71,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     Ember.$(".active_marker").removeClass("active_marker");
                     _this.send('activateVectorCard');
                 });
-
-                // We need to check if the layer controls are already added to the DOM.
-                if (Ember.$('.leaflet-control-layers').length === 0) {
-                    var controlDiv = control.onAdd(map);
-                    Ember.$('.base-layer-controls').append(controlDiv);
-                }
 
                 // Iniatate the dragging
                 var draggie = new Draggabilly( '.draggable', {
@@ -88,7 +94,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     });
 
                     projectLayer.then(function() {
-                        _this.send('opacitySlider', projectLayer);
+                        // _this.send('opacitySlider', projectLayer);
                         _this.send('sort', projectLayer);
                     });
                 });
@@ -130,56 +136,56 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             Ember.run.later(this, function() {
 
-                var options = {
-                    start: [ 10 ],
-                    connect: false,
-                    range: {
-                        'min': 0,
-                        'max': 10
-                    }
-                };
-                var slider = document.getElementById(layer.get('slider_id'));
-
-                // The slider drops out when we transition but noUiSlider thinks
-                // the slider has already been initialized. So, if the slider is
-                // "initalized", we destroy. Otherwise, we just initalize it.
-                try {
-                    slider.noUiSlider.destroy();
-                }
-                catch(err){/* don't care */}
-
-                try {
-                	noUiSlider.create(slider, options, true);
-                }
-            	catch(err){/* again, don't care*/}
-
-                // Change the opactity when a user moves the slider.
-                var valueInput = document.getElementById(layer.get('slider_value_id'));
-                try {
-	                slider.noUiSlider.on('update', function(values, handle){
-	                    valueInput.value = values[handle];
-	                    var opacity = values[handle] / 10;
-	                    Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
-	                });
-	            }
-	        	catch(err){/* still don't care */}
-	        	try {
-	                valueInput.addEventListener('change', function(){
-	                    slider.noUiSlider.set(this.value);
-	                });
-	            }
-	        	catch(err){/* for real don't care */}
-
-                // Watch the toggle check box to show/hide all raster layers.
-                var showHideSwitch = document.getElementById('toggle-layer-opacity');
-                showHideSwitch.addEventListener('click', function(){
-                    if (Ember.$("input#toggle-layer-opacity").prop("checked")){
-                        slider.noUiSlider.set(10);
-                    }
-                    else{
-                        slider.noUiSlider.set(0);
-                    }
-                });
+                // var options = {
+                //     start: [ 10 ],
+                //     connect: false,
+                //     range: {
+                //         'min': 0,
+                //         'max': 10
+                //     }
+                // };
+                // var slider = document.getElementById(layer.get('slider_id'));
+				//
+                // // The slider drops out when we transition but noUiSlider thinks
+                // // the slider has already been initialized. So, if the slider is
+                // // "initalized", we destroy. Otherwise, we just initalize it.
+                // try {
+                //     slider.noUiSlider.destroy();
+                // }
+                // catch(err){/* don't care */}
+				//
+                // try {
+                // 	noUiSlider.create(slider, options, true);
+                // }
+            	// catch(err){/* again, don't care*/}
+				//
+                // // Change the opactity when a user moves the slider.
+                // var valueInput = document.getElementById(layer.get('slider_value_id'));
+                // try {
+	            //     slider.noUiSlider.on('update', function(values, handle){
+	            //         valueInput.value = values[handle];
+	            //         var opacity = values[handle] / 10;
+	            //         Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+	            //     });
+	            // }
+	        	// catch(err){/* still don't care */}
+	        	// try {
+	            //     valueInput.addEventListener('change', function(){
+	            //         slider.noUiSlider.set(this.value);
+	            //     });
+	            // }
+	        	// catch(err){/* for real don't care */}
+				//
+                // // Watch the toggle check box to show/hide all raster layers.
+                // var showHideSwitch = document.getElementById('toggle-layer-opacity');
+                // showHideSwitch.addEventListener('click', function(){
+                //     if (Ember.$("input#toggle-layer-opacity").prop("checked")){
+                //         slider.noUiSlider.set(10);
+                //     }
+                //     else{
+                //         slider.noUiSlider.set(0);
+                //     }
+                // });
 
             }, 2000);
 
@@ -191,6 +197,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
+			// console.log(layer);
             // Get the current route so we handel requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
@@ -244,7 +251,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     position
                 );
 
-                _this.send('initProjectUI', _this.modelFor('project'));
+                _this.send('initProjectUI', _this.modelFor(route));
 
             });
 

@@ -19,6 +19,7 @@
 					<img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
 				</div>
 			{{else}}
+			    <h3>{{results.length}} raster layers found</h3>
 				{{#each results key="@index" as |layer|}}
 					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
 						<div class="col-xs-2 remove-layer-button">

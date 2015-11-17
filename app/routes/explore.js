@@ -7,7 +7,8 @@ export default Ember.Route.extend({
                 user_id: 0,
                 published: false,
                 is_mine: true,
-                may_edit: true
+                may_edit: true,
+				default_base_map: 'street'
             });
 	},
 

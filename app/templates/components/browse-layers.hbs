@@ -1,11 +1,109 @@
-<ul>
-  {{#each results.raster_layer_ids key="@index" as |raster|}}
-    {{raster.name}}
-  {{/each}}
-</ul>
+<div class="browse-nav">
+    <div style="background-color:whitesmoke">&nbsp;</div>
+    {{ project-nav mode='browse-filters'}}
 
-<ul>
-  {{#each results.vector_layer_ids key="@index" as |vector|}}
-    {{vector.name}}
-  {{/each}}
-</ul>
+</div>
+
+<div class="browse-cards">
+    <div class="browse-by-tags">
+
+        {{#each categories key="@index" as |category|}}
+            <p>
+              <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+              <div id="{{category.slug}}" class="tag-group">
+                  {{#if category.tag_ids.isPending}}
+                  <div class="modal-loading" id="raster-modal">
+                      <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
+                  </div>
+              {{else}}
+                  {{#each category.sortedTags key="@index" as |tag|}}
+                  <label>
+                    <input type="checkbox" class="tags" id="{{tag.slug}}" name="{{tag.name}}" />
+                    <span class="check"></span>
+                    {{tag.name}}
+                  </label>
+                  <br />
+                  {{/each}}
+                  {{/if}}
+              </div>
+          </p>
+          {{/each}}
+    </div>
+</div>
+
+    <div class="browse-results">
+        {{ project-nav mode='browse' rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
+         <div class="list">
+             <div class="raster-results">
+            {{#each results.raster_layer_ids key="@index" as |raster|}}
+
+
+            <div {{bind-attr class=":layer-list-item :row :name raster.tag_slugs raster.institution.slug raster.layer_type" }}>
+                <div class="col-xs-2 remove-layer-button">
+
+                    {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=raster}}
+
+                </div>
+                <div class="col-xs-9">
+                    <h4 class="name"><span {{bind-attr class="raster.layer_type :description_icon"}}></span> {{raster.name}}</h4>
+                    <p>
+                        <div class="description">{{raster.description}}</div>
+                    </p>
+                    <p>
+                        {{!-- not sure why i can't wrap the whole thing in a single if but doing so results in a build error :( --}}
+                        {{#if raster.tag_ids}}
+                            <span class="tagsIcon"></span>
+                        {{/if}}
+                        <ul class="list-inline">
+                            {{#each raster.tag_ids key="@index" as |tag|}}
+                            {{#if raster.tag_ids}}
+                                <li class="tags">{{tag.name}}</li>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                        <div class="institution">Provided by: <em>{{raster.institution.name}}</em></div>
+                    </p>
+                </div>
+            </div>
+
+
+            {{/each}}
+        </div>
+        </div>
+
+        <div class="list">
+            <div class="vector-results">
+          {{#each results.vector_layer_ids key="@index" as |vector|}}
+
+          <div {{bind-attr class=":layer-list-item :row :name vector.tag_slugs vector.institution.slug vector.layer_type" }}>
+              <div class="col-xs-2 remove-layer-button">
+
+                  {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=rvector}}
+
+              </div>
+              <div class="col-xs-9">
+                  <h4 class="name"><span {{bind-attr class="vector.layer_type :description_icon"}}></span> {{vector.name}}</h4>
+                  <p>
+                      <div class="description">{{vector.description}}</div>
+                  </p>
+                  <p>
+                      {{!-- not sure why i can't wrap the whole thing in a single if but doing so results in a build error :( --}}
+                      {{#if vector.tag_ids}}
+                          <span class="tagsIcon"></span>
+                      {{/if}}
+                      <ul class="list-inline">
+                          {{#each vector.tag_ids key="@index" as |tag|}}
+                          {{#if vector.tag_ids}}
+                              <li class="tags">{{tag.name}}</li>
+                              {{/if}}
+                          {{/each}}
+                      </ul>
+                      <div class="institution">Provided by: <em>{{vector.institution.name}}</em></div>
+                  </p>
+              </div>
+          </div>
+
+          {{/each}}
+      </div>
+      </div>
+    </div>

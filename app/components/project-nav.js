@@ -10,10 +10,16 @@ export default Ember.Component.extend({
 			this.set('edit', true);
 		}
         else if (this.get('mode') === 'view'){
-            this.set('view', true);
+            this.set('projview', true);
         }
         else if (this.get('mode') === 'explore'){
             this.set('explore', true);
+        }
+		else if (this.get('mode') === 'browse'){
+            this.set('browse', true);
+        }
+		else if (this.get('mode') === 'browse-filters'){
+            this.set('browse-filters', true);
         }
 
 	},
@@ -26,7 +32,7 @@ export default Ember.Component.extend({
             Ember.$(".project-nav").removeClass('active-button');
 
             Ember.$(".project-nav").addClass('transparent-button');
-            
+
             if (Ember.$('.'+card).is(":visible")) {
                 Ember.$('.'+card).slideToggle();
                 Ember.$('#'+card).removeClass('active-button');
@@ -40,6 +46,20 @@ export default Ember.Component.extend({
                 Ember.$('#'+card).removeClass('transparent-button');
             }
         },
+
+		showRasterResults: function(){
+			Ember.$('.raster-results').show();
+			Ember.$('.vector-results').hide();
+			Ember.$('.vector-result-tab').removeClass("active");
+			Ember.$('.raster-result-tab').addClass("active");
+		},
+
+		showVectorResults: function(){
+			Ember.$('.vector-results').show();
+			Ember.$('.raster-results').hide();
+			Ember.$('.raster-result-tab').removeClass("active");
+			Ember.$('.vector-result-tab').addClass("active");
+		}
 
 	}
 });

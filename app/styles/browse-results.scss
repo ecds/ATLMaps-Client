@@ -1,0 +1,95 @@
+.browse-results {
+  position: fixed;
+  left: 480px;
+  width: 45%;
+  overflow-y: scroll;
+  top: 70px;
+  height: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+
+  .layers {
+
+  }
+
+  ul {
+    padding: 1em !important;
+    background: white;
+  }
+
+  .btn-group {
+      margin-bottom: 0;
+      box-shadow: none;
+
+      .active {
+          background-color: white;
+          opacity: 1;
+      }
+  }
+
+  .name {
+      font-size: 1em;
+  }
+  p {
+      font-size: .75em;
+  }
+  ul {
+      background-color: inherit;
+  }
+}
+
+.browse {
+    .browse-nav {
+        position: absolute;
+        height: 100%;
+        width: 25%;
+        background-color: whitesmoke;
+        left: 0;
+        bottom: 0;
+
+        .btn-group-vertical {
+            box-shadow: none;
+            width: 100%;
+            margin-top: 0;
+
+            .btn {
+                background-color: whitesmoke;
+                padding: .5em 0;
+            }
+
+            .active {
+                background-color: white;
+            }
+        }
+    }
+
+
+    .browse-cards {
+        width: 75%;
+        margin-left: 25%;
+    }
+}
+
+.tag-group {
+    display: none;
+}
+
+.cp-Panels {
+    margin-bottom: .5em;
+    font-size: .75em;
+}
+.cp-Panel {
+  border: 1px solid #ddd;
+}
+.cp-Panel-toggle {
+  display: block;
+  padding: .5em;
+}
+.cp-Panel-toggle:link {
+  text-decoration: none;
+}
+.cp-Panel-toggle:hover {
+  background-color: whitesmoke;
+}
+.cp-Panel-body-inner {
+  padding: .5em;
+}

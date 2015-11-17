@@ -1,0 +1,54 @@
+<a {{action 'showIntro'}}>Show introduction.</a>
+
+{{#if isShowingIntroModal}}
+	{{#modal-dialog close="hideIntro" alignment="left" translucentOverlay=true container-class="project-intro"}}
+    <div class="container-fluid">
+        <div class="row title">
+            <div class="col-md-10">
+                <h1>{{project.name}}</h1>
+                <h2>By: {{project.owner}}</h2>
+            </div>
+            <div class="col-md-2">
+                <a {{action 'hideIntro'}} class="mdi-action-highlight-remove pull-right close-button"></a>
+            </div>
+        </div>
+        <div class="intro-body">
+        {{#if this.av}}
+
+                <div class="intro-text col-md-6">
+                    <article>
+                        {{{project.intro}}}
+                    </article>
+                </div>
+                <div class="intro-video col-md-6">
+                    <div class="text-center">
+                        {{lazy-video url=project.media}}
+                    </div>
+                </div>
+
+        {{else if a}}
+            <div class="intro-text col-md-12">{{{project.intro}}}</div>
+        {{else if v}}
+            <div class="intro-video col-md-12">
+                {{lazy-video url=project.media}}
+            </div>
+        {{/if}}
+        </div>
+
+        <div class="row intro-controls">
+            <div class="col-md-12">
+                <div class="checkbox pull-right">
+                    <label>
+                        {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}}
+                        <span class="check"></span>
+                        Don't show again.
+                    </label>
+                </div>
+                <div class="text-center explore-button">
+                    <a class="btn btn-info" {{action 'hideIntro'}}>Explore Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	{{/modal-dialog}}
+{{/if}}

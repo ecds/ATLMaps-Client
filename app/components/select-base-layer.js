@@ -10,7 +10,8 @@ export default Ember.Component.extend({
 
 	actions: {
 		setBase: function(base) {
-			Ember.$("span:contains(' "+ base + "')").prev().click();
+			Ember.$(".leaflet-control-layers-selector").removeAttr('checked');
+			Ember.$("span:contains(' "+ base + "')").prev().click().attr('checked', 'checked');;
 
 			if (this.get('mode') === 'edit') {
 				var model = this.get('model');

@@ -1,8 +1,10 @@
 <div class="layer-controls">
+	<div class="control-headers">
 	<div class="project-title">
 		<h1>{{model.name}}</h1>
 	</div>
-	{{ project-nav mode='explore' model=model}}
+</div>
+	{{ project-nav mode='explore' model=model rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
 	{{ reorder-layers mode='explore' model=model}}
 
 	<div class="project-info card">
@@ -54,7 +56,7 @@
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
 					<span class="handle pull-right">&varr;</span>
-					{{opacity-slider layer=layer}}
+					{{opacity-slider layers=model.raster_layer_ids}}
 					<div class="layer-info-detail {{layer.layer}}">
 
 						<article class="list-group-item-text">{{layer.description}}</article>
@@ -74,13 +76,17 @@
 		</div>
 	</div>
 
+	<div class="browse card">
+		{{browse-layers}}
+	</div>
+
 	<div class="controls controls-edit card">
 		<h3>Select Base Map</h3>
 		{{select-base-layer mode='explore' model=model}}
 	</div>
 
 	<div class="help help card">
-		<p>I got your help right here.</p>
+		<p>Help? You mean it isn't obvious?</p>
 	</div>
 
 </div>

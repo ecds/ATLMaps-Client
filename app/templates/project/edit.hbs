@@ -11,10 +11,10 @@
 			{{/link-to}}
 	</div>
 
-		{{ project-nav mode='edit' model=model}}
+		{{ project-nav mode='edit' model=model rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
 
 	{{ reorder-layers mode='edit' model=model}}
-	
+
 
 	<div class="project-info project-info-edit card">
 
@@ -32,6 +32,8 @@
 		<div class="form-group">
 			<label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
 			{{textarea value=model.description id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
+
+			{{edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
 
 			<div class="publish_check">
 				<div class="checkbox">
@@ -73,7 +75,7 @@
 						</div>
 					</div>
 					</div>
-				
+
 				{{else}}
 					No data layers have been added.
 				{{/each}}
@@ -103,7 +105,7 @@
 					<span class="handle pull-right mdi-navigation-unfold-more"></span>
 					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
-						
+
 						<article class="list-group-item-text">{{layer.description}}</article>
 						{{partial 'citation'}}
 						<div>&nbsp;</div>
