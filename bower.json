@@ -12,10 +12,7 @@
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
     "ember-simple-auth": "0.8.0",
-    "ember-data": "~1.13.5",
-    "FroalaWysiwygEditor": "~2.0.0",
-    "font-awesome": "~4.4.0",
-    "summernote": "~0.6.1"
+    "ember-data": "~1.13.5"
   },
   "devDependencies": {
     "blueimp-md5": "~1.1.0",

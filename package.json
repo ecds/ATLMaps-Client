@@ -48,6 +48,6 @@
     "ember-simple-auth": "1.0.1"
   },
   "dependencies": {
-    "ember-lazy-video": "^0.2.5"
+    
   }
 }
