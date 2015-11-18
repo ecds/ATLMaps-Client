@@ -371,7 +371,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             // var controller = _this.controllerFor('project');
             // controller.send('initProjectUI', _this.modelFor('project'));
-            this.send('initProjectUI', this.modelFor('project'));
+            this.send('initProjectUI', this.modelFor(route));
 
         },
 
@@ -412,7 +412,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             // var controller = _this.controllerFor('project');
             // controller.send('initProjectUI', _this.modelFor('project'));
-            this.send('initProjectUI', this.modelFor('project'));
+            this.send('initProjectUI', this.modelFor(route));
 
         },
 

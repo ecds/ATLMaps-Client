@@ -76,7 +76,13 @@ export default Ember.Component.extend({
 
       checkSingleTag: function(tag){
           var tags = this.collectCheckedTags();
-          tags.push(tag);
+          console.log(tag)
+          if (document.getElementById(tag).checked === true){
+              tags.push(tag);
+          }
+          else {
+              tags.splice(tag, 1);
+          }
           this.getResults(tags);
       },
 

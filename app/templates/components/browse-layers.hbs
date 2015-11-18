@@ -27,7 +27,7 @@
                   {{#each category.sortedTags key="@index" as |tag|}}
                   <div class="checkbox">
                       <label>
-                          <input type="checkbox" class="tags {{category.slug}}" id="{{tag.slug}}" name="{{tag.name}}" onchange={{action "checkSingleTag" tag.name}} >
+                          <input type="checkbox" class="tags {{category.slug}}" id="{{tag.name}}" name="{{tag.name}}" onchange={{action "checkSingleTag" tag.name}} />
                           <span class="check"></span>
                         {{tag.name}}
                       </label>
