@@ -3,7 +3,7 @@
       <p class="lead">Log in to continue.</p>
     </header>
     <div class="well login-form">
-      <form {{action 'authenticate' on='submit'}} class="form" autocomplete="on">
+     <form {{action 'authenticate' on='submit'}} class="form" autocomplete="on">
         <label for="identification" class="sr-only">Login</label>
         <div class="form-group">
           {{input value=identification placeholder='Email' class="form-control floating-label" type="text"}}
@@ -14,4 +14,10 @@
         </div>
         <button type="submit" class="btn btn-material-orange btn-block">Login</button>
       </form>
+      {{#if errorMessage}} 
+    <div class="alert alert-danger"> 
+      <strong>Login failed:</strong> {{errorMessage}} 
+    </div> 
+  {{/if}}
+      
     </div>
