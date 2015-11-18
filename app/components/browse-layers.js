@@ -42,6 +42,12 @@ export default Ember.Component.extend({
       var rasterCount = results.get('content.raster_layer_ids.length');
 
       var vectorCount = results.get('content.vector_layer_ids.length');
+      if (rasterCount === 0 || rasterCount === 'undefined'){
+          Ember.$('.browse-results').hide();
+      }
+      else{
+          Ember.$('.browse-results').show();
+      }
 
       if (rasterCount > vectorCount) {
           Ember.$('.vector-results').hide();
@@ -70,7 +76,6 @@ export default Ember.Component.extend({
 
       checkSingleTag: function(tag){
           var tags = this.collectCheckedTags();
-          console.log(tags);
           tags.push(tag);
           this.getResults(tags);
       },
