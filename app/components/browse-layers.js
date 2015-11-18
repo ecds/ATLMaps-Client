@@ -23,45 +23,31 @@ export default Ember.Component.extend({
   }.property('results'),
 
   getResults: function(tags){
-      // Because this gets called in the `didUpdate` runs after the template has
-      // re-rendered and the DOM is now up to date. We don't want to make the
-      // call to the API everytime, so we check to see if the length of the
-      // `tags` is equal to the value of `checkedTags`. If they don't, it means
-      // a tag was selected or de-selected and we should run the qurey. Then
-      // we update `checkedTags` so they will match the next time the template
-      // updates.
-      var stored = this.get('checkedTags');
-      if (tags.length !== stored ){
-          var results = this.store.queryRecord('search', {tags: tags});
-          this.setProperties({ checkedTags: tags.length });
-          this.setProperties({ resluts: results });
-      }
+      var results = this.store.queryRecord('search', {tags: tags});
+      this.setProperties({ checkedTags: tags });
+      this.setProperties({ resluts: results });
 
   },
-  didUpdate: function() {
+
+  collectCheckedTags: function(){
       var tags = [];
-      // Since this runs everytime the DOM updates, we need to get the
-      // tags that are already cheked and push them back into the array.
       Ember.$(".tags:checked").each(function(){
           tags.push(this.name);
       });
-      var _this = this;
-      Ember.$(".tags").click(function() {
-        if(this.checked) {
-          tags.push(this.name);
-        }
-        else if (!this.checked) {
-          var tag = tags.indexOf(this.name);
-          tags.splice(tag, 1);
-        }
-        _this.getResults(tags);
-      });
-
+      return tags;
+  },
+  didUpdate: function() {
       var results = this.get('results');
 
       var rasterCount = results.get('content.raster_layer_ids.length');
 
       var vectorCount = results.get('content.vector_layer_ids.length');
+      if (rasterCount === 0 || rasterCount === 'undefined'){
+          Ember.$('.browse-results').hide();
+      }
+      else{
+          Ember.$('.browse-results').show();
+      }
 
       if (rasterCount > vectorCount) {
           Ember.$('.vector-results').hide();
@@ -86,6 +72,37 @@ export default Ember.Component.extend({
             Ember.$(".tag-group").hide(400);
             Ember.$("#"+tag).show(400);
           }
+      },
+
+      checkSingleTag: function(tag){
+          var tags = this.collectCheckedTags();
+          tags.push(tag);
+          this.getResults(tags);
+      },
+
+      checkAllTagsInCategory: function(category, tags){
+
+          var clickedTags = this.collectCheckedTags();
+          var setTo;
+          if (document.getElementById("checkbox-"+category).checked === true){
+              Ember.$.each(tags, function(index, tag) {
+                  clickedTags.push(tag.get('name'));
+                  setTo = true;
+              });
+          }
+          else if (document.getElementById("checkbox-"+category).checked === false) {
+              Ember.$.each(tags, function(index, tag) {
+                  clickedTags.splice(tag, 1);
+                  setTo = false;
+              });
+
+          }
+
+          this.getResults(clickedTags);
+          Ember.$('input.'+category).each(function(){
+              this.checked = setTo;
+          });
+
       },
 
       sendRasterLayerToAdd: function(layer){

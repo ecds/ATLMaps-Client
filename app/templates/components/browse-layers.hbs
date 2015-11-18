@@ -10,19 +10,28 @@
         {{#each categories key="@index" as |category|}}
             <p>
               <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+
               <div id="{{category.slug}}" class="tag-group">
                   {{#if category.tag_ids.isPending}}
                   <div class="modal-loading" id="raster-modal">
                       <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
                   </div>
               {{else}}
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" id="checkbox-{{category.slug}}" onchange={{action "checkAllTagsInCategory" category.slug category.sortedTags}} />
+                        <span class="check"></span>
+                        Select All
+                      </label>
+                  </div>
                   {{#each category.sortedTags key="@index" as |tag|}}
-                  <label>
-                    <input type="checkbox" class="tags" id="{{tag.slug}}" name="{{tag.name}}" />
-                    <span class="check"></span>
-                    {{tag.name}}
-                  </label>
-                  <br />
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" class="tags {{category.slug}}" id="{{tag.slug}}" name="{{tag.name}}" onchange={{action "checkSingleTag" tag.name}} >
+                          <span class="check"></span>
+                        {{tag.name}}
+                      </label>
+                  </div>
                   {{/each}}
                   {{/if}}
               </div>
