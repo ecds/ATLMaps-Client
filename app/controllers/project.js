@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
     }.property(),
 
     showingAllLayers: true,
-        
+
     actions: {
 
       //   initProjectUI: function(model) {
@@ -53,7 +53,7 @@ export default Ember.Controller.extend({
       //               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
       //               detectRetina: true
       //           });
-                
+
       //           var MapQuestOpen_Aerial = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
       //               attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
       //               subdomains: '1234',
@@ -61,12 +61,12 @@ export default Ember.Controller.extend({
       //           });
 
       //           osm.addTo(map);
-                        
+
       //           var baseMaps = {
       //               "Street": osm,
       //               "Satellite": MapQuestOpen_Aerial
-      //           };        
-                
+      //           };
+
       //           var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
       //           control._map = map;
 
@@ -140,7 +140,7 @@ export default Ember.Controller.extend({
             var zIndex = position + 10;
 
             switch(layer.get('layer_type')) {
-        
+
                 case 'planningatlanta':
 
                     var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + layer.get('layer') + '/{z}/{x}/{y}.png', {
@@ -205,7 +205,7 @@ export default Ember.Controller.extend({
 
                 //  break;
 
-                case 'geojson':                    
+                case 'geojson':
                     function viewData(feature, layer) {
 
                         var popupContent = "<h2>"+feature.properties.name+"</h2>";
@@ -253,7 +253,7 @@ export default Ember.Controller.extend({
                                     html: '<div class="shadow"></div><div class="icon"></div>'
                                 });
 
-                                var marker = L.marker(latlng, {icon: icon});   
+                                var marker = L.marker(latlng, {icon: icon});
 
                                 return marker;
                             },
@@ -317,7 +317,7 @@ export default Ember.Controller.extend({
         //     }, 2000);
         // },
 
-        
-        
+
+
     }
 });

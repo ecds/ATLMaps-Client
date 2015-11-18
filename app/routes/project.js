@@ -49,7 +49,7 @@ export default Ember.Route.extend({
                 // controller.send('initProjectUI', _this.modelFor('project'));
                 //_this.send('initProjectUI', _this.modelFor('project'));
 
-    	        // Send some info to the ProjectController to 
+    	        // Send some info to the ProjectController to
     	        // add the raster layers.
                 // And oh my, this is ugly!
                 Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
@@ -71,7 +71,7 @@ export default Ember.Route.extend({
                     // Make an array of the above promise objects.
                     var rasterPromises = [rasterLayer, rasterLayerProjectInfo];
 
-                    // Once the promisies have been resolved, send them to the `mapLayer`
+                    // _this the promisies have been resolved, send them to the `mapLayer`
                     // action on the controler.
                     Ember.RSVP.allSettled(rasterPromises).then(function(){
                         var position = rasterLayerProjectInfo.content.content[0]._data.position;
@@ -108,7 +108,7 @@ export default Ember.Route.extend({
         		// Make an array of the above promise objects.
         		var vectorPromises = [vectorLayer, vectorLayerProjectInfo];
 
-        		// Once the promisies have been resolved, send them to the `mapLayer`
+        		// _this the promisies have been resolved, send them to the `mapLayer`
         		// action on the controler.
         		Ember.RSVP.allSettled(vectorPromises).then(function(){
 
@@ -129,7 +129,7 @@ export default Ember.Route.extend({
 
 	        		_this.send('colorIcons', vectorLayer, marker);
 
-	        		
+
         		});
 
 	        });
@@ -205,7 +205,7 @@ export default Ember.Route.extend({
         //         });
 
         //     });
-            
+
         //     //this.send('initProjectUI', this.modelFor('project'));
 
         // },
@@ -314,7 +314,7 @@ export default Ember.Route.extend({
 
         // },
 
-        
+
 
         //opacitySlider: function(layer){
 
@@ -331,7 +331,7 @@ export default Ember.Route.extend({
             //     var slider = document.getElementById(layer.get('slider_id'));
 
             //     // The slider drops out when we transition but noUiSlider thinks
-            //     // the slider has already been initialized. So, if the slider is 
+            //     // the slider has already been initialized. So, if the slider is
             //     // "initalized", we destroy. Otherwise, we just initalize it.
             //     try {
             //         slider.noUiSlider.destroy();
@@ -418,5 +418,5 @@ export default Ember.Route.extend({
         // }
 
     },
-    
+
 });

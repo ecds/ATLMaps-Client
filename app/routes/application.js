@@ -7,7 +7,7 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
 		initProjectUI: function(model) {
-			console.log(model)
+			// console.log(model);
             var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
