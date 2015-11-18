@@ -23,12 +23,9 @@ export default Ember.Component.extend({
   }.property('results'),
 
   getResults: function(tags){
-    //   var stored = this.get('checkedTags');
-    //   if (tags.length !== stored ){
-          var results = this.store.queryRecord('search', {tags: tags});
-          this.setProperties({ checkedTags: tags });
-          this.setProperties({ resluts: results });
-    //   }
+      var results = this.store.queryRecord('search', {tags: tags});
+      this.setProperties({ checkedTags: tags });
+      this.setProperties({ resluts: results });
 
   },
 
