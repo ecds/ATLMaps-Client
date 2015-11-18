@@ -1,7 +1,7 @@
 <a {{action 'openEditModal'}}>Edit Intorduction</a>
 {{#if isShowingEditModal}}
 	{{#modal-dialog close="closeEditModal" alignment="left" translucentOverlay=true container-class="project-intro"}}
-        <div class="container-fluid">
+		<div class="container-fluid">
             <!-- <div class="row"> -->
 				<!-- <p>a = {{this.a}}</p>
 				<p>av = {{this.av}}</p>
@@ -68,6 +68,7 @@
 					</div>
                 {{else}}
 					<div class="row">
+						<h1>Select the layout for your intorduction.</h1>
 	                    <div class="col-md-4">
 	                        <a {{action 'setTemplate' 'av'}} title="Select Article and Video" class="btn btn-default select-template select-av"></a>
 	                    </div>
