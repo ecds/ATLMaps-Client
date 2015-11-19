@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    classNames: ['intro-modal-link'],
+
     isShowingEditModal: false,
 
     didRender: function(){

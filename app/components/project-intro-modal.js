@@ -2,6 +2,8 @@ import Ember from 'ember';
 /* global Cookies */
 
 export default Ember.Component.extend({
+    classNames: ['intro-modal-link'],
+
     isShowingIntroModal: true,
 
     notShowingIntro: false,
