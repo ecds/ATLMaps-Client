@@ -1,0 +1,30 @@
+div.loading {
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 0;
+    background-color: white;
+    z-index: 2;
+    text-align: center;
+    margin-top: 0em;
+    height: 100%;
+
+    .ui-loader {
+      top: 30%;
+    width: 12.5em;
+    opacity: .88;
+    box-shadow: 0 1px 1px -1px #fff;
+    height: inherit;
+    margin: 0 auto .625em;
+    padding: 1em;
+    background-color: #fff;
+    border-color: #ddd;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+    position: relative;
+    border-radius: .3125em;
+    // background-image: url(/assets/images/loaders/Preloader_19.gif);
+    // background-repeat: no-repeat;
+    }
+}
