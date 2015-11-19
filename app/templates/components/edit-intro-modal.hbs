@@ -8,6 +8,16 @@
 				<p>v = {{this.v}}</p> -->
                 {{#if project.template_id}}
 					<div class="row">
+						<div class="col-md-12">
+							<div class="alert alert-success edit-intro-success save-success">
+							    Introduction saved!
+							</div>
+							<div class="alert alert-danger edit-intro-fail save-fail">
+							    Something went worng, introduction was not saved.
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-10">
 							<a {{action 'changeTemplate' project}}>Change Template</a>
 						</div>
@@ -17,7 +27,7 @@
 					</div>
 					<div class="row edit-area">
 						{{#if this.a}}
-							<div class="col-md-12">
+							<div class="col-md-12 edit-cell">
 	                    		{{textarea value=project.intro id="edit-project-intro"}}
 							</div>
 						{{else if this.av}}

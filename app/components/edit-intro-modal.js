@@ -74,7 +74,16 @@ export default Ember.Component.extend({
             var project = this.get('project');
             project.set('intro', Ember.$('textarea#edit-project-intro').val());
             // this.sendAction('update', project);
-            project.save();
+            project.save().then(function() {
+                // Success callback
+                // Show confirmation.
+                Ember.$(".edit-intro-success").slideToggle().delay(2500).slideToggle();
+                }, function() {
+                    // Error callback
+                    Ember.$(".edit-intro-fail").stop().slideToggle().delay(3000).slideToggle();
+                    project.rollbackAttributes();
+
+            });
         },
 
         cancelIntroUpdate: function(){

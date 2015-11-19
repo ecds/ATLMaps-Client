@@ -53,7 +53,7 @@ export default Ember.Route.extend({
         },
 
         setBaseMap: function() {
-            var base = Ember.$('input[name=leaflet-base-layers]:checked').next().html().trim().toLowerCase();
+            Ember.$('input[name=leaflet-base-layers]:checked').next().html().trim().toLowerCase();
         }
 
         // The action for updateing the order of raster layers is in the
