@@ -49,7 +49,7 @@ export default Ember.Component.extend({
           Ember.$('.browse-results').show();
       }
 
-      if (rasterCount > vectorCount) {
+      if (rasterCount > vectorCount || rasterCount === vectorCount) {
           Ember.$('.vector-results').hide();
           Ember.$('.raster-results').show();
           Ember.$('.raster-result-tab').addClass("active");

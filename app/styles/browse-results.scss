@@ -5,10 +5,13 @@
   overflow-y: scroll;
   top: 70px;
   height: 100%;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
 
-  .layers {
+  .layer-list-item {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  }
 
+  .badge {
+      background-color: deepskyblue !important;
   }
 
   ul {
