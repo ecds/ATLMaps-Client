@@ -8,24 +8,6 @@ export default Ember.Component.extend({
 
     notShowingIntro: false,
 
-    // A function to create a listiner for clicking
-    // the don't show intro model checkbox.
-    clickListen: function(){
-        var projectID = this.get('project.id');
-
-        // Sigh...don't like using the `run.later`
-        Ember.run.later(this, function() {
-            Ember.$('#dont-show').click(function(){
-                if(this.checked) {
-                    Cookies.set('noIntro' + projectID, true);
-                }
-                else{
-                    Cookies.remove('noIntro' + projectID);
-                }
-            });
-        }, 200);
-    },
-
     didInsertElement: function(){
         var projectID = this.get('project.id');
 
@@ -48,20 +30,29 @@ export default Ember.Component.extend({
             this.set('v', true);
         }
 
-        this.clickListen();
-
     },
 
     actions: {
 
         hideIntro: function() {
-            this.clickListen();
             this.setProperties({isShowingIntroModal: false});
         },
 
         showIntro: function() {
-            this.clickListen();
             this.setProperties({isShowingIntroModal: true});
+        },
+
+        supressIntro: function(){
+            var projectID = this.get('project.id');
+
+            if (document.getElementById('dont-show').checked === true){
+                console.log('setting cookie to true');
+                Cookies.set('noIntro' + projectID, true);
+            }
+            else {
+                console.log('removing cookie');
+                Cookies.remove('noIntro' + projectID);
+            }
         },
 
     }

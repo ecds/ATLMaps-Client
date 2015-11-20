@@ -39,9 +39,10 @@
             <div class="col-md-12">
                 <div class="checkbox pull-right">
                     <label>
-                        {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}}
+                        <!-- {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}} -->
+						 <input type="checkbox" id="dont-show" checked={{this.notShowingIntro}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
                         <span class="check"></span>
-                        Don't show again.
+                        Don't show automatically.
                     </label>
                 </div>
                 <div class="text-center explore-button">

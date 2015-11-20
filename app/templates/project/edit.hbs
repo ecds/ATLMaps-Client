@@ -60,8 +60,7 @@
 			<div class="layer-list list-group">
 				{{#each model.vector_layer_ids key="@index" as |layer|}}
 					<div class="list-group-item {{layer.layer}} vector-layer" id="{{layer.layer}}"  layer-id="{{layer.id}}">
-					<span class="geojson {{layer.layer}}">
-					</span>
+					{{project-vector-icon layer=layer projectID=model.id}}
 					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 					<div class="layer-info-detail {{layer.slug}}">
 						<p class="list-group-item-text">{{layer.description}}</p>

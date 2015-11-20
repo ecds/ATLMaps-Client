@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals L, noUiSlider, Draggabilly */
+/* globals L, Draggabilly */
 
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
 		initProjectUI: function(model) {
-			// console.log(model);
             var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
@@ -105,7 +104,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
-			// console.log(layer);
             // Get the current route so we handel requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
@@ -174,7 +172,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             route = route.replace('\.edit', '');
 
             var project_id = this.modelFor(route).get('id');
-
             layer.set('active_in_project', true);
 
             // Here we use `unshiftObject` instead of `pushObject` to prepend
@@ -194,7 +191,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 layer_type: layer.get('layer_type'),
             });
 
-            vectorLayerProject.save();
+			// Don't save if this is the exploer project.
+			vectorLayerProject.save();
+
 
             controller.send('mapLayer',
                 layer,
@@ -202,43 +201,43 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 0
             );
 
-            var addedLayers = DS.PromiseObject.create({
-                promise: _this.store.find('vector_layer_project', {
-                    project_id: project_id
-                })
-            });
-
-            addedLayers.then(function() {
-
-                Ember.$.each(addedLayers.content.content, function(index, layer_id) {
-
-                    var layer = DS.PromiseObject.create({
-                        promise: _this.store.find('layer', layer_id._data.vector_layer_id)
-                    });
-
-                    var savedMarker = DS.PromiseObject.create({
-                        promise: _this.store.find('vector_layer_project', {
-                            project_id: project_id, vector_layer_id: layer_id._data.vector_layer_id
-                        })
-                    });
-
-                    var promises = [layer, savedMarker];
-
-                    Ember.RSVP.allSettled(promises).then(function(){
-                        var marker = savedMarker.content.content[0]._data.marker;
-                        _this.send('colorIcons', layer, marker);
-                    });
-                });
-
-                var newLayer = DS.PromiseObject.create({
-                    promise: _this.store.find('layer', layer.get('id'))
-                });
-
-                newLayer.then(function(){
-                    _this.send('colorIcons', layer, marker);
-                });
-
-            });
+            // var addedLayers = DS.PromiseObject.create({
+            //     promise: _this.store.find('vector_layer_project', {
+            //         project_id: project_id
+            //     })
+            // });
+			//
+            // addedLayers.then(function() {
+			//
+            //     Ember.$.each(addedLayers.content.content, function(index, layer_id) {
+			//
+            //         var layer = DS.PromiseObject.create({
+            //             promise: _this.store.find('layer', layer_id._data.vector_layer_id)
+            //         });
+			//
+            //         var savedMarker = DS.PromiseObject.create({
+            //             promise: _this.store.find('vector_layer_project', {
+            //                 project_id: project_id, vector_layer_id: layer_id._data.vector_layer_id
+            //             })
+            //         });
+			//
+            //         var promises = [layer, savedMarker];
+			//
+            //         Ember.RSVP.allSettled(promises).then(function(){
+            //             var marker = savedMarker.content.content[0]._data.marker;
+            //             // _this.send('colorIcons', layer, marker);
+            //         });
+            //     });
+			//
+            //     var newLayer = DS.PromiseObject.create({
+            //         promise: _this.store.find('layer', layer.get('id'))
+            //     });
+			//
+            //     newLayer.then(function(){
+            //         // _this.send('colorIcons', layer, marker);
+            //     });
+			//
+            // });
 
         },
 
@@ -342,9 +341,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         colorIcons: function(layer, marker){
-            Ember.run.later(this, function() {
-                Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('layer')).addClass("map-marker layer-"+this.globals.color_options[marker]);
-            }, 1500);
+
         },
 
         snapBack: function(){

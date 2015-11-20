@@ -250,7 +250,8 @@ export default Ember.Controller.extend({
                                 var icon = L.divIcon({
                                     className: layerClass,
                                     iconSize: null,
-                                    html: '<div class="shadow"></div><div class="icon"></div>'
+                                    html: '<div class="shadow"></div><div class="icon"></div>',
+                                    data: 'foo'
                                 });
 
                                 var marker = L.marker(latlng, {icon: icon});
