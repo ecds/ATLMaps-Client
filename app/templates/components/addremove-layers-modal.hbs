@@ -1,7 +1,7 @@
 <a class="btn btn-add add_layer_button" {{action 'toggleModal' model}}><span class="mdi-large"></span>Add/Remove Layers</a>
 {{#if isShowingRasterModal}}
 
-	{{#modal-dialog close="closeRasterModal" alignment="left" translucentOverlay=true}}
+	{{#modal-dialog close="closeRasterModal" alignment="center" translucentOverlay=true container-class="add-layers"}}
 
 	<div id="searchableRasterLayers">
 		<nav class="navbar navbar-inverse" id="filter_and_search">
@@ -63,7 +63,7 @@
 
 {{#if isShowingVectorModal}}
 
-  {{#modal-dialog close="closeVectorModal" alignment="left" translucentOverlay=true}}
+  {{#modal-dialog close="closeVectorModal" alignment="center" translucentOverlay=true container-class="add-layers"}}
   <div id="searchableVectorLayers">
   {{filter-layers action="closeVectorModal"}}
 

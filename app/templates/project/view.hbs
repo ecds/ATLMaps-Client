@@ -41,7 +41,7 @@
 		<div class="pull-left">Archival Map Layers</div>
 		{{ hide-all-raster-layers }}
 		<div class="layer-list list-group raster-list" id="layer_sort">
-		{{#each model.raster_layer_ids key="@index" as |layer|}}
+		{{#each model.sortedRasterLayers key="@index" as |layer|}}
 				<div class="list-group-item raster-layer" id="{{layer.layer}}">
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>

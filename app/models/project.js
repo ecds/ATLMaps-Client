@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
 	name: DS.attr('string'),
@@ -22,5 +23,8 @@ export default DS.Model.extend({
 	templateSlug: DS.attr('string'),
 	intro: DS.attr('string'),
 	media: DS.attr('string'),
-	template_id: DS.attr('number')
+	template_id: DS.attr('number'),
+
+	sortedRasterLayers: Ember.computed.sort('raster_layer_ids', '_positionSort'),
+    _positionSort: ['position:asc']
 });

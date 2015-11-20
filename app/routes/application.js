@@ -93,10 +93,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                         promise: _this.store.find('raster_layer', raster_layer_id.id)
                     });
 
-                    projectLayer.then(function() {
-                        // _this.send('opacitySlider', projectLayer);
-                        _this.send('sort', projectLayer);
-                    });
                 });
 
                 // Toggle the label for the show/hide all layers switch
@@ -106,94 +102,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             //});
 
-        },
-
-        sort: function(layer){
-        	Ember.run.later(this, function() {
-	        	var project_id = this.modelFor('project').get('id');
-
-	        	var projectLayer = DS.PromiseObject.create({
-	                promise: this.store.query('raster_layer_project', {raster_layer_id: layer.get('id'), project_id: project_id})
-	            });
-
-	            projectLayer.then(function() {
-	            	var position = projectLayer.get('firstObject')._internalModel._data.position;
-	            	Ember.$('.raster-layer#'+layer.get('layer')).attr('data-position', position);
-
-	            	// This sorts all the raster layers by the `data-position` attribute.
-		            var list = Ember.$('#layer_sort');
-		            var listItems = list.find('div.raster-layer').sort(function(a,b){
-		                return Ember.$(b).attr('data-position') - Ember.$(a).attr('data-position');
-		            });
-		            list.find('div.raster-layer').remove();
-		            list.append(listItems);
-	            });
-	        }, 2000);
-
-        },
-
-        opacitySlider: function(layer){
-
-            Ember.run.later(this, function() {
-
-                // var options = {
-                //     start: [ 10 ],
-                //     connect: false,
-                //     range: {
-                //         'min': 0,
-                //         'max': 10
-                //     }
-                // };
-                // var slider = document.getElementById(layer.get('slider_id'));
-				//
-                // // The slider drops out when we transition but noUiSlider thinks
-                // // the slider has already been initialized. So, if the slider is
-                // // "initalized", we destroy. Otherwise, we just initalize it.
-                // try {
-                //     slider.noUiSlider.destroy();
-                // }
-                // catch(err){/* don't care */}
-				//
-                // try {
-                // 	noUiSlider.create(slider, options, true);
-                // }
-            	// catch(err){/* again, don't care*/}
-				//
-                // // Change the opactity when a user moves the slider.
-                // var valueInput = document.getElementById(layer.get('slider_value_id'));
-                // try {
-	            //     slider.noUiSlider.on('update', function(values, handle){
-	            //         valueInput.value = values[handle];
-	            //         var opacity = values[handle] / 10;
-	            //         Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
-	            //     });
-	            // }
-	        	// catch(err){/* still don't care */}
-	        	// try {
-	            //     valueInput.addEventListener('change', function(){
-	            //         slider.noUiSlider.set(this.value);
-	            //     });
-	            // }
-	        	// catch(err){/* for real don't care */}
-				//
-                // // Watch the toggle check box to show/hide all raster layers.
-                // var showHideSwitch = document.getElementById('toggle-layer-opacity');
-                // showHideSwitch.addEventListener('click', function(){
-                //     if (Ember.$("input#toggle-layer-opacity").prop("checked")){
-                //         slider.noUiSlider.set(10);
-                //     }
-                //     else{
-                //         slider.noUiSlider.set(0);
-                //     }
-                // });
-
-            }, 2000);
-
-            // var map = this.globals.mapObject;
-
-            // map.eachLayer(function (layer) {
-            //     console.log(layer);
-            // });
         },
 
         addRasterLayer: function(layer) {
@@ -455,7 +363,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 Ember.$('#vector-data').addClass('active-button');
             }
         },
-
 
  	}
 });
