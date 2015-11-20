@@ -989,7 +989,7 @@ a.project-options-close:hover {
 
 .list-group  div.project-group-item {
   overflow: auto;
-
+  min-height: 220px;
 }
 h2 .btn.btn-fab{
   box-shadow: 2px 3px 14px rgba(0, 0, 0, 0.13),-2px 5px 14px rgba(0, 0, 0, 0.13);
