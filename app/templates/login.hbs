@@ -3,10 +3,10 @@
       <p class="lead">Log in to continue.</p>
     </header>
     <div class="well login-form">
-     <form {{action 'authenticate' on='submit'}} class="form" autocomplete="on">
+     <form method="post" autocomplete="on" {{action 'authenticate' on='submit'}}  class="form">
         <label for="identification" class="sr-only">Login</label>
         <div class="form-group">
-          {{input value=identification placeholder='Email' class="form-control floating-label" type="text"}}
+          {{input value=identification placeholder='Email' class="form-control floating-label" type="text" name="email" }}
         </div>
         <label for="password" class="sr-only">Password</label>              
         <div class="form-group">
