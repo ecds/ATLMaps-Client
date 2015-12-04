@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals L, Draggabilly */
+/* globals L, Draggabilly, OSMBuildings */
 
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
@@ -36,6 +36,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 //     maxZoom: 20
                 // });
 
+				// If we want to add OSM's 3D buildings.
+				// var buildings = new OSMBuildings(map).load();
+
                 try {
 					if (model.get('default_base_map') === 'satellite') {
                     	MapQuestOpen_Aerial.addTo(map);
@@ -52,6 +55,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     "street": osm,
                     "satellite": MapQuestOpen_Aerial
                 };
+
 
                 var control = L.control.layers(baseMaps,null,{collapsed:false});//.addTo(_map);
                 control._map = map;

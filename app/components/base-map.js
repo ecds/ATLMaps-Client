@@ -4,7 +4,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNames: ['fullscreen-map'],
-    
+
     didInsertElement: function() {
 
         var _map = L.map('map', {

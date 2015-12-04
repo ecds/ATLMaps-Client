@@ -27,6 +27,7 @@
     "nouislider": "~8.0.2",
     "resizeThis": "~1.0.2",
     "Sortable": "~1.2.0",
-    "trumbowyg": "~1.1.7"
+    "trumbowyg": "~1.1.7",
+    "osmbuildings": "*"
   }
 }

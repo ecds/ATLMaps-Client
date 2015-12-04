@@ -64,6 +64,7 @@ app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('bower_components/js-cookie/src/js.cookie.js');
 app.import('vendor/js/menu/classie.js');
 app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
+app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');
 
 app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
