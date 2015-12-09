@@ -7,7 +7,7 @@
 		<h1>{{model.name}}</h1>
 
 			{{#link-to 'project.view' model title="Back to View Mode"}}
-				<span class="mdi-editor-mode-edit"></span>
+				<span class="mdi-editor-mode-edit"><i class="material-icons">mode_edit</i></span>
 			{{/link-to}}
 	</div>
 
@@ -101,7 +101,7 @@
 
 					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
-					<span class="handle pull-right mdi-navigation-unfold-more"></span>
+					<span class="handle pull-right"><i class="material-icons reorder">code</i></span>
 					{{opacity-slider layer=layer}}
 					<div class="layer-info-detail {{layer.layer}}">
 

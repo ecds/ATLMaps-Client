@@ -1,11 +1,11 @@
 <div class="marker-data draggable">
 	<div class="panel-controls btn-group btn-group-justified">
-	
-		<a {{action "snapBack" }} title="Snap Back" class="btn btn-default"><span class="mdi-navigation-arrow-back"></span></a>
 
-		<a href="javascript:void(0)" class="btn btn-default" title="Move"><span class="mdi-action-open-with"></span></a>
+		<a {{action "snapBack" }} title="Snap Back" class="btn btn-default"><i class="material-icons">arrow_back</i></a>
 
-		<a {{action "closeMarkerInfo" }} title="Close" class="btn btn-default"><span class="mdi-content-clear"></span></a>
+		<a href="javascript:void(0)" class="btn btn-default drag-window" title="Move"><i class="material-icons">open_with</i></a>
+
+		<a {{action "closeMarkerInfo" }} title="Close" class="btn btn-default"><i class="material-icons">clear</i></a>
 
 	</div>
 	<div class="marker-content"></div>

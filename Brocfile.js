@@ -43,9 +43,9 @@ var leafletImages = funnel('bower_components/leaflet/dist/images', {
 	destDir: 'assets/images',
 });
 
-var materialFonts = funnel('bower_components/bootstrap-material-design/fonts', {
-	destDir: 'assets/material-font-path'
-});
+// var materialFonts = funnel('bower_components/bootstrap-material-design/fonts', {
+// 	destDir: 'assets/material-font-path'
+// });
 
 var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
 	destDir: 'assets/images',
@@ -77,7 +77,6 @@ app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
 module.exports = mergeTrees([
 	app.toTree(),
 	leafletImages,
-	materialFonts,
 	trumbowygImages
 ],{
 	overwrite: true

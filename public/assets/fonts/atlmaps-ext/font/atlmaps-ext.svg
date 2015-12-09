@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="atlmaps-ext" horiz-adv-x="1000" >
+<font-face font-family="atlmaps-ext" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="database" unicode="&#xe800;" d="m429 421q132 0 247 24t181 71v-95q0-38-57-71t-157-52-214-20-215 20-156 52-58 71v95q66-47 181-71t248-24z m0-428q132 0 247 24t181 71v-95q0-39-57-72t-157-52-214-19-215 19-156 52-58 72v95q66-47 181-71t248-24z m0 214q132 0 247 24t181 71v-95q0-38-57-71t-157-52-214-20-215 20-156 52-58 71v95q66-47 181-71t248-24z m0 643q116 0 214-19t157-52 57-72v-71q0-39-57-72t-157-52-214-19-215 19-156 52-58 72v71q0 39 58 72t156 52 215 19z" horiz-adv-x="857.1" />
+<glyph glyph-name="polygon" unicode="&#xe801;" d="m580 773c-5-2-11-7-14-12-3-4-112-118-244-253-131-135-241-248-243-251-7-9-9-25-4-34 2-4 38-65 79-137 77-134 82-141 95-143 3-1 112-10 241-21 130-10 241-20 249-21 19-4 34 2 41 15 5 10 154 524 155 535 1 6 0 11-3 16-2 3-70 70-151 148-82 77-150 144-153 147-5 9-19 16-30 16-6 0-13-2-18-5z m150-207c71-68 129-124 129-126 0-2-30-107-67-234l-67-232-9 0c-30 2-436 37-437 38-4 3-127 218-126 220 1 4 444 458 446 457 1 0 60-55 131-123z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

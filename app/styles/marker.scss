@@ -30,7 +30,7 @@
 }
 .map-marker div.icon {
   /*Icon Font*/
-  font-family: Material-Design-Icons;
+  font-family: "Material Icons";
   speak: none;
   font-style: normal;
   font-weight: 400;
@@ -46,10 +46,11 @@
 }
 
 .map-marker div.icon:before{
-  content:$marker-icon;
+  content: $marker-icon;
 }
 
 .layer-marker div.icon:before {
+    font-family: "Material-Design-Icons";
   content: $layer-icon;
 }
 

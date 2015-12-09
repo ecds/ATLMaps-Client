@@ -54,7 +54,7 @@ module.exports = function(environment) {
     'default-src': "'none'",
     // 'script-src': "'self' 'unsafe-eval'",
     'script-src': "*",
-    'font-src': "'self'",
+    'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com",
     'connect-src': "'self' http://api.atlmaps-dev.com:3000",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'",
@@ -83,7 +83,7 @@ module.exports = function(environment) {
   includePaths: [
     'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
   ]
-}
+};
 
   return ENV;
 };

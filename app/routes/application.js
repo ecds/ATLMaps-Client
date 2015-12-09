@@ -77,7 +77,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
                 // Iniatate the dragging
                 var draggie = new Draggabilly( '.draggable', {
-                    handle: '.mdi-action-open-with'
+                    handle: '.drag-window'
                 });
 
                 // Draggabilly adds a style of position = relative to the
@@ -108,7 +108,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         addRasterLayer: function(layer) {
-            // Get the current route so we handel requests coming from both
+            // Get the current route so we handle requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.
@@ -169,7 +169,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
         addVectorLayer: function(layer){
 
-            // Get the current route so we handel requests coming from both
+            // Get the current route so we handle requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.
@@ -246,7 +246,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         removeRasterLayer: function(layer){
-            // Get the current route so we handel requests coming from both
+            // Get the current route so we handle requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.
@@ -287,7 +287,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
         removeVectorLayer: function(layer){
-            // Get the current route so we handel requests coming from both
+            // Get the current route so we handle requests coming from both
             // `explore` and `project.edit`
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.

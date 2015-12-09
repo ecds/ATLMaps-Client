@@ -1,10 +1,11 @@
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-@import '../../bower_components/bootstrap-material-design/sass/material.scss';
+@import '../../bower_components/bootstrap-material-design/sass/bootstrap-material-design.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
+@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 @import 'ember-modal-structure.scss';
 @import 'ember-modal-appearance.scss';
 //@import 'gn-menu.scss';
+@import 'variables.scss';
 @import 'marker.scss';
 @import 'toggle_button.scss';
 @import 'main-navbar.scss';
@@ -16,11 +17,10 @@
 @import 'project-intro.scss';
 @import 'loading.scss';
 @import 'modal-dialog-override.scss';
-
-//@import 'filter-bar.scss';
+@import 'extra-icons.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Material Icons' sans-serif;
   font-weight: 300;
 }
 
@@ -41,10 +41,6 @@ h6, .h6 { font-size: 12px; line-height: 20px; }
 
 article {
     font-weight: bolder;
-}
-
-span {
-  font-family: Material-Design-Icons;
 }
 
 #html-validator-loading {
@@ -1069,7 +1065,7 @@ h2 .btn-fab+span{
 .project-options.card .action-label{
   font-size: 16px;
   display: block;
-  margin-top: 3px;
+  margin-top: 10px;
 }
 
 .action.show-options.active {
@@ -1109,16 +1105,18 @@ li.gravatar {
 }
 
 span.description_icon {
-  font-family: Material-Design-Icons;
+  font-family: 'Material Icons';
 }
 
 span.geojson:before,
 span.wfs:before{
+    font-family: 'Material Icons';
   content: $marker-icon;
 }
 
 span.planningatlanta:before,
 span.wms:before {
+    font-family: 'Material Icons';
   content: $layer-icon;
 }
 
@@ -1530,4 +1528,13 @@ a.is-editing-project-button {
 .alert-danger {
   background-color: #f2dede;
   color: black;
+}
+
+.reorder {
+    transform: rotate(90deg);
+}
+
+// Maksure all the action button text is white.
+.btn-success, .btn-warning, .btn-info {
+    color: white !important;
 }
