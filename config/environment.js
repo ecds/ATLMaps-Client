@@ -54,9 +54,9 @@ module.exports = function(environment) {
     'default-src': "'none'",
     // 'script-src': "'self' 'unsafe-eval'",
     'script-src': "*",
-    'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com",
+    'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com https://fonts.gstatic.com",
     'connect-src': "'self' http://api.atlmaps-dev.com:3000",
-    'style-src': "'self' 'unsafe-inline'",
+    'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
     'media-src': "'self'",
     'img-src': "*",
     'frame-src': "'self' http://www.youtube.com https://www.youtube.com"

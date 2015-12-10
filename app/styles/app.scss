@@ -43,6 +43,10 @@ article {
     font-weight: bolder;
 }
 
+a {
+    color: blue;
+}
+
 #html-validator-loading {
   content: "LOADING";
 }
@@ -1177,7 +1181,7 @@ input.value-input {
 }
 
 .toggle {
-  margin: 0 .5em;
+  margin: 0 1em;
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
@@ -1186,11 +1190,15 @@ input.value-input {
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
   background-color: rgb(255, 183, 77);
-  margin-top:-1px;
+  margin-top:0px;
+
 }
 
 span.toggle_label {
-  font-size: .5em;
+  font-size: .75em;
+  top: 32px;
+width: 100%;
+position: absolute;
 }
 
 span.toggle_label:after {
@@ -1201,8 +1209,8 @@ span.toggle_label.off:after {
   content: 'Show Layers';
 }
 
-.toggle:after {
-  top: -8px;
+.togglebutton label .toggle:after {
+  top: -3px;
 }
 
 li.collaboration-list {

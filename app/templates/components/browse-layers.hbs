@@ -1,11 +1,11 @@
 <div class="browse-nav">
-    <div style="background-color:whitesmoke">&nbsp;</div>
+    <div class="filter-list">FILTERS</div>
     {{ project-nav mode='browse-filters'}}
 
 </div>
 
 <div class="browse-cards">
-    <div class="browse-by-tags">
+    <div class="browse-by-tags browse-form">
 
         {{#each categories key="@index" as |category|}}
             <p>
@@ -38,6 +38,25 @@
           </p>
           {{/each}}
     </div>
+    <div class="browse-by-institution browse-form">
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="optionsRadios" id="all" value="" onchange={{action "selectedInstitution" ""}}><span class="circle"></span><span class="check"></span>
+            Clear
+          </label>
+        </div>
+        {{#each institutions key="@index" as |institution|}}
+            <div class="radio radio-primary">
+              <label>
+                <input type="radio" name="optionsRadios" id="{{institution.slug}}" value="{{institution.slug}}" onchange={{action "selectedInstitution" institution.name}}><span class="circle"></span><span class="check"></span>
+                {{institution.name}}
+              </label>
+            </div>
+        {{/each}}
+    </div>
+    <div class="browse-by-years browse-form">
+        years!
+    </div>
 </div>
 
     <div class="browse-results">
@@ -47,14 +66,14 @@
             {{#each results.raster_layer_ids key="@index" as |raster|}}
 
 
-            <div {{bind-attr class=":layer-list-item :row :name raster.tag_slugs raster.institution.slug raster.layer_type" }}>
+            <div class="layer-list-item row name {{raster.tag_slugs}} {{raster.institution.slug}} {{raster.layer_type}}">
                 <div class="col-xs-2 remove-layer-button">
 
                     {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=raster}}
 
                 </div>
                 <div class="col-xs-9">
-                    <h4 class="name"><span {{bind-attr class="raster.layer_type :description_icon"}}></span> {{raster.name}}</h4>
+                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span> {{raster.name}}</h4>
                     <p>
                         <div class="description">{{raster.description}}</div>
                     </p>
@@ -84,14 +103,14 @@
             <div class="vector-results">
           {{#each results.vector_layer_ids key="@index" as |vector|}}
 
-          <div {{bind-attr class=":layer-list-item :row :name vector.tag_slugs vector.institution.slug vector.layer_type" }}>
+          <div class="layer-list-item row name {{vector.tag_slugs}} {{vector.institution.slug}} v{{ector.layer_type}}">
               <div class="col-xs-2 remove-layer-button">
 
                   {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=rvector}}
 
               </div>
               <div class="col-xs-9">
-                  <h4 class="name"><span {{bind-attr class="vector.layer_type :description_icon"}}></span> {{vector.name}}</h4>
+                  <h4 class="name"><span class="{{vector.layer_type}} description_icon"></span> {{vector.name}}</h4>
                   <p>
                       <div class="description">{{vector.description}}</div>
                   </p>

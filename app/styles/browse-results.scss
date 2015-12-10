@@ -11,7 +11,7 @@
   }
 
   .badge {
-      background-color: deepskyblue !important;
+      background-color: darkblue !important;
   }
 
   ul {
@@ -49,6 +49,13 @@
         left: 0;
         bottom: 0;
 
+        .filter-list {
+            background-color: whitesmoke;
+            margin: .25em 25%;
+            font-size: .75em;
+            font-weight: 400;
+        }
+
         .btn-group-vertical {
             box-shadow: none;
             width: 100%;
@@ -58,11 +65,13 @@
                 background-color: whitesmoke;
                 padding: .5em 0;
                 text-transform: none;
+                border: none;
 
             }
 
             .active {
                 background-color: white;
+                box-shadow: none;
             }
         }
     }
@@ -80,6 +89,18 @@
         margin-left: 30%;
         font-size: .75em;
         padding-bottom: 10px;
+
+        label {
+            padding-left: 2em;
+        }
+
+        div.browse-form {
+            display: none;
+        }
+
+        .browse-form {
+            min-height: 20em;
+        }
 
         div.checkbox {
             margin: 0 0 0 -5px;

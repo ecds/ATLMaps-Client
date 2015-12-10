@@ -4,7 +4,7 @@
     </div>
 {{/if}}
 {{#each projects key="@index" as |project|}}
-    <div class="list-group-item col-xs-6 project-group-item min-height-class" {{bind-attr data-project-id="project.id"}}>
+    <div class="list-group-item col-xs-6 project-group-item min-height-class" data-project-id="{{project.id}}">
         <div class="row-action-primary project-list-icon">
             <i class="material-icons">map</i>
         </div>

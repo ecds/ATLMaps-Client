@@ -63,9 +63,9 @@
 	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
 	    	<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
 	    </a>
-		<!-- <a {{action 'navigateProject' 'browse'}} class="btn btn-default transparent-button project-nav" id="browse" title="Browse">
-	    	<span class="mdi-action-search nav-icon"></span>
-	    </a> -->
+		<a {{action 'navigateProject' 'browse'}} class="btn btn-default transparent-button project-nav" id="browse" title="Browse">
+	    	<span class="nav-icon"><i class="material-icons">search</i></span>
+	    </a>
 	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls" title="Select Base Layer">
 	    	<span class="nav-icon"><i class="material-icons">tune</i></span>
 	    </a>
@@ -89,9 +89,9 @@
 {{/if}}
 
 {{#if this.browse-filters}}
-	<div class="btn-group-vertical">
-		<a href="javascript:void(0)" class="btn btn-default active">Tags</a>
-		<a href="javascript:void(0)" class="btn btn-default">Institution</a>
-		<a href="javascript:void(0)" class="btn btn-default">Years</a>
+	<div class="btn-group-vertical browse-options">
+		<a {{action 'toggleFilter' 'tags'}} class="btn btn-default tags active">Tags</a>
+		<a {{action 'toggleFilter' 'institution'}} class="btn institution btn-default">Institution</a>
+		<a {{action 'toggleFilter' 'years'}} class="btn years btn-default">Years</a>
 	</div>
 {{/if}}

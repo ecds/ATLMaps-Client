@@ -15,17 +15,36 @@ export default Ember.Component.extend({
     });
   }.property(),
 
+  institutions: function(){
+      return Ember.ArrayProxy.create({
+          content: this.store.findAll('institution'),
+          sort: function(){
+              this.set('sortProperties', ['name']);
+          }
+      });
+  }.property(),
+
+  selectedInstitution: '',
+
   // Number of tags that are checked.
-  checkedTags: 0,
+  checkedTags: '',
 
   results: function() {
       return this.store.queryRecord('search', {});
   }.property('results'),
 
-  getResults: function(tags){
-      var results = this.store.queryRecord('search', {tags: tags});
-      this.setProperties({ checkedTags: tags });
-      this.setProperties({ resluts: results });
+  getResults: function(){
+      var tags = this.get('checkedTags');
+      var institution = this.get('selectedInstitution');
+
+      var searchResults = this.store.queryRecord('search', {tags: tags, name: institution});
+
+      if (tags.length > 0 || institution !== '') {
+          this.setProperties({ results: searchResults });
+      }
+      else {
+          this.setProperties({results: []});
+      }
 
   },
 
@@ -36,6 +55,12 @@ export default Ember.Component.extend({
       });
       return tags;
   },
+
+  didInsertElement: function() {
+      Ember.$(".browse-cards div.browse-form").hide();
+      Ember.$(".browse-by-tags").show();
+  },
+
   didUpdate: function() {
       var results = this.get('results');
 
@@ -74,15 +99,10 @@ export default Ember.Component.extend({
           }
       },
 
-      checkSingleTag: function(tag){
+      checkSingleTag: function(){
           var tags = this.collectCheckedTags();
-          if (document.getElementById(tag).checked === true){
-              tags.push(tag);
-          }
-          else {
-              tags.splice(tag, 1);
-          }
-          this.getResults(tags);
+          this.setProperties({ checkedTags: tags });
+          this.getResults();
       },
 
       checkAllTagsInCategory: function(category, tags){
@@ -102,12 +122,17 @@ export default Ember.Component.extend({
               });
 
           }
-
-          this.getResults(clickedTags);
+          this.setProperties({ checkedTags: clickedTags });
+          this.getResults();
           Ember.$('input.'+category).each(function(){
               this.checked = setTo;
           });
 
+      },
+
+      selectedInstitution: function(institution){
+          this.setProperties({selectedInstitution: institution});
+          this.getResults();
       },
 
       sendRasterLayerToAdd: function(layer){

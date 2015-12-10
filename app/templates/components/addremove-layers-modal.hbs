@@ -21,14 +21,14 @@
 			{{else}}
 			    <h3>{{results.length}} raster layers found</h3>
 				{{#each results key="@index" as |layer|}}
-					<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+					<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
 						<div class="col-xs-2 remove-layer-button">
 
 							{{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=layer}}
 
 						</div>
 						<div class="col-xs-9">
-							<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+							<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.name}}</h4>
 							<p>
 								<div class="description">{{layer.description}}</div>
 							</p>
@@ -74,13 +74,13 @@
 			</div>
   		{{else}}
 		{{#each vectorLayers.content key="@index" as |layer|}}
-			<div {{bind-attr class=":layer-list-item :row :name layer.tag_slugs layer.institution.slug layer.layer_type" }}>
+			<div class="layer-list-item row name {{layer.tag_slugs}} {{layer.institution.slug}} {{layer.layer_type}}">
 				<div class="col-xs-2">
 					{{add-remove-layer-button add="sendVectorLayerToAdd" remove="sendVectorLayerToRemove" layer=layer}}
 
 				</div>
 				<div class="col-xs-9">
-					<h4 class="name"><span {{bind-attr class="layer.layer_type :description_icon"}}></span> {{layer.name}}</h4>
+					<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.name}}</h4>
 					<p>
       					<div class="description">{{layer.description}}</div>
     				</p>

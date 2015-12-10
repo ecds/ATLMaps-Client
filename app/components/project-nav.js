@@ -59,7 +59,14 @@ export default Ember.Component.extend({
 			Ember.$('.raster-results').hide();
 			Ember.$('.raster-result-tab').removeClass("active");
 			Ember.$('.vector-result-tab').addClass("active");
-		}
+		},
+
+		toggleFilter: function(filter) {
+			Ember.$(".browse-cards div.browse-form").hide();
+	        Ember.$(".browse-by-"+filter).show();
+			Ember.$('.browse-options .btn').removeClass('active');
+			Ember.$('.browse-options .'+ filter).addClass('active');
+        },
 
 	}
 });
