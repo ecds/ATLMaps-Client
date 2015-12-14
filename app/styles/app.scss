@@ -18,6 +18,7 @@
 @import 'loading.scss';
 @import 'modal-dialog-override.scss';
 @import 'extra-icons.scss';
+@import 'login-form.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -68,6 +69,10 @@ a {
 body, .static_content{
   background-color:#f4f4f4;
   height: 100%;
+}
+
+.checkbox label {
+    padding-left: 35px;
 }
 
 .static_content.container{

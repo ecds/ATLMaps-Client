@@ -24,7 +24,7 @@ export default Ember.Component.extend({
                 });
                 var layerLength = IDs.length;
                 Ember.$.each(IDs, function(index, value){
-                    // So here we are taking the length of the array, subtracting 
+                    // So here we are taking the length of the array, subtracting
                     // the index of the layer and then adding 10 to reorder them.
                     // It's just that easy.
                     var zIndex = layerLength - index + 10;
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
             Ember.$.each(layers, function(index, value){
                 var position = layerCount - index;
 
-                _this.store.find('raster_layer_project', {
+                _this.store.query('raster_layer_project', {
                     project_id: model.get('id'),
                     raster_layer_id: value
                 }).then(function(rasterLayerProject){
@@ -57,9 +57,11 @@ export default Ember.Component.extend({
                     layerToUpdate.save().then(function() {
                         // Success callback
                         // Show confirmation.
+						console.log('foo')
                         Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
                         }, function() {
                             // Error callback
+							console.log("bar")
                             Ember.$(".reorder-fail").stop().slideToggle().delay(3000).slideToggle();
 
                     });

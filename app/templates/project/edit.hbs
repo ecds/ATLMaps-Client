@@ -59,7 +59,7 @@
 			</div>
 			<div class="layer-list list-group">
 				{{#each model.vector_layer_ids key="@index" as |layer|}}
-					<div class="list-group-item {{layer.layer}} vector-layer" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+					<div class="list-group-item {{layer.slug}} vector-layer" id="{{layer.slug}}"  layer-id="{{layer.id}}">
 					{{project-vector-icon layer=layer projectID=model.id}}
 					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
 					<div class="layer-info-detail {{layer.slug}}">
@@ -97,13 +97,13 @@
 		{{ hide-all-raster-layers }}
 		<div class="layer-list list-group raster-list" id="layer_sort">
 			{{#each model.sortedRasterLayers key="@index" as |layer|}}
-				<div class="list-group-item raster-layer {{layer.layer}}" id="{{layer.layer}}"  layer-id="{{layer.id}}">
+				<div class="list-group-item raster-layer {{layer.slug}}" id="{{layer.slug}}"  layer-id="{{layer.id}}">
 
-					<span class="{{layer.layer_type}} {{layer.layer}}"></span>
-					<a {{action 'showLayerInfoDetals' layer.layer}}>{{layer.name}}</a>
+					<span class="{{layer.layer_type}} {{layer.slug}}"></span>
+					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
 					<span class="handle pull-right"><i class="material-icons reorder">code</i></span>
 					{{opacity-slider layer=layer}}
-					<div class="layer-info-detail {{layer.layer}}">
+					<div class="layer-info-detail {{layer.slug}}">
 
 						<article class="list-group-item-text">{{layer.description}}</article>
 						{{partial 'citation'}}

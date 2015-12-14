@@ -55,29 +55,29 @@ module.exports = function(environment) {
     // 'script-src': "'self' 'unsafe-eval'",
     'script-src': "*",
     'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com https://fonts.gstatic.com",
-    'connect-src': "'self' http://api.atlmaps-dev.com:3000",
+    'connect-src': "'self' http://api.atlmaps-dev.com:3000 https://s3.amazonaws.com",
     'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
     'media-src': "'self'",
     'img-src': "*",
     'frame-src': "'self' http://www.youtube.com https://www.youtube.com"
   };
 
-  ENV['simple-auth'] = {
-    //authorizer: 'simple-auth-authorizer:oauth2-bearer',
-    crossOriginWhitelist: [ENV.APP.API_HOST]
-  };
-
-  ENV['simple-auth-oauth2'] = {
-    serverTokenEndpoint: ENV.APP.API_HOST+'/oauth/token',
-    serverTokenRevocationEndpoint: ENV.APP.API_HOST+'/oauth/revoke',
-  };
-
-  // var apiHost = 'https://api.atlmaps.com/';
-
-  ENV['simple-auth'] = {
-    authorizer: 'simple-auth-authorizer:oauth2-bearer',
-    crossOriginWhitelist: [ENV.APP.API_HOST]
-  };
+  // ENV['ember-simple-auth'] = {
+  //   //authorizer: 'simple-auth-authorizer:oauth2-bearer',
+  //   crossOriginWhitelist: [ENV.APP.API_HOST]
+  // };
+  //
+  // ENV['ember-simple-auth-oauth2'] = {
+  //   serverTokenEndpoint: ENV.APP.API_HOST+'/oauth/token',
+  //   serverTokenRevocationEndpoint: ENV.APP.API_HOST+'/oauth/revoke',
+  // };
+  //
+  // // var apiHost = 'https://api.atlmaps.com/';
+  //
+  // ENV['ember-simple-auth'] = {
+  //   authorizer: 'ember-simple-auth-authorizer:oauth2-bearer',
+  //   crossOriginWhitelist: [ENV.APP.API_HOST]
+  // };
 
   ENV.sassOptions = {
   includePaths: [

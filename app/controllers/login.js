@@ -1,23 +1,17 @@
 import Ember from 'ember';
-import LoginControllerMixin from 'simple-auth/mixins/login-controller-mixin';
 
-export default Ember.Controller.extend(LoginControllerMixin, {
+export default Ember.Controller.extend({
 
-  authenticator: 'simple-auth-authenticator:oauth2-password-grant',
-  
+  session: Ember.inject.service('session'),
+
   actions: {
 
-    // display an error when authentication fails
-    authenticate: function () {
-      var self = this;
-      this._super().then(function () {
-        Ember.Logger.debug('Session authentication succeeded');
-      }, function (error) {
-        Ember.Logger.debug('Session authentication failed with message:',
-          error.message);
-        self.set('errorMessage', 'Invalid email/password combination.');
-      });
-    }
+    authenticate() {
+     let { identification, password } = this.getProperties('identification', 'password');
+     this.get('session').authenticate('authenticator:oauth2', identification, password).catch(() => {
+       this.set('errorMessage', 'Invalid email/password combination.');
+     });
+   }
 
   }
 

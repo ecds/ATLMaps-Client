@@ -46,11 +46,9 @@ export default Ember.Component.extend({
             var projectID = this.get('project.id');
 
             if (document.getElementById('dont-show').checked === true){
-                console.log('setting cookie to true');
                 Cookies.set('noIntro' + projectID, true);
             }
             else {
-                console.log('removing cookie');
                 Cookies.remove('noIntro' + projectID);
             }
         },

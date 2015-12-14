@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({
-            promise: this.store.find('raster-layer', {projectID: this.get('model.id')})
+            promise: this.store.query('raster-layer', {projectID: this.get('model.id')})
         });
 
         rasterLayers.then(function(){
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     vectorLayers: function() {
 
         var vectorLayers = DS.PromiseObject.create({
-            promise: this.store.find('vector-layer', {projectID: this.get('model.id')})
+            promise: this.store.query('vector-layer', {projectID: this.get('model.id')})
         });
 
         vectorLayers.then(function(){

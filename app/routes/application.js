@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-/* globals L, Draggabilly, OSMBuildings */
+/* globals L, Draggabilly */
 
-import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
+import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
@@ -37,6 +37,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // });
 
 				// If we want to add OSM's 3D buildings.
+				// Add `OSMBuildings` to the globals
 				// var buildings = new OSMBuildings(map).load();
 
                 try {
@@ -89,14 +90,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
                 Ember.$('.marker-data').resizeThis({ noNative: true });
 
-                var raster_layers = model.get('raster_layer_ids');
+                // var raster_layers = model.get('raster_layer_ids');
 
-                Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
-                    var projectLayer = DS.PromiseObject.create({
-                        promise: _this.store.find('raster_layer', raster_layer_id.id)
-                    });
-
-                });
+                // Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
+                //     var projectLayer = DS.PromiseObject.create({
+                //         promise: _this.store.query('raster_layer', raster_layer_id.id)
+                //     });
+				//
+                // });
 
                 // Toggle the label for the show/hide all layers switch
                 Ember.$("input#toggle-layer-opacity").change(function(){
@@ -126,7 +127,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var _this = this;
 
             var addedLayers = DS.PromiseObject.create({
-                promise: _this.store.find('raster-layer-project', {
+                promise: _this.store.query('raster-layer-project', {
                     project_id: project_id
                 })
             });
@@ -206,7 +207,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             );
 
             // var addedLayers = DS.PromiseObject.create({
-            //     promise: _this.store.find('vector_layer_project', {
+            //     promise: _this.store.query('vector_layer_project', {
             //         project_id: project_id
             //     })
             // });
@@ -216,11 +217,11 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             //     Ember.$.each(addedLayers.content.content, function(index, layer_id) {
 			//
             //         var layer = DS.PromiseObject.create({
-            //             promise: _this.store.find('layer', layer_id._data.vector_layer_id)
+            //             promise: _this.store.query('layer', layer_id._data.vector_layer_id)
             //         });
 			//
             //         var savedMarker = DS.PromiseObject.create({
-            //             promise: _this.store.find('vector_layer_project', {
+            //             promise: _this.store.query('vector_layer_project', {
             //                 project_id: project_id, vector_layer_id: layer_id._data.vector_layer_id
             //             })
             //         });
@@ -234,7 +235,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             //     });
 			//
             //     var newLayer = DS.PromiseObject.create({
-            //         promise: _this.store.find('layer', layer.get('id'))
+            //         promise: _this.store.query('layer', layer.get('id'))
             //     });
 			//
             //     newLayer.then(function(){
@@ -255,14 +256,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             layer.set('active_in_project', false);
             var projectID = this.modelFor(route).get('id');
             var layerID = layer.get('id');
-            var layerClass = layer.get('layer');
+            var layerClass = layer.get('slug');
 
             var _this = this;
 
             this.modelFor(route).get('raster_layer_ids').removeObject(layerID);
 
             var rasterLayerProject = DS.PromiseObject.create({
-                promise: this.store.find('raster_layer_project', {
+                promise: this.store.query('raster_layer_project', {
                     raster_layer_id: layerID, project_id: projectID
                 })
             });
@@ -270,7 +271,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             rasterLayerProject.then(function(){
                 var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
 
-                _this.store.find('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+                _this.store.query('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
                     rasterLayerProject.destroyRecord().then(function(){});
                 });
             });
@@ -296,14 +297,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var projectID = this.modelFor(route).get('id');
             layer.set('active_in_project', false);
             var layerID = layer.get('id');
-            var layerClass = layer.get('layer');
+            var layerClass = layer.get('slug');
 
             var _this = this;
 
             this.modelFor(route).get('vector_layer_ids').removeObject(layer);
 
             var vectorLayerProject = DS.PromiseObject.create({
-                promise: this.store.find('vector_layer_project', {
+                promise: this.store.query('vector_layer_project', {
                     vector_layer_id: layerID, project_id: projectID
                 })
             });
@@ -311,7 +312,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             vectorLayerProject.then(function(){
                 var vectorLayerProjectID = vectorLayerProject.get('content.content.0.id');
 
-                _this.store.find('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
+                _this.store.query('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
                     vectorLayerProject.destroyRecord().then(function(){});
                 });
             });
@@ -344,9 +345,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             this.sendAction('activateVectorCard');
         },
 
-        colorIcons: function(layer, marker){
-
-        },
+        // colorIcons: function(layer, marker){
+		//
+        // },
 
         snapBack: function(){
             Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);

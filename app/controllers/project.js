@@ -5,11 +5,11 @@ import DS from 'ember-data';
 
 
 export default Ember.Controller.extend({
-
+    
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({
-            promise: this.store.find('raster-layer', {projectID: this.model.get('id')})
+            promise: this.store.query('raster-layer', {projectID: this.model.get('id')})
         });
 
         rasterLayers.then(function(){
@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
     vectorLayers: function() {
 
         var vectorLayers = DS.PromiseObject.create({
-            promise: this.store.find('vector-layer', {projectID: this.model.get('id')})
+            promise: this.store.query('vector-layer', {projectID: this.model.get('id')})
         });
 
         vectorLayers.then(function(){
@@ -85,7 +85,7 @@ export default Ember.Controller.extend({
 
       //           Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
       //               var projectLayer = DS.PromiseObject.create({
-      //                   promise: _this.store.find('raster_layer', raster_layer_id.id)
+      //                   promise: _this.store.query('raster_layer', raster_layer_id.id)
       //               });
 
       //               projectLayer.then(function() {
@@ -103,11 +103,11 @@ export default Ember.Controller.extend({
 
       //       //  Ember.$.each(rasterLayerIDs.content.currentState, function(index, layer_id) {
       // //               var rasterLayer = DS.PromiseObject.create({
-      // //                   promise: _this.store.find('raster_layer', layer_id.id)
+      // //                   promise: _this.store.query('raster_layer', layer_id.id)
       // //               });
 
       // //               rasterLayer.then(function() {
-      // //                //Ember.$(".slider."+rasterLayer.get('layer'))[0].destroy();
+      // //                //Ember.$(".slider."+rasterLayer.get('slug'))[0].destroy();
       // //                   _this.send('opacitySlider', rasterLayer);
       // //               });
       // //           });
@@ -123,7 +123,7 @@ export default Ember.Controller.extend({
         // mapLayer expects `layer` to be a layer object.
         mapLayer: function(layer, marker_color, position){
 
-            var slug = layer.get('layer');
+            var slug = layer.get('slug');
             var map = this.globals.mapObject;
 
             // Ember pulls from the cache and the so the order of the layers gets
@@ -143,8 +143,8 @@ export default Ember.Controller.extend({
 
                 case 'planningatlanta':
 
-                    var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + layer.get('layer') + '/{z}/{x}/{y}.png', {
-                        layer: layer.get('layer'),
+                    var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + layer.get('name') + '/{z}/{x}/{y}.png', {
+                        layer: layer.get('slug'),
                         tms: true,
                         minZoom: 13,
                         maxZoom: 19,
@@ -157,8 +157,8 @@ export default Ember.Controller.extend({
 
                 case 'atlTopo':
 
-                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + layer.get('layer') + '/{z}/{x}/{y}.jpg', {
-                        layer: layer.get('layer'),
+                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + layer.get('slug') + '/{z}/{x}/{y}.jpg', {
+                        layer: layer.get('slug'),
                         tms: true,
                         minZoom: 13,
                         maxZoom: 19,
@@ -171,8 +171,8 @@ export default Ember.Controller.extend({
 
                 case 'wms':
 
-                    var wmsLayer = L.tileLayer.wms(institution.geoserver + layer.get('url') + '/wms', {
-                        layers: layer.get('url') + ':' + layer.get('layer'),
+                    var wmsLayer = L.tileLayer.wms(institution.geoserver + layer.get('workspace') + '/wms', {
+                        layers: layer.get('workspace') + ':' + layer.get('name'),
                         format: 'image/png',
                         crs: L.CRS.EPSG4326,
                         transparent: true,
@@ -186,7 +186,7 @@ export default Ember.Controller.extend({
                 // case 'wfs':
                 //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
                 //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
-                //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('layer') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
+                //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('slug') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
 
                 //  Ember.$.ajax(wfsLayer,
                 //      { dataType: 'jsonp' }
@@ -206,6 +206,7 @@ export default Ember.Controller.extend({
                 //  break;
 
                 case 'geojson':
+
                     function viewData(feature, layer) {
 
                         var popupContent = "<h2>"+feature.properties.name+"</h2>";
@@ -293,7 +294,7 @@ export default Ember.Controller.extend({
         //         slider.noUiSlider.on('update', function(values, handle){
         //             valueInput.value = values[handle];
         //             var opacity = values[handle] / 10;
-        //             Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+        //             Ember.$("#map div."+layer.get('slug')+",#map img."+layer.get('slug')).css({'opacity': opacity});
         //         });
         //         valueInput.addEventListener('change', function(){
         //             slider.noUiSlider.set(this.value);

@@ -43,7 +43,7 @@ export default Ember.Component.extend({
             slider.noUiSlider.on('update', function(values, handle){
                 valueInput.value = values[handle];
                 var opacity = values[handle] / 10;
-                Ember.$("#map div."+layer.get('layer')+",#map img."+layer.get('layer')).css({'opacity': opacity});
+                Ember.$("#map div."+layer.get('slug')+",#map img."+layer.get('slug')).css({'opacity': opacity});
             });
         }
         catch(err){/* still don't care */}
