@@ -57,11 +57,9 @@ export default Ember.Component.extend({
                     layerToUpdate.save().then(function() {
                         // Success callback
                         // Show confirmation.
-						console.log('foo')
                         Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
                         }, function() {
                             // Error callback
-							console.log("bar")
                             Ember.$(".reorder-fail").stop().slideToggle().delay(3000).slideToggle();
 
                     });
