@@ -26,6 +26,7 @@ export default Ember.Route.extend({
     		Ember.run.scheduleOnce('afterRender', function() {
                 _this.send('initProjectUI', _this.modelFor('explore'));
             });
-    	}
+    	},
+
     }
 });

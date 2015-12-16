@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
     notShowingIntro: false,
 
-    didInsertElement: function(){
+    willInsertElement: function(){
         var projectID = this.get('project.id');
 
         if (Cookies.get('noIntro' + projectID)) {

@@ -1,6 +1,6 @@
 <div class="browse-nav">
     <div class="filter-list">FILTERS</div>
-    {{ project-nav mode='browse-filters'}}
+    {{ project-nav browse-filters=true}}
 
 </div>
 
@@ -60,7 +60,7 @@
 </div>
 
     <div class="browse-results">
-        {{ project-nav mode='browse' rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
+        {{ project-nav browse=true rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
          <div class="list">
              <div class="raster-results">
             {{#each results.raster_layer_ids key="@index" as |raster|}}
@@ -69,11 +69,11 @@
             <div class="layer-list-item row name {{raster.tag_slugs}} {{raster.institution.slug}} {{raster.layer_type}}">
                 <div class="col-xs-2 remove-layer-button">
 
-                    {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=raster}}
+                    {{add-remove-layer-button add='sendRasterLayerToAdd' remove='removeRasterLayer' layer=raster}}
 
                 </div>
                 <div class="col-xs-9">
-                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span> {{raster.name}}</h4>
+                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span> {{raster.title}}</h4>
                     <p>
                         <div class="description">{{raster.description}}</div>
                     </p>
@@ -106,7 +106,7 @@
           <div class="layer-list-item row name {{vector.tag_slugs}} {{vector.institution.slug}} v{{ector.layer_type}}">
               <div class="col-xs-2 remove-layer-button">
 
-                  {{add-remove-layer-button add="sendRasterLayerToAdd" remove="sendRasterLayerToRemove" layer=rvector}}
+                  {{add-remove-layer-button add='addVectorLayer' remove='removeVectorLayer' layer=rvector}}
 
               </div>
               <div class="col-xs-9">

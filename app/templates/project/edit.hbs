@@ -11,7 +11,7 @@
 			{{/link-to}}
 	</div>
 
-		{{ project-nav mode='edit' model=model rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
+		{{ project-nav edit=true model=model rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
 
 	{{ reorder-layers mode='edit' model=model}}
 

@@ -66,7 +66,6 @@ app.import('vendor/js/menu/classie.js');
 app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
 app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');
 
-app.import('vendor/js/shuffle.js');
 app.import('vendor/js/local.js');
 app.import('vendor/js/addLayers.js');
 app.import('bower_components/blueimp-md5/js/md5.js');

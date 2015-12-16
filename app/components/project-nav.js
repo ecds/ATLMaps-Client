@@ -2,28 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	edit: false,
-
-	didInsertElement: function(){
-        // Set which group to show from the template.
-		if (this.get('mode') === 'edit'){
-			this.set('edit', true);
-		}
-        else if (this.get('mode') === 'view'){
-            this.set('projview', true);
-        }
-        else if (this.get('mode') === 'explore'){
-            this.set('explore', true);
-        }
-		else if (this.get('mode') === 'browse'){
-            this.set('browse', true);
-        }
-		else if (this.get('mode') === 'browse-filters'){
-            this.set('browse-filters', true);
-        }
-
-	},
-
 	actions: {
 		navigateProject: function(card){
 

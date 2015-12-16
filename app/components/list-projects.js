@@ -36,7 +36,7 @@ export default Ember.Component.extend({
 
             if (response === true) {
             	Ember.$("[data-project-id='"+project+"']").remove();
-                this.store.query('project', project).then(function (project) {
+                this.store.find('project', project).then(function (project) {
                     project.destroyRecord();
                 });
             }
