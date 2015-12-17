@@ -59,8 +59,8 @@
 					<div class="layer-info-detail {{layer.slug}}">
 
 						<article class="list-group-item-text">{{layer.description}}</article>
-						<div class="citation">Provided by: <img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo" /> <span class="institution">{{layer.institution.name}}</span></div>
-
+						{{partial 'citation'}}
+						
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">
 								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeRasterLayer' layer}}><i class="material-icons">delete</i></a>
@@ -76,7 +76,7 @@
 	</div>
 
 	<div class="browse card">
-		{{browse-layers}}
+		{{browse-layers addRaster='addRasterLayer' removeRaster='removeRasterLayer' addVector='addVectorLayer' removeVector='removeVectorLayer'}}
 	</div>
 
 	<div class="controls controls-edit card">

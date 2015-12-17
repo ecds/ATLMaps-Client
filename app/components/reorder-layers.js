@@ -45,6 +45,7 @@ export default Ember.Component.extend({
 	actions: {
 		updateOrder: function(layers, layerCount, model) {
             var _this = this;
+			// Go through each layer and update the new positon.
             Ember.$.each(layers, function(index, value){
                 var position = layerCount - index;
 
@@ -54,17 +55,12 @@ export default Ember.Component.extend({
                 }).then(function(rasterLayerProject){
                     var  layerToUpdate = rasterLayerProject.get('firstObject');
                     layerToUpdate.set('position', position);
-                    layerToUpdate.save().then(function() {
-                        // Success callback
-                        // Show confirmation.
-                        Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
-                        }, function() {
-                            // Error callback
-                            Ember.$(".reorder-fail").stop().slideToggle().delay(3000).slideToggle();
-
-                    });
+                    layerToUpdate.save();
                 });
             });
+			// This is less than ideal but we were getting getting errors on the
+			// `save().the()`function even though the save was successful.
+			Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
         }
 	}
 });

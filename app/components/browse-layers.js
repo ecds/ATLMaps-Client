@@ -136,20 +136,20 @@ export default Ember.Component.extend({
       },
 
       sendRasterLayerToAdd: function(layer){
-          console.log('hi');
-          this.sendAction('addRasterLayer', layer);
+          this.sendAction('addRaster', layer);
       },
 
       sendRasterLayerToRemove: function(layer){
-          this.sendAction('remove', layer);
+          this.sendAction('removeRaster', layer);
       },
 
       sendVectorLayerToAdd: function(layer){
-          this.sendAction('add', layer);
+          console.log(layer);
+          this.sendAction('addVector', layer);
       },
 
       sendVectorLayerToRemove: function(layer){
-          this.sendAction('remove', layer);
+          this.sendAction('removeVector', layer);
       }
   }
 });
