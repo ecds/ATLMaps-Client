@@ -17,6 +17,8 @@ export default Ember.Route.extend({
 			// Placehoder name for project.
             var newProjectName = md5((new Date()).toTimeString());
 
+			console.log(this.get('session'));
+
             var project = this.store.createRecord('project', {
                 name: newProjectName,
                 user_id: this.get('session.session.content.secure.user.id'),
