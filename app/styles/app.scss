@@ -338,6 +338,10 @@ a.site-title .alt-dark{
   background: none;
 }
 
+.list-group .list-group-item .row-action-primary {
+    vertical-align: top;
+}
+
 .planningatlanta .mdi-maps-place:before,
 .wms .mdi-maps-place:before {
   content: "\e867";

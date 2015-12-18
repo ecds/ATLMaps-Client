@@ -4,6 +4,8 @@ import DS from 'ember-data';
 /* globals md5 */
 
 export default Ember.Route.extend({
+	session: Ember.inject.service('session'),
+
 	actions : {
 
         didTransition: function() {
@@ -17,7 +19,7 @@ export default Ember.Route.extend({
 
             var project = this.store.createRecord('project', {
                 name: newProjectName,
-                user_id: this.session.get('content.secure.user.id'),
+                user_id: this.get('session.session.content.secure.user.id'),
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,
