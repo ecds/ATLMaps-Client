@@ -1,4 +1,11 @@
+<div class="layer-search row">
+  <div class="col-xs-12">
+    <input type="text" class="form-control pull-left" id="search-field" placeholder="Search" onchange={{action "search"}}>
+    <button {{action "search"}} type="submit" class="btn btn-info pull-right"><i class="material-icons">search</i></button>
+  </div>
+</div>
 <div class="browse-nav">
+
     <div class="filter-list">FILTERS</div>
     {{ project-nav browse-filters=true}}
 
@@ -55,7 +62,18 @@
         {{/each}}
     </div>
     <div class="browse-by-years browse-form">
-        years!
+      <div class="year-slider">
+        <div id="range"></div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="start_year" placeholder="Start Year">
+          </div>
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="end_year" placeholder="End Year">
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 

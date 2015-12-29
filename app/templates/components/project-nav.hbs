@@ -56,18 +56,17 @@
 		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" title="About Exploring">
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		</a>
-
+		<a {{action 'navigateProject' 'browse'}} class="btn btn-default transparent-button project-nav" id="browse" title="Browse">
+			<span class="nav-icon"><i class="material-icons">search</i></span>
+		</a>
 	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
 	    	<span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
 	    </a>
 	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
 	    	<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
 	    </a>
-		<a {{action 'navigateProject' 'browse'}} class="btn btn-default transparent-button project-nav" id="browse" title="Browse">
-	    	<span class="nav-icon"><i class="material-icons">search</i></span>
-	    </a>
 	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls" title="Select Base Layer">
-	    	<span class="nav-icon"><i class="material-icons">tune</i></span>
+	    	<span class="nav-icon"><i class="material-icons">map</i></span>
 	    </a>
 	    <!-- <a {{action 'navigateProject' 'help'}} class="btn btn-default transparent-button project-nav" id="help" title="Show Help Window">
 	    	<span class="nav-icon"><i class="material-icons">help_outline</i></span>

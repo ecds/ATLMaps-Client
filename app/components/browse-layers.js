@@ -1,6 +1,63 @@
 import Ember from 'ember';
+/* globals noUiSlider */
 
 export default Ember.Component.extend({
+
+  yearRange: function(){
+    return this.store.find('yearRange', 1);
+  }.property(),
+
+  didRender: function(){
+    var _this = this;
+    var range = this.get('yearRange');
+    var min = range.get('content.min_year');
+    var max = range.get('content.max_year');
+
+    this.setProperties({startYear: min, endYear: max});
+
+    var rangeSlider = document.getElementById('range');
+
+    try {
+      // Initializing the slider
+      noUiSlider.create(rangeSlider, {
+        start: [ min, max ],
+        connect: true,
+        range: {
+          'min': min,
+          'max': max
+        }
+      });
+
+      // Linking the inputs
+      var inputMinYear = document.getElementById('start_year');
+      var inputMaxYear = document.getElementById('end_year');
+
+      rangeSlider.noUiSlider.on('update', function( values, handle ) {
+        var value = values[handle];
+        if ( handle ) {
+          inputMaxYear.value = Math.round(value);
+        } else {
+          inputMinYear.value = Math.round(value);
+        }
+      });
+
+      inputMaxYear.addEventListener('change', function(){
+        rangeSlider.noUiSlider.set([null, this.value]);
+      });
+
+      inputMinYear.addEventListener('change', function(){
+        rangeSlider.noUiSlider.set([this.value, null]);
+      });
+
+      rangeSlider.noUiSlider.on('set', function(){
+        _this.send('yearFilter');
+      });
+
+    }
+    catch(err){
+      // Don't care
+    }
+  },
 
   panelActions: Ember.inject.service(),
 
@@ -26,6 +83,12 @@ export default Ember.Component.extend({
 
   selectedInstitution: '',
 
+  textSearch: '',
+
+  startYear: 0,
+
+  endYear: 0,
+
   // Number of tags that are checked.
   checkedTags: '',
 
@@ -36,10 +99,17 @@ export default Ember.Component.extend({
   getResults: function(){
       var tags = this.get('checkedTags');
       var institution = this.get('selectedInstitution');
+      var search = this.get('textSearch');
 
-      var searchResults = this.store.queryRecord('search', {tags: tags, name: institution});
+      var searchResults = this.store.queryRecord('search', {
+        tags: tags,
+        name: institution,
+        text_search: search,
+        start_year: this.get('startYear'),
+        end_year: this.get('endYear')
+      });
 
-      if (tags.length > 0 || institution !== '') {
+      if (tags.length > 0 || institution !== '' || search !== '') {
           this.setProperties({ results: searchResults });
       }
       else {
@@ -133,6 +203,18 @@ export default Ember.Component.extend({
       selectedInstitution: function(institution){
           this.setProperties({selectedInstitution: institution});
           this.getResults();
+      },
+
+      search: function(){
+        this.setProperties({textSearch: Ember.$('#search-field').val()});
+        this.getResults();
+      },
+
+      yearFilter: function(){
+        var min = Ember.$('#start_year').val();
+        var max = Ember.$('#end_year').val();
+        this.setProperties({startYear: min, endYear: max});
+        this.getResults();
       },
 
       sendRasterLayerToAdd: function(layer){
