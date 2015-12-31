@@ -96,17 +96,21 @@ div.layer-search {
         font-size: .75em;
         padding-bottom: 10px;
 
-        // .noUi-handle {
-        //   background-color: #ffb74d !important;
-        //   border-color: #ffb74d !important;
-        // }
-
-        .noUi-origin {
-          // background-color: #ffb74d;
+        .noUi-handle {
+          background-color: #ffb74d !important;
+          border-color: #ffb74d !important;
         }
 
-        .noUi-base {
-          background: deeppink;
+        .noUi-origin {
+          background-color: #ffb74d;
+        }
+
+        .noUi-base, .noUi-background {
+          background: #f4f4f4;
+        }
+
+        input {
+          text-align: center;
         }
 
         //   .noUi-origin {

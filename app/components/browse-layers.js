@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     var min = range.get('content.min_year');
     var max = range.get('content.max_year');
 
-    this.setProperties({startYear: min, endYear: max});
+    // this.setProperties({startYear: min, endYear: max});
 
     var rangeSlider = document.getElementById('range');
 
@@ -55,6 +55,7 @@ export default Ember.Component.extend({
 
     }
     catch(err){
+      console.log(err);
       // Don't care
     }
   },
@@ -100,16 +101,18 @@ export default Ember.Component.extend({
       var tags = this.get('checkedTags');
       var institution = this.get('selectedInstitution');
       var search = this.get('textSearch');
+      var start_year = this.get('startYear');
+      var end_year = this.get('endYear');
 
       var searchResults = this.store.queryRecord('search', {
         tags: tags,
         name: institution,
         text_search: search,
-        start_year: this.get('startYear'),
-        end_year: this.get('endYear')
+        start_year: start_year,
+        end_year: end_year
       });
 
-      if (tags.length > 0 || institution !== '' || search !== '') {
+      if (tags.length > 0 || institution !== '' || search !== '' || start_year !== '' || end_year !== '') {
           this.setProperties({ results: searchResults });
       }
       else {
