@@ -55,7 +55,6 @@ export default Ember.Component.extend({
 
     }
     catch(err){
-      console.log(err);
       // Don't care
     }
   },
@@ -112,7 +111,7 @@ export default Ember.Component.extend({
         end_year: end_year
       });
 
-      if (tags.length > 0 || institution !== '' || search !== '' || start_year !== '' || end_year !== '') {
+      if (tags.length > 0 || institution !== '' || search !== '' || start_year > 0 || end_year > 0) {
           this.setProperties({ results: searchResults });
       }
       else {
