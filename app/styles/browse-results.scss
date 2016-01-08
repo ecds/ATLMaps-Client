@@ -1,17 +1,65 @@
-.browse-results {
+@import "variables.scss";
+
+.results-nav {
   position: fixed;
   left: 480px;
   width: 45%;
-  overflow-y: auto;
   top: 70px;
-  height: 100%;
 
-  .layer-list-item {
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  i {
+    font-size: 4em;
   }
 
   .badge {
       background-color: darkblue !important;
+      font-size: 1.25em;
+  }
+
+  .vector-badge {
+    margin-bottom: 1.6em !important;
+  }
+
+  .nav-icon {
+    font-size: 2em;
+  }
+
+  a.btn {
+    background-color: whitesmoke;
+  }
+
+  a.active {
+    background-color: white;
+    opacity: 1;
+  }
+
+}
+.browse-results, .no-results {
+  position: fixed;
+  left: 480px;
+  width: 45%;
+  overflow-y: auto;
+  top: 163px;
+  max-height: 80%;
+
+  .results-loading {
+    width: 100%;
+    background-color: white;
+    margin: auto;
+
+    img {
+      display: block;
+      margin: 0 auto;
+      clear: right;
+      padding: 1em 0;
+    }
+   }
+
+  .layer-list-item {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+
+      .col-xs-9 {
+          padding-top: 1em;
+      }
   }
 
   ul {
@@ -39,6 +87,24 @@
       background-color: inherit;
   }
 }
+
+.no-results {
+    display: none;
+    background-color: white;
+    padding: 1em;
+    margin-left: 2px;
+    right: 38px;
+    width: 644px;
+}
+
+#new-search {
+    display: block;
+}
+
+#none-found {
+    color: #ff5722;
+}
+
 
 div.layer-search {
   input#search-field {
@@ -113,6 +179,16 @@ div.layer-search {
           text-align: center;
         }
 
+        .check {
+            border-color: $check-border-color;
+        }
+
+        .radio input[type=radio]:checked ~ .check {
+            background-color: #03a9f4;
+        }
+        .radio input[type=radio]:checked ~ .circle {
+            border-color: $check-border-color;
+        }
         //   .noUi-origin {
         //     // z-index: 2;
         //     height: 2px;
@@ -170,7 +246,7 @@ div.layer-search {
                     left: 17px;
                     width: 10px;
                     height: 12px;
-                    border-color: #0f9d58;
+                    border-color: $check-border-color;
                     border-left-color: transparent;
                     border-top-color: transparent;
                     transform: rotate(45deg);
@@ -181,7 +257,7 @@ div.layer-search {
                     width: 4px;
                     height: 4px;
                     transform: rotate(45deg);
-                    border-color: #0f9d58;
+                    border-color: $check-border-color;
                     border-left-color: transparent;
                     border-top-color: transparent;
                 }
@@ -209,7 +285,7 @@ div.layer-search {
                     width: 6px;
                     height: 12px;
                     transform: rotate(45deg);
-                    border-color: #0f9d58;
+                    border-color: $check-border-color;
                     border-left-color: transparent;
                     border-top-color: transparent;
                 }

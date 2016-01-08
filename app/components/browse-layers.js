@@ -117,6 +117,7 @@ export default Ember.Component.extend({
       else {
           this.setProperties({results: []});
       }
+      Ember.$('#new-search').hide();
 
   },
 
@@ -129,35 +130,57 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function() {
-      Ember.$(".browse-cards div.browse-form").hide();
+      // Ember.$(".browse-cards div.browse-form").hide();
       Ember.$(".browse-by-tags").show();
+      Ember.$('.nav-browse').slideDown('slow');
+  },
+
+  showResults: function (toShow, toHide){
+    Ember.$('.'+toHide+'-results').hide();
+    Ember.$('.'+toShow+'-results').show();
+    Ember.$('.'+toShow+'-result-tab').addClass("active");
+    Ember.$('.'+toHide+'-result-tab').removeClass("active");
   },
 
   didUpdate: function() {
-      var results = this.get('results');
+      var activeRasterCount = parseInt(Ember.$('.raster-badge').text());
+      var activeVectorCount = parseInt(Ember.$('.vector-badge').text());
 
-      var rasterCount = results.get('content.raster_layer_ids.length');
+      // Only want to select the active results tab the first time we
+      // load results. We pick the one wiht the most results to start.
+      if (Ember.$(".browse-nav-button").hasClass("active") === false){
+            var results = this.get('results');
+            var rasterCount = results.get('content.raster_layer_ids.length');
+            var vectorCount = results.get('content.vector_layer_ids.length');
 
-      var vectorCount = results.get('content.vector_layer_ids.length');
-      if ((rasterCount === 0 || rasterCount === 'undefined') && (vectorCount === 0 || vectorCount === 'undefined') ){
-          Ember.$('.browse-results').hide();
-      }
-      else{
-          Ember.$('.browse-results').show();
-      }
+            if ((rasterCount === 0 || rasterCount === 'undefined') && (vectorCount === 0 || vectorCount === 'undefined') ){
+                Ember.$('.browse-results').hide();
+            }
+            else{
+                Ember.$('.browse-results').show();
+            }
 
-      if (rasterCount > vectorCount || rasterCount === vectorCount) {
-          Ember.$('.vector-results').hide();
-          Ember.$('.raster-results').show();
-          Ember.$('.raster-result-tab').addClass("active");
-          Ember.$('.vector-result-tab').removeClass("active");
-      }
-      else if (rasterCount < vectorCount){
-          Ember.$('.raster-results').hide();
-          Ember.$('.vector-results').show();
-          Ember.$('.vector-result-tab').addClass("active");
-          Ember.$('.raster-result-tab').removeClass("active");
-      }
+            if (vectorCount > rasterCount) {
+              this.showResults('vector', 'raster');
+            }
+            else if (rasterCount > vectorCount){
+              this.showResults('raster', 'vector');
+            }
+        }
+        // This is for when results have been loaded and change the filters
+        // and the previous active type's count falls to 0. We want to switch
+        // to the tab that isn't 0.
+        else if (activeRasterCount === 0 && activeVectorCount > 0) {
+          console.log('show vector');
+          this.showResults('vector', 'raster');
+        }
+        else if (activeVectorCount === 0 && activeRasterCount > 0) {
+          console.log('show raster');
+          this.showResults('raster', 'vector');
+        }
+        else if (activeVectorCount === 0 && activeRasterCount === 0) {
+            Ember.$('#none-found').show();
+        }
   },
 
   actions: {

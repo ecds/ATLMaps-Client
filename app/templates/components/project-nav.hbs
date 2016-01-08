@@ -6,7 +6,7 @@
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		</a>
 	    <a {{action 'navigateProject' 'vector-data-edit'}} class="btn btn-default transparent-button project-nav" id='vector-data-edit' title="Manage Pinpoint Layers">
-	    	<span class="nav-icon atlmaps-ext data-icon"></span><span class="badge">{{this.vectorCount}}</span>
+	    	<span class="nav-icon atlmaps-ext data-icon"></span><span class="badge vector-badge">{{this.vectorCount}}</span>
 	    </a>
 	    <a {{action 'navigateProject' 'raster-layers-edit'}} class="btn btn-default transparent-button project-nav" id="raster-layers-edit" title="Manage Archival Map Layers">
 	    	<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
@@ -34,7 +34,7 @@
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		</a>
 	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
-	    	<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
+	    	<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{this.vectorCount}}</span>
 	    </a>
 	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Map Layers">
 	    	<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
@@ -53,17 +53,17 @@
 
 	<div class="btn-group btn-group-justified">
 
-		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" title="About Exploring">
+		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		</a>
 		<a {{action 'navigateProject' 'browse'}} class="btn btn-default transparent-button project-nav" id="browse" title="Browse">
 			<span class="nav-icon"><i class="material-icons">search</i></span>
 		</a>
 	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
-	    	<span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
+	    	<span class="atlmaps-ext data-icon nav-icon"><span class="badge vector-badge">{{this.vectorCount}}</span></span>
 	    </a>
 			<!-- <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
-	    	<span class="nav-icon"></span><i class="material-icons">local_pizza</i><span class="badge">{{this.vectorCount}}</span>
+	    	<span class="nav-icon"></span><i class="material-icons">hot_tub</i><span class="badge">{{this.vectorCount}}</span>
 	    </a> -->
 	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Maps">
 	    	<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
@@ -79,13 +79,14 @@
 {{/if}}
 
 {{#if this.browse}}
-	<div class="btn-group btn-group-justified">
+	<div class="btn-group btn-group-justified results-nav">
 
-		<a {{action 'showVectorResults'}} class="btn btn-default transparent-button project-nav vector-result-tab" id='vector-data' title="Pinpoint Layers">
-			<span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{this.vectorCount}}</span>
+		{{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
+		<a {{action 'showResults' 'vector' 'raster'}} class="btn btn-default transparent-button project-nav vector-result-tab browse-nav-button" id='vector-data' title="Pinpoint Layers">
+			<span class="atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{#if this.vectorCount}}{{this.vectorCount}}{{else}}0{{/if}}</span>
 		</a>
-		<a {{action 'showRasterResults'}} class="btn btn-default transparent-button project-nav raster-result-tab" id="raster-layers" title="Archival Maps">
-			<span class="nav-icon"></span><i class="material-icons">layers</i><span class="badge">{{this.rasterCount}}</span>
+		<a {{action 'showResults' 'raster' 'vector' }} class="btn btn-default transparent-button project-nav raster-result-tab browse-nav-button" id="raster-layers" title="Archival Maps">
+			<i class="material-icons">layers</i><span class="badge raster-badge">{{#if this.rasterCount}}{{this.rasterCount}}{{else}}0{{/if}}</span>
 		</a>
 	</div>
 {{/if}}

@@ -73,6 +73,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                     Ember.$("div.info").remove();
                     Ember.$("div.marker-data").hide();
                     Ember.$(".active_marker").removeClass("active_marker");
+										Ember.$(".browse-results").hide();
                     _this.send('activateVectorCard');
                 });
 

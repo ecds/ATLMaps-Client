@@ -77,8 +77,19 @@
     </div>
 </div>
 
+    {{ project-nav browse=true rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
+        <div class="no-results" id="new-search">
+            Use the filters to find what you want.
+        </div>
+        <div class="no-results" id="none-found">
+            Your search returned zero layers.
+        </div>
     <div class="browse-results">
-        {{ project-nav browse=true rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
+        {{#if results.isPending}}
+        <div class="loading">Loading...</div>
+        {{/if}}
+
+
          <div class="list">
              <div class="raster-results">
             {{#each results.raster_layer_ids key="@index" as |raster|}}
@@ -91,7 +102,7 @@
 
                 </div>
                 <div class="col-xs-9">
-                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span> {{raster.title}}</h4>
+                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span>{{#if raster.isPending}}Loacing...{{else}}{{raster.title}}{{/if}}</h4>
                     <p>
                         <div class="description">{{raster.description}}</div>
                     </p>
@@ -127,8 +138,8 @@
                   {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
 
               </div>
-              <div class="col-xs-9">
-                  <h4 class="name"><span class="{{vector.layer_type}} description_icon"></span> {{vector.name}}</h4>
+              <div class="col-xs-9 ">
+                  {{#if vector.name}}<h4 class="name"><span class="{{vector.layer_type}} description_icon"></span>{{vector.name}}</h4>{{else}}Loading...{{/if}}
                   <p>
                       <div class="description">{{vector.description}}</div>
                   </p>
