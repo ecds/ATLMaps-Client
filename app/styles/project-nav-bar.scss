@@ -11,9 +11,35 @@
   .active-button {
     border-bottom: none;
     z-index: 5;
+    opacity: 1;
+    .nav-icon {
+        color: #03A9F4;
+    }
+
   }
 
   .btn-group{
+      a:nth-of-type(1) {
+          background-color: #FAFAFA;
+      }
+      a:nth-of-type(2) {
+          background-color: #F5F5F5;
+      }
+      a:nth-of-type(3) {
+          background-color: #EEEEEE;
+      }
+      a:nth-of-type(4) {
+          background-color: #E0E0E0;
+      }
+      a:nth-of-type(5) {
+          background-color: #BDBDBD;
+      }
+      a:nth-of-type(6) {
+          background-color: #9E9E9E;
+      }
+      a:nth-of-type(7) {
+          background-color: #757575;
+      }
     &, & .btn{
       border-radius:0;
       padding: 0;
@@ -97,7 +123,7 @@
   font-size: 1.5em;
   ul {
     list-style-type: none;
-    padding: 0 0 1em 0 !important;
+    // padding: 0 0 1em 0 !important;
     li {
       padding-top: .25em;
     }
@@ -111,9 +137,4 @@
   span.badge {
       opacity: 0.5;
   }
-}
-
-.active-button {
-  opacity: 1;
-  color: deepskyblue;
 }

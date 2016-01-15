@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+	classNames: ['col-xs-2', 'remove-layer-button'],
+	
 	actions: {
 		addLayer: function(){
 

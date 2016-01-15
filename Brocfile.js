@@ -53,6 +53,7 @@ var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
 
 app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
+app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/leaflet/dist/leaflet.js');
 app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
@@ -72,6 +73,7 @@ app.import('bower_components/blueimp-md5/js/md5.js');
 app.import('bower_components/resizeThis/resizeThis.js');
 
 app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
+app.import('bower_components/bootstrap-material-design/dist/css/ripples.min.css');
 
 module.exports = mergeTrees([
 	app.toTree(),

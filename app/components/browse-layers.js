@@ -1,62 +1,73 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 /* globals noUiSlider */
 
 export default Ember.Component.extend({
 
+  // yearRange: function(){
+  //   return this.store.find('yearRange', 1);
+  // }.property(),
+
   yearRange: function(){
-    return this.store.find('yearRange', 1);
+      var _this = this;
+      var yearRange = DS.PromiseObject.create({
+          promise: this.store.find('yearRange', 1)
+      });
+
+      yearRange.then(function(){
+          var range = yearRange;
+          var min = range.get('content.min_year');
+          var max = range.get('content.max_year');
+
+          // this.setProperties({startYear: min, endYear: max});
+          var rangeSlider = document.getElementById('range');
+
+          try {
+            // Initializing the slider
+            noUiSlider.create(rangeSlider, {
+              start: [ min, max ],
+              connect: true,
+              range: {
+                'min': min,
+                'max': max
+              }
+            });
+
+            // Linking the inputs
+            var inputMinYear = document.getElementById('start_year');
+            var inputMaxYear = document.getElementById('end_year');
+
+            rangeSlider.noUiSlider.on('update', function( values, handle ) {
+              var value = values[handle];
+              if ( handle ) {
+                inputMaxYear.value = Math.round(value);
+              } else {
+                inputMinYear.value = Math.round(value);
+              }
+            });
+
+            inputMaxYear.addEventListener('change', function(){
+              rangeSlider.noUiSlider.set([null, this.value]);
+            });
+
+            inputMinYear.addEventListener('change', function(){
+              rangeSlider.noUiSlider.set([this.value, null]);
+            });
+
+            rangeSlider.noUiSlider.on('set', function(){
+              _this.send('yearFilter');
+            });
+
+          }
+          catch(err){
+            // Don't care
+          }
+          return yearRange;
+      });
   }.property(),
 
   didRender: function(){
-    var _this = this;
-    var range = this.get('yearRange');
-    var min = range.get('content.min_year');
-    var max = range.get('content.max_year');
 
-    // this.setProperties({startYear: min, endYear: max});
-
-    var rangeSlider = document.getElementById('range');
-
-    try {
-      // Initializing the slider
-      noUiSlider.create(rangeSlider, {
-        start: [ min, max ],
-        connect: true,
-        range: {
-          'min': min,
-          'max': max
-        }
-      });
-
-      // Linking the inputs
-      var inputMinYear = document.getElementById('start_year');
-      var inputMaxYear = document.getElementById('end_year');
-
-      rangeSlider.noUiSlider.on('update', function( values, handle ) {
-        var value = values[handle];
-        if ( handle ) {
-          inputMaxYear.value = Math.round(value);
-        } else {
-          inputMinYear.value = Math.round(value);
-        }
-      });
-
-      inputMaxYear.addEventListener('change', function(){
-        rangeSlider.noUiSlider.set([null, this.value]);
-      });
-
-      inputMinYear.addEventListener('change', function(){
-        rangeSlider.noUiSlider.set([this.value, null]);
-      });
-
-      rangeSlider.noUiSlider.on('set', function(){
-        _this.send('yearFilter');
-      });
-
-    }
-    catch(err){
-      // Don't care
-    }
   },
 
   panelActions: Ember.inject.service(),
@@ -81,7 +92,7 @@ export default Ember.Component.extend({
       });
   }.property(),
 
-  selectedInstitution: '',
+  checkedInstitutions: '',
 
   textSearch: '',
 
@@ -98,20 +109,20 @@ export default Ember.Component.extend({
 
   getResults: function(){
       var tags = this.get('checkedTags');
-      var institution = this.get('selectedInstitution');
+      var institutions = this.get('checkedInstitutions');
       var search = this.get('textSearch');
       var start_year = this.get('startYear');
       var end_year = this.get('endYear');
 
       var searchResults = this.store.queryRecord('search', {
         tags: tags,
-        name: institution,
+        name: institutions,
         text_search: search,
         start_year: start_year,
         end_year: end_year
       });
 
-      if (tags.length > 0 || institution !== '' || search !== '' || start_year > 0 || end_year > 0) {
+      if (tags.length > 0 || institutions.length > 0 || search !== '' || start_year > 0 || end_year > 0) {
           this.setProperties({ results: searchResults });
       }
       else {
@@ -123,10 +134,21 @@ export default Ember.Component.extend({
 
   collectCheckedTags: function(){
       var tags = [];
+      Ember.$('.category').removeClass('category-checked');
       Ember.$(".tags:checked").each(function(){
           tags.push(this.name);
+        var category = Ember.$(this).attr('category');
+        Ember.$('.category#category-'+category).addClass('category-checked');
       });
       return tags;
+  },
+
+  collectCheckedInsts: function(){
+      var insts = [];
+      Ember.$(".inst-check:checked").each(function(){
+          insts.push(this.name);
+      });
+      return insts;
   },
 
   didInsertElement: function() {
@@ -171,26 +193,31 @@ export default Ember.Component.extend({
         // and the previous active type's count falls to 0. We want to switch
         // to the tab that isn't 0.
         else if (activeRasterCount === 0 && activeVectorCount > 0) {
-          console.log('show vector');
           this.showResults('vector', 'raster');
         }
         else if (activeVectorCount === 0 && activeRasterCount > 0) {
-          console.log('show raster');
           this.showResults('raster', 'vector');
         }
         else if (activeVectorCount === 0 && activeRasterCount === 0) {
             Ember.$('#none-found').show();
         }
+
   },
 
   actions: {
-      showTagGroup: function(tag) {
-          if (Ember.$('#'+tag).is(':visible')) {
-              Ember.$("#"+tag).hide(400);
+      showTagGroup: function(category) {
+          Ember.$('.category').removeClass('active');
+          if (Ember.$('#'+category).is(':visible')) {
+              Ember.$("#"+category).fadeOut(400);
+          }
+          else if (Ember.$('#'+category).is(':hidden')){
+              Ember.$(".tag-group").fadeOut();
+              Ember.$('#'+category).fadeIn(400);
+              Ember.$('#category-'+category).addClass('active');
           }
           else {
-            Ember.$(".tag-group").hide(400);
-            Ember.$("#"+tag).show(400);
+              Ember.$(".tag-group").hide();
+              Ember.$("#"+category).show();
           }
       },
 
@@ -201,19 +228,20 @@ export default Ember.Component.extend({
       },
 
       checkAllTagsInCategory: function(category, tags){
-
           var clickedTags = this.collectCheckedTags();
           var setTo;
           if (document.getElementById("checkbox-"+category).checked === true){
               Ember.$.each(tags, function(index, tag) {
                   clickedTags.push(tag.get('name'));
                   setTo = true;
+                  Ember.$('.category#category-'+category).addClass('category-checked');
               });
           }
           else if (document.getElementById("checkbox-"+category).checked === false) {
               Ember.$.each(tags, function(index, tag) {
                   clickedTags.splice(tag, 1);
                   setTo = false;
+                  Ember.$('.category#category-'+category).removeClass('category-checked');
               });
 
           }
@@ -225,8 +253,9 @@ export default Ember.Component.extend({
 
       },
 
-      selectedInstitution: function(institution){
-          this.setProperties({selectedInstitution: institution});
+      checkInstitution: function(){
+          var ints = this.collectCheckedInsts();
+          this.setProperties({ checkedInstitutions: ints });
           this.getResults();
       },
 

@@ -1,166 +1,191 @@
 <div class="layer-search row">
-  <div class="col-xs-12">
-    <input type="text" class="form-control pull-left" id="search-field" placeholder="Search" onchange={{action "search"}}>
-    <button {{action "search"}} type="submit" class="btn btn-info pull-right"><i class="material-icons">search</i></button>
-  </div>
-</div>
-<div class="browse-nav">
+    <div class="col-xs-12">
+        <input type="text" class="form-control pull-left" id="search-field" placeholder="Search" onchange={{action "search"}}>
+        <button {{action "search"}} type="submit" class="btn btn-info pull-right"><i class="material-icons">search</i></button>
+        <hr />
+        <div class="browse-cards">
 
-    <div class="filter-list">FILTERS</div>
-    {{ project-nav browse-filters=true}}
-
-</div>
-
-<div class="browse-cards">
-    <div class="browse-by-tags browse-form">
-
-        {{#each categories key="@index" as |category|}}
-            <p>
-              <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
-
-              <div id="{{category.slug}}" class="tag-group">
-                  {{#if category.tag_ids.isPending}}
-                  <div class="modal-loading" id="raster-modal">
-                      <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
-                  </div>
-              {{else}}
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="checkbox-{{category.slug}}" onchange={{action "checkAllTagsInCategory" category.slug category.sortedTags}} />
-                        <span class="check"></span>
-                        Select All
-                      </label>
-                  </div>
-                  {{#each category.sortedTags key="@index" as |tag|}}
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" class="tags {{category.slug}}" id="{{tag.name}}" name="{{tag.name}}" onchange={{action "checkSingleTag" tag.name}} />
-                          <span class="check"></span>
-                        {{tag.name}}
-                      </label>
-                  </div>
-                  {{/each}}
-                  {{/if}}
-              </div>
-          </p>
-          {{/each}}
-    </div>
-    <div class="browse-by-institution browse-form">
-        <div class="radio radio-primary">
-          <label>
-            <input type="radio" name="optionsRadios" id="all" value="" onchange={{action "selectedInstitution" ""}}><span class="circle"></span><span class="check"></span>
-            Clear
-          </label>
-        </div>
-        {{#each institutions key="@index" as |institution|}}
-            <div class="radio radio-primary">
-              <label>
-                <input type="radio" name="optionsRadios" id="{{institution.slug}}" value="{{institution.slug}}" onchange={{action "selectedInstitution" institution.name}}><span class="circle"></span><span class="check"></span>
-                {{institution.name}}
-              </label>
+            <div class="browse-by-tags browse-form">
+                <h1>Tags:</h1>
+                {{#each categories key="@index" as |category|}}
+                    <div class="category" id="category-{{category.slug}}">
+                        <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+                        <div id="{{category.slug}}" class="tag-group">
+                            {{#if category.tag_ids.isPending}}
+                                <div class="modal-loading" id="raster-modal">
+                                    <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
+                                </div>
+                            {{else}}
+                                <div class="checkbox tags">
+                                    <label>
+                                        <input type="checkbox" id="checkbox-{{category.slug}}" onchange={{action "checkAllTagsInCategory" category.slug category.sortedTags}} />
+                                        <span class="check"></span>
+                                        Select All
+                                    </label>
+                                </div>
+                                {{#each category.sortedTags key="@index" as |tag|}}
+                                    <div class="checkbox tags">
+                                        <label>
+                                            <input type="checkbox" class="tags {{category.slug}}" id="{{tag.name}}" name="{{tag.name}}" category="{{category.slug}}" onchange={{action "checkSingleTag" tag.name}} />
+                                            <span class="check"></span>
+                                            {{tag.name}}
+                                        </label>
+                                    </div>
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/each}}
             </div>
-        {{/each}}
-    </div>
-    <div class="browse-by-years browse-form">
-      <div class="year-slider">
-        <div id="range"></div>
+            <hr />
 
-        <div class="row">
-          <div class="col-xs-6">
-            <input type="text" class="form-control" id="start_year" placeholder="Start Year">
-          </div>
-          <div class="col-xs-6">
-            <input type="text" class="form-control" id="end_year" placeholder="End Year">
-          </div>
+            <div class="browse-by-years browse-form">
+                <h1>Years:</h1>
+                <div class="year-slider">
+                    <div id="range"></div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="start_year" placeholder="Start Year" value={{yearRange.min_year}}>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="end_year" placeholder="End Year" value={{yearRange.max_year}}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="browse-by-institution browse-form">
+                <h1>Institutions:</h1>
+                <!-- <div class="radio radio-primary">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="all" value="" onchange={{action "selectedInstitution" ""}}><span class="circle"></span><span class="check"></span>
+                        Clear
+                    </label>
+                </div> -->
+                {{#each institutions key="@index" as |institution|}}
+                    <!-- <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="{{institution.slug}}" value="{{institution.slug}}" onchange={{action "selectedInstitution" institution.name}}><span class="circle"></span><span class="check"></span>
+                            {{institution.name}}
+                        </label>
+                    </div> -->
+                    <div class="checkbox institution">
+                        <label>
+                            <input type="checkbox" class='inst-check' id="{{institution.slug}}" name="{{institution.name}}" onchange={{action "checkInstitution" institution.name}} />
+                            <span class="check"></span>
+                            {{institution.name}}
+                        </label>
+                    </div>
+                {{/each}}
+            </div>
         </div>
-      </div>
     </div>
 </div>
+<!-- <div class="browse-nav">
 
-    {{ project-nav browse=true rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
-        <div class="no-results" id="new-search">
-            Use the filters to find what you want.
-        </div>
-        <div class="no-results" id="none-found">
-            Your search returned zero layers.
-        </div>
-    <div class="browse-results">
-        {{#if results.isPending}}
+<div class="filter-list">FILTERS</div>
+{{ project-nav browse-filters=true}}
+
+</div> -->
+
+<!-- <div class="browse-cards">
+<div class="browse-by-tags browse-form">
+
+{{#each categories key="@index" as |category|}}
+<p>
+<a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+
+<div id="{{category.slug}}" class="tag-group">
+{{#if category.tag_ids.isPending}}
+<div class="modal-loading" id="raster-modal">
+<img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
+</div>
+{{else}}
+<div class="checkbox">
+<label>
+<input type="checkbox" id="checkbox-{{category.slug}}" onchange={{action "checkAllTagsInCategory" category.slug category.sortedTags}} />
+<span class="check"></span>
+Select All
+</label>
+</div>
+{{#each category.sortedTags key="@index" as |tag|}}
+<div class="checkbox">
+<label>
+<input type="checkbox" class="tags {{category.slug}}" id="{{tag.name}}" name="{{tag.name}}" onchange={{action "checkSingleTag" tag.name}} />
+<span class="check"></span>
+{{tag.name}}
+</label>
+</div>
+{{/each}}
+{{/if}}
+</div>
+</p>
+{{/each}}
+</div>
+<div class="browse-by-institution browse-form">
+<div class="radio radio-primary">
+<label>
+<input type="radio" name="optionsRadios" id="all" value="" onchange={{action "selectedInstitution" ""}}><span class="circle"></span><span class="check"></span>
+Clear
+</label>
+</div>
+{{#each institutions key="@index" as |institution|}}
+<div class="radio radio-primary">
+<label>
+<input type="radio" name="optionsRadios" id="{{institution.slug}}" value="{{institution.slug}}" onchange={{action "selectedInstitution" institution.name}}><span class="circle"></span><span class="check"></span>
+{{institution.name}}
+</label>
+</div>
+{{/each}}
+</div>
+<div class="browse-by-years browse-form">
+<div class="year-slider">
+<div id="range"></div>
+
+<div class="row">
+<div class="col-xs-6">
+<input type="text" class="form-control" id="start_year" placeholder="Start Year">
+</div>
+<div class="col-xs-6">
+<input type="text" class="form-control" id="end_year" placeholder="End Year">
+</div>
+</div>
+</div>
+</div>
+</div> -->
+
+{{ project-nav browse=true rasterCount=results.raster_layer_ids.length vectorCount=results.vector_layer_ids.length }}
+<div class="no-results" id="new-search">
+    Use the filters to find what you want.
+</div>
+<div class="no-results" id="none-found">
+    Your search returned zero layers.
+</div>
+<div class="browse-results">
+    {{#if results.isPending}}
         <div class="loading">Loading...</div>
-        {{/if}}
+    {{/if}}
 
-
-         <div class="list">
-             <div class="raster-results">
+    <div class="list">
+        <div class="raster-results">
             {{#each results.raster_layer_ids key="@index" as |raster|}}
-
-
-            <div class="layer-list-item row name {{raster.tag_slugs}} {{raster.institution.slug}} {{raster.layer_type}}">
-                <div class="col-xs-2 remove-layer-button">
-
+                <div class="layer-list-item row name {{raster.tag_slugs}} {{raster.institution.slug}} {{raster.layer_type}}">
                     {{add-remove-layer-button add='sendRasterLayerToAdd' remove='sendRasterLayerToRemove' layer=raster}}
-
+                    {{list-available-layers layer=raster}}
                 </div>
-                <div class="col-xs-9">
-                    <h4 class="name"><span class="{{raster.layer_type}} description_icon"></span>{{#if raster.isPending}}Loacing...{{else}}{{raster.title}}{{/if}}</h4>
-                    <p>
-                        <div class="description">{{raster.description}}</div>
-                    </p>
-                    <p>
-                        {{!-- not sure why i can't wrap the whole thing in a single if but doing so results in a build error :( --}}
-                        {{#if raster.tag_ids}}
-                            <span class="tagsIcon"></span>
-                        {{/if}}
-                        <ul class="list-inline">
-                            {{#each raster.tag_ids key="@index" as |tag|}}
-                            {{#if raster.tag_ids}}
-                                <li class="tags">{{tag.name}}</li>
-                                {{/if}}
-                            {{/each}}
-                        </ul>
-                        <div class="institution">Provided by: <em>{{raster.institution.name}}</em></div>
-                    </p>
-                </div>
-            </div>
-
-
             {{/each}}
         </div>
-        </div>
-
-        <div class="list">
-            <div class="vector-results">
-          {{#each results.vector_layer_ids key="@index" as |vector|}}
-
-          <div class="layer-list-item row name {{vector.tag_slugs}} {{vector.institution.slug}} v{{ector.layer_type}}">
-              <div class="col-xs-2 remove-layer-button">
-
-                  {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
-
-              </div>
-              <div class="col-xs-9 ">
-                  {{#if vector.name}}<h4 class="name"><span class="{{vector.layer_type}} description_icon"></span>{{vector.name}}</h4>{{else}}Loading...{{/if}}
-                  <p>
-                      <div class="description">{{vector.description}}</div>
-                  </p>
-                  <p>
-                      {{!-- not sure why i can't wrap the whole thing in a single if but doing so results in a build error :( --}}
-                      {{#if vector.tag_ids}}
-                          <span class="tagsIcon"></span>
-                      {{/if}}
-                      <ul class="list-inline">
-                          {{#each vector.tag_ids key="@index" as |tag|}}
-                          {{#if vector.tag_ids}}
-                              <li class="tags">{{tag.name}}</li>
-                              {{/if}}
-                          {{/each}}
-                      </ul>
-                      <div class="institution">Provided by: <em>{{vector.institution.name}}</em></div>
-                  </p>
-              </div>
-          </div>
-
-          {{/each}}
-      </div>
-      </div>
     </div>
+
+    <div class="list">
+        <div class="vector-results">
+            {{#each results.vector_layer_ids key="@index" as |vector|}}
+                <div class="layer-list-item row name {{vector.tag_slugs}} {{vector.institution.slug}} v{{ector.layer_type}}">
+                    {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
+                    {{list-available-layers layer=vector}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

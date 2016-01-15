@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-xs-1">
+        <i class="material-icons">local_offer</i>
+    </div>
+    <div class="col-xs-11">
+        <ul class="list-inline">
+            {{#each tags key="@index" as |tag|}}
+                <li class="tags">{{tag.name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

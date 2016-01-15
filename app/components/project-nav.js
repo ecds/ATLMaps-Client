@@ -26,11 +26,11 @@ export default Ember.Component.extend({
     },
 
 		showResults: function(show, hide){
-			Ember.$('.'+show+'-results').slideDown("slow");
+			Ember.$('.'+show+'-results').fadeIn();
 			Ember.$('.'+hide+'-results').hide();
 			Ember.$('.'+hide+'-result-tab').removeClass("active");
 			Ember.$('.'+show+'-result-tab').addClass("active");
-			Ember.$(".browse-results").show();
+			Ember.$(".browse-results").fadeIn();
 		},
 
 		toggleFilter: function(filter) {

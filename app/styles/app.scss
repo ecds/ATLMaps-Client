@@ -21,6 +21,8 @@
 @import 'login-form.scss';
 @import 'list-active-layers.scss';
 @import 'add-remove-button.scss';
+@import 'tag-list';
+@import 'list-available-layers.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -47,7 +49,7 @@ article {
 }
 
 a {
-    color: blue;
+    color: $blue;
 }
 
 #html-validator-loading {
@@ -299,14 +301,6 @@ a.site-title .alt-dark{
 .navbar.navbar-clear {
   background-color: rgba(248, 248, 248, 0.85);
   min-height: 25px;
-}
-
-.layer-list-item:nth-child(even){
-  background: #EEE;
-}
-
-.layer-list-item:nth-child(odd){
-  background: white;
 }
 
 #ex1Slider .slider-selection {
@@ -1133,7 +1127,7 @@ h4#showCollaborators a {
 
 .project-title {
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: #03A9F4;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin: 2px 0 -10px 1px;
   border-radius: .25em;
@@ -1145,6 +1139,8 @@ h4#showCollaborators a {
     font-size: 1.5em;
     display: inline-block;
     max-width: 80%;
+    line-height: 1em;
+    color: aliceblue;
   }
 
   span {
@@ -1293,15 +1289,13 @@ a.is-editing-project-button {
   }
 }
 .project-title.project-edit {
-  background-color: #03a9f4;
+  background-color: #4CAF50;
   h1 {
     color: black;
   }
 }
 
 .remove-layer-button {
-  margin-left: 20px;
-  padding-top: 25px;
 
   .btn-added.btn-fab.btn-sm {
     // width: 20px;

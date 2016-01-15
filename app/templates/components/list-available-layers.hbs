@@ -1,0 +1,17 @@
+{{#if layer.name}}
+    <h4 class="name">
+        <span class="{{layer.layer_type}} description_icon"></span>
+        {{layer.title}}
+    </h4>
+    <div class="description">
+        <article>
+            {{layer.description}}
+        </article>
+    </div>
+    {{#if layer.tag_ids}}
+        {{tag-list tags=layer.tag_ids}}
+    {{/if}}
+    <div class="institution">Provided by: <em>{{layer.institution.name}}</em></div>
+{{else}}
+    <h4 class="name">Loading...</h4>
+{{/if}}
