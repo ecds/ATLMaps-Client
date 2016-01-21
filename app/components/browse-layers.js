@@ -134,11 +134,17 @@ export default Ember.Component.extend({
 
   collectCheckedTags: function(){
       var tags = [];
+      // Clear the `category-checked`
       Ember.$('.category').removeClass('category-checked');
+      // Hice the checkmark
+      Ember.$('.category-checked i').hide();
+      // Make an array of all the checked tags.
       Ember.$(".tags:checked").each(function(){
           tags.push(this.name);
         var category = Ember.$(this).attr('category');
         Ember.$('.category#category-'+category).addClass('category-checked');
+        // Show the check mark.
+        Ember.$("#check-"+category).show();
       });
       return tags;
   },
@@ -160,8 +166,8 @@ export default Ember.Component.extend({
   showResults: function (toShow, toHide){
     Ember.$('.'+toHide+'-results').hide();
     Ember.$('.'+toShow+'-results').show();
-    Ember.$('.'+toShow+'-result-tab').addClass("active");
-    Ember.$('.'+toHide+'-result-tab').removeClass("active");
+    Ember.$('.'+toShow+'-result-tab').addClass("active-result-tab");
+    Ember.$('.'+toHide+'-result-tab').removeClass("active-result-tab");
   },
 
   didUpdate: function() {
@@ -170,7 +176,7 @@ export default Ember.Component.extend({
 
       // Only want to select the active results tab the first time we
       // load results. We pick the one wiht the most results to start.
-      if (Ember.$(".browse-nav-button").hasClass("active") === false){
+      if (Ember.$(".browse-nav-button").hasClass("active-result-tab") === false){
             var results = this.get('results');
             var rasterCount = results.get('content.raster_layer_ids.length');
             var vectorCount = results.get('content.vector_layer_ids.length');
@@ -235,6 +241,7 @@ export default Ember.Component.extend({
                   clickedTags.push(tag.get('name'));
                   setTo = true;
                   Ember.$('.category#category-'+category).addClass('category-checked');
+                  Ember.$("#check-"+category).show();
               });
           }
           else if (document.getElementById("checkbox-"+category).checked === false) {
@@ -242,6 +249,7 @@ export default Ember.Component.extend({
                   clickedTags.splice(tag, 1);
                   setTo = false;
                   Ember.$('.category#category-'+category).removeClass('category-checked');
+                  Ember.$("#check-"+category).hide();
               });
 
           }

@@ -21,7 +21,7 @@
 				{{#each model.vector_layer_ids key="@index" as |layer|}}
 					<div class="list-group-item {{layer.slug}} vector-layer" id="{{layer.slug}}"  layer-id="{{layer.id}}">
 					{{project-vector-icon layer=layer projectID=model.id}}
-					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.name}}</a>
+					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
 					<div class="layer-info-detail {{layer.slug}}">
 						<p class="list-group-item-text">{{layer.description}}</p>
 						{{partial 'citation'}}
@@ -60,7 +60,7 @@
 
 						<article class="list-group-item-text">{{layer.description}}</article>
 						{{partial 'citation'}}
-						
+
 						<div class="edit-footer">
 							<div class="text-right btn-group pull-right">
 								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeRasterLayer' layer}}><i class="material-icons">delete</i></a>

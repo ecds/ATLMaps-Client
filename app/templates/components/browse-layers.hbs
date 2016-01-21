@@ -9,7 +9,12 @@
                 <h1>Tags:</h1>
                 {{#each categories key="@index" as |category|}}
                     <div class="category" id="category-{{category.slug}}">
-                        <a {{action 'showTagGroup' category.slug}}>{{category.name}}</a>
+                        <a {{action 'showTagGroup' category.slug}}>
+                            <span class="category-checked">
+                                <i class="material-icons" id="check-{{category.slug}}">done</i>
+                            </span>
+                            {{category.name}}
+                        </a>
                         <div id="{{category.slug}}" class="tag-group">
                             {{#if category.tag_ids.isPending}}
                                 <div class="modal-loading" id="raster-modal">
@@ -159,9 +164,7 @@ Clear
 <div class="no-results" id="new-search">
     Use the filters to find what you want.
 </div>
-<div class="no-results" id="none-found">
-    Your search returned zero layers.
-</div>
+
 <div class="browse-results">
     {{#if results.isPending}}
         <div class="loading">Loading...</div>
@@ -174,6 +177,10 @@ Clear
                     {{add-remove-layer-button add='sendRasterLayerToAdd' remove='sendRasterLayerToRemove' layer=raster}}
                     {{list-available-layers layer=raster}}
                 </div>
+            {{else}}
+                <div class="no-results">
+                    Your search returned no archival maps.
+                </div>
             {{/each}}
         </div>
     </div>
@@ -184,6 +191,10 @@ Clear
                 <div class="layer-list-item row name {{vector.tag_slugs}} {{vector.institution.slug}} v{{ector.layer_type}}">
                     {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
                     {{list-available-layers layer=vector}}
+                </div>
+            {{else}}
+                <div class="no-results">
+                    Your search returned no data layers.
                 </div>
             {{/each}}
         </div>

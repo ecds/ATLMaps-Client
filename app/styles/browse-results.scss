@@ -27,13 +27,13 @@
   //   background-color: whitesmoke;
   // }
 
-  .active {
-    background-color: white;
-    opacity: 1;
+  .active-result-tab {
+    background-color: white !important;
+    opacity: 1 !important;
   }
 
 }
-.browse-results, .no-results {
+.browse-results {
   position: fixed;
   left: 480px;
   width: 60%;
@@ -68,20 +68,19 @@
 }
 
 .no-results {
-    display: none;
+    padding: 1em;
+    background-color: white;
+    color: #ff5722;
+}
+
+#new-search {
+    // display: none;
     background-color: white;
     padding: 1em;
     // margin-left: 2px;
     right: 38px;
     width: 60%;
-}
-
-#new-search {
     display: block;
-}
-
-#none-found {
-    color: #ff5722;
 }
 
 
@@ -124,9 +123,13 @@ div.layer-search {
 
         .institution {
             label {
-                padding: .5em 0 0 2.25em;
+                padding: .5em 0 0 1.75em;
                 font-size: 1em;
                 color: $darkgrey;
+
+                .check {
+                    margin-top: 1px;
+                }
             }
 
             input[type=checkbox] ~ .check:before {
@@ -243,18 +246,32 @@ div.layer-search {
             border-color: $check-border-color;
         }
         .browse-by-tags {
-            // padding-bottom: 5em;
+            min-height: 17em;
 
             .category {
                 font-size: 1em;
-                padding-left: .5em;
+                // padding-left: .5em;
 
                 a {
                     color: $darkgrey;
+
+                    span.category-checked {
+
+                        display: inline-block;
+                        width: .75em;
+
+                        i {
+                            font-size: .75em;
+                            font-weight: 600;
+                            display: none;
+                        }
+                    }
                 }
+
             }
             .category.active {
                 background-color: $lightgrey;
+                width: 75%;
                 a {
                     color: $grey;
                 }
@@ -266,6 +283,7 @@ div.layer-search {
 
         label {
             padding-left: 2em;
+
         }
 
         hr {
@@ -401,7 +419,7 @@ div.layer-search {
     position: absolute;
     background-color: $lightgrey;
     height: 42%;
-    width: 46%;
+    width: 43%;
 
     label {
         color: $grey;

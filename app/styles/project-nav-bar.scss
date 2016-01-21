@@ -12,6 +12,7 @@
     border-bottom: none;
     z-index: 5;
     opacity: 1;
+    background-color: white !important;
     .nav-icon {
         color: #03A9F4;
     }
@@ -81,7 +82,7 @@
 
 .layer-controls .card{
   //margin:0;
-  padding-bottom: 0;
+  // padding-bottom: 0;
 }
 
 .layer-controls .card h3 {

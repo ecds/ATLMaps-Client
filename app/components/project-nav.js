@@ -28,8 +28,8 @@ export default Ember.Component.extend({
 		showResults: function(show, hide){
 			Ember.$('.'+show+'-results').fadeIn();
 			Ember.$('.'+hide+'-results').hide();
-			Ember.$('.'+hide+'-result-tab').removeClass("active");
-			Ember.$('.'+show+'-result-tab').addClass("active");
+			Ember.$('.'+hide+'-result-tab').removeClass("active-result-tab");
+			Ember.$('.'+show+'-result-tab').addClass("active-result-tab");
 			Ember.$(".browse-results").fadeIn();
 		},
 
