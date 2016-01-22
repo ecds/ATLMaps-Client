@@ -74,13 +74,12 @@
 }
 
 #new-search {
-    // display: none;
-    background-color: white;
-    padding: 1em;
-    // margin-left: 2px;
-    right: 38px;
     width: 60%;
+    position: fixed;
+    left: 480px;
     display: block;
+    color: inherit;
+    top: 163px;
 }
 
 
