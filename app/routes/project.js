@@ -13,11 +13,26 @@ export default Ember.Route.extend({
     //     return this.store.findRecord('project', params.project_id);
     // },
 
-    afterModel: function() {
+    afterModel: function(model) {
     	// Update the page title:
         var projectTitle = this.modelFor('project').get('name');
         Ember.$(document).attr('title', 'ATLMaps: ' + projectTitle);
+
+		this.setHeadTags(model);
     },
+
+	setHeadTags: function (model) {
+	   var headTags = [{
+	     type: 'meta',
+	     tagId: 'meta-description-tag',
+	     attrs: {
+	       name: 'foo',
+	       content: model.get('name')
+	     }
+	   }];
+
+	   this.set('headTags', headTags);
+   },
 
     actions: {
 

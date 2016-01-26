@@ -216,13 +216,12 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             // But we don't want the `.edit` junk on `route` when doing lookups.
             route = route.replace('\.edit', '');
 
+			console.log(route)
+
             layer.set('active_in_project', false);
             var projectID = this.modelFor(route).get('id');
             var layerID = layer.get('id');
             var layerClass = layer.get('slug');
-
-			console.log('layerID = ' + layerID);
-			console.log('projectID = ' + projectID);
 
             var _this = this;
 
@@ -295,22 +294,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
         },
 
-        showLayerInfoDetals: function(layer) {
-            if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
-                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
-            }
-            else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
-                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
-                Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
-            }
-        },
-
-        closeMarkerInfo: function() {
-            Ember.$("div.marker-data").hide();
-            Ember.$(".active_marker").removeClass("active_marker");
-            Ember.$(".vector-data.card").slideToggle();
-            this.sendAction('activateVectorCard');
-        },
 
         // colorIcons: function(layer, marker){
 		//
@@ -331,6 +314,23 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 Ember.$('#vector-data').removeClass('transparent-button');
                 Ember.$('#vector-data').addClass('active-button');
             }
+        },
+
+		showLayerInfoDetals: function(layer) {
+            if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+            }
+            else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+                Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
+            }
+        },
+
+        closeMarkerInfo: function() {
+            Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass("active_marker");
+            Ember.$(".vector-data.card").slideToggle();
+            this.sendAction('activateVectorCard');
         },
 
  	}

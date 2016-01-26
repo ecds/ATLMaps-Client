@@ -54,30 +54,13 @@
 	<div class="vector-data vector-data-edit card">
 
 		<div class="layer-list">
-			<div class="add_layer_button">
+			<!-- <div class="add_layer_button">
 				{{addremove-layers-modal model=model type='vector' action='initProjectUI' add='addVectorLayer' remove='removeVectorLayer'}}
-			</div>
+			</div> -->
 			<div class="layer-list list-group">
-				{{#each model.vector_layer_ids key="@index" as |layer|}}
-					<div class="list-group-item {{layer.slug}} vector-layer" id="{{layer.slug}}"  layer-id="{{layer.id}}">
-					{{project-vector-icon layer=layer projectID=model.id}}
-					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
-					<div class="layer-info-detail {{layer.slug}}">
-						<p class="list-group-item-text">{{layer.description}}</p>
-						{{partial 'citation'}}
-						<div>&nbsp;</div>
 
-						<div class="edit-footer">
-							<div class="text-right btn-group pull-right">
-								<a class="btn btn-warning btn-flat btn-xs" {{action 'removeVectorLayer' layer}}><i class="material-icons">delete</i></a>
-							</div>
-						</div>
-					</div>
-					</div>
+					{{project-layer layers=model.vector_layer_ids vector=true edit=true model=model}}
 
-				{{else}}
-					No data layers have been added.
-				{{/each}}
 			</div>
 		</div>
 
