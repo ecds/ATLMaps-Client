@@ -43,7 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'staging') {
-    ENV.APP.API_HOST = 'http://api.atlmaps-dev.org';
+    ENV.APP.API_HOST = 'http://atlmaps-api.ecdsweb.org';
   }
 
   if (environment === 'production') {

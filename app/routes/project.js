@@ -15,24 +15,25 @@ export default Ember.Route.extend({
 
     afterModel: function(model) {
     	// Update the page title:
-        var projectTitle = this.modelFor('project').get('name');
+        var projectTitle = model.get('name');
         Ember.$(document).attr('title', 'ATLMaps: ' + projectTitle);
 
 		this.setHeadTags(model);
     },
 
 	setHeadTags: function (model) {
+		console.log('setting tag')
 	   var headTags = [{
 	     type: 'meta',
 	     tagId: 'meta-description-tag',
 	     attrs: {
-	       name: 'foo',
-	       content: model.get('name')
+	       property: 'og:description',
+	       content: model.get('description')
 	     }
 	   }];
 
 	   this.set('headTags', headTags);
-   },
+	 },
 
     actions: {
 

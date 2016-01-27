@@ -51,7 +51,6 @@ var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
 	destDir: 'assets/images',
 });
 
-app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 app.import('bower_components/leaflet/dist/leaflet.js');
@@ -63,7 +62,6 @@ app.import('bower_components/nouislider/distribute/nouislider.min.js');
 app.import('bower_components/list.js/dist/list.min.js');
 app.import('bower_components/leaflet/dist/leaflet.css');
 app.import('bower_components/js-cookie/src/js.cookie.js');
-app.import('vendor/js/menu/classie.js');
 app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
 app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');
 
