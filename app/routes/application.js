@@ -186,8 +186,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             var _this = this;
 
-            var controller = _this.controllerFor('project');
-            var colors = _this.globals.color_options;
+            var controller = this.controllerFor('project');
+            var colors = this.globals.color_options;
             var marker = Math.floor((Math.random() * colors.length) + 1);
 
             var vectorLayerProject = _this.store.createRecord('vector-layer-project', {
@@ -215,8 +215,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var route = this.controller.currentRouteName;
             // But we don't want the `.edit` junk on `route` when doing lookups.
             route = route.replace('\.edit', '');
-
-			console.log(route)
 
             layer.set('active_in_project', false);
             var projectID = this.modelFor(route).get('id');

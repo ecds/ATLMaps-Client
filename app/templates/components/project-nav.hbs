@@ -30,21 +30,21 @@
 {{#if this.projview}}
 	<div class="btn-group btn-group-justified">
 
-		<a {{action 'navigateProject' 'project-info'}} class="btn btn-default active-button project-nav" id="project-info" title="Project Description">
+		{{#link-to "project.info" class="btn btn-default transparent-button project-nav" id='project-info' title="Project Description"}}
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
-		</a>
-	    <a {{action 'navigateProject' 'vector-data'}} class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers">
-	    	<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{this.vectorCount}}</span>
-	    </a>
-	    <a {{action 'navigateProject' 'raster-layers'}} class="btn btn-default transparent-button project-nav" id="raster-layers" title="Archival Map Layers">
+		{{/link-to}}
+		{{#link-to "project.vector-layers" class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers"}}
+			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{this.vectorCount}}</span>
+		{{/link-to}}
+		{{#link-to "project.raster-layers" class="btn btn-default transparent-button project-nav" id='raster-layers' title="Archival Map Layers"}}
 	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{this.rasterCount}}</span>
-	    </a>
-	    <a {{action 'navigateProject' 'controls'}} class="btn btn-default transparent-button project-nav" id="controls" title="Change Base Map">
+	    {{/link-to}}
+		{{#link-to "project.base-layers" class="btn btn-default transparent-button project-nav" id='controls' title="Change Base Map"}}
 	    	<span class="nav-icon"><i class="material-icons">map</i></span>
-	    </a>
-	    <!-- <a {{action 'navigateProject' 'help'}} class="btn btn-default transparent-button project-nav" id="help" title="Show Help Window">
+	    {{/link-to}}
+		<!-- {{#link-to "project.help" class="btn btn-default transparent-button project-nav" id='help' title="Show Help Window"}}
 	    	<span class="nav-icon"><i class="material-icons">help_outline</i></span>
-	    </a> -->
+	    {{/link-to}} -->
 	</div>
 
 {{/if}}

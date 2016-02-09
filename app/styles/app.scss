@@ -1075,11 +1075,6 @@ h4#showCollaborators a {
   color: rgb(119, 67, 208);
 }
 
-.project-info {
-  visibility: visible;
-  display: inline-block;
-}
-
 .list-group-item {
   border-bottom-color: rgb(219, 221, 226);
   padding: .25em !important;
@@ -1151,13 +1146,6 @@ h4#showCollaborators a {
 
 .leaflet-control-layers {
   box-shadow: none
-}
-
-.project-info{
-  article {
-    padding: 1em 1em 3em 1em;
-    font-size: .75em
-  }
 }
 
 .marker-data .is-pointer-down{

@@ -1,0 +1,7 @@
+{{outlet}}
+<div class="project-info-card card">
+    <article>{{{model.description}}}</article>
+    {{#if model.intro}}
+        {{project-intro-modal project=model template=model.templateSlug}}
+    {{/if}}
+</div>

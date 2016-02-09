@@ -1,0 +1,22 @@
+{{outlet}}
+{{ reorder-layers mode='view' }}
+<div class="raster-layers card">
+    <div class="pull-left">Archival Map Layers</div>
+    {{ hide-all-raster-layers }}
+    <div class="layer-list list-group raster-list" id="layer_sort">
+    {{#each model.sortedRasterLayers key="@index" as |layer|}}
+            <div class="list-group-item raster-layer" id="{{layer.slug}}">
+                <span class="{{layer.layer_type}} {{layer.slug}}"></span>
+                <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
+                <span class="handle pull-right"><i class="material-icons reorder">code</i></span>
+                {{opacity-slider layer=layer}}
+                <div class="layer-info-detail {{layer.slug}}">
+                    <p class="list-group-item-text">{{layer.description}}</p>
+                    {{partial 'citation'}}
+                </div>
+            </div>
+        {{else}}
+            No scanned maps have been added.
+        {{/each}}
+    </div>
+</div>

@@ -11,6 +11,12 @@ Router.map(function() {
         this.resource('project', { path: '/:project_id' }, function(){
             this.route('view');
             this.route('edit');
+            this.route('info');
+            this.route('vector-layers');
+            this.route('raster-layers');
+            this.route('base-layers');
+            this.route('help');
+            this.route('browse-layers');
         });
     });
   this.route('about');
@@ -18,6 +24,7 @@ Router.map(function() {
   this.route('explore');
   this.route('terms');
   this.route('support', {path: '/help'});
+
 });
 
 export default Router;
