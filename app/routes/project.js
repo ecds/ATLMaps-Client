@@ -22,17 +22,16 @@ export default Ember.Route.extend({
     },
 
 	setHeadTags: function (model) {
-		console.log('setting tag')
-	   var headTags = [{
-	     type: 'meta',
-	     tagId: 'meta-description-tag',
-	     attrs: {
-	       property: 'og:description',
-	       content: model.get('description')
-	     }
-	   }];
+		var headTags = [{
+			type: 'meta',
+			tagId: 'meta-description-tag',
+			attrs: {
+				property: 'og:description',
+				content: model.get('description')
+			}
+		}];
 
-	   this.set('headTags', headTags);
+		this.set('headTags', headTags);
 	 },
 
     actions: {

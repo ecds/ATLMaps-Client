@@ -1365,16 +1365,6 @@ a.is-editing-project-button {
     background-image: url(/assets/images/street_map.png);
 }
 
-// sytle the lines, we need to add some class to the svgs
-.leaflet-zoom-animated {
-  &> g{
-   &> path {
-    stroke: deeppink;
-    fill: deeppink;
-   }
-  }
-}
-
 .alert-danger {
   background-color: #f2dede;
   color: black;

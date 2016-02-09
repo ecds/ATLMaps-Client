@@ -65,7 +65,7 @@
 
   {{#modal-dialog close="closeVectorModal" alignment="center" translucentOverlay=true container-class="add-layers"}}
   <div id="searchableVectorLayers">
-  {{filter-layers action="closeVectorModal"}}
+  <!-- {{filter-layers action="closeVectorModal"}} -->
 
   <div class="list">
   		{{#if vectorLayers.isPending}}
@@ -80,7 +80,7 @@
 
 				</div>
 				<div class="col-xs-10">
-					<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.name}}</h4>
+					<h4 class="name"><span class="{{layer.layer_type}} description_icon"></span> {{layer.title}}</h4>
 					<p>
       					<div class="description">{{layer.description}}</div>
     				</p>

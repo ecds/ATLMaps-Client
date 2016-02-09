@@ -5,7 +5,7 @@ import DS from 'ember-data';
 
 
 export default Ember.Controller.extend({
-    
+
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({
@@ -243,11 +243,18 @@ export default Ember.Controller.extend({
 
                     }
 
-                    if(layer.get('url')){
-                        new L.GeoJSON.AJAX(layer.get('url'), {
+                    var polyStyle = {
+                        'color': markerColor
+                    };
 
+                    if(layer.get('url')){
+                        var layerClass = slug + ' atLayer vectorData map-marker layer-' + markerColor;
+                        new L.GeoJSON.AJAX(layer.get('url'), {
+                            style: polyStyle,
+                            className: layerClass,
                             pointToLayer: function (feature, latlng) {
-                                var layerClass = slug + ' atLayer vectorData map-marker layer-' + markerColor;
+
+                                console.log(layerClass);
                                 var icon = L.divIcon({
                                     className: layerClass,
                                     iconSize: null,

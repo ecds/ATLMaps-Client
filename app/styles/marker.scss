@@ -93,9 +93,25 @@
   border-color: #000 transparent transparent transparent;
 }
 
+// sytle the lines, we need to add some class to the svgs
+// .leaflet-zoom-animated {
+//   &> g{
+//    &> path {
+//     stroke: deeppink;
+//     fill: deeppink;
+//    }
+//   }
+// }
+
 /*Marker color instances*/
-.map-marker.layer-red {
+.map-marker.layer-red, .leaflet-zoom-animated.layer-red {
   color: #ef5350;
+  &> g{
+   &> path {
+    stroke: #ef5350;
+    fill: #ef5350;
+   }
+  }
 }
 .map-marker.layer-red-50 {
   color: #ffebee;
@@ -691,8 +707,14 @@
 .map-marker.layer-amber-200 {
   color: #ffe082;
 }
-.map-marker.layer-amber-300 {
+.map-marker.layer-amber-300 , .leaflet-zoom-animated.layer-amber-300{
   color: #ffd54f;
+  &> g{
+   &> path {
+    stroke: #ffd54f;
+    fill: #ffd54f;
+   }
+  }
 }
 .map-marker.layer-amber-400 {
   color: #ffca28;
