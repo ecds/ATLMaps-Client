@@ -6,7 +6,9 @@ import DS from 'ember-data';
 
 export default Ember.Controller.extend({
 
-    showProjIntroModal: true,
+    introSeen: function(){
+        return false;
+    }.property('introSeen'),
 
     rasterLayers: function() {
 

@@ -125,7 +125,7 @@ export default function MapLayer(map, layer, marker_color, position){
             }
 
             var polyStyle = {
-                'color': markerColor
+                'color': 'red'
             };
 
             if(layer.get('url')){

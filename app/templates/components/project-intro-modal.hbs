@@ -1,6 +1,6 @@
 <a {{action 'showIntro'}}>Show introduction.</a>
 
-{{#if isShowingIntroModal}}
+{{#unless seen}}
 	{{#modal-dialog close="hideIntro" alignment="left" translucentOverlay=true container-class="project-intro"}}
     <div class="container-fluid">
         <div class="row title">
@@ -39,8 +39,8 @@
             <div class="col-md-12">
                 <div class="checkbox pull-right">
                     <label>
-                        <!-- {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}} -->
-						 <input type="checkbox" id="dont-show" checked={{this.notShowingIntro}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
+                        <!-- {{input type="checkbox" id="dont-show" checked=this.surpressed}} -->
+						 <input type="checkbox" id="dont-show" checked={{this.surpressed}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
                         <span class="check"></span>
                         Don't show automatically.
                     </label>
@@ -52,4 +52,4 @@
         </div>
     </div>
 	{{/modal-dialog}}
-{{/if}}
+{{/unless}}

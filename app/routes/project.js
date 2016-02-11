@@ -36,8 +36,6 @@ export default Ember.Route.extend({
 		this.set('headTags', headTags);
 	 },
 
-	 showProjIntroModal: true,
-
     actions: {
 
     	didTransition: function() {

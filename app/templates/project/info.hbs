@@ -1,8 +1,8 @@
 {{outlet}}
 <div class="project-info-card card">
-    <h1>{{showProjIntroModal}}</h1>
+    <h1>{{introSeen}}</h1>
     <article>{{{model.description}}}</article>
     {{#if model.intro}}
-        {{project-intro-modal project=model template=model.templateSlug}}
+        {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
     {{/if}}
 </div>

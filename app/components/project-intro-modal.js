@@ -4,23 +4,22 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     classNames: ['intro-modal-link'],
 
-    isShowingIntroModal: true,
-
-    notShowingIntro: false,
+    // Property for to supres intro if user as said they don't want to see it.
+    surpressed: false,
 
     didInitAttrs: function(){
-        // console.log(this.get('showProjIntroModal'));
         var projectID = this.get('project.id');
 
+        // Check for cookie that user does not want to see intro.
         if (Cookies.get('noIntro' + projectID)) {
-            this.setProperties({isShowingIntroModal: false});
-            this.setProperties({notShowingIntro: true});
-        }
-        else {
-            this.setProperties({isShowingIntroModal: true});
-            this.setProperties({notShowingIntro: false});
+            this.sendAction('action', true);
+            // We need to upldate the local property as it does not get passed
+            // back in on change
+            this.set('seen', true);
+            this.setProperties({surpressed: true});
         }
 
+        // Pick the layout from the attribute
         if (this.get('template') === 'article-and-video'){
 			this.set('av', true);
 		}
@@ -36,13 +35,17 @@ export default Ember.Component.extend({
     actions: {
 
         hideIntro: function() {
-            this.setProperties({isShowingIntroModal: false});
+            // Again, the property that was passed in does not update
+            this.set('seen', true);
+            this.sendAction('action', true);
         },
 
         showIntro: function() {
-            this.setProperties({isShowingIntroModal: true});
+            this.set('seen', false);
+            this.sendAction('action', false);
         },
 
+        // Add/remmove cookie for showing the intro for a project.
         supressIntro: function(){
             var projectID = this.get('project.id');
 

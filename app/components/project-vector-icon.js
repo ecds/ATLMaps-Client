@@ -5,7 +5,6 @@ export default Ember.Component.extend({
     tagName: 'span',
 
     didUpdate: function(){
-        console.log('icon thing firing');
         var layer = this.get('layer');
         var projectID = this.get('projectID');
         var _this = this;

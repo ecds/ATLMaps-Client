@@ -2,11 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     actions: {
-        didTransnition: function(){
-            this.transitionTo('project.help');
-            console.log('hi');
-            console.log(this.get('showProjIntroModal'));
+        // Action to update wheather or not we're going to show the intro modal.
+        showHideIntro: function(seen){
+            this.controllerFor('project.info').set('introSeen', seen);
+            console.log('after setting ' + this.controllerFor('project').get('introSeen'));
         }
     }
-
 });

@@ -1,13 +1,10 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 export default Ember.Route.extend({
     actions: {
         didTransition: function(){
-            console.log('heloooooooooooooo');
-            this.transitionTo('project.info');
+            console.log(this.controllerFor('project').get('introSeen'));
         }
-        // showIntro: function() {
-        //     this.setProperties({isShowingIntroModal: true});
-        // }
     }
 });
