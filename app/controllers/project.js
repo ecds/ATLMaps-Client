@@ -6,6 +6,8 @@ import DS from 'ember-data';
 
 export default Ember.Controller.extend({
 
+    showProjIntroModal: true,
+
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({

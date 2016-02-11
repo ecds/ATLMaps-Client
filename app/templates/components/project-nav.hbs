@@ -34,10 +34,10 @@
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		{{/link-to}}
 		{{#link-to "project.vector-layers" class="btn btn-default transparent-button project-nav" id='vector-data' title="Pinpoint Layers"}}
-			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{this.vectorCount}}</span>
+			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{model.vector_layer_ids.length}}</span>
 		{{/link-to}}
 		{{#link-to "project.raster-layers" class="btn btn-default transparent-button project-nav" id='raster-layers' title="Archival Map Layers"}}
-	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{this.rasterCount}}</span>
+	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_ids.length}}</span>
 	    {{/link-to}}
 		{{#link-to "project.base-layers" class="btn btn-default transparent-button project-nav" id='controls' title="Change Base Map"}}
 	    	<span class="nav-icon"><i class="material-icons">map</i></span>

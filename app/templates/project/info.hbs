@@ -1,5 +1,6 @@
 {{outlet}}
 <div class="project-info-card card">
+    <h1>{{showProjIntroModal}}</h1>
     <article>{{{model.description}}}</article>
     {{#if model.intro}}
         {{project-intro-modal project=model template=model.templateSlug}}

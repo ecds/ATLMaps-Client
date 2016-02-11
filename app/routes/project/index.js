@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import MapLayer from '../map-layer';
+import MapLayer from '../../map-layer';
 
 /* global L */
 

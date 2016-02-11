@@ -12,8 +12,9 @@
 	</div>
 
 
-	{{ project-nav projview=true rasterCount=model.raster_layer_ids.length vectorCount=model.vector_layer_ids.length }}
+	{{ project-nav projview=true model=model }}
 
 </div>
+
 {{liquid-outlet}}
 {{partial 'marker-data-window'}}

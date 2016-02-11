@@ -19,15 +19,15 @@
 	              </a>
 	              <div class="project-options card">
 	                <a class="action project-delete" {{action 'deleteProject' project.id}}>
-	                  <span class="mdi-action-delete action-icon"><i class="material-icons">delete</i></span><span class="action-label">Delete</span>
+	                  <span class="mdi-action-delete action-icon"><i class="material-icons" title="Featured Project">delete</i></span><span class="action-label">Delete</span>
 	                </a>
 	              </div>
 	              {{/if}}
               {{/if}}
               <div class="pull-left">
             <h4 class="list-group-item-heading">
-                {{#link-to 'project.view' project}}
-                {{project.name}} {{#if project.featured}}<span class="mdi-maps-beenhere"></span>{{/if}}
+                {{#link-to 'project' project}}
+                {{project.name}} {{#if project.featured}}<i class="material-icons">beenhere</i>{{/if}}
                 {{/link-to}}
             </h4>
             <p class="list-group-item-text">{{project.description}}</p>

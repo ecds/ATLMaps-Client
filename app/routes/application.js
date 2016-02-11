@@ -3,6 +3,7 @@ import DS from 'ember-data';
 /* globals L, Draggabilly */
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
+import MapLayer from '../map-layer';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {
@@ -10,7 +11,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
-
 
                 // Set up the map
                 var map = _this.globals.mapObject;
@@ -156,12 +156,14 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // to add it to the map.
                 // The `mapLayer` action expects a parameter for
                 // the marker so the `0` is a placeholder.
-                var controller = _this.controllerFor('project');
-                controller.send('mapLayer',
-                    layer,
-                    0,
-                    position
-                );
+                // var controller = _this.controllerFor('projects.project.index');
+                // controller.send('mapLayer',
+                //     layer,
+                //     0,
+                //     position
+                // );
+
+				// var foo = new MapLayer();
 
                 _this.send('initProjectUI', _this.modelFor(route));
 
@@ -186,7 +188,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
             var _this = this;
 
-            var controller = this.controllerFor('project');
+            // var controller = this.controllerFor('project.project');
             var colors = this.globals.color_options;
             var marker = Math.floor((Math.random() * colors.length) + 1);
 
@@ -201,11 +203,12 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 			vectorLayerProject.save();
 
 
-            controller.send('mapLayer',
-                layer,
-                marker,
-                0
-            );
+            // controller.send('mapLayer',
+            //     layer,
+            //     marker,
+            //     0
+            // );
+			// var foo = new MapLayer();
 
         },
 

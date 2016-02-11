@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     notShowingIntro: false,
 
     didInitAttrs: function(){
+        // console.log(this.get('showProjIntroModal'));
         var projectID = this.get('project.id');
 
         if (Cookies.get('noIntro' + projectID)) {
