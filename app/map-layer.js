@@ -37,6 +37,20 @@ export default function MapLayer(map, layer, marker_color, position){
 
             break;
 
+            case 'wms-c':
+                alert('hello')
+                var wmscURL = L.tileLayer('https://geo.library.gsu.edu/geowebcache/service/tms/1.0.0/' + layer.get('name') + '/{z}/{x}/{y}.png', {
+                    layer: layer.get('slug'),
+                    tms: true,
+                    minZoom: 13,
+                    maxZoom: 19,
+                    detectRetina: true
+                }).addTo(map).setZIndex(10).getContainer();
+
+                Ember.$(wmscURL).addClass(slug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+
+                break;
+
         case 'atlTopo':
 
             var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + layer.get('slug') + '/{z}/{x}/{y}.jpg', {

@@ -1,8 +1,39 @@
 {{outlet}}
-<div class="project-info-card card">
-    <h1>{{introSeen}}</h1>
-    <article>{{{model.description}}}</article>
-    {{#if model.intro}}
-        {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
+<div class={{if isEditing 'project-info-card card project-info-edit' 'project-info-card card'}}>
+    {{#if isEditing}}
+        {{#each flashMessages.queue as |flash|}}
+            {{flash-message flash=flash}}
+        {{/each}}
+
+        <div class="form-group">
+            <label for="edit_name">Title for the Project</label>
+            {{input value=model.name name='name' id="edit_name" class="form-control h1"  }}
+        </div>
+        <div class="form-group">
+            <label for="edit_description" class="form-control">Description (Max 255 Characters)</label>
+            {{textarea value=model.description id="edit_description" class="form-control" rows="4" placeholder="Enter your project description here..." maxlength="255"}}
+
+            {{edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
+
+            <div class="publish_check">
+                <div class="checkbox">
+                    <label>
+                        {{input type="checkbox" checked=model.published}}
+                        <span class="check"></span>
+                        Publish
+                    </label>
+                </div>
+            </div>
+            <div class="text-right">
+                <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
+                <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
+            </div>
+        </div>
+    {{else}}
+
+        <article>{{{model.description}}}</article>
+        {{#if model.intro}}
+            {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
+        {{/if}}
     {{/if}}
 </div>

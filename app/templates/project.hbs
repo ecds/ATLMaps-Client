@@ -2,12 +2,12 @@
     {{ base-map }}
 </div>
 <div class="layer-controls">
-	<div class="project-title project-view">
+	<div class={{if isEditing 'project-title project-edit' 'project-title project-view'}}>
 		<h1>{{model.name}}</h1>
 		{{#if model.may_edit}}
-			{{#link-to 'project.edit' model title="Switch to Edit Mode"}}
-				<span class="mdi-editor-mode-edit"><i class="material-icons">mode_edit</i></span>
-			{{/link-to}}
+            <a {{action 'toggleEdit'}} title={{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
+				<i class="material-icons pull-right">mode_edit</i>
+			</a>
 		{{/if}}
 	</div>
 

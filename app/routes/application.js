@@ -3,7 +3,6 @@ import DS from 'ember-data';
 /* globals L, Draggabilly */
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import MapLayer from '../map-layer';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	actions: {

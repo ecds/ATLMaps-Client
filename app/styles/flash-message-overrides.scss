@@ -1,0 +1,58 @@
+// .edit-alert:after{
+//     content: none;
+//     visibility: hidden;
+//     opacity: 0;
+//     height: 100px;
+//     background-color: red;
+//     // transition: visibility 0s 2s, opacity 2s linear;
+// }
+
+.edit-alert {
+    // visibility: hidden;
+    // opacity: 0;
+
+//     .alert {
+//         opacity: 1;
+//         animation: fadein 1s;
+//     }
+//
+//     @keyframes fadein {
+//         from {
+//             // margin-bottom: 0px;
+//             padding-top: 0;
+//             padding-bottom: 0;
+//             max-height: 0;
+//             display: none;
+//
+//         }
+//         to {
+//             // margin-bottom: 20px;
+//             // padding: 0px;
+//             // height: 100px;
+//         }
+//     }
+// }
+// .alert {
+//     // visibility: visible;
+//     // opacity: 1;
+//
+//     transition:all 2s ease-in;
+//     // transition: visibility 0s 2s, opacity 2s linear;
+}
+// .alert {
+//     position: absolute;
+//     // background-color: red;
+//     height: 100%;
+//     width: 100%;
+//     left: 0;
+//     top: 0;
+// }
+// .exiting {
+//     opacity: 0;
+//     height: 0;
+//     visibility: collapse;
+//     padding: 0 15px;
+//     // transition: visibility 0s 2s, opacity 2s linear;
+//     // transform: scale(0);
+//     transition:all 2s;
+// }

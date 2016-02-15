@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     needs: "project",
 
-    // introSeen: Ember.computed.alias("controllers.project.introSeen")
+    isEditing: Ember.computed.alias("controllers.project.isEditing"),
 
     introSeen: function(){
         return false;

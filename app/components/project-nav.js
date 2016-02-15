@@ -25,14 +25,6 @@ export default Ember.Component.extend({
 			}
 		},
 
-		showResults: function(show, hide){
-			Ember.$('.'+show+'-results').fadeIn();
-			Ember.$('.'+hide+'-results').hide();
-			Ember.$('.'+hide+'-result-tab').removeClass("active-result-tab");
-			Ember.$('.'+show+'-result-tab').addClass("active-result-tab");
-			Ember.$(".browse-results").fadeIn();
-		},
-
 		toggleFilter: function(filter) {
 			Ember.$(".browse-cards div.browse-form").hide();
 	    	Ember.$(".browse-by-"+filter).show();

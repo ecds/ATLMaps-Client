@@ -4,7 +4,11 @@
   position: fixed;
   left: 480px;
   width: 60%;
-  top: 70px;
+  top: 0;
+
+  .btn {
+      background: whitesmoke;
+  }
 
   i {
     font-size: 4em;
@@ -38,7 +42,7 @@
   left: 480px;
   width: 60%;
   overflow-y: auto;
-  top: 163px;
+  top: 80px;
   max-height: 80%;
 
   .results-loading {
@@ -71,19 +75,21 @@
     padding: 1em;
     background-color: white;
     color: #ff5722;
+    top: 80;
 }
 
 #new-search {
-    width: 60%;
-    position: fixed;
-    left: 480px;
-    display: block;
+
     color: inherit;
-    top: 163px;
 }
 
 
 div.layer-search {
+    width: 420px;
+    background-color: white;
+    padding-top: 20px;
+    margin: 0;
+
   input#search-field {
     width: 85%;
     margin-right: 0;
@@ -95,6 +101,11 @@ div.layer-search {
   }
 }
 
+.browse.card {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+}
 
 .browse {
     .browse-nav {
