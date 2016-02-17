@@ -1,19 +1,19 @@
 {{outlet}}
-<div class="vector-data card">
 
-    <div class="layer-list list-group">
+<section class="cotainer project-pane">
+    <h1>Data Layers</h1>
+    <ul class="list-unstyled">
         {{#each model.vector_layer_ids key="@index" as |layer|}}
-                <div class="list-group-item {{layer.slug}} vector-layer">
+                <li class="{{layer.slug}} vector-layer">
                     {{project-vector-icon layer=layer projectID=model.id}}
                     <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
                     <div class="layer-info-detail {{layer.slug}}">
-                        <p class="list-group-item-text">{{layer.description}}</p>
+                        <article>{{layer.description}}</article>
                         {{partial 'citation'}}
                     </div>
-                </div>
+                </li>
         {{else}}
             No data layers have been added.
         {{/each}}
-    </div>
-
-</div>
+    </ul>
+</section>

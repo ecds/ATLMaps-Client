@@ -2,15 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     actions: {
-        showLayerInfoDetals: function(layer) {
-            if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
-                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
-            }
-            else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
-                Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
-                Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
-            }
-        },
+        // showLayerInfoDetals: function(layer) {
+        //     if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+        //         Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+        //     }
+        //     else if (!Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
+        //         Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
+        //         Ember.$(".layer-info-detail."+layer).slideToggle().addClass("layer-info-detail-active");
+        //     }
+        // },
 
         closeMarkerInfo: function() {
             Ember.$("div.marker-data").hide();

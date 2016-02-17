@@ -1,0 +1,62 @@
+.cotainer.project-pane {
+    background-color: white;
+    margin-top: 184px;
+    margin-left: 32px;
+    width: 420px;
+    padding: .5em;
+
+    h1 {
+        font-size: 2em;
+    }
+    section.row {
+        margin: 0;
+    }
+    article, footer {
+        padding: 2em;
+    }
+    ul {
+        li {
+            font-size: 1.5em;
+            border-width: 1px;
+            border-style: solid;
+            border-color: lightgrey;
+            border-radius: .25em;
+            margin-bottom: .5em;
+        }
+
+        li.raster-layer {
+            padding-top: .5em;
+            background-color: white;
+            a {
+                padding-left: .75em;
+            }
+        }
+
+        article {
+            padding: 1em;
+            font-size: .75em;
+        }
+        .handle {
+            cursor: -webkit-grab;
+            cursor: -moz-grab;
+            // position: absolute;
+            // margin: 0px;
+            // right: 5px;
+        }
+        footer {
+            padding: .5em;
+            h1 {
+                font-size: 1em;
+                margin: .5em 0 0 0;
+            }
+            h2 {
+                font-size: .75em;
+                margin: 0;
+            }
+            img {
+                min-width: 100px;
+                max-height: 100px;
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 <div class="row" id="base-map">
     {{ base-map }}
 </div>
+
 <div class="layer-controls">
 	<div class={{if isEditing 'project-title project-edit' 'project-title project-view'}}>
 		<h1>{{model.name}}</h1>
@@ -15,6 +16,6 @@
 	{{ project-nav projview=true model=model }}
 
 </div>
-
 {{liquid-outlet}}
+
 {{partial 'marker-data-window'}}

@@ -145,21 +145,13 @@ export default Ember.Component.extend({
               // and the previous active type's count falls to 0. We want to switch
               // to the tab that isn't 0.
               else if (rasterCount === 0 && vectorCount > 0) {
-                _this.set('rastersActive', false)
+                _this.set('rastersActive', false);
               }
               else if (vectorCount === 0 && rasterCount > 0) {
-                _this.set('rastersActive', true)
+                _this.set('rastersActive', true);
               }
           });
       }
-
-    //   if (tags.length > 0 || institutions.length > 0 || search !== '' || start_year > 0 || end_year > 0) {
-    //       this.setProperties({ results: searchResults });
-    //       if (this.get('searchMade') === false) {
-    //           console.log(searchResults)
-    //         this.set('searchMade', true);
-    //       }
-    //   }
       else {
           this.setProperties({results: []});
       }
@@ -191,43 +183,9 @@ export default Ember.Component.extend({
       return insts;
   },
 
-  didInsertElement: function() {
-      // Ember.$(".browse-cards div.browse-form").hide();
-    //   Ember.$(".browse-by-tags").show();
-    //   Ember.$('.nav-browse').slideDown('slow');
-  },
+  didInsertElement: function() {},
 
-  // showResults: function (toShow, toHide){
-  //   Ember.$('.'+toHide+'-results').hide();
-  //   Ember.$('.'+toShow+'-results').show();
-  //   Ember.$('.'+toShow+'-result-tab').addClass("active-result-tab");
-  //   Ember.$('.'+toHide+'-result-tab').removeClass("active-result-tab");
-  // },
-
-  didUpdate: function() {
-    //   var activeRasterCount = parseInt(Ember.$('.raster-badge').text());
-    //   var activeVectorCount = parseInt(Ember.$('.vector-badge').text());
-    //
-    //   // Only want to select the active results tab the first time we
-    //   // load results. We pick the one wiht the most results to start.
-    //   console.log(this.get('searchMade'))
-    //   if (this.get('searchMade') === false){
-    // //   if (Ember.$(".browse-nav-button").hasClass("active-result-tab") === false){
-    //         var results = this.get('results');
-    //         var rasterCount = results.get('content.raster_layer_ids.length');
-    //         var vectorCount = results.get('content.vector_layer_ids.length');
-    //
-    //
-    //         if (vectorCount > rasterCount) {
-    //           this.showResults('vector', 'raster');
-    //         }
-    //         else if (rasterCount > vectorCount){
-    //           this.showResults('raster', 'vector');
-    //         }
-    //     }
-
-
-  },
+  didUpdate: function() {},
 
   actions: {
       showTagGroup: function(category) {
@@ -253,6 +211,7 @@ export default Ember.Component.extend({
       },
 
       checkAllTagsInCategory: function(category, tags){
+          // TODO maybe turn the check into an action.
           var clickedTags = this.collectCheckedTags();
           var setTo;
           if (document.getElementById("checkbox-"+category).checked === true){
@@ -292,6 +251,7 @@ export default Ember.Component.extend({
       },
 
       yearFilter: function(){
+          //TODO make the year slider update a property
         var min = Ember.$('#start_year').val();
         var max = Ember.$('#end_year').val();
         this.setProperties({startYear: min, endYear: max});

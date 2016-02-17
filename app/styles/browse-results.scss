@@ -1,48 +1,47 @@
 @import "variables.scss";
 
-.results-nav {
-  position: fixed;
-  left: 480px;
-  width: 60%;
-  top: 0;
-
-  .btn {
-      background: whitesmoke;
-  }
-
-  i {
-    font-size: 4em;
-  }
-
-  .badge {
-      background-color: $blue !important;
-      font-size: 1.25em;
-  }
-
-  .vector-badge {
-    margin-bottom: 1.6em !important;
-  }
-
-  .nav-icon {
-    font-size: 2em;
-  }
-
-  // a.btn {
-  //   background-color: whitesmoke;
-  // }
-
-  .active-result-tab {
-    background-color: white !important;
-    opacity: 1 !important;
-  }
-
-}
+// .results-nav {
+//   // position: fixed;
+//   left: 10px;
+//   // width: 60%;
+//   // top: 0;
+//
+//   .btn {
+//       background: whitesmoke;
+//   }
+//
+//   i {
+//     font-size: 4em;
+//   }
+//
+//   .badge {
+//       background-color: $blue !important;
+//       font-size: 1.25em;
+//   }
+//
+//   .vector-badge {
+//     margin-bottom: 1.6em !important;
+//   }
+//
+//   .nav-icon {
+//     font-size: 2em;
+//   }
+//
+//   // a.btn {
+//   //   background-color: whitesmoke;
+//   // }
+//
+//   .active-result-tab {
+//     background-color: white !important;
+//     opacity: 1 !important;
+//   }
+//
+// }
 .browse-results {
-  position: fixed;
-  left: 480px;
-  width: 60%;
+  // left: 480px;
+  // width: 60%;
   overflow-y: auto;
-  top: 80px;
+  // top: 80px;
   max-height: 80%;
 
   .results-loading {
@@ -85,6 +84,7 @@
 
 
 div.layer-search {
+    left: 15px;
     width: 420px;
     background-color: white;
     padding-top: 20px;

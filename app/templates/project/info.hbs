@@ -1,6 +1,6 @@
 {{outlet}}
+{{#if isEditing}}
 <div class={{if isEditing 'project-info-card card project-info-edit' 'project-info-card card'}}>
-    {{#if isEditing}}
         {{#each flashMessages.queue as |flash|}}
             {{flash-message flash=flash}}
         {{/each}}
@@ -29,11 +29,16 @@
                 <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
             </div>
         </div>
-    {{else}}
 
-        <article>{{{model.description}}}</article>
-        {{#if model.intro}}
-            {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
-        {{/if}}
-    {{/if}}
 </div>
+{{/if}}
+<section class="cotainer project-pane">
+    <section class="row">
+        <article>{{{model.description}}}</article>
+    </section>
+    {{#if model.intro}}
+    <footer class="row">
+        {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
+    </footer>
+    {{/if}}
+</section>

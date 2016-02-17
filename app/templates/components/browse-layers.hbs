@@ -1,5 +1,5 @@
-<div class="layer-search row">
-    <div class="col-xs-12">
+<div class="row">
+    <div class="layer-search col-xs-4">
         <input type="text" class="form-control pull-left" id="search-field" placeholder="Search" onchange={{action "search"}}>
         <button {{action "search"}} type="submit" class="btn btn-info pull-right"><i class="material-icons">search</i></button>
         <hr />
@@ -86,22 +86,26 @@
             </div>
         </div>
     </div>
+
+<!-- RESULTS -->
+<div class="col-xs-8">
+    <div class="row results-nav">
+        <div class=col-xs-12>
+            <div class="btn-group btn-group-justified">
+
+            {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
+            <a {{action 'showResults' 'vector'}} class="btn btn-default project-nav vector-result-tab browse-nav-button {{unless rastersActive 'active-result-tab' }}" id='vector-data' title="Pinpoint Layers">
+            <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{results.vector_layer_ids.length}}</span>
+            </a>
+            <a {{action 'showResults' 'raster'}} class="btn btn-default project-nav raster-result-tab browse-nav-button {{if rastersActive 'active-result-tab' }}" id="raster-layers" title="Archival Maps">
+            <i class="material-icons">layers</i><span class="badge raster-badge">{{results.raster_layer_ids.length}}</span>
+            </a>
+            </div>
+        </div>
 </div>
 
-
-<div class="btn-group btn-group-justified results-nav">
-
-    {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
-    <a {{action 'showResults' 'vector'}} class="btn btn-default project-nav vector-result-tab browse-nav-button {{unless rastersActive 'active-result-tab' }}" id='vector-data' title="Pinpoint Layers">
-        <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{results.vector_layer_ids.length}}</span>
-    </a>
-    <a {{action 'showResults' 'raster'}} class="btn btn-default project-nav raster-result-tab browse-nav-button {{if rastersActive 'active-result-tab' }}" id="raster-layers" title="Archival Maps">
-        <i class="material-icons">layers</i><span class="badge raster-badge">{{results.raster_layer_ids.length}}</span>
-    </a>
-</div>
-
-<div class="browse-results">
-
+<div class="row browse-results">
+    <div class="col-xs-12">
     {{#if results.isPending}}
         <div class="loading">Loading...</div>
     {{/if}}
@@ -153,4 +157,7 @@
         {{/unless}}
     </div>
     {{/if}}
+</div>
+</div>
+</div>
 </div>

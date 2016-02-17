@@ -317,6 +317,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         },
 
 		showLayerInfoDetals: function(layer) {
+			console.log('this is the one')
             if (Ember.$(".layer-info-detail."+layer).hasClass("layer-info-detail-active")) {
                 Ember.$(".layer-info-detail-active").slideToggle().removeClass("layer-info-detail-active");
             }

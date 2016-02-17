@@ -24,6 +24,7 @@
 @import 'tag-list';
 @import 'list-available-layers.scss';
 @import 'flash-message-overrides.scss';
+@import 'project-pane.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -32,6 +33,10 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 
 .fullscreen-map {
   height: 100%;
+}
+
+div {
+    // pointer-events: none;
 }
 
 h1, h2, h3, .h1, .h2, .h3{
@@ -45,9 +50,6 @@ h4, .h4 { font-size: 18px; line-height: 20px; }
 h5, .h5 { font-size: 14px; line-height: 20px; }
 h6, .h6 { font-size: 12px; line-height: 20px; }
 
-article {
-    font-weight: bolder;
-}
 
 a {
     color: $blue;
@@ -1117,9 +1119,9 @@ h4#showCollaborators a {
   }
 }
 
-.raster-layer {
-  width: 100%;
-}
+// .raster-layer {
+//   width: 100%;
+// }
 
 .project-title {
   width: 100%;
@@ -1224,21 +1226,14 @@ div.marker-content:after {
   //height: 50em;
 }
 
-.handle {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  position: absolute;
-  margin: 0px;
-  right: 5px;
-}
 
 .layer-info-detail {
   display: none;
 }
 
-.raster-layers {
-  padding-bottom: .75em !important;
-}
+// .raster-layers {
+//   padding-bottom: .75em !important;
+// }
 
 a.edit-project-button {
   color: darkgray;
