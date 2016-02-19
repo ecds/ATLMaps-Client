@@ -31,27 +31,6 @@ export default Ember.Route.extend({
             model.rollbackAttributes();
         },
 
-        setCenterAndZoom: function(){
-            var map = this.globals.mapObject;
-
-            var project = this.modelFor('project');
-
-
-            project.set('center_lat', map.getCenter().lat);
-            project.set('center_lng', map.getCenter().lng);
-            project.set('zoom_level', map.getZoom());
-            project.save().then(function() {
-                // Success callback
-                // Show confirmation.
-                Ember.$(".recenter-success").stop().slideToggle().delay(1500).slideToggle();
-                }, function() {
-                    // Error callback
-                    Ember.$(".recenter-fail").stop().slideToggle().delay(3000).slideToggle();
-
-            });
-
-        },
-
         setBaseMap: function() {
             Ember.$('input[name=leaflet-base-layers]:checked').next().html().trim().toLowerCase();
         }

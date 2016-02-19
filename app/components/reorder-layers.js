@@ -5,7 +5,11 @@ export default Ember.Component.extend({
 
 	edit: false,
 
-	didInsertElement: function(){
+	editing: Ember.observer('editing', function(){
+		console.log(this.editing);
+	}),
+
+	didUpdate: function(){
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}

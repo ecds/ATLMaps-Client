@@ -1,5 +1,6 @@
 {{outlet}}
-{{ reorder-layers mode='view' }}
+{{ reorder-layers mode=isEditing }}
+
 <section class="cotainer project-pane">
     <section class="row">
         <section class="col-xs-10">
@@ -10,7 +11,7 @@
         </section>
 </section>
     <ul class="list-unstyled raster-list" id="layer_sort">
-        {{#each model.raster_layer_ids key="@index" as |layer|}}
+        {{#each model.sortedRasterLayers key="@index" as |layer|}}
                 <li class="{{layer.slug}} raster-layer" id="{{layer.slug}}">
                     <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
                     <span class="handle pull-right"><i class="material-icons reorder">code</i></span>

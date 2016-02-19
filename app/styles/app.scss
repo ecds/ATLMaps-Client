@@ -35,8 +35,9 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   height: 100%;
 }
 
-div {
-    // pointer-events: none;
+// Allow click though to the map past the liquid-container
+.liquid-container {
+    pointer-events: none;
 }
 
 h1, h2, h3, .h1, .h2, .h3{
@@ -789,10 +790,6 @@ img.layerMarker {
   //display: none;
 }
 
-.publish_check {
-  margin-top: 2em;
-}
-
 .list-group .list-group-item .row-action-primary i.icon-lg {
   font-size: 36px;
 }
@@ -1123,29 +1120,29 @@ h4#showCollaborators a {
 //   width: 100%;
 // }
 
-.project-title {
-  width: 100%;
-  background-color: #03A9F4;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 2px 0 -10px 1px;
-  border-radius: .25em;
-  border-bottom-left-radius:0;
-  border-bottom-right-radius:0;
-
-  h1 {
-    padding-left: .5em;
-    font-size: 1.5em;
-    display: inline-block;
-    max-width: 80%;
-    line-height: 1em;
-    color: aliceblue;
-  }
-
-  span {
-    float: right;
-    padding: 1em .5em 0 0;
-  }
-}
+// .project-title {
+//   width: 100%;
+//   background-color: #03A9F4;
+//   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+//   margin: 2px 0 -10px 1px;
+//   border-radius: .25em;
+//   border-bottom-left-radius:0;
+//   border-bottom-right-radius:0;
+//
+//   h1 {
+//     padding-left: .5em;
+//     font-size: 1.5em;
+//     display: inline-block;
+//     max-width: 80%;
+//     line-height: 1em;
+//     color: aliceblue;
+//   }
+//
+//   span {
+//     float: right;
+//     padding: 1em .5em 0 0;
+//   }
+// }
 
 .leaflet-control-layers {
   box-shadow: none
@@ -1265,19 +1262,19 @@ a.is-editing-project-button {
   }
 }
 
-.project-edit {
-  a {
-    .mdi-editor-mode-edit {
-      color: lightgrey;
-    }
-  }
-}
-.project-title.project-edit {
-  background-color: #4CAF50;
-  h1 {
-    color: black;
-  }
-}
+// .project-edit {
+//   a {
+//     .mdi-editor-mode-edit {
+//       color: lightgrey;
+//     }
+//   }
+// }
+// .project-title.project-edit {
+//   background-color: #4CAF50;
+//   h1 {
+//     color: black;
+//   }
+// }
 
 .remove-layer-button {
 

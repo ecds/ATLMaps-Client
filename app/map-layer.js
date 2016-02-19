@@ -139,7 +139,7 @@ export default function MapLayer(map, layer, marker_color, position){
             }
 
             var polyStyle = {
-                'color': 'red'
+                'color': 'deeppink'
             };
 
             if(layer.get('url')){

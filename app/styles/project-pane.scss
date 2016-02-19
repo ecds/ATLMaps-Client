@@ -1,9 +1,9 @@
 .cotainer.project-pane {
     background-color: white;
-    margin-top: 184px;
-    margin-left: 32px;
-    width: 420px;
+    margin-left: 31px;
+    width: 418px;
     padding: .5em;
+    pointer-events: auto; // Allow the pane to respond to click.
 
     h1 {
         font-size: 2em;
@@ -39,9 +39,7 @@
         .handle {
             cursor: -webkit-grab;
             cursor: -moz-grab;
-            // position: absolute;
-            // margin: 0px;
-            // right: 5px;
+            margin-right: 10px;
         }
         footer {
             padding: .5em;

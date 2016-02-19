@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    // notify: Ember.inject.service('notify'),
 
     actions: {
         // Action to update wheather or not we're going to show the intro modal.
@@ -12,14 +11,20 @@ export default Ember.Route.extend({
         updateProjectInfo: function(model) {
             /* Action that updates the title, description and
             published status of a project. */
-            const flashMessages = Ember.get(this, 'flashMessages');
+            var _this = this;
             model.save().then(function() {
                 // Success callback
                 // Show confirmation.
-                flashMessages.success('Project Updated!');
+                _this.controllerFor('project').set('editSuccess', true);
+                Ember.run.later(this, function(){
+                    _this.controllerFor('project').set('editSuccess', false);
+                }, 3000);
                 }, function() {
                     // Error callback
-                    flashMessages.danger('Something went worng. Info was not updated.');
+                    _this.controllerFor('project').set('editFail', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project').set('editFail', false);
+                    }, 3000);
                     model.rollbackAttributes();
 
             });

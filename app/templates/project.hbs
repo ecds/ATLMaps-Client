@@ -1,21 +1,54 @@
-<div class="row" id="base-map">
+<nav class="row">
+	{{#link-to 'projects' tagName='a' class="back-link" title="Back to All Projects"}}
+		<nav class="back-button"><i class="material-icons">chevron_left</i></nav>
+	{{/link-to}}
+</nav>
+<section id="base-map">
     {{ base-map }}
-</div>
+</section>
 
-<div class="layer-controls">
-	<div class={{if isEditing 'project-title project-edit' 'project-title project-view'}}>
-		<h1>{{model.name}}</h1>
+<section class="project-title container">
+	<section class="row {{if isEditing 'project-edit' 'project-view'}}">
+    <!-- <section class="row {{if isEditing 'project-edit' 'project-view'}}"> -->
+        <section class="col-xs-10">
+		          <h1>{{model.name}}</h1>
+        </section>
+        <section class="col-xs-2">
 		{{#if model.may_edit}}
             <a {{action 'toggleEdit'}} title={{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
-				<i class="material-icons pull-right">mode_edit</i>
+				<i class="material-icons">mode_edit</i>
 			</a>
 		{{/if}}
-	</div>
+    </section>
+	<!-- </section> -->
+</section>
+</section>
+
+<nav class="btn-group btn-group-justified">
+
+	{{#link-to "project.info" class="btn btn-default" id='project-info' title="Project Description"}}
+		<span class="nav-icon"><i class="material-icons">info_outline</i></span>
+	{{/link-to}}
+    {{#if isEditing}}
+		{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
+			<span class="nav-icon"><i class="material-icons">search</i></span>
+		{{/link-to}}
+    {{/if}}
+	{{#link-to "project.vector-layers" class="btn btn-default" id='vector-data' title="Pinpoint Layers"}}
+		<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{model.vector_layer_ids.length}}</span>
+	{{/link-to}}
+	{{#link-to "project.raster-layers" class="btn btn-default" id='raster-layers' title="Archival Map Layers"}}
+    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_ids.length}}</span>
+    {{/link-to}}
+	{{#link-to "project.base-layers" class="btn btn-default" id='controls' title="Change Base Map"}}
+    	<span class="nav-icon"><i class="material-icons">map</i></span>
+    {{/link-to}}
+	<!-- {{#link-to "project.help" class="btn btn-default project-nav" id='help' title="Show Help Window"}}
+    	<span class="nav-icon"><i class="material-icons">help_outline</i></span>
+    {{/link-to}} -->
+</nav>
 
 
-	{{ project-nav projview=true model=model }}
-
-</div>
 {{liquid-outlet}}
 
 {{partial 'marker-data-window'}}

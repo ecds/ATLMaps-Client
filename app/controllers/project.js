@@ -5,6 +5,10 @@ export default Ember.Controller.extend({
 
     isEditing: false,
 
+    editSuccess: false,
+
+    editFail: false,
+
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({
