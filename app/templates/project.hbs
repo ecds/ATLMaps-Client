@@ -50,5 +50,8 @@
 
 
 {{liquid-outlet}}
+{{#if showBrowse}}
+    {{browse-layers addRaster='addRasterLayer' removeRaster='removeRasterLayer' addVector='addVectorLayer' removeVector='removeVectorLayer'}}
+{{/if}}
 
 {{partial 'marker-data-window'}}

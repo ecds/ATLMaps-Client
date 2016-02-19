@@ -1,7 +1,17 @@
 {{outlet}}
-{{ reorder-layers mode=isEditing }}
+{{ reorder-layers isEditing=isEditing model=model}}
 
 <section class="cotainer project-pane">
+    {{#liquid-if editSuccess}}
+        <div class="alert alert-dismissible alert-success">
+            Project info has been updated!
+        </div>
+    {{/liquid-if}}
+    {{#liquid-if editFail}}
+        <div class="alert alert-dismissible alert-danger">
+            Dang, something went wrong. The project info was not updated.
+        </div>
+    {{/liquid-if}}
     <section class="row">
         <section class="col-xs-10">
             <h1>Archival Map Layers</h1>

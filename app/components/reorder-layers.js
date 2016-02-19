@@ -3,13 +3,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	edit: false,
-
-	editing: Ember.observer('editing', function(){
-		console.log(this.editing);
-	}),
-
-	didUpdate: function(){
+	didInsertElement: function(){
 		if (this.get('mode') === 'edit'){
 			this.set('edit', true);
 		}
@@ -35,7 +29,7 @@ export default Ember.Component.extend({
                     Ember.$("."+value).css("zIndex", zIndex);
 
                 });
-                if (_this.get('edit') === true) {
+                if (_this.get('isEditing') === true) {
                     Ember.$(".raster-list").find(".raster-layer").each(function(){
                         layerIDs.push(Ember.$(this).attr("layer-id"));
                     });
@@ -52,19 +46,21 @@ export default Ember.Component.extend({
 			// Go through each layer and update the new positon.
             Ember.$.each(layers, function(index, value){
                 var position = layerCount - index;
-
                 _this.store.query('raster_layer_project', {
                     project_id: model.get('id'),
                     raster_layer_id: value
                 }).then(function(rasterLayerProject){
+
                     var  layerToUpdate = rasterLayerProject.get('firstObject');
                     layerToUpdate.set('position', position);
-                    layerToUpdate.save();
+                    layerToUpdate.save().then(function(){
+						// success
+					}, function(){
+						// fail;
+					});
                 });
             });
-			// This is less than ideal but we were getting getting errors on the
-			// `save().the()`function even though the save was successful.
-			Ember.$(".reorder-success").stop().slideToggle().delay(1500).slideToggle();
+
         }
 	}
 });

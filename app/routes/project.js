@@ -38,6 +38,16 @@ export default Ember.Route.extend({
 
     actions: {
 
+		willTransition(transition) {
+			if (transition.targetName === 'project.browse-layers') {
+				this.controllerFor('project').set('showBrowse', true);
+			}
+			else {
+				this.controllerFor('project').set('showBrowse', false);
+			}
+			return true;
+		},
+
     	didTransition: function() {
 
 	    	var raster_layers = this.modelFor('project').get('raster_layer_ids');
