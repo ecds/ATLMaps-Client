@@ -50,8 +50,7 @@
 
 
 {{liquid-outlet}}
-{{#if showBrowse}}
+<section class="cotainer project-pane {{if showBrowse "show-browse" "hide-browse"}}">
     {{browse-layers addRaster='addRasterLayer' removeRaster='removeRasterLayer' addVector='addVectorLayer' removeVector='removeVectorLayer'}}
-{{/if}}
-
+</section>
 {{partial 'marker-data-window'}}

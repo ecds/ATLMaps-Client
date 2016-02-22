@@ -12,6 +12,10 @@ export default Ember.Component.extend({
       return false;
   },
 
+  // clickedCategory: function(){
+  //     return true;
+  // }.property(),
+
   yearRange: function(){
       var _this = this;
       var yearRange = DS.PromiseObject.create({
@@ -83,8 +87,17 @@ export default Ember.Component.extend({
         content: this.store.findAll('category'),
         sort: function(){
             this.set('sortProperties', ['name']);
+            // this.set('clicked', false);
         }
     });
+  }.property(),
+
+  checkedTags: function(){
+      return [];
+  }.property(),
+
+  checkedCategories: function(){
+      return this.store.query('category', {checked: true});
   }.property(),
 
   institutions: function(){
@@ -105,14 +118,18 @@ export default Ember.Component.extend({
   endYear: 0,
 
   // Number of tags that are checked.
-  checkedTags: '',
+  // checkedTags: '',
 
   results: function() {
       return this.store.queryRecord('search', {});
   }.property('results'),
 
   getResults: function(){
-      var tags = this.get('checkedTags');
+    //   var tags = this.get('checkedTags');
+    // var tags = this.store.peekAll('tag');
+    // var tags = this.store.peekAll('tag', {id: 24});
+    var tags = this.get('checkedTags');
+    // console.log(tags);
       var institutions = this.get('checkedInstitutions');
       var search = this.get('textSearch');
       var start_year = this.get('startYear');
@@ -159,20 +176,31 @@ export default Ember.Component.extend({
   },
 
   collectCheckedTags: function(){
-      var tags = [];
-      // Clear the `category-checked`
-      Ember.$('.category').removeClass('category-checked');
-      // Hice the checkmark
-      Ember.$('.category-checked i').hide();
-      // Make an array of all the checked tags.
-      Ember.$(".tags:checked").each(function(){
-          tags.push(this.name);
-        var category = Ember.$(this).attr('category');
-        Ember.$('.category#category-'+category).addClass('category-checked');
-        // Show the check mark.
-        Ember.$("#check-"+category).show();
-      });
-      return tags;
+    //   var tags = [];
+    //   // Clear the `category-checked`
+    //   Ember.$('.category').removeClass('category-checked');
+    //   // Hice the checkmark
+    //   Ember.$('.category-checked i').hide();
+    //   // Make an array of all the checked tags.
+    //   Ember.$(".tags:checked").each(function(){
+    //       tags.push(this.name);
+    //     var category = Ember.$(this).attr('category');
+    //     Ember.$('.category#category-'+category).addClass('category-checked');
+    //     // Show the check mark.
+    //     Ember.$("#check-"+category).show();
+    //   });
+    //   var tags = this.store.peekAll('tag', {checked: true});
+    // //   console.log(tags);
+    //   Ember.$.each(tags, function(index, tag) {
+    //     //   console.log(tag)
+    //   });
+    //   return tags;
+    //   Ember.$.each(tags, function(index, tag){
+        //   checkedTags.push(tag);
+        // console.log(tag);
+    //   });
+    //   console.log(checkedTags);
+    //   return checkedTags;
   },
 
   collectCheckedInsts: function(){
@@ -189,54 +217,78 @@ export default Ember.Component.extend({
 
   actions: {
       showTagGroup: function(category) {
-          Ember.$('.category').removeClass('active');
-          if (Ember.$('#'+category).is(':visible')) {
-              Ember.$("#"+category).fadeOut(400);
+          // There is a non-api backed boolean on the category model for `clicked`
+          // This is what is used for showing the tags for the clicked category.
+          // A property is set on this component, `clickedCategory` to the clicked
+          // category and that is used to show/hide the tags in the templete.
+
+          // When a category is clicked, we want to clear out the previous one.
+          try {
+              this.set('clickedCategory.clicked', false);
           }
-          else if (Ember.$('#'+category).is(':hidden')){
-              Ember.$(".tag-group").fadeOut();
-              Ember.$('#'+category).fadeIn(400);
-              Ember.$('#category-'+category).addClass('active');
+         catch(err) {
+             // The first time, clickedCategory will not be an instance
+             // of `category`. It will just be `true`.
+         }
+         // So if the category that is clicked does not match the one in the
+         // `clickedCategory` property, we set the `clicked` attribute to `true`
+         // and that will remove the `hidden` class in the template.
+         if (category !== this.get('clickedCategory')){
+                // Update the `clickedCategory` property
+                this.set('clickedCategory', category);
+                // Set the model attribute
+                category.set('clicked', 'true');
+         }
+         // Otherwise, this must be the first time a user has clicked a category.
+         else {
+            //  this.set('clickedCategory', true);
+         }
+
+    },
+
+      checkSingleTag: function(tag){
+          // Much like `checked` attribute for categories described above, here
+          // we go with tags. Tags are a little different because they are part
+          // of an array that is sent to the `getResuts` method.
+          var tagName = tag.get('name');
+          var checkedTags = this.get('checkedTags');
+          if (tag.get('checked') === true) {
+              // We are removing the tag for the search
+              tag.set('checked', false);
+              var index = checkedTags.indexOf(tagName);
+              checkedTags.splice(index, 1);
+
           }
           else {
-              Ember.$(".tag-group").hide();
-              Ember.$("#"+category).show();
+              // Adding the tag to the list of checked tags.
+              tag.set('checked', true);
+              checkedTags.push(tag.get('name'));
+              // TODO clear the select all box when when a user has selected all
+              // but then unchecks a tag. This action need acesse to the category.
           }
-      },
-
-      checkSingleTag: function(){
-          var tags = this.collectCheckedTags();
-          this.setProperties({ checkedTags: tags });
           this.getResults();
       },
 
-      checkAllTagsInCategory: function(category, tags){
-          // TODO maybe turn the check into an action.
-          var clickedTags = this.collectCheckedTags();
-          var setTo;
-          if (document.getElementById("checkbox-"+category).checked === true){
-              Ember.$.each(tags, function(index, tag) {
-                  clickedTags.push(tag.get('name'));
-                  setTo = true;
-                  Ember.$('.category#category-'+category).addClass('category-checked');
-                  Ember.$("#check-"+category).show();
-              });
-          }
-          else if (document.getElementById("checkbox-"+category).checked === false) {
-              Ember.$.each(tags, function(index, tag) {
-                  clickedTags.splice(tag, 1);
-                  setTo = false;
-                  Ember.$('.category#category-'+category).removeClass('category-checked');
-                  Ember.$("#check-"+category).hide();
-              });
+      checkAllTagsInCategory: function(category){
 
-          }
-          this.setProperties({ checkedTags: clickedTags });
-          this.getResults();
-          Ember.$('input.'+category).each(function(){
-              this.checked = setTo;
-          });
-
+        var set = category.get('allChecked');
+        var checkedTags = this.get('checkedTags');
+        if (set === false) {
+            category.set('allChecked', true);
+            for (var checkedTag of category.get('sortedTags')) {
+                checkedTag.set('checked', true);
+                checkedTags.push(checkedTag.get('name'));
+            }
+        }
+        else {
+            category.set('allChecked', false);
+            for (var unCheckedTag of category.get('sortedTags')) {
+                unCheckedTag.set('checked', false);
+                var index = checkedTags.indexOf(unCheckedTag.get('name'));
+                checkedTags.splice(index, 1);
+            }
+        }
+        this.getResults();
       },
 
       checkInstitution: function(){
@@ -276,7 +328,7 @@ export default Ember.Component.extend({
       },
 
       sendVectorLayerToAdd: function(layer){
-          console.log(layer);
+        //   console.log(layer);
           this.sendAction('addVector', layer);
       },
 

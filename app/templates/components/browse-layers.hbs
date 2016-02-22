@@ -1,4 +1,3 @@
-<section class="cotainer project-pane">
 <div class="row browse-pane">
     <div class="layer-search col-md-4">
         <section>
@@ -7,50 +6,56 @@
             <hr />
         </section>
 
-        <section class="browse-by-tags">
-            <h1>Tags:</h1>
-            <section>
-                {{#each categories key="@index" as |category|}}
-                <section class="row category" id="category-{{category.slug}}">
-                    <section class="col-md-4">
-                        <a {{action 'showTagGroup' category.slug}}>
-                            <span class="category-checked">
-                                <i class="material-icons" id="check-{{category.slug}}">done</i>
-                            </span>
-                            {{category.name}}
-                        </a>
-                    </section>
-
-
-                    <section id="{{category.slug}}" class="col-md-6 tag-group">
-                        {{#if category.tag_ids.isPending}}
-                        <div class="modal-loading" id="raster-modal">
-                            <img src="/assets/images/loaders/Preloader_19.gif" alt="LOADING"/>
-                        </div>
-                        {{else}}
+<section class="browse-by-tags">
+    <h1>Tags:</h1>
+    {{#each checkedTags key="@index" as |checkedTag|}}
+    {{#if checkedTag.checked}}
+    <h2>{{checkedTag.name}}</h2>
+    {{/if}}
+    {{/each}}
+    <section>
+        <ul class="list-unstyled pull-left categories">
+            {{#each categories key="@index" as |category|}}
+            <li class="category">
+                <a {{action 'showTagGroup' category}}>
+                    {{#if category.checked}}<i class="material-icons">done</i>{{/if}}
+                    {{category.name}}
+                </a>
+                {{#liquid-if category.clicked}}
+                <ul class="list-unstyled pull-right tag-group {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
+                    <li>
                         <div class="checkbox tags">
                             <label>
-                                <input type="checkbox" id="checkbox-{{category.slug}}" onchange={{action "checkAllTagsInCategory" category.slug category.sortedTags}} />
+                                <input type="checkbox" onchange={{action "checkAllTagsInCategory" category}} />
                                 <span class="check"></span>
                                 Select All
                             </label>
                         </div>
-                        {{#each category.sortedTags key="@index" as |tag|}}
-                        <div class="checkbox tags">
-                            <label>
-                                <input type="checkbox" class="tags {{category.slug}}" id="{{tag.name}}" name="{{tag.name}}" category="{{category.slug}}" onchange={{action "checkSingleTag" tag.name}} />
-                                <span class="check"></span>
-                                {{tag.name}}
-                            </label>
-                        </div>
-                        {{/each}}
-                        {{/if}}
-                    </section>
-                </section>
-                {{/each}}
-            </section>
-            <hr />
-        </section>
+                    </li>
+                    {{#each category.sortedTags key="@index" as |tag|}}
+                    <li class="checkbox tags">
+                        <label>
+                            <input type="checkbox"
+                                class="tags {{category.slug}}"
+                                id="{{tag.name}}"
+                                name="{{tag.name}}"
+                                category="{{category.slug}}"
+                                checked="{{if tag.checked false}}"
+                                onchange={{action "checkSingleTag" tag category}}
+                            />
+                            <span class="check"></span>
+                            {{tag.name}}{{tag.checked}}
+                        </label>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/liquid-if}}
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    <hr />
+</section>
 
 
 
@@ -171,4 +176,3 @@
 </div>
     </div>
 </div>
-</section>

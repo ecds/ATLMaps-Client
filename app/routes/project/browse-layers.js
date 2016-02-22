@@ -7,6 +7,7 @@ export default Ember.Route.extend({
 
     	didTransition: function() {
             this.controllerFor('project').set('showBrowse', true);
+            return true;
         }
     }
 });

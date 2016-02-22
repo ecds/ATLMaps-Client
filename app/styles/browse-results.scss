@@ -1,7 +1,41 @@
 @import "variables.scss";
 
+.show-browse {
+    visibility: visible;
+}
+
+.hide-browse {
+    visibility: hidden;
+}
+
 .browse-pane {
-    background-color: white;
+
+    .browse-by-tags {
+        section {
+            width: 100%;
+        }
+        ul.categories {
+            width: 100%;
+            li.category {
+                height: 1em;
+                width: 100%;
+                border: none;
+                font-size: 1em;
+
+                .liquid-container {
+                    position: absolute;
+                    top: 62px;
+                    right: 0;
+
+                }
+            }
+        }
+
+        ul.tag-group {
+            pointer-events: all;
+        }
+
+    }
 
     .results {
         position: absolute;
@@ -9,7 +43,8 @@
     }
 }
 
-div.layer-search {
+.layer-search {
+    background-color: white;
     width: 100%;
     margin-left: 5px;
 
@@ -21,6 +56,9 @@ div.layer-search {
         margin: 0;
         right: 10px;
         padding: .25em 0.85em
+    }
+    li {
+        border: none;
     }
 }
 
@@ -460,7 +498,7 @@ div.layer-search {
 // // 	margin: 0 2em;
 // // 	width: 4em;
 // // }
-// 
+//
 // div.year-slider {
 //   width: 97%;
 // }
