@@ -6,7 +6,7 @@
             <hr />
         </section>
 
-<section class="browse-by-tags">
+<section class="browse-by-tags container">
     <h1>Tags:</h1>
     {{#each checkedTags key="@index" as |checkedTag|}}
     {{#if checkedTag.checked}}
@@ -14,26 +14,24 @@
     {{/if}}
     {{/each}}
     <section>
-        <ul class="list-unstyled pull-left categories">
+        <ul class="list-unstyled categories">
             {{#each categories key="@index" as |category|}}
             <li class="category">
                 <a {{action 'showTagGroup' category}}>
-                    {{#if category.checked}}<i class="material-icons">done</i>{{/if}}
+                    <span><i class="material-icons {{unless category.checked "hidden"}}">done</i></span>
                     {{category.name}}
                 </a>
                 {{#liquid-if category.clicked}}
-                <ul class="list-unstyled pull-right tag-group {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
-                    <li>
-                        <div class="checkbox tags">
+                <ul class="list-unstyled tag-group pull-left {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
+                    <li class="checkbox">
                             <label>
-                                <input type="checkbox" onchange={{action "checkAllTagsInCategory" category}} />
+                                <input type="checkbox" class="tags" onchange={{action "checkAllTagsInCategory" category}} />
                                 <span class="check"></span>
                                 Select All
                             </label>
-                        </div>
                     </li>
                     {{#each category.sortedTags key="@index" as |tag|}}
-                    <li class="checkbox tags">
+                    <li class="checkbox">
                         <label>
                             <input type="checkbox"
                                 class="tags {{category.slug}}"
@@ -41,10 +39,10 @@
                                 name="{{tag.name}}"
                                 category="{{category.slug}}"
                                 checked="{{if tag.checked false}}"
-                                onchange={{action "checkSingleTag" tag category}}
+                                onchange={{action "checkSingleTag" category tag}}
                             />
                             <span class="check"></span>
-                            {{tag.name}}{{tag.checked}}
+                            {{tag.name}}
                         </label>
                     </li>
                     {{/each}}
@@ -54,10 +52,11 @@
             {{/each}}
         </ul>
     </section>
-    <hr />
 </section>
 
-
+<section class="row">
+    <hr />
+</section>
 
 
         <div class="browse-by-years browse-form">

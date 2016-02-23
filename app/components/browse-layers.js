@@ -74,10 +74,6 @@ export default Ember.Component.extend({
       });
   }.property(),
 
-  didRender: function(){
-
-  },
-
   // panelActions: Ember.inject.service(),
 
   categories: function(){
@@ -94,10 +90,6 @@ export default Ember.Component.extend({
 
   checkedTags: function(){
       return [];
-  }.property(),
-
-  checkedCategories: function(){
-      return this.store.query('category', {checked: true});
   }.property(),
 
   institutions: function(){
@@ -128,7 +120,8 @@ export default Ember.Component.extend({
     //   var tags = this.get('checkedTags');
     // var tags = this.store.peekAll('tag');
     // var tags = this.store.peekAll('tag', {id: 24});
-    var tags = this.get('checkedTags');
+    let tags = this.get('checkedTags');
+    // var tags = this.get('checkedTags');
     // console.log(tags);
       var institutions = this.get('checkedInstitutions');
       var search = this.get('textSearch');
@@ -213,10 +206,11 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {},
 
-  didUpdate: function() {},
+  didUpdate: function(){},
+
 
   actions: {
-      showTagGroup: function(category) {
+        showTagGroup: function(category) {
           // There is a non-api backed boolean on the category model for `clicked`
           // This is what is used for showing the tags for the clicked category.
           // A property is set on this component, `clickedCategory` to the clicked
@@ -224,7 +218,8 @@ export default Ember.Component.extend({
 
           // When a category is clicked, we want to clear out the previous one.
           try {
-              this.set('clickedCategory.clicked', false);
+              // Toggle the totally made up property!
+              this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
           }
          catch(err) {
              // The first time, clickedCategory will not be an instance
@@ -246,7 +241,7 @@ export default Ember.Component.extend({
 
     },
 
-      checkSingleTag: function(tag){
+      checkSingleTag: function(category, tag){
           // Much like `checked` attribute for categories described above, here
           // we go with tags. Tags are a little different because they are part
           // of an array that is sent to the `getResuts` method.
@@ -262,9 +257,15 @@ export default Ember.Component.extend({
           else {
               // Adding the tag to the list of checked tags.
               tag.set('checked', true);
-              checkedTags.push(tag.get('name'));
+              checkedTags.push(tagName);
               // TODO clear the select all box when when a user has selected all
               // but then unchecks a tag. This action need acesse to the category.
+          }
+          if (this.$("ul#"+category.get('slug')).find("input:checked").length > 0){
+              category.set('checked', true);
+          }
+          else {
+              category.set('checked', false);
           }
           this.getResults();
       },
@@ -278,14 +279,19 @@ export default Ember.Component.extend({
             for (var checkedTag of category.get('sortedTags')) {
                 checkedTag.set('checked', true);
                 checkedTags.push(checkedTag.get('name'));
+                // Make sure there are no duplicates in the array.
+                this.set('checkedTags', [...new Set(checkedTags)]);
+                category.set('checked', true);
             }
         }
         else {
             category.set('allChecked', false);
             for (var unCheckedTag of category.get('sortedTags')) {
+                // console.log(unCheckedTag);
                 unCheckedTag.set('checked', false);
                 var index = checkedTags.indexOf(unCheckedTag.get('name'));
                 checkedTags.splice(index, 1);
+                category.set('checked', false);
             }
         }
         this.getResults();

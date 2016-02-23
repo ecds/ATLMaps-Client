@@ -1,3 +1,4 @@
+@import "variables.scss";
 .project-title, nav.btn-group {
     width: 420px;
 
@@ -39,45 +40,45 @@ nav.btn-group{
     margin-bottom: 0;
 
     a:nth-of-type(1) {
-      background-color: #FAFAFA;
+      background-color: material-color(grey, 50);
       &:hover, &:focus {
-          background-color: #E1F5FE ! important;
+          background-color: material-color(blue, 50) ! important;
       }
     }
     a:nth-of-type(2) {
-      background-color: #F5F5F5;
+      background-color: material-color(grey, 100);
       &:hover, &:focus {
-          background-color: #81D4FA ! important;
+          background-color: material-color(blue, 100) ! important;
       }
     }
     a:nth-of-type(3) {
-      background-color: #EEEEEE;
+      background-color: material-color(grey, 200);
       &:hover, &:focus {
-          background-color: #4FC3F7 ! important;
+          background-color: material-color(blue, 200) ! important;
       }
     }
     a:nth-of-type(4) {
-      background-color: #E0E0E0;
+      background-color: material-color(grey, 300);
       &:hover, &:focus {
-          background-color: #29B6F6 ! important;
+          background-color: material-color(blue, 300) ! important;
       }
     }
     a:nth-of-type(5) {
-      background-color: #BDBDBD;
+      background-color: material-color(grey, 400);
       &:hover, &:focus {
-          background-color: #03A9F4 ! important;
+          background-color: material-color(blue, 400) ! important;
       }
     }
     a:nth-of-type(6) {
-      background-color: #9E9E9E;
+      background-color: material-color(grey, 500);
       &:hover, &:focus {
-          background-color: #039BE5 ! important;
+          background-color: material-color(blue, 500) ! important;
       }
     }
     a:nth-of-type(7) {
-      background-color: #757575;
+      background-color: material-color(grey, 600);
       &:hover, &:focus {
-          background-color: #0288D1 ! important;
+          background-color: material-color(blue, 600) ! important;
       }
     }
     &, & .btn{
