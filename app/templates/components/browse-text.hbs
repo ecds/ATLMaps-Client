@@ -1,0 +1,7 @@
+{{yield}}
+<section>
+    <!-- <input type="text" class="form-control pull-left" id="search-field" placeholder="Search" onchange={{action "textSearch"}} value={{searchTerms}}> -->
+    {{input type='text' value=searchTerms class='form-control pull-left' placeholder='Search' onchange="textSearch"}}
+    <button {{action "textSearch"}} type="submit" class="btn btn-info pull-right"><i class="material-icons">search</i></button>
+    <hr />
+</section>

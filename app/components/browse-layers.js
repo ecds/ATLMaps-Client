@@ -210,65 +210,65 @@ export default Ember.Component.extend({
 
 
   actions: {
-        showTagGroup: function(category) {
-          // There is a non-api backed boolean on the category model for `clicked`
-          // This is what is used for showing the tags for the clicked category.
-          // A property is set on this component, `clickedCategory` to the clicked
-          // category and that is used to show/hide the tags in the templete.
+    showTagGroup: function(category) {
+        // There is a non-api backed boolean on the category model for `clicked`
+        // This is what is used for showing the tags for the clicked category.
+        // A property is set on this component, `clickedCategory` to the clicked
+        // category and that is used to show/hide the tags in the templete.
 
-          // When a category is clicked, we want to clear out the previous one.
-          try {
-              // Toggle the totally made up property!
-              this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
-          }
-         catch(err) {
-             // The first time, clickedCategory will not be an instance
-             // of `category`. It will just be `true`.
-         }
-         // So if the category that is clicked does not match the one in the
-         // `clickedCategory` property, we set the `clicked` attribute to `true`
-         // and that will remove the `hidden` class in the template.
-         if (category !== this.get('clickedCategory')){
-                // Update the `clickedCategory` property
-                this.set('clickedCategory', category);
-                // Set the model attribute
-                category.set('clicked', 'true');
-         }
-         // Otherwise, this must be the first time a user has clicked a category.
-         else {
+        // When a category is clicked, we want to clear out the previous one.
+        try {
+            // Toggle the totally made up property!
+            this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
+        }
+        catch(err) {
+            // The first time, clickedCategory will not be an instance
+            // of `category`. It will just be `true`.
+        }
+        // So if the category that is clicked does not match the one in the
+        // `clickedCategory` property, we set the `clicked` attribute to `true`
+        // and that will remove the `hidden` class in the template.
+        if (category !== this.get('clickedCategory')){
+            // Update the `clickedCategory` property
+            this.set('clickedCategory', category);
+            // Set the model attribute
+            category.set('clicked', 'true');
+        }
+        // Otherwise, this must be the first time a user has clicked a category.
+        else {
             //  this.set('clickedCategory', true);
-         }
+        }
 
     },
 
-      checkSingleTag: function(category, tag){
-          // Much like `checked` attribute for categories described above, here
-          // we go with tags. Tags are a little different because they are part
-          // of an array that is sent to the `getResuts` method.
-          var tagName = tag.get('name');
-          var checkedTags = this.get('checkedTags');
-          if (tag.get('checked') === true) {
-              // We are removing the tag for the search
-              tag.set('checked', false);
-              var index = checkedTags.indexOf(tagName);
-              checkedTags.splice(index, 1);
-
-          }
-          else {
-              // Adding the tag to the list of checked tags.
-              tag.set('checked', true);
-              checkedTags.push(tagName);
-              // TODO clear the select all box when when a user has selected all
-              // but then unchecks a tag. This action need acesse to the category.
-          }
-          if (this.$("ul#"+category.get('slug')).find("input:checked").length > 0){
-              category.set('checked', true);
-          }
-          else {
-              category.set('checked', false);
-          }
-          this.getResults();
-      },
+    //   checkSingleTag: function(category, tag){
+    //       // Much like `checked` attribute for categories described above, here
+    //       // we go with tags. Tags are a little different because they are part
+    //       // of an array that is sent to the `getResuts` method.
+    //       var tagName = tag.get('name');
+    //       var checkedTags = this.get('checkedTags');
+    //       if (tag.get('checked') === true) {
+    //           // We are removing the tag for the search
+    //           tag.set('checked', false);
+    //           var index = checkedTags.indexOf(tagName);
+    //           checkedTags.splice(index, 1);
+      //
+    //       }
+    //       else {
+    //           // Adding the tag to the list of checked tags.
+    //           tag.set('checked', true);
+    //           checkedTags.push(tagName);
+    //           // TODO clear the select all box when when a user has selected all
+    //           // but then unchecks a tag. This action need acesse to the category.
+    //       }
+    //       if (this.$("ul#"+category.get('slug')).find("input:checked").length > 0){
+    //           category.set('checked', true);
+    //       }
+    //       else {
+    //           category.set('checked', false);
+    //       }
+    //       this.getResults();
+    //   },
 
       checkAllTagsInCategory: function(category){
 

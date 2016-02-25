@@ -1,6 +1,7 @@
 
 
 .main-navbar{
+	visibility: hidden;
 	position: relative;
 	background-color: white;
 	height: 60px;
@@ -94,6 +95,6 @@
 	}
 }
 
-.projects.project .main-navbar, .explore .main-navbar{
-  display: none;
+.projects-index .about, .index .main-navbar{
+  visibility: visible;
 }

@@ -1,0 +1,51 @@
+<section class="browse-by-tags container">
+    <h1>Tags:</h1>
+    {{#each checkedTags key="@index" as |checkedTag|}}
+    {{#if checkedTag.checked}}
+    <h2>{{checkedTag.name}}</h2>
+    {{/if}}
+    {{/each}}
+    <section class="row">
+        <ul class="list-unstyled categories">
+            {{#each model as |category|}}
+            <li class="category">
+                <a {{action 'showTagGroup' category}}>
+                    <span><i class="material-icons {{unless category.checked "hidden"}}">done</i></span>
+                    {{category.name}}
+                </a>
+                {{#liquid-if category.clicked}}
+                <ul class="list-unstyled tag-group pull-left {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
+                    <li class="checkbox">
+                            <label>
+                                <input type="checkbox" class="tags" checked="{{if category.allChecked false}}" onchange={{action "checkAllTagsInCategory" category}} />
+                                <span class="check"></span>
+                                Select All
+                            </label>
+                    </li>
+                    {{#if category.sortedTags}}
+                    {{#each category.sortedTags as |tag|}}
+                    <li class="checkbox">
+                        <label>
+                            <input type="checkbox"
+                                class="tags {{category.slug}}"
+                                id="{{tag.name}}"
+                                name="{{tag.name}}"
+                                category="{{category.slug}}"
+                                checked="{{if tag.checked false}}"
+                                onchange={{action "checkSingleTag" tag}}
+                            />
+                            <span class="check"></span>
+                            {{tag.name}}
+                        </label>
+                    </li>
+                    {{/each}}
+                    {{else}}
+                        <li>Loading...</li>
+                    {{/if}}
+                </ul>
+                {{/liquid-if}}
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+</section>

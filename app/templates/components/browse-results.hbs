@@ -1,0 +1,64 @@
+{{yield}}
+<!-- RESULTS -->
+<div class="container browse-results">
+    <div class="row">
+    <div class=col-xs-12>
+        <div class="btn-group btn-group-justified">
+
+        {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
+        <a {{action 'showResults' 'vector'}} class="btn btn-default  {{unless rastersActive 'active-result-tab' }}" title="Data Layers">
+        <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{results.vector_layer_ids.length}}</span><h4>Data Layers</h4>
+        </a>
+        <a {{action 'showResults' 'raster'}} class="btn btn-default {{if rastersActive 'active-result-tab' }}" title="Archival Maps">
+        <i class="material-icons">layers</i><span class="badge">{{results.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
+        </a>
+        </div>
+    </div>
+</div>
+
+<div class="row browse-results">
+<div class="col-xs-12">
+
+
+<div>
+
+    <div>
+        {{#each model.raster_layer_ids key="@index" as |raster|}}
+            <div class="layer-list-item row">
+                {{add-remove-layer-button add='sendRasterLayerToAdd' remove='sendRasterLayerToRemove' layer=raster}}
+                {{list-available-layers layer=raster}}
+            </div>
+        {{else}}
+
+                <div class="no-results">
+                    Use the filters to find what you want. {{searchMade}}
+                </div>
+
+                <div class="no-results">
+                    Your search returned no archival maps.
+                </div>
+
+        {{/each}}
+    </div>
+
+</div>
+
+<div>
+    {{#unless rastersActive}}
+    <div>
+        {{#each model.vector_layer_ids key="@index" as |vector|}}
+            <div class="layer-list-item row">
+                {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
+                {{list-available-layers layer=vector}}
+            </div>
+            <div class="no-results">
+                Your search returned no data layers.
+            </div>
+        {{/each}}
+    </div>
+    {{/unless}}
+</div>
+
+</div>
+</div>
+</div>
