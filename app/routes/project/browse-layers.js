@@ -17,7 +17,7 @@ export default Ember.Route.extend({
     setupController(controller, models){
         controller.set('yearRange', models.yearRange);
         controller.set('categories', models.categories);
-        // controller.set('institutions', models.institutions);
+        controller.set('institutions', models.institutions);
     },
 
     actions: {
@@ -35,12 +35,11 @@ export default Ember.Route.extend({
                 controller: 'project/browse-layers', // don't set controller to `project` or it will screw up `model`
                 model: this.store.queryRecord('search', {
                         tags: this.get('browseParams.tags'),
-                        text_search: this.get('browseParams.searchText')
-                        // name: institutions,
-                        // text_search: search,
-                        // start_year: start_year,
-                        // end_year: end_year
-                        // reload: true
+                        text_search: this.get('browseParams.searchText'),
+                        name: this.get('browseParams.institutions'),
+                        start_year: this.get('browseParams.start_year'),
+                        end_year: this.get('browseParams.end_year'),
+                        reload: true
                 })
             });
         }

@@ -4,13 +4,15 @@ export default Ember.Component.extend({
 
     browseParams: Ember.inject.service('browse-params'),
 
+    classNames: ['browse-by-tags'],
+
     actions: {
         checkSingleTag(tag){
             if (tag.get('checked') === true) {
-                this.get('browseParams').remove(tag);
+                this.get('browseParams').removeTag(tag);
             }
             else if (tag.get('checked') === false) {
-                this.get('browseParams').add(tag);
+                this.get('browseParams').addTag(tag);
             }
             tag.toggleProperty('checked');
             this.sendAction('getResults');
@@ -40,14 +42,15 @@ export default Ember.Component.extend({
             // category and that is used to show/hide the tags in the templete.
 
             // When a category is clicked, we want to clear out the previous one.
-            // console.log(category.get('name'));
+            console.log(!this.get('clickedCategory.clicked'));
             try {
                 // Toggle the totally made up property!
+                // The `!` in the second argument toggles the true/false state.
                 this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
             }
             catch(err) {
                 // The first time, clickedCategory will not be an instance
-                // of `category`. It will just be `true`.
+                // of `category`. It will just be `undefined`.
             }
             // So if the category that is clicked does not match the one in the
             // `clickedCategory` property, we set the `clicked` attribute to `true`
@@ -60,7 +63,7 @@ export default Ember.Component.extend({
             }
             // Otherwise, this must be the first time a user has clicked a category.
             else {
-                //  this.set('clickedCategory', true);
+                 this.set('clickedCategory', true);
             }
 
         }

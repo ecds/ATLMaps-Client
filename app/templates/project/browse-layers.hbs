@@ -1,56 +1,11 @@
 <section class="cotainer project-pane">
     <div class="browse-pane">
-        <div class="layer-search">
-
-
-    {{browse-text getResults='getResults'}}
-    {{browse-tags model=categories getResults='getResults'}}
-
-    <section class="row">
+        {{browse-text getResults='getResults'}}
         <hr />
-    </section>
-
-
-            <div class="browse-by-years browse-form">
-                <h1>Years:</h1>
-                <div class="year-slider">
-                    <div id="range"></div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" id="start_year" placeholder="Start Year" value={{yearRange.min_year}}>
-                        </div>
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" id="end_year" placeholder="End Year" value={{yearRange.max_year}}>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr />
-
-            <div class="browse-by-institution browse-form">
-                <h1>Institutions:</h1>
-                <!-- <div class="radio radio-primary">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="all" value="" onchange={{action "selectedInstitution" ""}}><span class="circle"></span><span class="check"></span>
-                        Clear
-                    </label>
-                </div> -->
-                {{#each institutions key="@index" as |institution|}}
-                    <!-- <div class="radio radio-primary">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="{{institution.slug}}" value="{{institution.slug}}" onchange={{action "selectedInstitution" institution.name}}><span class="circle"></span><span class="check"></span>
-                            {{institution.name}}
-                        </label>
-                    </div> -->
-                    <div class="checkbox institution">
-                        <label>
-                            <input type="checkbox" class='inst-check' id="{{institution.slug}}" name="{{institution.name}}" onchange={{action "checkInstitution" institution.name}} />
-                            <span class="check"></span>
-                            {{institution.name}}
-                        </label>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
+        {{browse-tags model=categories getResults='getResults'}}
+        <hr />
+        {{browse-years model=yearRange getResults='getResults'}}
+        <hr />
+        {{browse-institution model=institutions getResults='getResults'}}
     </div>
 </section>

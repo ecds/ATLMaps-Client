@@ -13,11 +13,27 @@
 
 .browse-pane {
 
-    .layer-search {
-        background-color: white;
-        width: 100%;
-        margin-left: 5px;
+    background-color: white;
+    width: 100%;
+    // margin-left: 5px;
 
+    h2 {
+        font-size: 1.5em;
+        margin: 10px 0;
+    }
+
+    hr {
+        margin-top: .5em;
+        margin-bottom: 0;
+    }
+
+    li {
+        border: none;
+    }
+
+    .browse-by-text {
+        padding-top: 1em;
+        
         input {
             width: 85%;
             margin-right: 0;
@@ -27,14 +43,11 @@
             right: 10px;
             padding: .25em 0.85em
         }
-        li {
-            border: none;
-        }
     }
 
     .browse-by-tags {
         padding-left: 0;
-        
+
         section {
             width: 100%;
         }

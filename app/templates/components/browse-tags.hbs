@@ -1,10 +1,5 @@
-<section class="browse-by-tags container">
-    <h1>Tags:</h1>
-    {{#each checkedTags key="@index" as |checkedTag|}}
-    {{#if checkedTag.checked}}
-    <h2>{{checkedTag.name}}</h2>
-    {{/if}}
-    {{/each}}
+<section >
+    <h2>Tags:</h2>
     <section class="row">
         <ul class="list-unstyled categories">
             {{#each model as |category|}}
