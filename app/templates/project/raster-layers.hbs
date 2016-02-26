@@ -13,26 +13,62 @@
         </div>
     {{/liquid-if}}
     <section class="row">
-        <section class="col-xs-10">
-            <h1>Archival Map Layers</h1>
+        <section class="col-xs-8">
+            <h3>Archival Map Layers</h3>
         </section>
-        <section class="col-xs-2">
-            {{ hide-all-raster-layers }}
+        <section class="col-xs-4">
+            <div class="togglebutton opacity">
+            	<label>
+            		<input id="toggle-layer-opacity" type="checkbox" checked="checked"/>
+            			<span class="toggle"></span>
+            			<span id="show-hide-layers" class="toggle_label"></span>
+            	</label>
+            </div>
         </section>
 </section>
-    <ul class="list-unstyled raster-list" id="layer_sort">
-        {{#each model.sortedRasterLayers key="@index" as |layer|}}
-                <li class="{{layer.slug}} raster-layer" id="{{layer.slug}}">
-                    <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
-                    <span class="handle pull-right"><i class="material-icons reorder">code</i></span>
-                    {{opacity-slider layer=layer}}
-                    <section class="layer-info-detail {{layer.slug}}">
-                        <article>{{layer.description}}</article>
-                        {{partial 'citation'}}
-                    </section>
-                </li>
+    <div class="raster-list" id="layer_sort">
+        {{#each model.sortedRasterLayers as |layer|}}
+                <div class="{{layer.slug}} raster-layer panel panel-default" id="{{layer.slug}}">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <h4><a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a></h4>
+                            </div>
+                            <div class="col-xs-2">
+                                <i class="material-icons reorder handle pull-right">code</i>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            {{opacity-slider layer=layer}}
+                        </div>
+                        <div class="layer-info-detail {{layer.slug}}">
+                            <article>{{layer.description}}</article>
+                            {{partial 'citation'}}
+                        </div>
+                    </div>
+                </div>
         {{else}}
             No data layers have been added.
         {{/each}}
-    </ul>
+    </div>
+    <!-- <div class="list-group" id="layer_sort">
+        {{#each model.sortedRasterLayers as |layer|}}
+      <div class="list-group-item">
+        <div class="row-action-primary">
+          <i class="material-icons">layers</i>
+        </div>
+        <div class="row-content">
+          <div class="action-secondary handle pull-right"><i class="material-icons">code</i></div>
+          <h4 class="list-group-item-heading">
+              <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
+          </h4>
+
+          <p class="list-group-item-text">{{layer.description}}</p>
+          {{partial 'citation'}}
+        </div>
+      </div>
+      {{/each}}
+    </div> -->
 </section>

@@ -10,7 +10,6 @@ export default Ember.Component.extend({
 
     actions: {
         textSearch: function(){
-            console.log(this.get('searchTerms'))
             this.get('browseParams').setSearchText(this.get('searchTerms'));
             this.sendAction('getResults');
         },

@@ -28,7 +28,6 @@ export default Ember.Component.extend({
                 this.get('browseParams').removeAllTags(tags);
             }
             category.toggleProperty('allChecked');
-            console.log(allChecked);
             tags.forEach(function(tag){
                 tag.set('checked', category.get('allChecked'));
             });

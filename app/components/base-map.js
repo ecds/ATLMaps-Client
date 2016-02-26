@@ -3,6 +3,8 @@ import Ember from 'ember';
 /* global L */
 
 export default Ember.Component.extend({
+    mapObject: Ember.inject.service('mapObject'),
+
     classNames: ['fullscreen-map'],
 
     didInsertElement: function() {
@@ -18,6 +20,8 @@ export default Ember.Component.extend({
 
             // Sets the global variable in /app/initializers/globals.js
             this.globals.set('mapObject', _map);
+            this.get('mapObject').createMap(_map);
+
         }
         catch(err){/* don't care */}
 

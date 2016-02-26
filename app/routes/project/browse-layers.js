@@ -10,7 +10,8 @@ export default Ember.Route.extend({
             yearRange: this.store.find('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
-            searchResults: this.store.findAll('search')
+            searchResults: this.store.findAll('search'),
+            project: this.modelFor('project')
         });
     },
 
@@ -42,6 +43,12 @@ export default Ember.Route.extend({
                         reload: true
                 })
             });
+        },
+
+        addLayer(layer){
+            console.log(layer);
+            console.log(this.modelFor('project'));
+            return true;
         }
     }
 });

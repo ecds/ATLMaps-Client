@@ -19,9 +19,7 @@
 @import 'extra-icons.scss';
 @import 'login-form.scss';
 @import 'list-active-layers.scss';
-@import 'add-remove-button.scss';
 @import 'tag-list';
-@import 'flash-message-overrides.scss';
 
 @import 'project-pane.scss';
 @import 'browse-pane.scss';
@@ -1002,29 +1000,9 @@ input.value-input {
   display: none;
 }
 
-.togglebutton.opacity{
-  margin-top:10px;
-  width: 20%;
-  z-index: 10;
-  position: relative;
-  min-height: 60px;
-  border-radius: .5em;
-  //font-size: .75em;
-  margin-bottom: 1em;
-  font-weight: 400;
-
-  #hide-layers {
-    background-color: #ffb74d;
-  }
-
-  #show-layers {
-    display: none;
-  }
-}
-
-.toggle {
-  margin: 0 1em;
-}
+// .toggle {
+//   margin: 0 1em;
+// }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
   background-color: rgba(255, 183, 77, 0.5);
@@ -1034,25 +1012,6 @@ input.value-input {
   background-color: rgb(255, 183, 77);
   margin-top:0px;
 
-}
-
-span.toggle_label {
-  font-size: .75em;
-  top: 32px;
-width: 100%;
-position: absolute;
-}
-
-span.toggle_label:after {
-  content: 'Hide Layers';
-}
-
-span.toggle_label.off:after {
-  content: 'Show Layers';
-}
-
-.togglebutton label .toggle:after {
-  top: -3px;
 }
 
 li.collaboration-list {

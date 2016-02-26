@@ -6,6 +6,8 @@ import MapLayer from '../map-layer';
 
 export default Ember.Route.extend({
 
+	mapObject: Ember.inject.service('map-object'),
+
 	beforeModel: function(){
 
     },

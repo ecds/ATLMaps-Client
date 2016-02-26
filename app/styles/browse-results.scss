@@ -9,13 +9,7 @@
 //     .browse-results {
 //         margin: 0;
 //
-//         .layer-list-item:nth-child(even){
-//           background: #EEE;
-//         }
-//
-//         .layer-list-item:nth-child(odd){
-//           background: white;
-//         }
+
 //
 //         .layer-list-item {
 //             padding: .5em 0;
@@ -35,5 +29,21 @@
 .browse-results {
     width: 65%;
     position: absolute;
-    right: 0;
+    right: 40px;
+
+    .btn-group {
+        margin: 0;
+    }
+
+    .layer-list-item {
+        margin: 0;
+    }
+
+    .layer-list-item:nth-child(even){
+      background: #EEE;
+    }
+
+    .layer-list-item:nth-child(odd){
+      background: white;
+    }
 }

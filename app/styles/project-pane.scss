@@ -24,13 +24,13 @@
             margin-bottom: .5em;
         }
 
-        li.raster-layer {
-            padding-top: .5em;
-            background-color: white;
-            a {
-                padding-left: .75em;
-            }
-        }
+        // div.raster-layer {
+        //     padding-top: .5em;
+        //     background-color: white;
+        //     a {
+        //         padding-left: .75em;
+        //     }
+        // }
 
         article {
             padding: 1em;
@@ -55,6 +55,44 @@
                 min-width: 100px;
                 max-height: 100px;
             }
+        }
+    }
+
+    // Raster Panel Toggle Stuff
+    .togglebutton.opacity{
+        top: 15px;
+        left: 50px;
+        position: relative;
+        min-height: 60px;
+        font-weight: 400;
+
+        #hide-layers {
+            background-color: #ffb74d;
+        }
+
+        #show-layers {
+            display: none;
+        }
+        .toggle {
+            margin: 0 1em;
+        }
+        span.toggle_label {
+            font-size: .75em;
+            top: 2.25em;
+            // width: 100%;
+            position: absolute;
+        }
+
+        span.toggle_label:after {
+            content: 'Hide Layers';
+        }
+
+        span.toggle_label.off:after {
+            content: 'Show Layers';
+        }
+
+        label .toggle:after {
+          top: -3px;
         }
     }
 }

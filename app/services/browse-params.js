@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-    tags: null,
 
     init(){
         this._super(...arguments);
