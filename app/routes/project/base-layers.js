@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    mapObject: Ember.inject.service('map-object'),
+
     actions: {
         setCenterAndZoom: function(model){
-            var map = this.globals.mapObject;
+            let map = this.get('mapObject.map');
             var projectController = this.controllerFor('project');
             var controller = this.controllerFor('project.base-layers');
 

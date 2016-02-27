@@ -18,8 +18,7 @@ export default Ember.Component.extend({
 
             L.control.zoom({ position: 'topright' }).addTo(_map);
 
-            // Sets the global variable in /app/initializers/globals.js
-            this.globals.set('mapObject', _map);
+            // Create the object for Leafet in the mapObject service.
             this.get('mapObject').createMap(_map);
 
         }

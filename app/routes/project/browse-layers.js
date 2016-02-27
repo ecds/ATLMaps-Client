@@ -5,6 +5,7 @@ export default Ember.Route.extend({
 
     browseParams: Ember.inject.service('browse-params'),
 
+    // This is a neat way to add multiple models to a route.
     model(){
         return Ember.RSVP.hash({
             yearRange: this.store.find('yearRange', 1),
@@ -23,11 +24,8 @@ export default Ember.Route.extend({
 
     actions: {
 
-    	didTransition: function() {
-            // this.controllerFor('project').set('showBrowse', true);
-            return true;
-        },
-
+        // Action to make the query to the API and render the results to the
+        // `project/browse-layers` route.
         getResults(){
 
             return this.render('components/browse-results', {
@@ -44,11 +42,5 @@ export default Ember.Route.extend({
                 })
             });
         },
-
-        addLayer(layer){
-            console.log(layer);
-            console.log(this.modelFor('project'));
-            return true;
-        }
     }
 });

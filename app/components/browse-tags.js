@@ -41,7 +41,6 @@ export default Ember.Component.extend({
             // category and that is used to show/hide the tags in the templete.
 
             // When a category is clicked, we want to clear out the previous one.
-            console.log(!this.get('clickedCategory.clicked'));
             try {
                 // Toggle the totally made up property!
                 // The `!` in the second argument toggles the true/false state.

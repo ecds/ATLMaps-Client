@@ -15,6 +15,8 @@ export default DS.Model.extend({
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
     raster_layer_ids: DS.hasMany('raster_layer', {async: true}),
+	raster_layer_project_ids: DS.hasMany('raster_layer_project', {async: true}),
+	// raster_layer_project: DS.hasMany('rasterLayerProject', {async: false}),
     vector_layer_ids: DS.hasMany('vector_layer', {async: true}),
     slug: DS.attr('string'),
     owner: DS.attr(),

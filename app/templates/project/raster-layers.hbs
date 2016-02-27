@@ -27,7 +27,8 @@
         </section>
 </section>
     <div class="raster-list" id="layer_sort">
-        {{#each model.sortedRasterLayers as |layer|}}
+        {{log layers}}
+        {{#each layers as |layer|}}
                 <div class="{{layer.slug}} raster-layer panel panel-default" id="{{layer.slug}}">
                     <div class="panel-body">
                         <div class="row">
