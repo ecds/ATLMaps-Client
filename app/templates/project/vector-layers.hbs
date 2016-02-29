@@ -3,14 +3,14 @@
 <section class="cotainer project-pane">
     <h1>Data Layers</h1>
     <ul class="list-unstyled">
-        {{#each model.vector_layer_ids key="@index" as |layer|}}
-                <li class="{{layer.slug}} vector-layer">
+        {{#each model.vector_layer_project_ids as |layer|}}
+                <li class="{{layer.vector_layer_id.slug}} vector-layer">
                     {{project-vector-icon layer=layer projectID=model.id}}
-                    <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
-                    <div class="layer-info-detail {{layer.slug}}">
-                        <article>{{layer.description}}</article>
+                    <a {{action 'showLayerInfoDetals' layer}}>{{layer.vector_layer_id.title}}</a>
+                    {{#liquid-if layer.clicked}}
+                        <article>{{layer.vector_layer_id.description}}</article>
                         {{partial 'citation'}}
-                    </div>
+                    {{/liquid-if}}
                 </li>
         {{else}}
             No data layers have been added.

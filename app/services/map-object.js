@@ -3,33 +3,56 @@ import Ember from 'ember';
 /* globals L */
 
 export default Ember.Service.extend({
+
+    dataColors: Ember.inject.service('data-colors'),
+
     init(){
         this._super(...arguments);
-        this.set('map', '');
+        var _map = L.map('map', {
+            center: [33.7489954,-84.3879824],
+            zoom: 13,
+            zoomControl:false
+        });
+
+        L.control.zoom({ position: 'topright' }).addTo(_map);
+
+        // Create the object for Leafet in the mapObject service.
+        this.set('map', _map);
+
     },
-    createMap(lMap){
-        this.setProperties({map: lMap});
-    },
+
+    // createMap(lMap){
+    //     this.setProperties({map: lMap});
+    // },
     mapLayer(layer){
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
-        let markerColor = layer.get('color');
+        let markerColor = this.get('dataColors.markerColors')[layer.get('marker')];
         // let slug = layer.get('raster_layer.slug');
-        let newLayer = layer.get('raster_layer');
+        layer.get('vector_layer_id').then(function(newLayer) {
+            // _this.get('mapObject').mapLayer(layer);
+        // let newLayer = layer.get('raster_layer');
 
-        switch(layer.get('raster_layer.layer_type')) {
+        let newLayerName = newLayer.get('name');
+        let newLayerSlug = newLayer.get('slug');
+        let newLayerInst = newLayer.get('institution.geoserver');
+        let newLayerWorkspace = newLayer.get('workspace');
+        let newLayerUrl = newLayer.get('url');
+        // let _this = this;
+
+        switch(newLayer.get('layer_type')) {
 
             case 'planningatlanta':
 
-                var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + newLayer.name + '/{z}/{x}/{y}.png', {
-                    layer: newLayer.slug,
+                var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + newLayerName + '/{z}/{x}/{y}.png', {
+                    layer: newLayerSlug,
                     tms: true,
                     minZoom: 13,
                     maxZoom: 19,
                     detectRetina: true
                 }).addTo(map).setZIndex(10).getContainer();
 
-                Ember.$(tile).addClass(newLayer.slug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+                Ember.$(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
 
                 break;
 
@@ -49,29 +72,28 @@ export default Ember.Service.extend({
 
             case 'atlTopo':
 
-                var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + newLayer.slug + '/{z}/{x}/{y}.jpg', {
-                    layer: newLayer.slug,
+                var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + newLayerSlug + '/{z}/{x}/{y}.jpg', {
+                    layer: newLayerSlug,
                     tms: true,
                     minZoom: 13,
                     maxZoom: 19,
                     detectRetina: true
                 }).addTo(map).setZIndex(10).getContainer();
 
-                Ember.$(topoTile).addClass(newLayer.slug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+                Ember.$(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
 
                 break;
 
             case 'wms':
-
-                var wmsLayer = L.tileLayer.wms(newLayer.institution.geoserver + newLayer.workspace + '/wms', {
-                    layers: newLayer.workspace + ':' + newLayer.name,
+                var wmsLayer = L.tileLayer.wms(newLayerInst+ newLayerWorkspace + '/wms', {
+                    layers: newLayerWorkspace + ':' + newLayerName,
                     format: 'image/png',
                     crs: L.CRS.EPSG4326,
                     transparent: true,
                     detectRetina: true
-                }).addTo(map).bringToFront().getContainer();
+                }).addTo(map).getContainer();
 
-                Ember.$(wmsLayer).addClass(newLayer.slug).addClass('atLayer').css("zIndex", zIndex);
+                Ember.$(wmsLayer).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
 
                 break;
 
@@ -138,9 +160,9 @@ export default Ember.Service.extend({
                     'color': 'deeppink'
                 };
 
-                if(layer.get('url')){
-                    var layerClass = newLayer.slug + ' atLayer vectorData map-marker layer-' + markerColor;
-                    var vector = new L.GeoJSON.AJAX(newLayer.url, {
+                if(newLayerUrl){
+                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+                    var vector = new L.GeoJSON.AJAX(newLayerUrl, {
                         style: polyStyle,
                         className: layerClass,
                         pointToLayer: function (feature, latlng) {
@@ -161,5 +183,6 @@ export default Ember.Service.extend({
                 break;
 
             }
+            });
     }
 });

@@ -3,15 +3,16 @@
 		<nav class="back-button"><i class="material-icons">chevron_left</i></nav>
 	{{/link-to}}
 </nav>
-<section id="base-map">
-    {{ base-map }}
+<section id="base-map" class="fullscreen-map">
+	<div id='map'></div>
+  <div class="base-layer-controls"></div>
 </section>
 
 {{outlet "browse-results"}}
 	<section class="project-title container">
 		<section class="row {{if isEditing 'project-edit' 'project-view'}}">
 	        <section class="col-xs-10">
-			          <h1>{{this.model.name}}</h1>
+			          <h1>{{model.name}}</h1>
 	        </section>
 	        <section class="col-xs-2">
 			{{#if model.may_edit}}
@@ -32,10 +33,10 @@
 				<span class="nav-icon"><i class="material-icons">search</i></span>
 			{{/link-to}}
 		{{#link-to "project.vector-layers" class="btn btn-default" id='vector-data' title="Pinpoint Layers"}}
-			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{model.vector_layer_ids.length}}</span>
+			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{model.vector_layer_project_ids.length}}</span>
 		{{/link-to}}
 		{{#link-to "project.raster-layers" class="btn btn-default" id='raster-layers' title="Archival Map Layers"}}
-	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_ids.length}}</span>
+	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_project_ids.length}}</span>
 	    {{/link-to}}
 		{{#link-to "project.base-layers" class="btn btn-default" id='controls' title="Change Base Map"}}
 	    	<span class="nav-icon"><i class="material-icons">map</i></span>

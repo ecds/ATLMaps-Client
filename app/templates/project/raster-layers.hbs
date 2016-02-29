@@ -27,29 +27,28 @@
         </section>
 </section>
     <div class="raster-list" id="layer_sort">
-        {{log layers}}
-        {{#each layers as |layer|}}
-                <div class="{{layer.slug}} raster-layer panel panel-default" id="{{layer.slug}}">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-10">
-                                <h4><a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a></h4>
-                            </div>
-                            <div class="col-xs-2">
-                                <i class="material-icons reorder handle pull-right">code</i>
-                            </div>
+        {{#each model.raster_layer_project_ids as |layer|}}
+            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <h4><a {{action 'showLayerInfoDetals' layer.raster_layer_id.slug}}>{{layer.raster_layer_id.title}}</a></h4>
                         </div>
-
-
-                        <div class="row">
-                            {{opacity-slider layer=layer}}
-                        </div>
-                        <div class="layer-info-detail {{layer.slug}}">
-                            <article>{{layer.description}}</article>
-                            {{partial 'citation'}}
+                        <div class="col-xs-2">
+                            <i class="material-icons reorder handle pull-right">code</i>
                         </div>
                     </div>
+
+
+                    <div class="row">
+                        {{opacity-slider layer=layer.raster_layer_id}}
+                    </div>
+                    <div class="layer-info-detail {{layer.raster_layer_id.slug}}">
+                        <article>{{layer.raster_layer_id.description}}</article>
+                        {{partial 'citation'}}
+                    </div>
                 </div>
+            </div>
         {{else}}
             No data layers have been added.
         {{/each}}

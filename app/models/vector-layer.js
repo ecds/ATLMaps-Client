@@ -22,5 +22,6 @@ export default DS.Model.extend({
     tag_slugs: DS.attr('string'),
     active: DS.attr('boolean'),
     marker: DS.attr(),
-    active_in_project: DS.attr('boolean')
+    active_in_project: DS.attr('boolean'),
+	vector_layer_project: DS.belongsTo('vector_layer_project', {async: true, inverse: null})
 });

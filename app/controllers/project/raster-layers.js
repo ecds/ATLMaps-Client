@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
 
     isEditing: Ember.computed.alias("controllers.project.isEditing"),
 
-    layers: function(){
-        return this.model.get('raster_layer_ids');
-    }.property()
+    // layers: function(){
+    //     return this.model.get('raster_layer_ids');
+    // }.property()
 });
