@@ -4,6 +4,7 @@ export default Ember.Route.extend({
     classNames: ['bwowse-layers-route'],
 
     browseParams: Ember.inject.service('browse-params'),
+    mapObject: Ember.inject.service('map-object'),
 
     // This is a neat way to add multiple models to a route.
     model(){
@@ -20,6 +21,7 @@ export default Ember.Route.extend({
         controller.set('yearRange', models.yearRange);
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
+        controller.set('rastersActive', true);
     },
 
     actions: {
@@ -42,5 +44,44 @@ export default Ember.Route.extend({
                 })
             });
         },
+
+        addLayer(layer) {
+
+            const project = this.modelFor('project');
+
+            let position = project.get('raster_layer_project_ids').get('length') + 1;
+
+            let layerToAdd = this.store.peekRecord('raster_layer', layer.get('id'));
+
+            let newLayer = this.store.createRecord('raster-layer-project', {
+                project_id: project.id,
+                raster_layer_id: layerToAdd,
+                data_format: layerToAdd.get('data_format'),
+                position: position
+            });
+
+            let _this = this;
+
+            project.get('raster_layer_project_ids').addObject(newLayer);
+
+            newLayer.save().then(function(){
+                _this.get('mapObject').mapLayer(newLayer);
+                alert('SAVED');
+            }, function(){
+                alert('DANG');
+            });
+
+        },
+
+        showResults(show){
+            console.log(show);
+            if (show === 'vector') {
+                this.controllerFor('project/browse-layers').set('rastersActive', false);
+                // this.setProperties({rastersActive: false});
+            }
+            else if (show === 'raster') {
+                this.controllerFor('project/browse-layers').set('rastersActive', true);
+            }
+        }
     }
 });

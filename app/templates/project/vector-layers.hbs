@@ -1,15 +1,13 @@
-{{outlet}}
-
-<section class="cotainer project-pane">
+<section class="cotainer">
     <h1>Data Layers</h1>
     <ul class="list-unstyled">
         {{#each model.vector_layer_project_ids as |layer|}}
                 <li class="{{layer.vector_layer_id.slug}} vector-layer">
-                    {{project-vector-icon layer=layer projectID=model.id}}
-                    <a {{action 'showLayerInfoDetals' layer}}>{{layer.vector_layer_id.title}}</a>
+                    <span class="{{layer.vector_layer_id.data_type}} {{layervector_layer.slug}} map-marker {{marker-color layer.marker dataColors.markerColors}}"></span>
+                    <a {{action 'showLayerInfoDetals' layer}}>{{layer.vector_layer_id.title}}: {{log markerColors.[layer]}}</a>
                     {{#liquid-if layer.clicked}}
                         <article>{{layer.vector_layer_id.description}}</article>
-                        {{partial 'citation'}}
+                        {{layer-citation layer = layer.vector_layer_id}}
                     {{/liquid-if}}
                 </li>
         {{else}}

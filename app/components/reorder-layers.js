@@ -4,9 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 	didInsertElement: function(){
-		if (this.get('mode') === 'edit'){
-			this.set('edit', true);
-		}
+
 		var el = document.getElementById("layer_sort");
 		var _this = this;
         Sortable.create(el, {
@@ -31,9 +29,8 @@ export default Ember.Component.extend({
                 });
                 if (_this.get('isEditing') === true) {
                     Ember.$(".raster-list").find(".raster-layer").each(function(){
-                        layerIDs.push(Ember.$(this).attr("layer-id"));
+                        layerIDs.push(Ember.$(this).attr("id"));
                     });
-
                     _this.send('updateOrder', layerIDs, layerIDs.length, _this.get('model'));
                 }
             }
@@ -55,8 +52,16 @@ export default Ember.Component.extend({
                     layerToUpdate.set('position', position);
                     layerToUpdate.save().then(function(){
 						// success
+						_this.set('editSuccess', true);
+		                Ember.run.later(this, function(){
+		                    _this.set('editSuccess', false);
+		                }, 3000);
 					}, function(){
-						// fail;
+						_this.set('editFail', true);
+	                    Ember.run.later(this, function(){
+	                        _this.set('editFail', false);
+	                    }, 3000);
+
 					});
                 });
             });

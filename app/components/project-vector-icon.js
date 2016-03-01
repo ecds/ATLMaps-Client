@@ -19,14 +19,14 @@ export default Ember.Component.extend({
             // marker color and apply it.
             try {
                 var markerColor = marker.content.content[0]._data.marker;
-                Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('slug')).addClass("map-marker layer-"+_this.globals.color_options[markerColor]);
+                Ember.$("span.geojson."+layer.get('data_type')+"."+layer.get('slug')).addClass("map-marker layer-"+_this.globals.color_options[markerColor]);
             }
             catch(err) {
                 // Sometimes things to load in time.
                 try {
                     // Once everything has loaded, the marker color with be the 6th (index of 5) class.
                     markerColor = Ember.$('.leaflet-marker-icon.'+ layer.get('slug')).attr('class').split(/\s+/)[5];
-                    Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('slug')).addClass("map-marker " + markerColor);
+                    Ember.$("span.geojson."+layer.get('data_type')+"."+layer.get('slug')).addClass("map-marker " + markerColor);
                 }
                 catch(errr){
                     // We don't really care if this fails, it will keep trying

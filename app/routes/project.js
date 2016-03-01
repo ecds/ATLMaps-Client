@@ -28,6 +28,12 @@ export default Ember.Route.extend({
 				_this.get('mapObject').mapLayer(vector);
 			});
 		});
+
+		model.get('raster_layer_project_ids').then(function(rasters){
+			rasters.forEach(function(raster){
+				_this.get('mapObject').mapLayer(raster);
+			});
+		});
     },
 
 	setHeadTags: function (model) {
@@ -62,9 +68,14 @@ export default Ember.Route.extend({
 
 	        var _this = this;
 
+			var map = this.get('mapObject').get('map');
+			Ember.$('#map').show();
+			map._onResize();
+
             Ember.run.scheduleOnce('afterRender', function() {
                 _this.send('initProjectUI', _this.modelFor('project'));
-				var map = _this.get('mapObject').get('map');
+
+
                 map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
                 map.setZoom(project.get('zoom_level'));
 			});
@@ -94,7 +105,7 @@ export default Ember.Route.extend({
             else {
                  this.set('clickedLayer', true);
             }
-		}
+		},
 
     },
 

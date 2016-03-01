@@ -27,6 +27,6 @@ export default DS.Model.extend({
 	media: DS.attr('string'),
 	template_id: DS.attr('number'),
 
-	sortedRasterLayers: Ember.computed.sort('raster_layer_ids', '_positionSort'),
-    _positionSort: ['position:asc']
+	sortedRasterLayers: Ember.computed.sort('raster_layer_project_ids', '_positionSort'),
+    _positionSort: ['position:desc']
 });

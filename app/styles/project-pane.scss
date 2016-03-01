@@ -1,7 +1,13 @@
-.cotainer.project-pane {
+@import 'layer-citation.scss';
+.project-pane {
+    margin-left: 30px;
+    width: 30%;
+
+.cotainer {
+    // background-color: white;
+    // // margin-left: 30px;
+    // width: 30%;
     background-color: white;
-    margin-left: 31px;
-    width: 418px;
     padding: .5em;
     pointer-events: auto; // Allow the pane to respond to click.
 
@@ -36,26 +42,21 @@
             padding: 1em;
             font-size: .75em;
         }
-        .handle {
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            margin-right: 10px;
-        }
-        footer {
-            padding: .5em;
-            h1 {
-                font-size: 1em;
-                margin: .5em 0 0 0;
-            }
-            h2 {
-                font-size: .75em;
-                margin: 0;
-            }
-            img {
-                min-width: 100px;
-                max-height: 100px;
-            }
-        }
+        // footer {
+        //     padding: .5em;
+        //     h1 {
+        //         font-size: 1em;
+        //         margin: .5em 0 0 0;
+        //     }
+        //     h2 {
+        //         font-size: .75em;
+        //         margin: 0;
+        //     }
+        //     img {
+        //         min-width: 100px;
+        //         max-height: 100px;
+        //     }
+        // }
     }
 
     // Raster Panel Toggle Stuff
@@ -66,13 +67,13 @@
         min-height: 60px;
         font-weight: 400;
 
-        #hide-layers {
-            background-color: #ffb74d;
-        }
-
-        #show-layers {
-            display: none;
-        }
+        // #hide-layers {
+        //     background-color: #ffb74d;
+        // }
+        //
+        // #show-layers {
+        //     display: none;
+        // }
         .toggle {
             margin: 0 1em;
         }
@@ -95,4 +96,20 @@
           top: -3px;
         }
     }
+
+    .reorder {
+        padding: 0;
+    }
+
+    .handle {
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+        margin-right: 10px;
+        transform: rotate(90deg);
+    }
+
+    .opacity-slider {
+        padding-left: 5px;
+    }
+}
 }

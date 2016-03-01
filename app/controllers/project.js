@@ -11,6 +11,8 @@ export default Ember.Controller.extend({
 
     showBrowse: false,
 
+    rastersActive: false,
+
     rasterLayers: function() {
 
         var rasterLayers = DS.PromiseObject.create({

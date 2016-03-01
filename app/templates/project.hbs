@@ -3,13 +3,11 @@
 		<nav class="back-button"><i class="material-icons">chevron_left</i></nav>
 	{{/link-to}}
 </nav>
-<section id="base-map" class="fullscreen-map">
-	<div id='map'></div>
-  <div class="base-layer-controls"></div>
-</section>
 
-{{outlet "browse-results"}}
-	<section class="project-title container">
+
+
+<section class="row">
+	<section class="project-title container col-xs-4">
 		<section class="row {{if isEditing 'project-edit' 'project-view'}}">
 	        <section class="col-xs-10">
 			          <h1>{{model.name}}</h1>
@@ -22,7 +20,7 @@
 			{{/if}}
 	    </section>
 	</section>
-	</section>
+
 
 	<nav class="btn-group btn-group-justified">
 
@@ -45,7 +43,21 @@
 	    	<span class="nav-icon"><i class="material-icons">help_outline</i></span>
 	    {{/link-to}} -->
 	</nav>
+</section>
+<section class="col-xs-8 pull-right">
+	{{outlet "browse-results"}}
+</section>
+</section>
+<section class="row">
+	<section class="col-xs-4 project-pane">
+		{{liquid-outlet}}
+	</section>
+	<section class="col-xs-8">
+		hi
+	</section>
+</section>
 
 
-{{liquid-outlet}}
+
+
 {{partial 'marker-data-window'}}

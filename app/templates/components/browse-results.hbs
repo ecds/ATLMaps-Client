@@ -3,23 +3,23 @@
 <div class="container browse-results">
     <div class="row">
     <div class=col-xs-12>
-        <div class="btn-group btn-group-justified">
+        <nav class="btn-group btn-group-justified">
 
         {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
         <a {{action 'showResults' 'vector'}} class="btn btn-default  {{unless rastersActive 'active-result-tab' }}" title="Data Layers">
-        <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{results.vector_layer_ids.length}}</span><h4>Data Layers</h4>
+        <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
         </a>
         <a {{action 'showResults' 'raster'}} class="btn btn-default {{if rastersActive 'active-result-tab' }}" title="Archival Maps">
-        <i class="material-icons">layers</i><span class="badge">{{results.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
+        <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps{{rastersActive}}</h4>
         </a>
-        </div>
+        </nav>
     </div>
 </div>
 
 <div class="row">
 <div class="col-xs-12">
 
-
+{{#if rastersActive}}
 <div>
 
     <div>
@@ -28,7 +28,7 @@
 
 
                 <div class="col-xs-2">
-                	{{#if layer.active_in_project}}
+                	{{#if raster.active_in_project}}
                 		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster }}><i class="material-icons">clear</i></a>
                 	{{else}}
                 		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster}}><i class="material-icons">add</i></a>
@@ -37,13 +37,8 @@
 
                 <div class="col-xs-10">
                     {{#if raster.name}}
-                        <h4 class="name">
-                            <!-- <span class="{{raster.layer_type}} description_icon"></span> -->
-                            {{raster.title}}
-                        </h4>
-                        <div class="description">
-                            {{raster.description}}
-                        </div>
+                        <h4 class="name">{{raster.title}}</h4>
+                        <div class="description">{{raster.description}}</div>
                         {{#if raster.tag_ids}}
                         <div class="row">
                             <div class="col-xs-1">
@@ -78,15 +73,46 @@
     </div>
 
 </div>
-
+{{/if}}
 <div>
     {{#unless rastersActive}}
     <div>
         {{#each model.vector_layer_ids key="@index" as |vector|}}
             <div class="layer-list-item row">
-                {{add-remove-layer-button add='sendVectorLayerToAdd' remove='sendVectorLayerToRemove' layer=vector}}
-                {{list-available-layers layer=vector}}
+
+                <div class="col-xs-2">
+                	{{#if vector.active_in_project}}
+                		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" vector }}><i class="material-icons">clear</i></a>
+                	{{else}}
+                		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" vector}}><i class="material-icons">add</i></a>
+                	{{/if}}
+                </div>
+
+                <div class="col-xs-10">
+                    {{#if vector.name}}
+                        <h4 class="name">{{vector.title}}</h4>
+                        <div class="description">{{vector.description}}</div>
+                        {{#if vector.tag_ids}}
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <i class="material-icons">local_offer</i>
+                            </div>
+                            <div class="col-xs-11">
+                                <ul class="list-inline">
+                                    {{#each vector.tag_ids as |tag|}}
+                                        <li class="tags">{{tag.name}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <div class="institution">Provided by: <em>{{vector.institution.name}}</em></div>
+                    {{else}}
+                        <h4 class="name">Loading...</h4>
+                    {{/if}}
+                </div>
             </div>
+            {{else}}
             <div class="no-results">
                 Your search returned no data layers.
             </div>

@@ -1,17 +1,5 @@
-{{outlet}}
-{{ reorder-layers isEditing=isEditing model=model}}
-
-<section class="cotainer project-pane">
-    {{#liquid-if editSuccess}}
-        <div class="alert alert-dismissible alert-success">
-            Project info has been updated!
-        </div>
-    {{/liquid-if}}
-    {{#liquid-if editFail}}
-        <div class="alert alert-dismissible alert-danger">
-            Dang, something went wrong. The project info was not updated.
-        </div>
-    {{/liquid-if}}
+<section class="cotainer">
+    {{ reorder-layers isEditing=isEditing model=model}}
     <section class="row">
         <section class="col-xs-8">
             <h3>Archival Map Layers</h3>
@@ -27,15 +15,15 @@
         </section>
 </section>
     <div class="raster-list" id="layer_sort">
-        {{#each model.raster_layer_project_ids as |layer|}}
-            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}">
+        {{#each model.sortedRasterLayers as |layer|}}
+            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.id}}">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-10">
-                            <h4><a {{action 'showLayerInfoDetals' layer.raster_layer_id.slug}}>{{layer.raster_layer_id.title}}</a></h4>
+                            <h4><a {{action 'showLayerInfoDetals' layer}}>{{layer.raster_layer_id.title}}</a></h4>
                         </div>
-                        <div class="col-xs-2">
-                            <i class="material-icons reorder handle pull-right">code</i>
+                        <div class="col-xs-2 reorder">
+                            <i class="material-icons handle pull-right">code</i>
                         </div>
                     </div>
 
@@ -43,10 +31,10 @@
                     <div class="row">
                         {{opacity-slider layer=layer.raster_layer_id}}
                     </div>
-                    <div class="layer-info-detail {{layer.raster_layer_id.slug}}">
+                    {{#liquid-if layer.clicked}}
                         <article>{{layer.raster_layer_id.description}}</article>
-                        {{partial 'citation'}}
-                    </div>
+                        {{layer-citation layer = layer.raster_layer_id}}
+                    {{/liquid-if}}
                 </div>
             </div>
         {{else}}

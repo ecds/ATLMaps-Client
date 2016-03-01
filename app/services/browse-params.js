@@ -9,6 +9,7 @@ export default Ember.Service.extend({
         this.set('institutions', []);
         this.set('start_year', '');
         this.set('end_year', '');
+        this.set('rastersActive', true);
     },
     setSearchText(searchTerms){
         this.setProperties({searchText: searchTerms});
@@ -36,5 +37,8 @@ export default Ember.Service.extend({
     },
     setYearSearch(min_year, max_year){
         this.setProperties({start_year: min_year, end_year: max_year});
+    },
+    toggleRasterActive(){
+        this.toggleProperty('rastersActive');
     }
 });

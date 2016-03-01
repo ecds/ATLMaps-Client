@@ -21,6 +21,7 @@
 @import 'list-active-layers.scss';
 @import 'tag-list';
 
+@import 'slider';
 @import 'project-pane.scss';
 @import 'browse-pane.scss';
 @import 'browse-results.scss';
@@ -345,73 +346,6 @@ a.site-title .alt-dark{
   display: block;
   width: 25px;
   float: left;
-}
-
-.slider .tooltip.top,
-.tooltip.tooltip-max.bottom,
-.tooltip-min, .tooltip-max,
-.tooltip.tooltip-main{
-  display: none;
-}
-
-.slider:hover .tooltip.tooltip-main{
-  display:block;
-  transition: all 0.2s ease;
-}
-
-.slider.slider-horizontal, .slider.slider-vertical{
-  background: transparent;
-}
-
-.slider-selection {
-  background: rgb(215, 233, 247);
-  border-radius: 0;
-  transition: all 0.2s;
-}
-
-.slider.slider-horizontal .slider-track {
-  height: 2px;
-  margin-top: -1px;
-}
-
-.slider.slider-vertical .slider-track {
-  width: 2px;
-  margin-left: -3px;
-}
-
-.slider-handle.min-slider-handle.round {
-  margin-top: -4px;
-  width: 10px;
-  height: 10px;
-  transition:all 0.2s;
-}
-
-.slider:hover .slider-handle.min-slider-handle.round {
-  margin-top: -10px;
-  width: 20px;
-  height: 20px;
-}
-
-.slider.slider-vertical .slider-handle.min-slider-handle.round{
-  margin-left:-4px;
-}
-
-.slider.slider-vertical:hover .slider-handle.min-slider-handle.round{
-  margin-left:-9px;
-}
-
-.slider.slider-horizontal{
-  width:100%;
-}
-
-.slider.slider-vertical .slider-track {
-  background: rgb(66, 169, 247);
-}
-
-.slider-material-orange-300 .noUi-handle {
-  background-color: #ffb74d;
-  border: none;
-  cursor: ew-resize;
 }
 
 .layer-list .item .slider.slider-vertical {
@@ -1309,10 +1243,6 @@ a.is-editing-project-button {
 .alert-danger {
   background-color: #f2dede;
   color: black;
-}
-
-.reorder {
-    transform: rotate(90deg);
 }
 
 // Maksure all the action button text is white.

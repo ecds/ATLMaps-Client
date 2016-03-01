@@ -2,6 +2,8 @@ import Ember from 'ember';
 /* globals noUiSlider */
 export default Ember.Component.extend({
 
+    classNames: ['opacity-slider'],
+
     // didInsertElement: function() {
     //
     //     var layer = this.get('layer');

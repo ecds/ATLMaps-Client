@@ -1,12 +1,14 @@
 @import "variables.scss";
 .project-title, nav.btn-group {
-    width: 420px;
-
-    margin-left:30px;
+    // width: 420px;
+    // margin-left:30px;
+    // width: 90%;
 }
 .project-title {
     position: inherit;
     margin-top: 10px;
+    margin-left: 30px;
+    width: 30%;
 
     .row {
         // margin-left: 0;
@@ -22,6 +24,9 @@
 }
 .project-view, .project-edit {
     // padding: 1em 0;
+    position: relative;
+    width: 100%;
+    margin-left: initial;
 }
 .project-view {
     background-color: #03A9F4 ! important;
@@ -36,8 +41,7 @@
 }
 nav.btn-group{
 
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
 
     a:nth-of-type(1) {
       background-color: material-color(grey, 50);
