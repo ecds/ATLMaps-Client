@@ -20,6 +20,7 @@ export default Ember.Component.extend({
                 });
                 var layerLength = IDs.length;
                 Ember.$.each(IDs, function(index, value){
+					console.log(value)
                     // So here we are taking the length of the array, subtracting
                     // the index of the layer and then adding 10 to reorder them.
                     // It's just that easy.
