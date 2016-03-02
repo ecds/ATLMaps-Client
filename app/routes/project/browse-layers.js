@@ -22,6 +22,8 @@ export default Ember.Route.extend({
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
         controller.set('rastersActive', true);
+        controller.set('editSuccess', false);
+        controller.set('editFail', false);
     },
 
     actions: {
@@ -65,12 +67,51 @@ export default Ember.Route.extend({
             project.get('raster_layer_project_ids').addObject(newLayer);
 
             newLayer.save().then(function(){
+                // Add the map to the view
                 _this.get('mapObject').mapLayer(newLayer);
-                alert('SAVED');
+                // Show a success message.
+                _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                Ember.run.later(this, function(){
+                    _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                }, 3000);
             }, function(){
-                alert('DANG');
+                _this.controllerFor('project/browse-layers').set('editFail', true);
+                Ember.run.later(this, function(){
+                    _this.controllerFor('project/browse-layers').set('editFail', false);
+                }, 3000);
             });
 
+        },
+
+        removeLayer(layer) {
+            const project = this.modelFor('project');
+            let _this = this;
+            // Get the join between layer and project
+            this.store.queryRecord('raster-layer-project', {
+                project_id: project.id,
+                raster_layer_id: layer.id
+            }).then(function(layerToRemove){
+                // Remove the object from the DOM
+                project.get('raster_layer_project_ids').removeObject(layerToRemove);
+                // Delete the record from the project
+                layerToRemove.destroyRecord().then(function(){
+                    // Set active to false
+                    layer.set('active_in_project', false);
+                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                        // Remove the map from the view
+                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+                            Ember.$(this).remove();
+                        });
+                    }, 3000);
+                }, function(){
+                    _this.controllerFor('project/browse-layers').set('editFail', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project/browse-layers').set('editFail', false);
+                    }, 3000);
+                });
+            });
         },
 
         showResults(show){

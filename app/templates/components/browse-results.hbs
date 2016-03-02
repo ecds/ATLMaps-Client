@@ -10,7 +10,7 @@
         <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
         </a>
         <a {{action 'showResults' 'raster'}} class="btn btn-default {{if rastersActive 'active-result-tab' }}" title="Archival Maps">
-        <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps{{rastersActive}}</h4>
+        <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
         </a>
         </nav>
     </div>
@@ -18,12 +18,21 @@
 
 <div class="row">
 <div class="col-xs-12">
-
+    {{#liquid-if editSuccess}}
+        <div class="alert alert-dismissible alert-success">
+            Project's Layers are updated.
+        </div>
+    {{/liquid-if}}
+    {{#liquid-if editFail}}
+        <div class="alert alert-dismissible alert-danger">
+            Dang, something went wrong. Layer's were not updated.
+        </div>
+    {{/liquid-if}}
 {{#if rastersActive}}
 <div>
 
     <div>
-        {{#each model.raster_layer_ids key="@index" as |raster|}}
+        {{#each model.raster_layer_ids as |raster|}}
             <div class="layer-list-item row">
 
 
@@ -77,7 +86,7 @@
 <div>
     {{#unless rastersActive}}
     <div>
-        {{#each model.vector_layer_ids key="@index" as |vector|}}
+        {{#each model.vector_layer_ids as |vector|}}
             <div class="layer-list-item row">
 
                 <div class="col-xs-2">
