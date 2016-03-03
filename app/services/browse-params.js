@@ -32,9 +32,6 @@ export default Ember.Service.extend({
     removeAllTags(allTags){
         this.get('tags').removeObjects(allTags.getEach('name'));
     },
-    addInstitution(institution){
-        this.get('institutions').pushObjects(institution.get('name'));
-    },
     setYearSearch(min_year, max_year){
         this.setProperties({start_year: min_year, end_year: max_year});
     },

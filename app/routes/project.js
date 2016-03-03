@@ -5,6 +5,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 	mapObject: Ember.inject.service('map-object'),
+	dataColors: Ember.inject.service('data-colors'),
 
 	beforeModel: function(){
 
@@ -106,6 +107,102 @@ export default Ember.Route.extend({
                  this.set('clickedLayer', true);
             }
 		},
+
+		addLayer(layer, format) {
+
+            const project = this.modelFor('project');
+
+            let layerToAdd = this.store.peekRecord(format+'_layer', layer.get('id'));
+
+			let newLayer = '';
+			switch(format) {
+				case 'raster':
+					let position = project.get('raster_layer_project_ids').get('length') + 1;
+
+					newLayer = this.store.createRecord(format+'-layer-project', {
+		                project_id: project.id,
+		                raster_layer_id: layerToAdd,
+		                data_format: layerToAdd.get('data_format'),
+		                position: position
+		            });
+					break;
+
+				case 'vector':
+					let layerColor = '';
+					switch(layerToAdd.get('data_type')){
+						case 'point-data':
+							let markerColors = this.get('dataColors.markerColors');
+							layerColor = Math.floor((Math.random() * markerColors.length) + 1);
+							break;
+						case 'polygon':
+						case 'line-data':
+							let shapeColors = this.get('dataColors.shapeColors');
+							layerColor = Math.floor((Math.random() * Object.keys(shapeColors).length) + 1);
+					}
+
+
+
+					newLayer = this.store.createRecord('vector-layer-project', {
+						project_id: project.id,
+						vector_layer_id: layerToAdd,
+						data_format: layerToAdd.get('data_format'),
+						marker: layerColor
+					});
+					break;
+			}
+
+            let _this = this;
+
+            project.get(format+'_layer_project_ids').addObject(newLayer);
+
+            newLayer.save().then(function(){
+                // Add the map to the view
+                _this.get('mapObject').mapLayer(newLayer);
+                // Show a success message.
+                _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                Ember.run.later(this, function(){
+                    _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                }, 3000);
+            }, function(){
+                _this.controllerFor('project/browse-layers').set('editFail', true);
+                Ember.run.later(this, function(){
+                    _this.controllerFor('project/browse-layers').set('editFail', false);
+                }, 3000);
+            });
+
+        },
+
+        removeLayer(layer, format) {
+			console.log(layer);
+            const project = this.modelFor('project');
+            let _this = this;
+            // Get the join between layer and project
+            this.store.queryRecord(format+'-layer-project', {
+                project_id: project.id,
+                raster_layer_id: layer.id
+            }).then(function(layerToRemove){
+                // Remove the object from the DOM
+                project.get(format+'_layer_project_ids').removeObject(layerToRemove);
+                // Delete the record from the project
+                layerToRemove.destroyRecord().then(function(){
+                    // Set active to false
+                    layer.set('active_in_project', false);
+                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                        // Remove the map from the view
+                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+                            Ember.$(this).remove();
+                        });
+                    }, 3000);
+                }, function(){
+                    _this.controllerFor('project/browse-layers').set('editFail', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project/browse-layers').set('editFail', false);
+                    }, 3000);
+                });
+            });
+        },
 
     },
 

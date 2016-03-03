@@ -1,6 +1,6 @@
 <nav class="row">
 	{{#link-to 'projects' tagName='a' class="back-link" title="Back to All Projects"}}
-		<nav class="back-button"><i class="material-icons">chevron_left</i></nav>
+		<span class="back-button"><i class="material-icons">chevron_left</i></span>
 	{{/link-to}}
 </nav>
 
@@ -31,7 +31,7 @@
 				<span class="nav-icon"><i class="material-icons">search</i></span>
 			{{/link-to}}
 		{{#link-to "project.vector-layers" class="btn btn-default" id='vector-data' title="Pinpoint Layers"}}
-			<span class="atlmaps-ext atlmaps-ext data-icon nav-icon"></span><span class="badge vector-badge">{{model.vector_layer_project_ids.length}}</span>
+			<span class="nav-icon"><i class="material-icons atlmaps-ext database"></i></span><span class="badge vector-badge">{{model.vector_layer_project_ids.length}}</span>
 		{{/link-to}}
 		{{#link-to "project.raster-layers" class="btn btn-default" id='raster-layers' title="Archival Map Layers"}}
 	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_project_ids.length}}</span>
@@ -52,9 +52,7 @@
 	<section class="col-xs-4 project-pane">
 		{{liquid-outlet}}
 	</section>
-	<section class="col-xs-8">
-		hi
-	</section>
+	<section class="col-xs-8"></section>
 </section>
 
 

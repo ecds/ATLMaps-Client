@@ -50,4 +50,13 @@
     .layer-list-item:nth-child(odd){
       background: white;
     }
+
+    /*Seperate the list of tags with commas.*/
+    li.tags:after {
+      content: ',';
+    }
+
+    li.tags:last-of-type:after {
+        content: '';
+    }
 }

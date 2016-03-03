@@ -7,7 +7,7 @@
 
         {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
         <a {{action 'showResults' 'vector'}} class="btn btn-default  {{unless rastersActive 'active-result-tab' }}" title="Data Layers">
-        <span class="atlmaps-ext data-icon nav-icon"></span><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
+        <i class="material-icons atlmaps-ext database"></i><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
         </a>
         <a {{action 'showResults' 'raster'}} class="btn btn-default {{if rastersActive 'active-result-tab' }}" title="Archival Maps">
         <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
@@ -38,9 +38,9 @@
 
                 <div class="col-xs-2">
                 	{{#if raster.active_in_project}}
-                		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster }}><i class="material-icons">clear</i></a>
+                		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster 'raster' }}><i class="material-icons">clear</i></a>
                 	{{else}}
-                		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster}}><i class="material-icons">add</i></a>
+                		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster 'raster' }}><i class="material-icons">add</i></a>
                 	{{/if}}
                 </div>
 
@@ -91,9 +91,9 @@
 
                 <div class="col-xs-2">
                 	{{#if vector.active_in_project}}
-                		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" vector }}><i class="material-icons">clear</i></a>
+                		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" vector 'vector' }}><i class="material-icons">clear</i></a>
                 	{{else}}
-                		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" vector}}><i class="material-icons">add</i></a>
+                		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" vector 'vector'}}><i class="material-icons">add</i></a>
                 	{{/if}}
                 </div>
 

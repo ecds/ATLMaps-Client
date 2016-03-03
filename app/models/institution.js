@@ -5,5 +5,6 @@ export default DS.Model.extend({
     slug: DS.attr('string'),
     geoserver: DS.attr('string'),
     layer_ids: DS.hasMany('layer', {async: true}),
-    user_ids: DS.hasMany('user', {async: true})
+    user_ids: DS.hasMany('user', {async: true}),
+	checked: DS.attr('boolean', { defaultValue: false })
 });

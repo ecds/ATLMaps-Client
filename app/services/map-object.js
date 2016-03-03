@@ -29,6 +29,12 @@ export default Ember.Service.extend({
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
         let markerColor = this.get('dataColors.markerColors')[layer.get('marker')];
+        let shapeColors = this.get('dataColors.shapeColors');
+        function shapeColor(){
+            let colorName = Object.keys(shapeColors)[layer.get('marker')];
+            return shapeColors[colorName];
+        }
+        console.log(shapeColor())
         // let slug = layer.get('raster_layer.slug');
 
         console.log(layer.get('data_format'));
@@ -109,7 +115,9 @@ export default Ember.Service.extend({
 
                 //  break;
 
-                case 'geojson':
+                case 'point-data':
+                case 'polygon':
+                case 'line-data':
 
                     function viewData(feature, layer) {
                         var popupContent = "<h2>"+feature.properties.name+"</h2>";
@@ -146,12 +154,18 @@ export default Ember.Service.extend({
 
                     }
 
-                    var polyStyle = {
-                        'color': 'deeppink'
-                    };
+                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+
+                    // console.log(shapeColor + ' ' + newLayerSlug)
+                    let polyStyle = {
+                            'color': shapeColor(),
+                            'fillColor': shapeColor(),
+                            'className': layerClass
+
+                    }
 
                     if(newLayerUrl){
-                        var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+
                         var vector = new L.GeoJSON.AJAX(newLayerUrl, {
                             style: polyStyle,
                             className: layerClass,
@@ -160,7 +174,7 @@ export default Ember.Service.extend({
                                     className: layerClass,
                                     iconSize: null,
                                     html: '<div class="shadow"></div><div class="icon"></div>',
-                                    data: 'foo'
+                                    // data: 'foo'
                                 });
 
                                 var marker = L.marker(latlng, {icon: icon});

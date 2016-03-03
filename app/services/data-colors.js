@@ -10,9 +10,6 @@ export default Ember.Service.extend({
                 "amber-400",
                 "amber-500",
                 "amber-600",
-                "blue-200",
-                "blue-300",
-                "blue-400",
                 "blue-500",
                 "blue-600",
                 "blue-700",
@@ -44,16 +41,6 @@ export default Ember.Service.extend({
                 "indigo-500",
                 "indigo-600",
                 "indigo-700",
-                "light-blue-300",
-                "light-blue-400",
-                "light-blue-500",
-                "light-blue-600",
-                "light-blue-700",
-                "light-green-300",
-                "light-green-400",
-                "light-green-500",
-                "light-green-600",
-                "light-green-700",
                 "orange-300",
                 "orange-400",
                 "orange-500",
@@ -73,15 +60,37 @@ export default Ember.Service.extend({
                 "red-500",
                 "red-600",
                 "red-700",
-                "teal-300",
-                "teal-400",
-                "teal-500",
-                "teal-600",
-                "teal-700",
                 "yellow-400",
                 "yellow-500",
                 "yellow-600"
-            ]);
+            ]
+        );
+
+        this.set('shapeColors',
+            {
+                "blue-600": '#1E88E5',
+                'blue-700': '#1976D2',
+                'blue-800': '#1565C0',
+                'cyan-600': '#00ACC1',
+                'cyan-700': '#0097A7',
+                'cyan-800': '#00838F',
+                'deep-orange-600': '#F4511E',
+                'deep-orange-700': '#E64A19',
+                'deep-purple-500': '#673AB7',
+                'deep-purple-600': '#5E35B1',
+                'light-green-600': '#7CB342',
+                'light-green-700': '#689F38',
+                'orange-600': '#FB8C00',
+                'orange-700': '#F57C00',
+                'orange-800': '#EF6C00',
+                'pink-600': '#D81B60',
+                'pink-700': '#C2185B',
+                'red-600': '#D81B60',
+                'red-700': '#C2185B',
+                'teal-600': '#00897B',
+                'teal-700': '#00796B'
+            }
+        );
 
     }
 });

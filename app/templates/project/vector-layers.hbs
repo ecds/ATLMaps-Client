@@ -3,8 +3,12 @@
     <ul class="list-unstyled">
         {{#each model.vector_layer_project_ids as |layer|}}
                 <li class="{{layer.vector_layer_id.slug}} vector-layer">
-                    <span class="{{layer.vector_layer_id.data_type}} {{layervector_layer.slug}} map-marker {{marker-color layer.marker dataColors.markerColors}}"></span>
-                    <a {{action 'showLayerInfoDetals' layer}}>{{layer.vector_layer_id.title}}: {{log markerColors.[layer]}}</a>
+                    <span class="map-marker
+                        {{layer.vector_layer_id.data_type}}
+                        {{layer.vector_layer_id.data_format}}
+                        {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}">
+                    </span>
+                    <a {{action 'showLayerInfoDetals' layer}}>{{layer.vector_layer_id.title}}</a>
                     {{#liquid-if layer.clicked}}
                         <article>{{layer.vector_layer_id.description}}</article>
                         {{layer-citation layer = layer.vector_layer_id}}

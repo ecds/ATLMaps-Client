@@ -8,7 +8,7 @@
          url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
 }
 
-span.atlmaps-ext {
+i.atlmaps-ext {
     font-family: 'atlmaps-ext';
 //     margin: .25em;
 //
@@ -17,13 +17,11 @@ span.atlmaps-ext {
 //     }
 }
 
-span.data-icon {
-    font-size: 12px;
-    &:before {
-        content: '\e800';
-    }
+i.material-icons.atlmaps-ext.database::before{
+    content: '\e800';
 }
 
-span.polygon-icon::before {
+span.map-marker.polygon::before {
+    font-family: 'atlmaps-ext';
     content: '\e801';
 }

@@ -878,19 +878,19 @@ div#hint {
   font-size: 2em;
 }
 
-li.gravatar {
-  padding: 2.5px;
-}
+// li.gravatar {
+//   padding: 2.5px;
+// }
 
 span.description_icon {
   font-family: 'Material Icons';
 }
 
-span.geojson:before,
-span.wfs:before{
-    font-family: 'Material Icons';
-  content: $marker-icon;
-}
+// span.geojson:before,
+// span.wfs:before{
+//     font-family: 'Material Icons';
+//   content: $marker-icon;
+// }
 
 span.planningatlanta:before,
 span.wms:before {
@@ -906,14 +906,7 @@ div.add_layer_button {
   z-index: 11;
 }
 
-/*Seperate the list of tags with commas.*/
-li.tags:after {
-  content: ',';
-}
 
-li.tags:last-of-type:after {
-    content: '';
-}
 
 ul.userlist {
   list-style: none;

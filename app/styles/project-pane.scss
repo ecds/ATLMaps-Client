@@ -17,7 +17,7 @@
     section.row {
         margin: 0;
     }
-    article, footer {
+    article {
         padding: 2em;
     }
     ul {
@@ -28,6 +28,10 @@
             border-color: lightgrey;
             border-radius: .25em;
             margin-bottom: .5em;
+        }
+
+        li.vector-layer {
+            padding-left: .5em;
         }
 
         // div.raster-layer {
@@ -57,6 +61,12 @@
         //         max-height: 100px;
         //     }
         // }
+    }
+
+    // layer controls in edit view
+    footer.row {
+        margin-bottom: 1px;
+        pointer-events: all;
     }
 
     // Raster Panel Toggle Stuff
