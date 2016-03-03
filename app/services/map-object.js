@@ -34,7 +34,7 @@ export default Ember.Service.extend({
             let colorName = Object.keys(shapeColors)[layer.get('marker')];
             return shapeColors[colorName];
         }
-        console.log(shapeColor())
+        console.log(shapeColor());
         // let slug = layer.get('raster_layer.slug');
 
         console.log(layer.get('data_format'));
@@ -161,8 +161,7 @@ export default Ember.Service.extend({
                             'color': shapeColor(),
                             'fillColor': shapeColor(),
                             'className': layerClass
-
-                    }
+                    };
 
                     if(newLayerUrl){
 
