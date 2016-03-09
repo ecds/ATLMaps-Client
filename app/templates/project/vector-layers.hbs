@@ -12,6 +12,14 @@
                     {{#liquid-if layer.clicked}}
                         <article>{{layer.vector_layer_id.description}}</article>
                         {{layer-citation layer = layer.vector_layer_id}}
+                        {{#if isEditing}}
+                        <footer class="row">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4">
+                                <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.vector_layer_id 'vector' }}><i class="material-icons">close</i></a>
+                            </div>
+                        </footer>
+                        {{/if}}
                     {{/liquid-if}}
                 </li>
         {{else}}

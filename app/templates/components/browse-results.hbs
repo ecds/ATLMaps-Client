@@ -2,7 +2,7 @@
 <!-- RESULTS -->
 <div class="container browse-results">
     <div class="row">
-    <div class=col-xs-12>
+    <div class=col-md-12>
         <nav class="btn-group btn-group-justified">
 
         {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-<div class="col-xs-12">
+<div class="col-md-12">
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
             Project's Layers are updated.
@@ -36,7 +36,7 @@
             <div class="layer-list-item row">
 
 
-                <div class="col-xs-2">
+                <div class="col-md-2">
                 	{{#if raster.active_in_project}}
                 		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster 'raster' }}><i class="material-icons">clear</i></a>
                 	{{else}}
@@ -44,16 +44,16 @@
                 	{{/if}}
                 </div>
 
-                <div class="col-xs-10">
+                <div class="col-md-10">
                     {{#if raster.name}}
                         <h4 class="name">{{raster.title}}</h4>
                         <div class="description">{{raster.description}}</div>
                         {{#if raster.tag_ids}}
                         <div class="row">
-                            <div class="col-xs-1">
+                            <div class="col-md-1">
                                 <i class="material-icons">local_offer</i>
                             </div>
-                            <div class="col-xs-11">
+                            <div class="col-md-11">
                                 <ul class="list-inline">
                                     {{#each raster.tag_ids as |tag|}}
                                         <li class="tags">{{tag.name}}</li>
@@ -89,7 +89,7 @@
         {{#each model.vector_layer_ids as |vector|}}
             <div class="layer-list-item row">
 
-                <div class="col-xs-2">
+                <div class="col-md-2">
                 	{{#if vector.active_in_project}}
                 		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" vector 'vector' }}><i class="material-icons">clear</i></a>
                 	{{else}}
@@ -97,16 +97,16 @@
                 	{{/if}}
                 </div>
 
-                <div class="col-xs-10">
+                <div class="col-md-10">
                     {{#if vector.name}}
                         <h4 class="name">{{vector.title}}</h4>
                         <div class="description">{{vector.description}}</div>
                         {{#if vector.tag_ids}}
                         <div class="row">
-                            <div class="col-xs-1">
+                            <div class="col-md-1">
                                 <i class="material-icons">local_offer</i>
                             </div>
-                            <div class="col-xs-11">
+                            <div class="col-md-11">
                                 <ul class="list-inline">
                                     {{#each vector.tag_ids as |tag|}}
                                         <li class="tags">{{tag.name}}</li>

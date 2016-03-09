@@ -4,7 +4,7 @@
     // margin-left:30px;
     // width: 90%;
 }
-.project-title {
+.project-head {
     position: inherit;
     margin-top: 10px;
     margin-left: 30px;
@@ -17,9 +17,11 @@
         padding: 1em;
     }
 
-    h1 {
-        font-size: 1.5em;
-        line-height: 0;
+    .title {
+        font-size: 1.75em;
+        line-height: 1;
+        color: whitesmoke;
+        font-weight: 500;
     }
 }
 .project-view, .project-edit {

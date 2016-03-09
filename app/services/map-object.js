@@ -11,7 +11,7 @@ export default Ember.Service.extend({
         var _map = L.map('map', {
             center: [33.7489954,-84.3879824],
             zoom: 13,
-            zoomControl:false
+            zoomControl: false // We add the zoom buttons just below to the top right.
         });
 
         L.control.zoom({ position: 'topright' }).addTo(_map);
@@ -138,12 +138,12 @@ export default Ember.Service.extend({
                         }
 
                         layer.on('click', function() {
-                            Ember.$(".project-nav").removeClass('active-button');
-                            Ember.$(".project-nav").addClass('transparent-button');
-                            Ember.$('#vector-data').addClass('active-button');
-                            Ember.$("div.marker-content").empty();
-                            Ember.$("div.marker-data").hide();
-                            Ember.$(".card").hide();
+                            // Ember.$(".project-nav").removeClass('active-button');
+                            // Ember.$(".project-nav").addClass('transparent-button');
+                            // Ember.$('#vector-data').addClass('active-button');
+                            // Ember.$("div.marker-content").empty();
+                            // Ember.$("div.marker-data").hide();
+                            // Ember.$(".card").hide();
                             var $content = Ember.$("<article/>").html(popupContent);
                             Ember.$("div.marker-data").show();
                             Ember.$('div.marker-content').append($content);
@@ -161,6 +161,7 @@ export default Ember.Service.extend({
                             'color': shapeColor(),
                             'fillColor': shapeColor(),
                             'className': layerClass
+
                     };
 
                     if(newLayerUrl){

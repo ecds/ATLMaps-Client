@@ -35,6 +35,7 @@ export default Ember.Route.extend({
         },
 
 		setBase: function(base, model) {
+            alert(base)
 			Ember.$(".leaflet-control-layers-selector").removeAttr('checked');
 			Ember.$("span:contains(' "+ base + "')").prev().click().attr('checked', 'checked');
             var projectController = this.controllerFor('project');

@@ -6,6 +6,10 @@ import DS from 'ember-data';
 export default Ember.Route.extend({
 	session: Ember.inject.service('session'),
 
+	model(){
+		return this.store.findAll('project');
+	},
+
 	actions : {
 
         didTransition: function() {

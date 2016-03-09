@@ -7,21 +7,32 @@
 </div>
 <div class="banner pink blurred">
     <div class="container">
-        <article>
-            {{#if session.isAuthenticated}}
-                <header class="row">
-                    <div class="col-sm-7">
-                        <h2>
-                            <a class="btn btn-info btn-fab" {{action 'createProject'}}><i class="material-icons">add</i></a><span>My Projects</span>
-                        </h2>
+        <div class="list-group row">
+
+            {{# each model as |project|}}
+            <div class="col-md-4">
+                <div class="project list-group-item">
+                    <div class="row-action-primary">
+                        <i class="material-icons">map</i>
                     </div>
-                </header>
-                <hr/>
-                {{my-projects}}
-                {{my-collaborations}}
-            {{/if}}
-            {{published-projects}}
-        </article>
+                    <div class="row-content">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h4 class="list-group-item-heading">{{#link-to 'project.info' project}}{{project.name}}{{/link-to}}</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                {{#if project.is_mine}}
+                                <div class="action-secondary"><i class="material-icons">delete_forever</i></div>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <p class="list-group-item-text">{{project.description}}</p>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>
 {{liquid-outlet}}

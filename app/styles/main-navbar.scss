@@ -1,7 +1,6 @@
 
 
 .main-navbar{
-	visibility: hidden;
 	position: relative;
 	background-color: white;
 	height: 60px;
@@ -95,6 +94,16 @@
 	}
 }
 
-.projects-index .about, .index .main-navbar{
-  visibility: visible;
+.project {
+	.main-navbar {
+		visibility: hidden;
+	}
+}
+.projects-index {
+  #map {
+	  opacity: 0;
+  };
+  .main-navbar {
+	  visibility: visible;
+  }
 }

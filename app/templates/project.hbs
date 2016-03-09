@@ -7,12 +7,12 @@
 
 
 <section class="row">
-	<section class="project-title container col-xs-4">
+	<section class="project-head container col-md-4">
 		<section class="row {{if isEditing 'project-edit' 'project-view'}}">
-	        <section class="col-xs-10">
-			          <h1>{{model.name}}</h1>
+	        <section class="col-md-10 title">
+			          {{model.name}}
 	        </section>
-	        <section class="col-xs-2">
+	        <section class="col-md-2">
 			{{#if model.may_edit}}
 	            <a {{action 'toggleEdit'}} title={{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
 					<i class="material-icons">mode_edit</i>
@@ -44,18 +44,15 @@
 	    {{/link-to}} -->
 	</nav>
 </section>
-<section class="col-xs-8 pull-right">
+<section class="col-md-8 pull-right">
 	{{outlet "browse-results"}}
 </section>
 </section>
 <section class="row">
-	<section class="col-xs-4 project-pane">
+	<section class="col-md-4 project-pane">
 		{{liquid-outlet}}
 	</section>
-	<section class="col-xs-8"></section>
+	<section class="col-md-8"></section>
 </section>
-
-
-
-
 {{partial 'marker-data-window'}}
+<div class="base-layer-controls"></div>

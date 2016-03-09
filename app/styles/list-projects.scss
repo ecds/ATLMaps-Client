@@ -1,7 +1,15 @@
-.min-height-class {
+.project.list-group-item {
+	min-height: 15em;
 
-	min-height: 300px;
+	.action-secondary {
+		top: 0 !important;
+		right: 0 !important;
+	}
 }
-.project-list-icon {
-	vertical-align: top;
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+	.project.list-group-item {
+		min-height: 1px;
+	}
 }
