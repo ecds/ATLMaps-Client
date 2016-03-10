@@ -31,8 +31,6 @@ export default Ember.Route.extend({
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(){
-            console.log(this.get('browseParams.start_year'));
-
             return this.render('components/browse-results', {
                 outlet: 'browse-results',
                 into: 'project', // Want it to open in the project view

@@ -35,6 +35,17 @@
         margin: 0;
     }
 
+    .results-button {
+        padding: .5em !important;
+        i {
+            font-size: 3.5em;
+        }
+        .badge {
+            font-size: 1em;
+            background-color: material-color(blue, 700) !important;
+        }
+    }
+
     .alert {
         margin-bottom: 0;
     }

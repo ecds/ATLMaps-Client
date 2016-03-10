@@ -212,15 +212,15 @@ export default Ember.Route.extend({
                 // Add the map to the view
                 _this.get('mapObject').mapLayer(newLayer);
                 // Show a success message.
-                _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                Ember.run.later(this, function(){
-                    _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                }, 3000);
+                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                // Ember.run.later(this, function(){
+                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                // }, 3000);
             }, function(){
-                _this.controllerFor('project/browse-layers').set('editFail', true);
-                Ember.run.later(this, function(){
-                    _this.controllerFor('project/browse-layers').set('editFail', false);
-                }, 3000);
+                // _this.controllerFor('project/browse-layers').set('editFail', true);
+                // Ember.run.later(this, function(){
+                //     _this.controllerFor('project/browse-layers').set('editFail', false);
+                // }, 3000);
             });
 
         },
@@ -240,19 +240,19 @@ export default Ember.Route.extend({
                 layerToRemove.destroyRecord().then(function(){
                     // Set active to false
                     layer.set('active_in_project', false);
-                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                    Ember.run.later(this, function(){
-                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                        // Remove the map from the view
-                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
-                            Ember.$(this).remove();
-                        });
-                    }, 3000);
+                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    // Ember.run.later(this, function(){
+                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                    //     // Remove the map from the view
+                    //     Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+                    //         Ember.$(this).remove();
+                    //     });
+                    // }, 3000);
                 }, function(){
-                    _this.controllerFor('project/browse-layers').set('editFail', true);
-                    Ember.run.later(this, function(){
-                        _this.controllerFor('project/browse-layers').set('editFail', false);
-                    }, 3000);
+                    // _this.controllerFor('project/browse-layers').set('editFail', true);
+                    // Ember.run.later(this, function(){
+                    //     _this.controllerFor('project/browse-layers').set('editFail', false);
+                    // }, 3000);
                 });
             });
         },

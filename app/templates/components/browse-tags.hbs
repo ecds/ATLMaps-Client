@@ -1,7 +1,7 @@
-<section >
+<div>
     <h2>Tags:</h2>
-    <section class="row">
-        <ul class="list-unstyled categories">
+    <div class="row">
+        <ul class="list-unstyled categories col-md-12">
             {{#each model as |category|}}
             <li class="category">
                 <a {{action 'showTagGroup' category}}>
@@ -42,5 +42,5 @@
             </li>
             {{/each}}
         </ul>
-    </section>
-</section>
+    </div>
+</div>

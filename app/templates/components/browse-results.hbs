@@ -1,15 +1,13 @@
-{{yield}}
-<!-- RESULTS -->
 <div class="container browse-results">
     <div class="row">
     <div class=col-md-12>
         <nav class="btn-group btn-group-justified">
 
         {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
-        <a {{action 'showResults' 'vector'}} class="btn btn-default  {{unless rastersActive 'active-result-tab' }}" title="Data Layers">
+        <a {{action 'showResults' 'vector'}} class="btn btn-default results-button {{unless rastersActive 'active' }}" title="Data Layers">
         <i class="material-icons atlmaps-ext database"></i><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
         </a>
-        <a {{action 'showResults' 'raster'}} class="btn btn-default {{if rastersActive 'active-result-tab' }}" title="Archival Maps">
+        <a {{action 'showResults' 'raster'}} class="btn btn-default results-button {{if rastersActive 'active' }}" title="Archival Maps">
         <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
         </a>
         </nav>
@@ -36,24 +34,27 @@
             <div class="layer-list-item row">
 
 
-                <div class="col-md-2">
-                	{{#if raster.active_in_project}}
+                <div class="col-md-1 checkbox">
+                    <label>
+                        <input type="checkbox" checked={{raster.active_in_project}} {{action "removeLayer" raster 'raster' }} />
+                        <span class="check"></span>
+                    </label>
+                	<!-- {{#if raster.active_in_project}}
                 		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster 'raster' }}><i class="material-icons">clear</i></a>
                 	{{else}}
                 		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster 'raster' }}><i class="material-icons">add</i></a>
-                	{{/if}}
+                	{{/if}} -->
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-11">
                     {{#if raster.name}}
                         <h4 class="name">{{raster.title}}</h4>
                         <div class="description">{{raster.description}}</div>
                         {{#if raster.tag_ids}}
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-12">
                                 <i class="material-icons">local_offer</i>
-                            </div>
-                            <div class="col-md-11">
+
                                 <ul class="list-inline">
                                     {{#each raster.tag_ids as |tag|}}
                                         <li class="tags">{{tag.name}}</li>

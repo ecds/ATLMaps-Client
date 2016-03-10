@@ -3,123 +3,123 @@
     margin-left: 30px;
     width: 30%;
 
-.cotainer {
-    // background-color: white;
-    // // margin-left: 30px;
-    // width: 30%;
-    background-color: white;
-    padding: .5em;
-    pointer-events: auto; // Allow the pane to respond to click.
+    .cotainer {
+        // background-color: white;
+        // // margin-left: 30px;
+        // width: 30%;
+        background-color: white;
+        padding: .5em;
+        pointer-events: auto; // Allow the pane to respond to click.
+        border-left: 1px solid #adadad;
+        border-right: 1px solid #adadad;
 
-    h1 {
-        font-size: 2em;
-    }
-    div.row {
-        margin: 0;
-    }
-    article {
-        padding: 2em;
-    }
-    ul {
-        li {
-            font-size: 1.5em;
-            border-width: 1px;
-            border-style: solid;
-            border-color: lightgrey;
-            border-radius: .25em;
-            margin-bottom: .5em;
+        h1 {
+            font-size: 2em;
         }
-
-        li.vector-layer {
-            padding-left: .5em;
-        }
-
-        // div.raster-layer {
-        //     padding-top: .5em;
-        //     background-color: white;
-        //     a {
-        //         padding-left: .75em;
-        //     }
-        // }
-
+        
         article {
-            padding: 1em;
-            font-size: .75em;
+            padding: 2em;
         }
-        // footer {
-        //     padding: .5em;
-        //     h1 {
-        //         font-size: 1em;
-        //         margin: .5em 0 0 0;
-        //     }
-        //     h2 {
-        //         font-size: .75em;
-        //         margin: 0;
-        //     }
-        //     img {
-        //         min-width: 100px;
-        //         max-height: 100px;
-        //     }
-        // }
-    }
+        ul {
+            li {
+                font-size: 1.5em;
+                border-width: 1px;
+                border-style: solid;
+                border-color: lightgrey;
+                border-radius: .25em;
+                margin-bottom: .5em;
+            }
 
-    // layer controls in edit view
-    footer.row {
-        margin-bottom: 1px;
-        pointer-events: all;
-    }
+            li.vector-layer {
+                padding-left: .5em;
+            }
 
-    // Raster Panel Toggle Stuff
-    .togglebutton.opacity{
-        top: 15px;
-        left: 50px;
-        position: relative;
-        min-height: 60px;
-        font-weight: 400;
+            // div.raster-layer {
+            //     padding-top: .5em;
+            //     background-color: white;
+            //     a {
+            //         padding-left: .75em;
+            //     }
+            // }
 
-        // #hide-layers {
-        //     background-color: #ffb74d;
-        // }
-        //
-        // #show-layers {
-        //     display: none;
-        // }
-        .toggle {
-            margin: 0 1em;
-        }
-        span.toggle_label {
-            font-size: .75em;
-            top: 2.25em;
-            // width: 100%;
-            position: absolute;
+            article {
+                padding: 1em;
+                font-size: .75em;
+            }
+            // footer {
+            //     padding: .5em;
+            //     h1 {
+            //         font-size: 1em;
+            //         margin: .5em 0 0 0;
+            //     }
+            //     h2 {
+            //         font-size: .75em;
+            //         margin: 0;
+            //     }
+            //     img {
+            //         min-width: 100px;
+            //         max-height: 100px;
+            //     }
+            // }
         }
 
-        span.toggle_label:after {
-            content: 'Hide Layers';
+        // layer controls in edit view
+        footer.row {
+            margin-bottom: 1px;
+            pointer-events: all;
         }
 
-        span.toggle_label.off:after {
-            content: 'Show Layers';
+        // Raster Panel Toggle Stuff
+        .togglebutton.opacity{
+            top: 15px;
+            left: 50px;
+            position: relative;
+            min-height: 60px;
+            font-weight: 400;
+
+            // #hide-layers {
+            //     background-color: #ffb74d;
+            // }
+            //
+            // #show-layers {
+            //     display: none;
+            // }
+            .toggle {
+                margin: 0 1em;
+            }
+            span.toggle_label {
+                font-size: .75em;
+                top: 2.25em;
+                // width: 100%;
+                position: absolute;
+            }
+
+            span.toggle_label:after {
+                content: 'Hide Layers';
+            }
+
+            span.toggle_label.off:after {
+                content: 'Show Layers';
+            }
+
+            label .toggle:after {
+              top: -3px;
+            }
         }
 
-        label .toggle:after {
-          top: -3px;
+        .reorder {
+            padding: 0;
+        }
+
+        .handle {
+            cursor: -webkit-grab;
+            cursor: -moz-grab;
+            margin-right: 10px;
+            transform: rotate(90deg);
+        }
+
+        .opacity-slider {
+            padding-left: 5px;
         }
     }
-
-    .reorder {
-        padding: 0;
-    }
-
-    .handle {
-        cursor: -webkit-grab;
-        cursor: -moz-grab;
-        margin-right: 10px;
-        transform: rotate(90deg);
-    }
-
-    .opacity-slider {
-        padding-left: 5px;
-    }
-}
 }

@@ -5,17 +5,22 @@
     margin-top: -7px;
     width: 404px ! important;
     margin-left: 34px ! important;
+
 }
 
-.hide-browse {
-    visibility: hidden;
+.toggle-results {
+    position: absolute !important;
+    top: 29%;
+    left: 28%;
+    background-color: material-color(deeporangealt, 400) !important;
+    color: #fff !important;
 }
 
 .browse-pane {
 
     background-color: white;
     width: 100%;
-    // margin-left: 5px;
+    margin-left: .25em;
 
     h2 {
         font-size: 1.5em;
@@ -33,7 +38,7 @@
 
     .browse-by-text {
         padding-top: 1em;
-        
+
         input {
             width: 85%;
             margin-right: 0;

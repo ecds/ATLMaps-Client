@@ -790,67 +790,67 @@ h2 .btn-fab+span{
   padding-bottom: 50px;
   background-position: 50% 0%;
 }
-
+//
 .projects-index .list-group-item-heading {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 80%;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // width: 80%;
 }
 
-.project-options.card{
-  overflow: hidden;
-  white-space: nowrap;
-  border-radius: 2px;
-  margin: 10px 0;
-  box-shadow: 0px 2px 4px rgba(0,0,0,.2);
-  background: white;
-  vertical-align: top;
-  position: absolute;
-  right: 25px;
-  top: 32px;
-  font-weight: 300;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-
-.project-options.card a.action {
-  float: left;
-  width: 100%;
-  padding: 12px 15px;
-  font-size: 14px;
-  text-decoration: none;
-  color: rgb(140, 140, 140);
-  border-left: 5px solid white;
-}
-
-.project-options.card a.action:hover,
-.project-options.card a.action:focus{
-  color: rgb(77, 194, 229);
-  border-left-color: rgb(77, 194, 229);
-}
-
-.project-options.card .action-icon{
-  margin-right: 20px;
-  font-size: 26px;
-  display: block;
-  float: left;
-}
-
-.project-options.card .action-label{
-  font-size: 16px;
-  display: block;
-  margin-top: 10px;
-}
-
-.action.show-options.active {
-  background: rgb(183, 183, 183);
-  color: whitesmoke;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.31) inset;
-}
+// .project-options.card{
+//   overflow: hidden;
+//   white-space: nowrap;
+//   border-radius: 2px;
+//   margin: 10px 0;
+//   box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+//   background: white;
+//   vertical-align: top;
+//   position: absolute;
+//   right: 25px;
+//   top: 32px;
+//   font-weight: 300;
+//   cursor: default;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+// }
+//
+//
+// .project-options.card a.action {
+//   float: left;
+//   width: 100%;
+//   padding: 12px 15px;
+//   font-size: 14px;
+//   text-decoration: none;
+//   color: rgb(140, 140, 140);
+//   border-left: 5px solid white;
+// }
+//
+// .project-options.card a.action:hover,
+// .project-options.card a.action:focus{
+//   color: rgb(77, 194, 229);
+//   border-left-color: rgb(77, 194, 229);
+// }
+//
+// .project-options.card .action-icon{
+//   margin-right: 20px;
+//   font-size: 26px;
+//   display: block;
+//   float: left;
+// }
+//
+// .project-options.card .action-label{
+//   font-size: 16px;
+//   display: block;
+//   margin-top: 10px;
+// }
+//
+// .action.show-options.active {
+//   background: rgb(183, 183, 183);
+//   color: whitesmoke;
+//   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.31) inset;
+// }
 
 // .no-touch .gn-menu-main .home  a{
 //   transition:background 0.2 ease;

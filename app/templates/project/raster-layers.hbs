@@ -1,5 +1,5 @@
 <section class="cotainer">
-    {{ reorder-layers isEditing=isEditing model=model}}
+    {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}}
     <section class="row">
         <section class="col-md-8">
             <h3>Archival Map Layers</h3>
@@ -16,11 +16,11 @@
 </section>
     <div class="raster-list" id="layer_sort">
         {{#each model.sortedRasterLayers as |layer|}}
-            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}">
+            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-10">
-                            <h4><a {{action 'showLayerInfoDetals' layer}}>{{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}</a></h4>
+                            <h4><a {{action 'showLayerInfoDetals' layer}}>{{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}} - {{layer.id}} - {{layer.position}}</a></h4>
                         </div>
                         <div class="col-md-2 reorder">
                             <i class="material-icons handle pull-right">code</i>

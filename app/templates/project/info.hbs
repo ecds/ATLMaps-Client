@@ -41,7 +41,7 @@
         <div class="row">
             <article>{{{model.description}}}</article>
         </div>
-        {{#if model.intro}}
+        {{#if model.template_id}}
         <footer>
             {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
         </footer>

@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .slider .tooltip.top,
 .tooltip.tooltip-max.bottom,
 .tooltip-min, .tooltip-max,
@@ -60,7 +62,7 @@
 }
 
 .slider-material-orange-300 .noUi-handle {
-  background-color: #ffb74d;
+  background-color: material-color(deeporangealt, 200);
   border: none;
   cursor: ew-resize;
 }

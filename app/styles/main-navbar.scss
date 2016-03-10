@@ -98,12 +98,15 @@
 	.main-navbar {
 		visibility: hidden;
 	}
+	.row {
+	    // margin-left: 0;
+	}
 }
 .projects-index {
-  #map {
-	  opacity: 0;
-  };
-  .main-navbar {
-	  visibility: visible;
-  }
+	  #map {
+		  opacity: 0;
+	  };
+	  .main-navbar {
+		  visibility: visible;
+	  }
 }

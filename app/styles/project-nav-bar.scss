@@ -12,7 +12,6 @@
 
     .row {
         // margin-left: 0;
-        // margin-right: 0;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         padding: 1em;
     }
@@ -29,9 +28,10 @@
     position: relative;
     width: 100%;
     margin-left: initial;
+
 }
 .project-view {
-    background-color: #03A9F4 ! important;
+    background-color: material-color(blue, 500) ! important;
 }
 .project-edit {
     background-color: #4CAF50;
@@ -47,43 +47,43 @@ nav.btn-group{
 
     a:nth-of-type(1) {
       background-color: material-color(grey, 50);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 50) ! important;
       }
     }
     a:nth-of-type(2) {
       background-color: material-color(grey, 100);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 100) ! important;
       }
     }
     a:nth-of-type(3) {
       background-color: material-color(grey, 200);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 200) ! important;
       }
     }
     a:nth-of-type(4) {
       background-color: material-color(grey, 300);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 300) ! important;
       }
     }
     a:nth-of-type(5) {
       background-color: material-color(grey, 400);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 400) ! important;
       }
     }
     a:nth-of-type(6) {
       background-color: material-color(grey, 500);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 500) ! important;
       }
     }
     a:nth-of-type(7) {
       background-color: material-color(grey, 600);
-      &:hover, &:focus {
+      &:hover {
           background-color: material-color(blue, 600) ! important;
       }
     }
@@ -99,7 +99,7 @@ nav.btn-group{
         }
 
         span.badge {
-            background-color: crimson;
+            background-color: material-color(deeporangealt, 700);
         }
 
     }
