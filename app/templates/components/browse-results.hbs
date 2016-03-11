@@ -26,6 +26,15 @@
             Dang, something went wrong. Layer's were not updated.
         </div>
     {{/liquid-if}}
+    {{#if model.isPending}}
+        <div class="no-results">
+            <div class="ui-loader">
+                <img src="/assets/images/loaders/Preloader_19.gif" />
+                <br />
+                Searching....
+            </div>
+        </div>
+    {{/if}}
 {{#if rastersActive}}
 <div>
 
@@ -35,15 +44,15 @@
 
 
                 <div class="col-md-1 checkbox">
-                    <label>
+                    <!-- <label>
                         <input type="checkbox" checked={{raster.active_in_project}} {{action "removeLayer" raster 'raster' }} />
                         <span class="check"></span>
-                    </label>
-                	<!-- {{#if raster.active_in_project}}
+                    </label> -->
+                	{{#if raster.active_in_project}}
                 		<a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster 'raster' }}><i class="material-icons">clear</i></a>
                 	{{else}}
                 		<a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster 'raster' }}><i class="material-icons">add</i></a>
-                	{{/if}} -->
+                	{{/if}}
                 </div>
 
                 <div class="col-md-11">
@@ -71,13 +80,15 @@
             </div>
         {{else}}
 
+                {{#unless model}}
                 <div class="no-results">
-                    Use the filters to find what you want. {{searchMade}}
+                    Use the filters to find what you want.
                 </div>
-
+                {{else}}
                 <div class="no-results">
-                    Your search returned no archival maps.
+                    Your search returned no archival maps. <i class="material-icons">sentiment_dissatisfied</i>
                 </div>
+                {{/unless}}
 
         {{/each}}
     </div>

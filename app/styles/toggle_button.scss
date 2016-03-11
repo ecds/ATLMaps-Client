@@ -1,5 +1,7 @@
+@import "variables.scss";
+
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
-  background-color: rgba(255, 183, 77, 0.5);
+  background-color: rgba(material-color(deeporangealt, 400), 0.5);
 }
 .togglebutton label input[type=checkbox]:first-child:checked + .toggle {
   background-color: rgba(0, 149, 135, 0.5);
@@ -24,8 +26,8 @@
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
-  background-color: rgb(255, 183, 77);
-  margin-top: -1px;
+  background-color: material-color(deeporangealt, 400);
+  margin-top: 1px;
 }
 .togglebutton label input[type=checkbox]:first-child:checked + .toggle:after {
   left: 15px;
@@ -43,10 +45,33 @@
   position: relative;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
   left: -5px;
-  top: -8px;
+  top: -4px;
   transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
 }
 
 #toggle-layer-opacity{
   display: none;
+}
+
+.toggle {
+    margin: 0 1em;
+}
+span.toggle_label {
+    font-size: .75em;
+    top: 2.25em;
+    padding-left: .25em;
+    // width: 100%;
+    position: absolute;
+}
+
+span.toggle_label:after {
+    content: 'Hide';
+}
+
+span.toggle_label.off:after {
+    content: 'Show';
+}
+
+label .toggle:after {
+  top: -3px;
 }

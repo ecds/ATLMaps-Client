@@ -24,9 +24,9 @@
 		    	display: inline-block;
 			}
 
-	    	a.active {
-	    		background-color: deeppink;
-	    	}
+	    	// a.active {
+	    	// 	background-color: deeppink;
+	    	// }
 
 		}
 	}
@@ -39,7 +39,7 @@
 		border-top-left-radius: 5%;
 
 		&:hover, &:focus {
-			background-color: deeppink !important;
+			background-color: material-color(deeporangealt, 400) !important;
 			color: white !important;
 		}
 

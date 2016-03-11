@@ -1,15 +1,17 @@
 import Ember from 'ember';
-import DS from 'ember-data';
-/* globals L, Draggabilly */
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 	mapObject: Ember.inject.service('map-object'),
 
+	model(){
+		return this.store.query('project', { featured: true});
+	},
+
 	actions: {
-		initProjectUI: function(model) {
-            var _this = this;
+		initProjectUI: function() {
+            // var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
 

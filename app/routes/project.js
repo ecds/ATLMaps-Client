@@ -19,74 +19,7 @@ export default Ember.Route.extend({
     //     controller.set('project', model);
     // },
 
-    afterModel: function(model) {
-    	// Update the page title:
-		// let project = models.project;
-		// let layers = models.layers;
-		let _this = this;
-		model.get('vector_layer_project_ids').then(function(vectors){
-			vectors.forEach(function(vector){
-				_this.get('mapObject').mapLayer(vector);
-			});
-		});
-
-		model.get('raster_layer_project_ids').then(function(rasters){
-			rasters.forEach(function(raster){
-				_this.get('mapObject').mapLayer(raster);
-			});
-		});
-
-		var map = this.get('mapObject').get('map');
-		map.panTo(new L.LatLng(model.get('center_lat'), model.get('center_lng')));
-
-		let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-            detectRetina: true
-        });
-
-        let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-            attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-            subdomains: '1234',
-            detectRetina: true
-        });
-
-		// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-		//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-		//     subdomains: '1234',
-		//     mapID: 'newest',
-		//     app_id: '1Igi60ZMWDeRNyjXqTZo',
-		//     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-		//     base: 'base',
-		//     maxZoom: 20
-		// });
-
-        try {
-            if (model.get('default_base_map') === 'satellite') {
-                satellite.addTo(map);
-            }
-            else {
-                osm.addTo(map);
-            }
-        }
-        catch(err) {
-            osm.addTo(map);
-        }
-
-        var baseMaps = {
-            "street": osm,
-            "satellite": satellite
-        };
-
-        var control = L.control.layers(baseMaps,null,{collapsed:false});
-		control._map = map;
-
-		// We need to check if the layer controls are already added to the DOM.
-        // if (Ember.$('.leaflet-control-layers').length === 0) {
-            var controlDiv = control.onAdd(map);
-            Ember.$('.base-layer-controls').append(controlDiv);
-        // }
-    },
-
+	// Remove all layers when we leave the `project` route.
 	deactivate(){
 		Ember.$('.atLayer').remove();
 	},
@@ -124,14 +57,83 @@ export default Ember.Route.extend({
 
 	        var _this = this;
 
-			var map = this.get('mapObject').get('map');
+			// var map = this.get('mapObject').get('map');
 			// Ember.$('#map').show();
 			// map._onResize();
 
             Ember.run.scheduleOnce('afterRender', function() {
+				//TODO Get rid of this `initProjectUI` bs.
                 _this.send('initProjectUI', _this.modelFor('project'));
 
-                map.setZoom(project.get('zoom_level'));
+				// Create the Leaflet map.
+				let map = _this.get('mapObject').createMap();
+
+				// Add all the vector layers to the map.
+				project.get('vector_layer_project_ids').then(function(vectors){
+					vectors.forEach(function(vector){
+						_this.get('mapObject').mapLayer(vector);
+					});
+				});
+
+				// Add all the raster layers to the map.
+				project.get('raster_layer_project_ids').then(function(rasters){
+					rasters.forEach(function(raster){
+						_this.get('mapObject').mapLayer(raster);
+					});
+				});
+
+				// Pan and zoom the map for the project.
+				map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
+				map.setZoom(project.get('zoom_level'));
+
+				// Add some base layers
+				let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+					attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
+					detectRetina: true
+				});
+
+				let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+					attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
+					subdomains: '1234',
+					detectRetina: true
+				});
+
+				// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+				//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+				//     subdomains: '1234',
+				//     mapID: 'newest',
+				//     app_id: '1Igi60ZMWDeRNyjXqTZo',
+				//     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+				//     base: 'base',
+				//     maxZoom: 20
+				// });
+
+				// Add the project's base map
+				try {
+					if (project.get('default_base_map') === 'satellite') {
+						satellite.addTo(map);
+					}
+					else {
+						osm.addTo(map);
+					}
+				}
+				catch(err) {
+					osm.addTo(map);
+				}
+
+				var baseMaps = {
+					"street": osm,
+					"satellite": satellite
+				};
+
+				var control = L.control.layers(baseMaps,null,{collapsed:false});
+				control._map = map;
+
+				// We need to check if the layer controls are already added to the DOM.
+				// if (Ember.$('.leaflet-control-layers').length === 0) {
+					var controlDiv = control.onAdd(map);
+					Ember.$('.base-layer-controls').append(controlDiv);
+				// }
 			});
 	    },
 
@@ -228,7 +230,6 @@ export default Ember.Route.extend({
         removeLayer(layer, format) {
 			console.log(layer);
             const project = this.modelFor('project');
-            let _this = this;
             // Get the join between layer and project
             this.store.queryRecord(format+'-layer-project', {
                 project_id: project.id,

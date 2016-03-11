@@ -10,31 +10,33 @@
                 Dang, something went wrong. The project info was not updated.
             </div>
         {{/liquid-if}}
-        <div>
-            <label for="edit_name">Title for the Project</label>
-            {{input value=model.name name='name' id="edit_name" class="form-control h1"  }}
+        <div class="row">
+            <div class="col-md-12">
+                <label for="edit_name">Title for the Project</label>
+                {{input value=model.name name='name' id="edit_name" class="form-control h1"}}
+            </div>
         </div>
-        <div>
-            <div class="row">
+        <div class="row">
+            <div class="col-md-12">
                 <!-- <label for="edit_description" class="form-control">Description (Max 255 Characters)</label> -->
                 {{textarea value=model.description id="edit_description" class="form-control" rows="10" placeholder="Enter your project description here..." maxlength="500"}}
 
                 {{edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
             </div>
-            <div class="row">
-                <div class="publish_check col-md-2">
-                    <div class="checkbox">
-                        <label>
-                            {{input type="checkbox" checked=model.published}}
-                            <span class="check"></span>
-                            Publish
-                        </label>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="publish_check col-md-2">
+                <div class="checkbox">
+                    <label>
+                        {{input type="checkbox" checked=model.published}}
+                        <span class="check"></span>
+                        Publish
+                    </label>
                 </div>
-                <div class="text-right col-md-10">
-                    <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
-                    <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
-                </div>
+            </div>
+            <div class="text-right col-md-10">
+                <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
+                <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
             </div>
         </div>
     {{else}}

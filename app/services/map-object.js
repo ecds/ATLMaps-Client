@@ -8,22 +8,39 @@ export default Ember.Service.extend({
 
     init(){
         this._super(...arguments);
-        var _map = L.map('map', {
-            center: [33.7489954,-84.3879824],
-            zoom: 13,
-            zoomControl: false // We add the zoom buttons just below to the top right.
-        });
-
-        L.control.zoom({ position: 'topright' }).addTo(_map);
-
-        // Create the object for Leafet in the mapObject service.
-        this.set('map', _map);
+        this.set('map', '');
 
     },
 
-    // createMap(lMap){
-    //     this.setProperties({map: lMap});
-    // },
+    createMap(){
+        let _map = L.map('map', {
+            center: [33.7489954,-84.3879824],
+            zoom: 13,
+            // zoomControl is a Boolean
+            // We add the zoom buttons just below to the top right.
+            zoomControl: false
+        });
+
+        // Layer contorl, topright
+        L.control.zoom({ position: 'topright' }).addTo(_map);
+
+        _map.on('click', function(){
+            Ember.$("div.info").remove();
+            Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass("active_marker");
+        	Ember.$(".browse-results").fadeOut();
+            // this.send('activateVectorCard');
+        });
+
+        // TODO: Get rid of this. only here while we develop a way to bring the results back
+        _map.on('dblclick', function(){
+            Ember.$(".browse-results").fadeIn();
+        });
+
+        // Create the object for Leafet in the mapObject service.
+        this.set('map', _map);
+        return _map;
+    },
 
     mapLayer(layer){
         let map = this.get('map');
@@ -34,13 +51,8 @@ export default Ember.Service.extend({
             let colorName = Object.keys(shapeColors)[layer.get('marker')];
             return shapeColors[colorName];
         }
-        console.log(shapeColor());
-        // let slug = layer.get('raster_layer.slug');
-
-        console.log(layer.get('data_format'));
 
         layer.get(layer.get('data_format')+'_layer_id').then(function(newLayer) {
-            // console.log(newLayer)
 
             let newLayerName = newLayer.get('name');
             let newLayerSlug = newLayer.get('slug');
@@ -68,7 +80,7 @@ export default Ember.Service.extend({
 
                 case 'atlTopo':
 
-                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/' + newLayerSlug + '/{z}/{x}/{y}.jpg', {
+                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/tilesTopo/{z}/{x}/{y}.jpg', {
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,

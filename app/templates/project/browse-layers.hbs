@@ -1,3 +1,4 @@
+{{#if isEditing}}
 <div class="cotainer">
     <div class="browse-pane">
         {{browse-text getResults='getResults'}}
@@ -9,3 +10,4 @@
         {{browse-institution model=institutions getResults='getResults'}}
     </div>
 </div>
+{{/if}}

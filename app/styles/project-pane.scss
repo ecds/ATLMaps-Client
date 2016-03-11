@@ -16,7 +16,7 @@
         h1 {
             font-size: 2em;
         }
-        
+
         article {
             padding: 2em;
         }
@@ -84,27 +84,6 @@
             // #show-layers {
             //     display: none;
             // }
-            .toggle {
-                margin: 0 1em;
-            }
-            span.toggle_label {
-                font-size: .75em;
-                top: 2.25em;
-                // width: 100%;
-                position: absolute;
-            }
-
-            span.toggle_label:after {
-                content: 'Hide Layers';
-            }
-
-            span.toggle_label.off:after {
-                content: 'Show Layers';
-            }
-
-            label .toggle:after {
-              top: -3px;
-            }
         }
 
         .reorder {

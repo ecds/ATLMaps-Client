@@ -1,3 +1,9 @@
+
+<section id="base-map" class="fullscreen-map">
+	<div id='map'></div>
+	<div class="base-layer-controls"></div>
+</section>
+
 <nav class="row">
 	{{#link-to 'projects' tagName='a' class="back-link" title="Back to All Projects"}}
 		<span class="back-button"><i class="material-icons">keyboard_backspace</i></span>
@@ -28,9 +34,11 @@
 		{{#link-to "project.info" class="btn btn-default" id='project-info' title="Project Description"}}
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		{{/link-to}}
+		{{#if isEditing}}
 			{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
 				<span class="nav-icon"><i class="material-icons">search</i></span>
 			{{/link-to}}
+		{{/if}}
 		{{#link-to "project.vector-layers" class="btn btn-default" id='vector-data' title="Pinpoint Layers"}}
 			<span class="nav-icon"><i class="material-icons atlmaps-ext database"></i></span><span class="badge vector-badge">{{model.vector_layer_project_ids.length}}</span>
 		{{/link-to}}
@@ -55,5 +63,5 @@
 	</div>
 	<div class="col-md-8"></div>
 </div>
-<a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a>
+<!-- <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{partial 'marker-data-window'}}
