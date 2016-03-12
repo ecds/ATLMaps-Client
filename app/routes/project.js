@@ -20,9 +20,12 @@ export default Ember.Route.extend({
     // },
 
 	// Remove all layers when we leave the `project` route.
-	deactivate(){
-		Ember.$('.atLayer').remove();
-	},
+	// deactivate(){
+	// 	Ember.$('.atLayer').remove();
+	// },
+	clearMap: function(){
+	    this.set('mapObject.map', '');
+	}.on('deactivate'),
 
 	// setHeadTags: function (model) {
 	// 	var headTags = [{
@@ -57,13 +60,12 @@ export default Ember.Route.extend({
 
 	        var _this = this;
 
-			// var map = this.get('mapObject').get('map');
-			// Ember.$('#map').show();
-			// map._onResize();
-
             Ember.run.scheduleOnce('afterRender', function() {
+				console.log('doing this again')
 				//TODO Get rid of this `initProjectUI` bs.
                 _this.send('initProjectUI', _this.modelFor('project'));
+
+				if(!_this.get('mapObject').map){
 
 				// Create the Leaflet map.
 				let map = _this.get('mapObject').createMap();
@@ -134,6 +136,10 @@ export default Ember.Route.extend({
 					var controlDiv = control.onAdd(map);
 					Ember.$('.base-layer-controls').append(controlDiv);
 				// }
+			}
+			else {
+				console.log('map exists');
+			}
 			});
 	    },
 

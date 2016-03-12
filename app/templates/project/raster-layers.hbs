@@ -1,10 +1,10 @@
-<section class="cotainer">
+<div class="cotainer">
     {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}}
-    <section class="row">
-        <section class="col-md-8">
+    <div class="row">
+        <div class="col-md-8">
             <h3>Archival Map Layers</h3>
-        </section>
-        <section class="col-md-4">
+        </div>
+        <div class="col-md-4">
             <div class="togglebutton opacity">
             	<label>
             		<input id="toggle-layer-opacity" type="checkbox" checked="checked"/>
@@ -12,15 +12,19 @@
             			<span id="show-hide-layers" class="toggle_label"></span>
             	</label>
             </div>
-        </section>
-</section>
+        </div>
+</div>
     <div class="raster-list" id="layer_sort">
         {{#each model.sortedRasterLayers as |layer|}}
             <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-10">
-                            <h4><a {{action 'showLayerInfoDetals' layer}}>{{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}} - {{layer.id}} - {{layer.position}}</a></h4>
+                            <h4>
+                                <a {{action 'showLayerInfoDetals' layer}}>
+                                    {{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}
+                                </a>
+                            </h4>
                         </div>
                         <div class="col-md-2 reorder">
                             <i class="material-icons handle pull-right">code</i>
@@ -67,4 +71,4 @@
       </div>
       {{/each}}
     </div> -->
-</section>
+</div>

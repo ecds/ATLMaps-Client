@@ -59,8 +59,7 @@
 span.toggle_label {
     font-size: .75em;
     top: 2.25em;
-    padding-left: .25em;
-    // width: 100%;
+    padding-left: 15%;
     position: absolute;
 }
 
@@ -74,4 +73,8 @@ span.toggle_label.off:after {
 
 label .toggle:after {
   top: -3px;
+}
+
+.togglebutton.opacity.vector {
+    left: 0 !important;
 }
