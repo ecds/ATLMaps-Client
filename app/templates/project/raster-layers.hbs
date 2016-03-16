@@ -1,15 +1,15 @@
 <div class="cotainer">
     {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}}
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row layer-heading">
+        <div class="col-md-9">
             <h3>Archival Map Layers</h3>
         </div>
-        <div class="col-md-4">
-            <div class="togglebutton opacity">
+        <div class="col-md-3">
+            <div class="togglebutton opacity toggle-all pull-right">
             	<label>
             		<input id="toggle-layer-opacity" type="checkbox" checked="checked"/>
             			<span class="toggle"></span>
-            			<span id="show-hide-layers" class="toggle_label"></span>
+            			<!-- <span id="show-hide-layers" class="toggle_label"></span> -->
             	</label>
             </div>
         </div>
@@ -40,7 +40,7 @@
                         {{layer-citation layer = layer.raster_layer_id}}
                         {{#if isEditing}}
                         <footer class="row">
-                            <div class="col-md-8"></div>
+                            <div class="col-md-8">{{layer.raster_layer_id}}</div>
                             <div class="col-md-4">
                                 <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.raster_layer_id 'raster' }}><i class="material-icons">close</i></a>
                             </div>

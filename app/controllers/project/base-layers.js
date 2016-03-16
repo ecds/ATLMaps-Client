@@ -11,6 +11,6 @@ export default Ember.Controller.extend({
 
     successMessage: 'I <3 burritos!',
 
-    failMessage: "I don't like eggplan.",
+    failMessage: "I don't like eggplant.",
 
 });

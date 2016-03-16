@@ -12,7 +12,21 @@ export default Ember.Route.extend({
     },
 
 	model(params){
-		return this.store.find('project', params.project_id);
+		if (params.project_id === 'explore') {
+			return this.store.createRecord('project', {
+                name: 'Explore',
+                published: false,
+                center_lat: 33.75440100,
+                center_lng: -84.3898100,
+                zoom_level: 13,
+                default_base_map: 'street',
+				exploring: true,
+				description: 'Here we say something about how they can play around but nothing will be saved.'
+            });
+		}
+		else {
+			return this.store.find('project', params.project_id);
+		}
 	},
 
 	// setupController(controller, model){
@@ -61,85 +75,78 @@ export default Ember.Route.extend({
 	        var _this = this;
 
             Ember.run.scheduleOnce('afterRender', function() {
-				console.log('doing this again')
 				//TODO Get rid of this `initProjectUI` bs.
-                _this.send('initProjectUI', _this.modelFor('project'));
+                // _this.send('initProjectUI', _this.modelFor('project'));
 
 				if(!_this.get('mapObject').map){
 
-				// Create the Leaflet map.
-				let map = _this.get('mapObject').createMap();
+					// Create the Leaflet map.
+					let map = _this.get('mapObject').createMap();
 
-				// Add all the vector layers to the map.
-				project.get('vector_layer_project_ids').then(function(vectors){
-					vectors.forEach(function(vector){
-						_this.get('mapObject').mapLayer(vector);
+					// Add all the vector layers to the map.
+					project.get('vector_layer_project_ids').then(function(vectors){
+						vectors.forEach(function(vector){
+							_this.get('mapObject').mapLayer(vector);
+						});
 					});
-				});
 
-				// Add all the raster layers to the map.
-				project.get('raster_layer_project_ids').then(function(rasters){
-					rasters.forEach(function(raster){
-						_this.get('mapObject').mapLayer(raster);
+					// Add all the raster layers to the map.
+					project.get('raster_layer_project_ids').then(function(rasters){
+						rasters.forEach(function(raster){
+							_this.get('mapObject').mapLayer(raster);
+						});
 					});
-				});
 
-				// Pan and zoom the map for the project.
-				map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
-				map.setZoom(project.get('zoom_level'));
+					// Pan and zoom the map for the project.
+					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
+					map.setZoom(project.get('zoom_level'));
 
-				// Add some base layers
-				let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-					attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-					detectRetina: true
-				});
+					// Add some base layers
+					let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+						attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
+						detectRetina: true
+					});
 
-				let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-					attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-					subdomains: '1234',
-					detectRetina: true
-				});
+					let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+						attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
+						subdomains: '1234',
+						detectRetina: true
+					});
 
-				// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-				//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-				//     subdomains: '1234',
-				//     mapID: 'newest',
-				//     app_id: '1Igi60ZMWDeRNyjXqTZo',
-				//     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-				//     base: 'base',
-				//     maxZoom: 20
-				// });
+					// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+					//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+					//     subdomains: '1234',
+					//     mapID: 'newest',
+					//     app_id: '1Igi60ZMWDeRNyjXqTZo',
+					//     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+					//     base: 'base',
+					//     maxZoom: 20
+					// });
 
-				// Add the project's base map
-				try {
-					if (project.get('default_base_map') === 'satellite') {
-						satellite.addTo(map);
+					// Add the project's base map
+					try {
+						if (project.get('default_base_map') === 'satellite') {
+							satellite.addTo(map);
+						}
+						else {
+							osm.addTo(map);
+						}
 					}
-					else {
+					catch(err) {
 						osm.addTo(map);
 					}
-				}
-				catch(err) {
-					osm.addTo(map);
-				}
 
-				var baseMaps = {
-					"street": osm,
-					"satellite": satellite
-				};
+					var baseMaps = {
+						"street": osm,
+						"satellite": satellite
+					};
 
-				var control = L.control.layers(baseMaps,null,{collapsed:false});
-				control._map = map;
+					var control = L.control.layers(baseMaps,null,{collapsed:false});
+					control._map = map;
 
-				// We need to check if the layer controls are already added to the DOM.
-				// if (Ember.$('.leaflet-control-layers').length === 0) {
 					var controlDiv = control.onAdd(map);
 					Ember.$('.base-layer-controls').append(controlDiv);
-				// }
-			}
-			else {
-				console.log('map exists');
-			}
+				}
 			});
 	    },
 
@@ -216,45 +223,55 @@ export default Ember.Route.extend({
 
             project.get(format+'_layer_project_ids').addObject(newLayer);
 
-            newLayer.save().then(function(){
-                // Add the map to the view
-                _this.get('mapObject').mapLayer(newLayer);
-                // Show a success message.
-                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                // Ember.run.later(this, function(){
-                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                // }, 3000);
-            }, function(){
-                // _this.controllerFor('project/browse-layers').set('editFail', true);
-                // Ember.run.later(this, function(){
-                //     _this.controllerFor('project/browse-layers').set('editFail', false);
-                // }, 3000);
-            });
+			if(this.get('session.isAuthenticated')){
+	            newLayer.save().then(function(){
+	                // Add the map to the view
+	                _this.get('mapObject').mapLayer(newLayer);
+	                // Show a success message.
+	                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+	                // Ember.run.later(this, function(){
+	                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+	                // }, 3000);
+	            }, function(){
+	                // _this.controllerFor('project/browse-layers').set('editFail', true);
+	                // Ember.run.later(this, function(){
+	                //     _this.controllerFor('project/browse-layers').set('editFail', false);
+	                // }, 3000);
+	            });
+			}
+			else if (project.may_edit) {
+				_this.get('mapObject').mapLayer(newLayer);
+			}
 
         },
 
         removeLayer(layer, format) {
-			console.log(layer);
             const project = this.modelFor('project');
-            // Get the join between layer and project
-            this.store.queryRecord(format+'-layer-project', {
-                project_id: project.id,
-                raster_layer_id: layer.id
-            }).then(function(layerToRemove){
+			let _this = this;
+			// Build a hash for the query. We do this because one key will need
+			// to equal the `format` var.
+			let attrs = {};
+			let layer_id = format+'_layer_id';
+			attrs[layer_id] = layer.get('id');
+			attrs['project_id'] = project.id;
+			// Get the join between layer and project
+            this.store.queryRecord(format+'-layer-project',
+				attrs
+            ).then(function(layerToRemove){
                 // Remove the object from the DOM
                 project.get(format+'_layer_project_ids').removeObject(layerToRemove);
                 // Delete the record from the project
                 layerToRemove.destroyRecord().then(function(){
                     // Set active to false
                     layer.set('active_in_project', false);
-                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                    // Ember.run.later(this, function(){
-                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                    //     // Remove the map from the view
-                    //     Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
-                    //         Ember.$(this).remove();
-                    //     });
-                    // }, 3000);
+                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    Ember.run.later(this, function(){
+                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                        // Remove the layer from the map
+                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+                            Ember.$(this).remove();
+                        });
+                    }, 3000);
                 }, function(){
                     // _this.controllerFor('project/browse-layers').set('editFail', true);
                     // Ember.run.later(this, function(){
@@ -263,6 +280,7 @@ export default Ember.Route.extend({
                 });
             });
         },
+
 
     },
 

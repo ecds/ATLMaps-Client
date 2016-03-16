@@ -71,13 +71,13 @@
     width: 93%;
 }
 
-// .noUi-handle {
-//   background-color: #ffb74d !important;
-//   border-color: #ffb74d !important;
-// }
+.noUi-handle {
+  background-color: material-color(deeporangealt, 200) !important;
+  border-color: material-color(deeporangealt, 200) !important;
+}
 
 .noUi-origin {
-  background-color: #ffb74d;
+  background-color: material-color(deeporangealt, 200);
 }
 
 .noUi-horizontal {

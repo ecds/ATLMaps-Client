@@ -69,28 +69,11 @@
             pointer-events: all;
         }
 
+        .layer-heading {
+            padding-right: .75em;
+        }
+
         // Raster Panel Toggle Stuff
-        .togglebutton.opacity{
-            top: 15px;
-            left: 50px;
-            position: relative;
-            min-height: 60px;
-            font-weight: 400;
-
-            // #hide-layers {
-            //     background-color: #ffb74d;
-            // }
-            //
-            // #show-layers {
-            //     display: none;
-            // }
-        }
-
-        .togglebutton.vector {
-            top: 9px;
-            min-height: 0;
-        }
-
         .reorder {
             padding: 0;
         }

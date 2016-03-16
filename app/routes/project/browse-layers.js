@@ -12,7 +12,7 @@ export default Ember.Route.extend({
             yearRange: this.store.find('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
-            searchResults: this.store.findAll('search'),
+            // searchResults: this.store.findAll('search'),
             project: this.modelFor('project')
         });
     },
@@ -28,9 +28,15 @@ export default Ember.Route.extend({
 
     actions: {
 
+        didTransition() {
+            // Show the results pane when we enter the the route.
+            this.send('getResults');
+            return true;
+        },
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(){
+            this.setProperties({searched: true});
             return this.render('components/browse-results', {
                 outlet: 'browse-results',
                 into: 'project', // Want it to open in the project view
@@ -46,7 +52,6 @@ export default Ember.Route.extend({
         },
 
         showResults(show){
-            console.log(show);
             if (show === 'vector') {
                 this.controllerFor('project/browse-layers').set('rastersActive', false);
                 // this.setProperties({rastersActive: false});

@@ -6,7 +6,6 @@ export default Ember.Component.extend({
 
     actions: {
         checkInstitution(institution){
-            console.log(institution.get('name'));
             if (institution.get('checked') === true) {
                 this.get('browseParams').removeInstution(institution);
             }

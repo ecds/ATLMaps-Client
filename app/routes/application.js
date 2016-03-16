@@ -3,14 +3,15 @@ import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
-	mapObject: Ember.inject.service('map-object'),
+	// mapObject: Ember.inject.service('map-object'),
 
-	model(){
-		return this.store.query('project', { featured: true});
-	},
+	// model(){
+	// 	return this.store.query('project', { featured: true});
+	// },
 
 	actions: {
 		initProjectUI: function() {
+			return true;
             // var _this = this;
 
             //Ember.run.scheduleOnce('afterRender', function() {
@@ -80,19 +81,19 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 //     _this.send('activateVectorCard');
                 // });
 
-                // Iniatate the dragging
-                var draggie = new Draggabilly( '.draggable', {
-                    handle: '.drag-window'
-                });
-
-                // Draggabilly adds a style of position = relative to the
-                // element. This prevents the abality to click through where
-                // the div was originally. So we change it to absolute.
-                draggie.element.style.position = 'absolute';
-
-                draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
-
-                Ember.$('.marker-data').resizeThis({ noNative: true });
+                // // Iniatate the dragging
+                // var draggie = new Draggabilly( '.draggable', {
+                //     handle: '.drag-window'
+                // });
+				//
+                // // Draggabilly adds a style of position = relative to the
+                // // element. This prevents the abality to click through where
+                // // the div was originally. So we change it to absolute.
+                // draggie.element.style.position = 'absolute';
+				//
+                // draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
+				//
+                // Ember.$('.marker-data').resizeThis({ noNative: true });
 
                 // var raster_layers = model.get('raster_layer_ids');
 
@@ -104,9 +105,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
                 // });
 
                 // Toggle the label for the show/hide all layers switch
-                Ember.$("input#toggle-layer-opacity").change(function(){
-                    Ember.$( "span.toggle_label" ).toggleClass( "off" );
-                });
+                // Ember.$("input#toggle-layer-opacity").change(function(){
+                //     Ember.$( "span.toggle_label" ).toggleClass( "off" );
+                // });
 
             //});
 
@@ -302,9 +303,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 		//
         // },
 
-        snapBack: function(){
-            Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
-        },
+        // snapBack: function(){
+        //     Ember.$(".draggable").animate({left: '0', top:'0', width: '420px'}, 100);
+        // },
 
         // activateVectorCard: function(){
 		//
@@ -329,12 +330,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         //     }
         // },
 
-        closeMarkerInfo: function() {
-            Ember.$("div.marker-data").hide();
-            Ember.$(".active_marker").removeClass("active_marker");
-            Ember.$(".vector-data.card").slideToggle();
-            this.sendAction('activateVectorCard');
-        },
+
 
  	}
 });

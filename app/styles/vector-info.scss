@@ -1,0 +1,71 @@
+.marker-data .is-pointer-down{
+    box-shadow: none;
+    padding: 0;
+  }
+
+.marker-data {
+
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+
+  $max-height-marker-content:50em;
+
+  display: none;
+  padding: 0;
+  max-height: $max-height-marker-content;
+  // overflow: auto;
+  //resize: both;
+  // z-index: 10000;
+  margin: 175px 0 0 75px;
+  // width: 420px;
+  right: inherit;
+  bottom: inherit;
+
+
+  .marker-content {
+    // padding: 1.5em;
+    display:inline-block;
+    height: inherit;
+    max-height: $max-height-marker-content;
+    overflow: scroll;
+    width: 100%;
+    // margin-top: 30px;
+
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0,0,0,.5);
+      -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+
+    iframe{
+      max-width: 100%;
+    }
+
+  }
+
+  .panel-controls{
+    background-color: white;
+    padding: .5em 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+
+
+    .mdi-action-open-with {
+      cursor: -webkit-grab;
+      cursor: -moz-grab;
+    }
+
+    a {
+      color: black;
+    }
+  }
+}

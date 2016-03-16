@@ -17,7 +17,7 @@
 	<div class="project-head container col-md-4">
 		<div class="row {{if isEditing 'project-edit' 'project-view'}}">
 	        <div class="col-md-10 title">
-			          {{model.name}}
+				{{model.name}}
 	        </div>
 	        <div class="col-md-2">
 			{{#if model.may_edit}}
@@ -35,6 +35,11 @@
 			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
 		{{/link-to}}
 		{{#if isEditing}}
+			{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
+				<span class="nav-icon"><i class="material-icons">search</i></span>
+			{{/link-to}}
+		{{/if}}
+		{{#if model.exploring}}
 			{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
 				<span class="nav-icon"><i class="material-icons">search</i></span>
 			{{/link-to}}
@@ -64,4 +69,4 @@
 	<div class="col-md-8"></div>
 </div>
 <!-- <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
-{{partial 'marker-data-window'}}
+{{vector-info}}

@@ -9,7 +9,6 @@ export default Ember.Service.extend({
     init(){
         this._super(...arguments);
         this.set('map', '');
-
     },
 
     createMap(){
@@ -65,7 +64,6 @@ export default Ember.Service.extend({
             let newLayerWorkspace = newLayer.get('workspace');
             let newLayerUrl = newLayer.get('url');
             newLayer.set('active_in_project', true);
-            // let _this = this;
 
             switch(newLayer.get('data_type')) {
 
@@ -137,7 +135,10 @@ export default Ember.Service.extend({
                 case 'line-data':
 
                     function viewData(feature, layer) {
-                        var popupContent = "<h2>"+feature.properties.name+"</h2>";
+                        var popupContent = "";
+                        if (feature.properties.name) {
+                            popupContent += "<h2>"+feature.properties.name+"</h2>";
+                        }
                         if (feature.properties.image) {
                             popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
                             "<span>Photo Credit: "+feature.properties.image.credit+"</span>";
@@ -145,7 +146,7 @@ export default Ember.Service.extend({
                             Ember.$('<img />').load( function(){}).attr('src', feature.properties.image.url);
                         }
                         if (feature.properties.gx_media_links) {
-                            popupContent += '<iframe width="375" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
+                            popupContent += '<iframe width="100%" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
                         }
                         if (feature.properties.images) {
                             popupContent += feature.properties.images;
@@ -153,18 +154,20 @@ export default Ember.Service.extend({
                         if (feature.properties.description) {
                             popupContent += "<p>" + feature.properties.description + "</p>";
                         }
+                        if (feature.properties.NAME) {
+                            popupContent += "<h2>"+feature.properties.NAME+"</h2>";
+                        }
 
                         layer.on('click', function() {
                             // Ember.$(".project-nav").removeClass('active-button');
                             // Ember.$(".project-nav").addClass('transparent-button');
                             // Ember.$('#vector-data').addClass('active-button');
-                            // Ember.$("div.marker-content").empty();
+                            Ember.$("div.marker-content").empty();
                             // Ember.$("div.marker-data").hide();
                             // Ember.$(".card").hide();
                             var $content = Ember.$("<article/>").html(popupContent);
                             Ember.$("div.marker-data").show();
                             Ember.$('div.marker-content').append($content);
-
                             Ember.$(".active_marker").removeClass("active_marker");
                             Ember.$(this._icon).addClass('active_marker');
                         });

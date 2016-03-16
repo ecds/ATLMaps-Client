@@ -1,17 +1,17 @@
 <div class="cotainer">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row layer-heading">
+        <div class="col-md-9">
             <h1>Data Layers</h1>
         </div>
-        <div class="col-md-4">
-            <div class="togglebutton vector opacity">
+        <div class="col-md-3">
+            <div class="togglebutton vector opacity toggle-all">
             	<label>
             		<input id="toggle-all-vectors"
                             type="checkbox"
                             checked="checked"
                             {{action 'toggleAllVectorLayers' checked on="change"}}/>
             			<span class="toggle"></span>
-            			<span id="show-hide-layers" class="toggle_label"></span>
+            			<!-- <span id="show-hide-layers" class="toggle_label"></span> -->
             	</label>
             </div>
         </div>
@@ -33,12 +33,12 @@
                         <div class="col-md-8">
                             <h4>
                                 <a {{action 'showLayerInfoDetals' layer}}>
-                                    {{ if layer.vector_layer_id.title layer.vector_layer_id.title 'Loading...'}}
+                                    {{ if layer.vector_layer_id.title layer.vector_layer_id.title 'Loading...'}}: {{layer.vector_layer_id.id}}
                                 </a>
                             </h4>
                         </div>
 
-                        <div class="togglebutton opacity vector col-md-3">
+                        <div class="togglebutton opacity vector single-vector col-md-3">
                             <label>
                                 <input class="vector-toggle"
                                         type="checkbox"
@@ -58,7 +58,7 @@
                                     {{layer-citation layer = layer.vector_layer_id}}
                                     {{#if isEditing}}
                                     <footer class="row">
-                                        <div class="col-md-8"></div>
+                                        <div class="col-md-8">{{layer.vector_layer_id}}</div>
                                         <div class="col-md-4">
                                             <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.vector_layer_id 'vector' }}><i class="material-icons">close</i></a>
                                         </div>
