@@ -61,7 +61,7 @@
   background: rgb(66, 169, 247);
 }
 
-.slider-material-orange-300 .noUi-handle {
+.slider-material-orange-300 .noUi-handle, .noUi-connect {
   background-color: material-color(deeporangealt, 200);
   border: none;
   cursor: ew-resize;
@@ -76,14 +76,20 @@
   border-color: material-color(deeporangealt, 200) !important;
 }
 
-.noUi-origin {
-  background-color: material-color(deeporangealt, 200);
-}
+// .noUi-base {
+//   background-color: #c8c8c8;
+// }
 
 .noUi-horizontal {
     padding-left: 10px;
 }
 
-.noUi-base, .noUi-background {
+.noUi-base {
   background: material-color(deeporangealt, 100);
+}
+
+.year-slider {
+    .noUi-base {
+        background-color: #c8c8c8;
+    }
 }

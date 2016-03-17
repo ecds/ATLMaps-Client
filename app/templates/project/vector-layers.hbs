@@ -4,7 +4,8 @@
             <h1>Data Layers</h1>
         </div>
         <div class="col-md-3">
-            <div class="togglebutton vector opacity toggle-all">
+
+            <div class="togglebutton vector opacity toggle-all {{unless model.vector_layer_project_ids "disabled"}}">
             	<label>
             		<input id="toggle-all-vectors"
                             type="checkbox"

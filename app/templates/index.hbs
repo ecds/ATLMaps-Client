@@ -35,7 +35,9 @@
       <hr />
 
       <div class="list-group col-sm-10 col-sm-offset-1">
-
+          {{#if model.isPending}}
+            <h2>Loading...</h2>
+          {{else}}
           {{#each model as |project|}}
 
                    <div class="list-group-item col-md-6 project-group-item">
@@ -59,7 +61,7 @@
                  {{else}}
                    <p>There are no projects visible at this time :(</p>
          {{/each}}
-
+          {{/if}}
       </div>
     </article>
   </div>

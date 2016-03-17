@@ -28,6 +28,7 @@ export default Ember.Component.extend({
     actions: {
         close(){
             Ember.$("div.marker-data").hide();
+            Ember.$(".active_marker").removeClass();
         }
     }
 });

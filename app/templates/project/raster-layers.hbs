@@ -5,7 +5,7 @@
             <h3>Archival Map Layers</h3>
         </div>
         <div class="col-md-3">
-            <div class="togglebutton opacity toggle-all pull-right">
+            <div class="togglebutton opacity toggle-all pull-right {{unless model.raster_layer_project_ids "disabled"}}">
             	<label>
             		<input id="toggle-layer-opacity" type="checkbox" checked="checked"/>
             			<span class="toggle"></span>
