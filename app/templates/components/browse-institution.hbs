@@ -4,9 +4,15 @@
     {{#each model as |institution|}}
         <div class="checkbox institution">
             <label>
-                <input type="checkbox" class='inst-check' id="{{institution.slug}}" name="{{institution.name}}" onchange={{action "checkInstitution" institution}} />
+                <input type="checkbox"
+                    class='inst-check'
+                    id="{{institution.slug}}"
+                    name="{{institution.name}}"
+                    checked="{{if institution.checked "checked" flase}}"
+                    onchange={{action "checkInstitution" institution}} />
+
                 <span class="check"></span>
-                {{institution.name}}
+                {{institution.name}} {{institution.checked}}
             </label>
         </div>
     {{/each}}
