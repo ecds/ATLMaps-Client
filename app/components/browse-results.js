@@ -1,12 +1,3 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-
-    // actions: {
-        didUpdate(){
-            console.log('hi');
-        }
-
-    // }
-
-});
+export default Ember.Component.extend({});

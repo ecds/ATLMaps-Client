@@ -38,6 +38,13 @@ export default Ember.Component.extend({
             _this.get('browseParams').setYearSearch(min, max);
             _this.sendAction('getResults');
         });
+
+        // Make reference so we can destory it when we remove the element.
+        Ember.set(this, 'rangeSlider', rangeSlider)
     },
+
+    willDestroyElement(){
+        this.get('rangeSlider').noUiSlider.destroy();
+    }
 
 });

@@ -33,7 +33,9 @@
 
 
                     <div class="row">
-                        {{opacity-slider layer=layer.raster_layer_id}}
+                        {{#if layer.raster_layer_id.slider_id}}
+                            {{opacity-slider layer=layer.raster_layer_id}}
+                        {{/if}}
                     </div>
                     {{#liquid-if layer.clicked}}
                         <article>{{layer.raster_layer_id.description}}</article>

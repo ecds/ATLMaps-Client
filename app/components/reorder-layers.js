@@ -8,9 +8,9 @@ export default Ember.Component.extend({
 	*/
 
 	didInsertElement: function(){
-		var el = document.getElementById("layer_sort");
-		var _this = this;
-		Sortable.create(el, {
+		let el = document.getElementById("layer_sort");
+		let _this = this;
+		let sortable = Sortable.create(el, {
 			handle: '.handle',
 			animation: 150,
 			ghostClass: "sorting",
@@ -34,5 +34,11 @@ export default Ember.Component.extend({
 				});
 			}
 		});
+
+		Ember.set(this, 'sortable', sortable);
+	},
+
+	willDestroyElement(){
+		this.get('sortable').destroy();
 	}
 });

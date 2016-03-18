@@ -3,26 +3,18 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    // // Iniatate the dragging
-    // var draggie = new Draggabilly( '.draggable', {
-    //     handle: '.drag-window'
-    // });
-    //
-    // // Draggabilly adds a style of position = relative to the
-    // // element. This prevents the abality to click through where
-    // // the div was originally. So we change it to absolute.
-    // draggie.element.style.position = 'absolute';
-    //
-    // draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
-    //
-    // Ember.$('.marker-data').resizeThis({ noNative: true });
-
     didInsertElement(){
-        var draggie = new Draggabilly( '.draggable', {
+        let draggie = new Draggabilly( '.draggable', {
             // options
         });
         draggie.element.style.position = 'fixed';
         draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
+        // Make reference to `draggie` so we can destroy it on exit.
+        Ember.set(this, 'draggie', draggie);
+    },
+
+    willDestroyElement(){
+        this.get('draggie').destroy();
     },
 
     actions: {

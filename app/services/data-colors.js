@@ -30,7 +30,6 @@ export default Ember.Service.extend({
                 "deep-orange-700",
                 "deep-purple-300",
                 "deep-purple-400",
-                "deep-purple-50",
                 "deep-purple-500",
                 "deep-purple-600",
                 "green-300",
