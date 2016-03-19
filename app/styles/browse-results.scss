@@ -1,437 +1,79 @@
-@import "variables.scss";
+// .results {
+//     position: absolute;
+//     left: 450px;
+//
+//     .btn-group {
+//         margin: 0;
+//     }
+//
+//     .browse-results {
+//         margin: 0;
+//
 
-.results-nav {
-  position: fixed;
-  left: 480px;
-  width: 60%;
-  top: 70px;
-
-  i {
-    font-size: 4em;
-  }
-
-  .badge {
-      background-color: $blue !important;
-      font-size: 1.25em;
-  }
-
-  .vector-badge {
-    margin-bottom: 1.6em !important;
-  }
-
-  .nav-icon {
-    font-size: 2em;
-  }
-
-  // a.btn {
-  //   background-color: whitesmoke;
-  // }
-
-  .active-result-tab {
-    background-color: white !important;
-    opacity: 1 !important;
-  }
-
-}
-.browse-results {
-  position: fixed;
-  left: 480px;
-  width: 60%;
-  overflow-y: auto;
-  top: 163px;
-  max-height: 80%;
-
-  .results-loading {
-    width: 100%;
-    background-color: white;
-    margin: auto;
-
-    img {
-      display: block;
-      margin: 0 auto;
-      clear: right;
-      padding: 1em 0;
-    }
-   }
-
-  ul {
-    // padding: 1em !important;
-    background: white;
-  }
-
-  .name {
-      font-size: 1em;
-  }
-  ul {
-      background-color: inherit;
-  }
-}
-
-.no-results {
-    padding: 1em;
-    background-color: white;
-    color: #ff5722;
-}
-
-#new-search {
-    width: 60%;
-    position: fixed;
-    left: 480px;
-    display: block;
-    color: inherit;
-    top: 163px;
-}
-
-
-div.layer-search {
-  input#search-field {
-    width: 85%;
-    margin-right: 0;
-  }
-  .btn {
-    margin: 0;
-    right: 10px;
-    padding: .25em 0.85em
-  }
-}
-
-
-.browse {
-    .browse-nav {
-        position: absolute;
-        height: 86%;
-        top: 55px;
-        width: 25%;
-        background-color: whitesmoke;
-        left: 0;
-        bottom: 0;
-
-        .filter-list {
-            background-color: whitesmoke;
-            margin: .25em 25%;
-            font-size: .75em;
-            font-weight: 400;
-        }
-    }
-
-    .browse-cards {
-        // width: 75%;
-        margin-left: .5em;
-        font-size: .75em;
-        // padding-bottom: 10px;
-
-        .institution {
-            label {
-                padding: .5em 0 0 1.75em;
-                font-size: 1em;
-                color: $darkgrey;
-
-                .check {
-                    margin-top: 1px;
-                }
-            }
-
-            input[type=checkbox] ~ .check:before {
-                animation: inst-uncheck 300ms ease-out forwards;
-            }
-
-            input[type=checkbox]:checked ~ .check:before {
-                animation: inst-check 300ms ease-out forwards;
-            }
-
-
-            @keyframes inst-uncheck {
-                0% {
-                    top: -3px;
-                    left: 17px;
-                    width: 10px;
-                    height: 12px;
-                    border-color: $blue;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                    transform: rotate(45deg);
-                }
-                50% {
-                    top: 14px;
-                    left: 17px;
-                    width: 4px;
-                    height: 4px;
-                    transform: rotate(45deg);
-                    border-color: $blue;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                }
-                51% {
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-                100% {
-                    top: 3px;
-                    left: 12px;
-                    width: 12px;
-                    height: 12px;
-                    transform: rotate(0deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-            }
-
-            @keyframes inst-check {
-                100% {
-                    top: 3px;
-                    left: 17px;
-                    width: 6px;
-                    height: 12px;
-                    transform: rotate(45deg);
-                    border-color: $blue;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                }
-                51% {
-                    border-left: transparent;
-                    border-top-color: transparent;
-                }
-                50% {
-                    top: 14px;
-                    left: 17px;
-                    width: 4px;
-                    height: 4px;
-                    transform: rotate(45deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-                0% {
-                    top: 5px;
-                    left: 10px;
-                    width: 12px;
-                    height: 12px;
-                    transform: rotate(0deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-            }
-
-        }
-
-        .noUi-handle {
-          background-color: #ffb74d !important;
-          border-color: #ffb74d !important;
-        }
-
-        .noUi-origin {
-          background-color: #ffb74d;
-        }
-
-        .noUi-base, .noUi-background {
-          background: #f4f4f4;
-        }
-
-        input {
-          text-align: center;
-        }
-
-        .check {
-            border-color: $check-border-color;
-        }
-
-        .radio input[type=radio]:checked ~ .check {
-            background-color: #03a9f4;
-        }
-        .radio input[type=radio]:checked ~ .circle {
-            border-color: $check-border-color;
-        }
-        .browse-by-tags {
-            min-height: 17em;
-
-            .category {
-                font-size: 1em;
-                // padding-left: .5em;
-
-                a {
-                    color: $darkgrey;
-
-                    span.category-checked {
-
-                        display: inline-block;
-                        width: .75em;
-
-                        i {
-                            font-size: .75em;
-                            font-weight: 600;
-                            display: none;
-                        }
-                    }
-                }
-
-            }
-            .category.active {
-                background-color: $lightgrey;
-                width: 75%;
-                a {
-                    color: $grey;
-                }
-            }
-            .category-checked {
-                font-weight: 600;
-            }
-        }
-
-        label {
-            padding-left: 2em;
-
-        }
-
-        hr {
-            margin: 0;
-        }
-
-        div.browse-form {
-            h1 {
-                font-size: large;
-                margin: 0;
-            }
-        }
-
-        #range {
-            margin-left: .75em;
-        }
-
-        div.checkbox {
-            margin: 0 0 0 -5px;
-        }
-
-        .checkbox.tags label {
-            padding-left: 30px;
-            font-size: .85em;
-            margin-left: 0;
-
-            input[type=checkbox] ~ .check:before {
-                position: absolute;
-                top: 2px;
-                left: 11px;
-                width: 12px;
-                height: 12px;
-                border: solid 2px;
-                border-color: $darkgrey;
-                animation: small-uncheck 300ms ease-out forwards;
-            }
-
-            input[type=checkbox]:checked ~ .check:before {
-                animation: small-check 300ms ease-out forwards;
-            }
-
-            .check:after {
-                height: 20px;
-                width: 20px;
-                left: 9px;
-                top: 0px;
-            }
-
-
-            @keyframes small-uncheck {
-                0% {
-                    top: -3px;
-                    left: 17px;
-                    width: 10px;
-                    height: 12px;
-                    border-color: $grey;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                    transform: rotate(45deg);
-                }
-                50% {
-                    top: 14px;
-                    left: 17px;
-                    width: 4px;
-                    height: 4px;
-                    transform: rotate(45deg);
-                    border-color: $grey;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                }
-                51% {
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-                100% {
-                    top: 3px;
-                    left: 12px;
-                    width: 12px;
-                    height: 12px;
-                    transform: rotate(0deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-            }
-
-            @keyframes small-check {
-                100% {
-                    top: 3px;
-                    left: 17px;
-                    width: 6px;
-                    height: 12px;
-                    transform: rotate(45deg);
-                    border-color: $grey;
-                    border-left-color: transparent;
-                    border-top-color: transparent;
-                }
-                51% {
-                    border-left: transparent;
-                    border-top-color: transparent;
-                }
-                50% {
-                    top: 14px;
-                    left: 17px;
-                    width: 4px;
-                    height: 4px;
-                    transform: rotate(45deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-                0% {
-                    top: 5px;
-                    left: 10px;
-                    width: 12px;
-                    height: 12px;
-                    transform: rotate(0deg);
-                    border-color: $darkgrey;
-                    border-left-color: $darkgrey;
-                    border-top-color: $darkgrey;
-                }
-            }
-        }
-
-    }
-}
-
-.tag-group {
-    display: none;
-    left: 14em;
-    top: 53px;
-    position: absolute;
-    background-color: $lightgrey;
-    height: 42%;
-    width: 43%;
-
-    label {
-        color: $grey;
-    }
-}
-
-// #start_year,
-// #end_year {
-// 	padding: 7px;
-// 	margin: 0 2em;
-// 	width: 4em;
+//
+//         .layer-list-item {
+//             padding: .5em 0;
+//             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+//
+//            article {
+//                font-weight: lighter;
+//                font-size: medium;
+//            }
+//
+//            .institution {
+//                font-size: initial;
+//            }
+//         }
+//     }
 // }
+.browse-results {
+    width: 90%;
+    position: absolute;
+    // right: 40px;
 
-div.year-slider {
-  width: 97%;
+    .btn-group {
+        margin: 0;
+    }
+
+    .results-button {
+        padding: .5em !important;
+        i {
+            font-size: 3.5em;
+        }
+        .badge {
+            font-size: 1em;
+            background-color: material-color(blue, 700) !important;
+        }
+    }
+
+    .no-results {
+        background-color: white;
+        font-size: x-large;
+        padding: 1em;
+    }
+
+    .alert {
+        margin-bottom: 0;
+    }
+
+    .layer-list-item {
+        margin: 0;
+    }
+
+    .layer-list-item:nth-child(even){
+      background: #EEE;
+    }
+
+    .layer-list-item:nth-child(odd){
+      background: white;
+    }
+
+    /*Seperate the list of tags with commas.*/
+    li.tags:after {
+      content: ',';
+    }
+
+    li.tags:last-of-type:after {
+        content: '';
+    }
 }

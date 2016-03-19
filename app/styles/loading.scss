@@ -6,12 +6,12 @@ div.loading {
     padding: 0;
     background-color: white;
     z-index: 2;
-    text-align: center;
     margin-top: 0em;
     height: 100%;
+}
 
-    .ui-loader {
-      top: 30%;
+.ui-loader {
+    top: 30%;
     width: 12.5em;
     opacity: .88;
     box-shadow: 0 1px 1px -1px #fff;
@@ -24,7 +24,7 @@ div.loading {
     text-shadow: 0 1px 0 #f3f3f3;
     position: relative;
     border-radius: .3125em;
+    text-align: center;
     // background-image: url(/assets/images/loaders/Preloader_19.gif);
     // background-repeat: no-repeat;
-    }
 }

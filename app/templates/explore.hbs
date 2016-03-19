@@ -52,7 +52,7 @@
 			{{#each model.raster_layer_ids key="@index" as |layer|}}
 				<div class="list-group-item raster-layer {{layer.slug}}" id="{{layer.slug}}"  layer-id="{{layer.id}}">
 
-					<span class="{{layer.layer_type}} {{layer.slug}}"></span>
+					<span class="{{layer.data_type}} {{layer.slug}}"></span>
 					<a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
 					<span class="handle pull-right"><i class="material-icons reorder">code</i></span>
 					{{opacity-slider layer=layer}}

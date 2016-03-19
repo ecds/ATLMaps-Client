@@ -1,26 +1,66 @@
-<div class="banner pink">
+<div class="banner orange">
     <div class="container">
         <header>
             <h2>Projects</h2>
         </header>
     </div>
 </div>
-<div class="banner pink blurred">
-    <div class="container">
-        <article>
-            {{#if session.isAuthenticated}}
-                <header class="row">
-                    <div class="col-sm-7">
-                        <h2>
-                            <a class="btn btn-info btn-fab" {{action 'createProject'}}><i class="material-icons">add</i></a><span>My Projects</span>
-                        </h2>
-                    </div>
-                </header>
-                <hr/>
-                {{my-projects}}
-                {{my-collaborations}}
-            {{/if}}
-            {{published-projects}}
-        </article>
+<a class="btn btn-fab new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
+<div class="banner orange blurred">
+    <div class="container project-list">
+        {{#if session.isAuthenticated}}
+
+<!-- <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel info</h3>
+        </div>
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div> -->
+
+
+
+        <!-- <div class="well"> -->
+            <header class="row">
+                <div class="col-md-12">
+                    <h4>My Projects</h4>
+                </div>
+            </header>
+            <div class="list-group row">
+                {{#each model.mine as |project|}}
+                {{partial "project-list"}}
+                {{/each}}
+            </div>
+        <!-- </div> -->
+
+        <!-- <div class="well"> -->
+        <hr />
+            <header class="row">
+                <div class="col-md-12"><h4>My Collaborations</h4></div>
+            </header>
+            <div class="list-group row">
+                {{# each model.collaborations as |project|}}
+                {{partial "project-list"}}
+                {{else}}
+                <h3>I don't collaborate <i class="material-icons">headset</i></h3>
+                {{/each}}
+            </div>
+        <!-- </div> -->
+        <hr />
+        {{/if}}
+        <!-- <div class="well"> -->
+            <header class="row">
+                <div class="col-md-12"><h4>Published Projects</h4></div>
+            </header>
+            <div class="list-group row">
+                {{# each model.published as |project|}}
+                {{partial "project-list"}}
+                {{else}}
+                <h3>No awesome projects have been published <i class="material-icons">thumb_down</i></h3>
+                {{/each}}
+            </div>
+        <!-- </div> -->
     </div>
 </div>
+{{liquid-outlet}}

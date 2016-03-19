@@ -9,7 +9,8 @@ export default DS.Model.extend({
     url: DS.attr('string'),
     layer: DS.attr('string'),
     date: DS.attr('date'),
-    layer_type: DS.attr('string'),
+    data_type: DS.attr('string'),
+	data_format: DS.attr('string'),
     zoomlevels: DS.attr('string'),
     minx: DS.attr('number'),
     miny: DS.attr('number'),
@@ -22,5 +23,6 @@ export default DS.Model.extend({
     tag_slugs: DS.attr('string'),
     active: DS.attr('boolean'),
     marker: DS.attr(),
-    active_in_project: DS.attr('boolean')
+    active_in_project: DS.attr('boolean'),
+	vector_layer_project: DS.belongsTo('vector_layer_project', {async: true, inverse: null})
 });

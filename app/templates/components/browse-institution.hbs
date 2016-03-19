@@ -1,0 +1,19 @@
+{{yield}}
+<div class="browse-by-institution browse-form">
+    <h2>Institutions:</h2>
+    {{#each model as |institution|}}
+        <div class="checkbox institution">
+            <label>
+                <input type="checkbox"
+                    class='inst-check'
+                    id="{{institution.slug}}"
+                    name="{{institution.name}}"
+                    checked="{{if institution.checked "checked" flase}}"
+                    onchange={{action "checkInstitution" institution}} />
+
+                <span class="check"></span>
+                {{institution.name}} {{institution.checked}}
+            </label>
+        </div>
+    {{/each}}
+</div>

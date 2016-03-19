@@ -71,7 +71,7 @@ app.import('bower_components/blueimp-md5/js/md5.js');
 app.import('bower_components/resizeThis/resizeThis.js');
 
 app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
-app.import('bower_components/bootstrap-material-design/dist/css/ripples.min.css');
+// app.import('bower_components/bootstrap-material-design/dist/css/ripples.min.css');
 
 module.exports = mergeTrees([
 	app.toTree(),

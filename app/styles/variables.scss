@@ -1,7 +1,81 @@
 $marker-icon: "\e55f";
 $layer-icon: "\e53b";
+$line-icon: "\e922";
 $check-border-color: #0398db;
 $blue: #0091EA;
 $lightgrey: #EEE;
 $grey: #757575;
 $darkgrey: #212121;
+
+$colors: (
+  red:(
+    50:#FFEBEE,
+    100:#FFCDD2,
+    200:#EF9A9A,
+    300:#E57373,
+    400:#EF5350,
+    500:#F44336,
+    600:#E53935,
+    700:#D32F2F,
+    800:#C62828,
+    900:#B71C1C,
+  ),
+  pink:(
+    50:#FCE4EC,
+    100:#F8BBD0,
+    200:#F48FB1,
+    300:#F06292,
+    400:#EC407A,
+    500:#E91E63,
+    600:#D81B60,
+    700:#C2185B,
+    800:#AD1457,
+    900:#880E4F,
+  ),
+  blue:(
+      50:#E1F5FE,
+      100:#B3E5FC,
+      200:#81D4FA,
+      300:#4FC3F7,
+      400:#29B6F6,
+      500:#03A9F4,
+      600:#039BE5,
+      700:#0288D1,
+      800:#0277BD,
+      900:#01579B,
+  ),
+  grey:(
+    50:#FAFAFA,
+    100:#FAFAFA,
+    200:#EEEEEE,
+    300:#E0E0E0,
+    400:#BDBDBD,
+    500:#9E9E9E,
+    600:#757575,
+    700:#616161,
+    800:#424242,
+    900:#212121
+  ),
+  orangealt:(
+    100:#FFD180,
+    200:#FFAB40,
+    400:#FF9100,
+    700:#FF6D00
+  ),
+  deeporangealt:(
+    100:#FF9E80,
+    200:#FF6E40,
+    400:#FF3D00,
+    700:#DD2C00,
+  ),
+  white:#fff,
+  black:#000,
+);
+@function material-color($h,$l:false) {
+  @if $l {
+    @return map-get(map-get($colors, $h), $l);
+  }
+  @else {
+    @return map-get($colors, $h);
+  }
+}

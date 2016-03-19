@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
+// This is a legacy route that we are going to keep around as some grant
+// applications have links with this route.
+
 export default Ember.Route.extend({
     actions: {
-        showIntro: function() {
-            this.setProperties({isShowingIntroModal: true});
+        didTransition: function(){
+            this.transitionTo('project.info');
         }
     }
 });

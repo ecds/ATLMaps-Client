@@ -1,0 +1,76 @@
+<div class="cotainer">
+    {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}}
+    <div class="row layer-heading">
+        <div class="col-md-9">
+            <h3>Archival Map Layers</h3>
+        </div>
+        <div class="col-md-3">
+            <div class="togglebutton opacity toggle-all pull-right {{unless model.raster_layer_project_ids "disabled"}}">
+            	<label>
+            		<input id="toggle-layer-opacity" type="checkbox" checked="checked"/>
+            			<span class="toggle"></span>
+            			<!-- <span id="show-hide-layers" class="toggle_label"></span> -->
+            	</label>
+            </div>
+        </div>
+</div>
+    <div class="raster-list" id="layer_sort">
+        {{#each model.sortedRasterLayers as |layer|}}
+            <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>
+                                <a {{action 'showLayerInfoDetals' layer}}>
+                                    {{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="col-md-2 reorder">
+                            <i class="material-icons handle pull-right">code</i>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        {{#if layer.raster_layer_id.slider_id}}
+                            {{opacity-slider layer=layer.raster_layer_id}}
+                        {{/if}}
+                    </div>
+                    {{#liquid-if layer.clicked}}
+                        <article>{{layer.raster_layer_id.description}}</article>
+                        {{layer-citation layer = layer.raster_layer_id}}
+                        {{#if isEditing}}
+                        <footer class="row">
+                            <div class="col-md-8">{{layer.raster_layer_id}}</div>
+                            <div class="col-md-4">
+                                <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.raster_layer_id 'raster' }}><i class="material-icons">close</i></a>
+                            </div>
+                        </footer>
+                        {{/if}}
+                    {{/liquid-if}}
+                </div>
+            </div>
+        {{else}}
+            No data layers have been added.
+        {{/each}}
+    </div>
+    <!-- <div class="list-group" id="layer_sort">
+        {{#each model.sortedRasterLayers as |layer|}}
+      <div class="list-group-item">
+        <div class="row-action-primary">
+          <i class="material-icons">layers</i>
+        </div>
+        <div class="row-content">
+          <div class="action-secondary handle pull-right"><i class="material-icons">code</i></div>
+          <h4 class="list-group-item-heading">
+              <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
+          </h4>
+
+          <p class="list-group-item-text">{{layer.description}}</p>
+          {{partial 'citation'}}
+        </div>
+      </div>
+      {{/each}}
+    </div> -->
+</div>

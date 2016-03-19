@@ -9,7 +9,8 @@ export default DS.Model.extend({
   workspace: DS.attr('string'),
   layer: DS.attr('string'),
   date: DS.attr('date'),
-  layer_type: DS.attr('string'),
+  data_type: DS.attr('string'),
+  data_format: DS.attr('string'),
   zoomlevels: DS.attr('string'),
   minx: DS.attr('number'),
   miny: DS.attr('number'),
@@ -25,5 +26,6 @@ export default DS.Model.extend({
   active_in_project: DS.attr('boolean'),
   slider_id: DS.attr('string'),
   slider_value_id: DS.attr('string'),
-  position_in_project: DS.attr('')
+  position_in_project: DS.attr(''),
+  raster_layer_project: DS.belongsTo('raster_layer_project', {async: true, inverse: null})
 });

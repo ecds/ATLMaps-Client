@@ -1,13 +1,10 @@
-<div class="marker-data draggable">
-	<div class="panel-controls btn-group btn-group-justified">
-
-		<a {{action "snapBack" }} title="Snap Back" class="btn btn-default"><i class="material-icons">arrow_back</i></a>
-
-		<a href="javascript:void(0)" class="btn btn-default drag-window" title="Move"><i class="material-icons">open_with</i></a>
-
-		<a {{action "closeMarkerInfo" }} title="Close" class="btn btn-default"><i class="material-icons">clear</i></a>
-
+<div class="marker-data draggable modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" click={{action "closeMarkerInfo"}}>×</button>
+			</div>
+			<div class="marker-content modal-body"></div>
+		</div>
 	</div>
-	<div class="marker-content"></div>
 </div>
-<hr />

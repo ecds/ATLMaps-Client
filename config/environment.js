@@ -7,6 +7,11 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+
+    flashMessageDefaults: {
+        extendedTimeout: 2000
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -58,7 +63,7 @@ module.exports = function(environment) {
     'connect-src': "'self' http://api.atlmaps-dev.com:3000 http://api.atlmaps-dev.org https://api.atlmaps.com https://s3.amazonaws.com http://vimeo.com https://vimeo.com",
     'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
     'media-src': "'self'",
-    'img-src': "*",
+    'img-src': "'self' *: *",
     'frame-src': "'self' http://www.youtube.com https://www.youtube.com"
   };
 

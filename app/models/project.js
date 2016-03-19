@@ -14,8 +14,8 @@ export default DS.Model.extend({
     featured: DS.attr('boolean'),
     user: DS.attr(),
     layer_ids: DS.hasMany('layer', {async: true}),
-    raster_layer_ids: DS.hasMany('raster_layer', {async: true}),
-    vector_layer_ids: DS.hasMany('vector_layer', {async: true}),
+	raster_layer_project_ids: DS.hasMany('raster_layer_project', {async: true}),
+    vector_layer_project_ids: DS.hasMany('vector_layer_project', {async: true}),
     slug: DS.attr('string'),
     owner: DS.attr(),
     is_mine: DS.attr('boolean'),
@@ -25,6 +25,11 @@ export default DS.Model.extend({
 	media: DS.attr('string'),
 	template_id: DS.attr('number'),
 
-	sortedRasterLayers: Ember.computed.sort('raster_layer_ids', '_positionSort'),
-    _positionSort: ['position:asc']
+	// Attribute that will be set to true if a user is "exploring".
+	exploring: DS.attr('boolean', { defaultValue: false }),
+
+	// TODO remember how this actually works and document it.
+	// Computed property that sorts rasters by on the position their `position` in the project.
+	sortedRasterLayers: Ember.computed.sort('raster_layer_project_ids', '_positionSort'),
+    _positionSort: ['position:desc']
 });

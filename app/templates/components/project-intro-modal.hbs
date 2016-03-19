@@ -1,6 +1,6 @@
-<a {{action 'showIntro'}}>Show introduction.</a>
+<a {{action 'showIntro'}}>Show introduction</a>
 
-{{#if isShowingIntroModal}}
+{{#unless seen}}
 	{{#modal-dialog close="hideIntro" alignment="left" translucentOverlay=true container-class="project-intro"}}
     <div class="container-fluid">
         <div class="row title">
@@ -9,10 +9,10 @@
                 <h2>By: {{project.owner}}</h2>
             </div>
             <div class="col-md-2">
-                <a {{action 'hideIntro'}} class="mdi-action-highlight-remove pull-right close-button"></a>
+                <a {{action 'hideIntro'}} class="pull-right close-button"><i class="material-icons">highlight_off</i></a>
             </div>
         </div>
-        <div class="intro-body">
+        <div class="intro-body row">
         {{#if this.av}}
 
                 <div class="intro-text col-md-6">
@@ -36,20 +36,19 @@
         </div>
 
         <div class="row intro-controls">
-            <div class="col-md-12">
-                <div class="checkbox pull-right">
-                    <label>
-                        <!-- {{input type="checkbox" id="dont-show" checked=this.notShowingIntro}} -->
-						 <input type="checkbox" id="dont-show" checked={{this.notShowingIntro}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
-                        <span class="check"></span>
-                        Don't show automatically.
-                    </label>
-                </div>
-                <div class="text-center explore-button">
-                    <a class="btn btn-info" {{action 'hideIntro'}}>Explore Project</a>
-                </div>
+			<div class="col-md-4"></div>
+            <div class="text-center explore-button col-md-4">
+                <a class="btn btn-info" {{action 'hideIntro'}}>Explore Project</a>
+            </div>
+            <div class="col-md-4 checkbox pull-right">
+                <label>
+                    <!-- {{input type="checkbox" id="dont-show" checked=this.surpressed}} -->
+					 <input type="checkbox" id="dont-show" checked={{this.surpressed}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
+                    <span class="check"></span>
+                    Don't show every time.
+                </label>
             </div>
         </div>
     </div>
 	{{/modal-dialog}}
-{{/if}}
+{{/unless}}
