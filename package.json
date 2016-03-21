@@ -47,7 +47,8 @@
     "ember-lazy-video": "git://github.com/poteto/ember-lazy-video.git#develop",
     "ember-modal-dialog": "0.7.5",
     "ember-simple-auth": "1.0.1",
-    "liquid-fire": "0.23.0"
+    "liquid-fire": "0.23.0",
+    "silent-error": "^1.0.0"
   },
   "dependencies": {}
 }
