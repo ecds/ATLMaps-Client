@@ -40,7 +40,7 @@ export default Ember.Component.extend({
         });
 
         // Make reference so we can destory it when we remove the element.
-        Ember.set(this, 'rangeSlider', rangeSlider)
+        Ember.set(this, 'rangeSlider', rangeSlider);
     },
 
     willDestroyElement(){
