@@ -216,7 +216,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
             // But we don't want the `.edit` junk on `route` when doing lookups.
             route = route.replace('\.edit', '');
 
-			console.log(route)
+			console.log(route);
 
             layer.set('active_in_project', false);
             var projectID = this.modelFor(route).get('id');
