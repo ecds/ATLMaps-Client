@@ -18,8 +18,9 @@ export default Ember.Component.extend({
             // When we are on the `explore` route, we're not going to have saved
             // data to look up so we're going to search the DOM for the layer's
             // marker color and apply it.
+            var markerColor;
             try {
-                var markerColor = marker.content.content[0]._data.marker;
+                markerColor = marker.content.content[0]._data.marker;
                 Ember.$("span.geojson."+layer.get('layer_type')+"."+layer.get('slug')).addClass("map-marker layer-"+_this.globals.color_options[markerColor]);
             }
             catch(err) {
