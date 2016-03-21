@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     // This is a neat way to add multiple models to a route.
     model(){
         return Ember.RSVP.hash({
-            yearRange: this.store.find('yearRange', 1),
+            yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
             // searchResults: this.store.findAll('search'),

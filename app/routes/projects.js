@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 		if(this.get('session.isAuthenticated')){
 			return Ember.RSVP.hash({
 				published: this.store.findAll('project'),
-				mine: this.store.find('project', { user_id: this.get('session.session.content.authenticated.user.id')}),
+				mine: this.store.query('project', { user_id: this.get('session.session.content.authenticated.user.id')}),
 				collaborations: this.store.query('project', {collaborations: this.get('session.session.content.authenticated.user.id')})
 			});
 		}
@@ -72,7 +72,7 @@ export default Ember.Route.extend({
             var response = confirm("Are you sure you want to DELETE this project?");
 
             if (response === true) {
-                this.store.find('project', project).then(function (project) {
+                this.store.query('project', project).then(function (project) {
                     project.destroyRecord();
                 });
             }
