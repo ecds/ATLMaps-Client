@@ -83,7 +83,7 @@ module.exports = function(defaults) {
 	app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
 	// app.import('bower_components/bootstrap-material-design/dist/css/ripples.min.css');
 
-	module.exports = mergeTrees([
+	return mergeTrees([
 		app.toTree(),
 		leafletImages,
 		trumbowygImages
