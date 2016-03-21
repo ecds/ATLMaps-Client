@@ -13,7 +13,7 @@
 //     },
 //
 //     model: function(params) {
-//         return this.store.findRecord('project', params.project_id);
+//         return this.store.queryRecord('project', params.project_id);
 //     },
 //
 //     afterModel: function(model) {
@@ -71,7 +71,7 @@
 //                 // And oh my, this is ugly!
 //                 Ember.$.each(raster_layers.content.currentState, function(index, raster_layer_id){
 //                     var rasterLayer = DS.PromiseObject.create({
-//                         promise: _this.store.find('raster_layer', raster_layer_id.id)
+//                         promise: _this.store.query('raster_layer', raster_layer_id.id)
 //                     });
 //
 //                     var rasterLayerProjectInfo = DS.PromiseObject.create({
@@ -109,7 +109,7 @@
 //             // Now send the vector layers
 // 	        Ember.$.each(vector_layers.content.currentState, function(index, vector_layer_id) {
 // 	        	var vectorLayer = DS.PromiseObject.create({
-//             		promise: _this.store.find('vector_layer', vector_layer_id.id)
+//             		promise: _this.store.query('vector_layer', vector_layer_id.id)
 //         		});
 //
 //         		var vectorLayerProjectInfo = DS.PromiseObject.create({

@@ -241,7 +241,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         //     rasterLayerProject.then(function(){
         //         var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
 		//
-        //         _this.store.findRecord('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
+        //         _this.store.queryRecord('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
         //             rasterLayerProject.destroyRecord().then(function(){});
         //         });
         //     });
@@ -282,7 +282,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         //     vectorLayerProject.then(function(){
         //         var vectorLayerProjectID = vectorLayerProject.get('content.content.0.id');
 		//
-        //         _this.store.findRecord('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
+        //         _this.store.queryRecord('vector_layer_project', vectorLayerProjectID).then(function(vectorLayerProject){
         //             vectorLayerProject.destroyRecord().then(function(){});
         //         });
         //     });

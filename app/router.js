@@ -7,7 +7,8 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('edit-project-modal');
-  this.resource('projects', function() {
+  this.route('projects', function() {
+        // TODO make this a route instead of a resource
         this.resource('project', { path: '/:project_id' }, function(){
             this.route('view');
             this.route('edit');

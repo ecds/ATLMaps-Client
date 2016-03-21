@@ -26,7 +26,7 @@ export default Ember.Route.extend({
             });
 		}
 		else {
-			return this.store.find('project', params.project_id);
+			return this.store.findRecord('project', params.project_id);
 		}
 	},
 
@@ -48,7 +48,7 @@ export default Ember.Route.extend({
 		let institutions = this.store.peekAll('institution');
 		institutions.setEach('checked', false);
 		// Reset the year range.
-		this.store.peekRecord('yearRange', 1).rollback();
+		// this.store.peekRecord('yearRange', 1).rollback();
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
 	// setHeadTags: function (model) {
