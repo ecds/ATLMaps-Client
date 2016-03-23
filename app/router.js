@@ -25,7 +25,8 @@ Router.map(function() {
   this.route('explore');
   this.route('terms');
   this.route('support', {path: '/help'});
-
+  this.route('homepage');
+  
   this.route('404', { path: '/*wildcard' });
 });
 
