@@ -524,12 +524,41 @@ a#hide-layer-options:hover{
   float: left;
 }
 
-.footer {
+footer {
   width: 100%;
   position: relative;
   bottom: 0;
-  height: 80px;
-  background: rgb(224, 227, 236);
+  background: #313232;
+  padding: 20px 0;
+
+  // Footer - Hyperlink
+  a {
+    color: #aaaaaa;
+    &:visited {
+      color: #888888;
+    }
+  }
+
+  // Footer - App name
+  .app-name {
+    color: #d1d3d4;
+  }
+
+  // Footer - Copyrights information
+  .app-copyrights {
+    color: #808285;
+  }
+
+  // Footer - Logo (bg-image)
+  .footer-logo {
+    display: block;
+    text-indent: -9999px;
+    height: 85px;
+    background: url('images/emory_logo.svg');
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+
 }
 
 img.geojson {
