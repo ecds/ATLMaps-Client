@@ -8,7 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('edit-project-modal');
   this.route('projects', function() {
-        // TODO make this a route instead of a resource
+        // TODO resource has been deprecated. make this a route.
         this.resource('project', { path: '/:project_id' }, function(){
             this.route('view');
             this.route('edit');
@@ -26,6 +26,7 @@ Router.map(function() {
   this.route('terms');
   this.route('support', {path: '/help'});
 
+  this.route('404', { path: '/*wildcard' });
 });
 
 export default Router;
