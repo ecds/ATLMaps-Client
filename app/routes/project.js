@@ -210,12 +210,12 @@ export default Ember.Route.extend({
 					switch(layerToAdd.get('data_type')){
 						case 'point-data':
 							let markerColors = this.get('dataColors.markerColors');
-							layerColor = Math.floor((Math.random() * markerColors.length) + 1);
+							layerColor = Math.floor(Math.random() * markerColors.length);
 							break;
 						case 'polygon':
 						case 'line-data':
 							let shapeColors = this.get('dataColors.shapeColors');
-							layerColor = Math.floor((Math.random() * Object.keys(shapeColors).length) + 1);
+							layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
 					}
 
 
