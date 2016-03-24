@@ -107,10 +107,6 @@ export default Ember.Route.extend({
 						});
 					});
 
-					// Pan and zoom the map for the project.
-					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
-					map.setZoom(project.get('zoom_level'));
-
 					// Add some base layers
 					let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 						attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
@@ -156,6 +152,14 @@ export default Ember.Route.extend({
 
 					var controlDiv = control.onAdd(map);
 					Ember.$('.base-layer-controls').append(controlDiv);
+
+					// Pan and zoom the map for the project.
+					// Animation is turned off on the panTo because the map gets stuck in Safari when it animates
+					// a pan and zoom simulateously.
+					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
+					map.setZoom(project.get('zoom_level'));
+
+					// debugger;
 				}
 			});
 	    },
