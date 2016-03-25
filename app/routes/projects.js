@@ -65,14 +65,12 @@ export default Ember.Route.extend({
 
         },
 
-		deleteProject: function(project) {
+		deleteProject: function(project_id) {
 
             var response = confirm("Are you sure you want to DELETE this project?");
 
             if (response === true) {
-                this.store.query('project', project).then(function (project) {
-                    project.destroyRecord();
-                });
+                this.store.peekRecord('project', project_id).destroyRecord();
             }
         }
     }
