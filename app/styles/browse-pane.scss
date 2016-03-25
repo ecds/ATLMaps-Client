@@ -72,20 +72,11 @@
                     font-size: small;
                     width: 1em;
                 }
-
-                // .liquid-container {
-                //     position: absolute;
-                //     top: 62px;
-                //     right: 0;
-                //
-                // }
             }
         }
 
         ul.tag-group {
             pointer-events: all;
-            // background-color: material-color(grey, 300);
-            // margin-right: 24px;
 
             li {
                 border: none;
@@ -97,7 +88,6 @@
             .checkbox label {
                 color: black;
                 padding-left: 30px;
-                // font-size: .85em;
                 margin-left: 0;
                 font-size: small;
                 margin-bottom: 0;
@@ -206,7 +196,7 @@
     }
 
     .browse-by-years {
-        
+
         #start_year,
         #end_year {
         	padding: 7px;

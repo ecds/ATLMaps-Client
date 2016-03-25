@@ -7,7 +7,4 @@ export default Ember.Controller.extend({
 
     editSuccess: false,
 
-    // layers: function(){
-    //     return this.model.get('raster_layer_ids');
-    // }.property()
 });

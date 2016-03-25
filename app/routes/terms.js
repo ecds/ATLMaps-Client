@@ -1,10 +1,3 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
-	actions: {
-
-    	didTransition: function() {
-    		Ember.$(document).attr('title', 'ATLMaps: Terms of Use');
-    	}
-    }
-});
+export default Ember.Route.extend({});

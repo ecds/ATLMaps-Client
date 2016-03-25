@@ -6,7 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('edit-project-modal');
   this.route('projects', function() {
         // TODO resource has been deprecated. make this a route.
         this.resource('project', { path: '/:project_id' }, function(){
@@ -30,11 +29,3 @@ Router.map(function() {
 });
 
 export default Router;
-
-// installing route
-//   create app/routes/projects/project.js
-//   create app/templates/projects/project.hbs
-// updating router
-//   add route projects/project
-// installing route-test
-//   create tests/unit/routes/projects/project-test.js

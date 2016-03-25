@@ -8,10 +8,6 @@ export default Ember.Route.extend({
 	dataColors: Ember.inject.service('data-colors'),
 	browseParams: Ember.inject.service('browse-params'),
 
-	beforeModel: function(){
-
-    },
-
 	model(params){
 		if (params.project_id === 'explore') {
 			return this.store.createRecord('project', {
@@ -51,20 +47,6 @@ export default Ember.Route.extend({
 		// this.store.peekRecord('yearRange', 1).rollback();
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
-	// setHeadTags: function (model) {
-	// 	var headTags = [{
-	// 		type: 'meta',
-	// 		tagId: 'meta-description-tag',
-	// 		attrs: {
-	// 			property: 'og:description',
-	// 			content: model.get('description')
-	// 		}
-	// 	}];
-	//
-	// 	this.set('headTags', headTags);
-	//
-	//  },
-
     actions: {
 
 		willTransition(transition) {
@@ -85,8 +67,6 @@ export default Ember.Route.extend({
 	        var _this = this;
 
             Ember.run.scheduleOnce('afterRender', function() {
-				//TODO Get rid of this `initProjectUI` bs.
-                // _this.send('initProjectUI', _this.modelFor('project'));
 
 				if(!_this.get('mapObject').map){
 
@@ -119,6 +99,7 @@ export default Ember.Route.extend({
 						detectRetina: true
 					});
 
+					// NOTE: We might want to add more base layer options like this one.
 					// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
 					//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
 					//     subdomains: '1234',

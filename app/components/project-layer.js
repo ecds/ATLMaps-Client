@@ -42,7 +42,6 @@ export default Ember.Component.extend({
             });
 
             rasterLayerProject.then(function(){
-				console.log(rasterLayerProject);
                 var rasterLayerProjectID = rasterLayerProject.get('content.content.0.id');
 
                 _this.store.findRecord('raster_layer_project', rasterLayerProjectID).then(function(rasterLayerProject){
@@ -55,21 +54,9 @@ export default Ember.Component.extend({
                 Ember.$(this).remove();
             });
 
-            // var controller = _this.controllerFor('project');
-            // controller.send('initProjectUI', _this.modelFor('project'));
-            // this.send('initProjectUI', this.modelFor(route));
-
         },
 
         removeVectorLayer: function(layer, model){
-            // var layer = this.get('layer');
-            console.log(model);
-            // Get the current route so we handle requests coming from both
-            // `explore` and `project.edit`
-            // var route = this.controller.currentRouteName;
-            // // But we don't want the `.edit` junk on `route` when doing lookups.
-            // route = route.replace('\.edit', '');
-            // var route = 'project';
             var projectID = model.get('id');
             layer.set('active_in_project', false);
             var layerID = layer.get('id');
@@ -97,10 +84,6 @@ export default Ember.Component.extend({
             Ember.$(".leaflet-marker-icon."+layerClass).fadeOut( 500, function() {
                 Ember.$(this).remove();
             });
-
-            // var controller = _this.controllerFor('project');
-            // controller.send('initProjectUI', _this.modelFor('project'));
-            // this.send('initProjectUI', this.modelFor(route));
 
         },
     }

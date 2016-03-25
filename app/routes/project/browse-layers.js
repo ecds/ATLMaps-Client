@@ -12,7 +12,6 @@ export default Ember.Route.extend({
             yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
-            // searchResults: this.store.findAll('search'),
             project: this.modelFor('project')
         });
     },
@@ -52,9 +51,10 @@ export default Ember.Route.extend({
         },
 
         showResults(show){
+            // TODO: We need to do a better job showing ruesults. In reality,
+            // most searches will start with more raster layers due to volume.
             if (show === 'vector') {
                 this.controllerFor('project/browse-layers').set('rastersActive', false);
-                // this.setProperties({rastersActive: false});
             }
             else if (show === 'raster') {
                 this.controllerFor('project/browse-layers').set('rastersActive', true);

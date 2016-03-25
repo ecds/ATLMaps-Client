@@ -13,7 +13,6 @@ export default DS.Model.extend({
     published: DS.attr('boolean'),
     featured: DS.attr('boolean'),
     user: DS.attr(),
-    layer_ids: DS.hasMany('layer', {async: true}),
 	raster_layer_project_ids: DS.hasMany('raster_layer_project', {async: true}),
     vector_layer_project_ids: DS.hasMany('vector_layer_project', {async: true}),
     slug: DS.attr('string'),

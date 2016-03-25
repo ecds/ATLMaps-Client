@@ -17,7 +17,6 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{#if searched}}<h1>hi!!!!!</h1>{{/if}}
             {{#liquid-if editSuccess}}
             <div class="alert alert-dismissible alert-success">
                 Project's Layers are updated.
@@ -43,6 +42,7 @@
                     {{#each model.raster_layer_ids as |raster|}}
                     <div class="layer-list-item row">
                         <div class="col-md-1 checkbox">
+                            {{!-- TODO: I don't like these buttons --}}
                                 <!-- <label>
                                 <input type="checkbox" checked={{raster.active_in_project}} {{action "removeLayer" raster 'raster' }} />
                                 <span class="check"></span>

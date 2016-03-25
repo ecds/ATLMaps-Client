@@ -11,44 +11,14 @@
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
   background-color: rgba(material-color(deeporangealt, 200), 0.5);
 }
-// .togglebutton label input[type=checkbox]:first-child:checked + .toggle {
-//   background-color: rgba(0, 149, 135, 0.5);
-// }
-// .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
-//
-// }
-//   content: "";
-//   display: inline-block;
-//   width: 30px;
-//   height: 15px;
-//   background-color: rgba(80, 80, 80, 0.7);
-//   border-radius: 15px;
-//   margin-right: 10px;
-//   transition: background 0.3s ease;
-//   vertical-align: middle;
-// }
-//
-// .togglebutton, .togglebutton * {
-//   -webkit-user-select: none;
-//   -moz-user-select: none;
-//   -ms-user-select: none;
-//   user-select: none;
-// }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
   background-color: material-color(deeporangealt, 200);
-
-  // margin-top: 1px;
 }
 
 .togglebutton.single-vector {
     span.toggle {
         height: 10px;
-        // opacity: .5;
-        //
-        // &:hover {
-        //     opacity: 1;
-        // }
 
         &:after{
             width: 15px;
@@ -62,53 +32,5 @@
     pointer-events: none;
     cursor: not-allowed;
     opacity: .5;
-    
+
 }
-// .togglebutton label input[type=checkbox]:first-child:checked + .toggle:after {
-//   left: 15px;
-// }
-// .togglebutton label input[type=checkbox]:first-child:checked + .toggle:after {
-//   background-color: #009587;
-// }
-// .togglebutton label .toggle:after {
-//   content: "";
-//   display: inline-block;
-//   width: 20px;
-//   height: 20px;
-//   background-color: #F1F1F1;
-//   border-radius: 20px;
-//   position: relative;
-//   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
-//   left: -5px;
-//   top: -4px;
-//   transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
-// }
-
-// #toggle-layer-opacity{
-//   display: visiable;
-// }
-
-// .toggle {
-//     margin: 0 1em;
-// }
-// span.toggle_label {
-//     font-size: .75em;
-//     top: 2.25em;
-//     padding-left: 15%;
-//     position: absolute;
-// }
-
-
-//
-// label .toggle:after {
-//   top: -3px;
-// }
-
-// .togglebutton.opacity.vector {
-//     left: 0 !important;
-//     opacity: .5;
-//
-//     &:hover {
-//         opacity: 1;
-//     }
-// }
