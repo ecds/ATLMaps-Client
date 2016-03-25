@@ -14,7 +14,7 @@ export default function(){
   this.transition(
       this.fromValue(false),
       this.toValue(true),
-      this.use('toDown'),
-      this.reverse('toUp')
+      this.use('crossFade')
+    //   this.reverse('toUp')
   );
 }

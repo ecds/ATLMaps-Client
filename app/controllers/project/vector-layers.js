@@ -2,10 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-    //TODO: is this true?
-    needs: "project",
+    projectController: Ember.inject.controller('project'),
 
-    isEditing: Ember.computed.alias("controllers.project.isEditing"),
+    isEditing: Ember.computed.reads('projectController.isEditing'),
 
     dataColors: Ember.inject.service('data-colors')
 });

@@ -5,7 +5,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 // Migrate Brocfile.js to ember-cli-build.js
 // Following this guide: https://github.com/ember-cli/ember-cli/blob/master/TRANSITION.md#user-content-brocfile-transition
 
-module.exports = function(defaults) {
+module.exports = function() {
 	var env = EmberApp.env();
 	var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 

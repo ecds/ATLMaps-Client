@@ -17,6 +17,9 @@
         article {
             padding: 2em;
         }
+        article.layer {
+            padding: 0;
+        }
         ul {
             li {
                 font-size: 1.5em;
@@ -38,13 +41,13 @@
         }
 
         // layer controls in edit view
-        footer.row {
+        panel-footer.row {
             margin-bottom: 1px;
             pointer-events: all;
         }
 
         .layer-heading {
-            padding-right: .75em;
+            padding: 0 .75em;
         }
 
         // Raster Panel Toggle Stuff
@@ -62,5 +65,6 @@
         .opacity-slider {
             padding-left: 5px;
         }
+
     }
 }

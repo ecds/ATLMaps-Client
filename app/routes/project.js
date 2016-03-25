@@ -223,12 +223,14 @@ export default Ember.Route.extend({
 	            newLayer.save().then(function(){
 	                // Add the map to the view
 	                _this.get('mapObject').mapLayer(newLayer);
+					// TODO figure out how to give feedback on these shared actions
 	                // Show a success message.
 	                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
 	                // Ember.run.later(this, function(){
 	                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
 	                // }, 3000);
 	            }, function(){
+					// TODO figure out how to give feedback on these shared actions
 	                // _this.controllerFor('project/browse-layers').set('editFail', true);
 	                // Ember.run.later(this, function(){
 	                //     _this.controllerFor('project/browse-layers').set('editFail', false);
@@ -245,7 +247,7 @@ export default Ember.Route.extend({
 		// save if user is authenticated.
         removeLayer(layer, format) {
             const project = this.modelFor('project');
-			let _this = this;
+			// let _this = this;
 			// Build a hash for the query. We do this because one key will need
 			// to equal the `format` var.
 			let attrs = {};
@@ -262,15 +264,17 @@ export default Ember.Route.extend({
                 layerToRemove.destroyRecord().then(function(){
                     // Set active to false
                     layer.set('active_in_project', false);
-                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                    Ember.run.later(this, function(){
-                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                        // Remove the layer from the map
+					// TODO figure out how to give feedback on these shared actions
+                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    // Ember.run.later(this, function(){
+                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                    //     // Remove the layer from the map
                         Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
                             Ember.$(this).remove();
                         });
-                    }, 3000);
+                    // }, 3000);
                 }, function(){
+					// TODO figure out how to give feedback on these shared actions
                     // _this.controllerFor('project/browse-layers').set('editFail', true);
                     // Ember.run.later(this, function(){
                     //     _this.controllerFor('project/browse-layers').set('editFail', false);

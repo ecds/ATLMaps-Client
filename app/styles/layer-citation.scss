@@ -1,3 +1,22 @@
-img.institution_logo {
-    height: 50px;
+.layer-citation {
+    h6 {
+        line-height: 0;
+    }
+    img.institution_logo {
+        width: 50px;
+        height: auto;
+    }
+    a.delete {
+        pointer-events: all;
+        i {
+            color: material-color(deeporangealt, 100);
+            font-size: 50px;
+            &:hover {
+                color: material-color(deeporangealt, 400);
+                background-color: material-color(grey, 300);
+                border-radius: 50%;
+            }
+
+        }
+    }
 }

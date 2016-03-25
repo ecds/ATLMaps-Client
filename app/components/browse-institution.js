@@ -4,6 +4,8 @@ export default Ember.Component.extend({
 
     browseParams: Ember.inject.service('browse-params'),
 
+    classNames: ['browse-by-institution', 'browse-form'],
+
     actions: {
         checkInstitution(institution){
             if (institution.get('checked') === true) {
