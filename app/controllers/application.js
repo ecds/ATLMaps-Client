@@ -7,7 +7,12 @@ export default Ember.Controller.extend({
 		invalidateSession() {
 	      this.get('session').invalidate();
 	    }
-	}
+	},
+
+	// computed property - whether this current route is a project.* page
+	isProjectDetail: Ember.computed('currentRouteName', function(){
+			return (this.get('currentRouteName').includes("project."));
+	})
 
 
 });

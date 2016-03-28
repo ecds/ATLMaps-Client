@@ -25,6 +25,7 @@
 @import 'browse-pane.scss';
 @import 'browse-results.scss';
 @import 'project-vector-list.scss';
+@import 'responsive.scss';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -153,6 +154,21 @@ a.site-title .alt-dark{
   width: 100%;
   position: relative;
   height: 100%;
+  background: white;
+}
+
+section {
+  margin: 45px 0;
+}
+
+.homepage-header {
+  margin: 30px 0;
+  font-weight: bold;
+}
+
+.partner-logo {
+  height: 150px;
+  padding: 15px;
 }
 
 #map {
@@ -393,12 +409,51 @@ a#hide-layer-options:hover{
   float: left;
 }
 
-.footer {
+footer {
   width: 100%;
   position: relative;
   bottom: 0;
-  height: 80px;
-  background: rgb(224, 227, 236);
+  background: #313232;
+  padding: 20px 0;
+
+  // Footer - Hyperlink
+  a {
+    color: #aaaaaa;
+    &:visited {
+      color: #888888;
+    }
+  }
+
+  // Footer - App name
+  .app-name {
+    color: #d1d3d4;
+  }
+
+  // Footer - Copyrights information
+  .app-copyrights {
+    color: #808285;
+  }
+
+  // Footer - Logo (bg-image)
+  // .footer-logo {
+  //   display: block;
+  //   text-indent: -9999px;
+  //   height: 85px;
+  //   position: absolute;
+  //   right: 0;
+  //   height: 50px;
+  //   // background: url('images/emory_logo.svg');
+  //   background-position: right;
+  //   background-repeat: no-repeat;
+  // }
+
+  .footer-logo {
+    height: 75px;
+  }
+
+  .footer-row {
+    padding: 15px;
+  }
 }
 
 img.geojson {
