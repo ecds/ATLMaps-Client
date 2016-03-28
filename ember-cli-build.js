@@ -12,7 +12,7 @@ module.exports = function() {
 	var app = new EmberApp({
 		fingerprint: {
 			enabled: isProductionLikeBuild,
-	    	prepend: 'https://s3.amazonaws.com/atlmaps-prod/'
+	    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
 		},
 		sassOptions: {
 			includePaths: [
