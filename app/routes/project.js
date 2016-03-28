@@ -40,6 +40,16 @@ export default Ember.Route.extend({
 			category.setProperties({checked: false, allChecked: false, clicked: false});
             category.get('tag_ids').setEach('checked', false);
         });
+		// Clear the vector layers that are marked active in this project.
+		let vectors = this.store.peekAll('vector-layer');
+		vectors.forEach(function(vector){
+			vector.setProperties({active_in_project: false});
+		});
+		// Clear the raster layers that are marked active in this project.
+		let rasters = this.store.peekAll('raster-layer');
+		rasters.forEach(function(raster){
+			raster.setProperties({active_in_project: false});
+		});
 		// Clear checked institution
 		let institutions = this.store.peekAll('institution');
 		institutions.setEach('checked', false);
