@@ -118,12 +118,6 @@
 /*Marker color instances*/
 .map-marker.layer-red, .leaflet-zoom-animated.layer-red {
   color: #ef5350;
-  &> g{
-   &> path {
-    stroke: #ef5350;
-    fill: #ef5350;
-   }
-  }
 }
 .map-marker.layer-red-300 {
   color: #e57373;
@@ -148,12 +142,6 @@
 }
 .map-marker.layer-pink-600 {
   color: #d81b60;
-  &> g{
-   &> path {
-    stroke: #d81b60;
-    fill: #d81b60;
-   }
-  }
 }
 .map-marker.layer-pink-700 {
   color: #c2185b;
@@ -283,12 +271,6 @@
 }
 .map-marker.layer-amber-300 , .leaflet-zoom-animated.layer-amber-300 {
   color: #ffd54f;
-  &> g{
-   &> path {
-    stroke: #ffd54f;
-    fill: #ffd54f;
-   }
-  }
 }
 .map-marker.layer-amber-400 {
   color: #ffca28;

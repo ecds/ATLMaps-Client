@@ -5,7 +5,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 // Migrate Brocfile.js to ember-cli-build.js
 // Following this guide: https://github.com/ember-cli/ember-cli/blob/master/TRANSITION.md#user-content-brocfile-transition
 
-module.exports = function(defaults) {
+module.exports = function() {
 	var env = EmberApp.env();
 	var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 
@@ -61,8 +61,8 @@ module.exports = function(defaults) {
 		destDir: 'assets/images',
 	});
 
-	app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
-	app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
+	// app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
+	// app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 	app.import('bower_components/leaflet/dist/leaflet.js');
 	app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 	app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
@@ -76,7 +76,6 @@ module.exports = function(defaults) {
 	app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');
 
 	app.import('vendor/js/local.js');
-	app.import('vendor/js/addLayers.js');
 	app.import('bower_components/blueimp-md5/js/md5.js');
 	app.import('bower_components/resizeThis/resizeThis.js');
 

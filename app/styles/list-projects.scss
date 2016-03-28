@@ -49,15 +49,12 @@ a.new-project {
 				&:hover {
 					color: material-color(deeporangealt, 400);
 					background-color: material-color(grey, 200);
+					border-radius: 50%;
 				}
 
 			}
 		}
 
-		// .list-group-item-heading {
-		// 	font-size: 1.25em;
-	    // 	line-height: 1em;
-		// }
 	}
 }
 

@@ -8,10 +8,6 @@ export default Ember.Route.extend({
 	dataColors: Ember.inject.service('data-colors'),
 	browseParams: Ember.inject.service('browse-params'),
 
-	beforeModel: function(){
-
-    },
-
 	model(params){
 		if (params.project_id === 'explore') {
 			return this.store.createRecord('project', {
@@ -44,26 +40,22 @@ export default Ember.Route.extend({
 			category.setProperties({checked: false, allChecked: false, clicked: false});
             category.get('tag_ids').setEach('checked', false);
         });
+		// Clear the vector layers that are marked active in this project.
+		let vectors = this.store.peekAll('vector-layer');
+		vectors.forEach(function(vector){
+			vector.setProperties({active_in_project: false});
+		});
+		// Clear the raster layers that are marked active in this project.
+		let rasters = this.store.peekAll('raster-layer');
+		rasters.forEach(function(raster){
+			raster.setProperties({active_in_project: false});
+		});
 		// Clear checked institution
 		let institutions = this.store.peekAll('institution');
 		institutions.setEach('checked', false);
 		// Reset the year range.
 		// this.store.peekRecord('yearRange', 1).rollback();
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
-
-	// setHeadTags: function (model) {
-	// 	var headTags = [{
-	// 		type: 'meta',
-	// 		tagId: 'meta-description-tag',
-	// 		attrs: {
-	// 			property: 'og:description',
-	// 			content: model.get('description')
-	// 		}
-	// 	}];
-	//
-	// 	this.set('headTags', headTags);
-	//
-	//  },
 
     actions: {
 
@@ -85,8 +77,6 @@ export default Ember.Route.extend({
 	        var _this = this;
 
             Ember.run.scheduleOnce('afterRender', function() {
-				//TODO Get rid of this `initProjectUI` bs.
-                // _this.send('initProjectUI', _this.modelFor('project'));
 
 				if(!_this.get('mapObject').map){
 
@@ -107,10 +97,6 @@ export default Ember.Route.extend({
 						});
 					});
 
-					// Pan and zoom the map for the project.
-					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')));
-					map.setZoom(project.get('zoom_level'));
-
 					// Add some base layers
 					let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 						attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
@@ -123,6 +109,7 @@ export default Ember.Route.extend({
 						detectRetina: true
 					});
 
+					// NOTE: We might want to add more base layer options like this one.
 					// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
 					//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
 					//     subdomains: '1234',
@@ -156,6 +143,12 @@ export default Ember.Route.extend({
 
 					var controlDiv = control.onAdd(map);
 					Ember.$('.base-layer-controls').append(controlDiv);
+
+					// Pan and zoom the map for the project.
+					// Animation is turned off on the panTo because the map gets stuck in Safari when it animates
+					// a pan and zoom simulateously.
+					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
+					map.setZoom(project.get('zoom_level'));
 				}
 			});
 	    },
@@ -210,12 +203,12 @@ export default Ember.Route.extend({
 					switch(layerToAdd.get('data_type')){
 						case 'point-data':
 							let markerColors = this.get('dataColors.markerColors');
-							layerColor = Math.floor((Math.random() * markerColors.length) + 1);
+							layerColor = Math.floor(Math.random() * markerColors.length);
 							break;
 						case 'polygon':
 						case 'line-data':
 							let shapeColors = this.get('dataColors.shapeColors');
-							layerColor = Math.floor((Math.random() * Object.keys(shapeColors).length) + 1);
+							layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
 					}
 
 
@@ -240,12 +233,14 @@ export default Ember.Route.extend({
 	            newLayer.save().then(function(){
 	                // Add the map to the view
 	                _this.get('mapObject').mapLayer(newLayer);
+					// TODO figure out how to give feedback on these shared actions
 	                // Show a success message.
 	                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
 	                // Ember.run.later(this, function(){
 	                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
 	                // }, 3000);
 	            }, function(){
+					// TODO figure out how to give feedback on these shared actions
 	                // _this.controllerFor('project/browse-layers').set('editFail', true);
 	                // Ember.run.later(this, function(){
 	                //     _this.controllerFor('project/browse-layers').set('editFail', false);
@@ -262,7 +257,7 @@ export default Ember.Route.extend({
 		// save if user is authenticated.
         removeLayer(layer, format) {
             const project = this.modelFor('project');
-			let _this = this;
+			// let _this = this;
 			// Build a hash for the query. We do this because one key will need
 			// to equal the `format` var.
 			let attrs = {};
@@ -279,15 +274,17 @@ export default Ember.Route.extend({
                 layerToRemove.destroyRecord().then(function(){
                     // Set active to false
                     layer.set('active_in_project', false);
-                    _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                    Ember.run.later(this, function(){
-                        _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                        // Remove the layer from the map
+					// TODO figure out how to give feedback on these shared actions
+                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                    // Ember.run.later(this, function(){
+                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                    //     // Remove the layer from the map
                         Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
                             Ember.$(this).remove();
                         });
-                    }, 3000);
+                    // }, 3000);
                 }, function(){
+					// TODO figure out how to give feedback on these shared actions
                     // _this.controllerFor('project/browse-layers').set('editFail', true);
                     // Ember.run.later(this, function(){
                     //     _this.controllerFor('project/browse-layers').set('editFail', false);

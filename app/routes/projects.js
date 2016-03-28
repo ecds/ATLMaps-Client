@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 
 /* globals md5 */
 
@@ -36,7 +35,8 @@ export default Ember.Route.extend({
 			// Placehoder name for project.
             var newProjectName = md5((new Date()).toTimeString());
 
-            var project = this.store.createRecord('project', {
+			// Create a new project with some basic data set.
+			var project = this.store.createRecord('project', {
                 name: newProjectName,
 				// I really hate this and there has to be a better way.
                 user_id: this.get('session.session.content.authenticated.user.id'),
@@ -49,32 +49,28 @@ export default Ember.Route.extend({
 
             var _this = this;
 
-			// TODO this is not the pattern we use anywhere else to create/save
-			// records.
-            var onSuccess = function() {
-
-                var newProject = DS.PromiseObject.create({
-                    promise: _this.store.query('project', { name: newProjectName })
-                });
-
-                newProject.then(function() {
+            project.save().then(function(){
+				// Success callback
+				// Get the newly created project
+                _this.store.queryRecord('project', {name: newProjectName}).then(function(newProject) {
 					// Set the name so we don't just have some ugly string in there.
-                	newProject.get('firstObject').set('name', 'Please enter a title.');
-                    _this.transitionTo('project.info', newProject.get('firstObject').id);
-                });
-            };
-            project.save().then(onSuccess);
+					newProject.set('name', 'Please enter a title.');
+					// Transition to our new project
+                    _this.transitionTo('project.info', newProject.id);
+                }, function(){
+					// Error callback
+					// TODO What should we do if this fails?
+				});
+			});
 
         },
 
-		deleteProject: function(project) {
+		deleteProject: function(project_id) {
 
             var response = confirm("Are you sure you want to DELETE this project?");
 
             if (response === true) {
-                this.store.query('project', project).then(function (project) {
-                    project.destroyRecord();
-                });
+                this.store.peekRecord('project', project_id).destroyRecord();
             }
         }
     }

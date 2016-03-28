@@ -6,7 +6,7 @@
         <div class="col-md-3">
 
             <div class="togglebutton vector opacity toggle-all {{unless model.vector_layer_project_ids "disabled"}}">
-            	<label>
+            	<label class="pull-right">
             		<input id="toggle-all-vectors"
                             type="checkbox"
                             checked="checked"
@@ -22,53 +22,65 @@
         {{#each model.vector_layer_project_ids as |layer|}}
             <div class="{{layer.vector_layer_id.slug}} panel panel-default">
 
-                <div class="panel-body">
-
-                    <div class="row">
-                        <div class="map-marker col-md-1 vector-icon
-                            {{layer.vector_layer_id.data_type}}
-                            {{layer.vector_layer_id.data_format}}
-                            {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}">
-                        </div>
-
-                        <div class="col-md-8">
-                            <h4>
-                                <a {{action 'showLayerInfoDetals' layer}}>
-                                    {{ if layer.vector_layer_id.title layer.vector_layer_id.title 'Loading...'}}
-                                </a>
-                            </h4>
-                        </div>
-
-                        <div class="togglebutton opacity vector single-vector col-md-3">
-                            <label>
-                                <input class="vector-toggle"
-                                        type="checkbox"
-                                        checked="checked"
-                                        {{action 'toggleVectorLayer' layer.vector_layer_id checked on="change"}} />
-                                <span class="toggle"></span>
-                            </label>
-                        </div>
+                <div class="row layer-heading">
+                    <div class="map-marker col-md-1 vector-icon
+                        {{layer.vector_layer_id.data_type}}
+                        {{layer.vector_layer_id.data_format}}
+                        {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}">
                     </div>
 
-                        <!-- <div class="row"></div> -->
+                    <div class="col-md-8">
+                        <h4>
+                            <a {{action 'showLayerInfoDetals' layer}}>
+                                {{ if layer.vector_layer_id.title layer.vector_layer_id.title 'Loading...'}}
+                            </a>
+                        </h4>
+                    </div>
 
-                            {{#liquid-if layer.clicked}}
-                            <!-- <div class="row">
-                                <div class="col-md-12"> -->
-                                    <article>{{layer.vector_layer_id.description}}</article>
-                                    {{layer-citation layer = layer.vector_layer_id}}
-                                    {{#if isEditing}}
-                                    <footer class="row">
-                                        <div class="col-md-8">{{layer.vector_layer_id}}</div>
-                                        <div class="col-md-4">
-                                            <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.vector_layer_id 'vector' }}><i class="material-icons">close</i></a>
-                                        </div>
-                                    </footer>
-                                    {{/if}}
-                                <!-- </div>
-                            </div> -->
-                            {{/liquid-if}}
+                    <div class="togglebutton opacity vector single-vector col-md-3">
+                        <label class="pull-right">
+                            <input class="vector-toggle"
+                                    type="checkbox"
+                                    checked="checked"
+                                    {{action 'toggleVectorLayer' layer.vector_layer_id checked on="change"}} />
+                            <span class="toggle"></span>
+                        </label>
+                    </div>
                 </div>
+
+                {{#liquid-if layer.clicked}}
+                <div class="panel-body">
+                    <article class="layer">{{layer.vector_layer_id.description}}</article>
+                </div>
+                {{!--
+
+                    TODO: move the actions into the layer-citation components
+                    The actions make it tricky.
+
+                --}}
+                <div class="panel-footer row">
+                    {{#liquid-if isEditing}}
+                        <div class="layer-citation">
+                            <div class="col-md-10">
+                                <h6>Provided by:</h6>
+                                <h4>{{layer.vector_layer_id.institution.name}}</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="javascript:void(0)" class="pick-color pull-right has-tooltip" data-tooltip-content="hi there">
+                                    <i class="material-icons">palette</i>
+                                </a>
+                            <!-- </div>
+                            <div class="col-md-2"> -->
+                                <a {{action "removeLayer" layer.vector_layer_id 'vector' }} class="delete pull-right">
+                                    <i class="material-icons">delete_forever</i>
+                                </a>
+                            </div>
+                        </div>
+                    {{else}}
+                        {{layer-citation layer = layer.vector_layer_id}}
+                    {{/liquid-if}}
+                </div>
+                {{/liquid-if}}
             </div>
         {{else}}
         No data layers have been added.

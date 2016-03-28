@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export function markerColor(params) {
+    // This is a helper to color the vector icons.
     let index = params[0];
     let pointColors = params[1];
     let shapeColors = params[2];
@@ -12,7 +13,6 @@ export function markerColor(params) {
     else {
         dataColor = Object.keys(shapeColors)[index];
     }
-    // This is never going to work b/c shape colors are hex codes
     return 'layer-' + dataColor;
 }
 

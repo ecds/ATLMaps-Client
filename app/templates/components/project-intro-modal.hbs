@@ -21,9 +21,7 @@
                     </article>
                 </div>
                 <div class="intro-video col-md-6">
-                    <div class="text-center">
-                        {{lazy-video url=project.media}}
-                    </div>
+                    {{lazy-video url=project.media}}
                 </div>
 
         {{else if a}}
@@ -40,9 +38,8 @@
             <div class="text-center explore-button col-md-4">
                 <a class="btn btn-info" {{action 'hideIntro'}}>Explore Project</a>
             </div>
-            <div class="col-md-4 checkbox pull-right">
-                <label>
-                    <!-- {{input type="checkbox" id="dont-show" checked=this.surpressed}} -->
+            <div class="col-md-4 checkbox">
+                <label class="pull-right">
 					 <input type="checkbox" id="dont-show" checked={{this.surpressed}} onchange={{action "supressIntro" category.slug category.sortedTags}} />
                     <span class="check"></span>
                     Don't show every time.

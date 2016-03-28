@@ -4,9 +4,6 @@
     width: 30%;
 
     .cotainer {
-        // background-color: white;
-        // // margin-left: 30px;
-        // width: 30%;
         background-color: white;
         padding: .5em;
         pointer-events: auto; // Allow the pane to respond to click.
@@ -19,6 +16,9 @@
 
         article {
             padding: 2em;
+        }
+        article.layer {
+            padding: 0;
         }
         ul {
             li {
@@ -34,43 +34,20 @@
                 padding-left: .5em;
             }
 
-            // div.raster-layer {
-            //     padding-top: .5em;
-            //     background-color: white;
-            //     a {
-            //         padding-left: .75em;
-            //     }
-            // }
-
             article {
                 padding: 1em;
                 font-size: .75em;
             }
-            // footer {
-            //     padding: .5em;
-            //     h1 {
-            //         font-size: 1em;
-            //         margin: .5em 0 0 0;
-            //     }
-            //     h2 {
-            //         font-size: .75em;
-            //         margin: 0;
-            //     }
-            //     img {
-            //         min-width: 100px;
-            //         max-height: 100px;
-            //     }
-            // }
         }
 
         // layer controls in edit view
-        footer.row {
+        panel-footer.row {
             margin-bottom: 1px;
             pointer-events: all;
         }
 
         .layer-heading {
-            padding-right: .75em;
+            padding: 0 .75em;
         }
 
         // Raster Panel Toggle Stuff
@@ -88,5 +65,6 @@
         .opacity-slider {
             padding-left: 5px;
         }
+
     }
 }

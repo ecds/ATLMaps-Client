@@ -1,5 +1,11 @@
 import Ember from 'ember';
 
+// Service to hold arrays of colors to be used for vector layers.
+// In `vector_layer_project` the `marker` attribute is used as an
+// index of the arrays.
+
+// Made a second one for shapes and lines. The lighter colors looked like crap.
+
 export default Ember.Service.extend({
     init(){
         this._super(...arguments);

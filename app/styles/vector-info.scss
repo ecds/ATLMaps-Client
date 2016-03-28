@@ -17,23 +17,18 @@
   display: none;
   padding: 0;
   max-height: $max-height-marker-content;
-  // overflow: auto;
-  //resize: both;
-  // z-index: 10000;
   margin: 175px 0 0 75px;
-  // width: 420px;
   right: inherit;
   bottom: inherit;
+  overflow: initial;
 
 
   .marker-content {
-    // padding: 1.5em;
     display:inline-block;
     height: inherit;
     max-height: $max-height-marker-content;
     overflow: scroll;
     width: 100%;
-    // margin-top: 30px;
 
     ::-webkit-scrollbar {
       -webkit-appearance: none;

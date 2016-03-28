@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 /* globals L */
 
+// Service to hold the Leaflet object.
+
 export default Ember.Service.extend({
 
     dataColors: Ember.inject.service('data-colors'),
@@ -108,6 +110,7 @@ export default Ember.Service.extend({
 
                     break;
 
+                // NOTE: At some point we'll move the vector data to GeoServer
                 // case 'wfs':
                 //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
                 //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
@@ -176,7 +179,6 @@ export default Ember.Service.extend({
 
                     var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
 
-                    // console.log(shapeColor + ' ' + newLayerSlug)
                     let polyStyle = {
                             'color': shapeColor(),
                             'fillColor': shapeColor(),
@@ -194,7 +196,6 @@ export default Ember.Service.extend({
                                     className: layerClass,
                                     iconSize: null,
                                     html: '<div class="shadow"></div><div class="icon"></div>',
-                                    // data: 'foo'
                                 });
 
                                 var marker = L.marker(latlng, {icon: icon});
@@ -205,7 +206,6 @@ export default Ember.Service.extend({
                         vector.addTo(map);
                     }
                     break;
-
             }
         });
     }

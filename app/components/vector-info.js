@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     didInsertElement(){
         let draggie = new Draggabilly( '.draggable', {
             // options
+            // see http://draggabilly.desandro.com/
         });
         draggie.element.style.position = 'fixed';
         draggie.on( 'dragStart', function( /* event, pointer*/ ) {});

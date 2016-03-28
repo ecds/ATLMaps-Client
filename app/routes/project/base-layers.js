@@ -5,6 +5,8 @@ export default Ember.Route.extend({
 
     actions: {
         setCenterAndZoom: function(model){
+            // Saves the zoom level and center to the current view.
+            // First we need the map object
             let map = this.get('mapObject.map');
             var projectController = this.controllerFor('project');
             var controller = this.controllerFor('project.base-layers');
