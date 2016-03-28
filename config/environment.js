@@ -20,6 +20,7 @@ module.exports = function(environment) {
       // when it is created
       API_HOST: 'http://api.atlmaps-dev.com:3000'
     }
+
   };
 
   if (environment === 'development') {

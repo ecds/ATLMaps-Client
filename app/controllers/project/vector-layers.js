@@ -6,5 +6,6 @@ export default Ember.Controller.extend({
 
     isEditing: Ember.computed.reads('projectController.isEditing'),
 
-    dataColors: Ember.inject.service('data-colors')
+    dataColors: Ember.inject.service('data-colors'),
+
 });

@@ -6,17 +6,32 @@
         width: 50px;
         height: auto;
     }
-    a.delete {
+    a {
         pointer-events: all;
         i {
-            color: material-color(deeporangealt, 100);
-            font-size: 50px;
+            // font-size: 50px;
             &:hover {
-                color: material-color(deeporangealt, 400);
                 background-color: material-color(grey, 300);
                 border-radius: 50%;
             }
 
+        }
+    }
+    a.delete {
+        i {
+            color: material-color(deeporangealt, 100);
+            &:hover {
+                color: material-color(deeporangealt, 400);
+            }
+
+        }
+    }
+    a.pick-color {
+        i {
+            color: material-color(blue, 100);
+            &:hover {
+                color: material-color(blue, 500);
+            }
         }
     }
 }

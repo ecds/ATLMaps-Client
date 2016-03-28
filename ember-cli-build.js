@@ -12,7 +12,7 @@ module.exports = function() {
 	var app = new EmberApp({
 		fingerprint: {
 			enabled: isProductionLikeBuild,
-	    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
+	    	prepend: 'https://s3.amazonaws.com/atlmaps-prod/'
 		},
 		sassOptions: {
 			includePaths: [
@@ -61,8 +61,8 @@ module.exports = function() {
 		destDir: 'assets/images',
 	});
 
-	app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
-	app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
+	// app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
+	// app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 	app.import('bower_components/leaflet/dist/leaflet.js');
 	app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 	app.import('bower_components/jquery.easing/js/jquery.easing.min.js');

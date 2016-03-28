@@ -61,11 +61,16 @@
                 <div class="panel-footer row">
                     {{#liquid-if isEditing}}
                         <div class="layer-citation">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <h6>Provided by:</h6>
                                 <h4>{{layer.vector_layer_id.institution.name}}</h4>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
+                                <a href="javascript:void(0)" class="pick-color pull-right has-tooltip" data-tooltip-content="hi there">
+                                    <i class="material-icons">palette</i>
+                                </a>
+                            <!-- </div>
+                            <div class="col-md-2"> -->
                                 <a {{action "removeLayer" layer.vector_layer_id 'vector' }} class="delete pull-right">
                                     <i class="material-icons">delete_forever</i>
                                 </a>
