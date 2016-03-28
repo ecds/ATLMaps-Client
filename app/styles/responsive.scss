@@ -1,0 +1,21 @@
+$screen-sm-min: 320px;
+$screen-sm-max: 480px;
+$screen-md-min: 768px;
+$screen-md-max: 992px;
+$screen-lg-min: 1200px;
+
+@media screen and (max-width: $screen-lg-min) {
+  .footer-row {
+    text-align: left;
+  }
+
+  .footer-logo-container {
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: $screen-md-max) {
+  .footer-row {
+    text-align: center;
+  }
+}
