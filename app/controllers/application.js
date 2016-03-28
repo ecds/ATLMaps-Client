@@ -23,9 +23,9 @@ export default Ember.Controller.extend({
 	    }
 	},
 
-	// computed property - whether this current route is a project.info page
-	isProjectInfo: Ember.computed('currentRouteName', function(){
-			return (this.get('currentRouteName') === "project.info");
+	// computed property - whether this current route is a project.* page
+	isProjectDetail: Ember.computed('currentRouteName', function(){
+			return (this.get('currentRouteName').includes("project."));
 	})
 
 

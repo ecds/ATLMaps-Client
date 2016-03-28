@@ -1,6 +1,7 @@
 {{outlet 'modal'}}
 <div class="content">
 
+    {{#unless isProjectDetail}}
     <div class="navbar main-navbar">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -28,10 +29,12 @@
         </ul>
     </div>
 </div>
+{{/unless}}
+
     {{outlet}}
   </div>
 
-  {{#unless isProjectInfo}}
+  {{#unless isProjectDetail}}
   <footer class="footer">
     <div class="container">
       <div class="row">
