@@ -10,12 +10,22 @@ $screen-lg-min: 1200px;
   }
 
   .footer-logo-container {
-    text-align: right;
+    text-align: center;
   }
 }
 
 @media screen and (max-width: $screen-md-max) {
   .footer-row {
     text-align: center;
+  }
+  .footer-logo-container {
+    text-align: center;
+  }
+}
+
+
+@media screen and (min-width: $screen-md-max) {
+  .footer-logo-container {
+    text-align: right;
   }
 }
