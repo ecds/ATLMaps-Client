@@ -20,3 +20,4 @@ testem.log
 .editorconfig
 .ember-cli
 .watchmanconfig
+.env*
