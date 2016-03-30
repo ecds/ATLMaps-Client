@@ -1,8 +1,8 @@
 
-<section id="base-map" class="fullscreen-map">
+<div id="base-map" class="fullscreen-map">
 	<div id='map'></div>
 	<div class="base-layer-controls"></div>
-</section>
+</div>
 
 <nav class="row">
 	{{#link-to 'projects' tagName='a' class="back-link" title="Back to All Projects"}}
@@ -13,8 +13,8 @@
 
 
 
-<div class="row">
-	<div class="project-head container col-md-4">
+<div class="row project-window">
+	<div class="project-head col-md-4">
 		<div class="row {{if isEditing 'project-edit' 'project-view'}}">
 	        <div class="col-md-10 title">
 				{{model.name}}
