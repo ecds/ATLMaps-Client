@@ -15,7 +15,7 @@ module.exports = function(deployTarget) {
         port: 6379
     },
     slack: {
-        webhookURL: true
+        webhookURL: 'https://hooks.slack.com/services/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'
     }
 
     // include other plugin configuration that applies to all deploy targets here
