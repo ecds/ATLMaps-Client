@@ -23,7 +23,7 @@ export default DS.Model.extend({
   tag_slugs: DS.attr('string'),
   active: DS.attr('boolean'),
   marker: DS.attr(),
-  active_in_project: DS.attr('boolean'),
+  active_in_project: DS.attr('boolean', { defaultValue: false }),
   slider_id: DS.attr('string'),
   slider_value_id: DS.attr('string'),
   position_in_project: DS.attr(''),

@@ -7,6 +7,7 @@ export default Ember.Route.extend({
 	mapObject: Ember.inject.service('map-object'),
 	dataColors: Ember.inject.service('data-colors'),
 	browseParams: Ember.inject.service('browse-params'),
+	session: Ember.inject.service('session'),
 
 	model(params){
 		if (params.project_id === 'explore') {
@@ -32,7 +33,7 @@ export default Ember.Route.extend({
 		// Clear the map.
 	    this.set('mapObject.map', '');
 		// Clear all search parameters.
-		this.get('browseParams').clearAll();
+		this.get('browseParams').init();
 		// Clear the chekes for the checked categories and tags.
 		let categories = this.store.peekAll('category');
         // categories.setEach('checked', false);
@@ -222,6 +223,7 @@ export default Ember.Route.extend({
 					break;
 			}
 
+
             let _this = this;
 
             project.get(format+'_layer_project_ids').addObject(newLayer);
@@ -230,6 +232,7 @@ export default Ember.Route.extend({
 			// There is another check on the server that verifies the user is
 			// authenticated and is allowed to edit this project.
 			if(this.get('session.isAuthenticated')){
+				console.log('yes')
 	            newLayer.save().then(function(){
 	                // Add the map to the view
 	                _this.get('mapObject').mapLayer(newLayer);
@@ -248,6 +251,7 @@ export default Ember.Route.extend({
 	            });
 			}
 			else if (project.may_edit) {
+				console.log('no')
 				_this.get('mapObject').mapLayer(newLayer);
 			}
 

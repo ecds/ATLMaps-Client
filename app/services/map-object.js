@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-/* globals L */
+/* globals L, Swiper */
 
 // Service to hold the Leaflet object.
 
@@ -152,7 +152,18 @@ export default Ember.Service.extend({
                             popupContent += '<iframe width="100%" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
                         }
                         if (feature.properties.images) {
-                            popupContent += feature.properties.images;
+                            console.log(feature.properties.images);
+                            popupContent += "<div class='gallery'><div class='swiper-wrapper'>";
+                            feature.properties.images.forEach(function(image){
+                                console.log(image.url);
+                                popupContent += "<div class='swiper-slide' ><a href='"+image.url+"' target='_blank'><img class='geojson' src='"+image.url+"' title='"+image.name+"' /></a>"+
+                                "<span>Photo Credit: "+image.credit+"</span></div>";
+
+                                Ember.$('<img />').load( function(){}).attr('src', image.url);
+
+                            });
+                            popupContent += '</div><div class="swiper-pagination"></div><div class="swiper-button-next swiper-button-white"></div><div class="swiper-button-prev swiper-button-white"></div></div>';
+
                         }
                         if (feature.properties.description) {
                             popupContent += "<p>" + feature.properties.description + "</p>";
@@ -169,10 +180,22 @@ export default Ember.Service.extend({
                             // Ember.$("div.marker-data").hide();
                             // Ember.$(".card").hide();
                             var $content = Ember.$("<article/>").html(popupContent);
+                            if (Ember.$('.gallery').length > 0){
+                                Ember.$('.gallery')[0].swiper.destroy();
+                            }
                             Ember.$("div.marker-data").show();
                             Ember.$('div.marker-content').append($content);
                             Ember.$(".active_marker").removeClass("active_marker");
                             Ember.$(this._icon).addClass('active_marker');
+                            new Swiper ('.gallery', {
+                                pagination: '.swiper-pagination',
+                                nextButton: '.swiper-button-next',
+                                prevButton: '.swiper-button-prev',
+                                slidesPerView: 1,
+                                paginationClickable: true,
+                                spaceBetween: 30,
+                                loop: true
+                            });
                         });
 
                     }

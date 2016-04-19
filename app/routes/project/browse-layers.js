@@ -12,7 +12,7 @@ export default Ember.Route.extend({
             yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
-            project: this.modelFor('project')
+            project: this.modelFor('project'),
         });
     },
 

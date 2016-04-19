@@ -12,6 +12,7 @@ export default Ember.Component.extend({
         draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
         // Make reference to `draggie` so we can destroy it on exit.
         Ember.set(this, 'draggie', draggie);
+
     },
 
     willDestroyElement(){
@@ -21,7 +22,7 @@ export default Ember.Component.extend({
     actions: {
         close(){
             Ember.$("div.marker-data").hide();
-            Ember.$(".active_marker").removeClass();
+            Ember.$(".active_marker").removeClass("active_marker");
         }
     }
 });

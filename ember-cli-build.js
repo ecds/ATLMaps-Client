@@ -12,7 +12,7 @@ module.exports = function() {
 	var app = new EmberApp({
 		fingerprint: {
 			enabled: isProductionLikeBuild,
-	    	prepend: 'https://s3.amazonaws.com/atlmaps-staging/'
+	    	prepend: 'https://s3.amazonaws.com/atlmaps-' + env + '/'
 		},
 		sassOptions: {
 			includePaths: [
@@ -74,12 +74,14 @@ module.exports = function() {
 	app.import('bower_components/js-cookie/src/js.cookie.js');
 	app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
 	app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');
+	app.import('bower_components/Swiper/dist/js/swiper.min.js');
 
 	app.import('vendor/js/local.js');
 	app.import('bower_components/blueimp-md5/js/md5.js');
 	app.import('bower_components/resizeThis/resizeThis.js');
 
 	app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
+	app.import('bower_components/Swiper/dist/css/swiper.min.css');
 	// app.import('bower_components/bootstrap-material-design/dist/css/ripples.min.css');
 
 	return mergeTrees([

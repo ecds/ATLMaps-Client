@@ -29,7 +29,8 @@
     "trumbowyg": "~1.1.7",
     "osmbuildings": "*",
     "bower": "*",
-    "install": "~1.0.4"
+    "install": "~1.0.4",
+    "Swiper": "swiper#^3.3.1"
   },
   "resolutions": {
     "ember": "2.4.3"

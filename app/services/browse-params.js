@@ -41,14 +41,5 @@ export default Ember.Service.extend({
     },
     toggleRasterActive(){
         this.toggleProperty('rastersActive');
-    },
-    clearAll(){
-        this.setProperties({
-            searchText: '',
-            tags: [],
-            institutions: [],
-            start_year: '',
-            end_year: ''
-        });
     }
 });

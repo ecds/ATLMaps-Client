@@ -6,7 +6,9 @@ export default Ember.Component.extend({
 
     classNames: ['browse-by-text'],
 
-    serchTerms: 'dude',
+    searchTerms: function(){
+        return this.get('browseParams.searchText');
+    }.property(),
 
     actions: {
         textSearch: function(){
