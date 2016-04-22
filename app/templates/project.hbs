@@ -12,11 +12,8 @@
 	{{/link-to}}
 </nav>
 
-
-
-
 <div class="row project-window">
-	<div class="project-head col-md-4">
+	<div class="project-head col-md-12">
 		<div class="row {{if isEditing 'project-edit' 'project-view'}}">
 	        <div class="col-md-10 title">
 				{{model.name}}
@@ -31,44 +28,56 @@
 	</div>
 
 
-	<nav class="btn-group btn-group-justified">
+	<nav class="container project-nav">
+		<div class="project-pane">
+			{{liquid-outlet}}
+		</div>
+		<div class="project-nav-group">
+			<div class="row">
+			{{#link-to "project.info" class="" id='project-info' title="Project Description"}}
+				<i class="material-icons">info_outline</i> About this Project
+			{{/link-to}}
+			</div>
+			{{#if isEditing}}
+			<div class="row">
+				{{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers"}}
+					<i class="material-icons">search</i> Find Maps
+				{{/link-to}}
+			</div>
+			{{/if}}
+			{{#if model.exploring}}
+			<div class="row">
+				{{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers"}}
+					<i class="material-icons">search</i> Find Maps
+				{{/link-to}}
+			</div>
+			{{/if}}
+			<div class="row">
+			{{#link-to "project.vector-layers" class="" id='vector-data' title="Pinpoint Layers"}}
+				<i class="material-icons atlmaps-ext database"></i> Data Maps
+			{{/link-to}}
+			</div>
+			<div class="row">
+			{{#link-to "project.raster-layers" class="" id='raster-layers' title="Archival Map Layers"}}
+		    	<i class="material-icons">layers</i> Paper Maps
+		    {{/link-to}}
+			</div>
+			<div class="row">
+			{{#link-to "project.base-layers" class="" id='controls' title="Change Base Map"}}
+		    	<i class="material-icons">map</i> Select Base Maps
+		    {{/link-to}}
+			</div>
+			<!-- {{#link-to "project.help" class=" project-nav" id='help' title="Show Help Window"}}
+		    	<i class="material-icons">help_outline</i>
+		    {{/link-to}} -->
+		</div>
 
-		{{#link-to "project.info" class="btn btn-default" id='project-info' title="Project Description"}}
-			<span class="nav-icon"><i class="material-icons">info_outline</i></span>
-		{{/link-to}}
-		{{#if isEditing}}
-			{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
-				<span class="nav-icon"><i class="material-icons">search</i></span>
-			{{/link-to}}
-		{{/if}}
-		{{#if model.exploring}}
-			{{#link-to "project.browse-layers" class="btn btn-default" id='browse' title="Browse Layers"}}
-				<span class="nav-icon"><i class="material-icons">search</i></span>
-			{{/link-to}}
-		{{/if}}
-		{{#link-to "project.vector-layers" class="btn btn-default" id='vector-data' title="Pinpoint Layers"}}
-			<span class="nav-icon"><i class="material-icons atlmaps-ext database"></i></span><span class="badge vector-badge">{{model.vector_layer_project_ids.length}}</span>
-		{{/link-to}}
-		{{#link-to "project.raster-layers" class="btn btn-default" id='raster-layers' title="Archival Map Layers"}}
-	    	<span class="nav-icon"><i class="material-icons">layers</i></span><span class="badge">{{model.raster_layer_project_ids.length}}</span>
-	    {{/link-to}}
-		{{#link-to "project.base-layers" class="btn btn-default" id='controls' title="Change Base Map"}}
-	    	<span class="nav-icon"><i class="material-icons">map</i></span>
-	    {{/link-to}}
-		<!-- {{#link-to "project.help" class="btn btn-default project-nav" id='help' title="Show Help Window"}}
-	    	<span class="nav-icon"><i class="material-icons">help_outline</i></span>
-	    {{/link-to}} -->
 	</nav>
 </div>
 <div class="col-md-8 pull-right">
 	{{outlet "browse-results"}}
 </div>
 </div>
-<div class="row">
-	<div class="col-md-4 project-pane">
-		{{liquid-outlet}}
-	</div>
-	<div class="col-md-8"></div>
-</div>
-<!-- <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
+
+<!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{vector-info}}

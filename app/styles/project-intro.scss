@@ -31,16 +31,6 @@
             font-size: 1.5em;
         }
     }
-    a.close-button {
-        color: black;
-        text-decoration: none;
-        margin-top: .5em;
-        &:hover {
-            background-color: lightcoral;
-            border-radius: 50%;
-        }
-    }
-
     .intro-text {
         overflow-y: scroll;
         height: 100%;

@@ -1,7 +1,9 @@
 @import 'layer-citation.scss';
 .project-pane {
-    margin-left: 30px;
-    width: 30%;
+    position: absolute;
+    right: 0;
+    width: 88%;
+    box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
 
     .cotainer {
         background-color: white;
@@ -67,4 +69,5 @@
         }
 
     }
+
 }

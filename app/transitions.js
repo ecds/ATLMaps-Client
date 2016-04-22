@@ -9,7 +9,8 @@ export default function(){
         'project.base-layers',
         'project.help'
     ]),
-    this.use('crossFade')
+    this.use('toLeft'),
+    this.reverse('toRight')
   );
   this.transition(
       this.fromValue(false),

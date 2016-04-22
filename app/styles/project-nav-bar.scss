@@ -1,14 +1,25 @@
 @import "variables.scss";
 
+.project-window {
+    margin-top: 6em;
+    width: 30%;
+
+    nav {
+        width: 100%;
+        position: relative;
+        background-color: white;
+    }
+}
+
 .project-head {
     position: inherit;
     margin-top: 10px;
     margin-left: 30px;
-    width: 30%;
+    // width: 30%;
 
     .row {
         // margin-left: 0;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         padding: 1em;
     }
 
@@ -37,76 +48,69 @@
         color: whitesmoke;
     }
 }
-nav.btn-group{
+.project-nav-group {
 
-    margin: 0;
+    // margin: 0;
 
-    a:nth-of-type(1) {
-      background-color: material-color(grey, 50);
+    a {
+        color: material-color(grey, 600);
+
+        i {
+            width: 10%;
+        }
+    }
+
+    .row:nth-of-type(1) {
+    //   background-color: material-color(grey, 50);
       &:hover {
           background-color: material-color(blue, 50) ! important;
       }
     }
-    a:nth-of-type(2) {
-      background-color: material-color(grey, 100);
+    .row:nth-of-type(2) {
+    //   background-color: material-color(grey, 100);
       &:hover {
           background-color: material-color(blue, 100) ! important;
       }
     }
-    a:nth-of-type(3) {
-      background-color: material-color(grey, 200);
+    .row:nth-of-type(3) {
+    //   background-color: material-color(grey, 200);
       &:hover {
           background-color: material-color(blue, 200) ! important;
       }
     }
-    a:nth-of-type(4) {
-      background-color: material-color(grey, 300);
+    .row:nth-of-type(4) {
+    //   background-color: material-color(grey, 300);
       &:hover {
           background-color: material-color(blue, 300) ! important;
       }
     }
-    a:nth-of-type(5) {
-      background-color: material-color(grey, 400);
+    .row:nth-of-type(5) {
+    //   background-color: material-color(grey, 400);
       &:hover {
           background-color: material-color(blue, 400) ! important;
       }
     }
-    a:nth-of-type(6) {
-      background-color: material-color(grey, 500);
+    .row:nth-of-type(6) {
+    //   background-color: material-color(grey, 500);
       &:hover {
           background-color: material-color(blue, 500) ! important;
       }
     }
-    a:nth-of-type(7) {
-      background-color: material-color(grey, 600);
+    .row:nth-of-type(7) {
+    //   background-color: material-color(grey, 600);
       &:hover {
           background-color: material-color(blue, 600) ! important;
       }
     }
-    &, & .btn{
-        border-radius:0;
-        padding: 0;
-        height: 4em;
-
-        span.nav-icon {
-            &:before {
-                font-size: 2em;
-            }
-        }
-
-        span.badge {
-            background-color: material-color(deeporangealt, 700);
-        }
-
-    }
     .active {
-        border-bottom: none;
-        z-index: 5;
-        opacity: 1;
-        background-color: white !important;
+        color: #03A9F4;
+    }
+}
 
-        .nav-icon {
-            color: #03A9F4;
+nav {
+    .row {
+        a {
+
         }
     }
 }

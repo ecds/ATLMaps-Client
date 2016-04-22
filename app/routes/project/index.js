@@ -4,9 +4,9 @@ import Ember from 'ember';
 // applications have links with this route.
 
 export default Ember.Route.extend({
-    actions: {
-        didTransition: function(){
-            this.transitionTo('project.info');
-        }
-    }
+    // actions: {
+    //     didTransition: function(){
+    //         this.transitionTo('project.info');
+    //     }
+    // }
 });

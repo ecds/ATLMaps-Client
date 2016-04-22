@@ -27,6 +27,7 @@
 @import 'project-vector-list.scss';
 @import 'responsive.scss';
 @import 'gallery.scss';
+@import 'close-button';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -87,10 +88,6 @@ a {
 body, .static_content{
   background-color:#f4f4f4;
   height: 100%;
-}
-
-.project-window {
-    margin-top: 6em;
 }
 
 .checkbox label {
