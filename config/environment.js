@@ -60,7 +60,7 @@ module.exports = function(environment) {
     'connect-src': "'self' http://api.atlmaps-dev.com:3000 http://api.atlmaps-dev.org https://api.atlmaps.com https://s3.amazonaws.com http://vimeo.com https://vimeo.com",
     'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
     'media-src': "'self'",
-    'img-src': "'self' *: *",
+    'img-src': "* data:",
     'frame-src': "'self' http://www.youtube.com https://www.youtube.com"
   };
 

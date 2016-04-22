@@ -27,5 +27,7 @@ export default DS.Model.extend({
   slider_id: DS.attr('string'),
   slider_value_id: DS.attr('string'),
   position_in_project: DS.attr(''),
-  raster_layer_project: DS.belongsTo('raster_layer_project', {async: true, inverse: null})
+  raster_layer_project: DS.belongsTo('raster_layer_project', {async: true, inverse: null}),
+  url: DS.attr('string'),
+  layers: DS.attr('string')
 });

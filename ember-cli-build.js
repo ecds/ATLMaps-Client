@@ -63,14 +63,14 @@ module.exports = function() {
 
 	// app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
 	// app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
-	app.import('bower_components/leaflet/dist/leaflet.js');
+	app.import('bower_components/leaflet/dist/my-leaflet.js');
 	app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 	app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
 	app.import('bower_components/Sortable/Sortable.min.js');
 	app.import('bower_components/draggabilly/dist/draggabilly.pkgd.min.js');
 	app.import('bower_components/nouislider/distribute/nouislider.min.js');
 	app.import('bower_components/list.js/dist/list.min.js');
-	app.import('bower_components/leaflet/dist/leaflet.css');
+	app.import('bower_components/leaflet/dist/leaflet-1.css');
 	app.import('bower_components/js-cookie/src/js.cookie.js');
 	app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
 	app.import('bower_components/osmbuildings/dist/OSMBuildings-Leaflet.js');

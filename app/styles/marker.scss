@@ -86,8 +86,8 @@
 }
 
 .map-marker.active_marker{
-  z-index: 1000000!important;
-  pointer-events: none;
+  // z-index: 1000000!important;
+  // pointer-events: none;
 }
 
 .map-marker.active_marker div.icon:before{

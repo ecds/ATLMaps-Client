@@ -35,6 +35,14 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 
 .fullscreen-map {
   height: 100%;
+  top:0;
+  left:0;
+  position: absolute;
+  position: fixed;
+  width:100%;
+  height:100%;
+  display:block;
+  margin: 0;
 }
 
 // Allow click though to the map past the liquid-container
@@ -105,16 +113,16 @@ body, .static_content{
   overflow-y: scroll;
 }
 
-#base-map{
-  top:0;
-  left:0;
-  position: absolute;
-  position: fixed;
-  width:100%;
-  height:100%;
-  display:block;
-  margin: 0;
-}
+// #base-map{
+//   top:0;
+//   left:0;
+//   position: absolute;
+//   position: fixed;
+//   width:100%;
+//   height:100%;
+//   display:block;
+//   margin: 0;
+// }
 
 .filter-heading .btn.rotate{
   transition: all 0.2s;

@@ -31,6 +31,7 @@ export default Ember.Route.extend({
 	// clears the serarch parameteres and items checked.
 	tearDown: function(){
 		// Clear the map.
+		this.get('mapObject.map').remove();
 	    this.set('mapObject.map', '');
 		// Clear all search parameters.
 		this.get('browseParams').init();
@@ -79,10 +80,11 @@ export default Ember.Route.extend({
 
             Ember.run.scheduleOnce('afterRender', function() {
 
+				console.log(!_this.get('mapObject').map);
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.
-					let map = _this.get('mapObject').createMap();
+					let map = _this.get('mapObject').createMap(project);
 
 					// Add all the vector layers to the map.
 					project.get('vector_layer_project_ids').then(function(vectors){
@@ -98,18 +100,6 @@ export default Ember.Route.extend({
 						});
 					});
 
-					// Add some base layers
-					let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-						attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-						detectRetina: true
-					});
-
-					let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-						attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-						subdomains: '1234',
-						detectRetina: true
-					});
-
 					// NOTE: We might want to add more base layer options like this one.
 					// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
 					//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
@@ -122,34 +112,34 @@ export default Ember.Route.extend({
 					// });
 
 					// Add the project's base map
-					try {
-						if (project.get('default_base_map') === 'satellite') {
-							satellite.addTo(map);
-						}
-						else {
-							osm.addTo(map);
-						}
-					}
-					catch(err) {
-						osm.addTo(map);
-					}
+					// let osm = map._layers['29'];
+					// let satellite = map._layers['125'];
+					// try {
+					// 	if (project.get('default_base_map') === 'satellite') {
+					// 		satellite.addTo(map);
+					// 	}
+					// 	else {
+					// 		osm.addTo(map);
+					// 	}
+					// }
+					// catch(err) {
+					// 	osm.addTo(map);
+					// }
 
-					var baseMaps = {
-						"street": osm,
-						"satellite": satellite
-					};
 
-					var control = L.control.layers(baseMaps,null,{collapsed:false});
-					control._map = map;
 
-					var controlDiv = control.onAdd(map);
-					Ember.$('.base-layer-controls').append(controlDiv);
+
+					// control._map = map;
+					//
+					// var controlDiv = control.onAdd(map);
+					// Ember.$('.base-layer-controls').append(controlDiv);
 
 					// Pan and zoom the map for the project.
 					// Animation is turned off on the panTo because the map gets stuck in Safari when it animates
 					// a pan and zoom simulateously.
-					map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
-					map.setZoom(project.get('zoom_level'));
+					// map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
+					// map.setZoom(project.get('zoom_level'));
+					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'))
 				}
 			});
 	    },
@@ -232,7 +222,6 @@ export default Ember.Route.extend({
 			// There is another check on the server that verifies the user is
 			// authenticated and is allowed to edit this project.
 			if(this.get('session.isAuthenticated')){
-				console.log('yes')
 	            newLayer.save().then(function(){
 	                // Add the map to the view
 	                _this.get('mapObject').mapLayer(newLayer);
@@ -251,7 +240,6 @@ export default Ember.Route.extend({
 	            });
 			}
 			else if (project.may_edit) {
-				console.log('no')
 				_this.get('mapObject').mapLayer(newLayer);
 			}
 

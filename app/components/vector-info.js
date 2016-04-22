@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+    VectorDetialContent: Ember.inject.service('vector-detail-content'),
+
     didInsertElement(){
         let draggie = new Draggabilly( '.draggable', {
             // options
@@ -12,6 +14,8 @@ export default Ember.Component.extend({
         draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
         // Make reference to `draggie` so we can destroy it on exit.
         Ember.set(this, 'draggie', draggie);
+
+        console.log(this.get('VectorDetialContent.properties'));
 
     },
 

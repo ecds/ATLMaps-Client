@@ -51,7 +51,7 @@ export default Ember.Component.extend({
 
     willDestroyElement(){
         this.get('slider').noUiSlider.destroy();
-        this.get('toggle').removeEventListener();
+        document.removeEventListener('click', this.get('toggle'));
     }
 
 });
