@@ -20,14 +20,14 @@ export default Ember.Service.extend({
             let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
                 detectRetina: true,
-                className: 'osm'
+                className: 'osm, base'
             });
 
             let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
                 attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
                 subdomains: '1234',
                 detectRetina: true,
-                className: 'satellite'
+                className: 'satellite, base'
             });
 
             let _map = L.map('map', {

@@ -17,8 +17,6 @@ export default Ember.Component.extend({
             return shapeColors[colorName];
         }
 
-        console.log(layer.get('url'))
-
         // layer.get(layer.get('data_format')+'_layer_id').then(function(newLayer) {
 
         let newLayer = layer;
@@ -28,7 +26,6 @@ export default Ember.Component.extend({
             // let newLayerInst = newLayer.get('institution.geoserver');
             // let newLayerWorkspace = newLayer.get('workspace');
             let newLayerUrl = newLayer.get('url');
-            console.log(newLayerUrl)
             newLayer.set('active_in_project', true);
 
             switch(newLayer.get('data_type')) {

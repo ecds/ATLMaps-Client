@@ -6,7 +6,6 @@ export default Ember.Controller.extend({
 
     colors: function() {
         let foo = this.get('dataColors.shapeColors');
-        console.log(foo);
         return foo;
     }.property()
 });

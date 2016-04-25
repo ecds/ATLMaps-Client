@@ -15,8 +15,6 @@ export default Ember.Component.extend({
         let min = model.get('min_year');
         let max = model.get('max_year');
 
-        console.log(min);
-
         let rangeSlider = document.getElementById('range');
 
         // Initializing the slider

@@ -80,7 +80,6 @@ export default Ember.Route.extend({
 
             Ember.run.scheduleOnce('afterRender', function() {
 
-				console.log(!_this.get('mapObject').map);
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.

@@ -3,6 +3,7 @@
 .project-window {
     margin-top: 6em;
     width: 30%;
+    min-width: 455px;
 
     nav {
         width: 100%;
@@ -38,7 +39,7 @@
 
 }
 .project-view {
-    background-color: material-color(blue, 500) ! important;
+    background-color: material-color(blue, 700) ! important;
 }
 .project-edit {
     background-color: #4CAF50;
@@ -50,13 +51,15 @@
 }
 .project-nav-group {
 
-    // margin: 0;
+    width: 50%;
 
     a {
         color: material-color(grey, 600);
+        font-size: large;
+        text-decoration: none;
 
         i {
-            width: 10%;
+            width: 31px;
         }
     }
 
@@ -107,10 +110,19 @@
     }
 }
 
-nav {
-    .row {
-        a {
+.project-meta {
+    width: 50%;
+    text-align: right;
+    height: 216px;
+    vertical-align: bottom;
 
+    h4 {
+        font-style: italic;
+
+        span {
+            font-size: 1.5em;
         }
+
     }
+
 }

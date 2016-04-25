@@ -32,7 +32,7 @@
 		<div class="project-pane">
 			{{liquid-outlet}}
 		</div>
-		<div class="project-nav-group">
+		<div class="project-nav-group pull-left">
 			<div class="row">
 			{{#link-to "project.info" class="" id='project-info' title="Project Description"}}
 				<i class="material-icons">info_outline</i> About this Project
@@ -52,16 +52,20 @@
 				{{/link-to}}
 			</div>
 			{{/if}}
+			{{#if model.vector_layer_project_ids}}
 			<div class="row">
 			{{#link-to "project.vector-layers" class="" id='vector-data' title="Pinpoint Layers"}}
 				<i class="material-icons atlmaps-ext database"></i> Data Maps
 			{{/link-to}}
 			</div>
+			{{/if}}
+			{{#if model.raster_layer_project_ids}}
 			<div class="row">
 			{{#link-to "project.raster-layers" class="" id='raster-layers' title="Archival Map Layers"}}
 		    	<i class="material-icons">layers</i> Paper Maps
 		    {{/link-to}}
 			</div>
+			{{/if}}
 			<div class="row">
 			{{#link-to "project.base-layers" class="" id='controls' title="Change Base Map"}}
 		    	<i class="material-icons">map</i> Select Base Maps
@@ -70,6 +74,10 @@
 			<!-- {{#link-to "project.help" class=" project-nav" id='help' title="Show Help Window"}}
 		    	<i class="material-icons">help_outline</i>
 		    {{/link-to}} -->
+		</div>
+		<div class="project-meta pull-right">
+			<h4>By <span>{{model.owner}}</span></h4>
+			<h5>Emory University</h5>
 		</div>
 
 	</nav>

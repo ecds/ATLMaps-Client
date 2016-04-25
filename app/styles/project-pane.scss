@@ -1,8 +1,9 @@
 @import 'layer-citation.scss';
 .project-pane {
+
     position: absolute;
     right: 0;
-    width: 88%;
+    left: 50px;
     box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
 
     .cotainer {
@@ -52,9 +53,20 @@
             padding: 0 .75em;
         }
 
-        // Raster Panel Toggle Stuff
-        .reorder {
-            padding: 0;
+        // Raster Panel Stuff
+        .raster-list {
+
+            .panel-body {
+                padding: 0 15px;
+            }
+
+            .row {
+                padding: 0;
+            }
+
+            .reorder {
+                padding: .25em 0 0 0;
+            }
         }
 
         .handle {

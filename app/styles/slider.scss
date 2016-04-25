@@ -72,16 +72,12 @@
 }
 
 .noUi-handle {
-  background-color: material-color(deeporangealt, 200) !important;
-  border-color: material-color(deeporangealt, 200) !important;
+  background-color: material-color(deeporangealt, 200);
+  border-color: material-color(deeporangealt, 200);
 }
 
-// .noUi-base {
-//   background-color: #c8c8c8;
-// }
-
-.noUi-horizontal {
-    padding-left: 10px;
+.noUi-lower {
+  background-color: #c8c8c8;
 }
 
 .noUi-base {
@@ -92,4 +88,14 @@
     .noUi-base {
         background-color: #c8c8c8;
     }
+    // .noUi-target {
+        #range {
+            .noUi-base {
+        .noUi-connect {
+            .noUi-handle-lower {
+                background-color: material-color(deeporangealt, 200) !important;
+            }
+
+        }}}
+    // }
 }

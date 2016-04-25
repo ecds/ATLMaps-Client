@@ -15,8 +15,6 @@ export default Ember.Component.extend({
         // Make reference to `draggie` so we can destroy it on exit.
         Ember.set(this, 'draggie', draggie);
 
-        console.log(this.get('VectorDetialContent.properties'));
-
     },
 
     willDestroyElement(){
