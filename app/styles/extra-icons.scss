@@ -19,4 +19,5 @@ i.material-icons.atlmaps-ext.database::before{
 .map-marker.polygon::before {
     font-family: 'atlmaps-ext';
     content: '\e801';
+    letter-spacing: .25em;
 }

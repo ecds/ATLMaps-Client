@@ -28,7 +28,7 @@ export default Ember.Route.extend({
 	},
 
 	// Function the runs after we fully exit a project route and clears the map,
-	// clears the serarch parameteres and items checked.
+	// clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
 	tearDown: function(){
 		// Clear the map.
 		this.get('mapObject.map').remove();
@@ -57,17 +57,21 @@ export default Ember.Route.extend({
 		institutions.setEach('checked', false);
 		// Reset the year range.
 		// this.store.peekRecord('yearRange', 1).rollback();
+		Ember.$('.marker-data').remove();
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {
 
 		willTransition(transition) {
+			console.log('hi')
 			if (transition.targetName === 'project.browse-layers') {
 				this.controllerFor('project').set('showBrowse', true);
 			}
 			else {
 				this.controllerFor('project').set('showBrowse', false);
 			}
+
+			Ember.$('.marker-data').hide();
 
 			return true;
 		},

@@ -5,6 +5,8 @@ export default Ember.Component.extend({
 
     VectorDetialContent: Ember.inject.service('vector-detail-content'),
 
+    classNames: ['marker-data', 'draggable', 'modal'],
+
     didInsertElement(){
         let draggie = new Draggabilly( '.draggable', {
             // options
@@ -18,6 +20,7 @@ export default Ember.Component.extend({
     },
 
     willDestroyElement(){
+        console.log('bye');
         this.get('draggie').destroy();
     },
 
@@ -25,6 +28,7 @@ export default Ember.Component.extend({
         close(){
             Ember.$("div.marker-data").hide();
             Ember.$(".active_marker").removeClass("active_marker");
+            this.get('draggie').destroy();
         }
     }
 });

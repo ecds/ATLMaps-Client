@@ -203,7 +203,6 @@ export default Ember.Service.extend({
 
                     var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
                     let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColorName() + '"></div>';
-                    console.log(layerClass);
 
                     let polyStyle = {
                         'color': shapeColor(),
@@ -217,7 +216,7 @@ export default Ember.Service.extend({
                             className: layerClass,
                             title: newLayerTitle,
                             markerDiv: vectorDiv,
-                            onEachFeature: _this.get('vectorDetailContent.viewData')
+                            onEachFeature: _this.get('vectorDetailContent.viewData'),
                         });
                         vector.addTo(map);
                     }

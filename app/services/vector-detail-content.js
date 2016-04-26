@@ -53,7 +53,6 @@ export default Ember.Service.extend({
         }
 
         layer.on('click', function() {
-            console.log(layer)
             Ember.$("div.marker-content").empty();
             let content = Ember.$("<article/>").html(popupContent);
             if (Ember.$('.gallery').length > 0){

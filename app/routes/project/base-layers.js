@@ -37,7 +37,6 @@ export default Ember.Route.extend({
         },
 
 		setBase: function(base, model, editing) {
-            console.log(base)
             Ember.$('.base').hide();
             Ember.$('.'+base).show();
 			Ember.$(".leaflet-control-layers-selector").removeAttr('checked');
