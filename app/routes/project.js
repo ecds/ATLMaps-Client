@@ -138,7 +138,9 @@ export default Ember.Route.extend({
 					// a pan and zoom simulateously.
 					// map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
 					// map.setZoom(project.get('zoom_level'));
-					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'))
+					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
+					Ember.$('.base').hide();
+					Ember.$('.'+project.get('default_base_map')).show();
 				}
 			});
 	    },

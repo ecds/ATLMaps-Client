@@ -9,38 +9,40 @@ export default Ember.Service.extend({
     dataColors: Ember.inject.service('data-colors'),
     vectorDetailContent: Ember.inject.service('vector-detail-content'),
 
-    init(){
+    init() {
         this._super(...arguments);
         this.set('map', '');
     },
 
-    createMap(project){
+    createMap(/*project*/) {
         try {
             // Add some base layers
-            let osm = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
                 detectRetina: true,
-                className: 'osm, base'
+                className: 'street base'
             });
 
             let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
                 attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
                 subdomains: '1234',
                 detectRetina: true,
-                className: 'satellite, base'
+                className: 'satellite base'
             });
 
             let _map = L.map('map', {
-                center: [33.7489954,-84.3879824],
+                center: [33.7489954, -84.3879824],
                 zoom: 13,
                 // zoomControl is a Boolean
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false,
-                layers: [osm, satellite]
+                layers: [satellite, street]
             });
 
             // Layer contorl, topright
-            L.control.zoom({ position: 'topright' }).addTo(_map);
+            L.control.zoom({
+                position: 'topright'
+            }).addTo(_map);
 
             // _map.on('click', function(){
             //     Ember.$("div.info").remove();
@@ -51,7 +53,7 @@ export default Ember.Service.extend({
             // });
 
             // TODO: Get rid of this. only here while we develop a way to bring the results back
-            _map.on('dblclick', function(){
+            _map.on('dblclick', function() {
                 Ember.$(".browse-results").fadeIn();
             });
 
@@ -64,33 +66,39 @@ export default Ember.Service.extend({
             // Create the object for Leafet in the mapObject service.
             this.set('map', _map);
             return _map;
-        }
-        catch(err){
+        } catch (err) {
             // Map is likely already initialized
         }
     },
 
-    mapLayer(layer){
+    mapLayer(layer) {
         let _this = this;
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
         let markerColor = this.get('dataColors.markerColors')[layer.get('marker')];
         let shapeColors = this.get('dataColors.shapeColors');
-        function shapeColor(){
-            let colorName = Object.keys(shapeColors)[layer.get('marker')];
-            return shapeColors[colorName];
+
+        function shapeColorName() {
+            return Object.keys(shapeColors)[layer.get('marker')];
         }
 
-        layer.get(layer.get('data_format')+'_layer_id').then(function(newLayer) {
+        function shapeColor() {
+            // let colorName = Object.keys(shapeColors)[layer.get('marker')];
+            return shapeColors[shapeColorName()];
+        }
+
+        layer.get(layer.get('data_format') + '_layer_id').then(function(newLayer) {
 
             let newLayerName = newLayer.get('name');
+            let newLayerTitle = newLayer.get('title');
             let newLayerSlug = newLayer.get('slug');
+            let dataType = newLayer.get('data_type');
             // let newLayerInst = newLayer.get('institution.geoserver');
             // let newLayerWorkspace = newLayer.get('workspace');
             let newLayerUrl = newLayer.get('url');
             newLayer.set('active_in_project', true);
 
-            switch(newLayer.get('data_type')) {
+            switch (dataType) {
 
                 case 'planningatlanta':
 
@@ -135,65 +143,87 @@ export default Ember.Service.extend({
 
                     break;
 
-                // NOTE: At some point we'll move the vector data to GeoServer
-                // case 'wfs':
-                //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
-                //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
-                //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('slug') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
+                    // NOTE: At some point we'll move the vector data to GeoServer
+                    // case 'wfs':
+                    //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
+                    //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
+                    //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('slug') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
 
-                //  Ember.$.ajax(wfsLayer,
-                //      { dataType: 'jsonp' }
-                //      ).done(function ( data ) {});
+                    //  Ember.$.ajax(wfsLayer,
+                    //      { dataType: 'jsonp' }
+                    //      ).done(function ( data ) {});
 
-                //  // This part is the magic that makes the JSONP work
-                //  // The string at the beginning of the JSONP is processJSON
-                //  function processJSON(data) {
-                //      points = wfsLayer(data,{
-                //          //onEachFeature: onEachFeature,
-                //          pointToLayer: function (feature, latlng) {
-                //              return L.marker(latlng);
-                //          }
-                //      }).addTo(map);
-                //  }
+                    //  // This part is the magic that makes the JSONP work
+                    //  // The string at the beginning of the JSONP is processJSON
+                    //  function processJSON(data) {
+                    //      points = wfsLayer(data,{
+                    //          //onEachFeature: onEachFeature,
+                    //          pointToLayer: function (feature, latlng) {
+                    //              return L.marker(latlng);
+                    //          }
+                    //      }).addTo(map);
+                    //  }
 
-                //  break;
+                    //  break;
 
                 case 'point-data':
                 case 'polygon':
                 case 'line-data':
 
+                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+
+                switch (dataType) {
+                    case 'point-data':
+                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColor + '"></div>';
+                            if (newLayerUrl) {
+                                var points = new L.GeoJSON.AJAX(newLayerUrl, {
+                                    pointToLayer: function(feature, latlng) {
+                                        var icon = L.divIcon({
+                                            className: layerClass,
+                                            iconSize: null,
+                                            html: '<div class="shadow"></div><div class="icon"></div>',
+                                        });
+
+                                        var marker = L.marker(latlng, {
+                                            icon: icon,
+                                            title: newLayerTitle,
+                                            markerDiv: markerDiv
+                                        });
+
+                                        return marker;
+                                    },
+
+                                    onEachFeature: _this.get('vectorDetailContent.viewData')
+                                });
+                                points.addTo(map);
+                            }
+                        break;
+                    case 'polygon':
+                    case 'line-data':
 
                     var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+                    let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColorName() + '"></div>';
+                    console.log(layerClass);
 
                     let polyStyle = {
-                            'color': shapeColor(),
-                            'fillColor': shapeColor(),
-                            'className': layerClass
+                        'color': shapeColor(),
+                        'fillColor': shapeColor(),
+                        'className': layerClass
 
                     };
-
-                    if(newLayerUrl){
-
+                    if (newLayerUrl) {
                         var vector = new L.GeoJSON.AJAX(newLayerUrl, {
                             style: polyStyle,
                             className: layerClass,
-                            pointToLayer: function (feature, latlng) {
-                                var icon = L.divIcon({
-                                    className: layerClass,
-                                    iconSize: null,
-                                    html: '<div class="shadow"></div><div class="icon"></div>',
-                                });
-
-                                var marker = L.marker(latlng, {icon: icon});
-
-                                return marker;
-                            },
-                            // onEachFeature: viewData,
+                            title: newLayerTitle,
+                            markerDiv: vectorDiv,
                             onEachFeature: _this.get('vectorDetailContent.viewData')
                         });
                         vector.addTo(map);
                     }
                     break;
+                }
+                break;
             }
         });
     }

@@ -11,3 +11,11 @@ a.close-button {
 .row.close-button-row {
     padding: 0 1.75em;
 }
+
+.modal-content {
+    a.close-button {
+        right: 23px;
+        position: absolute;
+        z-index: 2;
+    }
+}

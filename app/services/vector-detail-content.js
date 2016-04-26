@@ -11,9 +11,10 @@ export default Ember.Service.extend({
 
 
     viewData(feature, layer) {
-        var popupContent = "";
+
+        var popupContent = "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
         if (feature.properties.name) {
-            popupContent += "<h2>"+feature.properties.name+"</h2>";
+            popupContent += "<h3>"+feature.properties.name+"</h3>";
         }
         if (feature.properties.image) {
             popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
@@ -27,24 +28,32 @@ export default Ember.Service.extend({
         if (feature.properties.images) {
             popupContent += "<div class='gallery'><div class='swiper-wrapper'>";
             feature.properties.images.forEach(function(image){
-                popupContent += "<div class='swiper-slide' ><a href='"+image.url+"' target='_blank'><img class='geojson' src='"+image.url+"' title='"+image.name+"' /></a>"+
-                "<span>Photo Credit: "+image.credit+"</span></div>";
+                popupContent += "<div class='swiper-slide' ><a href='"+image.url+"' target='_blank'><img class='geojson' src='"+image.url+"' title='"+image.name+"' /></a>";
+                if (image.credit){
+                    popupContent += "<span>Photo Credit: "+image.credit+"</span></div>";
+                }
+                // if (image.title) {
+                //     popupContent += "<span>"+image.title+"</span></div>";
+                // }
+                else {
+                    popupContent += "</div>";
+                }
 
                 Ember.$('<img />').load( function(){}).attr('src', image.url);
 
             });
-            popupContent += '</div><div class="swiper-pagination"></div><div class="swiper-button-next swiper-button-white"></div><div class="swiper-button-prev swiper-button-white"></div></div>';
+            popupContent += '</div><div class="swiper-pagination swiper-pagination-white"></div><div class="swiper-button-next swiper-button-black"></div><div class="swiper-button-prev swiper-button-black"></div></div>';
 
         }
         if (feature.properties.description) {
-            popupContent += "<p>" + feature.properties.description + "</p>";
+            popupContent += "<div>" + feature.properties.description + "</div>";
         }
         if (feature.properties.NAME) {
             popupContent += "<h2>"+feature.properties.NAME+"</h2>";
         }
 
         layer.on('click', function() {
-
+            console.log(layer)
             Ember.$("div.marker-content").empty();
             let content = Ember.$("<article/>").html(popupContent);
             if (Ember.$('.gallery').length > 0){
@@ -61,7 +70,9 @@ export default Ember.Service.extend({
                 slidesPerView: 1,
                 paginationClickable: true,
                 spaceBetween: 30,
-                loop: true
+                loop: true,
+                centeredSlides: true
+                // autoHeight: true
             });
         });
 

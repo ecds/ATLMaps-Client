@@ -3,6 +3,14 @@
     padding: 0;
   }
 
+  .marker-content.modal-body {
+      padding-top: 0;
+
+      .map-marker {
+          margin-left: -4px;
+      }
+  }
+
 .marker-data {
 
     cursor: -webkit-grab;

@@ -1,12 +1,26 @@
-// .swiper-button-next, .swiper-button-prev {
-//     background-color: darkgray;
-//     padding: 2em 1.5em;
-//     opacity: .5;
-// }
+@import "variables.scss";
+
+.swiper-button-next, .swiper-button-prev {
+    // top: 67%;
+}
 
 .swiper-button-prev {
     left: 30px;
 }
 .swiper-button-next {
     right: 30px;
+}
+
+.swiper-container-horizontal {
+    width: auto;
+    height: 200px;
+    text-align: center;
+    background-color: rgba(material-color(grey, 200), 0.5);
+    position: relative;
+    margin-bottom: 1em;
+
+    img {
+        height: 200px;
+        width: auto;
+    }
 }
