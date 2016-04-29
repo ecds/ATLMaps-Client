@@ -19,7 +19,7 @@
     {{else}}
         <h1>Select Base Map</h1>
     {{/if}}
-    <a {{action 'setBase' 'osm' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
+    <a {{action 'setBase' 'street' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
 
     <a {{action 'setBase' 'satellite' model isEditing}} title="Satellite" class="btn btn-default base-preview satellite"></a>
 </div>
