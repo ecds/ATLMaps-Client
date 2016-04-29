@@ -18,7 +18,12 @@ module.exports = function() {
 			includePaths: [
 		    'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
 		  ]
-		}
+	   },
+	   sourcemaps: {
+		   enabled: !isProductionLikeBuild
+	   },
+	   minifyCSS: { enabled: isProductionLikeBuild },
+	   minifyJS: { enabled: isProductionLikeBuild }
 	});
 
 	// var config = {

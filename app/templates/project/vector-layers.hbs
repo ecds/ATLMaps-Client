@@ -1,22 +1,28 @@
 <div class="cotainer">
-    {{partial 'close-button'}}
     <div class="row layer-heading">
-        <div class="col-md-9">
-            <h1>Data Layers</h1>
-        </div>
-        <div class="col-md-3">
-
-            <div class="togglebutton vector opacity toggle-all {{unless model.vector_layer_project_ids "disabled"}}">
-            	<label class="pull-right">
-            		<input id="toggle-all-vectors"
-                            type="checkbox"
-                            checked="checked"
-                            {{action 'toggleAllVectorLayers' checked on="change"}}/>
-            			<span class="toggle"></span>
-            			<!-- <span id="show-hide-layers" class="toggle_label"></span> -->
-            	</label>
-            </div>
-        </div>
+        <table class="table">
+            <tr>
+                <td>
+                    <h1>Paper Map Layers</h1>
+                </td>
+                <table>
+                    <tr>
+                        <td class="pull-right">{{partial 'close-button'}}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="togglebutton opacity toggle-all pull-right {{unless model.vector_layer_project_ids "disabled"}}">
+                            <label>
+                                <input id="toggle-all-vectors" type="checkbox" checked="checked"
+                                        {{action 'toggleAllVectorLayers' checked on="change"}}/>
+                                <span class="toggle"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
     </div>
 
     <div class="vector-list">
@@ -53,6 +59,7 @@
                 <div class="panel-body">
                     <article class="layer">{{layer.vector_layer_id.description}}</article>
                 </div>
+                {{!--{{color-picker shapeColors=shapeColors}}--}}
                 {{!--
 
                     TODO: move the actions into the layer-citation components
@@ -69,6 +76,7 @@
                             <div class="col-md-2">
                                 <a href="javascript:void(0)" class="pick-color pull-right has-tooltip" data-tooltip-content="hi there">
                                     <i class="material-icons">palette</i>
+
                                 </a>
                             <!-- </div>
                             <div class="col-md-2"> -->

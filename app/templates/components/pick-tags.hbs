@@ -1,0 +1,20 @@
+{{yield}}
+<div id="category-list">
+    <input class="search" placeholder="Search" />
+    {{input focus-in="initList" class="search"}}
+  <button class="sort" data-sort="name">
+    Sort by name
+  </button>
+<ul class="list">
+{{#each model as |category|}}
+    <li>
+        <div class="category tag">
+            {{category.name}}
+        </div><br />
+        {{#each category.tag_ids as |tag|}}
+            <div class="tag">{{tag.name}}</div><br />
+        {{/each}}
+    </li>
+{{/each}}
+</ul>
+</div>

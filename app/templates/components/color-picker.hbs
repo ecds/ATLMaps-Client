@@ -1,2 +1,6 @@
 {{yield}}
-{{shapeColors}}
+{{#each shapeColors as |color|}}
+    <a {{action "setColor" color}}>
+        <div style="background-color: {{color}}; height: 40px;" class="col-md-4"></div>
+    </a>
+{{/each}}

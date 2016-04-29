@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    
     actions: {
         toggleAllVectorLayers(){
             // First we figure out if the toggle all button is now `checked`

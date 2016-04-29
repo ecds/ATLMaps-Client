@@ -8,4 +8,13 @@ export default Ember.Controller.extend({
 
     dataColors: Ember.inject.service('data-colors'),
 
+    shapeColors: function(){
+        let shapeColors = this.get('dataColors.shapeColors');
+        let colors = [];
+        for(let hex in shapeColors) {
+            colors.push(shapeColors[hex]);
+        }
+        return colors;
+    }.property()
+
 });

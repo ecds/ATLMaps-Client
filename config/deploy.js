@@ -1,8 +1,8 @@
 /* jshint node: true */
 
-module.exports = function(deployTarget) {
+module.exports = function(environment) {
   var ENV = {
-    build: {},
+    build: {environment: environment},
     s3: {
         accessKeyId: process.env.AWS_KEY,
         secretAccessKey: process.env.AWS_SECRET,
@@ -13,25 +13,23 @@ module.exports = function(deployTarget) {
         host: process.env.REDIS_HOST,
         password: process.env.REDIS_PW,
         port: 6379
-    },
-    slack: {
-        webhookURL: 'https://hooks.slack.com/services/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'
     }
 
     // include other plugin configuration that applies to all deploy targets here
   };
 
 
-  if (deployTarget === 'development') {
-    ENV.build.environment = 'development';
+  if (environment === 'development') {
+    ENV.buildEnv = 'development';
     // configure other plugins for development deploy target here
   }
 
-  if (deployTarget === 'staging') {
+  if (environment === 'staging') {
+      ENV.buildEnv = 'staging';
     // configure other plugins for staging deploy target here
   }
 
-  if (deployTarget === 'production') {
+  if (environment === 'production') {
     ENV.build.environment = 'production';
     // configure other plugins for production deploy target here
   }

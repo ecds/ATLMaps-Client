@@ -1,3 +1,4 @@
+@import "ember-power-select";
 @import '../../bower_components/bootstrap-material-design/sass/bootstrap-material-design.scss';
 @import '../../bower_components/bootstrap-material-design/sass/ripples.scss';
 @import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
@@ -28,6 +29,7 @@
 @import 'responsive.scss';
 @import 'gallery.scss';
 @import 'close-button';
+@import 'color-picker';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
