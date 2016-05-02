@@ -11,7 +11,7 @@ export default Ember.Service.extend({
 
     init() {
         this._super(...arguments);
-        this.set('map', '');
+        this.set('map', 'foo');
     },
 
     createMap(/*project*/) {
@@ -19,7 +19,7 @@ export default Ember.Service.extend({
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
-                detectRetina: true,
+                // detectRetina: true,
                 className: 'street base'
             });
 

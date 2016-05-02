@@ -2,11 +2,11 @@
 
 .togglebutton.toggle-all {
     margin-top: 1em;
-    // margin-top: .5em;
 }
 
 .togglebutton.single-vector {
     margin-top: .65em;
+    padding-right: .25em;
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    
+
     actions: {
         toggleAllVectorLayers(){
             // First we figure out if the toggle all button is now `checked`
@@ -28,6 +28,13 @@ export default Ember.Route.extend({
 
         toggleVectorLayer(layer){
             Ember.$('.vectorData.'+layer.get('slug')).fadeToggle();
+        },
+
+        actions: {
+            updateColor(newColor, layer){
+                console.log(layer);
+                console.log(newColor);
+            }
         }
     }
 });

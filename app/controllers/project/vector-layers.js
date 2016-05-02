@@ -15,6 +15,17 @@ export default Ember.Controller.extend({
             colors.push(shapeColors[hex]);
         }
         return colors;
-    }.property()
+    }.property(),
+
+    actions: {
+        updateColor(newColor, layer){
+            // console.log(layer);
+            // console.log(newColor);
+            // let layerProject = this.peekRecord('vector_layer_project', layer.get('id'));
+            // console.log(layerProject);
+            console.log(layer)
+            layer.setProperties('marker', newColor);
+        }
+    }
 
 });

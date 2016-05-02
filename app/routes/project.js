@@ -27,6 +27,10 @@ export default Ember.Route.extend({
 		}
 	},
 
+	map: function(){
+		return this.get('mapObject').createMap(this.currentModel);
+	},
+
 	// Function the runs after we fully exit a project route and clears the map,
 	// clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
 	tearDown: function(){
@@ -63,7 +67,6 @@ export default Ember.Route.extend({
     actions: {
 
 		willTransition(transition) {
-			console.log('hi')
 			if (transition.targetName === 'project.browse-layers') {
 				this.controllerFor('project').set('showBrowse', true);
 			}
@@ -87,7 +90,7 @@ export default Ember.Route.extend({
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.
-					let map = _this.get('mapObject').createMap(project);
+					let map = _this.map();
 
 					// Add all the vector layers to the map.
 					project.get('vector_layer_project_ids').then(function(vectors){
