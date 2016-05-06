@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    mapObject: Ember.inject.service('map-object'),
+    
     actions: {
         reorder(layer, position){
             let _this = this;

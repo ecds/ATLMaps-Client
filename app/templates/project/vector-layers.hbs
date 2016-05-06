@@ -3,7 +3,7 @@
         <table class="table">
             <tr>
                 <td>
-                    <h1>Paper Map Layers</h1>
+                    <h1>Data Layers</h1>
                 </td>
                 <table>
                     <tr>
@@ -60,14 +60,13 @@
                 <div class="panel-body">
                     <article class="layer">{{layer.vector_layer_id.description}}</article>
                 </div>
-                <!-- {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}} -->
-                {{color-picker shapeColors=shapeColors layer=layer updateColor="updateColor"}}
-                {{!--
 
+                {{color-picker layer=layer group=layer.vector_layer_id.color_group}}
+                {{!
                     TODO: move the actions into the layer-citation components
                     The actions make it tricky.
-
-                --}}
+                    TODO: remember what I meant by this.
+                }}
                 <div class="panel-footer row">
                     {{#liquid-if isEditing}}
                         <div class="layer-citation">

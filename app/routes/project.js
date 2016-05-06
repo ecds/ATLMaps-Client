@@ -31,6 +31,10 @@ export default Ember.Route.extend({
 		return this.get('mapObject').createMap(this.currentModel);
 	},
 
+	rasterLayers: function(){
+		return this.currentModel;
+	},
+
 	// Function the runs after we fully exit a project route and clears the map,
 	// clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
 	tearDown: function(){

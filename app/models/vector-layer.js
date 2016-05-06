@@ -1,6 +1,8 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
+
 	name: DS.attr('string'),
 	title: DS.attr('string'),
     slug: DS.attr('string'),
@@ -24,5 +26,14 @@ export default DS.Model.extend({
     active: DS.attr('boolean'),
     marker: DS.attr(),
     active_in_project: DS.attr('boolean', { defaultValue: false }),
-	vector_layer_project: DS.belongsTo('vector_layer_project', {async: true, inverse: null})
+	vector_layer_project: DS.belongsTo('vector_layer_project', {async: true, inverse: null}),
+
+	// color_group: Ember.computed(function(){
+	// 	if(this.get('data_type') === 'point-data'){
+	// 		return 'markerColors';
+	// 	}
+	// 	else {
+	// 		return 'shapeColors';
+	// 	}
+	// })
 });

@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+    dataColors: Ember.inject.service('data-colors'),
+
     actions: {
         toggleAllVectorLayers(){
             // First we figure out if the toggle all button is now `checked`

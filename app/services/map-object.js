@@ -11,7 +11,7 @@ export default Ember.Service.extend({
 
     init() {
         this._super(...arguments);
-        this.set('map', 'foo');
+        this.set('map', '');
     },
 
     createMap(/*project*/) {
@@ -75,15 +75,18 @@ export default Ember.Service.extend({
         let _this = this;
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
-        let markerColor = this.get('dataColors.markerColors')[layer.get('marker')];
+        let markerColors = this.get('dataColors.markerColors');
         let shapeColors = this.get('dataColors.shapeColors');
 
         function shapeColorName() {
             return Object.keys(shapeColors)[layer.get('marker')];
         }
 
+        function markerColorName() {
+            return Object.keys(markerColors)[layer.get('marker')];
+        }
+
         function shapeColor() {
-            // let colorName = Object.keys(shapeColors)[layer.get('marker')];
             return shapeColors[shapeColorName()];
         }
 
@@ -170,11 +173,11 @@ export default Ember.Service.extend({
                 case 'polygon':
                 case 'line-data':
 
-                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColorName();
 
                 switch (dataType) {
                     case 'point-data':
-                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColor + '"></div>';
+                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColorName() + '"></div>';
                             if (newLayerUrl) {
                                 var points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer: function(feature, latlng) {
@@ -201,7 +204,7 @@ export default Ember.Service.extend({
                     case 'polygon':
                     case 'line-data':
 
-                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor;
+                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColorName();
                     let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColorName() + '"></div>';
 
                     let polyStyle = {
