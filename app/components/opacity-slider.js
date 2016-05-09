@@ -2,9 +2,11 @@ import Ember from 'ember';
 /* globals noUiSlider */
 export default Ember.Component.extend({
 
+    mapObject: Ember.inject.service('map-object'),
     classNames: ['opacity-slider'],
 
     didInsertElement: function(){
+        let _this = this;
         var layer = this.get('layer');
         var options = {
             start: [ 10 ],
@@ -25,7 +27,7 @@ export default Ember.Component.extend({
         slider.noUiSlider.on('update', function(values, handle){
             valueInput.value = values[handle];
             var opacity = values[handle] / 10;
-            Ember.$("#map div."+layer.get('slug')+",#map img."+layer.get('slug')).css({'opacity': opacity});
+            _this.get('mapObject.rasterLayers')[layer.get('slug')].setOpacity(opacity);
         });
 
         valueInput.addEventListener('change', function(){

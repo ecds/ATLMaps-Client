@@ -46,10 +46,11 @@
     "ember-export-application-global": "^1.0.2",
     "ember-inflector": "1.9.4",
     "ember-lazy-video": "git://github.com/poteto/ember-lazy-video.git#develop",
-    "ember-modal-dialog": "0.7.5",
+    "ember-modal-dialog": "0.8.3",
     "ember-power-select": "0.10.2",
     "ember-route-action-helper": "0.3.1",
     "ember-simple-auth": "1.0.1",
+    "ember-tether": "0.3.0",
     "liquid-fire": "0.23.0",
     "silent-error": "^1.0.0"
   },

@@ -1,6 +1,6 @@
 {{yield}}
-{{log colors}}
-{{#each-in colors as |colorClass hex|}}
+
+{{#each colors as |color|}}
     {{!dataColors.shapeColors[0]}}
-    <div style="background-color: {{hex}}; height: 40px;" class="col-md-4" onclick={{action "setColor" colorClass hex layer}}></div>
-{{/each-in}}
+    <div style={{bgcolor color.hex}} class="col-md-4" onclick={{action "setColor" color layer}}></div>
+{{/each}}

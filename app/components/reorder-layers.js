@@ -7,9 +7,12 @@ export default Ember.Component.extend({
 	out of the element and querying the DOM because order matters a lot here.
 	*/
 
+	mapObject: Ember.inject.service('map-object'),
+
 	didInsertElement: function(){
 		let el = document.getElementById("layer_sort");
 		let _this = this;
+		let layerObjs = this.get('mapObject.rasterLayers')
 		let sortable = Sortable.create(el, {
 			handle: '.handle',
 			animation: 150,
@@ -26,7 +29,12 @@ export default Ember.Component.extend({
 					// the index of the layer and then adding 10 to reorder them.
 					// It's just that easy.
 					var position = layerLength - index;
-					Ember.$("."+layer.id).css("zIndex", position + 10);
+
+					_this.get('mapObject.rasterLayers')[layer.id].setZIndex(position + 10);
+
+					// let updatedLayerObj = _this.get('mapObject.rasterLayers')[layer.get('slug')].setOpacity(opacity);
+					// _this.get('mapObject').updateLayerObjects(layer.get('slug'), updatedLayerObj);
+
 					if(_this.get('isEditing') === true){
 						// Send the new position up to the route's action.
 						_this.sendAction('reorder', Ember.$(layer).attr("data-id"), position);

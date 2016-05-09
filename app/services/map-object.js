@@ -12,22 +12,24 @@ export default Ember.Service.extend({
     init() {
         this._super(...arguments);
         this.set('map', '');
+        this.set('rasterLayers', {});
+        this.set('vectorLayers', {});
     },
 
     createMap(/*project*/) {
         try {
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University'
                 // detectRetina: true,
-                className: 'street base'
+                // className: 'street base'
             });
 
             let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
                 attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
                 subdomains: '1234',
-                detectRetina: true,
-                className: 'satellite base'
+                // className: 'satellite base',
+                detectRetina: true
             });
 
             let _map = L.map('map', {
@@ -38,6 +40,9 @@ export default Ember.Service.extend({
                 zoomControl: false,
                 layers: [satellite, street]
             });
+
+            Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
+            Ember.$(street.getContainer()).addClass('street').addClass('base');
 
             // Layer contorl, topright
             L.control.zoom({
@@ -78,17 +83,9 @@ export default Ember.Service.extend({
         let markerColors = this.get('dataColors.markerColors');
         let shapeColors = this.get('dataColors.shapeColors');
 
-        function shapeColorName() {
-            return Object.keys(shapeColors)[layer.get('marker')];
-        }
+        let shapeColor = shapeColors[layer.get('marker')];
 
-        function markerColorName() {
-            return Object.keys(markerColors)[layer.get('marker')];
-        }
-
-        function shapeColor() {
-            return shapeColors[shapeColorName()];
-        }
+        let markerColor = markerColors[layer.get('marker')];
 
         layer.get(layer.get('data_format') + '_layer_id').then(function(newLayer) {
 
@@ -132,17 +129,23 @@ export default Ember.Service.extend({
                     break;
 
                 case 'wms':
-                    L.tileLayer.wms(newLayerUrl, {
+                    let wmsLayer = L.tileLayer.wms(newLayerUrl, {
                         layers: newLayer.get('layers'),
                         format: 'image/png',
-                        crs: L.CRS.EPSG4326,
                         transparent: true,
                         detectRetina: true,
-                        className: newLayerSlug,
-                        zIndex: zIndex
-                    }).addTo(map);
+                        // className: newLayerSlug,
+                        zIndex: zIndex,
+                        opacity: 1
+                    });
 
-                    // Ember.$(wmsLayer).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
+                    // let layerObj = {name: newLayerSlug, mapObj: wmsLayer};
+                    // layerObj[newLayerSlug] = wmsLayer;
+                    _this.get('rasterLayers')[newLayerSlug] = wmsLayer;
+
+                    wmsLayer.addTo(map);
+
+                    Ember.$(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
 
                     break;
 
@@ -173,11 +176,11 @@ export default Ember.Service.extend({
                 case 'polygon':
                 case 'line-data':
 
-                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColorName();
+                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor.name;
 
                 switch (dataType) {
                     case 'point-data':
-                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColorName() + '"></div>';
+                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColor.name + '"></div>';
                             if (newLayerUrl) {
                                 var points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer: function(feature, latlng) {
@@ -198,18 +201,19 @@ export default Ember.Service.extend({
 
                                     onEachFeature: _this.get('vectorDetailContent.viewData')
                                 });
+                                _this.get('vectorLayers')[newLayerSlug] = points;
                                 points.addTo(map);
                             }
                         break;
                     case 'polygon':
                     case 'line-data':
 
-                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColorName();
-                    let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColorName() + '"></div>';
+                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor.name;
+                    let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColor.name + '"></div>';
 
                     let polyStyle = {
-                        'color': shapeColor(),
-                        'fillColor': shapeColor(),
+                        'color': shapeColor.hex,
+                        'fillColor': shapeColor.hex,
                         'className': layerClass
 
                     };
@@ -221,6 +225,7 @@ export default Ember.Service.extend({
                             markerDiv: vectorDiv,
                             onEachFeature: _this.get('vectorDetailContent.viewData'),
                         });
+                        _this.get('vectorLayers')[newLayerSlug] = vector;
                         vector.addTo(map);
                     }
                     break;

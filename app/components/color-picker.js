@@ -3,8 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
     dataColors: Ember.inject.service('data-colors'),
+    mapObject: Ember.inject.service('map-object'),
 
-    classNames: ['color-picker', 'row'],
+    classNames: ['color-picker'],
 
     colors: function(){
         let layer = this.get('layer');
@@ -17,8 +18,14 @@ export default Ember.Component.extend({
         }
     }.property(),
 
+    mouseLeave(){
+        this.toggleProperty('isShowing');
+    },
+
     actions: {
-        setColor(colorClass, hex, layer){
+        setColor(color, layer){
+            console.log(color);
+            let _this = this;
             let colorGroup;
             if (layer.get('vector_layer_id.data_type') === 'point-data'){
                 colorGroup = this.get('dataColors.markerColors');
@@ -26,20 +33,20 @@ export default Ember.Component.extend({
             else {
                 colorGroup = this.get('dataColors.shapeColors');
             }
-            let newColor = Object.keys(colorGroup).indexOf(colorClass);
-            layer.setProperties({marker: newColor});
+            layer.setProperties({marker: colorGroup.indexOf(color)});
             layer.save().then(function(){
                 layer.get('vector_layer_id').then(function(vector){
                     let slug = vector.get('slug');
                     let dataType = vector.get('data_type');
                     if (dataType === 'polygon'){
-                        Ember.$('path.'+slug).attr({stroke: hex, fill: hex});
+                        _this.get('mapObject.vectorLayers')[slug].setStyle({color: color.hex, fillColor: color.hex});
                     }
                     else if (dataType === 'line-data') {
-                        Ember.$('path.'+slug).attr({stroke: hex});
+                        _this.get('mapObject.vectorLayers')[slug].setStyle({color: color.hex});
                     }
                     else if (dataType === 'point-data') {
-                        Ember.$('.leaflet-marker-icon.'+slug).css({color: hex});
+                        // The Icon class doesn't have any methods like setStyle.
+                        Ember.$('.leaflet-marker-icon.'+slug).css({color: color.hex});
                     }
                 });
             }).catch(/*fail*/);

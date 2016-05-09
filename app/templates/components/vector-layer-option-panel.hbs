@@ -1,0 +1,12 @@
+{{yield}}
+<i class="material-icons" id="options-{{layer.vector_layer_id.slug}}">more_vert</i>
+{{#if isShowing}}
+{{#tether-dialog
+    target=(concat '#options-' layer.vector_layer_id.slug)
+    attachment='top center'
+    targetAttachment='bottom center'
+}}
+<button {{action "toggleModal"}}>Toggle Modal</button>
+{{color-picker layer=layer group=layer.vector_layer_id.color_group isShowing=isShowing}}
+{{/tether-dialog}}
+{{/if}}
