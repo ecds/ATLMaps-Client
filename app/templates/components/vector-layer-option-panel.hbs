@@ -3,10 +3,13 @@
 {{#if isShowing}}
 {{#tether-dialog
     target=(concat '#options-' layer.vector_layer_id.slug)
-    attachment='top center'
-    targetAttachment='bottom center'
+    close='toggleModal'
+    attachment='top right'
+    targetAttachment='bottom left'
+    offset="-10px, -20px"
+    clickOutsideToClose=true
+    container-class='vector-layer-options-modal'
 }}
-<button {{action "toggleModal"}}>Toggle Modal</button>
 {{color-picker layer=layer group=layer.vector_layer_id.color_group isShowing=isShowing}}
 {{/tether-dialog}}
 {{/if}}

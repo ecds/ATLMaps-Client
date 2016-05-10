@@ -2,5 +2,5 @@
 
 {{#each colors as |color|}}
     {{!dataColors.shapeColors[0]}}
-    <div style={{bgcolor color.hex}} class="col-md-4" onclick={{action "setColor" color layer}}></div>
+    <div style={{bgcolor color.hex}} class="col-md-4 color" onmouseenter={{action "previewColor" color layer}} onclick={{action "setColor" color layer}}></div>
 {{/each}}
