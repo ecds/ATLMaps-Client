@@ -17,15 +17,7 @@
 
         }
     }
-    a.delete {
-        i {
-            color: material-color(deeporangealt, 100);
-            &:hover {
-                color: material-color(deeporangealt, 400);
-            }
 
-        }
-    }
     a.pick-color {
         i {
             color: material-color(blue, 100);

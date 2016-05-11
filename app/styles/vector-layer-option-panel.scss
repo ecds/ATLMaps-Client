@@ -1,7 +1,18 @@
 .vector-options {
     pointer-events: all;
+    padding-right: .75em;
 }
 
 .vector-layer-options-modal {
     width: 20%;
+}
+
+h5.delete {
+    i {
+        color: material-color(deeporangealt, 100);
+        &:hover {
+            color: material-color(deeporangealt, 400);
+        }
+
+    }
 }

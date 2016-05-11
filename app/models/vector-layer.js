@@ -27,6 +27,8 @@ export default DS.Model.extend({
     marker: DS.attr(),
     active_in_project: DS.attr('boolean', { defaultValue: false }),
 	vector_layer_project: DS.belongsTo('vector_layer_project', {async: true, inverse: null}),
+	color_name: DS.attr('string'),
+	color_hex: DS.attr('string')
 
 	// color_group: Ember.computed(function(){
 	// 	if(this.get('data_type') === 'point-data'){

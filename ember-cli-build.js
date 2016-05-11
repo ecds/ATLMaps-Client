@@ -71,7 +71,7 @@ module.exports = function() {
 	app.import('bower_components/leaflet/dist/leaflet.js');
 	app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
 	app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
-	app.import('bower_components/Sortable/Sortable.min.js');
+	// app.import('bower_components/Sortable/Sortable.min.js');
 	app.import('bower_components/draggabilly/dist/draggabilly.pkgd.min.js');
 	app.import('bower_components/nouislider/distribute/nouislider.min.js');
 	app.import('bower_components/list.js/dist/list.min.js');

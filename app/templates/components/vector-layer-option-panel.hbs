@@ -8,8 +8,14 @@
     targetAttachment='bottom left'
     offset="-10px, -20px"
     clickOutsideToClose=true
-    container-class='vector-layer-options-modal'
+    container-class='vector-layer-options-modal container'
 }}
 {{color-picker layer=layer group=layer.vector_layer_id.color_group isShowing=isShowing}}
+<div><hr /></div>
+<div class="row">
+<h5 class="delete col-sm-12"><a {{action (route-action "removeLayer" layer.vector_layer_id 'vector') }} class="delete">
+    <i class="material-icons">delete_forever</i> Remove Layer
+</a></h5>
+</div>
 {{/tether-dialog}}
 {{/if}}

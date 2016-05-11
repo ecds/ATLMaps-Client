@@ -1,5 +1,5 @@
 <div class="cotainer">
-    {{ reorder-layers isEditing=isEditing model=model reorder='reorder'}}
+    {{! reorder-layers isEditing=isEditing model=model reorder='reorder'}}
     <div class="row layer-heading">
         <table class="table">
             <tr>
@@ -24,8 +24,15 @@
             </tr>
         </table>
     </div>
+
+
+
+
+
     <div class="raster-list" id="layer_sort">
-        {{#each model.sortedRasterLayers as |layer|}}
+        {{#sortable-group tagName="ul" model=model onChange="reorderItems" as |group|}}
+        {{#each model.raster_layer_project_ids as |layer|}}
+        {{#sortable-item onDragStart="dragStarted" onDragStop="dragStopped" tagName="li" model=layer group=group handle=".handle"}}
             <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
                 <div class="panel-body">
                     <div class="row">
@@ -63,24 +70,9 @@
             </div>
             {{else}}
                 No data layers have been added.
+        {{/sortable-item}}
         {{/each}}
+        {{/sortable-group}}
     </div>
-    <!-- <div class="list-group" id="layer_sort">
-        {{#each model.sortedRasterLayers as |layer|}}
-      <div class="list-group-item">
-        <div class="row-action-primary">
-          <i class="material-icons">layers</i>
-        </div>
-        <div class="row-content">
-          <div class="action-secondary handle pull-right"><i class="material-icons">code</i></div>
-          <h4 class="list-group-item-heading">
-              <a {{action 'showLayerInfoDetals' layer.slug}}>{{layer.title}}</a>
-          </h4>
 
-          <p class="list-group-item-text">{{layer.description}}</p>
-          {{partial 'citation'}}
-        </div>
-      </div>
-      {{/each}}
-    </div> -->
 </div>

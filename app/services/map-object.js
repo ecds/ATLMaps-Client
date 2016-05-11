@@ -16,13 +16,13 @@ export default Ember.Service.extend({
         this.set('vectorLayers', {});
     },
 
-    createMap(/*project*/) {
+    createMap( /*project*/ ) {
         try {
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University'
-                // detectRetina: true,
-                // className: 'street base'
+                    // detectRetina: true,
+                    // className: 'street base'
             });
 
             let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
@@ -80,12 +80,6 @@ export default Ember.Service.extend({
         let _this = this;
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
-        let markerColors = this.get('dataColors.markerColors');
-        let shapeColors = this.get('dataColors.shapeColors');
-
-        let shapeColor = shapeColors[layer.get('marker')];
-
-        let markerColor = markerColors[layer.get('marker')];
 
         layer.get(layer.get('data_format') + '_layer_id').then(function(newLayer) {
 
@@ -176,11 +170,16 @@ export default Ember.Service.extend({
                 case 'polygon':
                 case 'line-data':
 
-                let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor.name;
+                    switch (dataType) {
+                        case 'point-data':
+                            let markerColors = _this.get('dataColors.markerColors');
+                            newLayer.setProperties({
+                                color_name: markerColors[layer.get('marker')].name,
+                                color_hex: markerColors[layer.get('marker')].hex
 
-                switch (dataType) {
-                    case 'point-data':
-                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + markerColor.name + '"></div>';
+                            });
+                            let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
+                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + newLayer.get('color_name') + '"></div>';
                             if (newLayerUrl) {
                                 var points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer: function(feature, latlng) {
@@ -204,34 +203,62 @@ export default Ember.Service.extend({
                                 _this.get('vectorLayers')[newLayerSlug] = points;
                                 points.addTo(map);
                             }
-                        break;
-                    case 'polygon':
-                    case 'line-data':
+                            break;
 
-                    var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + markerColor.name;
-                    let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + shapeColor.name + '"></div>';
+                        case 'polygon':
+                        case 'line-data':
 
-                    let polyStyle = {
-                        'color': shapeColor.hex,
-                        'fillColor': shapeColor.hex,
-                        'className': layerClass
+                            let shapeColors = _this.get('dataColors.shapeColors');
+                            newLayer.setProperties({
+                                color_name: shapeColors[layer.get('marker')].name,
+                                color_hex: shapeColors[layer.get('marker')].hex
 
-                    };
-                    if (newLayerUrl) {
-                        var vector = new L.GeoJSON.AJAX(newLayerUrl, {
-                            style: polyStyle,
-                            className: layerClass,
-                            title: newLayerTitle,
-                            markerDiv: vectorDiv,
-                            onEachFeature: _this.get('vectorDetailContent.viewData'),
-                        });
-                        _this.get('vectorLayers')[newLayerSlug] = vector;
-                        vector.addTo(map);
+                            });
+                            var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
+                            let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + newLayer.get('color_name') + '"></div>';
+
+                            let polyStyle = {
+                                'color': newLayer.get('color_hex'),
+                                'fillColor': newLayer.get('color_hex'),
+                                'className': layerClass
+
+                            };
+                            if (newLayerUrl) {
+                                var vector = new L.GeoJSON.AJAX(newLayerUrl, {
+                                    style: polyStyle,
+                                    className: layerClass,
+                                    title: newLayerTitle,
+                                    markerDiv: vectorDiv,
+                                    onEachFeature: _this.get('vectorDetailContent.viewData'),
+                                });
+                                _this.get('vectorLayers')[newLayerSlug] = vector;
+                                vector.addTo(map);
+                            }
+                            break;
                     }
                     break;
-                }
-                break;
             }
         });
+    },
+
+    updateVectorStyle: function(vector) {
+        console.log(vector.get('color_hex'))
+        let slug = vector.get('slug');
+        let dataType = vector.get('data_type');
+        if (dataType === 'polygon') {
+            this.get('vectorLayers')[slug].setStyle({
+                color: vector.get('color_hex'),
+                fillColor: vector.get('color_hex')
+            });
+        } else if (dataType === 'line-data') {
+            this.get('vectorLayers')[slug].setStyle({
+                color: vector.get('color_hex')
+            });
+        } else if (dataType === 'point-data') {
+            // The Icon class doesn't have any methods like setStyle.
+            Ember.$('.leaflet-marker-icon.' + slug).css({
+                color: vector.get('color_hex')
+            });
+        }
     }
 });

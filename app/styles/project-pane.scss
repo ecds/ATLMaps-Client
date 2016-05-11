@@ -83,6 +83,18 @@
             .reorder {
                 padding: .25em 0 0 0;
             }
+            ul {
+                list-style: none;
+                padding-left: 0;
+                li {
+                    border-style: none;
+                    border-width: 0;
+                    border-color: none;
+                    border-radius: 0;
+                    margin-bottom: 0;
+                    width: 100%;
+                }
+            }
         }
 
         .handle {

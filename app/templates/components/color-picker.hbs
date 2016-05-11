@@ -1,6 +1,9 @@
 {{yield}}
-
-{{#each colors as |color|}}
-    {{!dataColors.shapeColors[0]}}
-    <div style={{bgcolor color.hex}} class="col-md-4 color" onmouseenter={{action "previewColor" color layer}} onclick={{action "setColor" color layer}}></div>
-{{/each}}
+<div class="row">
+    <div class='col-sm-12'>Pick a color (click to save).</div>
+</div>
+<div>
+    {{#each colors as |color index|}}
+        <div style= {{bgcolor color.hex}} class="col-xs-2 color" onmouseenter= {{action "previewColor" color layer index}} onclick= {{action "setColor" layer}}></div>
+    {{/each}}
+</div>

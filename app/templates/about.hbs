@@ -21,3 +21,13 @@
     </article>
   </div>
 </div>
+
+{{log model}}
+
+{{#sortable-group tagName="ul" onChange="reorder" as |group|}}
+{{#each model as |project|}}
+{{#sortable-item onDragStart="dragStarted" onDragStop="dragStopped" tagName="li" group=group handle=".handle"}}
+{{project.raster_layer_id.title}} {{project.position}}<span class="handle">X</span>
+{{/sortable-item}}
+{{/each}}
+{{/sortable-group}}

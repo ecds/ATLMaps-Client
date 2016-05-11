@@ -19,38 +19,20 @@ export default Ember.Component.extend({
     }.property(),
 
     mouseLeave(){
-        this.get('layer').rollbackAttributes();
+
     },
 
     actions: {
-        previewColor(color, layer){
+        previewColor(color, layer, index){
+            layer.setProperties({marker: index});
             let _this = this;
             layer.get('vector_layer_id').then(function(vector){
-                let slug = vector.get('slug');
-                let dataType = vector.get('data_type');
-                if (dataType === 'polygon'){
-                    _this.get('mapObject.vectorLayers')[slug].setStyle({color: color.hex, fillColor: color.hex});
-                }
-                else if (dataType === 'line-data') {
-                    _this.get('mapObject.vectorLayers')[slug].setStyle({color: color.hex});
-                }
-                else if (dataType === 'point-data') {
-                    // The Icon class doesn't have any methods like setStyle.
-                    Ember.$('.leaflet-marker-icon.'+slug).css({color: color.hex});
-                }
+                vector.setProperties({color_name: color.name, color_hex: color.hex});
+                _this.get('mapObject').updateVectorStyle(vector, color);
             });
         },
-        setColor(color, layer){
-            // console.log(color);
-            // let _this = this;
-            let colorGroup;
-            if (layer.get('vector_layer_id.data_type') === 'point-data'){
-                colorGroup = this.get('dataColors.markerColors');
-            }
-            else {
-                colorGroup = this.get('dataColors.shapeColors');
-            }
-            layer.setProperties({marker: colorGroup.indexOf(color)});
+        setColor(layer){
+
             layer.save().then(function(){
                 // console.log('saving')
             }).catch(/*fail*/);
