@@ -10,6 +10,9 @@ export default Ember.Component.extend({
     click() {
         this.toggleProperty('isShowing');
     },
+    mouseLeave(){
+
+    },
     actions: {
         toggleModal() {
             this.toggleProperty('isShowing');
@@ -17,7 +20,7 @@ export default Ember.Component.extend({
                 this.get('layer').rollbackAttributes();
                 let color;
                 let layer = this.get('layer.vector_layer_id');
-                if (layer.data_type === 'point-data') {
+                if (layer.get('data_type') === 'point-data') {
                     color = this.get('dataColors.markerColors')[this.get('layer.marker')];
                 } else {
                     color = this.get('dataColors.shapeColors')[this.get('layer.marker')];
@@ -26,6 +29,7 @@ export default Ember.Component.extend({
                     color_name: color.name,
                     color_hex: color.hex
                 });
+                console.log(this.get('layer.marker'))
                 this.get('mapObject').updateVectorStyle(this.get('layer.vector_layer_id'));
             }
         }

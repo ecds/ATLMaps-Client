@@ -49,18 +49,26 @@ export default Ember.Route.extend({
 
             var _this = this;
 
-            project.save().then(function(){
+            project.save().then(function(newProject){
+				newProject.setProperties(
+					{
+						name: 'Please enter a title.',
+						editing: true
+					}
+				);
+
+				_this.transitionTo('project.info', newProject.get('id'));
 				// Success callback
 				// Get the newly created project
-                _this.store.queryRecord('project', {name: newProjectName}).then(function(newProject) {
-					// Set the name so we don't just have some ugly string in there.
-					newProject.set('name', 'Please enter a title.');
-					// Transition to our new project
-                    _this.transitionTo('project.info', newProject.id);
-                }, function(){
-					// Error callback
-					// TODO What should we do if this fails?
-				});
+                // _this.store.queryRecord('project', {name: newProjectName}).then(function(newProject) {
+				// 	// Set the name so we don't just have some ugly string in there.
+				// 	newProject.set('name', 'Please enter a title.');
+				// 	// Transition to our new project
+                //     _this.transitionTo('project.info', newProject.id);
+                // }, function(){
+				// 	// Error callback
+				// 	// TODO What should we do if this fails?
+				// });
 			});
 
         },
