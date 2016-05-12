@@ -33,10 +33,7 @@ export default Ember.Route.extend({
         },
 
         actions: {
-            updateColor(newColor, layer){
-                console.log(layer);
-                console.log(newColor);
-            }
+
         }
     }
 });

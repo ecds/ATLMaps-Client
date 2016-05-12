@@ -30,13 +30,6 @@ export default Ember.Component.extend({
                 vector.setProperties({color_name: color.name, color_hex: color.hex});
                 _this.get('mapObject').updateVectorStyle(vector, color);
             });
-        },
-        setColor(layer){
-
-            layer.save().then(function(){
-                // console.log('saving')
-            }).catch(/*fail*/);
-
         }
     }
 

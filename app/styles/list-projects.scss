@@ -64,3 +64,58 @@ a.new-project {
 		min-height: 1px;
 	}
 }
+
+a.featured {
+	color: whitesmoke;
+	text-decoration: none;
+
+	h2 {
+		color: material-color(grey, 800);
+		padding-left: .5em;
+	}
+}
+
+.panel-default.featured {
+
+
+	min-height: 250px;
+	width: 100%;
+
+	.panel-body.featured {
+		padding: 0;
+	}
+
+	td {
+		height: 175px;
+		vertical-align: top;
+	}
+	tr.head {
+		background-size: 100%;
+		min-height: 150px;
+
+		td {
+		}
+	}
+	tr.des {
+		background-color: material-color(grey, 600);
+		color: white;
+		max-height: 75px;
+
+		td {
+			padding: 1em;
+		}
+
+		a {
+			color: whitesmoke;
+		}
+	}
+	// padding: 0;
+	// margin: 0;
+	//
+	// .panel-body.featured {
+	// 	div {
+	// 		position: absolute;
+	// 		bottom: 0;
+	// 	}
+	// }
+}

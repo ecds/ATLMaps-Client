@@ -1,26 +1,24 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-
-moduleForComponent('reorder-layers', 'Integration | Component | reorder layers', {
+moduleForComponent('flash-message', 'Integration | Component | flash message', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
-
+  
   // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.render(hbs`{{reorder-layers}}`);
+  this.render(hbs`{{flash-message}}`);
 
-  assert.equal(this.$().text(), '');
+  assert.equal(this.$().text().trim(), '');
 
-  // Template block usage:
+  // Template block usage:" + EOL +
   this.render(hbs`
-    {{#reorder-layers}}
+    {{#flash-message}}
       template block text
-    {{/reorder-layers}}
+    {{/flash-message}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

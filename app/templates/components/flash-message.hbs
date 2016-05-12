@@ -1,0 +1,6 @@
+{{yield}}
+{{#liquid-if flashMessage.flash}}
+<div class="alert alert-dismissible alert-success">
+    {{flashMessage.message}}
+</div>
+{{/liquid-if}}

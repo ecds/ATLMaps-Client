@@ -1,4 +1,4 @@
-<div class="cotainer">
+<div class="container">
     <div class="row layer-heading">
         <table class="table">
             <tr>
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="togglebutton opacity vector single-vector col-md-3">
-                        {{#liquid-if isEditing}}
+                        {{#liquid-if model.editing}}
                         {{vector-layer-option-panel layer=layer group=layer.vector_layer_id.color_group}}
                         {{else}}
                         <label class="pull-right">

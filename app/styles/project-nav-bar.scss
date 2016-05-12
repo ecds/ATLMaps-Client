@@ -30,14 +30,8 @@
         color: whitesmoke;
         font-weight: 500;
     }
-    .edit-button {
-        margin-right: 0;
-        padding-right: 0;
 
-        a {
-            color: material-color(blue, 900) !important;
-        }
-    }
+    color: material-color(blue, 900);
 }
 .project-view, .project-edit {
     // padding: 1em 0;

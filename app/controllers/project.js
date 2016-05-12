@@ -14,9 +14,11 @@ export default Ember.Controller.extend({
 
     showingAllLayers: true,
 
-    actions: {
-        toggleEdit: function(){
-            this.toggleProperty('isEditing');
-        }
-    }
+    // flashMessage: Ember.inject.service('flash-message'),
+
+    // actions: {
+    //     toggleEdit: function(){
+    //         this.toggleProperty('isEditing');
+    //     }
+    // }
 });

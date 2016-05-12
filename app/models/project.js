@@ -23,9 +23,12 @@ export default DS.Model.extend({
 	intro: DS.attr('string'),
 	media: DS.attr('string'),
 	template_id: DS.attr('number'),
+	card_url: DS.attr('string'),
 
 	// Attribute that will be set to true if a user is "exploring".
 	exploring: DS.attr('boolean', { defaultValue: false }),
+
+	editing: DS.attr('boolean', { defaultValue: false }),
 
 	// TODO remember how this actually works and document it.
 	// Computed property that sorts rasters by on the position their `position` in the project.

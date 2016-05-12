@@ -20,7 +20,6 @@ export default Ember.Component.extend({
     },
 
     willDestroyElement(){
-        console.log('bye');
         this.get('draggie').destroy();
     },
 

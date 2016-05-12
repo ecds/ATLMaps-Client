@@ -8,6 +8,7 @@ export default Ember.Route.extend({
 	dataColors: Ember.inject.service('data-colors'),
 	browseParams: Ember.inject.service('browse-params'),
 	session: Ember.inject.service('session'),
+	flashMessage: Ember.inject.service('flash-message'),
 
 	model(params){
 		if (params.project_id === 'explore') {
@@ -110,45 +111,6 @@ export default Ember.Route.extend({
 						});
 					});
 
-					// NOTE: We might want to add more base layer options like this one.
-					// var normal = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.day.grey.mobile/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-					//     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-					//     subdomains: '1234',
-					//     mapID: 'newest',
-					//     app_id: '1Igi60ZMWDeRNyjXqTZo',
-					//     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-					//     base: 'base',
-					//     maxZoom: 20
-					// });
-
-					// Add the project's base map
-					// let osm = map._layers['29'];
-					// let satellite = map._layers['125'];
-					// try {
-					// 	if (project.get('default_base_map') === 'satellite') {
-					// 		satellite.addTo(map);
-					// 	}
-					// 	else {
-					// 		osm.addTo(map);
-					// 	}
-					// }
-					// catch(err) {
-					// 	osm.addTo(map);
-					// }
-
-
-
-
-					// control._map = map;
-					//
-					// var controlDiv = control.onAdd(map);
-					// Ember.$('.base-layer-controls').append(controlDiv);
-
-					// Pan and zoom the map for the project.
-					// Animation is turned off on the panTo because the map gets stuck in Safari when it animates
-					// a pan and zoom simulateously.
-					// map.panTo(new L.LatLng(project.get('center_lat'), project.get('center_lng')), {animate: false});
-					// map.setZoom(project.get('zoom_level'));
 					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
 					Ember.$('.base').hide();
 					Ember.$('.'+project.get('default_base_map')).show();
@@ -180,6 +142,10 @@ export default Ember.Route.extend({
             else {
                  this.set('clickedLayer', true);
             }
+		},
+
+		toggleEdit(){
+			this.modelFor('project').toggleProperty('editing');
 		},
 
 		addLayer(layer, format) {
@@ -296,6 +262,15 @@ export default Ember.Route.extend({
                 });
             });
         },
+
+		setColor(layer){
+            layer.save().then(
+				this.get('flashMessage').showMessage('New color saved!', 'success')
+			).catch(
+				// this.get('flashMessage').showMessage('Dang, something went wrong!', 'fail')
+			);
+
+        }
 
 
     },

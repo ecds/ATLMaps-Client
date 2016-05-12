@@ -4,6 +4,6 @@
 </div>
 <div>
     {{#each colors as |color index|}}
-        <div style= {{bgcolor color.hex}} class="col-xs-2 color" onmouseenter= {{action "previewColor" color layer index}} onclick= {{action "setColor" layer}}></div>
+        <div style= {{bgcolor color.hex}} class="col-xs-2 color" onmouseenter= {{action "previewColor" color layer index}} onclick= {{route-action "setColor" layer}}></div>
     {{/each}}
 </div>

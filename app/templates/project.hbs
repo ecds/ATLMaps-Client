@@ -11,7 +11,7 @@
 
 <div class="row project-window">
 	<div class="project-head col-md-12">
-		<div class="row {{if isEditing 'project-edit' 'project-view'}}">
+		<div class="row {{if model.editing 'project-edit' 'project-view'}}">
 			<div class="col-md-10 title">
 				{{model.name}}
 			</div>
@@ -24,8 +24,10 @@
 			</div>
 		</div>
 
-
 		<nav class="container project-nav">
+			<!-- <div class="project-pane"> -->
+				{{flash-message}}
+			<!-- </div> -->
 			<div class="project-pane">
 				{{liquid-outlet}}
 			</div>

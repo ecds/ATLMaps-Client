@@ -5,13 +5,15 @@
     right: 0;
     left: 50px;
     box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    background-color: white;
 
-    .cotainer {
+    .container {
         background-color: white;
         padding: .5em;
         pointer-events: auto; // Allow the pane to respond to click.
         border-left: 1px solid #adadad;
         border-right: 1px solid #adadad;
+        width: 100%;
 
         h1 {
             font-size: 2em;

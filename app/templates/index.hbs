@@ -1,91 +1,87 @@
 {{liquid-outlet}}
 <div class="banner blue">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-offset-2 col-sm-8">
-        <div class="jumbotron text-center">
-          <h1>Layers of discovery</h1>
-          <h2>Mapping the stories of your city</h2>
-          {{#if session.isAuthenticated}}
-            <p>
-              {{#link-to 'projects' tagName='a' class="btn btn-info btn-lg"}}Go to Projects{{/link-to}}
-            </p>
-          {{else}}
-            <p>
-              {{#link-to 'explore' tagName='a' class="btn btn-info btn-lg"}}
-                Start Exploring
-              {{/link-to}}
-     <!--          <a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a> -->
-            </p>
-          {{/if}}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="jumbotron text-center">
+                    <h1>Layers of discovery</h1>
+                    <h2>Mapping the stories of your city</h2>
+                    {{#if session.isAuthenticated}}
+                        <p>
+                            {{#link-to 'projects' tagName='a' class="btn btn-info btn-lg" }}Go to Projects{{/link-to}}
+                        </p>
+                    {{else}}
+                        <p>
+                            {{#link-to 'explore' tagName='a' class="btn btn-info btn-lg" }}
+                                Start Exploring
+                            {{/link-to}}
+                            <!--          <a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a> -->
+                        </p>
+                    {{/if}}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div class="banner blue blurred">
-  <div class="container">
-    <article>
-      <header class="row">
-        <div class="col-md-12">
-          <h2>Featured Projects</h2>
+    <div class="container">
+        <header class="row">
+            <div class="col-md-12">
+                <h2>Featured Projects</h2>
+            </div>
+        </header>
+    <hr />
+
+<div class="row">
+    {{#each model as |project|}}
+        <div class="col-sm-4">
+            {{#link-to 'project' project class="featured" }}
+                <div class="panel panel-default featured">
+                    <div class="panel-body featured">
+                        <table>
+                            <tr class="head" style='background-image: url("{{project.card_url}}");'>
+                                <td>
+                                    <h2>{{project.name}}</h2>
+                                </td>
+                            </tr>
+                            <tr class="des">
+                                <td>
+                                    <p>{{project.description}}</p>
+                                    <h5>Created by: {{project.owner}}</h5>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            {{/link-to}}
         </div>
-      </header>
-      <hr />
-
-      <div class="list-group col-sm-10 col-sm-offset-1">
-          {{#if model.isPending}}
-            <h2>Loading...</h2>
-          {{else}}
-          {{#each model as |project|}}
-
-                   <div class="list-group-item col-md-6 project-group-item">
-                     <div class="row-action-primary">
-                       <i class="material-icons">map</i>
-                     </div>
-                     <div class="row-content">
-                       <div class="action-secondary"><i class="mdi-material-info"></i></div>
-                       <h4 class="list-group-item-heading">
-                         {{#link-to 'project' project}}
-                           <span>
-                           {{project.name}}</span>
-                         {{/link-to}}
-                       </h4>
-                       <p class="list-group-item-text">{{project.description}}</p>
-                       <h5>Created by: {{project.owner}}</h5>
-                     </div>
-                     <div class="list-group-separator"></div>
-                   </div>
-
-                 {{else}}
-                   <p>There are no projects visible at this time :(</p>
-         {{/each}}
-          {{/if}}
-      </div>
-    </article>
-  </div>
+    {{else}}
+        <p>There are no projects visible at this time :(</p>
+    {{/each}}
+</div>
+</div>
 </div>
 
 <!-- Partners -->
 <div class="container">
-  <section class="text-center">
-    <header class="homepage-header">Project Partners</header>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <img class="partner-logo text-center" src="assets/images/institutions/emory.png" alt="Emory University Libraries and Information Technology Services">
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <img class="partner-logo text-center" src="assets/images/institutions/gsu.png" alt="Georgia State University">
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <img class="partner-logo text-center" src="assets/images/institutions/ksu.png" alt="Kennesaw State University">
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <img class="partner-logo text-center" src="assets/images/institutions/wabe.png" alt="WABE">
-      </div>
-    </div>
+    <section class="text-center">
+        <header class="homepage-header">Project Partners</header>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <img class="partner-logo text-center" src="assets/images/institutions/emory.png" alt="Emory University Libraries and Information Technology Services">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <img class="partner-logo text-center" src="assets/images/institutions/gsu.png" alt="Georgia State University">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <img class="partner-logo text-center" src="assets/images/institutions/ksu.png" alt="Kennesaw State University">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <img class="partner-logo text-center" src="assets/images/institutions/wabe.png" alt="WABE">
+            </div>
+        </div>
 
-  </section>
+    </section>
 </div>
 <!-- End of Partners -->

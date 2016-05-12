@@ -242,7 +242,6 @@ export default Ember.Service.extend({
     },
 
     updateVectorStyle: function(vector) {
-        console.log(vector.get('color_hex'))
         let slug = vector.get('slug');
         let dataType = vector.get('data_type');
         if (dataType === 'polygon') {
