@@ -51,6 +51,13 @@
 						{{/link-to}}
 					</div>
 				{{/if}}
+				{{#if model.may_edit}}
+					<div class="row">
+						{{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers" }}
+							<i class="material-icons">search</i> Find Maps
+						{{/link-to}}
+					</div>
+				{{/if}}
 				{{#if model.vector_layer_project_ids}}
 					<div class="row">
 						{{#link-to "project.vector-layers" class="" id='vector-data' title="Pinpoint Layers" }}
