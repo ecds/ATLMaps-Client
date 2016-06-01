@@ -52,7 +52,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 
 // Allow click though to the map past the liquid-container
 .liquid-container {
-    pointer-events: none;
+    // pointer-events: none;
 }
 
 h1, h2, h3, .h1, .h2, .h3{
@@ -96,6 +96,10 @@ body, .static_content{
 
 .checkbox label {
     padding-left: 35px;
+}
+
+label {
+    pointer-events: all;
 }
 
 .static_content.container{
@@ -234,9 +238,9 @@ section {
   min-height: 25px;
 }
 
-#ex1Slider .slider-selection {
-  background: #BABABA;
-}
+// #ex1Slider .slider-selection {
+//   background: #BABABA;
+// }
 
 .layer-list .list-group .list-group-item{
   overflow:visible;
@@ -279,10 +283,6 @@ section {
   float: right;
   height: 100px;
   margin-right: 3px;
-}
-
-.slider {
-  margin: .75em;
 }
 
 h3 .btn {

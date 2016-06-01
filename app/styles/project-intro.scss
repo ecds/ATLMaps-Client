@@ -3,10 +3,14 @@
     padding-bottom: 1em;
 }
 .project-intro {
-    width: 90% !important;
-    height: 90%;
-    top: 5% !important;
+    // the modal addon adds
+    // some crap to the element.
+    width: 80% !important;
+    height: 80%;
+    top: 10% !important;
     left: 5%;
+    left: 10% !important;
+    margin: 0 !important;
 
     .container-fluid {
         height: 100%;

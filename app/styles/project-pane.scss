@@ -1,19 +1,22 @@
 @import 'layer-citation.scss';
+
 .project-pane {
 
     position: absolute;
+    pointer-events: all;
     right: 0;
-    left: 50px;
+    left: 32px;
     box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
     background-color: white;
+    min-height: 175px;
 
-    .container {
+    // .container {
         background-color: white;
         padding: .5em;
         pointer-events: auto; // Allow the pane to respond to click.
         border-left: 1px solid #adadad;
         border-right: 1px solid #adadad;
-        width: 100%;
+        width: calc(100% - 16px);
 
         h1 {
             font-size: 2em;
@@ -54,13 +57,15 @@
         }
 
         // layer controls in edit view
-        panel-footer.row {
-            margin-bottom: 1px;
+        .panel-footer.row {
+            // margin-bottom: 1px;
             pointer-events: all;
+            margin: 0;
         }
 
         .layer-heading {
             padding: 0 .75em;
+            pointer-events: all;
 
             table {
                 width: 100%;
@@ -110,6 +115,6 @@
             padding-left: 5px;
         }
 
-    }
+    // }
 
 }

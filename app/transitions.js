@@ -9,8 +9,14 @@ export default function(){
         'project.base-layers',
         'project.help'
     ]),
-    this.use('toLeft'),
-    this.reverse('toRight')
+    this.use('crossFade'),
+    this.reverse('crossFade')
+  );
+  this.transition(
+      this.hasClass('catagory'),
+      this.toValue(true),
+      this.use('crossFade'),
+      this.reverse('crossFade')
   );
   this.transition(
       this.fromValue(false),

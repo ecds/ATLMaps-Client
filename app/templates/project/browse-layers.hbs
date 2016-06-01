@@ -1,22 +1,22 @@
-<div class="container">
-    {{partial 'close-button'}}
-    <div class="browse-pane">
-        {{#liquid-if editSuccess}}
-            <div class="alert alert-dismissible alert-success">
-                Project info has been updated!
-            </div>
-        {{/liquid-if}}
-        {{#liquid-if editFail}}
-            <div class="alert alert-dismissible alert-danger">
-                Dang, something went wrong. The project info was not updated.
-            </div>
-        {{/liquid-if}}
-        {{browse-text getResults='getResults'}}
-        <hr />
-        {{browse-tags model=categories getResults='getResults'}}
-        <hr />
-        {{browse-years model=yearRange getResults='getResults'}}
-        <hr />
-        {{browse-institution model=institutions getResults='getResults'}}
-    </div>
+<div class="project-pane">
+{{partial 'close-button'}}
+<div class="browse-pane">
+    {{#liquid-if editSuccess}}
+        <div class="alert alert-dismissible alert-success">
+            Project info has been updated!
+        </div>
+    {{/liquid-if}}
+    {{#liquid-if editFail}}
+        <div class="alert alert-dismissible alert-danger">
+            Dang, something went wrong. The project info was not updated.
+        </div>
+    {{/liquid-if}}
+    {{browse-text getResults='getResults'}}
+    <hr />
+    {{browse-tags model=categories getResults='getResults'}}
+    <hr />
+    {{browse-years model=yearRange getResults='getResults'}}
+    <hr />
+    {{browse-institution model=institutions getResults='getResults'}}
+</div>
 </div>

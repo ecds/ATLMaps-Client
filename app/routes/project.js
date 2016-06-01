@@ -9,6 +9,7 @@ export default Ember.Route.extend({
 	browseParams: Ember.inject.service('browse-params'),
 	session: Ember.inject.service('session'),
 	flashMessage: Ember.inject.service('flash-message'),
+	showIntro: Ember.inject.service(),
 
 	model(params){
 		if (params.project_id === 'explore') {
@@ -26,6 +27,10 @@ export default Ember.Route.extend({
 		else {
 			return this.store.findRecord('project', params.project_id);
 		}
+	},
+
+	afterModel(){
+		this.get('showIntro').init(this.modelFor('project').get('id'));
 	},
 
 	map: function(){
@@ -70,6 +75,10 @@ export default Ember.Route.extend({
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {
+
+		toggleIntro(){
+			this.get('showIntro').toggleShow();
+		},
 
 		willTransition(transition) {
 			if (transition.targetName === 'project.browse-layers') {

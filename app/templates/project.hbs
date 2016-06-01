@@ -3,19 +3,16 @@
 	<div class="base-layer-controls"></div>
 </div>
 
-<nav class="row">
-	{{#link-to 'projects' tagName='a' class="back-link" title="Back to All Projects" }}
-		<span class="back-button"><i class="material-icons">keyboard_backspace</i></span>
-	{{/link-to}}
-</nav>
-
-<div class="row project-window">
-	<div class="project-head col-md-12">
-		<div class="row {{if model.editing 'project-edit' 'project-view'}}">
-			<div class="col-md-10 title">
+<div class="project-window">
+	<div class="project-head">
+		<div class="row project-head {{if model.editing 'project-edit' 'project-view'}}">
+			<div class="col-xs-2 col-md-1 exit title">
+				{{#link-to 'projects' title="Back to All Projects"}}<i class="material-icons">exit_to_app</i>{{/link-to}}
+			</div>
+			<div class="col-xs-6 col-md-6 title">
 				{{model.name}}
 			</div>
-			<div class="col-md-2 edit-button">
+			<div class="pull-left col-xs-2 col-md-2 edit-button">
 				{{#if model.may_edit}}
 					<a {{action 'toggleEdit'}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
 						<i class="material-icons pull-right">mode_edit</i>
@@ -28,9 +25,7 @@
 			<!-- <div class="project-pane"> -->
 				{{flash-message}}
 			<!-- </div> -->
-			<div class="project-pane">
 				{{liquid-outlet}}
-			</div>
 			<div class="project-nav-group pull-left">
 				<div class="row">
 					{{#link-to "project.info" class="" id='project-info' title="Project Description" }}
@@ -95,3 +90,6 @@
 
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{vector-info}}
+{{#if showIntro.show}}
+	{{project-intro-modal action='toggleIntro' project=model template=model.templateSlug}}
+{{/if}}

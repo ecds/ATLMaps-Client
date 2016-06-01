@@ -1,6 +1,6 @@
-<div class="container {{if isEditing form-group}}">
+<div class="project-pane {{if model.editing form-group}}">
     {{partial 'close-button'}}
-    {{#if isEditing}}
+    {{#if model.editing}}
         {{#liquid-if editSuccess}}
             <div class="alert alert-dismissible alert-success">
                 Project info has been updated!
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-11">
-                {{project-intro-modal action='showHideIntro' project=model template=model.templateSlug seen=introSeen}}
+                <a class="btn btn-info" {{action 'toggleIntro'}}>Show intro</a>
             </div>
         </div>
         {{/if}}

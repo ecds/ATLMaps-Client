@@ -10,6 +10,11 @@
     clickOutsideToClose=true
     container-class='vector-layer-options-modal container'
 }}
+<div class="row">
+    <div class="col-sm-12">
+        <a {{action 'toggleModal'}} class="pull-right close-button"><i class="material-icons">highlight_off</i></a>
+    </div>
+</div>
 {{color-picker layer=layer group=layer.vector_layer_id.color_group isShowing=isShowing}}
 <div><hr /></div>
 <div class="row">

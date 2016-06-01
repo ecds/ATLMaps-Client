@@ -14,6 +14,8 @@ export default Ember.Controller.extend({
 
     showingAllLayers: true,
 
+    showIntro: Ember.inject.service()
+
     // flashMessage: Ember.inject.service('flash-message'),
 
     // actions: {

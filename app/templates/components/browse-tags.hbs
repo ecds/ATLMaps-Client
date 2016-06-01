@@ -8,7 +8,7 @@
                     <span><i class="material-icons {{unless category.checked "hidden"}}">done</i></span>
                     {{category.name}}
                 </a>
-                {{#liquid-if category.clicked}}
+                {{#liquid-if category.clicked class="category"}}
                 <ul class="list-unstyled tag-group pull-left {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
                     <li class="checkbox">
                             <label>

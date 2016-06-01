@@ -68,7 +68,9 @@
 }
 
 .slider {
-    width: 94%;
+    width: 93%;
+    pointer-events: all;
+    margin: .5em;
 }
 
 .noUi-handle {
