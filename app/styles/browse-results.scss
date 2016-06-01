@@ -4,6 +4,24 @@
     right: 34px;
     top: 90px;
 
+    .browse-nav {
+        display: flex;
+        position: absolute;
+    }
+
+    .results-container {
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        height: 100vh;
+
+        .result-list {
+            overflow: auto;
+            top: 104px;
+            left: 1px;
+        }
+    }
+
     .btn-group {
         margin: 0;
     }

@@ -1,16 +1,23 @@
 @import "variables.scss";
 
+div.project-nav {
+    display: flex;
+    position: absolute;
+    background-color: white;
+    top: 82px;
+    left: 30px;
+    width: 35%;
+
+    .row {
+        padding: .5em
+    }
+}
+
 .project-window {
     margin-top: 10px;
     // width: 30%;
     min-width: 455px;
     position: fixed;
-
-    nav {
-        width: 100%;
-        position: relative;
-        background-color: white;
-    }
 
     .liquid-container, .liquid-child {
         overflow: visible;

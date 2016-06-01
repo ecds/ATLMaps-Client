@@ -1,6 +1,6 @@
 <div class="container browse-results">
-    <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a>
-    <div class="row">
+    <!-- <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
+    <div class="row browse-nav">
         <div class=col-md-12>
             <nav class="btn-group btn-group-justified">
 
@@ -15,8 +15,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row results-container">
+        <div class="col-md-12 result-list">
             {{#liquid-if editSuccess}}
             <div class="alert alert-dismissible alert-success">
                 Project's Layers are updated.

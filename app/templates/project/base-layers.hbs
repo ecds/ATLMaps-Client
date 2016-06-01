@@ -1,4 +1,3 @@
-<div class="project-pane">
 {{partial 'close-button'}}
 {{#if isEditing}}
     {{#liquid-if editSuccess}}
@@ -21,4 +20,3 @@
 <a {{action 'setBase' 'street' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
 
 <a {{action 'setBase' 'satellite' model isEditing}} title="Satellite" class="btn btn-default base-preview satellite"></a>
-</div>

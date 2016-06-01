@@ -2,21 +2,22 @@
 
 .project-pane {
 
-    position: absolute;
-    pointer-events: all;
-    right: 0;
-    left: 32px;
-    box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    background-color: white;
+    pointer-events: none !important;
+    display: flex;
+  overflow: hidden;
+  position: fixed;
+  left: 63px;
+  top: 75px;
+  height: 100vh;
+    // background-color: red;
     // min-height: 175px;
     min-height: 270px;
     // .container {
-        background-color: white;
+        // background-color: white;
         padding: .5em;
         pointer-events: auto; // Allow the pane to respond to click.
-        border-left: 1px solid #adadad;
-        border-right: 1px solid #adadad;
-        width: calc(100% - 16px);
+
+        width: calc(35% - 25px);
 
         h1 {
             font-size: 2em;
@@ -29,6 +30,24 @@
         // .row {
         //
         // }
+
+        .project-route {
+            overflow: auto;
+            width: 100%;
+            height: auto;
+            background-color: tranparent;
+
+
+            .route-content {
+                border-left: 1px solid #adadad;
+                border-right: 1px solid #adadad;
+                box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
+                background-color: white;
+                padding: 1em;
+                pointer-events: all;
+            }
+
+        }
 
         article {
             padding: 2em;

@@ -5,7 +5,7 @@
 
 <div class="project-window">
 	<div class="project-head">
-		<div class="row project-head {{if model.editing 'project-edit' 'project-view'}}">
+		<div class="row project-head container {{if model.editing 'project-edit' 'project-view'}}">
 			<div class="col-xs-2 col-md-1 exit title">
 				{{#link-to 'projects' title="Back to All Projects"}}<i class="material-icons">exit_to_app</i>{{/link-to}}
 			</div>
@@ -20,13 +20,11 @@
 				</span>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<nav class="container project-nav">
-			<!-- <div class="project-pane"> -->
-				{{flash-message}}
-			<!-- </div> -->
-				{{liquid-outlet}}
-			<div class="project-nav-group pull-left">
+		<div class="project-nav container">
+			<nav class="project-nav-group pull-left">
 				<div class="row">
 					{{#link-to "project.info" class="" id='project-info' title="Project Description" }}
 						<i class="material-icons">info_outline</i> About this Project
@@ -75,18 +73,29 @@
 				<!-- {{#link-to "project.help" class=" project-nav" id='help' title="Show Help Window"}}
 		    	<i class="material-icons">help_outline</i>
 		    {{/link-to}} -->
-			</div>
+		</nav>
 			<div class="project-meta pull-right">
 				<!-- <h4>By <span>{{model.owner}}</span></h4>
 			<h5>Emory University</h5> -->
 			</div>
 
-		</nav>
-	</div>
+		</div>
+
+		<div class="project-pane">
+			<div class="project-route">
+				<div class="route-content">
+				{{flash-message}}
+				{{liquid-outlet}}
+			</div>
+  			</div>
+		</div>
+
+
+	<!-- </div> -->
 	<div class="col-md-8 pull-right">
 		{{outlet "browse-results"}}
 	</div>
-</div>
+<!-- </div> -->
 
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{vector-info}}
