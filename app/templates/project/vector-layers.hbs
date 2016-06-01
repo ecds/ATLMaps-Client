@@ -32,10 +32,11 @@
             <div class="row layer-heading">
                 {{! Moving forward with out the data_type causes problems.}}
                 {{#if layer.vector_layer_id.data_type}}
-                <div class="map-marker col-md-1 vector-icon
+                <div class="col-md-1 vector-icon
                     {{layer.vector_layer_id.data_type}}
                     {{layer.vector_layer_id.data_format}}
                     {{!-- marker color is a helper --}}
+                    map-marker
                     {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}">
                 </div>
                 {{/if}}

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-/* global Cookies */
 
 export default Ember.Component.extend({
     showIntro: Ember.inject.service(),

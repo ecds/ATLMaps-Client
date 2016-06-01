@@ -5,7 +5,9 @@
         </header>
     </div>
 </div>
+{{#if session.isAuthenticated }}
 <a class="btn btn-fab new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
+{{/if}}
 <div class="banner orange blurred">
     <div class="container project-list">
         {{#if session.isAuthenticated}}

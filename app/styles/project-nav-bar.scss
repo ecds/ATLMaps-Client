@@ -35,6 +35,14 @@
         color: whitesmoke;
         font-weight: 500;
         padding-left: 0;
+
+        span.edit-button a {
+            color: material-color(blue, 100);
+            i {
+                margin-left: 5px;
+                vertical-align: top !important;
+            }
+        }
     }
 
     .exit {

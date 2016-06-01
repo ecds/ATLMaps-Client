@@ -29,7 +29,6 @@ export default Ember.Component.extend({
                     color_name: color.name,
                     color_hex: color.hex
                 });
-                console.log(this.get('layer.marker'))
                 this.get('mapObject').updateVectorStyle(this.get('layer.vector_layer_id'));
             }
         }

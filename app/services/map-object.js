@@ -214,19 +214,20 @@ export default Ember.Service.extend({
                                 color_hex: shapeColors[layer.get('marker')].hex
 
                             });
-                            var layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
+                            // let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
+                            let shapeLayerClass = newLayerSlug + ' vectorData map-marker layer-' + newLayer.get('color_name');
                             let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + newLayer.get('color_name') + '"></div>';
 
                             let polyStyle = {
                                 'color': newLayer.get('color_hex'),
                                 'fillColor': newLayer.get('color_hex'),
-                                'className': layerClass
+                                'className': shapeLayerClass
 
                             };
                             if (newLayerUrl) {
                                 var vector = new L.GeoJSON.AJAX(newLayerUrl, {
                                     style: polyStyle,
-                                    className: layerClass,
+                                    className: shapeLayerClass,
                                     title: newLayerTitle,
                                     markerDiv: vectorDiv,
                                     onEachFeature: _this.get('vectorDetailContent.viewData'),

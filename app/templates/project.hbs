@@ -9,15 +9,15 @@
 			<div class="col-xs-2 col-md-1 exit title">
 				{{#link-to 'projects' title="Back to All Projects"}}<i class="material-icons">exit_to_app</i>{{/link-to}}
 			</div>
-			<div class="col-xs-6 col-md-6 title">
+			<div class="col-xs-10 col-md-10 title">
 				{{model.name}}
-			</div>
-			<div class="pull-left col-xs-2 col-md-2 edit-button">
-				{{#if model.may_edit}}
-					<a {{action 'toggleEdit'}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
-						<i class="material-icons pull-right">mode_edit</i>
-					</a>
-				{{/if}}
+				<span class="edit-button pull-right">
+					{{#if model.may_edit}}
+						<a {{action 'toggleEdit'}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
+							<i class="material-icons">mode_edit</i>
+						</a>
+					{{/if}}
+				</span>
 			</div>
 		</div>
 
@@ -90,6 +90,8 @@
 
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{vector-info}}
+{{#if model.intro}}
 {{#if showIntro.show}}
 	{{project-intro-modal action='toggleIntro' project=model template=model.templateSlug}}
+{{/if}}
 {{/if}}

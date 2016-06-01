@@ -31,36 +31,67 @@
                 <h2>Featured Projects</h2>
             </div>
         </header>
-    <hr />
-
-<div class="row">
+        <hr />{{!-- code that shows images. needs more work
     {{#each model as |project|}}
-        <div class="col-sm-4">
-            {{#link-to 'project' project class="featured" }}
-                <div class="panel panel-default featured">
-                    <div class="panel-body featured">
-                        <table>
-                            <tr class="head" style='background-image: url("{{project.card_url}}");'>
-                                <td>
-                                    <h2>{{project.name}}</h2>
-                                </td>
-                            </tr>
-                            <tr class="des">
-                                <td>
-                                    <p>{{project.description}}</p>
-                                    <h5>Created by: {{project.owner}}</h5>
-                                </td>
-                            </tr>
-                        </table>
+        <div class="row">
+            <div class="col-sm-4">
+                {{#link-to 'project' project class="featured" }}
+                    <div class="panel panel-default featured">
+                        <div class="panel-body featured">
+                            <table>
+                                <tr class="head" style='background-image: url("{{project.card_url}}");'>
+                                    <td>
+                                        <h2>{{project.name}}</h2>
+                                    </td>
+                                </tr>
+                                <tr class="des">
+                                    <td>
+                                        <p>{{project.description}}</p>
+                                        <h5>Created by: {{project.owner}}</h5>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            {{/link-to}}
+                {{/link-to}}
+            </div>
+            {{else}}
+                <p>There are no projects visible at this time :(</p>
+                {{/each}}
         </div>
-    {{else}}
-        <p>There are no projects visible at this time :(</p>
-    {{/each}}
-</div>
-</div>
+        end of newer look --}}
+        {{! so for now we'll just use the "old" look}}
+        <div class="list-group col-sm-10 col-sm-offset-1">
+            {{#if model.isPending}}
+                <h2>Loading...</h2>
+            {{else}}
+                {{#each model as |project|}}
+
+                    <div class="list-group-item col-md-6 project-group-item">
+                        <div class="row-action-primary">
+                            <i class="material-icons">map</i>
+                        </div>
+                        <div class="row-content">
+                            <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                            <h4 class="list-group-item-heading">
+                         {{#link-to 'project' project}}
+                           <span>
+                           {{project.name}}</span>
+                         {{/link-to}}
+                       </h4>
+                            <p class="list-group-item-text">{{project.description}}</p>
+                            <h5>Created by: {{project.owner}}</h5>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    </div>
+
+            {{else}}
+                <p>There are no projects visible at this time :(</p>
+                {{/each}}
+            {{/if}}
+        </div>
+        {{! end "old" look}}
+    </div>
 </div>
 
 <!-- Partners -->

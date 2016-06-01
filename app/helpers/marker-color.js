@@ -8,6 +8,8 @@ export function markerColor(params) {
     let type = params[3];
     let dataColor = '';
 
+    console.log(type + ' ' + index);
+
     if (type === 'point-data'){
         dataColor = markerColors[index].name;
     }

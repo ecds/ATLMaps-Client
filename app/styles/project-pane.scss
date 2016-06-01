@@ -8,8 +8,8 @@
     left: 32px;
     box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
     background-color: white;
-    min-height: 175px;
-
+    // min-height: 175px;
+    min-height: 270px;
     // .container {
         background-color: white;
         padding: .5em;
@@ -32,6 +32,7 @@
 
         article {
             padding: 2em;
+            color: material-color(grey, 800);
         }
         article.layer {
             padding: 0;
