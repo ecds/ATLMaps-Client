@@ -1,162 +1,143 @@
 @import "variables.scss";
-
 div.project-nav {
     display: flex;
-    position: absolute;
+    position: fixed;
     background-color: white;
-    top: 82px;
-    left: 30px;
+    top: 87px;
+    left: 45px;
     width: 35%;
-
     .row {
-        padding: .5em
+        padding: 0.5em;
     }
 }
-
-.project-window {
+.project-head {
     margin-top: 10px;
     // width: 30%;
     min-width: 455px;
     position: fixed;
-
-    .liquid-container, .liquid-child {
-        overflow: visible;
-    }
-}
-
-.project-head {
-    position: inherit;
-    margin-top: 10px;
-    margin-left: 30px;
-    width: 35%;
-
+    display: flex;
+    z-index: 1;
+    // .liquid-container, .liquid-child {
+    //     overflow: visible;
+    // }
     .row {
-        // margin-left: 0;
-        // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        position: inherit;
+        margin-top: 10px;
+        margin-left: 30px;
+        width: 35%;
         padding: 1em;
-    }
 
-    .title {
-        font-size: 1.75em;
-        line-height: 1;
-        color: whitesmoke;
-        font-weight: 500;
-        padding-left: 0;
-
-        span.edit-button a {
-            color: material-color(blue, 100);
-            i {
-                margin-left: 5px;
-                vertical-align: top !important;
+            .title {
+                font-size: 1.75em;
+                line-height: 1;
+                color: whitesmoke;
+                font-weight: 500;
+                padding-left: 0;
+                span.edit-button a {
+                    color: material-color(blue, 100);
+                    i {
+                        margin-left: 5px;
+                        vertical-align: top !important;
+                    }
+                }
             }
-        }
-    }
+            .exit {
+                padding-left: 26px;
+                transform: rotate(180deg);
+                margin-left: 9px;
+                a {
+                    padding-left: 10px;
+                    color: material-color(grey, 300);
+                }
+                i {
+                    vertical-align: bottom;
+                }
+            }
 
-    .exit {
-        padding-left: 26px;
-        transform: rotate(180deg);
-        margin-left: 9px;
-        a {
-            color: material-color(grey, 300);
-        }
-        i {
-            vertical-align: bottom;
-        }
+            color: material-color(blue, 900);
     }
-
-    color: material-color(blue, 900);
 }
-.project-view, .project-edit {
+.project-edit,
+.project-view {
     // padding: 1em 0;
     position: relative;
     width: 100%;
     margin-left: initial;
-
 }
 .project-view {
-    background-color: material-color(blue, 700) ! important;
+    background-color: material-color(blue, 700) !important;
 }
 .project-edit {
     background-color: #4CAF50;
     color: white;
-
     a {
         color: whitesmoke;
     }
 }
 .project-nav-group {
-
     width: 50%;
-
     a {
         color: material-color(grey, 600);
         font-size: large;
         text-decoration: none;
-
         i {
             width: 31px;
         }
     }
-
     .row:nth-of-type(1) {
-    //   background-color: material-color(grey, 50);
-      &:hover {
-          background-color: material-color(blue, 50) ! important;
-      }
+        //   background-color: material-color(grey, 50);
+        &:hover {
+            background-color: material-color(blue, 50) !important;
+        }
     }
     .row:nth-of-type(2) {
-    //   background-color: material-color(grey, 100);
-      &:hover {
-          background-color: material-color(blue, 100) ! important;
-      }
+        //   background-color: material-color(grey, 100);
+        &:hover {
+            background-color: material-color(blue, 100) !important;
+        }
     }
     .row:nth-of-type(3) {
-    //   background-color: material-color(grey, 200);
-      &:hover {
-          background-color: material-color(blue, 200) ! important;
-      }
+        //   background-color: material-color(grey, 200);
+        &:hover {
+            background-color: material-color(blue, 200) !important;
+        }
     }
     .row:nth-of-type(4) {
-    //   background-color: material-color(grey, 300);
-      &:hover {
-          background-color: material-color(blue, 300) ! important;
-      }
+        //   background-color: material-color(grey, 300);
+        &:hover {
+            background-color: material-color(blue, 300) !important;
+        }
     }
     .row:nth-of-type(5) {
-    //   background-color: material-color(grey, 400);
-      &:hover {
-          background-color: material-color(blue, 400) ! important;
-      }
+        //   background-color: material-color(grey, 400);
+        &:hover {
+            background-color: material-color(blue, 400) !important;
+        }
     }
     .row:nth-of-type(6) {
-    //   background-color: material-color(grey, 500);
-      &:hover {
-          background-color: material-color(blue, 500) ! important;
-      }
+        //   background-color: material-color(grey, 500);
+        &:hover {
+            background-color: material-color(blue, 500) !important;
+        }
     }
     .row:nth-of-type(7) {
-    //   background-color: material-color(grey, 600);
-      &:hover {
-          background-color: material-color(blue, 600) ! important;
-      }
+        //   background-color: material-color(grey, 600);
+        &:hover {
+            background-color: material-color(blue, 600) !important;
+        }
     }
     .active {
         color: #03A9F4;
     }
 }
-
 .project-meta {
     width: 50%;
     text-align: right;
     vertical-align: bottom;
-
     h4 {
         font-style: italic;
-
         span {
             font-size: 1.5em;
         }
-
     }
-
 }

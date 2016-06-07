@@ -6,6 +6,10 @@ export default Ember.Route.extend({
     browseParams: Ember.inject.service('browse-params'),
     mapObject: Ember.inject.service('map-object'),
 
+    beforeModel(){
+        console.log(this);
+    },
+
     // This is a neat way to add multiple models to a route.
     model(){
         return Ember.RSVP.hash({
@@ -20,6 +24,7 @@ export default Ember.Route.extend({
         controller.set('yearRange', models.yearRange);
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
+        controller.set('project', models.project),
         controller.set('rastersActive', true);
         controller.set('editSuccess', false);
         controller.set('editFail', false);

@@ -6,7 +6,8 @@
 
     .browse-nav {
         display: flex;
-        position: absolute;
+        position: relative;
+        top: -20;
     }
 
     .results-container {
@@ -14,10 +15,11 @@
         overflow: hidden;
         position: relative;
         height: 100vh;
+        // top: -20px;
 
         .result-list {
             overflow: auto;
-            top: 104px;
+            // top: 104px;
             left: 1px;
         }
     }

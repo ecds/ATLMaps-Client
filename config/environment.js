@@ -19,7 +19,17 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       API_HOST: 'http://api.atlmaps-dev.com:3000'
-    }
+    },
+
+    metricsAdapters: [
+        {
+            name: 'GoogleAnalytics',
+            environments: ['all'],
+            config: {
+                id: ''
+            }
+        }
+    ]
 
   };
 
@@ -30,6 +40,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.API_HOST = 'http://api.atlmaps-dev.com:3000';
+    ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-1';
   }
 
   if (environment === 'test') {
@@ -50,6 +61,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.APP.API_HOST = 'https://api.atlmaps.com';
+    ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-2';
   }
 
   ENV.contentSecurityPolicy = {

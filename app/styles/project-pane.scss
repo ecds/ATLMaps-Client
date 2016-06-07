@@ -1,140 +1,116 @@
 @import 'layer-citation.scss';
-
 .project-pane {
-
-    pointer-events: none !important;
-    display: flex;
-  overflow: hidden;
-  position: fixed;
-  left: 63px;
-  top: 75px;
-  height: 100vh;
+    // pointer-events: none !important;
+    // display: flex;
+    // overflow: hidden;
+    position: fixed;
+    left: 79px;
+    top: 78px;
+    height: 100px;
+    // height: 100vh;
     // background-color: red;
     // min-height: 175px;
-    min-height: 270px;
+    // min-height: 270px;
     // .container {
-        // background-color: white;
-        padding: .5em;
-        pointer-events: auto; // Allow the pane to respond to click.
+    // background-color: white;
+    padding: 0.5em;
+    pointer-events: auto; // Allow the pane to respond to click.
+    width: calc(35% - 25px);
+    h1 {
+        font-size: 2em;
+    }
+    // h3 {
+    //     margin-top: 0;
+    // }
+    //
+    // .row {
+    //
+    // }
+}
+    .project-route {
 
-        width: calc(35% - 25px);
+        border-left: 1px solid #adadad;
+        border-right: 1px solid #adadad;
+        box-shadow: -3px 0 10px 0 rgba(0, 0, 0, 0.5);
+        background-color: white;
 
-        h1 {
-            font-size: 2em;
+        .route-content {
+            overflow: scroll;
+            max-height: 50vh;
+            padding: 1em;
         }
-
-        // h3 {
-        //     margin-top: 0;
-        // }
-        //
-        // .row {
-        //
-        // }
-
-        .project-route {
-            overflow: auto;
-            width: 100%;
-            height: auto;
-            background-color: tranparent;
-
-
-            .route-content {
-                border-left: 1px solid #adadad;
-                border-right: 1px solid #adadad;
-                box-shadow: -3px 0px 10px 0px rgba(0, 0, 0, 0.5);
-                background-color: white;
-                padding: 1em;
-                pointer-events: all;
-            }
-
+    }
+    article {
+        padding: 2em;
+        color: material-color(grey, 800);
+    }
+    article.layer {
+        padding: 0;
+    }
+    ul {
+        li {
+            font-size: 1.5em;
+            border-width: 1px;
+            border-style: solid;
+            border-color: lightgrey;
+            border-radius: 0.25em;
+            margin-bottom: 0.5em;
         }
-
+        li.vector-layer {
+            padding-left: 0.5em;
+        }
         article {
-            padding: 2em;
-            color: material-color(grey, 800);
+            padding: 1em;
+            font-size: 0.75em;
         }
-        article.layer {
+    }
+    // layer controls in edit view
+    .panel-footer.row {
+        // margin-bottom: 1px;
+        pointer-events: all;
+        margin: 0;
+    }
+    .layer-heading {
+        padding: 0 1em;
+        pointer-events: all;
+        table {
+            width: 100%;
+            td {
+                padding: 0 0.5em;
+            }
+        }
+    }
+    // Raster Panel Stuff
+    .raster-list {
+        .panel-body {
+            padding: 0 15px;
+        }
+        .row {
             padding: 0;
         }
+        .reorder {
+            padding: 0.25em 0 0;
+        }
         ul {
+            list-style: none;
+            padding-left: 0;
             li {
-                font-size: 1.5em;
-                border-width: 1px;
-                border-style: solid;
-                border-color: lightgrey;
-                border-radius: .25em;
-                margin-bottom: .5em;
-            }
-
-            li.vector-layer {
-                padding-left: .5em;
-            }
-
-            article {
-                padding: 1em;
-                font-size: .75em;
-            }
-        }
-
-        // layer controls in edit view
-        .panel-footer.row {
-            // margin-bottom: 1px;
-            pointer-events: all;
-            margin: 0;
-        }
-
-        .layer-heading {
-            padding: 0 .75em;
-            pointer-events: all;
-
-            table {
+                border-style: none;
+                border-width: 0;
+                border-color: none;
+                border-radius: 0;
+                margin-bottom: 0;
                 width: 100%;
-
-                td {
-                    padding: 0 .5em;
-                }
             }
         }
-
-        // Raster Panel Stuff
-        .raster-list {
-
-            .panel-body {
-                padding: 0 15px;
-            }
-
-            .row {
-                padding: 0;
-            }
-
-            .reorder {
-                padding: .25em 0 0 0;
-            }
-            ul {
-                list-style: none;
-                padding-left: 0;
-                li {
-                    border-style: none;
-                    border-width: 0;
-                    border-color: none;
-                    border-radius: 0;
-                    margin-bottom: 0;
-                    width: 100%;
-                }
-            }
-        }
-
-        .handle {
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            margin-right: 10px;
-            transform: rotate(90deg);
-        }
-
-        .opacity-slider {
-            padding-left: 5px;
-        }
-
+    }
+    .handle {
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+        margin-right: 10px;
+        transform: rotate(90deg);
+    }
+    .opacity-slider {
+        padding-left: 5px;
+    }
     // }
-
-}

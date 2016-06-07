@@ -1,4 +1,23 @@
-{{partial 'close-button'}}
+<div class="route-content row layer-heading">
+    <table class="table">
+        <tr>
+            <td>
+                <h3>Select Base Map</h3>
+            </td>
+            <table>
+                <tr>
+                    <td class="pull-right">{{partial 'close-button'}}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </tr>
+    </table>
+</div>
 {{#if isEditing}}
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
@@ -13,9 +32,8 @@
     <a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom' model}}>
         Set Center and Zoom Level
     </a>
-    <h4>Set Base Map</h4>
 {{else}}
-    <h4>Select Base Map</h4>
+
 {{/if}}
 <a {{action 'setBase' 'street' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
 

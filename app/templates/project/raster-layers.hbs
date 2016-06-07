@@ -2,7 +2,7 @@
     <table class="table">
         <tr>
             <td>
-                <h4>Paper Map Layers</h4>
+                <h3>Paper Map Layers</h3>
             </td>
             <table>
                 <tr>
@@ -23,7 +23,7 @@
     </table>
 </div>
 
-<div class="raster-list" id="layer_sort">
+<div class="route-content raster-list" id="layer_sort">
     {{#sortable-group tagName="ul" model=model onChange="reorderItems" as |group|}}
         {{#each model.sortedRasterLayers as |layer|}}
             {{#sortable-item tagName="li" model=layer group=group handle=".handle" }}

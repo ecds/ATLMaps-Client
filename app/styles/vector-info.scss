@@ -16,7 +16,7 @@
     cursor: -webkit-grab;
     cursor: -moz-grab;
 
-  $max-height-marker-content:50em;
+  $max-height-marker-content:25em;
 
   display: none;
   padding: 0;
@@ -31,7 +31,7 @@
     display:inline-block;
     height: inherit;
     max-height: $max-height-marker-content;
-    overflow: scroll;
+    overflow: auto;
     width: 100%;
 
     ::-webkit-scrollbar {
@@ -72,3 +72,31 @@
     }
   }
 }
+
+.close-vector {
+    // display: flex;
+    // position: relative;
+    z-index: 10;
+    height: 10px;
+    // background-color: red;
+}
+.vector-header {
+    padding: 0 11px;
+}
+//
+// .vector-info-container {
+//     display: flex;
+//     overflow: hidden;
+//     height: 100vh;
+//     // margin-top: -100px;
+//     // padding-top: 100px;
+//     position: relative;
+//     // width: 100%;
+//     backface-visibility: hidden;
+//     will-change: overflow;
+// }
+//
+// .vectory-body {
+//     overflow: auto;
+//     height: auto;
+// }

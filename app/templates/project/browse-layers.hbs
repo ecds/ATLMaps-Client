@@ -1,4 +1,8 @@
-{{partial 'close-button'}}
+<div class="route-content">
+<td class="pull-right">
+    {{#link-to 'project' project.id class='pull-right close-button'}}<i class="material-icons">highlight_off</i>{{/link-to}}
+</td>
+
 <div class="browse-pane">
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
@@ -17,4 +21,5 @@
     {{browse-years model=yearRange getResults='getResults'}}
     <hr />
     {{browse-institution model=institutions getResults='getResults'}}
+</div>
 </div>

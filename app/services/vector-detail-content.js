@@ -12,10 +12,18 @@ export default Ember.Service.extend({
 
     viewData(feature, layer) {
 
-        var popupContent = "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
+        let popupTitle = "<div class='vector-header'>";
+
+        popupTitle += "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
+
         if (feature.properties.name) {
-            popupContent += "<h3>"+feature.properties.name+"</h3>";
+            popupTitle += "<h3>"+feature.properties.name+"</h3>";
         }
+
+        popupTitle += "</div>";
+
+        let popupContent = "<div class='vector-info-container'><div class='vector-body'>";
+
         if (feature.properties.image) {
             popupContent += "<a href='"+feature.properties.image.url+"' target='_blank'><img class='geojson' src='"+feature.properties.image.url+"' title='"+feature.properties.image.name+"' /></a>"+
             "<span>Photo Credit: "+feature.properties.image.credit+"</span>";
@@ -51,14 +59,17 @@ export default Ember.Service.extend({
         if (feature.properties.NAME) {
             popupContent += "<h2>"+feature.properties.NAME+"</h2>";
         }
+        popupContent += "</div></div>";
 
         layer.on('click', function() {
             Ember.$("div.marker-content").empty();
-            let content = Ember.$("<article/>").html(popupContent);
+            Ember.$("div.marker-title").empty();
+            let content = Ember.$("<div/>").html(popupContent);
             if (Ember.$('.gallery').length > 0){
                 Ember.$('.gallery')[0].swiper.destroy();
             }
             Ember.$("div.marker-data").show();
+            Ember.$("div.marker-title").append(popupTitle);
             Ember.$('div.marker-content').append(content);
             Ember.$(".active_marker").removeClass("active_marker");
             Ember.$(this._icon).addClass('active_marker');
