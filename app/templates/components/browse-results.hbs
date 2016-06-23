@@ -1,145 +1,83 @@
+<!-- <input type="checkbox" name="show-results" value="Car"> -->
 <div class="browse-results">
-    <!-- <a class="btn rotate btn-fab btn-sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
-    <div class="row browse-nav">
-        <div class=col-md-12>
-            <nav class="">
-
-                {{! The first parmater to the action is the one that will be shown, the second one will be hidden}}
-                <a {{action 'showResults' 'vector'}} class="btn btn-default results-button {{unless rastersActive 'active' }}" title="Data Layers">
-                    <i class="material-icons atlmaps-ext database"></i><span class="badge">{{model.vector_layer_ids.length}}</span><h4>Data Layers</h4>
-                </a>
-                <a {{action 'showResults' 'raster'}} class="btn btn-default results-button {{if rastersActive 'active' }}" title="Archival Maps">
-                    <i class="material-icons">layers</i><span class="badge">{{model.raster_layer_ids.length}}</span><h4>Archival Maps</h4>
-                </a>
-            </nav>
-        </div>
+    {{!#liquid-if}}
+    <div class="results-toolbar">
+        <i class="material-icons" onclick={{route-action "toggleResults"}}>
+            expand_more
+        </i>{{showingResults}}
     </div>
-
-    <div class="row results-container">
-        <div class="col-md-12 result-list">
-            {{#liquid-if editSuccess}}
-            <div class="alert alert-dismissible alert-success">
-                Project's Layers are updated.
-            </div>
-            {{/liquid-if}}
-            {{#liquid-if editFail}}
-            <div class="alert alert-dismissible alert-danger">
-                Dang, something went wrong. Layer's were not updated.
-            </div>
-            {{/liquid-if}}
-            {{#if model.isPending}}
-            <div class="no-results">
-                <div class="ui-loader">
-                    <img src="/assets/images/loaders/Preloader_19.gif" />
-                    <br />
-                    Searching....
-                </div>
-            </div>
-            {{/if}}
-            {{#if rastersActive}}
-            <div>
-                <div>
-                    {{#each model.raster_layer_ids as |raster|}}
-                    <div class="layer-list-item row">
-                        <div class="col-md-1 checkbox">
-                            {{!-- TODO: I don't like these buttons --}}
-                                <!-- <label>
-                                <input type="checkbox" checked={{raster.active_in_project}} {{action "removeLayer" raster 'raster' }} />
-                                <span class="check"></span>
-                            </label> -->
-                            {{#if raster.active_in_project}}
-                            <a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" raster 'raster' }}><i class="material-icons">clear</i></a>
-                            {{else}}
-                            <a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" raster 'raster' }}><i class="material-icons">add</i></a>
-                            {{/if}}
-                        </div>
-
-                        <div class="col-md-11">
-                            {{#if raster.name}}
-                            <h4 class="name">{{raster.title}}</h4>
-                            <div class="description">{{raster.description}}</div>
-                            {{#if raster.tag_ids}}
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <i class="material-icons">local_offer</i>
-
-                                    <ul class="list-inline">
-                                        {{#each raster.tag_ids as |tag|}}
-                                        <li class="tags">{{tag.name}}</li>
-                                        {{/each}}
-                                    </ul>
+    {{!else}}
+        <!-- <div class="results-toolbar" style="width:50%">
+            <i class="material-icons" onclick={{route-action "toggleResults"}}>
+                expand_more
+            </i>
+        </div> -->
+    {{!/liquid-if}}
+    {{#if showingResults}}
+    <!-- <div class="tab-wrap browse-nav" style="background-color: white;"> -->
+    {{#liquid-if (has-results model) class="tab-wrap browse-nav" containerless=true}}
+        <input type="radio" name="tabs" id="tab1" checked>
+        <div class="tab-label-content" id="tab1-content">
+            <label for="tab1">Paper Maps</label>
+            <div class="tab-content">
+                <div style="display: flex;position: relative;height: 1rem;z-index: 10;"></div>
+                <div class="results-container">
+                    <div class="col-md-12 result-list">
+                        <ul>
+                        {{#each model.raster_layer_ids as |raster|}}
+                            {{! Show "Loading..." if the title hasn't loaded yet.}}
+                            <li>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label style="background-color: transparent;">
+                                            <input type="checkbox"
+                                                checked="{{if raster.active_in_project false}}"
+                                                {{action (route-action "addLayer" raster 'raster') on="change"}}
+                                            />
+                                            <span class="check"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h3>{{if raster.title raster.title "Loading..."}}</h3>
+                                        <p>{{raster.description}}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            {{/if}}
-                            <div class="institution">Provided by: <em>{{raster.institution.name}}</em></div>
-                            {{else}}
-                            <h4 class="name">Loading...</h4>
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{else}}
+                            </li>
 
-                    {{#unless model}}
-                    <div class="no-results">
-                        Use the filters to find what you want.
+                        {{/each}}
+                    </ul>
+                    <div style="height:10rem; opacity:0;"></div>
                     </div>
-                    {{else}}
-                    <div class="no-results">
-                        No results.
-                    </div>
-                    {{/unless}}
-
-                {{/each}}
                 </div>
-
-            </div>
-            {{/if}}
-            <div>
-                {{#unless rastersActive}}
-                <div>
-                    {{#each model.vector_layer_ids as |vector|}}
-                    <div class="layer-list-item row">
-
-                        <div class="col-md-2">
-                            {{#if vector.active_in_project}}
-                            <a class="btn rotate btn-added btn-fab btn-sm" {{action "removeLayer" vector 'vector' }}><i class="material-icons">clear</i></a>
-                            {{else}}
-                            <a class="btn rotate btn-add btn-fab btn-sm" {{action "addLayer" vector 'vector'}}><i class="material-icons">add</i></a>
-                            {{/if}}
-                        </div>
-
-                        <div class="col-md-10">
-                            {{#if vector.name}}
-                            <h4 class="name">{{vector.title}}</h4>
-                            <div class="description">{{vector.description}}</div>
-                            {{#if vector.tag_ids}}
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <i class="material-icons">local_offer</i>
-                                </div>
-                                <div class="col-md-11">
-                                    <ul class="list-inline">
-                                        {{#each vector.tag_ids as |tag|}}
-                                        <li class="tags">{{tag.name}}</li>
-                                        {{/each}}
-                                    </ul>
-                                </div>
-                            </div>
-                            {{/if}}
-                            <div class="institution">Provided by: <em>{{vector.institution.name}}</em></div>
-                            {{else}}
-                            <h4 class="name">Loading...</h4>
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{else}}
-                    <div class="no-results">
-                        No results.
-                    </div>
-                    {{/each}}
-                </div>
-                {{/unless}}
             </div>
         </div>
-    </div>
+
+        <input type="radio" name="tabs" id="tab2">
+        <div class="tab-label-content" id="tab2-content">
+            <label for="tab2">Data Maps</label>
+            <div class="tab-content" style="background-color: white;">
+                <div style="display: flex;position: relative;height: 1rem;z-index: 10;"></div>
+                <div class="results-container">
+                    <div class="col-md-12 result-list">
+                        <ul>
+                        {{#each model.vector_layer_ids as |vector|}}
+                            {{! Show "Loading..." if the title hasn't loaded yet.}}
+                            <li>
+                                <h3>{{if vector.title vector.title "Loading..."}}</h3>
+                                <p>{{vector.description}}</p>
+                            </li>
+                        {{/each}}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide"></div>
+
+{{else}}
+<h5>NOTHING</h5>
+{{/liquid-if}}
+<!-- </div> -->
+{{/if}}
 </div>

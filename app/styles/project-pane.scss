@@ -6,7 +6,7 @@
     position: fixed;
     left: 79px;
     top: 78px;
-    height: 100px;
+    // height: 100px;
     // height: 100vh;
     // background-color: red;
     // min-height: 175px;
@@ -15,7 +15,7 @@
     // background-color: white;
     padding: 0.5em;
     pointer-events: auto; // Allow the pane to respond to click.
-    width: calc(35% - 25px);
+    width: calc(33% - 25px);
     h1 {
         font-size: 2em;
     }

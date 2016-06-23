@@ -159,6 +159,8 @@ export default Ember.Route.extend({
 
 		addLayer(layer, format) {
 
+			console.log('hmmmmm')
+
             const project = this.modelFor('project');
 
             let layerToAdd = this.store.peekRecord(format+'_layer', layer.get('id'));

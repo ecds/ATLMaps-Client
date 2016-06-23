@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     mapObject: Ember.inject.service('map-object'),
 
     beforeModel(){
-        console.log(this);
+        // console.log(this);
     },
 
     // This is a neat way to add multiple models to a route.
@@ -24,10 +24,10 @@ export default Ember.Route.extend({
         controller.set('yearRange', models.yearRange);
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
-        controller.set('project', models.project),
-        controller.set('rastersActive', true);
+        controller.set('project', models.project);
         controller.set('editSuccess', false);
         controller.set('editFail', false);
+        controller.set('showingResults', true);
     },
 
     actions: {
@@ -37,10 +37,19 @@ export default Ember.Route.extend({
             this.send('getResults');
             return true;
         },
+
+        toggleResults(){
+            this.controller.toggleProperty('showingResults');
+        },
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(){
-            this.setProperties({searched: true});
+            this.setProperties(
+                {
+                    searched: true,
+                    // showingResults: true
+                }
+            );
             return this.render('components/browse-results', {
                 outlet: 'browse-results',
                 into: 'project', // Want it to open in the project view

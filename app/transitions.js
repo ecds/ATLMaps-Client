@@ -18,10 +18,12 @@ export default function(){
       this.use('crossFade'),
       this.reverse('crossFade')
   );
-  this.transition(
-      this.fromValue(false),
-      this.toValue(true),
-      this.use('crossFade'),
-      this.reverse('toUp')
-  );
+  // this.transition(
+  //     this.childOf('.browse-results'),
+  //     this.fromValue(false),
+  //     this.toValue(true),
+  //     this.use('crossFade'),
+  //     this.reverse('toDown', {duration: 5000}),
+  //     this.debug()
+  // );
 }

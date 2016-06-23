@@ -5,7 +5,7 @@ div.project-nav {
     background-color: white;
     top: 87px;
     left: 45px;
-    width: 35%;
+    width: 33%;
     .row {
         padding: 0.5em;
     }
@@ -13,7 +13,7 @@ div.project-nav {
 .project-head {
     margin-top: 10px;
     // width: 30%;
-    min-width: 455px;
+    min-width: 33%;
     position: fixed;
     display: flex;
     z-index: 1;
@@ -24,7 +24,7 @@ div.project-nav {
         position: inherit;
         margin-top: 10px;
         margin-left: 30px;
-        width: 35%;
+        width: 33%;
         padding: 1em;
 
             .title {

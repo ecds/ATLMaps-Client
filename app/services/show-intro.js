@@ -32,7 +32,7 @@ export default Ember.Service.extend({
     },
 
     toggleShow(){
-        console.log('oh hello')
+        // console.log('oh hello')
         this.toggleProperty('show');
     }
 

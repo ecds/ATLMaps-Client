@@ -5,33 +5,33 @@
 
 // TODO: There is a better way to do this right?
 
-@import 'ember-modal-structure.scss';
-@import 'ember-modal-appearance.scss';
-@import 'variables.scss';
-@import 'marker.scss';
-@import 'toggle_button.scss';
-@import 'main-navbar.scss';
-@import 'back-to-project-button.scss';
-@import 'list-projects.scss';
-@import 'project-nav-bar.scss';
-@import 'project-intro.scss';
-@import 'loading.scss';
-@import 'extra-icons.scss';
-@import 'login-form.scss';
-@import 'tag-list';
+@import 'ember-modal-structure',
+ 'ember-modal-appearance',
+ 'variables',
+ 'marker',
+ 'toggle_button',
+ 'main-navbar',
+ 'back-to-project-button',
+ 'list-projects',
+ 'project-nav-bar',
+ 'project-intro',
+ 'loading',
+ 'extra-icons',
+ 'login-form',
+ 'tag-list',
 
-@import 'alert';
-@import 'slider';
-@import 'vector-info';
-@import 'project-pane.scss';
-@import 'browse-pane.scss';
-@import 'browse-results.scss';
-@import 'project-vector-list.scss';
-@import 'responsive.scss';
-@import 'gallery.scss';
-@import 'close-button';
-@import 'color-picker';
-@import 'vector-layer-option-panel';
+ 'alert',
+ 'slider',
+ 'vector-info',
+ 'project-pane',
+ 'project-vector-list',
+ 'responsive',
+ 'gallery',
+ 'close-button',
+ 'color-picker',
+ 'vector-layer-option-panel',
+ 'browse-pane',
+ 'browse-results';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
