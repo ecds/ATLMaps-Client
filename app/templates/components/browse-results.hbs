@@ -27,17 +27,18 @@
                         {{#each model.raster_layer_ids as |raster|}}
                             {{! Show "Loading..." if the title hasn't loaded yet.}}
                             <li>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label style="background-color: transparent;">
+                                <div class="row-eq-height">
+                                    <div class="col-sm-1">
+                                        <label class="add-remove">
                                             <input type="checkbox"
                                                 checked="{{if raster.active_in_project false}}"
                                                 {{action (route-action "addLayer" raster 'raster') on="change"}}
                                             />
-                                            <span class="check"></span>
+                                            <div class="check-layer"></div>
+                                            +
                                         </label>
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-11">
                                         <h3>{{if raster.title raster.title "Loading..."}}</h3>
                                         <p>{{raster.description}}</p>
                                     </div>
