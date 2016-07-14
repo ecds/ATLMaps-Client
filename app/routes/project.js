@@ -38,6 +38,7 @@ export default Ember.Route.extend({
 	},
 
 	rasterLayers: function(){
+		console.log('the fuck do i do?');
 		return this.currentModel;
 	},
 
@@ -157,122 +158,127 @@ export default Ember.Route.extend({
 			this.modelFor('project').toggleProperty('editing');
 		},
 
-		addLayer(layer, format) {
+		addRemoveLayer(layer){
+			const project = this.modelFor('project');
 
-			console.log('hmmmmm')
+			let layerModel = layer._internalModel.modelName;
 
-            const project = this.modelFor('project');
+            let layerObj = this.store.peekRecord(layerModel, layer.get('id'));
 
-            let layerToAdd = this.store.peekRecord(format+'_layer', layer.get('id'));
+			let format = layerObj.get('data_format');
 
-			let newLayer = '';
-			switch(format) {
-				case 'raster':
-					let position = project.get('raster_layer_project_ids').get('length') + 1;
+			if (layerObj.get('active_in_project')){
 
-					newLayer = this.store.createRecord(format+'-layer-project', {
-		                project_id: project.id,
-		                raster_layer_id: layerToAdd,
-		                data_format: layerToAdd.get('data_format'),
-		                position: position
-		            });
-					break;
+				let newLayer = '';
+				switch(format) {
+					case 'raster':
+						let position = project.get('raster_layer_project_ids').get('length') + 1;
 
-				case 'vector':
-					let layerColor = '';
-					switch(layerToAdd.get('data_type')){
-						case 'point-data':
-							let markerColors = this.get('dataColors.markerColors');
-							layerColor = Math.floor(Math.random() * markerColors.length);
-							break;
-						case 'polygon':
-						case 'line-data':
-							let shapeColors = this.get('dataColors.shapeColors');
-							layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
-					}
+						newLayer = this.store.createRecord(format+'-layer-project', {
+							project_id: project.id,
+							raster_layer_id: layerObj,
+							data_format: layerObj.get('data_format'),
+							position: position
+						});
+						break;
+
+					case 'vector':
+						let layerColor = '';
+						switch(layerObj.get('data_type')){
+							case 'point-data':
+								let markerColors = this.get('dataColors.markerColors');
+								layerColor = Math.floor(Math.random() * markerColors.length);
+								break;
+							case 'polygon':
+							case 'line-data':
+								let shapeColors = this.get('dataColors.shapeColors');
+								layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
+						}
 
 
 
-					newLayer = this.store.createRecord('vector-layer-project', {
-						project_id: project.id,
-						vector_layer_id: layerToAdd,
-						data_format: layerToAdd.get('data_format'),
-						marker: layerColor
+						newLayer = this.store.createRecord('vector-layer-project', {
+							project_id: project.id,
+							vector_layer_id: layerObj,
+							data_format: layerObj.get('data_format'),
+							marker: layerColor
+						});
+						break;
+				}
+
+
+				let _this = this;
+				project.get(format+'_layer_project_ids').addObject(newLayer);
+
+				// Only call save if the session is authenticated.
+				// There is another check on the server that verifies the user is
+				// authenticated and is allowed to edit this project.
+				if(this.get('session.isAuthenticated')){
+					newLayer.save().then(function(){
+						// Add the map to the view
+						_this.get('mapObject').mapLayer(newLayer);
+						// TODO figure out how to give feedback on these shared actions
+						// Show a success message.
+						// _this.controllerFor('project/browse-layers').set('editSuccess', true);
+						Ember.$('.browse-results').opacity(0.2);
+						Ember.run.later(this, function(){
+						    Ember.$('.browse-results').opacity(1);
+						}, 3000);
+					}, function(){
+						// TODO figure out how to give feedback on these shared actions
+						// _this.controllerFor('project/browse-layers').set('editFail', true);
+						// Ember.run.later(this, function(){
+						//     _this.controllerFor('project/browse-layers').set('editFail', false);
+						// }, 3000);
 					});
-					break;
-			}
+				}
+				else if (project.may_edit) {
+					_this.get('mapObject').mapLayer(newLayer);
+				}
 
 
-            let _this = this;
 
-            project.get(format+'_layer_project_ids').addObject(newLayer);
+			// REMOVE LAYER
+			} else {
+				// TODO This shouldn't call destroyRecord, it should call dealte and then
+				// save if user is authenticated.
 
-			// Only call save if the session is authenticated.
-			// There is another check on the server that verifies the user is
-			// authenticated and is allowed to edit this project.
-			if(this.get('session.isAuthenticated')){
-	            newLayer.save().then(function(){
-	                // Add the map to the view
-	                _this.get('mapObject').mapLayer(newLayer);
-					// TODO figure out how to give feedback on these shared actions
-	                // Show a success message.
-	                // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-	                // Ember.run.later(this, function(){
-	                //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
-	                // }, 3000);
-	            }, function(){
-					// TODO figure out how to give feedback on these shared actions
-	                // _this.controllerFor('project/browse-layers').set('editFail', true);
-	                // Ember.run.later(this, function(){
-	                //     _this.controllerFor('project/browse-layers').set('editFail', false);
-	                // }, 3000);
+				// Build a hash for the query. We do this because one key will need
+				// to equal the `format` var.
+				let attrs = {};
+				let layer_id = layerModel+'_layer_id';
+				attrs[layer_id] = layer.get('id');
+				attrs['project_id'] = project.id;
+				// Get the join between layer and project
+				// NOTE: peekRecord doesn't work here? It is 4:17am
+	            this.store.queryRecord(layerModel+'-project',
+					attrs
+	            ).then(function(layerToRemove){
+	                // Remove the object from the DOM
+	                project.get(format+'_layer_project_ids').removeObject(layerToRemove);
+	                // Delete the record from the project
+	                layerToRemove.destroyRecord().then(function(){
+	                    // Set active to false
+	                    layer.set('active_in_project', false);
+						// TODO figure out how to give feedback on these shared actions
+	                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+	                    // Ember.run.later(this, function(){
+	                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+	                    //     // Remove the layer from the map
+	                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+	                            Ember.$(this).remove();
+	                        });
+	                    // }, 3000);
+	                }, function(){
+						// TODO figure out how to give feedback on these shared actions
+	                    // _this.controllerFor('project/browse-layers').set('editFail', true);
+	                    // Ember.run.later(this, function(){
+	                    //     _this.controllerFor('project/browse-layers').set('editFail', false);
+	                    // }, 3000);
+	                });
 	            });
 			}
-			else if (project.may_edit) {
-				_this.get('mapObject').mapLayer(newLayer);
-			}
-
-        },
-
-		// TODO This shouldn't call destroyRecord, it should call dealte and then
-		// save if user is authenticated.
-        removeLayer(layer, format) {
-            const project = this.modelFor('project');
-			// let _this = this;
-			// Build a hash for the query. We do this because one key will need
-			// to equal the `format` var.
-			let attrs = {};
-			let layer_id = format+'_layer_id';
-			attrs[layer_id] = layer.get('id');
-			attrs['project_id'] = project.id;
-			// Get the join between layer and project
-            this.store.queryRecord(format+'-layer-project',
-				attrs
-            ).then(function(layerToRemove){
-                // Remove the object from the DOM
-                project.get(format+'_layer_project_ids').removeObject(layerToRemove);
-                // Delete the record from the project
-                layerToRemove.destroyRecord().then(function(){
-                    // Set active to false
-                    layer.set('active_in_project', false);
-					// TODO figure out how to give feedback on these shared actions
-                    // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                    // Ember.run.later(this, function(){
-                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
-                    //     // Remove the layer from the map
-                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
-                            Ember.$(this).remove();
-                        });
-                    // }, 3000);
-                }, function(){
-					// TODO figure out how to give feedback on these shared actions
-                    // _this.controllerFor('project/browse-layers').set('editFail', true);
-                    // Ember.run.later(this, function(){
-                    //     _this.controllerFor('project/browse-layers').set('editFail', false);
-                    // }, 3000);
-                });
-            });
-        },
+		},
 
 		setColor(layer){
             layer.save().then(

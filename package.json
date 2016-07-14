@@ -40,6 +40,7 @@
     "ember-cli-qunit": "0.3.15",
     "ember-cli-release": "0.2.3",
     "ember-cli-sass": "^4.0.1",
+    "ember-cli-transformicons": "0.6.0",
     "ember-cli-uglify": "^1.0.1",
     "ember-data": "2.4.2",
     "ember-disable-proxy-controllers": "^1.0.0",
@@ -54,7 +55,7 @@
     "ember-simple-auth": "1.0.1",
     "ember-sortable": "1.8.0",
     "ember-tether": "0.3.0",
-    "liquid-fire": "0.23.0",
+    "liquid-fire": "0.24.1",
     "silent-error": "^1.0.0"
   },
   "dependencies": {}

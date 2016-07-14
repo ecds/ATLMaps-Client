@@ -1,53 +1,38 @@
-<!-- <input type="checkbox" name="show-results" value="Car"> -->
+{{#ember-wormhole to="modal-overlays"}}
+<input type="checkbox" name="toggleResults" id="toggleResultsCheck" checked="{{if showingResults false}}" style="position:absolute" />
+<label for="toggleResultsCheck" style="z-index:1;border-radius:50%;position:absolute;display:block;height:20rem;width:20rem;background-color:red;"><i class="material-icons">view_list</i></label>
 <div class="browse-results">
-    {{!#liquid-if}}
     <div class="results-toolbar">
-        <i class="material-icons" onclick={{route-action "toggleResults"}}>
-            expand_more
-        </i>{{showingResults}}
+        <label for="toggleResultsCheck"><i class="material-icons" onclick= {{route-action "toggleResults"}}>
+            arrow_drop_down
+        </i></label> Search Results
     </div>
-    {{!else}}
-        <!-- <div class="results-toolbar" style="width:50%">
-            <i class="material-icons" onclick={{route-action "toggleResults"}}>
-                expand_more
-            </i>
-        </div> -->
-    {{!/liquid-if}}
-    {{#if showingResults}}
-    <!-- <div class="tab-wrap browse-nav" style="background-color: white;"> -->
-    {{#liquid-if (has-results model) class="tab-wrap browse-nav" containerless=true}}
+    <div class="tab-wrap browse-nav">
         <input type="radio" name="tabs" id="tab1" checked>
         <div class="tab-label-content" id="tab1-content">
-            <label for="tab1">Paper Maps</label>
+            <label for="tab1">Historical Maps</label>
             <div class="tab-content">
                 <div style="display: flex;position: relative;height: 1rem;z-index: 10;"></div>
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                        {{#each model.raster_layer_ids as |raster|}}
-                            {{! Show "Loading..." if the title hasn't loaded yet.}}
-                            <li>
-                                <div class="row-eq-height">
-                                    <div class="col-sm-1">
-                                        <label class="add-remove">
-                                            <input type="checkbox"
-                                                checked="{{if raster.active_in_project false}}"
-                                                {{action (route-action "addLayer" raster 'raster') on="change"}}
-                                            />
-                                            <div class="check-layer"></div>
-                                            +
-                                        </label>
+                            {{#each model.raster_layer_ids as |raster|}}
+                                {{! Show "Loading..." if the title hasn't loaded yet.}}
+                                <li class="{{if raster.active_in_project "active" }}">
+                                    <div class="row-eq-height">
+                                        <div class="col-sm-1">
+                                            {{t-add a="check" is-added=raster.active_in_project action=(route-action "addRemoveLayer" raster) class="pull-right"}}
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <h3>{{if raster.title raster.title "Loading..."}}</h3>
+                                            <p>{{raster.description}}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-11">
-                                        <h3>{{if raster.title raster.title "Loading..."}}</h3>
-                                        <p>{{raster.description}}</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                        {{/each}}
-                    </ul>
-                    <div style="height:10rem; opacity:0;"></div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                        {{! TODO get rid of this hack to make sure we see the whole list :( }}
+                        <div style="height:10rem; opacity:0;"></div>
                     </div>
                 </div>
             </div>
@@ -61,14 +46,20 @@
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                        {{#each model.vector_layer_ids as |vector|}}
-                            {{! Show "Loading..." if the title hasn't loaded yet.}}
-                            <li>
-                                <h3>{{if vector.title vector.title "Loading..."}}</h3>
-                                <p>{{vector.description}}</p>
-                            </li>
-                        {{/each}}
-                    </ul>
+                            {{#each model.vector_layer_ids as |vector|}}
+                                <li class="{{if vector.active_in_project "active" }}">
+                                    <div class="row-eq-height">
+                                        <div class="col-sm-1">
+                                            {{t-add a="check" is-added=vector.active_in_project action=(route-action "addRemoveLayer" vector) class="pull-right"}}
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <h3>{{if vector.title vector.title "Loading..."}}</h3>
+                                            <p>{{vector.description}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -76,9 +67,8 @@
 
         <div class="slide"></div>
 
-{{else}}
-<h5>NOTHING</h5>
-{{/liquid-if}}
-<!-- </div> -->
-{{/if}}
+        {{!else}}
+        <!-- <h5>NOTHING</h5> -->
+    </div>
 </div>
+{{/ember-wormhole}}
