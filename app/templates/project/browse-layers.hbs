@@ -1,8 +1,23 @@
+<div class="row layer-heading">
+    <table class="table">
+        <tr>
+            <td>
+                <h3>Browse Layers</h3>
+            </td>
+            <table>
+                <tr>
+                    <td class="pull-right">{{partial 'close-button'}}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </tr>
+    </table>
+</div>
 <div class="browse-pane route-content">
-<td class="pull-right">
-    {{#link-to 'project' project.id class='pull-right close-button'}}<i class="material-icons">highlight_off</i>{{/link-to}}
-</td>
-
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
             Project info has been updated!

@@ -29,5 +29,6 @@ export default DS.Model.extend({
   position_in_project: DS.attr(''),
   raster_layer_project: DS.belongsTo('raster_layer_project', {async: true, inverse: null}),
   url: DS.attr('string'),
-  layers: DS.attr('string')
+  layers: DS.attr('string'),
+  opacity: DS.attr('number', { defaultValue: 10 })
 });

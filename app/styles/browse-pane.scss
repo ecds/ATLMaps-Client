@@ -1,13 +1,10 @@
 @import "variables.scss";
-
 .show-browse {
     visibility: visible;
     margin-top: -7px;
-    width: 404px ! important;
-    margin-left: 34px ! important;
-
+    width: 404px !important;
+    margin-left: 34px !important;
 }
-
 .toggle-results {
     position: absolute !important;
     top: 29%;
@@ -15,50 +12,29 @@
     background-color: material-color(deeporangealt, 400) !important;
     color: #fff !important;
 }
-
 li.tags {
-    font-size: .75em;
+    font-size: 0.75em;
 }
 
 .browse-pane {
-
     background-color: white;
     width: 100%;
-    margin-left: .25em;
+    margin-left: 0.25em;
     max-height: 100vh !important;
-
     h2 {
         font-size: 1.5em;
         margin: 10px 0;
     }
-
     hr {
-        margin-top: .5em;
+        margin-top: 0.5em;
         margin-bottom: 0;
     }
-
     li {
         border: none;
     }
 
-    .browse-by-text {
-        padding-top: 1em;
-
-        input {
-            width: 84%;
-            margin-right: 0;
-        }
-        .btn {
-            margin: 0;
-            right: 10px;
-            padding: .25em 0.85em;
-            width: 16px;
-        }
-    }
-
     .browse-by-tags {
         padding-left: 0;
-
         section {
             width: 100%;
         }
@@ -69,9 +45,8 @@ li.tags {
                 width: 100%;
                 border: none;
                 font-size: medium;
-
                 span {
-                    width: .75em;
+                    width: 0.75em;
                     display: inline-block;
                 }
                 i {
@@ -80,24 +55,19 @@ li.tags {
                 }
             }
         }
-
         ul.tag-group {
             pointer-events: all;
-
             li {
                 border: none;
                 padding-left: 5px;
                 margin: 0;
-
             }
-
             .checkbox label {
                 color: black;
                 padding-left: 30px;
                 margin-left: 0;
                 font-size: small;
                 margin-bottom: 0;
-
                 input[type=checkbox] ~ .check:before {
                     position: absolute;
                     top: 2px;
@@ -108,19 +78,15 @@ li.tags {
                     border-color: $darkgrey;
                     animation: small-uncheck 300ms ease-out forwards;
                 }
-
                 input[type=checkbox]:checked ~ .check:before {
                     animation: small-check 300ms ease-out forwards;
                 }
-
                 .check:after {
                     height: 20px;
                     width: 20px;
                     left: 9px;
-                    top: 0px;
+                    top: 0;
                 }
-
-
                 @keyframes small-uncheck {
                     0% {
                         top: -3px;
@@ -158,7 +124,6 @@ li.tags {
                         border-top-color: $darkgrey;
                     }
                 }
-
                 @keyframes small-check {
                     100% {
                         top: 3px;
@@ -196,57 +161,44 @@ li.tags {
                     }
                 }
             }
-
         }
-
     }
-
     .browse-by-years {
-
-        #start_year,
-        #end_year {
-        	padding: 7px;
-        	// margin: 0 2em;
-        	width: 4em;
+        #end_year,
+        #start_year {
+            padding: 7px;
+            // margin: 0 2em;
+            width: 4em;
         }
-
         #start_year {
             float: left;
             margin-left: 15px;
         }
-
         #end_year {
             float: right;
             margin-right: 15px;
         }
-
         div.year-slider {
-          width: 97%;
-          padding-left: 12px;
+            width: 97%;
+            padding-left: 12px;
         }
     }
-
     .browse-by-institution {
         .institution {
             label {
-                padding: .5em 0 0 1.75em;
+                padding: 0.5em 0 0 1.75em;
                 // font-size: 1em;
                 color: $darkgrey;
-
                 .check {
                     margin-top: 1px;
                 }
             }
-
             input[type=checkbox] ~ .check:before {
                 animation: inst-uncheck 300ms ease-out forwards;
             }
-
             input[type=checkbox]:checked ~ .check:before {
                 animation: inst-check 300ms ease-out forwards;
             }
-
-
             @keyframes inst-uncheck {
                 0% {
                     top: -3px;
@@ -284,7 +236,6 @@ li.tags {
                     border-top-color: $darkgrey;
                 }
             }
-
             @keyframes inst-check {
                 100% {
                     top: 3px;
@@ -321,7 +272,6 @@ li.tags {
                     border-top-color: $darkgrey;
                 }
             }
-
         }
     }
 }

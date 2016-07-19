@@ -9,7 +9,7 @@ export default Ember.Component.extend({
         let _this = this;
         var layer = this.get('layer');
         var options = {
-            start: [ 10 ],
+            start: [ layer.get('opacity') ],
             connect: false,
             range: {
                 'min': 0,
@@ -25,9 +25,10 @@ export default Ember.Component.extend({
         var valueInput = document.getElementById(layer.get('slider_value_id'));
 
         slider.noUiSlider.on('update', function(values, handle){
-            valueInput.value = values[handle];
             var opacity = values[handle] / 10;
+            // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
             _this.get('mapObject.rasterLayers')[layer.get('slug')].setOpacity(opacity);
+            layer.setProperties({opacity: values[handle]});
         });
 
         valueInput.addEventListener('change', function(){
