@@ -81,6 +81,10 @@ export default Ember.Route.extend({
 			this.get('showIntro').toggleShow();
 		},
 
+        toggleEdit(){
+			this.modelFor('project').toggleProperty('editing');
+		},
+
 		willTransition(transition) {
 			if (transition.targetName === 'project.browse-layers') {
 				this.controllerFor('project').set('showBrowse', true);
@@ -154,10 +158,6 @@ export default Ember.Route.extend({
             }
 		},
 
-		toggleEdit(){
-			this.modelFor('project').toggleProperty('editing');
-		},
-
 		addRemoveLayer(layer){
 			const project = this.modelFor('project');
 
@@ -220,9 +220,9 @@ export default Ember.Route.extend({
 						// TODO figure out how to give feedback on these shared actions
 						// Show a success message.
 						// _this.controllerFor('project/browse-layers').set('editSuccess', true);
-						Ember.$('.browse-results').opacity(0.2);
+						// Ember.$('.browse-results').fadeTo(0.2);
 						Ember.run.later(this, function(){
-						    Ember.$('.browse-results').opacity(1);
+						    // Ember.$('.browse-results').faddeTo(1);
 						}, 3000);
 					}, function(){
 						// TODO figure out how to give feedback on these shared actions

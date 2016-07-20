@@ -1,31 +1,14 @@
 @import 'layer-citation.scss';
 .project-pane {
-    // pointer-events: none !important;
-    // display: flex;
-    // overflow: hidden;
     position: fixed;
     left: 79px;
     top: 78px;
-    // height: 100px;
-    // height: 100vh;
-    // background-color: red;
-    // min-height: 175px;
-    // min-height: 270px;
-    // .container {
-    // background-color: white;
     padding: 0.5em;
     pointer-events: auto; // Allow the pane to respond to click.
     width: calc(33% - 25px);
-    h1 {
-        font-size: 2em;
+    h3 {
+        margin: .25em 0;
     }
-    // h3 {
-    //     margin-top: 0;
-    // }
-    //
-    // .row {
-    //
-    // }
 }
     .project-route {
 
@@ -49,7 +32,6 @@
     }
     ul {
         li {
-            font-size: 1.5em;
             border-width: 1px;
             border-style: solid;
             border-color: lightgrey;
@@ -61,7 +43,6 @@
         }
         article {
             padding: 1em;
-            font-size: 0.75em;
         }
     }
     // layer controls in edit view
@@ -103,7 +84,7 @@
                 width: 100%;
             }
         }
-        
+
     }
     .handle {
         cursor: -webkit-grab;

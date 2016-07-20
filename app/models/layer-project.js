@@ -1,6 +1,9 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+    /*
+    * Extended by RasterLayerProject and VectorLayerProject.
+    */
     project_id: DS.attr(),
     data_format: DS.attr(),
 

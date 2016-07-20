@@ -2,7 +2,7 @@
     <table class="table">
         <tr>
             <td>
-                <h3>Data Layers</h3>
+                <h2>Data Layers {{model.visiable_vector}} : {{model.showing_all_vectors}}</h2>
             </td>
             <table>
                 <tr>
@@ -11,13 +11,17 @@
             </table>
             <table>
                 <tr>
-                    <td class="togglebutton opacity toggle-all pull-right {{unless model.vector_layer_project_ids "disabled"}}">
+                    <td class="togglebutton opacity toggle-all pull-right">
                         <label>
-                            {{input type="checkbox"
-                                    checked=model.showing_all_vectors
+                            {{!input type="checkbox"
+                                    checked=model.visiable_vector
                                     elementId="toggle-all-vectors"
                                     change=(route-action "toggleAllVectorLayers")
                             }}
+                            <input type="checkbox"
+                                    id="toggle-all-vectors"
+                                    checked={{model.visiable_vector}}
+                                    {{action 'toggleAllVectorLayers' layer checked on="change"}} />
                             <span class="toggle"></span>
                         </label>
                     </td>
@@ -44,11 +48,11 @@
                 {{/if}}
 
                 <div class="col-md-8">
-                    <h4>
+                    <h3>
                         <a {{action 'showLayerInfoDetals' layer}}>
                             {{ if layer.vector_layer_id.title layer.vector_layer_id.title 'Loading...'}}
-                        </a>
-                    </h4>
+                        </a>{{layer.showing}}
+                    </h3>
                 </div>
 
                 <div class="togglebutton opacity vector single-vector col-md-3">
@@ -56,11 +60,11 @@
                     {{vector-layer-option-panel layer=layer group=layer.vector_layer_id.color_group}}
                     {{else}}
                     <label class="pull-right">
-                        <input class="vector-toggle"
-                                type="checkbox"
+                        <input type="checkbox"
                                 checked={{layer.showing}}
                                 {{action 'toggleVectorLayer' layer checked on="change"}} />
                         <span class="toggle"></span>
+
                     </label>
                     {{/liquid-if}}
                 </div>
@@ -77,7 +81,7 @@
                 TODO: remember what I meant by this.
             }}
             <div class="panel-footer row">
-                {{#liquid-if isEditing}}
+                {{#liquid-if model.editing}}
                     <div class="layer-citation">
                         <div class="col-md-10">
                             <h6>Provided by:</h6>

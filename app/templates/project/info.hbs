@@ -2,7 +2,9 @@
     <table class="table">
         <tr>
             <td>
-                <h3></h3>
+                {{if model.edit_success "Success"}}
+                {{if model.edit_fail "Fail"}}
+                <h3>{{if model.editing "Edit Project"}}</h3>
             </td>
             <table>
                 <tr>

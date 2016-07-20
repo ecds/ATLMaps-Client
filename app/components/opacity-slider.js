@@ -7,9 +7,11 @@ export default Ember.Component.extend({
 
     didInsertElement: function(){
         let _this = this;
-        var layer = this.get('layer');
+        // this.store.peekRecord(layerModel, layer.get('id'));
+        let projLayer = this.get('layer');
+        let layer = projLayer.get('raster_layer_id');
         var options = {
-            start: [ layer.get('opacity') ],
+            start: [ projLayer.get('opacity') ],
             connect: false,
             range: {
                 'min': 0,
@@ -28,7 +30,12 @@ export default Ember.Component.extend({
             var opacity = values[handle] / 10;
             // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
             _this.get('mapObject.rasterLayers')[layer.get('slug')].setOpacity(opacity);
-            layer.setProperties({opacity: values[handle]});
+            projLayer.setProperties({opacity: values[handle]});
+            if (opacity > 0) {
+                projLayer.setProperties({showing: true});
+            } else {
+                projLayer.setProperties({showing: false});
+            }
         });
 
         valueInput.addEventListener('change', function(){
@@ -43,9 +50,11 @@ export default Ember.Component.extend({
         showHideSwitch.addEventListener('click', function(){
             if (Ember.$("input#toggle-layer-opacity").prop("checked")){
                 slider.noUiSlider.set(10);
+                projLayer.setProperties({showing: true});
             }
             else{
                 slider.noUiSlider.set(0);
+                projLayer.setProperties({showing: false});
             }
         });
 

@@ -34,7 +34,7 @@ export default Ember.Route.extend({
 
         didTransition() {
             // Show the results pane when we enter the the route.
-            // this.send('getResults');
+            this.send('getResults');
             return true;
         },
 
@@ -44,7 +44,6 @@ export default Ember.Route.extend({
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(){
-            console.log(this);
             this.setProperties(
                 {
                     searched: true,

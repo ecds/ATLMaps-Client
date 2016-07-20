@@ -11,9 +11,9 @@ export default Layer.extend({
     }),
     color_name: attr('string'),
     color_hex: attr('string'),
-    opacity: attr('number', {
-        defaultValue: 1
-    }),
+    // opacity: attr('number', {
+    //     defaultValue: 1
+    // }),
     showing: attr('boolean', {
         defaultValue: true
     })

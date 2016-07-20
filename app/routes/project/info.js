@@ -11,21 +11,21 @@ export default Ember.Route.extend({
         updateProjectInfo: function(model) {
             /* Action that updates the title, description and
             published status of a project. */
-            var _this = this;
             model.save().then(function() {
                 // Success callback
                 // Show confirmation.
-                _this.controllerFor('project').set('editSuccess', true);
+                model.setProperties({edit_success: true});
                 Ember.run.later(this, function(){
-                    _this.controllerFor('project').set('editSuccess', false);
+                    model.setProperties({edit_success: false});
                 }, 3000);
                 }, function() {
                     // Error callback
-                    _this.controllerFor('project').set('editFail', true);
+                    model.setProperties({edit_fail: true});
                     Ember.run.later(this, function(){
-                        _this.controllerFor('project').set('editFail', false);
+                        model.setProperties({edit_fail: false});
+                        model.rollbackAttributes();
+                        model.setProperties({editing: true});
                     }, 3000);
-                    model.rollbackAttributes();
 
             });
         },
