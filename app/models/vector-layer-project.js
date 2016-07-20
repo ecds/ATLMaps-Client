@@ -1,11 +1,11 @@
-import DS from 'ember-data';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
+import LayerProject from './layer-project';
 
-export default DS.Model.extend({
-	vector_layer_id: DS.belongsTo('vector_layer', {async: true, inverse: null}),
-    project_id: DS.attr(),
-    marker: DS.attr(),
-    data_format: DS.attr(),
-
-	// Non-API property. Used to show/hide the layer's description in the list.
-	clicked: DS.attr('boolean', { defaultValue: false })
+export default LayerProject.extend({
+	vector_layer_id: belongsTo('vector_layer', {
+		async: true,
+		inverse: null
+	}),
+	marker: attr(),
 });

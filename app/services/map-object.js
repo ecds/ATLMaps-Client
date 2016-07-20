@@ -16,7 +16,7 @@ export default Ember.Service.extend({
         this.set('vectorLayers', {});
     },
 
-    createMap( /*project*/ ) {
+    createMap( project ) {
         try {
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -49,17 +49,12 @@ export default Ember.Service.extend({
                 position: 'topright'
             }).addTo(_map);
 
-            // _map.on('click', function(){
-            //     Ember.$("div.info").remove();
-            //     Ember.$("div.marker-data").hide();
-            //     Ember.$(".active_marker").removeClass("active_marker");
-            // 	Ember.$(".browse-results").fadeOut();
-            //     // this.send('activateVectorCard');
-            // });
-
-            // TODO: Get rid of this. only here while we develop a way to bring the results back
-            _map.on('dblclick', function() {
-                Ember.$(".browse-results").fadeIn();
+            _map.on('click', function(){
+                // Ember.$("div.info").remove();
+                // Ember.$("div.marker-data").hide();
+                // Ember.$(".active_marker").removeClass("active_marker");
+                project.setProperties({showing_browse_results: false});
+                // this.send('activateVectorCard');
             });
 
             // let baseMaps = {

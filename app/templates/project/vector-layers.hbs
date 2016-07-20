@@ -13,8 +13,11 @@
                 <tr>
                     <td class="togglebutton opacity toggle-all pull-right {{unless model.vector_layer_project_ids "disabled"}}">
                         <label>
-                            <input id="toggle-all-vectors" type="checkbox" checked="checked"
-                                    {{action 'toggleAllVectorLayers' checked on="change"}}/>
+                            {{input type="checkbox"
+                                    checked=model.showing_all_vectors
+                                    elementId="toggle-all-vectors"
+                                    change=(route-action "toggleAllVectorLayers")
+                            }}
                             <span class="toggle"></span>
                         </label>
                     </td>
@@ -55,8 +58,8 @@
                     <label class="pull-right">
                         <input class="vector-toggle"
                                 type="checkbox"
-                                checked="checked"
-                                {{action 'toggleVectorLayer' layer.vector_layer_id checked on="change"}} />
+                                checked={{layer.showing}}
+                                {{action 'toggleVectorLayer' layer checked on="change"}} />
                         <span class="toggle"></span>
                     </label>
                     {{/liquid-if}}

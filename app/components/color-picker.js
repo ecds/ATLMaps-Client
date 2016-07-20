@@ -7,27 +7,31 @@ export default Ember.Component.extend({
 
     classNames: ['color-picker'],
 
-    colors: function(){
+    colors: function() {
         let layer = this.get('layer');
         let group = layer.get('vector_layer_id.data_type');
-        if(group === 'point-data'){
+        if (group === 'point-data') {
             return this.get('dataColors.markerColors');
-        }
-        else {
+        } else {
             return this.get('dataColors.shapeColors');
         }
     }.property(),
 
-    mouseLeave(){
-
+    mouseLeave() {
+        this.get('layer').rollbackAttributes();
     },
 
     actions: {
-        previewColor(color, layer, index){
-            layer.setProperties({marker: index});
+        previewColor(color, layer, index) {
+            layer.setProperties({
+                marker: index
+            });
             let _this = this;
-            layer.get('vector_layer_id').then(function(vector){
-                vector.setProperties({color_name: color.name, color_hex: color.hex});
+            layer.get('vector_layer_id').then(function(vector) {
+                vector.setProperties({
+                    color_name: color.name,
+                    color_hex: color.hex
+                });
                 _this.get('mapObject').updateVectorStyle(vector, color);
             });
         }

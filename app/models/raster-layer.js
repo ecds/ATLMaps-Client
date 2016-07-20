@@ -1,34 +1,18 @@
-import DS from 'ember-data';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
+import Layer from './layer';
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  title: DS.attr('string'),
-  slug: DS.attr('string'),
-  keywords: DS.attr('string'),
-  description: DS.attr('string'),
-  workspace: DS.attr('string'),
-  layer: DS.attr('string'),
-  date: DS.attr('date'),
-  data_type: DS.attr('string'),
-  data_format: DS.attr('string'),
-  zoomlevels: DS.attr('string'),
-  minx: DS.attr('number'),
-  miny: DS.attr('number'),
-  maxx: DS.attr('number'),
-  maxy: DS.attr('number'),
-  project_ids: DS.hasMany('project', {async: true}),
-  tag_ids: DS.hasMany('tag', {async: true}),
-  institution: DS.attr(),
-  institution_id: DS.belongsTo('institution'),
-  tag_slugs: DS.attr('string'),
-  active: DS.attr('boolean'),
-  marker: DS.attr(),
-  active_in_project: DS.attr('boolean', { defaultValue: false }),
-  slider_id: DS.attr('string'),
-  slider_value_id: DS.attr('string'),
-  position_in_project: DS.attr(''),
-  raster_layer_project: DS.belongsTo('raster_layer_project', {async: true, inverse: null}),
-  url: DS.attr('string'),
-  layers: DS.attr('string'),
-  opacity: DS.attr('number', { defaultValue: 10 })
+export default Layer.extend({
+    workspace: attr('string'),
+    slider_id: attr('string'),
+    slider_value_id: attr('string'),
+    position_in_project: attr(''),
+    raster_layer_project: belongsTo('raster_layer_project', {
+        async: true,
+        inverse: null
+    }),
+    layers: attr('string'),
+    opacity: attr('number', {
+        defaultValue: 10
+    })
 });

@@ -25,13 +25,24 @@ export default DS.Model.extend({
 	template_id: DS.attr('number'),
 	card_url: DS.attr('string'),
 
+    // The following are non-API based attributes.
+
+    // Non-API backed attributes for managing state.
+    is_editing: DS.attr('boolean', {defaultValue: true}),
+    showing_browse_results: DS.attr('boolean', {defaultValue: true}),
+	showing_all_vectors: DS.attr('boolean', {defaultValue: true}),
+	showing_all_rasters: DS.attr('boolean', {defaultValue: true}),
+
 	// Attribute that will be set to true if a user is "exploring".
 	exploring: DS.attr('boolean', { defaultValue: false }),
-
 	editing: DS.attr('boolean', { defaultValue: false }),
 
-	// TODO remember how this actually works and document it.
-	// Computed property that sorts rasters by on the position their `position` in the project.
+	// Computed property that sorts rasters by on the position their `position`
+    // in the project. See http://emberjs.com/api/classes/Ember.computed.html#method_sort
 	sortedRasterLayers: Ember.computed.sort('raster_layer_project_ids', '_positionSort'),
-    _positionSort: ['position:desc']
+    _positionSort: ['position:desc'],
+
+    // We'll call length on this so we can set the toggle switch if all vectors
+    // are hidden. See http://emberjs.com/api/classes/Ember.computed.html#method_filterBy
+    hidden_vectors: Ember.computed.filterBy('vector_layer_project_ids', 'showing', true)
 });

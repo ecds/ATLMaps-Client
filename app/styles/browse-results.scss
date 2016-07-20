@@ -191,6 +191,7 @@ label.show-results-btn {
     left: $left;
     top: $top;
     z-index: 1;
+    pointer-events: none;
     .browse-nav {
         width: 100%;
     }

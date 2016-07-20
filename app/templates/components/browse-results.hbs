@@ -1,6 +1,10 @@
 {{#ember-wormhole to="modal-overlays"}}
 
-<input type="checkbox" name="toggleResults" id="toggleResultsCheck" checked="{{if showingResults false}}" />
+{{input type="checkbox"
+        checked=project.showing_browse_results
+        elementId="toggleResultsCheck"
+        change=(route-action "toggleResults" project)
+}}
 <label for="toggleResultsCheck" class="show-results-btn"><i class="material-icons">view_list</i></label>
 <div class="browse-results">
     <div class="results-toolbar">

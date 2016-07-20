@@ -18,18 +18,18 @@ export default function(){
       this.use('crossFade'),
       this.reverse('crossFade')
   );
-  this.transition(
-      this.hasClass('.browse-nav'),
-    //   this.includingInitialRender(),
-      this.fromValue(true),
-
-      this.use('explode', {
-          pickOld: 'div',
-          use:['toRight', {duration: 5000}]
-      },{
-          pickNew: 'div',
-          use: ['toLeft', 'toDown', {duration: 5000}]
-      }),
-      this.debug()
-  );
+  // this.transition(
+  //     this.hasClass('.browse-nav'),
+  //   //   this.includingInitialRender(),
+  //     this.fromValue(true),
+  //
+  //     this.use('explode', {
+  //         pickOld: 'div',
+  //         use:['toRight', {duration: 5000}]
+  //     },{
+  //         pickNew: 'div',
+  //         use: ['toLeft', 'toDown', {duration: 5000}]
+  //     }),
+  //     this.debug()
+  // );
 }

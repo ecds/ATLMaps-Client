@@ -25,25 +25,26 @@ export default Ember.Route.extend({
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
         controller.set('project', models.project);
-        controller.set('editSuccess', false);
-        controller.set('editFail', false);
-        controller.set('showingResults', true);
+        // controller.set('editSuccess', false);
+        // controller.set('editFail', false);
+        // controller.set('showingResults', true);
     },
 
     actions: {
 
         didTransition() {
             // Show the results pane when we enter the the route.
-            this.send('getResults');
+            // this.send('getResults');
             return true;
         },
 
-        toggleResults(){
-            this.controller.toggleProperty('showingResults');
+        toggleResults(project){
+            project.toggleProperty('showing_browse_results');
         },
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(){
+            console.log(this);
             this.setProperties(
                 {
                     searched: true,
@@ -64,15 +65,16 @@ export default Ember.Route.extend({
             });
         },
 
-        showResults(show){
-            // TODO: We need to do a better job showing ruesults. In reality,
-            // most searches will start with more raster layers due to volume.
-            if (show === 'vector') {
-                this.controllerFor('project/browse-layers').set('rastersActive', false);
-            }
-            else if (show === 'raster') {
-                this.controllerFor('project/browse-layers').set('rastersActive', true);
-            }
-        }
+        // NOTE: this is no longer needed?
+        // showResults(show){
+        //     // TODO: We need to do a better job showing ruesults. In reality,
+        //     // most searches will start with more raster layers due to volume.
+        //     if (show === 'vector') {
+        //         this.controllerFor('project/browse-layers').set('rastersActive', false);
+        //     }
+        //     else if (show === 'raster') {
+        //         this.controllerFor('project/browse-layers').set('rastersActive', true);
+        //     }
+        // }
     }
 });

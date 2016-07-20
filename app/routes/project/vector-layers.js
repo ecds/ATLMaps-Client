@@ -6,34 +6,30 @@ export default Ember.Route.extend({
 
     actions: {
         toggleAllVectorLayers(){
-            // First we figure out if the toggle all button is now `checked`
-            // or `undefined`
-            let checked = Ember.$('#toggle-all-vectors').prop('checked');
-            // If checked, we're going to fade in all the vector layers.
-            if (checked){
-                // This sets all the individual vector layer's toggle to `checked`.
-                Ember.$('.vector-toggle').prop('checked', checked);
-                // So we want to see all the layers. Fade in any that are hidden.
-                Ember.$('.vectorData').fadeIn();
-            }
-            // Otherwise, we don't want see any vector layers so set the
-            // `checked` property fot `false`.
-            else {
-                // This sets all the individual vector layer toggel's
-                // `checked` attribute to false.
-                Ember.$('.vector-toggle').prop('checked', false);
-                // Fade out all the vector layers on the map.
-                Ember.$('.vectorData').fadeOut();
-            }
-
+            const project = this.currentModel;
+            // Toggle a model attribute for persistance
+            project.toggleProperty('showing_all_vectors');
+            // Trigger the toggles for each layer.
+            // Setting the prop does not trigger the change event.
+            Ember.$('.vector-toggle').trigger("change");
         },
 
         toggleVectorLayer(layer){
-            Ember.$('.vectorData.'+layer.get('slug')).fadeToggle();
-        },
-
-        actions: {
-
+            // Toggle the opacity of vectors.
+            Ember.$('.vectorData.'+layer.get('vector_layer_id.slug')).fadeToggle();
+            // Toggle the layer's model attribute.
+            layer.toggleProperty('showing');
+            const project = this.currentModel;
+            // Make the projects `showing_all_vectors` model attribute true only if the layer
+            // was previously hidden.
+            console.log(project.get('hidden_vectors').length);
+            if (project.get('hidden_vectors').length === 0) {
+                // This will not trigger the change event on the toggle all.
+                project.setProperties({showing_all_vectors: false });
+            }
+            else {
+                project.setProperties({showing_all_vectors: true });
+            }
         }
     }
 });
