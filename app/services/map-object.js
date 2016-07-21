@@ -25,11 +25,19 @@ export default Ember.Service.extend({
                     // className: 'street base'
             });
 
-            let satellite = L.tileLayer('http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-                attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency contributors Georgia State University and Emory University',
-                subdomains: '1234',
-                // className: 'satellite base',
-                detectRetina: true
+            let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+  attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+  subdomains: '1234',
+  base: 'aerial',
+  type: 'maptile',
+  scheme: 'satellite.day',
+  app_id: '1Igi60ZMWDeRNyjXqTZo',
+  app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+  mapID: 'newest',
+  maxZoom: 20,
+  language: 'eng',
+  format: 'png8',
+  size: '256'
             });
 
             let _map = L.map('map', {

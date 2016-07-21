@@ -57,6 +57,7 @@ module.exports = function(environment) {
 
   if (environment === 'staging') {
     ENV.APP.API_HOST = 'http://atlmaps-api.ecdsweb.org';
+    ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-1';
   }
 
   if (environment === 'production') {
