@@ -19,11 +19,10 @@
         <div class="tab-label-content" id="tab1-content">
             <label for="tab1"><i class="material-icons">layers</i> Historical Maps</label>
             <div class="tab-content {{if model.raster_layer_ids "has-results"}}">
-
+                <div class="result-count">{{model.raster_layer_ids.length}} Historical Maps found.</div>
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                            <li><span class="result-count">{{model.raster_layer_ids.length}} Historical Maps found.</span></li>
                             {{#each model.raster_layer_ids as |raster|}}
                                 {{! Show "Loading..." if the title hasn't loaded yet.}}
                                 <li class="{{if raster.active_in_project "active" }}">
@@ -49,10 +48,10 @@
         <div class="tab-label-content" id="tab2-content">
             <label for="tab2"><i class="material-icons atlmaps-ext database"></i> Data Maps</label>
             <div class="tab-content {{if model.vector_layer_ids "has-results"}}">
+                <div class="result-count">{{model.vector_layer_ids.length}} Data Layers found.</div>
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                            <li><span class="result-count">{{model.vector_layer_ids.length}} Data Layers found.</span></li>
                             {{#each model.vector_layer_ids as |vector|}}
                                 <li class="{{if vector.active_in_project "active" }}">
                                     <div class="row-eq-height">
