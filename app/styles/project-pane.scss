@@ -1,6 +1,6 @@
 @import 'layer-citation.scss';
 .project-pane {
-    position: fixed;
+    position: fixed; // This is preventing the scroll and/or causing the problems.
     left: 79px;
     top: 78px;
     padding: 0.5em;

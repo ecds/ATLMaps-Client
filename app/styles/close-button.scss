@@ -1,12 +1,12 @@
 a.close-button {
-    color: black;
+    color: material-color(red, 600);
     text-decoration: none;
     margin-top: .5em;
     margin-right: .45em;
     padding: 0;
+    opacity: .7;
     &:hover {
-        background-color: lightcoral;
-        border-radius: 50%;
+        opacity: 1;
     }
 }
 
@@ -14,10 +14,10 @@ a.close-button {
 //
 // }
 
-.modal-content {
-    a.close-button {
-        right: 23px;
-        position: absolute;
-        z-index: 2;
-    }
-}
+// .modal-content {
+//     a.close-button {
+//         right: 23px;
+//         position: absolute;
+//         z-index: 2;
+//     }
+// }

@@ -74,7 +74,7 @@ module.exports = function(environment) {
     'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
     'media-src': "'self'",
     'img-src': "* data:",
-    'frame-src': "'self' http://www.youtube.com https://www.youtube.com"
+    'frame-src': "'self' http://www.youtube.com https://www.youtube.com https://youtu.be"
   };
 
   // ENV['ember-simple-auth'] = {

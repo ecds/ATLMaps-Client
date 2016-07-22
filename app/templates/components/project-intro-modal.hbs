@@ -1,49 +1,48 @@
-{{#if showIntro.show}}
-	{{#modal-dialog close="toggleIntro" alignment="left" translucentOverlay=true container-class="project-intro"}}
-    <div class="container-fluid">
-        <div class="row title">
-            <div class="col-md-10">
+<div class="intro-body">
+    <header>
+        <div class="row">
+            <div class="col-md-8">
                 <h1>{{project.name}}</h1>
-                <h2>By: {{project.owner}}</h2>
+                <h2>By: {{project.owner}} {{project.templateSlug}}</h2>
             </div>
-            <div class="col-md-2">
-                <a {{action 'toggleIntro'}} class="pull-right close-button"><i class="material-icons">highlight_off</i></a>
+            <div class="col-md-4">
+                <a {{action 'toggleIntro'}} class='close-button pull-right'>
+                    <i class="material-icons">highlight_off</i>
+                </a>
             </div>
         </div>
-        <div class="intro-body row">
-        {{#if this.av}}
+    </header>
+    <div class="container-fluid">
 
-                <div class="intro-text col-md-6">
-                    <article>
-                        {{{project.intro}}}
-                    </article>
+        {{! Article Only }}
+        <div class="col-md-6">
+            <article>
+                {{{project.intro}}}
+            </article>
+        </div>
+        <div class="col-md-6 player">
+                <div class='embed-container'>
+                    <iframe src="https://www.youtube.com/embed/1m2cQjNhyaY" frameborder='0' allowfullscreen>
+                    </iframe>
                 </div>
-                <div class="intro-video col-md-6">
-                    {{lazy-video url=project.media}}
-                </div>
-
-        {{else if a}}
-            <div class="intro-text col-md-12">{{{project.intro}}}</div>
-        {{else if v}}
-            <div class="intro-video col-md-12">
-                {{lazy-video url=project.media}}
-            </div>
-        {{/if}}
         </div>
 
-        <div class="row intro-controls">
-			<div class="col-md-4"></div>
-            <div class="text-center explore-button col-md-4">
-                <a class="btn btn-info" {{action 'toggleIntro'}}>Explore Project</a>
+
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <div class="btn btn-raised btn-info">
+                    <a {{action 'toggleIntro'}}>Explore Project</a>
+                </div>
             </div>
-            <div class="col-md-4 checkbox">
+            <div class="col-md-4">
                 <label class="pull-right">
-					 <input type="checkbox" id="dont-show" checked={{showIntro.noIntroCookie}} onchange={{action "supressIntro"}} />
-                    <span class="check"></span>
-                    Don't show every time.
+                    <input type="checkbox" id="dont-show" checked= {{showIntro.noIntroCookie}} onchange= {{action "supressIntro"}} />
+                    <span class="check"></span> Don't show every time.
                 </label>
             </div>
         </div>
-    </div>
-	{{/modal-dialog}}
-{{/if}}
+    </footer>
+</div>

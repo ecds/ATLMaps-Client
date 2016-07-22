@@ -18,6 +18,7 @@
     </table>
 </div>
 <div class="browse-pane route-content">
+    <div style="overflow:auto">
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
             Project info has been updated!
@@ -35,4 +36,5 @@
     {{browse-years model=yearRange getResults='getResults'}}
     <hr />
     {{browse-institution model=institutions getResults='getResults'}}
+    </div>
 </div>
