@@ -7,13 +7,13 @@ export default Ember.Component.extend({
     didInitAttrs: function(){
 
         // Pick the layout from the attribute
-        if (this.get('template') === 'article-and-video'){
+        if (this.get('project.templateSlug') === 'article-and-video'){
 			this.set('av', true);
 		}
-        else if (this.get('template') === 'article-only'){
+        else if (this.get('project.templateSlug') === 'article-only'){
             this.set('a', true);
         }
-        else if (this.get('template') === 'video-only'){
+        else if (this.get('project.templateSlug') === 'video-only'){
             this.set('v', true);
         }
 

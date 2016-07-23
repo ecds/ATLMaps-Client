@@ -19,6 +19,7 @@ $side-padding: 1.25em;
             h1 {
                 font-size: 1.75em;
                 line-height: 1em;
+                float: left;
             }
             h2 {
                 font-size: 1.25em;
@@ -31,7 +32,7 @@ $side-padding: 1.25em;
             }
         }
         article {
-            padding: 0 2em 2em;
+            padding: 0;
         }
         div.player {
             position: fixed;
@@ -39,7 +40,7 @@ $side-padding: 1.25em;
         }
         .container-fluid {
             position: absolute;
-            top: 15rem;
+            top: 8rem;
             bottom: 6rem;
             right: 0;
             left: 0;

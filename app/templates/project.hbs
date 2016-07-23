@@ -90,7 +90,7 @@
 {{vector-info}}
 {{#if model.intro}}
     {{#if showIntro.show}}
-        {{#tether-dialog close='toggleTranslucent' translucentOverlay=true container-class="project-intro" }}
+        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=true container-class="project-intro" }}
             {{project-intro-modal action='toggleIntro' project=model }}
         {{/tether-dialog}}
     {{/if}}
