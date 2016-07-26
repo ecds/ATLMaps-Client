@@ -3,13 +3,13 @@
     <div class="base-layer-controls"></div>
 </div>
 
-<div class="container project-head">
-    <div class="row {{if model.editing 'project-edit' 'project-view'}}">
-        <div class="col-xs-2 col-md-1 exit title">
-            {{#link-to 'projects' title="Back to All Projects" }}<i class="material-icons">exit_to_app</i>{{/link-to}}
-        </div>
-        <div class="col-xs-10 col-md-10 title">
-            {{model.name}}
+<div class="project-nav container">
+    <nav class="project-nav-group pull-left">
+        <div class="row head {{if model.editing 'edit'}}">
+            {{#link-to "projects" title="Back to All Projects" }}
+                <i class="material-icons exit">exit_to_app</i>
+            {{/link-to}}
+            <span>{{model.name}}</span>
             <span class="edit-button pull-right">
 				{{#if model.may_edit}}
 					<a {{action 'toggleEdit'}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
@@ -18,31 +18,12 @@
 				{{/if}}
 			</span>
         </div>
-    </div>
-</div>
-
-<div class="project-nav container">
-    <nav class="project-nav-group pull-left">
         <div class="row">
             {{#link-to "project.info" class="" id='project-info' title="Project Description" }}
                 <i class="material-icons">info_outline</i> About this Project
             {{/link-to}}
         </div>
-        {{#if isEditing}}
-            <div class="row">
-                {{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers" }}
-                    <i class="material-icons">search</i> Find Maps
-                {{/link-to}}
-            </div>
-        {{/if}}
-        {{#if model.exploring}}
-            <div class="row">
-                {{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers" }}
-                    <i class="material-icons">search</i> Find Maps
-                {{/link-to}}
-            </div>
-        {{/if}}
-        {{#if model.may_edit}}
+        {{#if model.may_browse}}
             <div class="row">
                 {{#link-to "project.browse-layers" class="" id='browse' title="Browse Layers" }}
                     <i class="material-icons">search</i> Find Maps

@@ -1,13 +1,12 @@
 
 
-.main-navbar{
+.main-navbar {
 	position: relative;
 	background-color: white;
 	height: 60px;
 	box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.20);
 
-
-	.in{
+	.in {
 
 		margin-top: -8px;
 		width: 100%;
@@ -24,17 +23,13 @@
 		    	display: inline-block;
 			}
 
-	    	// a.active {
-	    	// 	background-color: deeppink;
-	    	// }
-
 		}
 	}
 
-	a{
+	a {
 		color: #4E4E4E !important;
 		font-size: larger;
-		height: 46px;
+		// height: 46px;
 		border-top-right-radius: 5%;
 		border-top-left-radius: 5%;
 
@@ -55,11 +50,11 @@
 		color: #B0BEC5;
 	}
 
-	li{
+	li {
 		padding-top: 1em;
 
 		.active {
-			background-color: deepskyblue !important;
+			background-color: material-color(blue, 700);
 			color: white !important;
 		}
 		a {

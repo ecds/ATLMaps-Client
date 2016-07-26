@@ -21,6 +21,7 @@ export default Ember.Route.extend({
                 zoom_level: 13,
                 default_base_map: 'street',
 				exploring: true,
+                may_browse: true,
 				description: 'Here we say something about how they can play around but nothing will be saved.'
             });
 		}
@@ -83,6 +84,7 @@ export default Ember.Route.extend({
 
         toggleEdit(){
 			this.modelFor('project').toggleProperty('editing');
+            this.modelFor('project').toggleProperty('may_browse');
 		},
 
 		willTransition(transition) {

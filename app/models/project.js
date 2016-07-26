@@ -60,6 +60,10 @@ export default DS.Model.extend({
         defaultValue: false
     }),
 
+    may_browse: DS.attr('boolean', {
+        defaultValue: false
+    }),
+
     // Computed property that sorts rasters by on the position their `position`
     // in the project. See http://emberjs.com/api/classes/Ember.computed.html#method_sort
     sortedRasterLayers: Ember.computed.sort('raster_layer_project_ids', '_positionSort'),

@@ -32,7 +32,8 @@
  'vector-layer-option-panel',
  'browse-pane',
  'browse-results',
- 'atl-checkbox';
+ 'atl-checkbox',
+ 'base-picker';
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: 'Roboto', 'Material Icons' sans-serif;
@@ -865,26 +866,6 @@ a.is-editing-project-button {
     bottom: 0;
     right: 0;
     cursor: nwse-resize;
-}
-
-.base-preview {
-  width: 48%;
-  height: 10em;
-  text-align: center;
-
-  a &:hover, a &:focus{
-    border-color: deeppink;
-    border-bottom-width: thick;
-  }
-
-}
-
-.base-preview.satellite {
-  background-image: url(/assets/images/satellite.png);
-}
-
-.base-preview.street {
-    background-image: url(/assets/images/street_map.png);
 }
 
 .alert-danger {

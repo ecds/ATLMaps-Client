@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h1>{{project.name}}</h1>
-                <h2>By: {{project.owner}} {{this.av}}</h2>
+                <h2>By: {{project.owner}}</h2>
             </div>
             <div class="col-md-4">
                 <a {{action 'toggleIntro'}} class='close-button pull-right'>
@@ -13,21 +13,18 @@
         </div>
     </header>
     <div class="container-fluid">
-
         {{! Article Only }}
         <div class="{{if this.av "col-md-6" "col-md-12"}}">
             <article>
                 {{{project.intro}}}
             </article>
         </div>
-        <div class="{{if this.av "col-md-6" col-md-12}}">
-                <div class='embed-container'>
-                    <iframe src="https://www.youtube.com/embed/1m2cQjNhyaY?rel=0&autohide=1&showinfo=0" frameborder='0' allowfullscreen>
-                    </iframe>
-                </div>
+        <div class="{{if this.av "col-md-6 player" col-md-12}}">
+            <div class='embed-container'>
+                <iframe src="https://www.youtube.com/embed/1m2cQjNhyaY?rel=0&autohide=1&showinfo=0" frameborder='0' allowfullscreen>
+                </iframe>
+            </div>
         </div>
-
-
     </div>
     <footer>
         <div class="row">

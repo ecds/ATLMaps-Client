@@ -1,0 +1,22 @@
+.base-preview {
+  width: 48%;
+  height: 10em;
+  text-align: center;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  a &:hover, a &:focus{
+    border-color: deeppink;
+    border-bottom-width: thick;
+  }
+
+}
+
+.base-preview.satellite {
+  background-image: url(/assets/images/satellite.png);
+}
+
+.base-preview.street {
+    background-image: url(/assets/images/street_map.png);
+}

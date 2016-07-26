@@ -3,59 +3,59 @@ div.project-nav {
     display: flex;
     position: fixed;
     background-color: white;
-    top: 87px;
-    left: 45px;
+    top: 1em;
+    left: 2.5em;
     width: 33%;
     .row {
         padding: 0.5em;
     }
 }
 .project-head {
-    margin-top: 10px;
-    // width: 30%;
-    min-width: 33%;
-    position: fixed;
-    display: flex;
-    z-index: 1;
-    // .liquid-container, .liquid-child {
-    //     overflow: visible;
+    // margin-top: 10px;
+    // // width: 30%;
+    // min-width: 33%;
+    // position: fixed;
+    // display: flex;
+    // z-index: 1;
+    // // .liquid-container, .liquid-child {
+    // //     overflow: visible;
+    // // }
+    // .row {
+    //     position: inherit;
+    //     margin-top: 10px;
+    //     margin-left: 30px;
+    //     width: 33%;
+    //     padding: 1em;
+    //
+    //         .title {
+    //             font-size: 1.75em;
+    //             line-height: 1;
+    //             color: whitesmoke;
+    //             font-weight: 500;
+    //             padding-left: 0;
+    //             span.edit-button a {
+    //                 color: material-color(blue, 100);
+    //                 i {
+    //                     margin-left: 5px;
+    //                     vertical-align: top !important;
+    //                 }
+    //             }
+    //         }
+    //         .exit {
+    //             padding-left: 26px;
+    //             transform: rotate(180deg);
+    //             margin-left: 9px;
+    //             a {
+    //                 padding-left: 10px;
+    //                 color: material-color(grey, 300);
+    //             }
+    //             i {
+    //                 vertical-align: bottom;
+    //             }
+    //         }
+    //
+    //         color: material-color(blue, 900);
     // }
-    .row {
-        position: inherit;
-        margin-top: 10px;
-        margin-left: 30px;
-        width: 33%;
-        padding: 1em;
-
-            .title {
-                font-size: 1.75em;
-                line-height: 1;
-                color: whitesmoke;
-                font-weight: 500;
-                padding-left: 0;
-                span.edit-button a {
-                    color: material-color(blue, 100);
-                    i {
-                        margin-left: 5px;
-                        vertical-align: top !important;
-                    }
-                }
-            }
-            .exit {
-                padding-left: 26px;
-                transform: rotate(180deg);
-                margin-left: 9px;
-                a {
-                    padding-left: 10px;
-                    color: material-color(grey, 300);
-                }
-                i {
-                    vertical-align: bottom;
-                }
-            }
-
-            color: material-color(blue, 900);
-    }
 }
 .project-edit,
 .project-view {
@@ -75,7 +75,30 @@ div.project-nav {
     }
 }
 .project-nav-group {
-    width: 50%;
+    width: 100%;
+    .row.head {
+        background-color: material-color(blue, 700);
+
+        &.edit {
+            background-color: material-color(green, 500);
+        }
+        a {
+            color: material-color(grey, 50);
+        }
+
+        i {
+            display: table-cell;
+        }
+        i.exit {
+            transform: rotate(180deg);
+            padding-left: 0.4em;
+        }
+
+        span {
+            font-size: 2em;
+            color: material-color(grey, 100);
+        }
+    }
     a {
         color: material-color(grey, 600);
         font-size: large;
@@ -84,43 +107,43 @@ div.project-nav {
             width: 31px;
         }
     }
-    .row:nth-of-type(1) {
+    .row:nth-of-type(2) {
         //   background-color: material-color(grey, 50);
         &:hover {
             background-color: material-color(blue, 50) !important;
         }
     }
-    .row:nth-of-type(2) {
+    .row:nth-of-type(3) {
         //   background-color: material-color(grey, 100);
         &:hover {
             background-color: material-color(blue, 100) !important;
         }
     }
-    .row:nth-of-type(3) {
+    .row:nth-of-type(4) {
         //   background-color: material-color(grey, 200);
         &:hover {
             background-color: material-color(blue, 200) !important;
         }
     }
-    .row:nth-of-type(4) {
+    .row:nth-of-type(5) {
         //   background-color: material-color(grey, 300);
         &:hover {
             background-color: material-color(blue, 300) !important;
         }
     }
-    .row:nth-of-type(5) {
+    .row:nth-of-type(6) {
         //   background-color: material-color(grey, 400);
         &:hover {
             background-color: material-color(blue, 400) !important;
         }
     }
-    .row:nth-of-type(6) {
+    .row:nth-of-type(7) {
         //   background-color: material-color(grey, 500);
         &:hover {
             background-color: material-color(blue, 500) !important;
         }
     }
-    .row:nth-of-type(7) {
+    .row:nth-of-type(8) {
         //   background-color: material-color(grey, 600);
         &:hover {
             background-color: material-color(blue, 600) !important;
