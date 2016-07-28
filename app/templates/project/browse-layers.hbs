@@ -6,7 +6,17 @@
             </td>
             <table>
                 <tr>
-                    <td class="pull-right">{{partial 'close-button'}}</td>
+                    <td class="pull-right">
+                        <td class="pull-right">
+                            {{!
+                                TODO Pulled this out of the partial. There has
+                                to be a better way.
+                            }}
+                            {{#link-to 'project' project.id class='pull-right close-button'}}
+                                <i class="material-icons">highlight_off</i>
+                            {{/link-to}}
+                        </td>
+                    </td>
                 </tr>
             </table>
             <table>

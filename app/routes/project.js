@@ -73,7 +73,7 @@ export default Ember.Route.extend({
 		institutions.setEach('checked', false);
 		// Reset the year range.
 		// this.store.peekRecord('yearRange', 1).rollback();
-		Ember.$('.marker-data').remove();
+		Ember.$('.vector-info').remove();
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {
@@ -95,7 +95,7 @@ export default Ember.Route.extend({
 				this.controllerFor('project').set('showBrowse', false);
 			}
 
-			Ember.$('.marker-data').hide();
+			Ember.$('.vector-info').hide();
 
 			return true;
 		},

@@ -2,7 +2,7 @@
 $orange: material-color(deeporangealt, 400);
 $grey: #9e9e9e;
 $left: 40%;
-$top: 2rem;
+$top: 3em;
 
 $rabbit: 200ms;
 $turtle: 300ms;
@@ -191,7 +191,7 @@ label.show-results-btn {
 .browse-results {
     position: absolute;
     left: $left;
-    top: $top;
+    top: 2.5em;
     z-index: 1;
     // pointer-events: none;
     .browse-nav {

@@ -68,7 +68,7 @@ export default Ember.Service.extend({
             if (Ember.$('.gallery').length > 0){
                 Ember.$('.gallery')[0].swiper.destroy();
             }
-            Ember.$("div.marker-data").show();
+            Ember.$("div.vector-info").show();
             Ember.$("div.marker-title").append(popupTitle);
             Ember.$('div.marker-content').append(content);
             Ember.$(".active_marker").removeClass("active_marker");

@@ -6,12 +6,12 @@ export default Ember.Route.extend({
     browseParams: Ember.inject.service('browse-params'),
     mapObject: Ember.inject.service('map-object'),
 
-    beforeModel(){
+    beforeModel() {
         // console.log(this);
     },
 
     // This is a neat way to add multiple models to a route.
-    model(){
+    model() {
         return Ember.RSVP.hash({
             yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
@@ -20,7 +20,7 @@ export default Ember.Route.extend({
         });
     },
 
-    setupController(controller, models){
+    setupController(controller, models) {
         controller.set('yearRange', models.yearRange);
         controller.set('categories', models.categories);
         controller.set('institutions', models.institutions);
@@ -38,28 +38,26 @@ export default Ember.Route.extend({
             return true;
         },
 
-        toggleResults(project){
+        toggleResults(project) {
             project.toggleProperty('showing_browse_results');
         },
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
-        getResults(){
-            this.setProperties(
-                {
-                    searched: true,
-                    // showingResults: true
-                }
-            );
+        getResults() {
+            this.setProperties({
+                searched: true,
+                // showingResults: true
+            });
             return this.render('components/browse-results', {
                 outlet: 'browse-results',
                 into: 'project', // Want it to open in the project view
                 controller: 'project/browse-layers', // don't set controller to `project` or it will screw up `model`
                 model: this.store.queryRecord('search', {
-                        tags: this.get('browseParams.tags'),
-                        text_search: this.get('browseParams.searchText'),
-                        name: this.get('browseParams.institutions'),
-                        start_year: this.get('browseParams.start_year'),
-                        end_year: this.get('browseParams.end_year')
+                    tags: this.get('browseParams.tags'),
+                    text_search: this.get('browseParams.searchText'),
+                    name: this.get('browseParams.institutions'),
+                    start_year: this.get('browseParams.start_year'),
+                    end_year: this.get('browseParams.end_year')
                 })
             });
         },

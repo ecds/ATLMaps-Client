@@ -5,12 +5,19 @@ export default Ember.Component.extend({
 
     VectorDetialContent: Ember.inject.service('vector-detail-content'),
 
-    classNames: ['marker-data', 'draggable', 'modal'],
+    classNames: ['vector-info', 'modal', 'draggable'],
+    // attributeBindings: ['draggable'],
+    // draggable : 'true',
+    //
+    // dropEnd(event) {
+    //     console.log('holly shit');
+    // },
 
     didInsertElement(){
         let draggie = new Draggabilly( '.draggable', {
             // options
             // see http://draggabilly.desandro.com/
+            handle: '.drag-handle'
         });
         draggie.element.style.position = 'fixed';
         draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
@@ -25,7 +32,9 @@ export default Ember.Component.extend({
 
     actions: {
         close(){
-            Ember.$("div.marker-data").hide();
+            Ember.$("div.vector-info").hide();
+            Ember.$(".marker-content iframe").remove();
+            Ember.$(".div.marker-content").empty();
             Ember.$(".active_marker").removeClass("active_marker");
             this.get('draggie').destroy();
         }

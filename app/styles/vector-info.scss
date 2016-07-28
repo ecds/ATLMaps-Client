@@ -1,87 +1,99 @@
-.marker-data .is-pointer-down{
+.vector-info .is-pointer-down {
     box-shadow: none;
     padding: 0;
-  }
-
-  .marker-content.modal-body {
-      padding-top: 0;
-
-      .map-marker {
-          margin-left: -4px;
-      }
-  }
-
-.marker-data {
-
+    pointer-events: none;
+}
+.marker-content.modal-body {
+    padding-top: 0;
+    .map-marker {
+        margin-left: -4px;
+    }
+}
+.vector-info.modal {
+    overflow: inherit;
+}
+.vector-info {
     cursor: -webkit-grab;
     cursor: -moz-grab;
-
-  $max-height-marker-content:25em;
-
-  display: none;
-  padding: 0;
-  max-height: $max-height-marker-content;
-  margin: 105px 0 0 125px;
-  right: inherit;
-  bottom: inherit;
-  overflow: initial;
-
-
-  .marker-content {
-    display:inline-block;
-    height: inherit;
-    max-height: $max-height-marker-content;
-    overflow: auto;
-    width: 100%;
-
-    ::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 7px;
-    }
-    ::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background-color: rgba(0,0,0,.5);
-      -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-    }
-
-    iframe{
-      max-width: 100%;
-    }
-
-  }
-
-  .panel-controls{
-    background-color: white;
-    padding: .5em 1em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-shadow: none;
+    max-height: 35em;
+    max-width: 35em;
+    display: none;
     padding: 0;
-    margin: 0;
-
-
-    .mdi-action-open-with {
-      cursor: -webkit-grab;
-      cursor: -moz-grab;
+    top: 9.75em;
+    left: 8em;
+    // max-height: $max-height-marker-content;
+    // margin: 105px 0 0 125px;
+    // right: inherit;
+    // bottom: inherit;
+    // overflow: initial;
+    .modal-dialog {
+        overflow: initial;
+        height: 53em;
     }
-
-    a {
-      color: black;
+    .modal-content {
+        // display:inline-block;
+        // height: inherit;
+        // max-height: $max-height-marker-content;
+        overflow: auto;
+        resize: both;
+        max-height: 100%;
+        width: 95%;
+        padding: 0 1em 1em;
+        cursor: nwse-resize;
+        pointer-events: all;
+        .drag-handle {
+            cursor: -webkit-grab;
+            cursor: -moz-grab;
+        }
+        //
+        // ::-webkit-scrollbar {
+        //   -webkit-appearance: none;
+        //   width: 7px;
+        // }
+        // ::-webkit-scrollbar-thumb {
+        //   border-radius: 4px;
+        //   background-color: rgba(0,0,0,.5);
+        //   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        // }
+        iframe {
+            max-width: 100%;
+        }
     }
-  }
+    .vector-info-footer {
+        min-height: 1em;
+        width: 100%;
+        pointer-events: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    // .panel-controls {
+    //     background-color: white;
+    //     padding: 0.5em 1em;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     box-shadow: none;
+    //     padding: 0;
+    //     margin: 0;
+    //     .mdi-action-open-with {
+    //         cursor: -webkit-grab;
+    //         cursor: -moz-grab;
+    //     }
+    //     a {
+    //         color: black;
+    //     }
+    // }
 }
-
 .close-vector {
     // display: flex;
     // position: relative;
     z-index: 10;
-    height: 10px;
-    // background-color: red;
+    height: 10px; // background-color: red;
 }
 .vector-header {
-    padding: 0 11px;
+    padding: 0.25em 0.5em 0;
 }
 //
 // .vector-info-container {
@@ -100,3 +112,10 @@
 //     overflow: auto;
 //     height: auto;
 // }
+.vector-info-container {
+    img {
+        max-width: 100%;
+        max-height: 45rem;
+        display: block;
+    }
+}

@@ -14,7 +14,7 @@ export default Ember.Component.extend({
         },
 
         closeMarkerInfo: function() {
-            Ember.$("div.marker-data").hide();
+            Ember.$("div.vector-info").hide();
             Ember.$(".active_marker").removeClass("active_marker");
             Ember.$(".vector-data.card").slideToggle();
             this.sendAction('activateVectorCard');

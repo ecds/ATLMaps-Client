@@ -16,7 +16,7 @@ export default Ember.Service.extend({
         this.set('vectorLayers', {});
     },
 
-    createMap( project ) {
+    createMap(project) {
         try {
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -26,18 +26,18 @@ export default Ember.Service.extend({
             });
 
             let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-  attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
-  subdomains: '1234',
-  base: 'aerial',
-  type: 'maptile',
-  scheme: 'satellite.day',
-  app_id: '1Igi60ZMWDeRNyjXqTZo',
-  app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-  mapID: 'newest',
-  maxZoom: 20,
-  language: 'eng',
-  format: 'png8',
-  size: '256'
+                attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+                subdomains: '1234',
+                base: 'aerial',
+                type: 'maptile',
+                scheme: 'satellite.day',
+                app_id: '1Igi60ZMWDeRNyjXqTZo',
+                app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+                mapID: 'newest',
+                maxZoom: 20,
+                language: 'eng',
+                format: 'png8',
+                size: '256'
             });
 
             let _map = L.map('map', {
@@ -57,11 +57,13 @@ export default Ember.Service.extend({
                 position: 'topright'
             }).addTo(_map);
 
-            _map.on('click', function(){
+            _map.on('click', function() {
                 // Ember.$("div.info").remove();
-                // Ember.$("div.marker-data").hide();
+                // Ember.$("div.vector-info").hide();
                 // Ember.$(".active_marker").removeClass("active_marker");
-                project.setProperties({showing_browse_results: false});
+                project.setProperties({
+                    showing_browse_results: false
+                });
                 // this.send('activateVectorCard');
             });
 

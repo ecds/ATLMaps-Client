@@ -4,7 +4,7 @@ export default Ember.Component.extend({
     showIntro: Ember.inject.service(),
     classNames: ['intro-modal-link'],
 
-    didInitAttrs: function(){
+    didInsertElement: function(){
 
         // Pick the layout from the attribute
         if (this.get('project.templateSlug') === 'article-and-video'){

@@ -87,5 +87,21 @@ export default DS.Model.extend({
     // Booleans are easier to deal with.
     visiable_raster: Ember.computed('hidden_rasters', function() {
         return this.get('hidden_rasters').length > 0;
+    }),
+
+    hasIntro: Ember.computed(function(){
+        if (this.get('intro') || (this.get('media'))) {
+            return true;
+        } else {
+            return false;
+        }
+    }),
+
+    twoColIntro: Ember.computed(function(){
+        if (this.get('intro') && (this.get('media'))) {
+            return true;
+        } else {
+            return false;
+        }
     })
 });
