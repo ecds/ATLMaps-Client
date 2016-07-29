@@ -97,6 +97,10 @@ div.project-nav {
         span {
             font-size: 2em;
             color: material-color(grey, 100);
+
+            a {
+                margin-right: .75em;
+            }
         }
     }
     a {

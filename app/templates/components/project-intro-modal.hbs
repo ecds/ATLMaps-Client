@@ -1,8 +1,9 @@
+{{!FIXME this is awful. there has to be a better way to decide which template to but it in.}}
 <div class="intro-body">
     <header>
         <div class="row">
             <div class="col-md-8">
-                <h1>{{project.name}} {{this.av}}</h1>
+                <h1>{{project.name}}</h1>
                 <h2>By: {{project.owner}}</h2>
             </div>
             <div class="col-md-4">
@@ -13,57 +14,56 @@
         </div>
     </header>
     <div class="container-fluid">
-        <div class="row">
-        {{!project.twoColIntro}}
-        {{! Article Only }}
-
-
-        {{! ******************
-            This works for something with both but nothing else.
-            the way it works now is feeding off the computed properties on the project Model
-            It only works for both
-            this might be a really awful approach. but the fuck ever. it almost 1am on a scholl night.
-            @$%^&*&^%$%^&*(*&^%$#$%^&*()(*&^%$$%^&*(*&^%$)))
-        }}
-
-
-
         {{#if project.twoColIntro}}
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="jumbotron">
+                        <div class='embed-container'>
+                            <iframe src="https://www.youtube.com/embed/vOtZBy7zafs" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <article>
+                        {{{project.intro}}}
+                    </article>
+                </div>
+            </div>
+            {{else if project.media}}
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="jumbotron">
+                        <div class='embed-container'>
+                            <iframe src="https://www.youtube.com/embed/vOtZBy7zafs" frameborder="0" allowfullscreen></iframe>
+                        </div>
 
-            <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="col-md-12">
                 <article>
                     {{{project.intro}}}
                 </article>
             </div>
-            <div class="col-md-6">
-                <div class='embed-container'>
-                    <iframe src="https://www.youtube.com/embed/1m2cQjNhyaY?rel=0&autohide=1&showinfo=0" frameborder='0' allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-            {{else}}
-        <div class="col-md-12">
-            {{if project.media
-                '<iframe src="https://www.youtube.com/embed/1m2cQjNhyaY?rel=0&autohide=1&showinfo=0" frameborder="0" allowfullscreen></iframe>' '{{project.ingro}}'
-            }}
-        </div>
         {{/if}}
     </div>
-</div>
-<footer>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <div class="btn btn-raised btn-info">
-                <a {{action 'toggleIntro'}}>Explore Project</a>
+    <footer>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <div class="btn btn-raised btn-info">
+                    <a {{action 'toggleIntro'}}>Explore Project</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="pull-right">
+                    <input type="checkbox" id="dont-show" checked= {{showIntro.noIntroCookie}} onchange= {{action "supressIntro"}} />
+                    <span class="check"></span> Don't show every time.
+                </label>
             </div>
         </div>
-        <div class="col-md-4">
-            <label class="pull-right">
-                <input type="checkbox" id="dont-show" checked= {{showIntro.noIntroCookie}} onchange= {{action "supressIntro"}} />
-                <span class="check"></span> Don't show every time.
-            </label>
-        </div>
-    </div>
-</footer>
+    </footer>
 </div>

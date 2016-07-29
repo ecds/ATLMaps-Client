@@ -120,7 +120,8 @@ export default Ember.Service.extend({
                         tms: true,
                         minZoom: 13,
                         maxZoom: 19,
-                        detectRetina: true
+                        detectRetina: true,
+                        errorTileUrl: 'http://inspiresara.com/wp-content/uploads/2015/04/Peanut-butter-jelly-time.gif'
                     }).addTo(map).setZIndex(10).getContainer();
 
                     Ember.$(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
