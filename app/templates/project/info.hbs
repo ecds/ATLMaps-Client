@@ -42,8 +42,12 @@
             <div class="col-md-12">
                 <!-- <label for="edit_description" class="form-control">Description (Max 255 Characters)</label> -->
                 {{textarea value=model.description id="edit_description" class="form-control" rows="10" placeholder="Enter your project description here..." maxlength="500"}}
-
-                {{edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-success" {{action 'toggleIntro'}}>Edit Intro</a>
+                    </div>
+                </div>
+                {{!edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
             </div>
         </div>
         <div class="row">
@@ -57,8 +61,8 @@
                 </div>
             </div>
             <div class="text-right col-md-10">
-                <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
                 <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
+                <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
             </div>
         </div>
     {{else}}
@@ -71,7 +75,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-11">
-                <a class="btn btn-info" {{action 'toggleIntro'}}>Show intro</a>
+                <a class="btn btn-info" {{action 'toggleIntro'}}>Show Intro</a>
             </div>
         </div>
         {{/if}}

@@ -1,6 +1,6 @@
 <a {{action 'openEditModal'}}>Edit Intorduction</a>
 {{#if isShowingEditModal}}
-	{{#modal-dialog close="closeEditModal" alignment="left" translucentOverlay=true container-class="project-intro"}}
+	{{#tether-dialog close="closeEditModal" alignment="left" translucentOverlay=true container-class="project-intro"}}
 		<div class="container-fluid">
             <!-- <div class="row"> -->
 				<!-- <p>a = {{this.a}}</p>
@@ -92,5 +92,5 @@
                 {{/if}}
             <!-- </div> -->
         </div>
-    {{/modal-dialog}}
+    {{/tether-dialog}}
 {{/if}}
