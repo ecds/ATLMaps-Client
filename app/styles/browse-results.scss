@@ -150,9 +150,6 @@ label.show-results-btn {
     transition: color 0.2s ease;
     width: 100%;
 
-    .result-count {
-        padding: .5em;
-    }
 }
 .slide {
     background: $orange;
@@ -240,6 +237,10 @@ label.show-results-btn {
                 height: 80vh;
                 opacity: 1;
                 transition: height $rabbit ease-in $rabbit, opacity $rabbit;
+
+                .result-count {
+                    padding: .5em;
+                }
                 // &:after {
                 //     content: "";
                 // }
