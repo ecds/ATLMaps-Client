@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-
+/* globals L */
 
 export default Ember.Route.extend({
 
@@ -111,7 +111,7 @@ export default Ember.Route.extend({
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.
-					//let map = _this.map();
+					let map = _this.map();
 
 					// Add all the vector layers to the map.
 					project.get('vector_layer_project_ids').then(function(vectors){
@@ -127,7 +127,7 @@ export default Ember.Route.extend({
 						});
 					});
 
-					//map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
+					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
 					Ember.$('.base').hide();
 					Ember.$('.'+project.get('default_base_map')).show();
 				}

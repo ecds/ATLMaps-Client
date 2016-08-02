@@ -61,7 +61,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.API_HOST = 'https://api.atlmaps.com';
+    ENV.APP.API_HOST = 'http://atlmaps-api.ecdsweb.org';
     ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-2';
   }
 
@@ -101,5 +101,5 @@ module.exports = function(environment) {
 // };
 
   return ENV;
-  
+
 };
