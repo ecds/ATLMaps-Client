@@ -69,7 +69,7 @@
 
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 {{vector-info}}
-{{#if model.intro}}
+{{#if model.hasIntro}}
     {{#if showIntro.show}}
         {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=true container-class="project-intro" }}
             {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
