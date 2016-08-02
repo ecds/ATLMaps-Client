@@ -86,12 +86,13 @@ export default Ember.Service.extend({
             });
 
             // Add all the raster layers to the map.
+            Ember.run.later(this, function(){
             project.get('raster_layer_project_ids').then(function(rasters){
                 rasters.forEach(function(raster){
                     _this.mapLayer(raster);
                 });
             });
-
+}, 30000);
             _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
             Ember.$('.base').hide();
             Ember.$('.'+project.get('default_base_map')).show();
