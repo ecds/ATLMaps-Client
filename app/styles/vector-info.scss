@@ -10,7 +10,7 @@
     }
 }
 .vector-info.modal {
-    overflow: inherit;
+    overflow: hidden;
 }
 .vector-info {
     cursor: -webkit-grab;
@@ -36,7 +36,7 @@
         // max-height: $max-height-marker-content;
         overflow: auto;
         resize: both;
-        max-height: 100%;
+        max-height: 60%;
         width: 95%;
         padding: 0 1em 1em;
         cursor: nwse-resize;

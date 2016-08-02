@@ -194,10 +194,13 @@ label.show-results-btn {
     left: $left;
     top: 2.5em;
     z-index: 1;
-    // pointer-events: none;
     .browse-nav {
         width: 100%;
     }
+}
+
+.browse-results.no-results {
+    pointer-events: none;
 }
 
 

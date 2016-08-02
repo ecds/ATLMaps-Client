@@ -6,7 +6,9 @@
         change=(route-action "toggleResults" project)
 }}
 <label for="toggleResultsCheck" class="show-results-btn"><i class="material-icons">view_list</i></label>
-<div class="browse-results">
+{{! the `hasResults` helper calculates if there are any rastors or vectors. If there are no results
+    we add the `no-results` class to allow a user to click through the results pane. }}
+<div class="browse-results {{unless (hasResults model) "no-results"}}">
     <div class="results-toolbar">
         <label for="toggleResultsCheck">
             <span class="arrow"></span>
