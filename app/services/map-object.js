@@ -59,9 +59,9 @@ export default Ember.Service.extend({
             }).addTo(_map);
 
             _map.on('click', function() {
-                // Ember.$("div.info").remove();
-                // Ember.$("div.vector-info").hide();
-                // Ember.$(".active_marker").removeClass("active_marker");
+                Ember.$("div.info").remove();
+                Ember.$("div.vector-info").hide();
+                Ember.$(".active_marker").removeClass("active_marker");
                 project.setProperties({
                     showing_browse_results: false
                 });
@@ -153,6 +153,7 @@ export default Ember.Service.extend({
                         layers: newLayer.get('layers'),
                         format: 'image/png',
                         transparent: true,
+                        maxZoom: 20,
                         // detectRetina: true,
                         // className: newLayerSlug,
                         zIndex: zIndex,
