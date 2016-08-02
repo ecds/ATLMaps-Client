@@ -25,20 +25,19 @@ export default Ember.Service.extend({
                     // className: 'street base'
             });
 
-            let satellite = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-            // L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-            //     attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
-            //     subdomains: '1234',
-            //     base: 'aerial',
-            //     type: 'maptile',
-            //     scheme: 'satellite.day',
-            //     app_id: '1Igi60ZMWDeRNyjXqTZo',
-            //     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-            //     mapID: 'newest',
-            //     maxZoom: 20,
-            //     language: 'eng',
-            //     format: 'png8',
-            //     size: '256'
+            let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+                attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+                subdomains: '1234',
+                base: 'aerial',
+                type: 'maptile',
+                scheme: 'satellite.day',
+                app_id: '1Igi60ZMWDeRNyjXqTZo',
+                app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+                mapID: 'newest',
+                maxZoom: 20,
+                language: 'eng',
+                format: 'png8',
+                size: '256'
             });
 
             let _map = L.map('map', {
@@ -86,13 +85,12 @@ export default Ember.Service.extend({
             });
 
             // Add all the raster layers to the map.
-            Ember.run.later(this, function(){
             project.get('raster_layer_project_ids').then(function(rasters){
                 rasters.forEach(function(raster){
                     _this.mapLayer(raster);
                 });
             });
-}, 30000);
+
             _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
             Ember.$('.base').hide();
             Ember.$('.'+project.get('default_base_map')).show();
