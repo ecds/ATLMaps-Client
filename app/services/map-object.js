@@ -46,7 +46,8 @@ export default Ember.Service.extend({
                 // zoomControl is a Boolean
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false,
-                layers: [satellite, street]
+                layers: [satellite, street],
+                worldCopyJump: true
             });
 
             Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
