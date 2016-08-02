@@ -30,8 +30,17 @@ export default Ember.Service.extend({
 
             Ember.$('<img />').load( function(){}).attr('src', feature.properties.image.url);
         }
+        /*
+        <div class="jumbotron">
+            <div class='embed-container'>
+                <iframe src="https://www.youtube.com/embed/vOtZBy7zafs" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        */
         if (feature.properties.gx_media_links) {
-            popupContent += '<iframe width="100%" height="250" src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
+            popupContent += '<div class="embed-container">'
+            popupContent += '<iframe src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
+            popupContent += '</div>';
         }
         if (feature.properties.images) {
             popupContent += "<div class='gallery'><div class='swiper-wrapper'>";
