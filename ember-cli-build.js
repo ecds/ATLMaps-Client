@@ -23,7 +23,7 @@ module.exports = function() {
 		   enabled: !isProductionLikeBuild
 	   },
 	   minifyCSS: { enabled: isProductionLikeBuild },
-	   //minifyJS: { enabled: isProductionLikeBuild }
+	   minifyJS: { enabled: false }
 	});
 
 	// var config = {
