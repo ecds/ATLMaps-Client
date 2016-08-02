@@ -46,8 +46,8 @@ export default Ember.Service.extend({
                 // zoomControl is a Boolean
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false,
-                layers: [satellite, street],
-                worldCopyJump: true
+                layers: [satellite, street]
+                // worldCopyJump: true
             });
 
             Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
@@ -152,7 +152,7 @@ export default Ember.Service.extend({
                         layers: newLayer.get('layers'),
                         format: 'image/png',
                         transparent: true,
-                        detectRetina: true,
+                        // detectRetina: true,
                         // className: newLayerSlug,
                         zIndex: zIndex,
                         opacity: 1
@@ -164,7 +164,7 @@ export default Ember.Service.extend({
 
                     wmsLayer.addTo(map);
 
-                    Ember.$(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
+                    // Ember.$(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
 
                     break;
 
