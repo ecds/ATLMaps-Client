@@ -25,7 +25,8 @@ export default Ember.Service.extend({
                     // className: 'street base'
             });
 
-            // let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+            let satellite = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            // L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
             //     attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
             //     subdomains: '1234',
             //     base: 'aerial',
@@ -38,7 +39,7 @@ export default Ember.Service.extend({
             //     language: 'eng',
             //     format: 'png8',
             //     size: '256'
-            // });
+            });
 
             let _map = L.map('map', {
                 center: [33.7489954, -84.3879824],
@@ -46,11 +47,11 @@ export default Ember.Service.extend({
                 // zoomControl is a Boolean
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false,
-                layers: [street]
+                layers: [satellite, street]
                 // worldCopyJump: true
             });
 
-            // Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
+            Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
             Ember.$(street.getContainer()).addClass('street').addClass('base');
 
             // Layer contorl, topright
