@@ -84,11 +84,11 @@ export default Ember.Service.extend({
             });
 
             // Add all the raster layers to the map.
-            project.get('raster_layer_project_ids').then(function(rasters){
-                rasters.forEach(function(raster){
-                    _this.mapLayer(raster);
-                });
-            });
+            // project.get('raster_layer_project_ids').then(function(rasters){
+            //     rasters.forEach(function(raster){
+            //         _this.mapLayer(raster);
+            //     });
+            // });
 
             _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
             Ember.$('.base').hide();
