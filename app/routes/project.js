@@ -111,25 +111,9 @@ export default Ember.Route.extend({
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.
-					let map = _this.map();
+					let map = _this.map(project);
 
-					// Add all the vector layers to the map.
-					project.get('vector_layer_project_ids').then(function(vectors){
-						vectors.forEach(function(vector){
-							_this.get('mapObject').mapLayer(vector);
-						});
-					});
-
-					// Add all the raster layers to the map.
-					project.get('raster_layer_project_ids').then(function(rasters){
-						rasters.forEach(function(raster){
-							_this.get('mapObject').mapLayer(raster);
-						});
-					});
-
-					map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
-					Ember.$('.base').hide();
-					Ember.$('.'+project.get('default_base_map')).show();
+					
 				}
 			});
 	    },

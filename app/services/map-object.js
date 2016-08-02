@@ -75,6 +75,24 @@ export default Ember.Service.extend({
             // L.control.layers(baseMaps,null).addTo(_map);
             // Create the object for Leafet in the mapObject service.
             this.set('map', _map);
+            // Add all the vector layers to the map.
+            let _this = this;
+            project.get('vector_layer_project_ids').then(function(vectors){
+                vectors.forEach(function(vector){
+                    _this.mapLayer(vector);
+                });
+            });
+
+            // Add all the raster layers to the map.
+            project.get('raster_layer_project_ids').then(function(rasters){
+                rasters.forEach(function(raster){
+                    _this.mapLayer(raster);
+                });
+            });
+
+            _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
+            Ember.$('.base').hide();
+            Ember.$('.'+project.get('default_base_map')).show();
             return _map;
         } catch (err) {
             // Map is likely already initialized
