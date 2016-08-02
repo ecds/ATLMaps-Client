@@ -38,7 +38,7 @@ export default Ember.Service.extend({
         </div>
         */
         if (feature.properties.gx_media_links) {
-            popupContent += '<div class="embed-container">'
+            popupContent += '<div class="embed-container">';
             popupContent += '<iframe src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
             popupContent += '</div>';
         }
