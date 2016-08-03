@@ -148,7 +148,6 @@ export default Ember.Service.extend({
                     break;
 
                 case 'wms':
-                    console.log(map);
                     let wmsLayer = L.tileLayer.wms(newLayerUrl, {
                         layers: newLayer.get('layers'),
                         format: 'image/png',

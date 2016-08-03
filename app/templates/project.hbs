@@ -68,7 +68,9 @@
 <!-- </div> -->
 
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
+{{#tether-dialog hasOverlay=false }}
 {{vector-info}}
+{{/tether-dialog}}
 {{#if model.hasIntro}}
     {{#if showIntro.show}}
         {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=true container-class="project-intro" }}

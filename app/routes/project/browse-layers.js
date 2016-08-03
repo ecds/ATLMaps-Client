@@ -6,9 +6,9 @@ export default Ember.Route.extend({
     browseParams: Ember.inject.service('browse-params'),
     mapObject: Ember.inject.service('map-object'),
 
-    afterModel() {
-        console.log('hello');
-    },
+    // afterModel() {
+    //     console.log('hello');
+    // },
 
 
     // This is a neat way to add multiple models to a route.

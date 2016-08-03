@@ -1,6 +1,5 @@
 import Ember from 'ember';
 
-/* globals L */
 
 export default Ember.Route.extend({
 
@@ -38,10 +37,10 @@ export default Ember.Route.extend({
 		return this.get('mapObject').createMap(this.currentModel);
 	},
 
-	rasterLayers: function(){
-		console.log('the fuck do i do?');
-		return this.currentModel;
-	},
+	// rasterLayers: function(){
+	// 	console.log('the fuck do i do?');
+	// 	return this.currentModel;
+	// },
 
 	// Function the runs after we fully exit a project route and clears the map,
 	// clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
@@ -113,7 +112,7 @@ export default Ember.Route.extend({
 					// Create the Leaflet map.
 					let map = _this.map(project);
 
-					
+
 				}
 			});
 	    },

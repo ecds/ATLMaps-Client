@@ -56,6 +56,7 @@
     "ember-simple-auth": "1.0.1",
     "ember-sortable": "1.8.0",
     "ember-tether": "0.3.0",
+    "interact.js": "^1.2.6",
     "liquid-fire": "0.24.1",
     "silent-error": "^1.0.0"
   },
