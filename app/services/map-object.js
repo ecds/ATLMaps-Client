@@ -59,7 +59,7 @@ export default Ember.Service.extend({
             }).addTo(_map);
 
             _map.on('click', function() {
-                Ember.$("div.info").remove();
+                // Ember.$("div.info").remove();
                 Ember.$("div.vector-info").hide();
                 Ember.$(".active_marker").removeClass("active_marker");
                 project.setProperties({
@@ -205,7 +205,7 @@ export default Ember.Service.extend({
 
                             });
                             let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
-                            let markerDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + newLayer.get('color_name') + '"></div>';
+                            let markerDiv = '<span class="map-marker vector-icon vector ' + dataType + ' layer-' + newLayer.get('color_name') + '"></span>';
                             if (newLayerUrl) {
                                 var points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer: function(feature, latlng) {

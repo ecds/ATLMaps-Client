@@ -94,7 +94,7 @@ export default Ember.Route.extend({
 				this.controllerFor('project').set('showBrowse', false);
 			}
 
-			Ember.$('.vector-info').hide();
+			// Ember.$('.vector-info').hide();
 
 			return true;
 		},

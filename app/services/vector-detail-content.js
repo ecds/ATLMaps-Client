@@ -1,5 +1,5 @@
 import Ember from 'ember';
-/* globals Swiper */
+/* globals Swiper, interact */
 
 export default Ember.Service.extend({
 
@@ -12,17 +12,17 @@ export default Ember.Service.extend({
 
     viewData(feature, layer) {
 
-        let popupTitle = "<div class='vector-header'>";
+        // let popupTitle = "<div class='vector-header'>";
+        //
+        // popupTitle += "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
+        //
+        // if (feature.properties.name) {
+        //     popupTitle += "<h3>" + feature.properties.name + "</h3>";
+        // }
+        //
+        // popupTitle += "</div>";
 
-        popupTitle += "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
-
-        if (feature.properties.name) {
-            popupTitle += "<h3>" + feature.properties.name + "</h3>";
-        }
-
-        popupTitle += "</div>";
-
-        let popupContent = "<div class='vector-info-container'><div class='vector-body'>";
+        let popupContent = "";
 
         if (feature.properties.image) {
             popupContent += "<a href='" + feature.properties.image.url + "' target='_blank'><img class='geojson' src='" + feature.properties.image.url + "' title='" + feature.properties.image.name + "' /></a>" +
@@ -63,36 +63,39 @@ export default Ember.Service.extend({
 
         }
         if (feature.properties.description) {
-            popupContent += "<div>" + feature.properties.description + "</div>";
+            popupContent += feature.properties.description;
         }
-        if (feature.properties.NAME) {
-            popupContent += "<h2>" + feature.properties.NAME + "</h2>";
-        }
-        popupContent += "</div></div>";
+        // if (feature.properties.NAME) {
+        //     popupContent += "<h2>" + feature.properties.NAME + "</h2>";
+        // }
+        // popupContent += "</div></div>";
 
         layer.on('click', function() {
-            Ember.$("div.marker-content").empty();
-            Ember.$("div.marker-title").empty();
-            let content = Ember.$("<div/>").html(popupContent);
-            if (Ember.$('.gallery').length > 0) {
-                Ember.$('.gallery')[0].swiper.destroy();
-            }
+            Ember.$(".vector-content" ).empty();
+            // Ember.$("div.marker-title").empty();
+            // let content = Ember.$("<div/>").html(popupContent);
+            // if (Ember.$('.gallery').length > 0) {
+            //     Ember.$('.gallery')[0].swiper.destroy();
+            // }
             Ember.$("div.vector-info").show();
-            Ember.$("div.marker-title").append(popupTitle);
-            Ember.$('div.marker-content').append(content);
+            Ember.$(".vector-content.layer-icon").append(layer.options.markerDiv);
+            Ember.$('.vector-content.layer-title').append(layer.options.title);
+            Ember.$('.vector-content.title').append(feature.properties.name);
+            console.log(popupContent);
+            Ember.$('.vector-content.marker-content').append(popupContent);
             Ember.$(".active_marker").removeClass("active_marker");
             Ember.$(this._icon).addClass('active_marker');
-            new Swiper('.gallery', {
-                pagination: '.swiper-pagination',
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                slidesPerView: 1,
-                paginationClickable: true,
-                spaceBetween: 30,
-                loop: true,
-                centeredSlides: true
-                    // autoHeight: true
-            });
+            // new Swiper('.gallery', {
+            //     pagination: '.swiper-pagination',
+            //     nextButton: '.swiper-button-next',
+            //     prevButton: '.swiper-button-prev',
+            //     slidesPerView: 1,
+            //     paginationClickable: true,
+            //     spaceBetween: 30,
+            //     loop: true,
+            //     centeredSlides: true
+            //         // autoHeight: true
+            // });
         });
 
     }

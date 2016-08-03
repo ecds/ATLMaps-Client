@@ -1,121 +1,170 @@
-.vector-info .is-pointer-down {
-    box-shadow: none;
-    padding: 0;
-    pointer-events: none;
+.resize-drag {
+  background-color: white;
+  color: material-color(grey, 900);
+  // border-radius: 8px;
+  padding: 0 .75em;
+  margin: 30px 20px;
+  overflow: auto;
+  width: 35em;
+  max-height: 70vh;
+ box-shadow: 0 1em 1em -1em #888888;
+
+  /* This makes things *much* easier */
+  box-sizing: border-box;
+
+      border: solid thin material-color(grey, 700);
+    //   border-right: solid .2em material-color(grey, 700);
+    //   border-left: solid .2em material-color(grey, 700);
+    //   border-top-right-radius: .5em;
+      border-radius: .3em;
+      box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
+
+      .vector-info-head.row {
+          box-shadow: 0 1em 1em -1em material-color(grey, 600);
+          margin-bottom: .5em;
+          padding-top: .5em;
+      background-color: material-color(grey, 200);
+
+      .point-data {
+          &:before {
+              font-size: 1.5em;
+          }
+      }
+      .title {
+          font-size: 1.5em;
+      }
+  }
+
+  .marker-content {
+      background-color: white;
+      padding: 1.5em;
+      img {
+          max-width: 100%;
+          max-height: 45rem;
+          display: block;
+      }
+  }
 }
-.marker-content.modal-body {
-    padding-top: 0;
-    .map-marker {
-        margin-left: -4px;
-    }
-}
-.vector-info.modal {
-    overflow: hidden;
+
+.resize-container {
+  // width: 100%;
+
+  height: 240px;
+  // max-height: 75vh;
+  position: absolute;
+  z-index: 1;
+  top: 5em;
+    left: 7em;
 }
 .vector-info {
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    max-height: 35em;
-    max-width: 35em;
     display: none;
-    padding: 0;
-    top: 6.75em;
-    left: 8em;
-    // max-height: $max-height-marker-content;
-    // margin: 105px 0 0 125px;
-    // right: inherit;
-    // bottom: inherit;
-    // overflow: initial;
-    .modal-dialog {
-        overflow: initial;
-        height: 53em;
-    }
-    .modal-content {
-        // display:inline-block;
-        // height: inherit;
-        // max-height: $max-height-marker-content;
-        overflow: auto;
-        resize: both;
-        max-height: 60%;
-        width: 95%;
-        padding: 0 1em 1em;
-        cursor: nwse-resize;
-        pointer-events: all;
-        .drag-handle {
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-        }
-        //
-        // ::-webkit-scrollbar {
-        //   -webkit-appearance: none;
-        //   width: 7px;
-        // }
-        // ::-webkit-scrollbar-thumb {
-        //   border-radius: 4px;
-        //   background-color: rgba(0,0,0,.5);
-        //   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-        // }
-        iframe {
-            max-width: 100%;
-        }
-    }
-    .vector-info-footer {
-        min-height: 1em;
-        width: 100%;
-        pointer-events: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
-    // .panel-controls {
-    //     background-color: white;
-    //     padding: 0.5em 1em;
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     box-shadow: none;
-    //     padding: 0;
-    //     margin: 0;
-    //     .mdi-action-open-with {
-    //         cursor: -webkit-grab;
-    //         cursor: -moz-grab;
-    //     }
-    //     a {
-    //         color: black;
-    //     }
-    // }
 }
-.close-vector {
-    // display: flex;
-    // position: relative;
-    z-index: 10;
-    height: 10px; // background-color: red;
-}
-.vector-header {
-    padding: 0.25em 0.5em 0;
-}
-//
-// .vector-info-container {
-//     display: flex;
+// .marker-content.modal-body {
+//     padding-top: 0;
+//     .map-marker {
+//         margin-left: -4px;
+//     }
+// }
+// .vector-info.modal {
 //     overflow: hidden;
-//     height: 100vh;
-//     // margin-top: -100px;
-//     // padding-top: 100px;
-//     position: relative;
-//     // width: 100%;
-//     backface-visibility: hidden;
-//     will-change: overflow;
 // }
-//
-// .vectory-body {
-//     overflow: auto;
-//     height: auto;
+// .vector-info {
+//     cursor: -webkit-grab;
+//     cursor: -moz-grab;
+//     max-height: 35em;
+//     max-width: 35em;
+//     display: none;
+//     padding: 0;
+//     top: 6.75em;
+//     left: 8em;
+//     // max-height: $max-height-marker-content;
+//     // margin: 105px 0 0 125px;
+//     // right: inherit;
+//     // bottom: inherit;
+//     // overflow: initial;
+//     .modal-dialog {
+//         overflow: initial;
+//         height: 53em;
+//     }
+//     .modal-content {
+//         // display:inline-block;
+//         // height: inherit;
+//         // max-height: $max-height-marker-content;
+//         overflow: auto;
+//         resize: both;
+//         max-height: 60%;
+//         width: 95%;
+//         padding: 0 1em 1em;
+//         cursor: nwse-resize;
+//         pointer-events: all;
+//         .drag-handle {
+//             cursor: -webkit-grab;
+//             cursor: -moz-grab;
+//         }
+//         //
+//         // ::-webkit-scrollbar {
+//         //   -webkit-appearance: none;
+//         //   width: 7px;
+//         // }
+//         // ::-webkit-scrollbar-thumb {
+//         //   border-radius: 4px;
+//         //   background-color: rgba(0,0,0,.5);
+//         //   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+//         // }
+//         iframe {
+//             max-width: 100%;
+//         }
+//     }
+//     .vector-info-footer {
+//         min-height: 1em;
+//         width: 100%;
+//         pointer-events: none;
+//         position: absolute;
+//         bottom: 0;
+//         left: 0;
+//     }
+//     // .panel-controls {
+//     //     background-color: white;
+//     //     padding: 0.5em 1em;
+//     //     position: absolute;
+//     //     top: 0;
+//     //     left: 0;
+//     //     width: 100%;
+//     //     box-shadow: none;
+//     //     padding: 0;
+//     //     margin: 0;
+//     //     .mdi-action-open-with {
+//     //         cursor: -webkit-grab;
+//     //         cursor: -moz-grab;
+//     //     }
+//     //     a {
+//     //         color: black;
+//     //     }
+//     // }
 // }
-.vector-info-container {
-    img {
-        max-width: 100%;
-        max-height: 45rem;
-        display: block;
-    }
-}
+// .close-vector {
+//     // display: flex;
+//     // position: relative;
+//     z-index: 10;
+//     height: 10px; // background-color: red;
+// }
+// .vector-header {
+//     padding: 0.25em 0.5em 0;
+// }
+// //
+// // .vector-info-container {
+// //     display: flex;
+// //     overflow: hidden;
+// //     height: 100vh;
+// //     // margin-top: -100px;
+// //     // padding-top: 100px;
+// //     position: relative;
+// //     // width: 100%;
+// //     backface-visibility: hidden;
+// //     will-change: overflow;
+// // }
+// //
+// // .vectory-body {
+// //     overflow: auto;
+// //     height: auto;
+// // }
