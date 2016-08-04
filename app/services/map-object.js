@@ -62,6 +62,7 @@ export default Ember.Service.extend({
                 // Ember.$("div.info").remove();
                 Ember.$("div.vector-info").hide();
                 Ember.$(".active_marker").removeClass("active_marker");
+                Ember.$('.vector-content.marker-content').empty();
                 project.setProperties({
                     showing_browse_results: false
                 });

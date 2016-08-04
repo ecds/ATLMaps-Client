@@ -81,7 +81,6 @@ export default Ember.Service.extend({
             Ember.$(".vector-content.layer-icon").append(layer.options.markerDiv);
             Ember.$('.vector-content.layer-title').append(layer.options.title);
             Ember.$('.vector-content.title').append(feature.properties.name);
-            console.log(popupContent);
             Ember.$('.vector-content.marker-content').append(popupContent);
             Ember.$(".active_marker").removeClass("active_marker");
             Ember.$(this._icon).addClass('active_marker');
