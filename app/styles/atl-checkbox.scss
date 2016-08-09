@@ -1,144 +1,40 @@
-@import "variables.scss";
+@import 'variables';
 
-.tcon-plus::before, .tcon-plus::after {
-    content: "";
+.tcon-plus {
+  &::before,
+  &::after {
+    background-color: material-color(md_blue, 100);
     border-radius: 2px;
+    content: $empty;
     display: block;
-    width: 85%;
     height: 25%;
+    left: 15%;
     position: absolute;
     top: 37%;
-    left: 15%;
-    transition: 0.3s;
-    background-color: material-color(blue, 100);
+    transition: .3s;
+    width: 85%;
+  }
 }
 
-.tcon-transform::before, .tcon-transform::after {
-    background-color: material-color(green, 500);
+.tcon-transform {
+  &::before,
+  &::after {
+    background-color: material-color(md_green, 500);
+  }
 }
-// body {
-//     font-size: 18px;
-// }
-// .atl-checkbox input[type=checkbox],
-// .atl-checkbox-inline input[type=checkbox],
-// .radio input[type=radio],
-// .radio-inline input[type=radio],
-// label span {
-//     position: absolute;
-// }
-// .atl-checkbox input[type=checkbox] {
-//     opacity: 0;
-// }
-// *,
-// :after,
-// :before {
-//     -webkit-box-sizing: border-box;
-//     -moz-box-sizing: border-box;
-//     box-sizing: border-box;
-// }
-// label {
-//     display: inline-block;
-// }
-// .atl-checkbox input[type=checkbox]~.atl-check:before {
-//     position: absolute;
-//     border: 0.25em solid;
-// }
-// .atl-checkbox label .atl-check:before {
-//     content: "";
-// }
-// .atl-checkbox label .atl-check:after {
-//     display: block;
-//     position: absolute;
-// }
+
 .atl-checkbox {
-    display: block;
-    background-color: #E0E0E0;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50%;
-    position: absolute;
-    left: 1.5em;
+  background-color: material-color(md_grey, 200);
+  border-radius: 50%;
+  display: block;
+  height: 4rem;
+  left: 1.5em;
+  position: absolute;
+  width: 4rem;
 }
-// input[type=checkbox] ~ .atl-check:before {
-//     animation: inst-uncheck 500ms ease-in-out forwards;
-// }
-// input[type=checkbox]:checked ~ .atl-check:before {
-//     animation: inst-check 500ms ease-in-out forwards;
-// }
-// @keyframes inst-uncheck {
-//     0% {
-//         top: -0.65em;
-//         left: 1.35em;
-//         width: 1.25em;
-//         height: 2.5em;
-//         transform: rotate(45deg);
-//         border-color: #2196F3;
-//         border-left-color: transparent;
-//         border-top-color: transparent;
-//     }
-//     25% {
-//         transform: rotate(405deg);
-//     }
-//     50% {
-//         top: 0.75em;
-//         left: 1.75em;
-//         width: 0.1em;
-//         height: 0.1em;
-//         transform: rotate(405deg);
-//         border-color: #EEEEEE;
-//         border-left-color: transparent;
-//         border-top-color: transparent;
-//     }
-//     51% {
-//         border-color: #EEEEEE;
-//     }
-//     75% {
-//         transform: rotate(405deg);
-//     }
-//     100% {
-//         top: -0.2em;
-//         left: 0.75em;
-//         width: 2em;
-//         height: 2em;
-//         transform: rotate(0deg);
-//         border-color: #616161;
-//     }
-// }
-// @keyframes inst-check {
-//     100% {
-//         top: -0.65em;
-//         left: 1.2em;
-//         width: 1.25em;
-//         height: 2.5em;
-//         transform: rotate(45deg);
-//         border-color: #2196F3;
-//         border-left-color: transparent;
-//         border-top-color: transparent;
-//     }
-//     75% {
-//         transform: rotate(405deg);
-//     }
-//     51% {
-//         border-left: transparent;
-//         border-top-color: transparent;
-//     }
-//     50% {
-//         top: 0.75em;
-//         left: 2em;
-//         width: 0.2em;
-//         height: 0.2em;
-//         border-color: #90CAF9;
-//         transform: rotate(405deg);
-//     }
-//     25% {
-//         transform: rotate(405deg);
-//     }
-//     0% {
-//         top: 0.1em;
-//         left: 1em;
-//         width: 2em;
-//         height: 2em;
-//         transform: rotate(45deg);
-//         border-color: #E3F2FD;
-//     }
-// }
+
+.checkbox {
+  label {
+    padding-left: 2em;
+  }
+}

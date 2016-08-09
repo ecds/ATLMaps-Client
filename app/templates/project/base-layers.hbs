@@ -18,7 +18,7 @@
     </table>
 </div>
 <div class="route-content">
-    {{#if isEditing}}
+    {{#if model.editing}}
     {{#liquid-if editSuccess}}
         <div class="alert alert-dismissible alert-success">
             {{successMessage}}

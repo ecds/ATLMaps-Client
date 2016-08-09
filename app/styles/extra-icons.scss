@@ -1,23 +1,23 @@
 @font-face {
-    font-family: 'atlmaps-ext';
-    src: url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot'),
-         url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf'),
-         url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot#iefix') format('embedded-opentype'),
-         url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.woff') format('woff'),
-         url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf') format('truetype'),
-         url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
+  font-family: 'atlmaps-ext';
+  src: url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot'),
+  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf'),
+  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot#iefix') format('embedded-opentype'),
+  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.woff') format('woff'),
+  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf') format('truetype'),
+  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
 }
 
 i.atlmaps-ext {
-    font-family: 'atlmaps-ext';
+  font-family: 'atlmaps-ext';
 }
 
 i.material-icons.atlmaps-ext.database::before{
-    content: '\e800';
+  content: '\e800';
 }
 
 .map-marker.polygon::before {
-    font-family: 'atlmaps-ext';
-    content: '\e801';
-    letter-spacing: .25em;
+  content: '\e801';
+  font-family: 'atlmaps-ext';
+  letter-spacing: .25em;
 }

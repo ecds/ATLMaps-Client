@@ -4,7 +4,7 @@ a.new-project {
 	right: 150px !important;
 	height: 75px !important;
     width: 75px !important;
-	background-color: material-color(deeporangealt, 400) !important;
+	background-color: material-color(md_deeporangealt, 400) !important;
 	color: #fff !important;
 
 	i {
@@ -21,6 +21,7 @@ a.new-project {
 		opacity: .6;
 		padding-left: 7%;
 		padding-bottom: 2%;
+    padding-top: 1.2em;
 	}
 
 	a {
@@ -28,7 +29,7 @@ a.new-project {
 
 		.material-icons {
 			&:hover {
-				background-color: material-color(blue, 700);
+				background-color: material-color(md_blue, 700);
 				color: #fff;
 			}
 		}
@@ -47,8 +48,8 @@ a.new-project {
 
 			i {
 				&:hover {
-					color: material-color(deeporangealt, 400);
-					background-color: material-color(grey, 200);
+					color: material-color(md_deeporangealt, 400);
+					background-color: material-color(md_grey, 200);
 					border-radius: 50%;
 				}
 
@@ -70,7 +71,7 @@ a.featured {
 	text-decoration: none;
 
 	h2 {
-		color: material-color(grey, 800);
+		color: material-color(md_grey, 800);
 		padding-left: .5em;
 	}
 }
@@ -97,7 +98,7 @@ a.featured {
 		}
 	}
 	tr.des {
-		background-color: material-color(grey, 600);
+		background-color: material-color(md_grey, 600);
 		color: white;
 		max-height: 75px;
 

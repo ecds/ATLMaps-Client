@@ -1,16 +1,16 @@
 .tag-list {
+  i {
+    font-size: initial;
+  }
 
-    i {
-        font-size: initial;
-    }
-    .col-md-1 {
-        width: 5%;
-        bottom: 5px;
-    }
-    .col-md-11 {
-        font-size: small;
-        line-height: 1;
-        padding-left: 0px;
-    }
+  .col-md-1 {
+    bottom: 5px;
+    width: 5%;
+  }
 
+  .col-md-11 {
+    font-size: small;
+    line-height: 1;
+    padding-left: 0px;
+  }
 }

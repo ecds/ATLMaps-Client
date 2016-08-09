@@ -11,7 +11,7 @@ var Router = Ember.Router.extend({
   },
 
   _trackPage() {
-    Ember.run.scheduleOnce('afterRender', this, () => {
+    Ember.run.scheduleOnce('afterRender', this, function() {
       const page = document.location.pathname;
       const title = this.getWithDefault('currentRouteName', 'unknown');
 
@@ -23,6 +23,8 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('projects', function() {
         // TODO resource has been deprecated. make this a route.
+        // Project needs to come out from under projects but we
+        // will need to figure out redirects for the bad urls.
         this.resource('project', { path: '/:project_id' }, function(){
             this.route('view');
             this.route('edit');

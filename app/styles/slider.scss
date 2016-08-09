@@ -62,7 +62,7 @@
 }
 
 .slider-material-orange-300 .noUi-handle, .noUi-connect {
-  background-color: material-color(deeporangealt, 200);
+  background-color: material-color(md_deeporangealt, 200);
   border: none;
   cursor: ew-resize;
 }
@@ -74,8 +74,8 @@
 }
 
 .noUi-handle {
-  background-color: material-color(deeporangealt, 200);
-  border-color: material-color(deeporangealt, 200);
+  background-color: material-color(md_deeporangealt, 200);
+  border-color: material-color(md_deeporangealt, 200);
 }
 
 .noUi-lower {
@@ -83,7 +83,7 @@
 }
 
 .noUi-base {
-  background: material-color(deeporangealt, 100);
+  background: material-color(md_deeporangealt, 100);
 }
 
 .year-slider {
@@ -95,7 +95,7 @@
             .noUi-base {
         .noUi-connect {
             .noUi-handle-lower {
-                background-color: material-color(deeporangealt, 200) !important;
+                background-color: material-color(md_deeporangealt, 200) !important;
             }
 
         }}}

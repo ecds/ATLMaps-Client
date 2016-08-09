@@ -24,12 +24,12 @@ export default Ember.Component.extend({
         noUiSlider.create(slider, options, true);
 
         // Change the opactity when a user moves the slider.
-        var valueInput = document.getElementById(layer.get('slider_value_id'));
+        var valueInput = document.getElementById(layer.get('slider_id'));
 
         slider.noUiSlider.on('update', function(values, handle){
             var opacity = values[handle] / 10;
             // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
-            _this.get('mapObject.rasterLayers')[layer.get('slug')].setOpacity(opacity);
+            _this.get('mapObject.projectLayers')[layer.get('slug')].setOpacity(opacity);
             projLayer.setProperties({opacity: values[handle]});
             if (opacity > 0) {
                 projLayer.setProperties({showing: true});

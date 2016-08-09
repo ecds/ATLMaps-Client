@@ -110,13 +110,14 @@ export default Ember.Route.extend({
 				if(!_this.get('mapObject').map){
 
 					// Create the Leaflet map.
-					let map = _this.map(project);
-
+					_this.map(project);
+                    console.log(_this.get('mapObject').leafletGroup);
 
 				}
 			});
 	    },
 
+        // TODO this should be a Component or service
 		showLayerInfoDetals: function(layer) {
 
 			try {
@@ -152,12 +153,14 @@ export default Ember.Route.extend({
 
 			let format = layerObj.get('data_format');
 
+            let _this = this;
+
 			if (layerObj.get('active_in_project')){
 
 				let newLayer = '';
 				switch(format) {
 					case 'raster':
-						let position = project.get('raster_layer_project_ids').get('length') + 1;
+						let position = project.get('raster_layer_project_ids').get('length') + 11;
 
 						newLayer = this.store.createRecord(format+'-layer-project', {
 							project_id: project.id,
@@ -192,9 +195,10 @@ export default Ember.Route.extend({
 				}
 
 
-				let _this = this;
+				// let _this = this;
 				project.get(format+'_layer_project_ids').addObject(newLayer);
-
+                console.log('gahhhh');
+                _this.get('mapObject').mapLayer(newLayer);
 				// Only call save if the session is authenticated.
 				// There is another check on the server that verifies the user is
 				// authenticated and is allowed to edit this project.
@@ -217,11 +221,6 @@ export default Ember.Route.extend({
 						// }, 3000);
 					});
 				}
-				else if (project.may_edit) {
-					_this.get('mapObject').mapLayer(newLayer);
-				}
-
-
 
 			// REMOVE LAYER
 			} else {
@@ -242,7 +241,7 @@ export default Ember.Route.extend({
 	                // Remove the object from the DOM
 	                project.get(format+'_layer_project_ids').removeObject(layerToRemove);
 	                // Delete the record from the project
-	                layerToRemove.destroyRecord().then(function(){
+	                layerToRemove.deleteRecord().then(function(){
 	                    // Set active to false
 	                    layer.set('active_in_project', false);
 						// TODO figure out how to give feedback on these shared actions
@@ -250,9 +249,14 @@ export default Ember.Route.extend({
 	                    // Ember.run.later(this, function(){
 	                    //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
 	                    //     // Remove the layer from the map
-	                        Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
-	                            Ember.$(this).remove();
-	                        });
+
+	                        _this.get('projectLayers')[layer.get('slug')].remove();
+                            if(this.get('session.isAuthenticated')){
+                                layerToRemove.save();
+                            }
+	                        // Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
+	                        //     Ember.$(this).remove();
+	                        // });
 	                    // }, 3000);
 	                }, function(){
 						// TODO figure out how to give feedback on these shared actions

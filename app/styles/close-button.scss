@@ -1,5 +1,5 @@
 a.close-button {
-    color: material-color(grey, 600);
+    color: material-color(md_grey, 600);
     text-decoration: none;
     margin-top: .5em;
     margin-right: .45em;
@@ -7,7 +7,7 @@ a.close-button {
     opacity: .7;
     &:hover {
         opacity: 1;
-        color: material-color(red, 500);
+        color: material-color(md_red, 500);
     }
 }
 

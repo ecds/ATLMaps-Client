@@ -13,11 +13,11 @@
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle {
-  background-color: rgba(material-color(deeporangealt, 200), 0.5);
+  background-color: rgba(material-color(md_deeporangealt, 200), 0.5);
 }
 
 .togglebutton.opacity label input[type=checkbox]:first-child:checked + .toggle:after {
-  background-color: material-color(deeporangealt, 200);
+  background-color: material-color(md_deeporangealt, 200);
 
 
 }

@@ -1,0 +1,60 @@
+.content .banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 30px 0 120px;
+}
+.content .banner.blurred {
+  padding-bottom: 220px;
+  min-height: 280px;
+}
+.content .banner.blue {
+  background-image: url('/assets/images/backgrounds/bg-blue-map.png');
+}
+.content .banner.blue.blurred {
+  background-image: url('/assets/images/backgrounds/bg-blue-map-blurred.png');
+}
+.content .banner.pink {
+  background-image: url('/assets/images/backgrounds/bg-pink-map.png');
+}
+.content .banner.pink.blurred {
+  background-image: url('/assets/images/backgrounds/bg-pink-map-blurred.png');
+}
+.content .banner.orange {
+  background-image: url('/assets/images/backgrounds/bg-orange-map.png');
+}
+.content .banner.orange.blurred {
+  background-image: url('/assets/images/backgrounds/bg-orange-map-blurred.png');
+}
+.content .banner.light-orange.blurred {
+  background-image: url('/assets/images/backgrounds/bg-lightorange-map-blurred.png');
+}
+.projects-index .content .banner.blurred {
+  padding-bottom: 10px;
+}
+
+.projects-index .content .banner.blurred+.banner {
+  padding-bottom: 220px;
+}
+
+.index .content .banner.published h2 {
+  text-align: center;
+  font-size: 3em;
+}
+
+.index .content > .container {
+  margin-top: 40px;
+}
+
+.about header > h2,
+.projects-index header > h2,
+.support header > h2,
+.terms header > h2 {
+  font-size: 5em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
+  font-weight: 400;
+  color: rgba(3, 177, 255, 0.7);
+  line-height: normal;
+}

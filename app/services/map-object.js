@@ -12,8 +12,8 @@ export default Ember.Service.extend({
     init() {
         this._super(...arguments);
         this.set('map', '');
-        this.set('rasterLayers', {});
-        this.set('vectorLayers', {});
+        this.set('leafletGroup', L.layerGroup());
+        this.set('projectLayers', {});
     },
 
     createMap(project) {
@@ -57,6 +57,8 @@ export default Ember.Service.extend({
             L.control.zoom({
                 position: 'topright'
             }).addTo(_map);
+
+            this.get('leafletGroup').addTo(_map);
 
             _map.on('click', function() {
                 // Ember.$("div.info").remove();
@@ -155,15 +157,16 @@ export default Ember.Service.extend({
                         transparent: true,
                         maxZoom: 20,
                         // detectRetina: true,
-                        // className: newLayerSlug,
+                        className: newLayerSlug,
                         zIndex: zIndex,
                         opacity: 1
                     });
 
                     // let layerObj = {name: newLayerSlug, mapObj: wmsLayer};
                     // layerObj[newLayerSlug] = wmsLayer;
-                    _this.get('rasterLayers')[newLayerSlug] = wmsLayer;
+                    _this.get('projectLayers')[newLayerSlug] = wmsLayer;
 
+                    _this.get('leafletGroup').addLayer(wmsLayer);
                     wmsLayer.addTo(map);
 
                     // Ember.$(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
@@ -227,7 +230,7 @@ export default Ember.Service.extend({
 
                                     onEachFeature: _this.get('vectorDetailContent.viewData')
                                 });
-                                _this.get('vectorLayers')[newLayerSlug] = points;
+                                _this.get('projectLayers')[newLayerSlug] = points;
                                 points.addTo(map);
                             }
                             break;
@@ -252,14 +255,15 @@ export default Ember.Service.extend({
 
                             };
                             if (newLayerUrl) {
+                                let content =_this.get('vectorDetailContent.viewData');
                                 var vector = new L.GeoJSON.AJAX(newLayerUrl, {
                                     style: polyStyle,
                                     className: shapeLayerClass,
                                     title: newLayerTitle,
                                     markerDiv: vectorDiv,
-                                    onEachFeature: _this.get('vectorDetailContent.viewData'),
+                                    onEachFeature: content,
                                 });
-                                _this.get('vectorLayers')[newLayerSlug] = vector;
+                                _this.get('projectLayers')[newLayerSlug] = vector;
                                 vector.addTo(map);
                             }
                             break;
@@ -273,12 +277,12 @@ export default Ember.Service.extend({
         let slug = vector.get('slug');
         let dataType = vector.get('data_type');
         if (dataType === 'polygon') {
-            this.get('vectorLayers')[slug].setStyle({
+            this.get('projectLayers')[slug].setStyle({
                 color: vector.get('color_hex'),
                 fillColor: vector.get('color_hex')
             });
         } else if (dataType === 'line-data') {
-            this.get('vectorLayers')[slug].setStyle({
+            this.get('projectLayers')[slug].setStyle({
                 color: vector.get('color_hex')
             });
         } else if (dataType === 'point-data') {

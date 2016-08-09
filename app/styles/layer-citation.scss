@@ -11,7 +11,7 @@
         i {
             // font-size: 50px;
             &:hover {
-                background-color: material-color(grey, 300);
+                background-color: material-color(md_grey, 300);
                 border-radius: 50%;
             }
 
@@ -20,9 +20,9 @@
 
     a.pick-color {
         i {
-            color: material-color(blue, 100);
+            color: material-color(md_blue, 100);
             &:hover {
-                color: material-color(blue, 500);
+                color: material-color(md_blue, 500);
             }
         }
     }

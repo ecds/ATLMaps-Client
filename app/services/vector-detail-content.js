@@ -8,19 +8,7 @@ export default Ember.Service.extend({
         this.set('properties', 'foo');
     },
 
-
-
     viewData(feature, layer) {
-
-        // let popupTitle = "<div class='vector-header'>";
-        //
-        // popupTitle += "<h4>" + layer.options.markerDiv + layer.options.title + "</h4>";
-        //
-        // if (feature.properties.name) {
-        //     popupTitle += "<h3>" + feature.properties.name + "</h3>";
-        // }
-        //
-        // popupTitle += "</div>";
 
         let popupContent = "";
 
@@ -30,13 +18,7 @@ export default Ember.Service.extend({
 
             Ember.$('<img />').load(function() {}).attr('src', feature.properties.image.url);
         }
-        /*
-        <div class="jumbotron">
-            <div class='embed-container'>
-                <iframe src="https://www.youtube.com/embed/vOtZBy7zafs" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-        */
+
         if (feature.properties.gx_media_links) {
             popupContent += '<div class="embed-container">';
             popupContent += '<iframe src="//' + feature.properties.gx_media_links + '?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>';
@@ -49,9 +31,7 @@ export default Ember.Service.extend({
                 if (image.credit) {
                     popupContent += "<span>Photo Credit: " + image.credit + "</span></div>";
                 }
-                // if (image.title) {
-                //     popupContent += "<span>"+image.title+"</span></div>";
-                // }
+
                 else {
                     popupContent += "</div>";
                 }
@@ -71,7 +51,7 @@ export default Ember.Service.extend({
         // popupContent += "</div></div>";
 
         layer.on('click', function() {
-            Ember.$(".vector-content" ).empty();
+            Ember.$(".vector-content").empty();
             // Ember.$("div.marker-title").empty();
             // let content = Ember.$("<div/>").html(popupContent);
             // if (Ember.$('.gallery').length > 0) {

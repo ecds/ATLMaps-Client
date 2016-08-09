@@ -1,98 +1,118 @@
-@import 'layer-citation.scss';
+@import 'layer-citation';
+
 .project-pane {
-    position: fixed; // This is preventing the scroll and/or causing the problems.
-    left: 4.35em;
-    top: 5.85em;
-    padding: 0.5em;
-    pointer-events: auto; // Allow the pane to respond to click.
-    width: calc(33% - 25px);
-    h3 {
-        margin: .25em 0;
-    }
+  left: 4.35em;
+  padding: .5em;
+  pointer-events: auto; // Allow the pane to respond to click.
+  position: fixed; // This is preventing the scroll and/or causing the problems.
+  top: 5.5em;
+  width: calc(33% - 25px);
+
+  h3 {
+    margin: .25em 0;
+  }
 }
-    .project-route {
 
-        border-left: 1px solid #adadad;
-        border-right: 1px solid #adadad;
-        box-shadow: -3px 0 10px 0 rgba(0, 0, 0, 0.5);
-        background-color: white;
+.project-route {
+  background-color: $white;
+  border-left: 1px solid $border;
+  border-right: 1px solid $border;
+  box-shadow: -3px 0 10px 0 $shadow;
 
-        .route-content {
-            overflow: scroll;
-            max-height: 95vh;
-            padding: 1em;
-        }
-    }
-    article {
-        padding: 2em;
-        color: material-color(grey, 800);
-    }
-    article.layer {
-        padding: 0;
-    }
-    ul {
-        li {
-            // border-width: 1px;
-            // border-style: solid;
-            // border-color: lightgrey;
-            // border-radius: 0.25em;
-            // margin-bottom: 0.5em;
-        }
-        li.vector-layer {
-            padding-left: 0.5em;
-        }
-        article {
-            padding: 1em;
-        }
-    }
-    // layer controls in edit view
-    .panel-footer.row {
-        // margin-bottom: 1px;
-        pointer-events: all;
-        margin: 0;
-    }
-    .layer-heading {
-        padding: 0 1em;
-        pointer-events: all;
-        table {
-            width: 100%;
-            td {
-                padding: 0 0.5em;
-            }
-        }
-    }
-    // Raster Panel Stuff
-    .raster-list {
-        .panel-body {
-            padding: 0 15px;
-        }
-        .row {
-            padding: 0;
-        }
-        .reorder {
-            padding: 0.25em 0 0;
-        }
-        ul {
-            list-style: none;
-            padding-left: 0;
-            li {
-                border-style: none;
-                border-width: 0;
-                border-color: none;
-                border-radius: 0;
-                margin-bottom: 0;
-                width: 100%;
-            }
-        }
+  .route-content {
+    max-height: 95vh;
+    overflow: scroll;
+    padding: 1em;
+  }
 
+  // layer controls in edit view
+  .panel-footer {
+    // margin-bottom: 1px;
+    margin: 0;
+    pointer-events: all;
+  }
+
+}
+
+article {
+  color: material-color(md_grey, 800);
+  padding: 2em;
+}
+
+.layer-article {
+  padding: 0;
+}
+
+ul {
+  li {
+    // border-width: 1px;
+    // border-style: solid;
+    // border-color: lightgrey;
+    // border-radius: 0.25em;
+    // margin-bottom: 0.5em;
+  }
+
+  // li.vector-layer {
+  //   padding-left: .5em;
+  // }
+
+  article {
+    padding: 1em;
+  }
+}
+
+.layer-heading {
+  padding: 0 1em;
+  pointer-events: all;
+
+  table {
+    width: 100%;
+
+    td {
+      padding: 0 .5em;
     }
-    .handle {
-        cursor: -webkit-grab;
-        cursor: -moz-grab;
-        margin-right: 10px;
-        transform: rotate(90deg);
+  }
+}
+
+// Raster Panel Stuff
+.raster-list {
+  .panel {
+    padding: .25em 1em;
+  }
+
+  .panel-body {
+    padding: 0 15px;
+  }
+
+  .row {
+    padding: 0;
+  }
+
+  .reorder {
+    padding: .25em 0 0;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      border-color: none;
+      border-radius: 0;
+      border-style: none;
+      border-width: 0;
+      margin-bottom: 0;
+      width: 100%;
     }
-    .opacity-slider {
-        padding-left: 5px;
-    }
-    // }
+  }
+}
+
+.handle {
+  cursor: grab;
+  margin-right: 10px;
+  transform: rotate(90deg);
+}
+
+.opacity-slider {
+  padding-left: 5px;
+}

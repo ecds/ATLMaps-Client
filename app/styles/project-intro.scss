@@ -13,7 +13,7 @@ $side-padding: 1.25em;
             right: 0;
             top: 0;
             // height: 10rem;
-            background-color: material-color(grey, 200);
+            background-color: material-color(md_grey, 200);
             padding-left: $side-padding;
             padding-right: $side-padding;
             h1 {
@@ -53,7 +53,7 @@ $side-padding: 1.25em;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: material-color(grey, 300);
+            background-color: material-color(md_grey, 300);
             height: 6rem;
             padding: 0;
             .btn-info {
@@ -61,16 +61,16 @@ $side-padding: 1.25em;
                     opacity: 0.7;
                 }
                 a {
-                    color: material-color(grey, 50);
+                    color: material-color(md_grey, 50);
                     text-decoration: none;
                     &:hover {
-                        color: material-color(grey, 300);
+                        color: material-color(md_grey, 300);
                     }
                 }
             }
             label {
                 padding: 1em 3em 1em 0;
-                color: material-color(grey, 500);
+                color: material-color(md_grey, 500);
             }
         }
     }

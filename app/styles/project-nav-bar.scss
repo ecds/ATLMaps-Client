@@ -1,170 +1,151 @@
-@import "variables.scss";
+@import 'variables';
+
 div.project-nav {
-    display: flex;
-    position: fixed;
-    background-color: white;
-    top: 2.5em;
-    left: 2.5em;
-    width: 33%;
-    .row {
-        padding: 0.5em;
-    }
+  background-color: $white;
+  display: flex;
+  left: 2.5em;
+  position: fixed;
+  top: 2.5em;
+  width: 33%;
+
+  .row {
+    padding: .5em;
+  }
 }
-.project-head {
-    // margin-top: 10px;
-    // // width: 30%;
-    // min-width: 33%;
-    // position: fixed;
-    // display: flex;
-    // z-index: 1;
-    // // .liquid-container, .liquid-child {
-    // //     overflow: visible;
-    // // }
-    // .row {
-    //     position: inherit;
-    //     margin-top: 10px;
-    //     margin-left: 30px;
-    //     width: 33%;
-    //     padding: 1em;
-    //
-    //         .title {
-    //             font-size: 1.75em;
-    //             line-height: 1;
-    //             color: whitesmoke;
-    //             font-weight: 500;
-    //             padding-left: 0;
-    //             span.edit-button a {
-    //                 color: material-color(blue, 100);
-    //                 i {
-    //                     margin-left: 5px;
-    //                     vertical-align: top !important;
-    //                 }
-    //             }
-    //         }
-    //         .exit {
-    //             padding-left: 26px;
-    //             transform: rotate(180deg);
-    //             margin-left: 9px;
-    //             a {
-    //                 padding-left: 10px;
-    //                 color: material-color(grey, 300);
-    //             }
-    //             i {
-    //                 vertical-align: bottom;
-    //             }
-    //         }
-    //
-    //         color: material-color(blue, 900);
-    // }
-}
+
+// .project-head {}
 .project-edit,
 .project-view {
-    // padding: 1em 0;
-    position: relative;
-    width: 100%;
-    margin-left: initial;
+  margin-left: initial;
+  position: relative;
+  width: 100%;
 }
+
 .project-view {
-    background-color: material-color(blue, 700) !important;
+  background-color: material-color(md_blue, 700);
 }
+
 .project-edit {
-    background-color: #4CAF50;
-    color: white;
-    a {
-        color: whitesmoke;
-    }
+  background-color: material-color(md_green, 700);
+  color: $white;
+
+  a {
+    color: $whitesmoke;
+  }
 }
+
 .project-nav-group {
-    width: 100%;
-    .row.head {
-        background-color: material-color(blue, 700);
+  width: 100%;
 
-        &.edit {
-            background-color: material-color(green, 500);
-        }
-        a {
-            color: material-color(grey, 50);
-        }
+  .row.head {
+    background-color: material-color(md_blue, 700);
 
-        i {
-            display: table-cell;
-        }
-        i.exit {
-            transform: rotate(180deg);
-            padding-left: 0.4em;
-        }
-
-        span {
-            font-size: 2em;
-            color: material-color(grey, 100);
-
-            a {
-                margin-right: .75em;
-            }
-        }
+    &.edit {
+      background-color: material-color(md_green, 500);
     }
+
     a {
-        color: material-color(grey, 600);
-        font-size: large;
-        text-decoration: none;
-        i {
-            width: 31px;
-        }
+      color: material-color(md_grey, 50);
     }
-    .row:nth-of-type(2) {
-        //   background-color: material-color(grey, 50);
-        &:hover {
-            background-color: material-color(blue, 50) !important;
-        }
+
+    i {
+      display: table-cell;
     }
-    .row:nth-of-type(3) {
-        //   background-color: material-color(grey, 100);
-        &:hover {
-            background-color: material-color(blue, 100) !important;
-        }
+
+    i.exit {
+      padding-left: .4em;
+      transform: rotate(180deg);
     }
-    .row:nth-of-type(4) {
-        //   background-color: material-color(grey, 200);
-        &:hover {
-            background-color: material-color(blue, 200) !important;
-        }
+
+    span {
+      color: material-color(md_grey, 100);
+      font-size: 1.75em;
+
+      a {
+        margin-right: .75em;
+      }
     }
-    .row:nth-of-type(5) {
-        //   background-color: material-color(grey, 300);
-        &:hover {
-            background-color: material-color(blue, 300) !important;
-        }
+
+  }
+
+  a {
+    color: material-color(md_grey, 600);
+    font-size: large;
+    text-decoration: none;
+
+    i {
+      width: 31px;
     }
-    .row:nth-of-type(6) {
-        //   background-color: material-color(grey, 400);
-        &:hover {
-            background-color: material-color(blue, 400) !important;
-        }
+  }
+
+  .row {
+
+    &:nth-of-type(2) {
+      //   background-color: material-color(md_grey, 50);
+      &:hover {
+        background-color: material-color(md_blue, 50) !important;
+      }
     }
-    .row:nth-of-type(7) {
-        //   background-color: material-color(grey, 500);
-        &:hover {
-            background-color: material-color(blue, 500) !important;
-        }
+
+    &:nth-of-type(3) {
+      // background-color: material-color(md_grey, 100);
+
+      &:hover {
+        background-color: material-color(md_blue, 100) !important;
+      }
     }
-    .row:nth-of-type(8) {
-        //   background-color: material-color(grey, 600);
-        &:hover {
-            background-color: material-color(blue, 600) !important;
-        }
+
+    &:nth-of-type(4) {
+      //   background-color: material-color(md_grey, 200);
+      &:hover {
+        background-color: material-color(md_blue, 200) !important;
+      }
     }
-    .active {
-        color: #03A9F4;
+
+    &:nth-of-type(5) {
+      //   background-color: material-color(md_grey, 300);
+      &:hover {
+        background-color: material-color(md_blue, 300) !important;
+      }
     }
+
+    &:nth-of-type(6) {
+      //   background-color: material-color(md_grey, 400);
+      &:hover {
+        background-color: material-color(md_blue, 400) !important;
+      }
+    }
+
+    &:nth-of-type(7) {
+      //   background-color: material-color(md_grey, 500);
+      &:hover {
+        background-color: material-color(md_blue, 500) !important;
+      }
+    }
+
+    &:nth-of-type(8) {
+      //   background-color: material-color(md_grey, 600);
+      &:hover {
+        background-color: material-color(md_blue, 600) !important;
+      }
+    }
+  }
+
+  .active {
+    color: #03A9F4;
+  }
 }
+
 .project-meta {
-    width: 50%;
-    text-align: right;
-    vertical-align: bottom;
-    h4 {
-        font-style: italic;
-        span {
-            font-size: 1.5em;
-        }
+  text-align: right;
+  vertical-align: bottom;
+  width: 50%;
+
+  h4 {
+    font-style: italic;
+
+    span {
+      font-size: 1.5em;
     }
+  }
 }

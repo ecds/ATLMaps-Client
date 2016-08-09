@@ -6,23 +6,9 @@ export default Ember.Component.extend({
     VectorDetialContent: Ember.inject.service('vector-detail-content'),
 
     classNames: ['vector-info'],
-    // attributeBindings: ['draggable'],
-    // draggable : 'true',
-    //
-    // dropEnd(event) {
-    //     console.log('holly shit');
-    // },
 
     didInsertElement() {
-        //     let draggie = new Draggabilly( '.draggable', {
-        //         // options
-        //         // see http://draggabilly.desandro.com/
-        //         handle: '.drag-handle'
-        //     });
-        //     draggie.element.style.position = 'fixed';
-        //     draggie.on( 'dragStart', function( /* event, pointer*/ ) {});
-        //     // Make reference to `draggie` so we can destroy it on exit.
-        //     Ember.set(this, 'draggie', draggie);
+
         interact('.resize-drag')
             .draggable({
                 onmove: dragMoveListener
@@ -54,8 +40,8 @@ export default Ember.Component.extend({
 
                 target.setAttribute('data-x', x);
                 target.setAttribute('data-y', y);
-                // target.textContent = Math.round(event.rect.width) + '×' + Math.round(event.rect.height);
             });
+
 
         function dragMoveListener(event) {
             var target = event.target,
@@ -78,9 +64,9 @@ export default Ember.Component.extend({
         // Ember.set(this,'dragMoveListener' dragMoveListener);
     },
     //
-    // willDestroyElement(){
-    //     this.get('draggie').destroy();
-    // },
+    didDestroyElement(){
+        delete(window.dragMoveListener);
+    },
 
     actions: {
         close() {

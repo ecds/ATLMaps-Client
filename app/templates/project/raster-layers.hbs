@@ -28,8 +28,8 @@
         {{#each model.sortedRasterLayers as |layer|}}
             {{#sortable-item tagName="li" model=layer group=group handle=".handle" }}
                 <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
-                    <div class="panel-body">
-                        <div class="row">
+                    <!-- <div class="panel panel-default"> -->
+                        <div class="row layer-heading">
                             <div class="col-md-10">
                                 <h3>
                                         <a {{action 'showLayerInfoDetals' layer}}>
@@ -47,18 +47,23 @@
                             {{/if}}
                         </div>
                         {{#liquid-if layer.clicked}}
-                            <article>{{layer.raster_layer_id.description}}</article>
+                            <div class="panel-body">
+                              <article class="layer-article">{{layer.raster_layer_id.description}}</article>
+                            </div>
+
+                            <div class="panel-footer row">
                             {{layer-citation layer = layer.raster_layer_id}}
                             {{#if model.editing}}
-                                <div class="row">
+                                <!-- <div class="row"> -->
                                     <div class="col-md-8">{{layer.raster_layer_id}}</div>
                                     <div class="col-md-4">
                                         <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.raster_layer_id 'raster' }}><i class="material-icons">close</i></a>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             {{/if}}
+                          </div>
                         {{/liquid-if}}
-                    </div>
+                    <!-- </div> -->
                 </div>
                 {{else}}
                     No data layers have been added.

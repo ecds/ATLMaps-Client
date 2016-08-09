@@ -17,7 +17,7 @@ export default Ember.Route.extend({
                 item.setProperties({position: newPosition});
 
                 let rasterSlug = item.get('raster_layer_id.slug');
-                _this.get('mapObject.rasterLayers')[rasterSlug].setZIndex(newPosition);
+                _this.get('mapObject.projectLayers')[rasterSlug].setZIndex(newPosition);
 
                 if(groupModel.get('editing') === true){
                     item.save();
