@@ -1,5 +1,4 @@
 import Ember from 'ember';
-/* globals Swiper, interact */
 
 export default Ember.Service.extend({
 
