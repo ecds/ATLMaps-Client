@@ -17,7 +17,7 @@ module.exports = function() {
             ]
         },
         sourcemaps: {
-            enabled: true
+            enabled: !isProductionLikeBuild
         },
         minifyCSS: { enabled: isProductionLikeBuild },
         minifyJS: { enabled: isProductionLikeBuild }
