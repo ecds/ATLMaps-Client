@@ -34,10 +34,27 @@
 
 }
 
-article {
-  color: material-color(md_grey, 800);
-  padding: 2em;
+.layer-heading {
+  padding: 0 1em;
+  pointer-events: all;
+
+  table {
+    width: 100%;
+
+    td {
+      padding: 0 .5em;
+    }
+  }
+
+  a {
+    cursor: pointer;
+  }
 }
+
+// article {
+//   color: material-color(md_grey, 800);
+//   padding: 2em;
+// }
 
 .layer-article {
   padding: 0;
@@ -56,36 +73,27 @@ ul {
   //   padding-left: .5em;
   // }
 
-  article {
+  .layer-article {
     padding: 1em;
-  }
-}
-
-.layer-heading {
-  padding: 0 1em;
-  pointer-events: all;
-
-  table {
-    width: 100%;
-
-    td {
-      padding: 0 .5em;
-    }
   }
 }
 
 // Raster Panel Stuff
 .raster-list {
   .panel {
-    padding: .25em 1em;
+    // padding: .25em 1em;
   }
 
   .panel-body {
-    padding: 0 15px;
+    padding: 0 .75em;
   }
 
   .row {
-    padding: 0;
+    padding: 0 1em;
+  }
+
+  .panel-footer {
+    padding: .5em 1em;
   }
 
   .reorder {
@@ -115,4 +123,8 @@ ul {
 
 .opacity-slider {
   padding-left: 5px;
+
+  input {
+    display: none;
+  }
 }

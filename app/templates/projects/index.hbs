@@ -6,7 +6,9 @@
     </div>
 </div>
 {{#if session.isAuthenticated }}
-<a class="btn btn-fab new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
+<span calss="add-new-project">
+  <a class="btn btn-fab btn-default new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
+</span>
 {{/if}}
 <div class="banner orange blurred">
     <div class="container project-list">

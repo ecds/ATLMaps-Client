@@ -8,7 +8,7 @@
                     <h2>Mapping the stories of your city</h2>
                     {{#if session.isAuthenticated}}
                         <p>
-                            {{#link-to 'projects' tagName='a' class="btn btn-info btn-lg" }}Go to Projects{{/link-to}}
+                            {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
                         </p>
                     {{else}}
                         <p>
@@ -28,7 +28,7 @@
     <div class="container">
         <header class="row">
             <div class="col-md-12">
-                <h2>Featured Projects</h2>
+                <h3>Featured Projects</h3>
             </div>
         </header>
         <hr />{{!-- code that shows images. needs more work
@@ -61,18 +61,19 @@
         </div>
         end of newer look --}}
         {{! so for now we'll just use the "old" look}}
-        <div class="list-group col-sm-10 col-sm-offset-1">
+        <div class="list-group row project-group-item">
             {{#if model.isPending}}
                 <h2>Loading...</h2>
             {{else}}
                 {{#each model as |project|}}
 
-                    <div class="list-group-item col-md-6 project-group-item">
-                        <div class="row-action-primary">
+                    <div class="list-group-item col-md-1">
+                        <span class="row-action-primary">
                             <i class="material-icons">map</i>
-                        </div>
-                        <div class="row-content">
-                            <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                        </span>
+                      </div>
+                    <div class="col-md-4">
+                        <article class="row-content">
                             <h4 class="list-group-item-heading">
                          {{#link-to 'project' project}}
                            <span>
@@ -81,9 +82,10 @@
                        </h4>
                             <p class="list-group-item-text">{{project.description}}</p>
                             <h5>Created by: {{project.owner}}</h5>
-                        </div>
-                        <div class="list-group-separator"></div>
+                        </article>
+                        <span class="list-group-separator"></span>
                     </div>
+                      <div class="action-secondary col-md-1"><i class="mdi-material-info"></i></div>
 
             {{else}}
                 <p>There are no projects visible at this time :(</p>
