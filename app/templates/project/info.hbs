@@ -71,11 +71,11 @@
                 <article>{{{model.description}}}</article>
             </div>
         </div>
-        {{#if model.template_id}}
+        {{#if model.hasIntro}}
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-11">
-                <a class="btn btn-info" {{action 'toggleIntro'}}>Show Intro</a>
+            {{!-- <div class="col-md-1"></div> --}}
+            <div class="col-md-12">
+                <a class="btn btn-default btn-raised" {{action 'toggleIntro'}}>Show Intro</a>
             </div>
         </div>
         {{/if}}

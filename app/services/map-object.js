@@ -58,7 +58,7 @@ export default Ember.Service.extend({
                 position: 'topright'
             }).addTo(_map);
 
-            this.get('leafletGroup').addTo(_map);
+            // this.get('leafletGroup').addTo(_map);
 
             _map.on('click', function() {
                 // Ember.$("div.info").remove();

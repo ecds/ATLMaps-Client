@@ -8,9 +8,32 @@ div.project-nav {
   top: 2.5em;
   width: 33%;
 
-  .row {
-    padding: .5em;
+}
+
+.route-row {
+  padding: .5em .5em .5em .4em;
+}
+
+.nav-icon {
+  font-size: .75em;
+  padding-left: 0;
+  padding-right: 0;
+
+  i {
+    font-size: 2.25em;
   }
+
+  label {
+    display: none;
+    font-size: 1em;
+    margin-bottom: 0;
+    margin-left: -.2em;
+  }
+
+
+  // & > * {
+  //   padding-left: 25%;
+  // }
 }
 
 // .project-head {}
@@ -37,35 +60,42 @@ div.project-nav {
 .project-nav-group {
   width: 100%;
 
-  .row.head {
-    background-color: material-color(md_blue, 700);
+  .row {
 
-    &.edit {
-      background-color: material-color(md_green, 500);
-    }
+    &.head {
+      background-color: material-color(md_blue, 700);
+      padding: .6em;
 
-    a {
-      color: material-color(md_grey, 50);
-    }
-
-    i {
-      display: table-cell;
-    }
-
-    i.exit {
-      padding-left: .4em;
-      transform: rotate(180deg);
-    }
-
-    span {
-      color: material-color(md_grey, 100);
-      font-size: 1.75em;
+      &.edit {
+        background-color: material-color(md_green, 500);
+      }
 
       a {
-        margin-right: .75em;
+        color: material-color(md_grey, 50);
       }
-    }
 
+      i {
+        display: table-cell;
+        // padding-left: 25%;
+
+        &.exit {
+          padding-left: .4em;
+          transform: rotate(180deg);
+        }
+      }
+
+
+
+      span {
+        color: material-color(md_grey, 100);
+        font-size: 1.75em;
+
+        a {
+          margin-right: .75em;
+        }
+      }
+
+    }
   }
 
   a {

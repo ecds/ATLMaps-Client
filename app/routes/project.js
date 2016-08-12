@@ -37,18 +37,10 @@ export default Ember.Route.extend({
 		return this.get('mapObject').createMap(this.currentModel);
 	},
 
-	// rasterLayers: function(){
-	// 	console.log('the fuck do i do?');
-	// 	return this.currentModel;
-	// },
 
 	// Function the runs after we fully exit a project route and clears the map,
 	// clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
 	tearDown: function(){
-		// Clear the map.
-		this.get('mapObject.map').remove();
-	    this.set('mapObject.map', '');
-		// Clear all search parameters.
 		this.get('browseParams').init();
 		// Clear the chekes for the checked categories and tags.
 		let categories = this.store.peekAll('category');
@@ -73,6 +65,9 @@ export default Ember.Route.extend({
 		// Reset the year range.
 		// this.store.peekRecord('yearRange', 1).rollback();
 		Ember.$('.vector-info').remove();
+        // Clear the map.
+		this.get('mapObject.map').remove();
+	    this.set('mapObject.map', '');
 	}.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {
@@ -111,7 +106,6 @@ export default Ember.Route.extend({
 
 					// Create the Leaflet map.
 					_this.map(project);
-                    console.log(_this.get('mapObject').leafletGroup);
 
 				}
 			});
@@ -197,7 +191,7 @@ export default Ember.Route.extend({
 
 				// let _this = this;
 				project.get(format+'_layer_project_ids').addObject(newLayer);
-                console.log('gahhhh');
+
                 _this.get('mapObject').mapLayer(newLayer);
 				// Only call save if the session is authenticated.
 				// There is another check on the server that verifies the user is
