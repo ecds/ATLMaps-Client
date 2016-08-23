@@ -1,2 +1,22 @@
-{{outlet}}
-{{pick-tags model=model.categories}}
+{{!pick-tags model=model.categories}}
+<div class="container-fluid style=background-color:white;">
+    <div class="row">
+
+        <div class="available-users col-md-6">
+            {{#each model.categories as |category|}}
+                <h4>{{category.name}}</h4>
+                {{#each category.tag_ids as |tag|}}
+                    {{#draggable-item content=tag layer=model.layer tag=tag tags=model.layer.tag_ids action=(route-action "addTag")}}
+                        {{tag.name}}
+                    {{/draggable-item}}
+                {{/each}}
+            {{/each}}
+        </div>
+
+        <div class="selected-users col-md-6">
+            {{#draggable-dropzone layer=model.layer dropped=(route-action "addTag")}}
+                <div id="map" style="height:100vh;"></div>
+            {{/draggable-dropzone}}
+        </div>
+    </div>
+</div>

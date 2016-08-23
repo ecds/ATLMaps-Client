@@ -14,5 +14,6 @@ export default Layer.extend({
     layers: attr('string'),
     opacity: attr('number', {
         defaultValue: 10
-    })
+    }),
+    tagem: attr('boolean')
 });

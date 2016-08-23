@@ -1,0 +1,14 @@
+@import 'variables';
+
+.draggable-item {
+  background-color: material-color(md_blue, 600);
+  border-radius: .25em;
+  color: material-color(md_grey, 50);
+  display: inline-block;
+  margin: .5em 1em;
+  padding: .5em 1em;
+
+  &.tagged {
+    background-color: material-color(md_deeporangealt, 400);
+  }
+}
