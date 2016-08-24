@@ -19,8 +19,7 @@ export default Controller.extend({
 
     // computed property - whether this current route is a project.* page
     isProjectDetail: computed('currentRouteName', function() {
-        return (this.get('currentRouteName').includes("project."));
+        return (this.get('currentRouteName').includes('project.'));
     })
-
 
 });

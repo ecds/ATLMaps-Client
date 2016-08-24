@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Service.extend({
+const {
+    Service
+} = Ember;
+
+
+export default Service.extend({
 
     init() {
         this._super(...arguments);
@@ -9,11 +14,11 @@ export default Ember.Service.extend({
 
     viewData(feature, layer) {
 
-        let popupContent = "";
+        let popupContent = '';
 
         if (feature.properties.image) {
-            popupContent += "<a href='" + feature.properties.image.url + "' target='_blank'><img class='geojson' src='" + feature.properties.image.url + "' title='" + feature.properties.image.name + "' /></a>" +
-                "<span>Photo Credit: " + feature.properties.image.credit + "</span>";
+            popupContent += '<a href="' + feature.properties.image.url + '" target="_blank"><img class="geojson" src="' + feature.properties.image.url + '" title="' + feature.properties.image.name + '" /></a>"' +
+                '<span>Photo Credit: ' + feature.properties.image.credit + '</span>';
 
             Ember.$('<img />').load(function() {}).attr('src', feature.properties.image.url);
         }
@@ -24,15 +29,13 @@ export default Ember.Service.extend({
             popupContent += '</div>';
         }
         if (feature.properties.images) {
-            popupContent += "<div class='gallery'><div class='swiper-wrapper'>";
+            popupContent += '<div class="gallery"><div class="swiper-wrapper">';
             feature.properties.images.forEach(function(image) {
-                popupContent += "<div class='swiper-slide' ><a href='" + image.url + "' target='_blank'><img class='geojson' src='" + image.url + "' title='" + image.name + "' /></a>";
+                popupContent += '<div class="swiper-slide" ><a href="' + image.url + '" target="_blank"><img class="geojson" src="' + image.url + '" title="' + image.name + '" /></a>"';
                 if (image.credit) {
-                    popupContent += "<span>Photo Credit: " + image.credit + "</span></div>";
-                }
-
-                else {
-                    popupContent += "</div>";
+                    popupContent += '<span>Photo Credit: ' + image.credit + '</span></div>';
+                } else {
+                    popupContent += '</div>';
                 }
 
                 Ember.$('<img />').load(function() {}).attr('src', image.url);
@@ -50,18 +53,18 @@ export default Ember.Service.extend({
         // popupContent += "</div></div>";
 
         layer.on('click', function() {
-            Ember.$(".vector-content").empty();
+            Ember.$('.vector-content').empty();
             // Ember.$("div.marker-title").empty();
             // let content = Ember.$("<div/>").html(popupContent);
             // if (Ember.$('.gallery').length > 0) {
             //     Ember.$('.gallery')[0].swiper.destroy();
             // }
-            Ember.$("div.vector-info").show();
-            Ember.$(".vector-content.layer-icon").append(layer.options.markerDiv);
+            Ember.$('div.vector-info').show();
+            Ember.$('.vector-content.layer-icon').append(layer.options.markerDiv);
             Ember.$('.vector-content.layer-title').append(layer.options.title);
             Ember.$('.vector-content.title').append(feature.properties.name);
             Ember.$('.vector-content.marker-content').append(popupContent);
-            Ember.$(".active_marker").removeClass("active_marker");
+            Ember.$('.active_marker').removeClass('active_marker');
             Ember.$(this._icon).addClass('active_marker');
             // new Swiper('.gallery', {
             //     pagination: '.swiper-pagination',

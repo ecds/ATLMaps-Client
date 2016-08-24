@@ -78,10 +78,10 @@ export default Component.extend({
 
     actions: {
         close() {
-            Ember.$("div.vector-info").hide();
-            Ember.$(".marker-content iframe").remove();
-            Ember.$(".div.marker-content").empty();
-            Ember.$(".active_marker").removeClass("active_marker");
+            Ember.$('div.vector-info').hide();
+            Ember.$('.marker-content iframe').remove();
+            Ember.$('.div.marker-content').empty();
+            Ember.$('.active_marker').removeClass('active_marker');
             // this.get('draggie').destroy();
         }
     }

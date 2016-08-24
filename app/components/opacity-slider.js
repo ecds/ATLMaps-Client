@@ -58,7 +58,7 @@ export default Component.extend({
         // Watch the toggle check box to show/hide all raster layers.
         let showHideSwitch = document.getElementById('toggle-layer-opacity');
         showHideSwitch.addEventListener('click', function() {
-            if (Ember.$("input#toggle-layer-opacity").prop("checked")) {
+            if (Ember.$('input#toggle-layer-opacity').prop('checked')) {
                 slider.noUiSlider.set(10);
                 projLayer.setProperties({ showing: true });
             } else {

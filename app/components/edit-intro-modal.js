@@ -89,10 +89,10 @@ export default Component.extend({
             project.save().then(function() {
                 // Success callback
                 // Show confirmation.
-                Ember.$(".edit-intro-success").slideToggle().delay(2500).slideToggle();
+                Ember.$('.edit-intro-success').slideToggle().delay(2500).slideToggle();
             }, function() {
                 // Error callback
-                Ember.$(".edit-intro-fail").stop().slideToggle().delay(3000).slideToggle();
+                Ember.$('.edit-intro-fail').stop().slideToggle().delay(3000).slideToggle();
                 project.rollbackAttributes();
 
             });

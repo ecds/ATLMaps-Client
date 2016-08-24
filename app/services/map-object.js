@@ -4,10 +4,17 @@ import Ember from 'ember';
 
 // Service to hold the Leaflet object.
 
-export default Ember.Service.extend({
+const {
+    inject: {
+        service
+    },
+    Service
+} = Ember;
 
-    dataColors: Ember.inject.service('data-colors'),
-    vectorDetailContent: Ember.inject.service('vector-detail-content'),
+export default Service.extend({
+
+    dataColors: service(),
+    vectorDetailContent: service(),
 
     init() {
         this._super(...arguments);
@@ -21,8 +28,6 @@ export default Ember.Service.extend({
             // Add some base layers
             let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University'
-                    // detectRetina: true,
-                    // className: 'street base'
             });
 
             let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
@@ -47,7 +52,6 @@ export default Ember.Service.extend({
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false,
                 layers: [satellite, street]
-                // worldCopyJump: true
             });
 
             Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
@@ -62,8 +66,8 @@ export default Ember.Service.extend({
 
             _map.on('click', function() {
                 // Ember.$("div.info").remove();
-                Ember.$("div.vector-info").hide();
-                Ember.$(".active_marker").removeClass("active_marker");
+                Ember.$('div.vector-info').hide();
+                Ember.$('.active_marker').removeClass('active_marker');
                 Ember.$('.vector-content.marker-content').empty();
                 project.setProperties({
                     showing_browse_results: false
@@ -81,22 +85,22 @@ export default Ember.Service.extend({
             this.set('map', _map);
             // Add all the vector layers to the map.
             let _this = this;
-            project.get('vector_layer_project_ids').then(function(vectors){
-                vectors.forEach(function(vector){
+            project.get('vector_layer_project_ids').then(function(vectors) {
+                vectors.forEach(function(vector) {
                     _this.mapLayer(vector);
                 });
             });
 
             // Add all the raster layers to the map.
-            project.get('raster_layer_project_ids').then(function(rasters){
-                rasters.forEach(function(raster){
+            project.get('raster_layer_project_ids').then(function(rasters) {
+                rasters.forEach(function(raster) {
                     _this.mapLayer(raster);
                 });
             });
 
             _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
             Ember.$('.base').hide();
-            Ember.$('.'+project.get('default_base_map')).show();
+            Ember.$('.' + project.get('default_base_map')).show();
             return _map;
         } catch (err) {
             // Map is likely already initialized
@@ -123,7 +127,7 @@ export default Ember.Service.extend({
 
                 case 'planningatlanta':
 
-                    var tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + newLayerName + '/{z}/{x}/{y}.png', {
+                    let tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + newLayerName + '/{z}/{x}/{y}.png', {
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,
@@ -131,13 +135,13 @@ export default Ember.Service.extend({
                         detectRetina: true
                     }).addTo(map).setZIndex(10).getContainer();
 
-                    Ember.$(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+                    Ember.$(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
 
                 case 'atlTopo':
 
-                    var topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/tilesTopo/{z}/{x}/{y}.jpg', {
+                    let topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/tilesTopo/{z}/{x}/{y}.jpg', {
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,
@@ -146,7 +150,7 @@ export default Ember.Service.extend({
                         errorTileUrl: 'http://inspiresara.com/wp-content/uploads/2015/04/Peanut-butter-jelly-time.gif'
                     }).addTo(map).setZIndex(10).getContainer();
 
-                    Ember.$(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css("zIndex", zIndex);
+                    Ember.$(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
 
@@ -211,15 +215,15 @@ export default Ember.Service.extend({
                             let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
                             let markerDiv = '<span class="map-marker vector-icon vector ' + dataType + ' layer-' + newLayer.get('color_name') + '"></span>';
                             if (newLayerUrl) {
-                                var points = new L.GeoJSON.AJAX(newLayerUrl, {
+                                let points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer: function(feature, latlng) {
-                                        var icon = L.divIcon({
+                                        let icon = L.divIcon({
                                             className: layerClass,
                                             iconSize: null,
-                                            html: '<div class="shadow"></div><div class="icon"></div>',
+                                            html: '<div class="shadow"></div><div class="icon"></div>'
                                         });
 
-                                        var marker = L.marker(latlng, {
+                                        let marker = L.marker(latlng, {
                                             icon: icon,
                                             title: newLayerTitle,
                                             markerDiv: markerDiv
@@ -255,13 +259,13 @@ export default Ember.Service.extend({
 
                             };
                             if (newLayerUrl) {
-                                let content =_this.get('vectorDetailContent.viewData');
-                                var vector = new L.GeoJSON.AJAX(newLayerUrl, {
+                                let content = _this.get('vectorDetailContent.viewData');
+                                let vector = new L.GeoJSON.AJAX(newLayerUrl, {
                                     style: polyStyle,
                                     className: shapeLayerClass,
                                     title: newLayerTitle,
                                     markerDiv: vectorDiv,
-                                    onEachFeature: content,
+                                    onEachFeature: content
                                 });
                                 _this.get('projectLayers')[newLayerSlug] = vector;
                                 vector.addTo(map);
@@ -273,7 +277,7 @@ export default Ember.Service.extend({
         });
     },
 
-    updateVectorStyle: function(vector) {
+    updateVectorStyle(vector) {
         let slug = vector.get('slug');
         let dataType = vector.get('data_type');
         if (dataType === 'polygon') {

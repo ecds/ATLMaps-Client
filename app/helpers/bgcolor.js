@@ -1,7 +1,12 @@
 import Ember from 'ember';
 
-export function bgcolor(params/*, hash*/) {
-  return new Ember.Handlebars.SafeString("background-color: " + params[0] + ";");
+const {
+    Handlebars,
+    Helper
+} = Ember;
+
+export function bgcolor(params /*, hash*/) {
+    return new Handlebars.SafeString('background-color: ' + params[0] + ';');
 }
 
-export default Ember.Helper.helper(bgcolor);
+export default Helper.helper(bgcolor);
