@@ -1,9 +1,17 @@
 import Ember from 'ember';
+
 /* globals interact */
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    }
+} = Ember;
 
-    VectorDetialContent: Ember.inject.service('vector-detail-content'),
+export default Component.extend({
+
+    VectorDetialContent: service(),
 
     classNames: ['vector-info'],
 
@@ -23,7 +31,7 @@ export default Ember.Component.extend({
                 }
             })
             .on('resizemove', function(event) {
-                var target = event.target,
+                let target = event.target,
                     x = (parseFloat(target.getAttribute('data-x')) || 0),
                     y = (parseFloat(target.getAttribute('data-y')) || 0);
 
@@ -44,7 +52,7 @@ export default Ember.Component.extend({
 
 
         function dragMoveListener(event) {
-            var target = event.target,
+            let target = event.target,
                 // keep the dragged position in the data-x/data-y attributes
                 x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
                 y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
@@ -64,7 +72,7 @@ export default Ember.Component.extend({
         // Ember.set(this,'dragMoveListener' dragMoveListener);
     },
     //
-    didDestroyElement(){
+    didDestroyElement() {
         delete(window.dragMoveListener);
     },
 

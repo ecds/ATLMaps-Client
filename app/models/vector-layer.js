@@ -1,5 +1,10 @@
-import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import DS from 'ember-data';
+
+const {
+    attr,
+    belongsTo
+} = DS;
+
 import Layer from './layer';
 
 export default Layer.extend({
@@ -11,19 +16,8 @@ export default Layer.extend({
     }),
     color_name: attr('string'),
     color_hex: attr('string'),
-    // opacity: attr('number', {
-    //     defaultValue: 1
-    // }),
     showing: attr('boolean', {
         defaultValue: true
     })
 
-    // color_group: Ember.computed(function(){
-    //     if(this.get('data_type') === 'point-data'){
-    //         return 'markerColors';
-    //     }
-    //     else {
-    //         return 'shapeColors';
-    //     }
-    // })
 });

@@ -1,5 +1,9 @@
-import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import DS from 'ember-data';
+
+const {
+    attr,
+    belongsTo
+} = DS;
 import Layer from './layer';
 
 export default Layer.extend({

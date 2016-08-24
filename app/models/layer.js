@@ -1,29 +1,42 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
+const {
+    Model,
+    attr,
+    belongsTo,
+    hasMany
+} = DS;
+
+export default Model.extend({
     /*
-    * Extended by RasterLayer and VectorLayer
-    */
-    name: DS.attr('string'),
-    title: DS.attr('string'),
-    slug: DS.attr('string'),
-    keywords: DS.attr('string'),
-    description: DS.attr('string'),
-    layer: DS.attr('string'),
-    date: DS.attr('date'),
-    data_type: DS.attr('string'),
-    data_format: DS.attr('string'),
-    zoomlevels: DS.attr('string'),
-    minx: DS.attr('number'),
-    miny: DS.attr('number'),
-    maxx: DS.attr('number'),
-    maxy: DS.attr('number'),
-    project_ids: DS.hasMany('project', {async: true}),
-    tag_ids: DS.hasMany('tag', {async: true}),
-    institution: DS.attr(),
-    institution_id: DS.belongsTo('institution'),
-    tag_slugs: DS.attr('string'),
-    active: DS.attr('boolean'),
-    active_in_project: DS.attr('boolean', { defaultValue: false }),
-    url: DS.attr('string'),
+     * Extended by RasterLayer and VectorLayer
+     */
+    name: attr('string'),
+    title: attr('string'),
+    slug: attr('string'),
+    keywords: attr('string'),
+    description: attr('string'),
+    layer: attr('string'),
+    date: attr('date'),
+    data_type: attr('string'),
+    data_format: attr('string'),
+    zoomlevels: attr('string'),
+    minx: attr('number'),
+    miny: attr('number'),
+    maxx: attr('number'),
+    maxy: attr('number'),
+    project_ids: hasMany('project', {
+        async: true
+    }),
+    tag_ids: hasMany('tag', {
+        async: true
+    }),
+    institution: attr(),
+    institution_id: belongsTo('institution'),
+    tag_slugs: attr('string'),
+    active: attr('boolean'),
+    active_in_project: attr('boolean', {
+        defaultValue: false
+    }),
+    url: attr('string')
 });

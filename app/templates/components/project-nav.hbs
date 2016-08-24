@@ -7,7 +7,7 @@
             <span>{{model.name}}</span>
             <span class="edit-button pull-right">
       				{{#if model.may_edit}}
-      					<a {{action 'toggleEdit'}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
+      					<a {{action (route-action 'toggleEdit')}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>
       						<i class="material-icons">mode_edit</i>
       					</a>
       				{{/if}}

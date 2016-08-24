@@ -1,72 +1,80 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-export default DS.Model.extend({
-    name: DS.attr('string'),
-    description: DS.attr('string'),
-    center_lat: DS.attr('number'),
-    center_lng: DS.attr('number'),
-    zoom_level: DS.attr('number'),
-    default_base_map: DS.attr('string'),
-    user_id: DS.attr(),
-    saved: DS.attr('boolean'),
-    published: DS.attr('boolean'),
-    featured: DS.attr('boolean'),
-    user: DS.attr(),
-    raster_layer_project_ids: DS.hasMany('raster_layer_project', {
+const {
+    Model,
+    attr,
+    hasMany
+} = DS;
+const {
+    computed
+} = Ember;
+
+export default Model.extend({
+    name: attr('string'),
+    description: attr('string'),
+    center_lat: attr('number'),
+    center_lng: attr('number'),
+    zoom_level: attr('number'),
+    default_base_map: attr('string'),
+    user_id: attr(),
+    saved: attr('boolean'),
+    published: attr('boolean'),
+    featured: attr('boolean'),
+    user: attr(),
+    raster_layer_project_ids: hasMany('raster_layer_project', {
         async: true
     }),
-    vector_layer_project_ids: DS.hasMany('vector_layer_project', {
+    vector_layer_project_ids: hasMany('vector_layer_project', {
         async: true
     }),
-    slug: DS.attr('string'),
-    owner: DS.attr(),
-    is_mine: DS.attr('boolean'),
-    may_edit: DS.attr('boolean'),
-    templateSlug: DS.attr('string'),
-    intro: DS.attr('string'),
-    media: DS.attr('string'),
-    template_id: DS.attr('number'),
-    card_url: DS.attr('string'),
+    slug: attr('string'),
+    owner: attr(),
+    is_mine: attr('boolean'),
+    may_edit: attr('boolean'),
+    templateSlug: attr('string'),
+    intro: attr('string'),
+    media: attr('string'),
+    template_id: attr('number'),
+    card_url: attr('string'),
 
     // The following are non-API based attributes.
 
     // Non-API backed attributes for managing state.
-    is_editing: DS.attr('boolean', {
+    is_editing: attr('boolean', {
         defaultValue: true
     }),
-    showing_browse_results: DS.attr('boolean', {
+    showing_browse_results: attr('boolean', {
         defaultValue: true
     }),
-    showing_all_vectors: DS.attr('boolean', {
+    showing_all_vectors: attr('boolean', {
         defaultValue: true
     }),
-    showing_all_rasters: DS.attr('boolean', {
+    showing_all_rasters: attr('boolean', {
         defaultValue: true
     }),
-    edit_success: DS.attr('boolean', {
+    edit_success: attr('boolean', {
         defaultValue: false
     }),
-    edit_fail: DS.attr('boolean', {
+    edit_fail: attr('boolean', {
         defaultValue: false
     }),
-
 
     // Attribute that will be set to true if a user is "exploring".
-    exploring: DS.attr('boolean', {
+    exploring: attr('boolean', {
         defaultValue: false
     }),
-    editing: DS.attr('boolean', {
+    editing: attr('boolean', {
         defaultValue: false
     }),
 
-    may_browse: DS.attr('boolean', {
+    may_browse: attr('boolean', {
         defaultValue: false
     }),
 
     // Computed property that sorts rasters by on the position their `position`
     // in the project. See http://emberjs.com/api/classes/Ember.computed.html#method_sort
-    sortedRasterLayers: Ember.computed.sort('raster_layer_project_ids', '_positionSort'),
+    sortedRasterLayers: computed.sort('raster_layer_project_ids', '_positionSort'),
     _positionSort: ['position:desc'],
 
     // The following computed values are used for the show/hide all toggle switch.
@@ -74,22 +82,22 @@ export default DS.Model.extend({
 
     // We'll call length on this so we can set the toggle switch if all vectors
     // are hidden. See http://emberjs.com/api/classes/Ember.computed.html#method_filterBy
-    hidden_vectors: Ember.computed.filterBy('vector_layer_project_ids', 'showing', true),
+    hidden_vectors: computed.filterBy('vector_layer_project_ids', 'showing', true),
 
     // Booleans are easier to deal with.
-    visiable_vector: Ember.computed('hidden_vectors', function() {
+    visiable_vector: computed('hidden_vectors', function() {
         return this.get('hidden_vectors').length > 0;
     }),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
-    hidden_rasters: Ember.computed.filterBy('raster_layer_project_ids', 'showing', true),
+    hidden_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
 
     // Booleans are easier to deal with.
-    visiable_raster: Ember.computed('hidden_rasters', function() {
+    visiable_raster: computed('hidden_rasters', function() {
         return this.get('hidden_rasters').length > 0;
     }),
 
-    hasIntro: Ember.computed(function(){
+    hasIntro: computed(function() {
         if (this.get('intro') || (this.get('media'))) {
             return true;
         } else {
@@ -97,7 +105,7 @@ export default DS.Model.extend({
         }
     }),
 
-    twoColIntro: Ember.computed(function(){
+    twoColIntro: computed(function() {
         if (this.get('intro') && (this.get('media'))) {
             return true;
         } else {

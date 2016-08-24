@@ -1,19 +1,27 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    }
 
-    browseParams: Ember.inject.service('browse-params'),
+} = Ember;
+
+export default Component.extend({
+
+    browseParams: service(),
 
     classNames: ['browse-by-text'],
 
-    searchTerms: function(){
+    searchTerms: function() {
         return this.get('browseParams.searchText');
     }.property(),
 
     actions: {
-        textSearch: function(){
+        textSearch: function() {
             this.get('browseParams').setSearchText(this.get('searchTerms'));
             this.sendAction('getResults');
-        },
+        }
     }
 });

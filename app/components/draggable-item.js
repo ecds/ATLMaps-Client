@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component } = Ember;
+
+export default Component.extend({
     classNames: ['draggable-item'],
     classNameBindings: ['taggedClass'],
     attributeBindings: ['draggable'],
@@ -12,12 +14,12 @@ export default Ember.Component.extend({
         // this.setTaggedClass();
         return event.dataTransfer.setData('text/data', tag.get('id'));
     },
-    click(){
+    click() {
         this.sendAction('action', this.tag.id);
         this.set('taggedClass', 'tagged');
     },
 
-    didUpdateAttrs(){
+    didUpdateAttrs() {
         let layer = this.layer;
         let tag = this.tag;
         if (layer.get('tag_ids').indexOf(tag) !== -1) {

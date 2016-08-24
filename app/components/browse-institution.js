@@ -1,17 +1,23 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    }
+} = Ember;
 
-    browseParams: Ember.inject.service('browse-params'),
+export default Component.extend({
+
+    browseParams: service(),
 
     classNames: ['browse-by-institution', 'browse-form'],
 
     actions: {
-        checkInstitution(institution){
+        checkInstitution(institution) {
             if (institution.get('checked') === true) {
                 this.get('browseParams').removeInstution(institution);
-            }
-            else if (institution.get('checked') === false) {
+            } else if (institution.get('checked') === false) {
                 this.get('browseParams').addInstitution(institution);
             }
             institution.toggleProperty('checked');

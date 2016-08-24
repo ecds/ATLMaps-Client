@@ -1,11 +1,16 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    get
+} = Ember;
+
+export default Component.extend({
     classNames: ['intro-modal-link'],
 
     isShowingEditModal: false,
 
-    didRender: function(){
+    didRender() {
         // http://alex-d.github.io/Trumbowyg/documentation.html
         Ember.$('#edit-project-intro').trumbowyg({
             fullscreenable: false,
@@ -14,8 +19,8 @@ export default Ember.Component.extend({
 
     },
 
-    didInsertElement: function(){
-        switch (this.get('project.templateSlug')){
+    didInsertElement() {
+        switch (this.get('project.templateSlug')) {
             case 'article-and-video':
                 this.set('av', true);
                 break;
@@ -30,19 +35,24 @@ export default Ember.Component.extend({
 
     actions: {
 
-        openEditModal: function() {
-            this.setProperties({isShowingEditModal: true});
+        openEditModal() {
+            this.setProperties({
+                isShowingEditModal: true
+            });
         },
-        closeEditModal: function() {
-            this.setProperties({isShowingEditModal: false});
+        closeEditModal() {
+            this.setProperties({
+                isShowingEditModal: false
+            });
         },
 
-        setTemplate: function(template) {
-            var pickedTemplate = '';
+        setTemplate(template) {
+            let pickedTemplate = '';
             this.set('a', false);
             this.set('av', false);
             this.set('v', false);
-            switch(template){
+            // TODO: These cases don't mean shit anymore.
+            switch (template) {
                 case 'av':
                     pickedTemplate = 1;
                     this.set('av', true);
@@ -62,33 +72,33 @@ export default Ember.Component.extend({
                     this.set('av', false);
                     break;
             }
-            var project = this.get('project');
+            let project = this.get('project');
             project.set('template_id', pickedTemplate);
             project.save();
         },
 
-        changeTemplate: function(){
-            var project = this.get('project');
+        changeTemplate() {
+            let project = get(this, 'project');
             project.set('template_id', '');
         },
 
-        updateIntro: function(){
-            var project = this.get('project');
+        updateIntro() {
+            let project = this.get('project');
             project.set('intro', Ember.$('textarea#edit-project-intro').val());
             // this.sendAction('update', project);
             project.save().then(function() {
                 // Success callback
                 // Show confirmation.
                 Ember.$(".edit-intro-success").slideToggle().delay(2500).slideToggle();
-                }, function() {
-                    // Error callback
-                    Ember.$(".edit-intro-fail").stop().slideToggle().delay(3000).slideToggle();
-                    project.rollbackAttributes();
+            }, function() {
+                // Error callback
+                Ember.$(".edit-intro-fail").stop().slideToggle().delay(3000).slideToggle();
+                project.rollbackAttributes();
 
             });
         },
 
-        cancelIntroUpdate: function(){
+        cancelIntroUpdate() {
             this.send('closeEditModal');
             this.sendAction('cancel', this.get('project'));
         }

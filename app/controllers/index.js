@@ -1,5 +1,13 @@
+// TODO When auth is refactored, make me go away!
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-    session: Ember.inject.service('session'),
+const {
+    Controller,
+    inject: {
+        service
+    }
+} = Ember;
+
+export default Controller.extend({
+    session: service()
 });

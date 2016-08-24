@@ -1,18 +1,24 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    }
 
-    dataColors: Ember.inject.service('data-colors'),
-    mapObject: Ember.inject.service('map-object'),
+} = Ember;
+
+export default Component.extend({
+
+    dataColors: service(),
+    mapObject: service(),
     isShowing: false,
     classNames: ['vector-options', 'pull-right'],
 
     click() {
         this.toggleProperty('isShowing');
     },
-    mouseLeave(){
 
-    },
     actions: {
         toggleModal() {
             this.toggleProperty('isShowing');

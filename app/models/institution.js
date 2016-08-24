@@ -1,10 +1,22 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-	name: DS.attr('string'),
-    slug: DS.attr('string'),
-    geoserver: DS.attr('string'),
-    layer_ids: DS.hasMany('layer', {async: true}),
-    user_ids: DS.hasMany('user', {async: true}),
-	checked: DS.attr('boolean', { defaultValue: false })
+const {
+    Model,
+    attr,
+    hasMany
+} = DS;
+
+export default Model.extend({
+    name: attr('string'),
+    slug: attr('string'),
+    geoserver: attr('string'),
+    layer_ids: hasMany('layer', {
+        async: true
+    }),
+    user_ids: hasMany('user', {
+        async: true
+    }),
+    checked: attr('boolean', {
+        defaultValue: false
+    })
 });

@@ -1,7 +1,17 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  raster_layer_ids: DS.hasMany('raster_layer', {async: true}),
-  vector_layer_ids: DS.hasMany('vector_layer', {async: true}),
-  search_terms: DS.attr('text')
+const {
+    Model,
+    attr,
+    hasMany
+} = DS;
+
+export default Model.extend({
+    raster_layer_ids: hasMany('raster_layer', {
+        async: true
+    }),
+    vector_layer_ids: hasMany('vector_layer', {
+        async: true
+    }),
+    search_terms: attr('text')
 });

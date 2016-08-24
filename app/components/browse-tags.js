@@ -1,34 +1,40 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    },
+    set
+} = Ember;
 
-    browseParams: Ember.inject.service('browse-params'),
+export default Component.extend({
+
+    browseParams: service(),
 
     classNames: ['browse-by-tags'],
 
     actions: {
-        checkSingleTag(tag){
+        checkSingleTag(tag) {
             if (tag.get('checked') === true) {
                 this.get('browseParams').removeTag(tag);
-            }
-            else if (tag.get('checked') === false) {
+            } else if (tag.get('checked') === false) {
                 this.get('browseParams').addTag(tag);
             }
             tag.toggleProperty('checked');
             this.sendAction('getResults');
         },
 
-        checkAllTagsInCategory: function(category){
+        checkAllTagsInCategory: function(category) {
             let allChecked = category.get('allChecked');
             let tags = category.get('sortedTags');
             if (allChecked === false) {
                 this.get('browseParams').addAllTags(tags);
-            }
-            else {
+            } else {
                 this.get('browseParams').removeAllTags(tags);
             }
             category.toggleProperty('allChecked');
-            tags.forEach(function(tag){
+            tags.forEach(function(tag) {
                 tag.set('checked', category.get('allChecked'));
             });
             this.sendAction('getResults');
@@ -45,15 +51,14 @@ export default Ember.Component.extend({
                 // Toggle the totally made up property!
                 // The `!` in the second argument toggles the true/false state.
                 this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
-            }
-            catch(err) {
+            } catch (err) {
                 // The first time, clickedCategory will not be an instance
                 // of `category`. It will just be `undefined`.
             }
             // So if the category that is clicked does not match the one in the
             // `clickedCategory` property, we set the `clicked` attribute to `true`
             // and that will remove the `hidden` class in the template.
-            if (category !== this.get('clickedCategory')){
+            if (category !== this.get('clickedCategory')) {
                 // Update the `clickedCategory` property
                 this.set('clickedCategory', category);
                 // Set the model attribute
@@ -61,9 +66,9 @@ export default Ember.Component.extend({
             }
             // Otherwise, this must be the first time a user has clicked a category.
             else {
-                 this.set('clickedCategory', true);
+                set(this, 'clickedCategory', true);
             }
 
-        },
+        }
     }
 });

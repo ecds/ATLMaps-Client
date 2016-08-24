@@ -1,18 +1,26 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-	session: Ember.inject.service('session'),
+const {
+    computed,
+    Controller,
+    inject: {
+        service
+    }
+} = Ember;
 
-	actions: {
-		invalidateSession() {
-	      this.get('session').invalidate();
-	    }
-	},
+export default Controller.extend({
+    session: service(),
 
-	// computed property - whether this current route is a project.* page
-	isProjectDetail: Ember.computed('currentRouteName', function(){
-			return (this.get('currentRouteName').includes("project."));
-	})
+    actions: {
+        invalidateSession() {
+            this.get('session').invalidate();
+        }
+    },
+
+    // computed property - whether this current route is a project.* page
+    isProjectDetail: computed('currentRouteName', function() {
+        return (this.get('currentRouteName').includes("project."));
+    })
 
 
 });

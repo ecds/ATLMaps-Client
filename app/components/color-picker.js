@@ -1,9 +1,16 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+    Component,
+    inject: {
+        service
+    }
+} = Ember;
 
-    dataColors: Ember.inject.service('data-colors'),
-    mapObject: Ember.inject.service('map-object'),
+export default Component.extend({
+
+    dataColors: service(),
+    mapObject: service(),
 
     classNames: ['color-picker'],
 

@@ -1,0 +1,7 @@
+{
+  "preset": "ember-suave",
+  "excludeFiles": ["tests/**"],
+  "validateIndentation": 4,
+  "requireCommentsToIncludeAccess": false,
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+}

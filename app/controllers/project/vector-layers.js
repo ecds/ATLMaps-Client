@@ -1,17 +1,27 @@
+// TODO GET RID OF THIS!!!!!!
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const {
+    Controller,
+    computed,
+    inject: {
+        controller,
+        service
+    }
+} = Ember;
 
-    projectController: Ember.inject.controller('project'),
+export default Controller.extend({
 
-    isEditing: Ember.computed.reads('projectController.isEditing'),
+    projectController: controller('project'),
 
-    dataColors: Ember.inject.service('data-colors'),
+    isEditing: computed.reads('projectController.isEditing'),
 
-    shapeColors: function(){
+    dataColors: service(),
+
+    shapeColors: function() {
         let shapeColors = this.get('dataColors.shapeColors');
         let colors = [];
-        for(let hex in shapeColors) {
+        for (let hex in shapeColors) {
             colors.push(shapeColors[hex]);
         }
         return colors;

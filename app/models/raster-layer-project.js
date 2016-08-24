@@ -1,7 +1,10 @@
-import attr from 'ember-data/attr';
-import {
+import DS from 'ember-data';
+
+const {
+    attr,
     belongsTo
-} from 'ember-data/relationships';
+} = DS;
+
 import LayerProject from './layer-project';
 
 export default LayerProject.extend({

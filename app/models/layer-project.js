@@ -1,17 +1,19 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
+const { Model, attr } = DS;
+
+export default Model.extend({
     /*
     * Extended by RasterLayerProject and VectorLayerProject.
     */
-    project_id: DS.attr(),
-    data_format: DS.attr(),
+    project_id: attr(),
+    data_format: attr(),
 
     // Non-API property. Used to show/hide the layer's description in the list.
-    clicked: DS.attr('boolean', {
+    clicked: attr('boolean', {
         defaultValue: false
     }),
-    showing: DS.attr('boolean', {
+    showing: attr('boolean', {
         defaultValue: true
     })
 });

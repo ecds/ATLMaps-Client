@@ -5,11 +5,13 @@ import Ember from 'ember';
 
 // TODO: Decide if we want to keep this around.
 
-export default Ember.Route.extend({
-	actions: {
-    	didTransition() {
+const { Route } = Ember;
+
+export default Route.extend({
+    actions: {
+        didTransition() {
             this.transitionTo('project.info', 'explore');
-    	},
+        }
 
     }
 });
