@@ -122,7 +122,7 @@ export default Service.extend({
             transparent: true,
             maxZoom: 20,
             // detectRetina: true,
-            // className: newLayerSlug,
+            className: 'wms',
             // zIndex, // Enhanced litrial
             opacity: 1
         });

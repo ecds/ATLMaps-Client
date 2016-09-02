@@ -104,11 +104,14 @@ $colors: (
   md_black: #000,
 );
 
+// Function taken from https://dribbble.com/shots/1850527-Music-Player-Transition
 @function material-color($h, $l: false) {
-
   @if $l {
     @return map-get(map-get($colors, $h), $l);
   } @else {
     @return map-get($colors, $h);
   }
 }
+
+$fab-shadow1: rgba(material-color(md_grey, 900), .12);
+$fab-shadow2: rgba(material-color(md_grey, 900), .24);

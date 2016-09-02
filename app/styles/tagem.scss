@@ -1,15 +1,40 @@
 @import 'variables';
 
 .draggable-item {
-  background-color: material-color(md_blue, 600);
-  border-radius: .25em;
-  color: material-color(md_grey, 50);
-  display: inline-block;
-  margin: .5em;
-  padding: .5em 1em;
+  display: inline-flex;
+
+  @media (min-width: 800px) {
+    margin: 0 .1em;
+
+    h3 {
+      font-size: 1em;
+      margin-bottom: .2em;
+      margin-top: 0;
+
+      .label {
+        padding: .5em;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    margin: .25em;
+
+    h3 {
+      font-size: 1.25em;
+    }
+  }
+
+  .label {
+    background-color: material-color(md_blue, 600);
+    display: inherit;
+    font-weight: normal;
+  }
 
   &.tagged {
-    background-color: material-color(md_deeporangealt, 400);
+    .label {
+      background-color: material-color(md_deeporangealt, 400);
+    }
   }
 }
 
@@ -75,20 +100,43 @@
   overflow: auto;
 }
 
+.map-to-tag {
+  .opacity {
+    display: block;
+    left: 81%;
+    position: absolute;
+    top: 32%;
+    transform: rotate(-90deg);
+    width: 25%;
+    z-index: 999;
+  }
+}
+
 .draggable-dropzone {
-  .btn-fab {
+  .next-sm {
+    background-color: material-color(md_deeporangealt, 400);
+    border-radius: 50%;
     bottom: 2em;
+    box-shadow: 0 1px 1.5px 0 $fab-shadow1, 0 1px 1px 0 $fab-shadow2;
+    cursor: pointer;
+    font-size: 24px;
+    height: 56px;
     position: absolute;
     right: 2em;
+    text-align: center;
+    text-decoration: none;
     width: 56px;
+    will-change: box-shadow, transform;
     z-index: 999;
 
-    &.btn-warning {
-      background-color: material-color(md_deeporangealt, 400) !important;
+    &:hover {
+      background-color: material-color(md_deeporangealt, 700);
     }
 
-    &:hover {
-      background-color: material-color(md_deeporangealt, 700) !important;
+    i {
+      color: material-color(md_grey, 200);
+      font-size: 2em;
+      vertical-align: text-top;
     }
 
   }

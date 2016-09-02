@@ -11,6 +11,7 @@ import Ember from 'ember';
  */
 
 const {
+    $,
     Route,
     RSVP,
     get,
@@ -29,6 +30,22 @@ export default Route.extend({
         let foo = this.get('currentUser.user');
         console.log('foo', this.get('currentUser.user.displayname'));
         return foo;
+
+        var Legend = L.Control.extend({
+          options: {
+            position: 'bottomright'
+          },
+
+          onAdd: function (map) {
+            var legend = L.DomUtil.create('div', 'map-legend', L.DomUtil.get('map'));
+
+            // here we can fill the legend with colors, strings and whatever
+
+            return legend;
+          }
+        });
+
+        map.addControl(new Legend());
     },
 
     model() {
@@ -67,6 +84,13 @@ export default Route.extend({
                 set(_this, 'currentModel.layer', nextLayer);
                 get(_this, 'mapObject').mapSingleLayer(nextLayer);
             });
+        },
+
+        opacity() {
+            let val = $('.opacity').val();
+            let layer = this.currentModel.layer;
+            console.log('val', val);
+            get(this, 'mapObject.projectLayers')[get(layer, 'slug')].setOpacity(val);
         }
 
     }
