@@ -12,6 +12,8 @@ $darkgrey: #212121;
 $whitesmoke: #f5f5f5;
 $border: #adadad;
 $shadow: rgba(0, 0, 0, .5);
+$rabbit: 200ms;
+$turtle: 500ms;
 
 $colors: (
   md_red: (
@@ -62,7 +64,7 @@ $colors: (
     800: #424242,
     900: #212121
   ),
-  md_orange:(
+  md_orange: (
     50: #fff3e0,
     100: #ffe0b2,
     200: #ffcc80,

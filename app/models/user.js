@@ -12,5 +12,6 @@ export default Model.extend({
     institution_id: belongsTo('institution'),
     institution: attr(),
     project_ids: attr(),
-    projects: attr()
+    projects: attr(),
+    number_tagged: attr('number')
 });

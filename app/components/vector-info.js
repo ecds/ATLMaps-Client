@@ -3,6 +3,7 @@ import Ember from 'ember';
 /* globals interact */
 
 const {
+    $,
     Component,
     inject: {
         service
@@ -31,36 +32,40 @@ export default Component.extend({
                 }
             })
             .on('resizemove', function(event) {
-                let target = event.target,
-                    x = (parseFloat(target.getAttribute('data-x')) || 0),
-                    y = (parseFloat(target.getAttribute('data-y')) || 0);
+                // Destructuring
+                // This had been written as `let target = event.target`.
+                // This is better?
+                let { target } = { target: event.target };
+
+                let x = parseFloat(target.getAttribute('data-x')) || 0;
+                let y = parseFloat(target.getAttribute('data-y')) || 0;
 
                 // update the element's style
-                target.style.width = event.rect.width + 'px';
-                target.style.height = event.rect.height + 'px';
+                target.style.width = `${event.rect.width}px`;
+                target.style.height = `${event.rect.height}px`;
 
                 // translate when resizing from top or left edges
                 x += event.deltaRect.left;
                 y += event.deltaRect.top;
 
                 target.style.webkitTransform = target.style.transform =
-                    'translate(' + x + 'px,' + y + 'px)';
+                    `translate(${x}px,${y}px)`;
 
                 target.setAttribute('data-x', x);
                 target.setAttribute('data-y', y);
             });
 
-
         function dragMoveListener(event) {
-            let target = event.target,
-                // keep the dragged position in the data-x/data-y attributes
-                x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-                y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+            // Destructuring?
+            let { target } = { target: event.target };
+            // keep the dragged position in the data-x/data-y attributes
+            let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+            let y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
             // translate the element
             target.style.webkitTransform =
                 target.style.transform =
-                'translate(' + x + 'px, ' + y + 'px)';
+                `translate(${x}px,${y}px)`;
 
             // update the posiion attributes
             target.setAttribute('data-x', x);
@@ -78,10 +83,10 @@ export default Component.extend({
 
     actions: {
         close() {
-            Ember.$('div.vector-info').hide();
-            Ember.$('.marker-content iframe').remove();
-            Ember.$('.div.marker-content').empty();
-            Ember.$('.active_marker').removeClass('active_marker');
+            $('div.vector-info').hide();
+            $('.marker-content iframe').remove();
+            $('.div.marker-content').empty();
+            $('.active_marker').removeClass('active_marker');
             // this.get('draggie').destroy();
         }
     }

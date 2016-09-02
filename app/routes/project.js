@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 const {
+    $,
     inject: {
         service
     },
     set,
-    Route
+    Route,
+    run
 } = Ember;
 
 export default Route.extend({
@@ -40,8 +42,8 @@ export default Route.extend({
         this.get('showIntro').init(this.modelFor('project').get('id'));
     },
 
-    map: function() {
-        return this.get('mapObject').createMap(this.currentModel);
+    map() {
+        return this.get('mapObject').createMap();
     },
 
     // Function the runs after we fully exit a project route and clears the map,
@@ -78,7 +80,7 @@ export default Route.extend({
         institutions.setEach('checked', false);
         // Reset the year range.
         // this.store.peekRecord('yearRange', 1).rollback();
-        Ember.$('.vector-info').remove();
+        $('.vector-info').remove();
         // Clear the map.
         this.get('mapObject.map').remove();
         this.set('mapObject.map', '');
@@ -96,11 +98,14 @@ export default Route.extend({
         },
 
         willTransition(transition) {
+            // TODO: WTF does this do?
             if (transition.targetName === 'project.browse-layers') {
                 this.controllerFor('project').set('showBrowse', true);
             } else {
                 this.controllerFor('project').set('showBrowse', false);
             }
+            // TODO: Kill the vector info window here.
+            // TODO: User test if the vector window should go away.
 
             return true;
         },
@@ -111,12 +116,13 @@ export default Route.extend({
 
             let _this = this;
 
-            Ember.run.scheduleOnce('afterRender', function() {
+            run.scheduleOnce('afterRender', function() {
 
                 if (!_this.get('mapObject').map) {
 
                     // Create the Leaflet map.
                     _this.map(project);
+                    _this.get('mapObject').setUpProjectMap(project);
 
                 }
             });
@@ -149,7 +155,7 @@ export default Route.extend({
         },
 
         addRemoveLayer(layer) {
-            const project = this.modelFor('project');
+            let project = this.modelFor('project');
 
             let layerModel = layer._internalModel.modelName;
 
@@ -159,6 +165,7 @@ export default Route.extend({
 
             let _this = this;
 
+            // TODO Q: Do we set `active_in_project` before?
             if (layerObj.get('active_in_project')) {
 
                 let newLayer = '';
@@ -166,11 +173,11 @@ export default Route.extend({
                     case 'raster':
                         let position = project.get('raster_layer_project_ids').get('length') + 11;
 
-                        newLayer = this.store.createRecord(format + '-layer-project', {
+                        newLayer = this.store.createRecord(`${format}-layer-project`, {
                             project_id: project.id,
                             raster_layer_id: layerObj,
                             data_format: layerObj.get('data_format'),
-                            position: position
+                            position // enhanced litrial
                         });
                         break;
 
@@ -196,7 +203,7 @@ export default Route.extend({
                         break;
                 }
 
-                project.get(format + '_layer_project_ids').addObject(newLayer);
+                project.get(`${format}_layer_project_ids`).addObject(newLayer);
 
                 _this.get('mapObject').mapLayer(newLayer);
                 // Only call save if the session is authenticated.
@@ -210,7 +217,7 @@ export default Route.extend({
                         // Show a success message.
                         // _this.controllerFor('project/browse-layers').set('editSuccess', true);
                         // Ember.$('.browse-results').fadeTo(0.2);
-                        Ember.run.later(this, function() {
+                        run.later(this, function() {
                             // Ember.$('.browse-results').faddeTo(1);
                         }, 3000);
                     }, function() {
@@ -230,16 +237,17 @@ export default Route.extend({
                 // Build a hash for the query. We do this because one key will need
                 // to equal the `format` var.
                 let attrs = {};
-                let layer_id = layerModel + '_layer_id';
+                let layer_id = `${layerModel}_layer_id`;
                 attrs[layer_id] = layer.get('id');
-                attrs['project_id'] = project.id;
+                // NOTE: This might be wrong. Was `attrs['project_id'] =`
+                attrs.project_id = project.id;
                 // Get the join between layer and project
                 // NOTE: peekRecord doesn't work here? It is 4:17am
-                this.store.queryRecord(layerModel + '-project',
+                this.store.queryRecord(`${layerModel}-project`,
                     attrs
                 ).then(function(layerToRemove) {
                     // Remove the object from the DOM
-                    project.get(format + '_layer_project_ids').removeObject(layerToRemove);
+                    project.get(`${format}_layer_project_ids`).removeObject(layerToRemove);
                     // Delete the record from the project
                     layerToRemove.deleteRecord().then(function() {
                         // Set active to false

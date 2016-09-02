@@ -5,10 +5,13 @@ import Ember from 'ember';
 // Service to hold the Leaflet object.
 
 const {
+    $,
+    get,
     inject: {
         service
     },
-    Service
+    Service,
+    set
 } = Ember;
 
 export default Service.extend({
@@ -18,19 +21,32 @@ export default Service.extend({
 
     init() {
         this._super(...arguments);
-        this.set('map', '');
-        this.set('leafletGroup', L.layerGroup());
-        this.set('projectLayers', {});
+        set(this, 'map', '');
+        set(this, 'leafletGroup', L.layerGroup());
+        set(this, 'projectLayers', {});
     },
 
-    createMap(project) {
+    createMap() {
         try {
-            // Add some base layers
-            let street = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors Georgia State University and Emory University'
+            let _map = L.map('map', {
+                center: [33.7489954, -84.3879824],
+                zoom: 13,
+                // zoomControl is a Boolean
+                // We add the zoom buttons just below to the top right.
+                zoomControl: false
+                // layers: [satellite, street]
             });
 
-            let satellite = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+            // Create the object for Leafet in the mapObject service.
+            this.set('map', _map);
+
+            // Add some base layers
+            L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
+                className: 'street base'
+            }).addTo(_map);
+
+            L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
                 attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
                 subdomains: '1234',
                 base: 'aerial',
@@ -42,69 +58,81 @@ export default Service.extend({
                 maxZoom: 20,
                 language: 'eng',
                 format: 'png8',
-                size: '256'
-            });
+                size: '256',
+                className: 'satellite base'
+            }).addTo(_map);
 
-            let _map = L.map('map', {
-                center: [33.7489954, -84.3879824],
-                zoom: 13,
-                // zoomControl is a Boolean
-                // We add the zoom buttons just below to the top right.
-                zoomControl: false,
-                layers: [satellite, street]
-            });
-
-            Ember.$(satellite.getContainer()).addClass('satellite').addClass('base');
-            Ember.$(street.getContainer()).addClass('street').addClass('base');
-
-            // Layer contorl, topright
+            // Zoom contorl, topright
             L.control.zoom({
                 position: 'topright'
             }).addTo(_map);
 
             // this.get('leafletGroup').addTo(_map);
 
-            _map.on('click', function() {
-                // Ember.$("div.info").remove();
-                Ember.$('div.vector-info').hide();
-                Ember.$('.active_marker').removeClass('active_marker');
-                Ember.$('.vector-content.marker-content').empty();
-                project.setProperties({
-                    showing_browse_results: false
-                });
-                // this.send('activateVectorCard');
-            });
-
-            // let baseMaps = {
-            //     "satellite": satellite,
-            //     "street": osm
-            // }
-            //
-            // L.control.layers(baseMaps,null).addTo(_map);
-            // Create the object for Leafet in the mapObject service.
-            this.set('map', _map);
-            // Add all the vector layers to the map.
-            let _this = this;
-            project.get('vector_layer_project_ids').then(function(vectors) {
-                vectors.forEach(function(vector) {
-                    _this.mapLayer(vector);
-                });
-            });
-
-            // Add all the raster layers to the map.
-            project.get('raster_layer_project_ids').then(function(rasters) {
-                rasters.forEach(function(raster) {
-                    _this.mapLayer(raster);
-                });
-            });
-
-            _map.flyTo(L.latLng(project.get('center_lat'), project.get('center_lng')), project.get('zoom_level'));
-            Ember.$('.base').hide();
-            Ember.$('.' + project.get('default_base_map')).show();
             return _map;
+
         } catch (err) {
             // Map is likely already initialized
         }
+    },
+
+    setUpProjectMap(project) {
+        let _map = get(this, 'map');
+        console.log(get(this, 'map'));
+        _map.on('click', function() {
+            $('div.vector-info').hide();
+            $('.active_marker').removeClass('active_marker');
+            $('.vector-content.marker-content').empty();
+            project.setProperties({
+                showing_browse_results: false
+            });
+        });
+
+        // Add all the vector layers to the map.
+        let _this = this;
+        project.get('vector_layer_project_ids').then(function(vectors) {
+            vectors.forEach(function(vector) {
+                _this.mapLayer(vector);
+            });
+        });
+
+        // Add all the raster layers to the map.
+        project.get('raster_layer_project_ids').then(function(rasters) {
+            rasters.forEach(function(raster) {
+                _this.mapLayer(raster);
+            });
+        });
+
+        _map.flyTo(
+            L.latLng(
+                project.get('center_lat'),
+                project.get('center_lng')
+            ), project.get('zoom_level')
+        );
+
+        $('.base').hide();
+
+        $(`.${project.get('default_base_map')}`).show();
+    },
+
+    mapSingleLayer(layer) {
+        let wmsLayer = L.tileLayer.wms(layer.get('url'), {
+            layers: layer.get('layers'),
+            format: 'image/png',
+            transparent: true,
+            maxZoom: 20,
+            // detectRetina: true,
+            // className: newLayerSlug,
+            // zIndex, // Enhanced litrial
+            opacity: 1
+        });
+
+        this.get('projectLayers')[layer.get('slug')] = wmsLayer;
+        wmsLayer.addTo(this.get('map'));
+        this.get('map').fitBounds([
+            [layer.get('miny'), layer.get('minx')],
+            [layer.get('maxy'), layer.get('maxx')]
+        ]);
     },
 
     mapLayer(layer) {
@@ -112,7 +140,7 @@ export default Service.extend({
         let map = this.get('map');
         let zIndex = layer.get('position') + 10;
 
-        layer.get(layer.get('data_format') + '_layer_id').then(function(newLayer) {
+        layer.get(`${layer.get('data_format')}_layer_id`).then(function(newLayer) {
 
             let newLayerName = newLayer.get('name');
             let newLayerTitle = newLayer.get('title');
@@ -127,7 +155,7 @@ export default Service.extend({
 
                 case 'planningatlanta':
 
-                    let tile = L.tileLayer('http://static.library.gsu.edu/ATLmaps/tiles/' + newLayerName + '/{z}/{x}/{y}.png', {
+                    let tile = L.tileLayer(`http://static.library.gsu.edu/ATLmaps/tiles/${newLayerName}/{z}/{x}/{y}.png`, {
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,
@@ -135,7 +163,7 @@ export default Service.extend({
                         detectRetina: true
                     }).addTo(map).setZIndex(10).getContainer();
 
-                    Ember.$(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
+                    $(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
 
@@ -150,7 +178,7 @@ export default Service.extend({
                         errorTileUrl: 'http://inspiresara.com/wp-content/uploads/2015/04/Peanut-butter-jelly-time.gif'
                     }).addTo(map).setZIndex(10).getContainer();
 
-                    Ember.$(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
+                    $(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
 
@@ -161,8 +189,8 @@ export default Service.extend({
                         transparent: true,
                         maxZoom: 20,
                         // detectRetina: true,
-                        className: newLayerSlug,
-                        zIndex: zIndex,
+                        // className: newLayerSlug,
+                        zIndex, // Enhanced litrial
                         opacity: 1
                     });
 
@@ -173,7 +201,7 @@ export default Service.extend({
                     _this.get('leafletGroup').addLayer(wmsLayer);
                     wmsLayer.addTo(map);
 
-                    // Ember.$(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
+                    // $(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
 
                     break;
 
@@ -183,7 +211,7 @@ export default Service.extend({
                     //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
                     //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('slug') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
 
-                    //  Ember.$.ajax(wfsLayer,
+                    //  $.ajax(wfsLayer,
                     //      { dataType: 'jsonp' }
                     //      ).done(function ( data ) {});
 
@@ -212,11 +240,11 @@ export default Service.extend({
                                 color_hex: markerColors[layer.get('marker')].hex
 
                             });
-                            let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
-                            let markerDiv = '<span class="map-marker vector-icon vector ' + dataType + ' layer-' + newLayer.get('color_name') + '"></span>';
+                            let layerClass = `${newLayerSlug} vectorData map-marker layer-${newLayer.get('color_name')}`;
+                            let markerDiv = `<span class='map-marker vector-icon vector ${dataType} layer-${newLayer.get('color_name')}'></span>`;
                             if (newLayerUrl) {
                                 let points = new L.GeoJSON.AJAX(newLayerUrl, {
-                                    pointToLayer: function(feature, latlng) {
+                                    pointToLayer(feature, latlng) {
                                         let icon = L.divIcon({
                                             className: layerClass,
                                             iconSize: null,
@@ -224,9 +252,9 @@ export default Service.extend({
                                         });
 
                                         let marker = L.marker(latlng, {
-                                            icon: icon,
+                                            icon,
                                             title: newLayerTitle,
-                                            markerDiv: markerDiv
+                                            markerDiv
                                         });
 
                                         return marker;
@@ -291,7 +319,7 @@ export default Service.extend({
             });
         } else if (dataType === 'point-data') {
             // The Icon class doesn't have any methods like setStyle.
-            Ember.$('.leaflet-marker-icon.' + slug).css({
+            $('.leaflet-marker-icon.' + slug).css({
                 color: vector.get('color_hex')
             });
         }

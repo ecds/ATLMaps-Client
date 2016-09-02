@@ -25,7 +25,7 @@ export default Component.extend({
             this.sendAction('getResults');
         },
 
-        checkAllTagsInCategory: function(category) {
+        checkAllTagsInCategory(category) {
             let allChecked = category.get('allChecked');
             let tags = category.get('sortedTags');
             if (allChecked === false) {
@@ -40,7 +40,7 @@ export default Component.extend({
             this.sendAction('getResults');
         },
 
-        showTagGroup: function(category) {
+        showTagGroup(category) {
             // There is a non-api backed boolean on the category model for `clicked`
             // This is what is used for showing the tags for the clicked category.
             // A property is set on this component, `clickedCategory` to the clicked

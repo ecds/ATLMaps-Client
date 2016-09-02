@@ -3,6 +3,7 @@ import Ember from 'ember';
 const {
     computed,
     Controller,
+    get,
     inject: {
         service
     }
@@ -17,9 +18,14 @@ export default Controller.extend({
         }
     },
 
+    // TODO: I don't like this.
     // computed property - whether this current route is a project.* page
     isProjectDetail: computed('currentRouteName', function() {
-        return (this.get('currentRouteName').includes('project.'));
+        if (get(this, 'currentRouteName').includes('project.') || get(this, 'currentRouteName').includes('tagem')) {
+            return true;
+        } else {
+            return false;
+        }
     })
 
 });

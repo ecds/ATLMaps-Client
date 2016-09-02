@@ -19,7 +19,7 @@ export default Component.extend({
     }.property(),
 
     actions: {
-        textSearch: function() {
+        textSearch() {
             this.get('browseParams').setSearchText(this.get('searchTerms'));
             this.sendAction('getResults');
         }

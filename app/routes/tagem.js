@@ -13,10 +13,24 @@ import Ember from 'ember';
 const {
     Route,
     RSVP,
-    get
+    get,
+    inject: {
+        service
+    },
+    set
 } = Ember;
 
 export default Route.extend({
+    mapObject: service(),
+    session: service(),
+    currentUser: service(),
+
+    afterModel() {
+        let foo = this.get('currentUser.user');
+        console.log('foo', this.get('currentUser.user.displayname'));
+        return foo;
+    },
+
     model() {
         return RSVP.hash({
             categories: this.store.findAll('category'),
@@ -26,12 +40,33 @@ export default Route.extend({
 
     actions: {
         addTag(tagID) {
-            let tag = this.store.peekRecord('tag', tagID);
+            // let tag = this.store.peekRecord('tag', tagID);
             let layer = this.currentModel.layer;
+            let userID = get(this, 'session.session.content.authenticated.user.id');
 
-            let ids = get(layer, 'tag_ids');
-            ids.pushObject(tag);
-            layer.save();
+            let userTagged = this.store.createRecord('user-tagged', {
+                tag_id: tagID,
+                raster_layer_id: layer.id,
+                user_id: userID
+            });
+
+            userTagged.save();
+
+            let count = this.store.peekRecord('user', userID);
+            set(count, 'number_tagged', count.get('number_tagged') + 1);
+        },
+
+        getNextMap() {
+            let _this = this;
+            this.store.unloadAll('raster-layer');
+            this.get('mapObject.map').remove();
+            // set(this, 'currentModel.layer', '');
+            get(this, 'mapObject').createMap();
+            this.store.queryRecord('raster-layer', { tagem: true }).then(function(nextLayer) {
+                set(_this, 'layer', nextLayer);
+                set(_this, 'currentModel.layer', nextLayer);
+                get(_this, 'mapObject').mapSingleLayer(nextLayer);
+            });
         }
 
     }

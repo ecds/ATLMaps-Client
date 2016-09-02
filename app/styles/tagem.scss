@@ -5,10 +5,91 @@
   border-radius: .25em;
   color: material-color(md_grey, 50);
   display: inline-block;
-  margin: .5em 1em;
+  margin: .5em;
   padding: .5em 1em;
 
   &.tagged {
     background-color: material-color(md_deeporangealt, 400);
+  }
+}
+
+.tagem-title {
+  font-size: 3vh;
+  text-align: center;
+
+  input {
+    display: none;
+  }
+
+  label {
+    transition: transform $rabbit;
+
+    i {
+      border-radius: 50%;
+      color: material-color(md_deeporangealt, 400);
+      font-size: 2em;
+      margin-top: .25em;
+    }
+  }
+}
+
+.tagem {
+  & .main-navbar {
+    height: 6vh;
+  }
+
+  .btn {
+    font-size: 1.25em;
+    width: 100%;
+  }
+}
+
+.tagem-description {
+  background-color: material-color(md_white);
+  border-bottom: solid 1px material-color(md_grey, 300);
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-left: solid 1px material-color(md_grey, 300);
+  border-right: solid 1px material-color(md_grey, 300);
+  box-shadow: 0 1em 1.25em -1em material-color(md_grey, 600);
+  display: block;
+  margin: .37em 12.5%;
+  max-height: 0;
+  overflow: hidden;
+  position: absolute;
+  transition: max-height $turtle;
+  width: 50vw;
+  z-index: 999;
+
+  article {
+    margin: .5em;
+  }
+}
+
+#toggleDescription:checked ~ label {
+  transform: rotate(180deg);
+}
+
+#toggleDescription:checked ~ .tagem-description {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.draggable-dropzone {
+  .btn-fab {
+    bottom: 2em;
+    position: absolute;
+    right: 2em;
+    width: 56px;
+    z-index: 999;
+
+    &.btn-warning {
+      background-color: material-color(md_deeporangealt, 400) !important;
+    }
+
+    &:hover {
+      background-color: material-color(md_deeporangealt, 700) !important;
+    }
+
   }
 }

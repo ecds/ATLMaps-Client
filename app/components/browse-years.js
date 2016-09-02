@@ -24,12 +24,10 @@ export default Component.extend({
 
         // Initializing the slider
         noUiSlider.create(rangeSlider, {
-            start: [ min, max ],
+            start: [min, max],
             connect: true,
-            range: {
-                'min': min,
-                'max': max
-            }
+            // ES6: Enhanced object literal.
+            range: { min, max }
         });
 
         let _this = this;

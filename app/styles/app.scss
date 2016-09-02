@@ -125,3 +125,13 @@ a {
   height: 100%;
   width: 100%;
 }
+
+.row-eq-height {
+  display: flex;
+
+  div {
+    .checkbox {
+      margin-top: -10px;
+    }
+  }
+}

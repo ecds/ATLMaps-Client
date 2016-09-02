@@ -12,7 +12,7 @@ export default Component.extend({
     dragStart(event) {
         let tag = this.get('content');
         // this.setTaggedClass();
-        return event.dataTransfer.setData('text/data', tag.get('id'));
+        return event.dataTransfer.setData('text/data', tag.get('id'), 'obj');
     },
     click() {
         this.sendAction('action', this.tag.id);

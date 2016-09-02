@@ -1,8 +1,30 @@
-{{!pick-tags model=model.categories}}
+<div class="tagem main-navbar">
+    <div class="col-lg-2 col-md-2">
+        {{ tag-count }}
+    </div>
+    <div class="col-lg-8 col-md-10 tagem-title">
+        {{ model.layer.title }}
+        {{input type="checkbox"
+                checked=false
+                elementId="toggleDescription"
+        }}
+        <label for="toggleDescription">
+          <i class="material-icons">expand_less</i>
+        </label>
+        <div class="container tagem-description">
+          <article>
+            {{model.layer.description}}
+          </article>
+        </div>
+    </div>
+    <div class="col-lg-2 hidden-md">
+        <a class="btn btn-raised btn-warning" {{action 'getNextMap'}}>Next <i class="material-icons">navigate_next</i></a>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
-
-        <div class="available-users col-md-6">
+        <div class="col-md-6">
             {{#each model.categories as |category|}}
                 <h4>{{category.name}}</h4>
                 {{#each category.tag_ids as |tag|}}
@@ -13,9 +35,13 @@
             {{/each}}
         </div>
 
-        <div class="selected-users col-md-6">
+        <div class="map-to-tag col-md-6">
+            {{opacity-slider layer=model.layer}}
             {{#draggable-dropzone layer=model.layer dropped=(route-action "addTag")}}
-                <div id="map" style="height:100vh;"></div>
+                <div id="map" style="height:90vh;"></div>
+                <a class="btn btn-warning btn-fab visible-md-* hidden-lg" {{action 'getNextMap'}}>
+                  <i class="material-icons">navigate_next</i>
+                </a>
             {{/draggable-dropzone}}
         </div>
     </div>
