@@ -18,9 +18,13 @@ export default Service.extend({
         this._super(...arguments);
         let userId = this.get('session.data.authenticated.user.id');
         let _this = this;
-        this.get('store').findRecord('user', userId).then(function(user) {
-            set(_this, 'user', user);
-        });
+        try {
+            this.get('store').findRecord('user', userId).then(function(user) {
+                set(_this, 'user', user);
+            });
+        } catch(err) {
+
+        }
         set(this, 'tags', {});
     }
 });
