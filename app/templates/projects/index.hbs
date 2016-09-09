@@ -1,15 +1,15 @@
 <div class="banner orange">
     <div class="container">
         <header>
-            <h2>Projects</h2>
+            <h2>Projects {{currentUser.user.displayname}}!!!!</h2>
         </header>
     </div>
 </div>
-{{#if session.isAuthenticated }}
+{{!#if currentUser }}
 <span calss="add-new-project">
   <a class="btn btn-fab btn-default new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
 </span>
-{{/if}}
+{{!/if}}
 <div class="banner orange blurred">
     <div class="container project-list">
         {{#if session.isAuthenticated}}

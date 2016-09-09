@@ -78,7 +78,6 @@ export default Service.extend({
 
     setUpProjectMap(project) {
         let _map = get(this, 'map');
-        console.log(get(this, 'map'));
         _map.on('click', function() {
             $('div.vector-info').hide();
             $('.active_marker').removeClass('active_marker');
@@ -146,6 +145,7 @@ export default Service.extend({
             let newLayerTitle = newLayer.get('title');
             let newLayerSlug = newLayer.get('slug');
             let dataType = newLayer.get('data_type');
+
             // let newLayerInst = newLayer.get('institution.geoserver');
             // let newLayerWorkspace = newLayer.get('workspace');
             let newLayerUrl = newLayer.get('url');

@@ -34,7 +34,7 @@
                                 <h3>
                                         <a {{action 'showLayerInfoDetals' layer}}>
                                             {{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}
-                                        </a>
+                                        </a> {{layer.position}}
                                     </h3>
                             </div>
                             <div class="col-md-2 reorder">

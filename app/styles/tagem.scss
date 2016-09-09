@@ -29,11 +29,10 @@
     background-color: material-color(md_blue, 600);
     display: inherit;
     font-weight: normal;
-  }
 
-  &.tagged {
-    .label {
+    &.tagged {
       background-color: material-color(md_deeporangealt, 400);
+      opacity: .5;
     }
   }
 }
@@ -104,6 +103,7 @@
   .opacity {
     display: block;
     left: 81%;
+    pointer-events: all;
     position: absolute;
     top: 32%;
     transform: rotate(-90deg);

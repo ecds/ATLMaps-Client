@@ -3,6 +3,7 @@ import Ember from 'ember';
 /* globals noUiSlider */
 
 const {
+    $,
     Component,
     get,
     inject: {
@@ -43,7 +44,7 @@ export default Component.extend({
         // Change the opactity when a user moves the slider.
         let valueInput = document.getElementById(layer.get('slider_id'));
 
-        slider.noUiSlider.on('slide', function(values, handle) {
+        slider.noUiSlider.on('update', function(values, handle) {
             let opacity = values[handle] / 10;
             // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
             get(_this, 'mapObject.projectLayers')[get(layer, 'slug')].setOpacity(opacity);
@@ -64,6 +65,27 @@ export default Component.extend({
             }
         });
 
+        valueInput.addEventListener('change', function() {
+            slider.noUiSlider.set(this.value);
+        });
+
+        // Make a reference so we can destroy on exit.
+        set(this, 'slider', slider);
+
+        // Watch the toggle check box to show/hide all raster layers.
+        let showHideSwitch = document.getElementById('toggle-layer-opacity');
+        showHideSwitch.addEventListener('click', function() {
+            if ($('input#toggle-layer-opacity').prop('checked')) {
+                slider.noUiSlider.set(10);
+                projLayer.setProperties({ showing: true });
+            } else {
+                slider.noUiSlider.set(0);
+                projLayer.setProperties({ showing: false });
+            }
+        });
+
+        set(this, 'toggle', showHideSwitch);
+
     },
 
     update(slider) {
@@ -73,8 +95,6 @@ export default Component.extend({
     willDestroyElement() {
         get(this, 'slider').noUiSlider.destroy();
         document.removeEventListener('click', this.get('toggle'));
-        this.get('mapObject.map').remove();
-        this.set('mapObject.map', '');
     }
 
 });

@@ -3,6 +3,7 @@ import Ember from 'ember';
 /* globals md5 */
 
 const {
+    $,
     Route,
     RSVP,
     inject: {
@@ -12,11 +13,13 @@ const {
 
 export default Route.extend({
     session: service(),
+    currentUser: service(),
 
     model() {
         // The API will only return published projects when asked for all.
         // We'll make seperate calls for a user's projects if a user is authenticated.
         if (this.get('session.isAuthenticated')) {
+            console.log('this', this.get('session.isAuthenticated'));
             return RSVP.hash({
                 published: this.store.findAll('project'),
                 mine: this.store.query('project', {
@@ -39,7 +42,7 @@ export default Route.extend({
     actions: {
 
         didTransition() {
-            Ember.$(document).attr('title', 'ATLMaps: Projects');
+            $(document).attr('title', 'ATLMaps: Projects');
         },
 
         createProject() {

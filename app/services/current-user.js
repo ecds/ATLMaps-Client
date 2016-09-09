@@ -21,5 +21,6 @@ export default Service.extend({
         this.get('store').findRecord('user', userId).then(function(user) {
             set(_this, 'user', user);
         });
+        set(this, 'tags', {});
     }
 });

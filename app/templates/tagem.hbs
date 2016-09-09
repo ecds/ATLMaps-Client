@@ -27,9 +27,9 @@
         <div class="col-md-6">
             {{#each model.categories as |category|}}
                 <h4>{{category.name}}</h4>
-                {{#each category.tag_ids as |tag|}}
+                {{#each category.sortedTags as |tag|}}
                     {{#draggable-item content=tag layer=model.layer tag=tag tags=model.layer.tag_ids action=(route-action "addTag")}}
-                        <h3><span class='label label-default'>{{tag.name}}</span></h3>
+                        <h3><span class='label label-default {{if tag.assigned "tagged"}}'>{{tag.name}}</span></h3>
                     {{/draggable-item}}
                 {{/each}}
             {{/each}}

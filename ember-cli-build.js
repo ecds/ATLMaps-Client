@@ -27,11 +27,11 @@ module.exports = function() {
     var mergeTrees = require('broccoli-merge-trees');
 
     var leafletImages = funnel('bower_components/leaflet/dist/images', {
-        destDir: 'assets/images',
+        destDir: 'assets/images'
     });
 
     var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
-        destDir: 'assets/images',
+        destDir: 'assets/images'
     });
 
     app.import('bower_components/leaflet/dist/leaflet.js');
@@ -54,7 +54,7 @@ module.exports = function() {
         app.toTree(),
         leafletImages,
         trumbowygImages
-    ],{
+    ], {
         overwrite: true
     });
 };

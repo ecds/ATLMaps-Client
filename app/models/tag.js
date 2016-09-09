@@ -20,5 +20,8 @@ export default Model.extend({
     }),
     checked: attr('boolean', {
         defaultValue: false
+    }),
+    assigned: attr('boolean', {
+        defaultValue: false
     })
 });
