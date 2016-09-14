@@ -57,18 +57,38 @@
   }
 }
 
+.user-label {
+  padding-bottom: 0;
+}
+
 .tagem {
   & .main-navbar {
     height: 6vh;
+    // min-height: auto;
+
+    div {
+      // height: 6vh;
+    }
   }
 
-  .btn {
-    font-size: 1.25em;
-    width: 100%;
+  i {
+    &.user {
+      color: material-color(md_blue, 300);
+      font-size: 3em;
+      vertical-align: text-top;
+    }
+  }
+
+
+  .btn-warning {
+    // font-size: 1.25em;
+    // width: 100%;
+    color: material-color(md_grey, 100) !important;
   }
 }
 
-.tagem-description {
+.tagem-description,
+.tagem-user {
   background-color: material-color(md_white);
   border-bottom: solid 1px material-color(md_grey, 300);
   border-bottom-left-radius: 1em;
@@ -79,6 +99,7 @@
   display: block;
   margin: .37em 12.5%;
   max-height: 0;
+  opacity: 0;
   overflow: hidden;
   position: absolute;
   transition: max-height $turtle;
@@ -90,25 +111,41 @@
   }
 }
 
+.tagem-user {
+  display: table;
+  margin-left: 0;
+  top: 2.9em;
+  width: 25vw;
+}
+
+#toggleUserInfo {
+  display: none;
+}
+
 #toggleDescription:checked ~ label {
   transform: rotate(180deg);
 }
 
-#toggleDescription:checked ~ .tagem-description {
+#toggleDescription:checked ~ .tagem-description,
+#toggleUserInfo:checked ~ .tagem-user {
   max-height: 50vh;
+  opacity: 1;
   overflow: auto;
 }
 
-.map-to-tag {
+.slider-container {
+  display: block;
+  max-height: 6em;
+  max-width: 8em;
+
+  position: absolute;
+  right: .5em;
+  top: 9em;
+  z-index: 999;
+
   .opacity {
-    display: block;
-    left: 81%;
     pointer-events: all;
-    position: absolute;
-    top: 32%;
     transform: rotate(-90deg);
-    width: 25%;
-    z-index: 999;
   }
 }
 

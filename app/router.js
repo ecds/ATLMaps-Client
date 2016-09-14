@@ -48,11 +48,10 @@ Router.map(function() {
     this.route('support', {
         path: '/help'
     });
-
+    this.route('tagem', { path: '/:tagem' });
     this.route('404', {
         path: '/*wildcard'
     });
-    this.route('tagem');
 });
 
 export default Router;

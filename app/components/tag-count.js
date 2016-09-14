@@ -7,5 +7,13 @@ const {
     }
 } = Ember;
 export default Component.extend({
-    currentUser: service()
+    currentUser: service(),
+
+    session: service(),
+
+    actions: {
+        invalidateSession() {
+            this.get('session').invalidate();
+        }
+    }
 });

@@ -1,13 +1,25 @@
 <div class="tagem main-navbar">
-    <div class="col-lg-2 col-md-2">
-        {{ tag-count }}
+    <div class="col-lg-1 col-md-1">
+      {{input type="checkbox"
+              checked=false
+              elementId="toggleUserInfo"
+      }}
+      <label class="user-label" for="toggleUserInfo">
+      <i class="material-icons user">account_box</i>
+    </label>
+    <div class="container tagem-user">
+      <article>
+        {{ tag-count }}{{currentUser}}
+      </article>
     </div>
-    <div class="col-lg-8 col-md-10 tagem-title">
-        {{ model.layer.title }}
+    </div>
+
+    <div class="col-lg-9 col-md-10 tagem-title">
         {{input type="checkbox"
                 checked=false
                 elementId="toggleDescription"
         }}
+        {{ model.layer.title }}
         <label for="toggleDescription">
           <i class="material-icons">expand_less</i>
         </label>
@@ -17,9 +29,15 @@
           </article>
         </div>
     </div>
+
     <div class="col-lg-2 hidden-md">
-        <a class="btn btn-raised btn-warning" {{action 'getNextMap'}}>Next <i class="material-icons">navigate_next</i></a>
+      <div class='btn-group btn-group-md'>
+      {{#previous-map layer=model.layer action=(route-action "getPreviousMap")}}
+        <i class="material-icons">chevron_left</i>Back
+      {{/previous-map}}
+      <button class="btn btn-default btn-warning" onclick={{route-action 'getNextMap' model.layer.id}}>Next<i class="material-icons">chevron_right</i></button>
     </div>
+  </div>
 </div>
 
 <div class="container-fluid">
@@ -36,13 +54,14 @@
         </div>
 
         <div class="map-to-tag col-md-6">
-            {{input class="opacity leaflet-top leaflet-left" type='range' min=0.2 step=0.1 max=1.0 value=1 input=(route-action "opacity")}}
             {{#draggable-dropzone layer=model.layer dropped=(route-action "addTag")}}
                 <div id="map" style="height:90vh;"></div>
                 <a class="next-sm visible-md-* hidden-lg" {{action 'getNextMap'}}>
                   <i class="material-icons">navigate_next</i>
                 </a>
             {{/draggable-dropzone}}
-        </div>
+            <div class="slider-container">
+            {{input class="opacity" type='range' min=0 step=0.1 max=1.0 value=1 input=(route-action "opacity")}}
+  </div>      </div>
     </div>
 </div>

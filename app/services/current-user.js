@@ -26,5 +26,6 @@ export default Service.extend({
 
         }
         set(this, 'tags', {});
+        set(this, 'previous', '');
     }
 });

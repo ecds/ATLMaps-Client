@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 /**
  * Route for tagging interface.
@@ -21,7 +22,7 @@ const {
     set
 } = Ember;
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRouteMixin, {
     mapObject: service(),
     session: service(),
     currentUser: service(),
@@ -47,14 +48,47 @@ export default Route.extend({
         // map.addControl(new Legend());
     },
 
-    model() {
+    model(params) {
+        console.log('params', params);
+        let tagem;
+        if (params.tagem === 'tagem') {
+            tagem = true;
+        } else {
+            tagem = params.tagem;
+        }
         return RSVP.hash({
             categories: this.store.findAll('category'),
-            layer: this.store.queryRecord('raster-layer', {
-                tagem: true
-            }),
+            layer: this.store.queryRecord('raster-layer', { tagem }),
             userTagged: this.store.peekAll('user-tagged')
         });
+    },
+
+    saveTags() {
+        let _this = this;
+        set(this, 'currentUser.tags', {});
+        let userTagged = this.store.peekAll('user-tagged');
+
+        userTagged.save().then(function() {
+            _this.store.unloadAll('user-tagged');
+        }, function(errors) {
+            console.log('error', errors.errors.msg);
+        });
+    },
+
+    loadMap(layer) {
+        // Reset all tags.
+        this.store.peekAll('tag').setEach('assigned', false);
+
+        // this.store.unloadAll('raster-layer');
+
+        this.get('mapObject.map').remove();
+        // set(this, 'currentModel.layer', '');
+        get(this, 'mapObject').createMap();
+
+        set(this, 'layer', layer);
+        set(this, 'currentModel.layer', layer);
+        get(this, 'mapObject').mapSingleLayer(layer);
+        $('.opacity').val(1);
     },
 
     actions: {
@@ -81,31 +115,35 @@ export default Route.extend({
             }
         },
 
-        getNextMap() {
+        getNextMap(layer) {
             let _this = this;
-            let userTagged = this.store.peekAll('user-tagged');
-            set(this, 'currentUser.tags', {});
 
-            // Reset all tags.
-            this.store.peekAll('tag').setEach('assigned', false);
-
-            userTagged.save().then(function() {
-                _this.store.unloadAll('user-tagged');
-            }, function(errors) {
-                console.log('error', errors.errors.msg);
-            });
-
-            this.store.unloadAll('raster-layer');
-
-            this.get('mapObject.map').remove();
-            // set(this, 'currentModel.layer', '');
-            get(this, 'mapObject').createMap();
             this.store.queryRecord('raster-layer', {
                 tagem: true
             }).then(function(nextLayer) {
-                set(_this, 'layer', nextLayer);
-                set(_this, 'currentModel.layer', nextLayer);
-                get(_this, 'mapObject').mapSingleLayer(nextLayer);
+                _this.saveTags();
+                _this.loadMap(nextLayer);
+            });
+
+            set(this, 'currentUser.previous', layer);
+        },
+
+        getPreviousMap() {
+            let _this = this;
+            let previous_id = get(this, 'currentUser.previous');
+            let userID = get(this, 'currentUser.user.id');
+            this.store.findRecord('raster-layer', previous_id).then(function(previousLayer) {
+                _this.loadMap(previousLayer);
+                _this.store.query('user-tagged', {
+                    user_id: userID,
+                    raster_layer_id: previousLayer.id
+                }).then(function(tags) {
+                    tags.forEach(function(tag) {
+                        let assigned = _this.store.peekRecord('tag', get(tag, 'tag_id'));
+                        assigned.setProperties({ assigned: true });
+                    });
+                    // console.log('tags', tags);
+                });
             });
         },
 
