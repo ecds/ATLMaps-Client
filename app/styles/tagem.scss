@@ -116,6 +116,7 @@
   margin-left: 0;
   top: 2.9em;
   width: 25vw;
+  z-index: 0;
 }
 
 #toggleUserInfo {
@@ -131,6 +132,7 @@
   max-height: 50vh;
   opacity: 1;
   overflow: auto;
+  z-index: 999;
 }
 
 .slider-container {
