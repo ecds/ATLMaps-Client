@@ -1,13 +1,13 @@
 <div class="banner orange">
     <div class="container">
         <header>
-            <h2>Projects {{currentUser.user.displayname}}!!!!</h2>
+            <h2>Projects {{currentUser.user.displayname}}</h2>
         </header>
     </div>
 </div>
 {{!#if currentUser }}
 <span calss="add-new-project">
-  <a class="btn btn-fab btn-default new-project" {{action 'createProject'}}><i class="material-icons">add</i></a>
+  {{!-- <a class="btn btn-fab btn-default new-project" {{action 'createProject'}}><i class="material-icons">add</i></a> --}}
 </span>
 {{!/if}}
 <div class="banner orange blurred">

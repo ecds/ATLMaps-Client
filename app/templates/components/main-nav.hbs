@@ -22,11 +22,11 @@
         <li>{{#link-to 'terms' tagName='a'}}Terms of Use{{/link-to}}</li> -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
+          {{!-- {{#if currentUser}}
               <li><a {{action 'invalidateSession' }} title="Logout">{{currentUser.user.displayname}}</a></li>
             {{else}}
               <li>{{#link-to 'login' tagName='a'}}Login{{/link-to}}</li>
-            {{/if}}
+            {{/if}} --}}
         </ul>
     </div>
 </div>
