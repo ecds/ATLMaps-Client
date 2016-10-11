@@ -60,7 +60,11 @@
             </div>
             <div class="col-md-4">
                 <label class="pull-right">
-                    <input type="checkbox" id="dont-show" checked= {{showIntro.noIntroCookie}} onchange= {{action "supressIntro"}} />
+                    {{input type="checkbox"
+                            checked=project.hasSuppressCookie
+                            elementId="dont-show"
+                            change=(action "supressIntro" project)
+                    }}
                     <span class="check"></span> Don't show every time.
                 </label>
             </div>

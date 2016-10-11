@@ -182,6 +182,7 @@ label.show-results-btn {
 .browse-results {
     position: absolute;
     left: $left;
+    pointer-events: all;
     top: 2.5em;
     z-index: 1;
     .browse-nav {

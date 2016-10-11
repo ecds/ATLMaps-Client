@@ -1,3 +1,10 @@
+// This is a hacky class to hide the parent tether dialog
+// No longer needed?
+.hack {
+  background: transparent;
+  box-shadow: none;
+}
+
 .resize-drag {
     background-color: white;
     color: material-color(md_grey, 900);

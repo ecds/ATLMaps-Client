@@ -4,7 +4,7 @@
             {{#link-to "projects" title="Back to All Projects" }}
                 <i class="material-icons exit">exit_to_app</i>
             {{/link-to}}
-            <span>{{model.name}}</span>
+            <span>{{model.name}} {{model.suppressIntro}}</span>
             <span class="edit-button pull-right">
       				{{#if model.may_edit}}
       					<a {{action (route-action 'toggleEdit')}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>

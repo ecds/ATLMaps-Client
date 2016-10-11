@@ -1,4 +1,4 @@
-{{partial 'project-intro'}}
+{{!partial 'project-intro'}}
 <div class="row layer-heading">
     <table class="table">
         <tr>
@@ -44,7 +44,7 @@
                 {{textarea value=model.description id="edit_description" class="form-control" rows="10" placeholder="Enter your project description here..." maxlength="500"}}
                 <div class="row">
                     <div class="col-md-12">
-                        <a class="btn btn-success" {{action 'toggleIntro'}}>Edit Intro</a>
+                        <a class="btn btn-success" {{route-action 'toggleIntro'}}>Edit Intro</a>
                     </div>
                 </div>
                 {{!edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
@@ -74,8 +74,9 @@
         {{#if model.hasIntro}}
         <div class="row">
             {{!-- <div class="col-md-1"></div> --}}
-            <div class="col-md-12">
-                <a class="btn btn-default btn-raised" {{action 'toggleIntro'}}>Show Intro</a>
+            <div class="col-md-12" id="foo">
+              <a class="btn btn-default btn-warning" {{action 'toggleIntro' bubbles=false}}>Show Intro</a>
+
             </div>
         </div>
         {{/if}}

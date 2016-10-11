@@ -7,7 +7,8 @@ const {
     hasMany
 } = DS;
 const {
-    computed
+    computed,
+    get
 } = Ember;
 
 export default Model.extend({
@@ -53,6 +54,12 @@ export default Model.extend({
     showing_all_rasters: attr('boolean', {
         defaultValue: true
     }),
+    suppressIntro: attr('boolean', {
+        defaultValue: false
+    }),
+    hasSuppressCookie: attr('boolean', {
+        defaultValue: false
+    }),
     edit_success: attr('boolean', {
         defaultValue: false
     }),
@@ -86,7 +93,7 @@ export default Model.extend({
 
     // Booleans are easier to deal with.
     visiable_vector: computed('hidden_vectors', function() {
-        return this.get('hidden_vectors').length > 0;
+        return get(this, 'hidden_vectors').length > 0;
     }),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
@@ -94,11 +101,11 @@ export default Model.extend({
 
     // Booleans are easier to deal with.
     visiable_raster: computed('hidden_rasters', function() {
-        return this.get('hidden_rasters').length > 0;
+        return get(this, 'hidden_rasters').length > 0;
     }),
 
     hasIntro: computed(function() {
-        if (this.get('intro') || (this.get('media'))) {
+        if (get(this, 'intro') || get(this, 'media')) {
             return true;
         } else {
             return false;
@@ -106,7 +113,7 @@ export default Model.extend({
     }),
 
     twoColIntro: computed(function() {
-        if (this.get('intro') && (this.get('media'))) {
+        if (get(this, 'intro') && get(this, 'media')) {
             return true;
         } else {
             return false;

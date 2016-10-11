@@ -21,6 +21,7 @@ li.tags {
     width: 100%;
     margin-left: 0.25em;
     max-height: 100vh !important;
+    pointer-events: all;
     h2 {
         font-size: 1.5em;
         margin: 10px 0;

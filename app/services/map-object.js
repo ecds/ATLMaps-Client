@@ -14,6 +14,8 @@ const {
     set
 } = Ember;
 
+// const { max, min } = Math;
+
 export default Service.extend({
 
     dataColors: service(),
@@ -68,6 +70,7 @@ export default Service.extend({
             }).addTo(_map);
 
             // this.get('leafletGroup').addTo(_map);
+            console.log('title', _map.getBounds());
 
             return _map;
 
@@ -145,6 +148,10 @@ export default Service.extend({
             let newLayerTitle = newLayer.get('title');
             let newLayerSlug = newLayer.get('slug');
             let dataType = newLayer.get('data_type');
+            // let west = newLayer.get('maxx');
+            // let north = newLayer.get('maxy');
+            // let east = newLayer.get('minx');
+            // let south = newLayer.get('miny');
 
             // let newLayerInst = newLayer.get('institution.geoserver');
             // let newLayerWorkspace = newLayer.get('workspace');
@@ -201,7 +208,85 @@ export default Service.extend({
                     _this.get('leafletGroup').addLayer(wmsLayer);
                     wmsLayer.addTo(map);
 
-                    // $(wmsLayer.getContainer()).addClass(newLayerSlug).addClass('atLayer').css("zIndex", zIndex);
+                    // let northWest = L.latLng(west, north);
+                    // let south = L.latLng(east, north);
+                    // let west = L.latLng(west, south);
+                    //
+                    // let layerHeight = map.distance(northWest, south);
+                    // let layerWidth = map.distance(west, northWest);
+                    //
+                    // let b = map.getBounds();
+                    // let mapNorthEast = L.latLng(b.getNorth(), b.getEast());
+                    // let mapSouthEast = L.latLng(b.getSouth(), b.getEast());
+                    // let mapNorthWest = L.latLng(b.getNorth(), b.getWest());
+                    // let mapHeight = map.distance(mapNorthEast, mapSouthEast);
+                    // let mapWidth = map.distance(mapNorthEast, mapNorthWest);
+
+                    // let layerBounds = L.latLngBounds(
+                    //     L.latLng(south, west),
+                    //     L.latLng(north, east)
+                    // );
+
+                    // console.log('map', newLayerTitle, newLayerSlug);
+
+                    // console.log('layerBounds', layerBounds);
+                    //
+                    // console.log('b', b);
+
+                    // console.log('contains', b.contains(layerBounds));
+
+                    // SI = max(0, Max(XA2, XB2) - Min(XA1, XB1)) * Max(0, Max(YA2, YB2) - Min(YA1, YB1))
+                    // console.log('b.getEast', b.getEast());
+                    // let left = max(west, b.getWest());
+                    // let right = min(east, b.getEast());
+                    // let top = max(north, b.getNorth());
+                    // let bottom = min(south, b.getSouth());
+                    // console.log(left + ' < ' + right + ' && ' + bottom + ' < ' + top);
+                    // console.log(west, b.getWest());
+                    // console.log(east, b.getEast());
+                    // if (left < right && bottom < top) {
+                    //     console.log('intersects');
+                    // } else {
+                    //     console.log('no intersects');
+                    // }
+                    // console.log('*****');
+
+                    // let latlngs = [
+                    //     [north, east], // Northeast
+                    //     [south, east], // Southeast
+                    //
+                    //     [south, east], // Southeast
+                    //     [south, west], // Southwest
+                    //
+                    //     [south, west], // Southwest
+                    //     [north, west], // Northwest
+                    //
+                    //     [north, west], // Northwest
+                    //     [north, east]  // Northeast
+                    // ];
+                    // L.polyline(latlngs, { color: 'red' }).addTo(map);
+                    //
+                    // let grr = [
+                    //     [b.getNorth(), b.getEast()],
+                    //     [b.getSouth(), b.getEast()],
+                    //
+                    //     [b.getSouth(), b.getEast()],
+                    //     [b.getSouth(), b.getWest()],
+                    //
+                    //     [b.getSouth(), b.getWest()],
+                    //     [b.getNorth(), b.getWest()],
+                    //
+                    //     [b.getNorth(), b.getWest()],
+                    //     [b.getNorth(), b.getEast()]
+                    // ];
+                    // L.polyline(grr, { color: 'blue' }).addTo(map);
+
+                    // let SI = max(0, max(b.getNorth(), north) - min(b.getSouth(), south)) * max(0, max(b.getWest(), west) - min(b.getEast(), east));
+                    //
+                    // // su = (a.width * a.height) + (b.width * b.height) - si;
+                    // let SU = mapWidth * mapHeight + (layerWidth * layerHeight);
+
+                    // console.log('SU', SI / SU);
 
                     break;
 
@@ -277,8 +362,8 @@ export default Service.extend({
 
                             });
                             // let layerClass = newLayerSlug + ' atLayer vectorData map-marker layer-' + newLayer.get('color_name');
-                            let shapeLayerClass = newLayerSlug + ' vectorData map-marker layer-' + newLayer.get('color_name');
-                            let vectorDiv = '<div class="map-marker vector-icon vector pull-left ' + dataType + ' layer-' + newLayer.get('color_name') + '"></div>';
+                            let shapeLayerClass = `${newLayerSlug} vectorData map-marker layer-${newLayer.get('color_name')}`;
+                            let vectorDiv = `<div class="map-marker vector-icon vector pull-left ${dataType} layer-${newLayer.get('color_name')}"></div>`;
 
                             let polyStyle = {
                                 'color': newLayer.get('color_hex'),
@@ -319,7 +404,7 @@ export default Service.extend({
             });
         } else if (dataType === 'point-data') {
             // The Icon class doesn't have any methods like setStyle.
-            $('.leaflet-marker-icon.' + slug).css({
+            $(`'.leaflet-marker-icon.${slug}`).css({
                 color: vector.get('color_hex')
             });
         }

@@ -49,16 +49,16 @@ export default Route.extend(AuthenticatedRouteMixin, {
     },
 
     model(params) {
-        console.log('params', params);
-        let tagem;
-        if (params.tagem === 'tagem') {
-            tagem = true;
-        } else {
-            tagem = params.tagem;
-        }
+        // console.log('params', params);
+        // let tagem;
+        // if (params.tagem === 'tagem') {
+        //     tagem = true;
+        // } else {
+        //     tagem = params.tagem;
+        // }
         return RSVP.hash({
             categories: this.store.findAll('category'),
-            layer: this.store.queryRecord('raster-layer', { tagem }),
+            layer: this.store.queryRecord('raster-layer', { tagem: true }),
             userTagged: this.store.peekAll('user-tagged')
         });
     },

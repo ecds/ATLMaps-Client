@@ -1,23 +1,31 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const {
+    Route,
+    get,
+    inject: {
+        service
+    },
+    RSVP
+} = Ember;
+
+export default Route.extend({
     classNames: ['bwowse-layers-route'],
 
-    browseParams: Ember.inject.service('browse-params'),
-    mapObject: Ember.inject.service('map-object'),
+    browseParams: service('browse-params'),
+    mapObject: service('map-object'),
 
     // afterModel() {
     //     console.log('hello');
     // },
 
-
     // This is a neat way to add multiple models to a route.
     model() {
-        return Ember.RSVP.hash({
+        return RSVP.hash({
             yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
-            project: this.modelFor('project'),
+            project: this.modelFor('project')
         });
     },
 
@@ -35,33 +43,39 @@ export default Ember.Route.extend({
 
         didTransition() {
             // Show the results pane when we enter the the route.
-            this.send('getResults');
+            // this.send('getResults');
             return true;
         },
 
         toggleResults(project) {
             project.toggleProperty('showing_browse_results');
         },
+        nextPage(meta) {
+            this.getResults(meta.next_page);
+        },
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
-        getResults() {
+        getResults(page) {
             this.setProperties({
-                searched: true,
+                searched: true
                 // showingResults: true
             });
             return this.render('components/browse-results', {
                 outlet: 'browse-results',
                 into: 'project', // Want it to open in the project view
                 controller: 'project/browse-layers', // don't set controller to `project` or it will screw up `model`
-                model: this.store.queryRecord('search', {
+                model: this.store.query('raster-layer', {
+                    search: true,
                     tags: this.get('browseParams.tags'),
                     text_search: this.get('browseParams.searchText'),
-                    name: this.get('browseParams.institutions'),
+                    institution: this.get('browseParams.institutions'),
                     start_year: this.get('browseParams.start_year'),
-                    end_year: this.get('browseParams.end_year')
+                    end_year: this.get('browseParams.end_year'),
+                    bounds: this.get('browseParams.bounds'),
+                    page: page || 0
                 })
             });
-        },
+        }
 
         // NOTE: this is no longer needed?
         // showResults(show){

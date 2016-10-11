@@ -5,6 +5,7 @@ const {
     inject: {
         service
     },
+    get,
     set,
     Route,
     run
@@ -18,7 +19,7 @@ export default Route.extend({
     browseParams: service(),
     session: service(),
     flashMessage: service(),
-    showIntro: service(),
+    cookies: service(),
 
     model(params) {
         if (params.project_id === 'explore') {
@@ -39,17 +40,50 @@ export default Route.extend({
     },
 
     afterModel() {
-        this.get('showIntro').init(this.modelFor('project').get('id'));
+        let project = this.modelFor('project');
+        let projectID = get(project, 'id');
+        if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
+            project.setProperties({ suppressIntro: true });
+        }
+
     },
 
     map() {
         return this.get('mapObject').createMap();
     },
 
+    setUp: function() {
+
+        let project = this.modelFor('project');
+        let cookieService = get(this, 'cookies');
+        let _this = this;
+
+        run.scheduleOnce('afterRender', function() {
+            if (!_this.get('mapObject').map) {
+
+                // Create the Leaflet map.
+                _this.map(project);
+                _this.get('mapObject').setUpProjectMap(project);
+            }
+
+            let suppressCookie = cookieService.read(`noIntro${project.id}`);
+            if (suppressCookie) {
+                project.setProperties(
+                    {
+                        hasSuppressCookie: true,
+                        suppressIntro: true
+                    });
+            } else {
+                set(_this, 'hasSuppressCookie', false);
+            }
+        });
+
+    }.on('activate'),
+
     // Function the runs after we fully exit a project route and clears the map,
     // clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
     tearDown: function() {
-        this.get('browseParams').init();
+        get(this, 'browseParams').init();
         // Clear the chekes for the checked categories and tags.
         let categories = this.store.peekAll('category');
         // categories.setEach('checked', false);
@@ -89,7 +123,8 @@ export default Route.extend({
     actions: {
 
         toggleIntro() {
-            this.get('showIntro').toggleShow();
+            this.modelFor('project').toggleProperty('suppressIntro');
+            console.log('showing');
         },
 
         toggleEdit() {
@@ -108,24 +143,6 @@ export default Route.extend({
             // TODO: User test if the vector window should go away.
 
             return true;
-        },
-
-        didTransition() {
-
-            let project = this.modelFor('project');
-
-            let _this = this;
-
-            run.scheduleOnce('afterRender', function() {
-
-                if (!_this.get('mapObject').map) {
-
-                    // Create the Leaflet map.
-                    _this.map(project);
-                    _this.get('mapObject').setUpProjectMap(project);
-
-                }
-            });
         },
 
         // TODO this should be a Component or service
@@ -212,7 +229,7 @@ export default Route.extend({
                 if (this.get('session.isAuthenticated')) {
                     newLayer.save().then(function() {
                         // Add the map to the view
-                        _this.get('mapObject').mapLayer(newLayer);
+                        // _this.get('mapObject').mapLayer(newLayer);
                         // TODO figure out how to give feedback on these shared actions
                         // Show a success message.
                         // _this.controllerFor('project/browse-layers').set('editSuccess', true);

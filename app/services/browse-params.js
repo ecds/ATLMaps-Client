@@ -3,20 +3,24 @@ import Ember from 'ember';
 // Service to keep track of what a user is browsing so they are persistent
 // while she is in the route. `clearAll` is called when the user leavs the
 // project route.
+const {
+    Service,
+    set
+} = Ember;
 
-export default Ember.Service.extend({
+export default Service.extend({
 
-    init(){
+    init() {
         this._super(...arguments);
         this.set('searchText', '');
         this.set('tags', []);
         this.set('institutions', []);
         this.set('start_year', '');
         this.set('end_year', '');
-        this.set('rastersActive', true);
+        set(this, 'bounds', null);
     },
-    setSearchText(searchTerms){
-        this.setProperties({searchText: searchTerms});
+    setSearchText(searchTerms) {
+        this.setProperties({ searchText: searchTerms });
     },
     addTag(tag){
         this.get('tags').pushObject(tag.get('name'));

@@ -1,0 +1,19 @@
+{{yield}}
+
+<div class="checkbox">
+    <label>
+        <input type="checkbox"
+            class=""
+            id=""
+            name="bounds"
+            checked="{{if tag.checked false}}"
+            onchange={{action "searchBounds"}}
+        />
+        <span class="check"></span>
+        Search Viewable Area
+    </label>
+</div>
+
+
+{{!-- so here is a task i'm handing off to some GSU CS student. create a service that will identify the polygon(s) on an image that is a map
+example https://geo.library.gsu.edu/geoserver/atlmaps/wms?service=WMS&version=1.1.0&request=GetMap&layers=atlmaps:atlpm0129c&styles=&bbox=-84.40804977542822,33.73183603885645,-84.37977451778364,33.75051872120966&width=768&height=507&srs=EPSG:4326&format=image%2Fpng --}}
