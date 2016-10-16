@@ -5,7 +5,7 @@ const { Component, inject: { service } } = Ember;
 export default Component.extend({
     browseParams: service(),
 
-    didInsertElement() {
-        this.sendAction('getResults');
-    }
+    // didInsertElement() {
+    //     this.sendAction('getResults');
+    // }
 });
