@@ -10,7 +10,7 @@ const { Route } = Ember;
 export default Route.extend({
     actions: {
         didTransition() {
-            this.transitionTo('project.browse-layers', 'explore');
+            this.transitionTo('project.info', 'explore');
         }
 
     }
