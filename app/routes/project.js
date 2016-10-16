@@ -32,7 +32,7 @@ export default Route.extend({
                 default_base_map: 'street',
                 exploring: true,
                 may_browse: true,
-                description: 'Here we say something about how they can play around but nothing will be saved.'
+                description: 'Here you can explore almost 3,000 of Atlanta from collections at held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good by to next few hours.'
             });
         } else {
             return this.store.findRecord('project', params.project_id);
