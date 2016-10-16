@@ -7,6 +7,9 @@ module.exports = function() {
     var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 
     var app = new EmberApp({
+        'ember-power-select': {
+            theme: 'bootstrap'
+        },
         fingerprint: {
             enabled: isProductionLikeBuild,
             prepend: 'https://s3.amazonaws.com/atlmaps-' + env + '/'

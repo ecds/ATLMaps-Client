@@ -1,3 +1,4 @@
+{{browse-results rasters=rasters vectors=vectors getResults='getResults'}}
 <div class="row layer-heading">
     <table class="table">
         <tr>
@@ -40,11 +41,11 @@
         </div>
     {{/liquid-if}}
     {{browse-text getResults='getResults'}}
-    {{search-bounds getResults='getResults'}}
+    {{!-- {{search-bounds getResults='getResults'}} --}}
     {{!-- <hr /> --}}
-    {{!browse-tags model=categories getResults='getResults'}}
-    <!-- <hr /> -->
-    {{browse-years model=yearRange getResults='getResults'}}
+    {{!-- {{browse-tags model=categories getResults='getResults'}} --}}
+    <hr />
+    {{!-- {{browse-years model=yearRange getResults='getResults'}} --}}
     <!-- <hr /> -->
     {{browse-institution model=institutions getResults='getResults'}}
     </div>

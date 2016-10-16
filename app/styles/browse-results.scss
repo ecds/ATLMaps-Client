@@ -1,314 +1,156 @@
-// $cyan: material-color(md_blue, 500);
 @import 'variables';
 
-$orange: material-color(md_deeporangealt, 400);
-$grey: #9e9e9e;
-$left: 40%;
-$top: 3em;
-
-input {
-  & #toggleResultsCheck {
-    display: none;
-    left: $left;
-    position: absolute;
-    top: $top;
-    z-index: 1111111;
-  }
-}
-
-$num-of-tabs: 2;
-
-@mixin tabs {
-  @for $i from 1 through $num-of-tabs {
-    &:nth-of-type(#{$i}) {
-      &:checked {
-        ~ .slide {
-          left: calc((100% / #{$num-of-tabs}) * #{$i - 1});
-        }
-      }
-    }
-  }
-}
-
-.tab-wrap {
-  background-color: white;
-  display: flex;
-  position: relative;
-  width: 0;
-
-  input {
-    display: none;
-  }
-}
-
-input[type="radio"][name="tabs"] {
-  position: absolute;
-  z-index: -1;
-  &:checked {
-    + .tab-label-content {
-      label {
-        color: material-color(md_white);
-      }
-
-      .tab-content {
-        display: block;
-      }
-    }
-  }
-
-  @include tabs;
-
-  &:first-of-type {
-    &:checked {
-      ~ .slide {
-        left: 0;
-      }
-    }
-  }
-}
-
-// Show Button
-
-label.show-results-btn {
-    font-family: Material-Design-Icons;
-    z-index: 1;
-    border-radius: 50%;
-    position: absolute;
-    left: $left;
-    top: $top;
-    display: block;
-    background-color: $orange;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 0.6em;
-    color: material-color(md_grey, 200);
-    cursor: pointer;
-    i {}
-}
-#toggleResultsCheck ~ label.show-results-btn {
-    height: 6.75rem;
-    width: 6.75rem;
-    opacity: 0.5;
-    &:hover {
-        transition: opacity $rabbit;
-        opacity: 1;
-    }
-    transition: height $turtle ease-in $rabbit, width $turtle ease-in $rabbit, opacity 8s;
-    i {
-        transition: font-size $turtle ease-in $rabbit;
-        font-size: 3em;
-    }
-}
-#toggleResultsCheck:checked ~ label.show-results-btn {
-    height: 0;
-    width: 0;
-    opacity: 1;
-    transition: height $rabbit, width $rabbit, opacity 8s;
-    i {
-        transition: font-size $rabbit;
-        font-size: 0;
-    }
-}
-.results-toolbar {
-    background-color: material-color(md_blue, 700);
-    color: whitesmoke;
-    position: relative;
-    display: flex;
-    align-items: baseline;
-    padding-top: 0.25em;
-    border-top-right-radius: 0.25em;
-    border-top-left-radius: 0.25em;
-    .arrow {
-        width: 0;
-        height: 0;
-        border-right: 0.75em solid transparent;
-        border-left: 0.75em solid transparent;
-        border-top: 0.75em solid material-color(md_grey, 200);
-        margin: 0 0.5em;
-        transition: transform $rabbit, opacity $rabbit, height $rabbit;
-        cursor: pointer;
-        display: flex;
-    }
-}
-.tab-label-content > label:first-child {
-    cursor: pointer;
-    color: rgba(255,255,255,0.8);
-    background-color: material-color(md_blue, 500);
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 56px;
-    transition: color 0.2s ease;
-    width: 100%;
-}
-.slide {
-    background: $orange;
-    width: calc(100% / #{$num-of-tabs});
-    height: 4px;
-    position: absolute;
-    left: 0;
-    top: calc(100% - 5px);
-    transition: left $turtle ease-out;
-}
-.tab-label-content {
-    width: 100%;
-    .tab-content {
-        position: absolute;
-        // border-radius: 50%;
-        top: 6rem;
-        left: 0;
-        line-height: 130%;
-        overflow: auto;
-        display: none;
-    }
-    label {}
-}
-@media screen and (max-width: 800px) {
-    h1 {
-        // padding: 40px 0 90px 10%;
-    }
-    .tab-wrap {
-        margin-left: 10%;
-        width: 50%;
-    }
-}
-.tab-content {
-    background-color: white;
-    width: 100%;
-}
 .browse-results {
-    position: absolute;
-    left: $left;
-    pointer-events: all;
-    top: 2.5em;
-    z-index: 1;
-    .browse-nav {
-        width: 100%;
-    }
-}
-.browse-results.no-results {
-    pointer-events: none;
-}
-#toggleResultsCheck:checked ~ .browse-results {
-    height: 100%;
-    width: 50vw;
-    transform: none;
-    font-size: unset;
-    opacity: 1;
-    transition: width $rabbit ease-in $rabbit, height $rabbit ease-in $rabbit, font-size $rabbit ease-in $rabbit, opacity $turtle ease-in $rabbit,;
-    > .results-toolbar {
-        label {
-            > span.arrow {
-                opacity: 1;
-                transform: none;
-            }
-        }
-    }
-    > .tab-wrap.browse-nav {
-        > .tab-label-content {
-            > label {
-                font-size: unset;
-                // transition: font-size $rabbit ease-in $rabbit;
-                i {
-                    transition: opacity ease-in $turtle;
-                    opacity: 1;
-                }
-            }
-            > .tab-content {
-                height: 10vh;
-                opacity: 0.7;
-                transition: height $rabbit ease-in $rabbit, opacity $rabbit;
-                // &:after {
-                //     content: "No layers found."
-                // }
-            }
-            > .tab-content.has-results {
-                height: 80vh;
-                opacity: 1;
-                transition: height $rabbit ease-in $rabbit, opacity $rabbit;
-                .result-count {
-                    padding: 0.5em;
-                }
-                // &:after {
-                //     content: "";
-                // }
-            }
-        }
-    }
-}
-#toggleResultsCheck ~ .browse-results {
-    height: 0;
-    width: 0;
-    transform: none;
-    font-size: 0;
-    opacity: 0;
-    transition: width $turtle, height 1s, font-size $turtle, opacity $rabbit;
-    > .results-toolbar {
-        label {
-            > span.arrow {
-                opacity: 0;
-                transform: rotate(-90deg);
-                height: 0;
-            }
-        }
-    }
-    > .tab-wrap.browse-nav {
-        > .tab-label-content {
-            > label {
-                font-size: 0;
-                // transition: font-size $rabbit;
-                i {
-                    transition: opacity $turtle;
-                    opacity: 0;
-                }
-            }
-            > .tab-content {
-                height: 0;
-                transition: height $turtle ease-in;
-            }
-        }
-    }
-}
-.results-container {
-    display: flex;
-    overflow: hidden;
-    overflow: auto;
-    h3 {
-        margin-top: 0;
-        margin-bottom: 0.25em;
-    }
-    .result-list {
-        padding: 0;
-        ul {
-            overflow: auto;
-            list-style: none;
-            padding: inherit;
-            // pointer-events: all;
-            li:nth-child(even) {
-                // background-color: material-color(md_grey, 300);
-            }
-            li {
-                border: unset;
-                font-size: unset;
-                border-radius: unset;
-                margin-bottom: 0;
-                padding: 0.5rem;
-                border-bottom: 1px solid material-color(md_grey, 700);
-                span.result-count {
-                    margin-left: 3.5rem;
-                }
-            }
-            li.active {
-                background-color: material-color(md_blue, 50);
-            }
-            /*
-            * Row with equal height columns
-            * --------------------------------------------------
-            */
+  font-size: unset;
+  height: 100%;
+  left: 40%;
+  opacity: 1;
+  pointer-events: all;
+  position: absolute;
+  top: 5em;
+  transform: none;
+  width: 50vw;
+  z-index: 1;
 
+  .browse-nav {
+    width: 100%;
+  }
+
+}
+
+.browse-results.no-results {
+  pointer-events: none;
+}
+
+.browse-results {
+
+  > .tab-wrap.browse-nav {
+    > .tab-label-content {
+
+      > label {
+        font-size: unset;
+
+        i {
+          opacity: 1;
         }
+      }
+
+      > .tab-content {
+        height: 10vh;
+        opacity: .7;
+      }
+
+      > .tab-content.has-results {
+        height: 80vh;
+        opacity: 1;
+
+        .result-count {
+          padding: .5em;
+        }
+      }
     }
+  }
+}
+
+.results-container {
+  display: flex;
+  overflow: auto;
+  position: relative;
+
+  h3 {
+    margin-bottom: .25em;
+    margin-top: 0;
+  }
+
+  .result-list {
+    padding: 0;
+    // position: relative;
+
+    ul {
+      list-style: none;
+      overflow: auto;
+      padding: inherit;
+
+      li {
+        border: unset;
+        border-bottom: 1px solid material-color(md_grey, 700);
+        border-radius: unset;
+        font-size: unset;
+        margin-bottom: 0;
+        padding: .5rem;
+
+        span {
+          & .result-count {
+            margin-left: 3.5rem;
+          }
+        }
+
+        & .active {
+          background-color: material-color(md_blue, 50);
+        }
+      }
+    }
+  }
+}
+
+#toggleResultsCheck:not(:checked) ~ .browse-results {
+  animation: fadeOutToTopLeft $rabbit;
+  animation-fill-mode: forwards;
+  transform-origin: top left;
+}
+
+#toggleResultsCheck:checked ~ .browse-results {
+  animation: fadeInFromTopLeft $rabbit;
+  transform-origin: top left;
+}
+@keyframes fadeInFromTopLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes fadeOutToTopLeft {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+}
+
+
+// TODO move this to a pagination-links.scss
+.pagination {
+  background-color: material-color(md_grey, 200);
+  left: 0;
+  padding-bottom: 1em;
+  position: absolute;
+  top: 80vh;
+  width: 100%;
+
+  button {
+    pointer-events: all;
+  }
+
+  .btn-warning {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  i {
+    vertical-align: bottom;
+  }
+}
+
+.ember-power-select {
+  padding-top: .5em;
 }

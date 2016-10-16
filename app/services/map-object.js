@@ -70,7 +70,6 @@ export default Service.extend({
             }).addTo(_map);
 
             // this.get('leafletGroup').addTo(_map);
-            console.log('title', _map.getBounds());
 
             return _map;
 
@@ -88,6 +87,7 @@ export default Service.extend({
             project.setProperties({
                 showing_browse_results: false
             });
+            $('#toggleResultsCheck').attr('checked', false);
         });
 
         // Add all the vector layers to the map.

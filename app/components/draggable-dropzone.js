@@ -31,7 +31,7 @@ export default Component.extend({
 
     drop(event) {
         let data = event.dataTransfer.getData('text/data');
-        console.log('event.dataTransfer', event.dataTransfer);
+        // console.log('event.dataTransfer', event.dataTransfer);
         this.sendAction('dropped', data);
         this.set('dragClass', 'deactivated');
     },

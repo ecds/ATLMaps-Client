@@ -124,7 +124,6 @@ export default Route.extend({
 
         toggleIntro() {
             this.modelFor('project').toggleProperty('suppressIntro');
-            console.log('showing');
         },
 
         toggleEdit() {
@@ -134,11 +133,11 @@ export default Route.extend({
 
         willTransition(transition) {
             // TODO: WTF does this do?
-            if (transition.targetName === 'project.browse-layers') {
-                this.controllerFor('project').set('showBrowse', true);
-            } else {
-                this.controllerFor('project').set('showBrowse', false);
-            }
+            // if (transition.targetName === 'project.browse-layers') {
+            //     this.controllerFor('project').set('showBrowse', true);
+            // } else {
+            //     this.controllerFor('project').set('showBrowse', false);
+            // }
             // TODO: Kill the vector info window here.
             // TODO: User test if the vector window should go away.
 

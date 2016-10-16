@@ -1,21 +1,25 @@
 {{yield}}
-<nav class="row row-centered">
-    <div class='col-sm-2 col-sm-offset-3 text-center pagination-centered'>
-        <button {{action (route-action 'getResults' meta.prev_page)}} class='btn btn-raised btn-info' style="pointer-events:all;"><i class="material-icons">chevron_left</i> Previous</button>
+<div class="pull-left col-sm-4">
+      {{!-- {{#power-select
+        selected=limit
+        options=limits
+        onchange=(action "updateLimt" getResults='getResults')
+        as |limit|
+      }}
+        {{limit.label}}
+      {{/power-select}} --}}
+    </div><div class='text-center pagination-centered col-md-5 col-sm-8'>
+      {{#if meta.prev_page}}
+        <button {{action (route-action 'getResults' meta.prev_page)}} class='btn btn-raised btn-info'>{{meta.prev_page}}</button>
+      {{else}}
+        <button class='btn btn-raised btn-primary' disabled='disabled'>--</button>
+      {{/if}}
+        <button {{action (route-action 'getResults' meta.current_page)}} class='btn btn-raised btn-warning'>{{meta.current_page}}</button>
+      {{#if meta.next_page}}
+        <button {{action (route-action 'getResults' meta.next_page)}} class='btn btn-raised btn-info'>{{meta.next_page}}</button>
+      {{else}}
+        <button class='btn btn-raised btn-primary' disabled='disabled'>--</button>
+      {{/if}}
+      <i class="material-icons">more_horiz</i>
+        <button {{action (route-action 'getResults' meta.next_page)}} class='btn btn-raised btn-info'>{{meta.total_pages}}</button>
     </div>
-    <div class='col-sm-2 text-right'>
-        {{meta.current_page}} of {{meta.total_pages}}
-    </div>
-    <div class='col-sm-2 text-center pagination-centered'>
-        <button {{action (route-action 'getResults' meta.next_page)}} class='btn btn-raised btn-info' style="pointer-events:all;"><i class="material-icons">chevron_right</i> Next</button>
-    </div>
-    <div class='col-sm-3'>
-        Show
-        <select>
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-    </div>
-</nav>

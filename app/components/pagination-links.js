@@ -1,9 +1,28 @@
 import Ember from 'ember';
 
-const { Component, computed, get } = Ember;
+const limits = [
+    { value: 10, label: 'Show: 10 Per Page' },
+    { value: 25, label: 'Show: 25 Per Page' },
+    { value: 50, label: 'Show: 50 Per Page' },
+    { value: 100, label: 'Show: 100 Per Page' }
+];
+
+const { Component, inject: { service }, get, set } = Ember;
 
 export default Component.extend({
-    range: computed(function() {
-        console.log('get meta', get(this, 'meta'));
-    })
+    classNames: ['pagination'],
+    tagName: 'nav',
+    browseParams: service('browse-params'),
+    searchEnabled: false,
+    limits,
+    limit: limits[0],
+
+    actions: {
+
+        updateLimt(newLimit) {
+            console.log('fuck you');
+            set(this, 'browseParams.searchLimit', newLimit.value);
+            this.sendAction('getResults');
+        }
+    }
 });

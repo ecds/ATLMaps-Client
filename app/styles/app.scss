@@ -1,3 +1,4 @@
+@import 'ember-power-select/themes/bootstrap';
 @import 'ember-power-select';
 @import '../../bower_components/bootstrap-material-design/sass/bootstrap-material-design';
 @import '../../bower_components/bootstrap-material-design/sass/ripples';
@@ -30,8 +31,10 @@
 'close-button',
 'color-picker',
 'vector-layer-option-panel',
+'material-tabs',
 'browse-pane',
 'browse-results',
+'browse-toolbar',
 'atl-checkbox',
 'base-picker',
 'zoom-buttons',
@@ -61,11 +64,16 @@ body {
   height: 100%;
 }
 
+.project {
+  overflow: hidden;
+}
+
 .fullscreen-map {
   display: block;
   height: 100%;
   left: 0;
   margin: $zero;
+  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
@@ -134,4 +142,8 @@ a {
       margin-top: -10px;
     }
   }
+}
+
+.btn {
+  color: $white;
 }

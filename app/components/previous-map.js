@@ -17,7 +17,6 @@ export default Component.extend({
 
     click() {
         let fuckfuckfuck = this.get('currentUser.previous');
-        console.log('fuckfuckfuck', fuckfuckfuck);
         this.sendAction('action', get(this, 'currentUser.previous'));
     }
 });

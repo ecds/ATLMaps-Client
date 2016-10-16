@@ -66,14 +66,14 @@
 
 .layer-marker div.icon:before {
   content: $layer-icon;
-  font-family: "material-design-icons";
+  font-family: 'material-design-icons';
 }
 
 .laoding div.icon:before {
   content: "\e8c0";
 }
 
-.map-marker div.shadow{
+.map-marker div.shadow {
   background-image:url('/assets/images/marker-shadow.png');
   bottom: 11px;
   height: 40px;
@@ -109,7 +109,7 @@
   border-color: #000 transparent transparent transparent;
 }
 
-/*marker color instances*/
+// TODO Make getting the colors a function.
 .map-marker.layer-red, .leaflet-zoom-animated.layer-red {
   color: #ef5350;
 }
@@ -204,6 +204,18 @@
 
 .map-marker.layer-indigo-700 {
   color: #303f9f;
+}
+
+.map-marker.layer-light-blue-300 {
+  color: #4FC3F7;
+}
+
+.map-marker.layer-light-blue-400 {
+  color: #29B6F6;
+}
+
+.map-marker.layer-light-blue-500 {
+  color: #03A9F4;
 }
 
 .map-marker.layer-blue-500 {

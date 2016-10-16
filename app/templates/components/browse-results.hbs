@@ -1,34 +1,35 @@
 {{#ember-wormhole to="modal-overlays"}}
-
 {{input type="checkbox"
         checked=project.showing_browse_results
         elementId="toggleResultsCheck"
         change=(route-action "toggleResults" project)
 }}
-<label for="toggleResultsCheck" class="show-results-btn"><i class="material-icons">view_list</i></label>
+{{!-- <label for="toggleResultsCheck" class="show-results-btn"><i class="material-icons">view_list</i></label> --}}
 {{! the `hasResults` helper calculates if there are any rastors or vectors. If there are no results
     we add the `no-results` class to allow a user to click through the results pane. }}
-    <div class="browse-results">
-    {{!-- <div class="browse-results {{unless (hasResults model) "no-results"}}"> --}}
     <div class="results-toolbar">
         <label for="toggleResultsCheck">
-            <span class="arrow"></span>
-            <!-- <i class="material-icons">arrow_drop_down</i> -->
+            <h3 class="results-heading text-center">
+              <i class="material-icons">chevron_left</i>
+              Search Results
+            </h3>
         </label>
-        <span>Search Results</span>
+
     </div>
+    <div class="browse-results">
+    {{!-- <div class="browse-results {{unless (hasResults model) "no-results"}}"> --}}
+    {{raster-results}}
     <div class="tab-wrap browse-nav">
         <input type="radio" name="tabs" id="tab1" checked>
         <div class="tab-label-content" id="tab1-content">
             <label for="tab1"><i class="material-icons">layers</i> Historical Maps</label>
-            <div class="tab-content {{if model "has-results"}}">
-              {{if model.pending 'Blah'}}
-                <div class="result-count">{{model.content.meta.total_count}} Historical Maps found.</div>
+            {{!-- <div class="tab-content {{if model "has-results"}}"> --}}
+              <div class="tab-content has-results">
+                <div class="result-count">{{rasters.content.meta.total_count}} Historical Maps found.</div>
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                          {{log model}}
-                            {{#each model as |raster|}}
+                            {{#each rasters as |raster|}}
                                 {{! Show "Loading..." if the title hasn't loaded yet.}}
                                 <li class="{{if raster.active_in_project "active" }}">
                                     <div class="row-eq-height">
@@ -44,21 +45,21 @@
                                 </li>
                             {{/each}}
                         </ul>
-                        {{pagination-links meta=model.content.meta}}
                     </div>
                 </div>
             </div>
+            {{pagination-links meta=rasters.content.meta}}
         </div>
 
         <input type="radio" name="tabs" id="tab2">
         <div class="tab-label-content" id="tab2-content">
             <label for="tab2"><i class="material-icons atlmaps-ext database"></i> Data Maps</label>
-            <div class="tab-content {{if model.vector_layer_ids "has-results"}}">
-                <div class="result-count">{{model.vector_layer_ids.length}} Data Layers found.</div>
+            <div class="tab-content">
+                <div class="result-count">{{vectors.length}} Data Layers found.</div>
                 <div class="results-container">
                     <div class="col-md-12 result-list">
                         <ul>
-                            {{#each model.vector_layer_ids as |vector|}}
+                            {{#each vectors as |vector|}}
                                 <li class="{{if vector.active_in_project "active" }}">
                                     <div class="row-eq-height">
                                         <div class="col-sm-1">

@@ -1,16 +1,11 @@
 import Ember from 'ember';
 
-const { Component, get } = Ember;
+const { Component, inject: { service } } = Ember;
 
 export default Component.extend({
-    actions: {
-        toggleResults() {
-            // console.log('hi');
-        },
+    browseParams: service(),
 
-        // nextPage() {
-        //     let meta = get(this, 'content.meta');
-        //     console.log('meta', meta);
-        // }
+    didInsertElement() {
+        this.sendAction('getResults');
     }
 });

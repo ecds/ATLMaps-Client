@@ -46,7 +46,7 @@ export default Model.extend({
         defaultValue: true
     }),
     showing_browse_results: attr('boolean', {
-        defaultValue: true
+        defaultValue: false
     }),
     showing_all_vectors: attr('boolean', {
         defaultValue: true
