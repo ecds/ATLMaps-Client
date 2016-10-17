@@ -89,11 +89,11 @@ export default Route.extend({
         // categories.setEach('checked', false);
         categories.forEach(function(category) {
             category.setProperties({
-                checked: false,
+                // checked: false,
                 allChecked: false,
                 clicked: false
             });
-            category.get('tag_ids').setEach('checked', false);
+            // category.get('tag_ids').setEach('checked', false);
         });
         // Clear the vector layers that are marked active in this project.
         let vectors = this.store.peekAll('vector-layer');
@@ -131,18 +131,18 @@ export default Route.extend({
             this.modelFor('project').toggleProperty('may_browse');
         },
 
-        willTransition(transition) {
-            // TODO: WTF does this do?
-            // if (transition.targetName === 'project.browse-layers') {
-            //     this.controllerFor('project').set('showBrowse', true);
-            // } else {
-            //     this.controllerFor('project').set('showBrowse', false);
-            // }
-            // TODO: Kill the vector info window here.
-            // TODO: User test if the vector window should go away.
-
-            return true;
-        },
+        // willTransition(transition) {
+        //     // TODO: WTF does this do?
+        //     if (transition.targetName === 'project.browse-layers') {
+        //         this.controllerFor('project').set('showBrowse', true);
+        //     } else {
+        //         this.controllerFor('project').set('showBrowse', false);
+        //     }
+        //     // TODO: Kill the vector info window here.
+        //     // TODO: User test if the vector window should go away.
+        //
+        //     return true;
+        // },
 
         // TODO this should be a Component or service
         showLayerInfoDetals(layer) {
