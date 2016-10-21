@@ -4,7 +4,6 @@ const {
     Service
 } = Ember;
 
-
 export default Service.extend({
 
     init() {
@@ -29,6 +28,7 @@ export default Service.extend({
             popupContent += '</div>';
         }
         if (feature.properties.images) {
+            fillColor = 'red';
             popupContent += '<div class="gallery"><div class="swiper-wrapper">';
             feature.properties.images.forEach(function(image) {
                 popupContent += '<div class="swiper-slide" ><a href="' + image.url + '" target="_blank"><img class="geojson" src="' + image.url + '" title="' + image.name + '" /></a>"';

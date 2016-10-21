@@ -1,10 +1,14 @@
 {{!-- <div class=""> --}}
     <nav class="project-nav-group pull-left">
         <div class="row head {{if model.editing 'edit'}}">
+          <div class="col-md-1">
             {{#link-to "projects" title="Back to All Projects" }}
                 <i class="material-icons exit">exit_to_app</i>
             {{/link-to}}
-            <span>{{model.name}}</span>
+          </div>
+          <div class="col-md-10">
+            <span>{{model.name}} {{current}}</span>
+          </div>
             <span class="edit-button pull-right">
       				{{#if model.may_edit}}
       					<a {{action (route-action 'toggleEdit')}} title= {{if isEditing 'Exit Edit Mode' 'Edit Project'}}>

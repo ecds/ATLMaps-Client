@@ -24,16 +24,15 @@ div.project-nav {
   }
 
   label {
-    display: none;
     font-size: 1em;
     margin-bottom: 0;
     margin-left: -.2em;
+    visibility: hidden;
   }
+}
 
-
-  // & > * {
-  //   padding-left: 25%;
-  // }
+.prject-index > nav > div > a > div > label {
+  visibility: hidden;
 }
 
 // .project-head {}

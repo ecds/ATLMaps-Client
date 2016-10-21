@@ -24,8 +24,8 @@ export default Route.extend({
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
             project: this.modelFor('project'),
-            rasters: this.store.queryRecord('raster-layer', { search: true }),
-            vectors: this.store.queryRecord('vector-layer', { search: true })
+            rasters: this.store.query('raster-layer', { search: true }),
+            vectors: this.store.query('vector-layer', { search: true })
         });
     },
 

@@ -58,7 +58,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
         // }
         return RSVP.hash({
             categories: this.store.findAll('category'),
-            layer: this.store.queryRecord('raster-layer', { tagem: true }),
+            layer: this.store.queryRecord('raster-layer', { tagem: true, page: 0 }),
             userTagged: this.store.peekAll('user-tagged')
         });
     },

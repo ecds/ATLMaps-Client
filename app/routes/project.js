@@ -6,6 +6,7 @@ const {
         service
     },
     get,
+    getOwner,
     set,
     Route,
     run
@@ -51,6 +52,8 @@ export default Route.extend({
     map() {
         return this.get('mapObject').createMap();
     },
+
+    current: '',
 
     setUp: function() {
 
@@ -131,18 +134,22 @@ export default Route.extend({
             this.modelFor('project').toggleProperty('may_browse');
         },
 
-        // willTransition(transition) {
-        //     // TODO: WTF does this do?
-        //     if (transition.targetName === 'project.browse-layers') {
-        //         this.controllerFor('project').set('showBrowse', true);
-        //     } else {
-        //         this.controllerFor('project').set('showBrowse', false);
-        //     }
-        //     // TODO: Kill the vector info window here.
-        //     // TODO: User test if the vector window should go away.
-        //
-        //     return true;
-        // },
+        didTransition(/*transition*/) {
+            // let current = getOwner(this).lookup('controller:application').currentPath;
+            // let currentRoutes = current.split('.');
+            // console.log('currentRoutes', currentRoutes);
+            // get(this, 'controller').set('current', currentRoutes);
+            //     // TODO: WTF does this do?
+            //     if (transition.targetName === 'project.browse-layers') {
+            //         this.controllerFor('project').set('showBrowse', true);
+            //     } else {
+            //         this.controllerFor('project').set('showBrowse', false);
+            //     }
+            //     // TODO: Kill the vector info window here.
+            //     // TODO: User test if the vector window should go away.
+            //
+            return true;
+        },
 
         // TODO this should be a Component or service
         showLayerInfoDetals(layer) {
