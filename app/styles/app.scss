@@ -1,65 +1,112 @@
-@import 'ember-power-select/themes/bootstrap';
-@import 'ember-power-select';
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+// @import 'ember-power-select/themes/bootstrap';
+// @import 'ember-power-select';
+// @import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
 // TODO: There is a better way to do this right?
+$roboto-font-path: '../assets/';
+
+@import 'components/color';
+@import 'variables';
+
+// Custom color settings go here
+$primary-color: color('light-blue', 'darken-2');
+$primary-color-light: color('light-blue', 'base');
+$primary-color-trans: rgba(3, 169, 244, 1);
+$secondary-color: color('deep-orange', 'accent-3');
+$nav-button: color('grey', 'darken-4');
+
+@import 'components/variables';
+@import 'materialize';
+@import 'ember-cli-materialize';
+@import 'project-pane';
+
+nav {
+
+  li {
+
+    &.active {
+      background-color: $secondary-color;
+    }
+  }
+}
+
+.project-top-nav {
+  box-shadow: none;
+  height: 2em;
+}
+
+.project-title {
+  background-color: $primary-color;
+  color: $white;
+  height: 3em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+
+  h2 {
+    font-size: 2em;
+    line-height: 0;
+  }
+
+  .col {
+    a {
+      color: color('grey', 'lighten-4');
+    }
+    &.s1 {
+      cursor: pointer;
+      // font-size: 1em;
+      // line-height: 1em;
+      padding: .5em .75em;
+      text-align: center;
+      width: 4em;
+    }
+  }
+
+}
+
 @import 'banner',
 'ember-modal-structure',
 'ember-modal-appearance',
-'footer',
-'variables',
+// 'footer',
+// 'variables',
 'marker',
-'toggle_button',
-'main-navbar',
-'back-to-project-button',
-'list-projects',
-'project-nav-bar',
-'project-intro',
-'loading',
-'extra-icons',
-'login-form',
-'tag-list',
-'alert',
-'slider',
-'vector-info',
-'project-pane',
-'project-vector-list',
-'responsive',
-'gallery',
-'close-button',
-'color-picker',
-'vector-layer-option-panel',
-'material-tabs',
-'browse-pane',
-'browse-results',
-'browse-toolbar',
-'atl-checkbox',
-'base-picker',
-'zoom-buttons',
-'tagem';
+// 'toggle_button',
+// 'main-navbar',
+// 'back-to-project-button',
+// 'list-projects',
+'project-nav',
+// 'project-intro',
+// 'loading',
+'extra-icons';
+// 'login-form',
+// 'tag-list',
+// 'alert',
+@import 'slider';
+// 'vector-info',
+// 'project-vector-list',
+// 'responsive',
+// 'gallery',
+// 'close-button',
+// 'color-picker',
+// 'vector-layer-option-panel',
+// 'material-tabs',
+// 'browse-pane',
+// 'browse-results',
+// 'browse-toolbar',
+// 'atl-checkbox',
+// 'base-picker',
+// 'zoom-buttons',
+// 'tagem';
 
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Roboto', 'Material Icons' sans-serif;
-  font-weight: 300;
-}
 
 body {
+  font-family: 'Roboto', 'Material Icons' sans-serif;
+  font-weight: 300;
   background-color: material-color(md_grey, 200);
   color: material-color(md_grey, 600);
   font-size: 18px;
-  height: 100%;
+  height: 100vh;
 }
 
 .project {
@@ -68,65 +115,51 @@ body {
 
 .fullscreen-map {
   display: block;
-  height: 100%;
+  height: 100vh;
   left: 0;
-  margin: $zero;
+  margin: 0;
   overflow: hidden;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
 }
 
-.h1,
-.h2,
-.h3,
-h1,
-h2,
-h3 {
-  font-weight: 100;
-}
-
-.h1,
-h1 {
-  font-size: 36px;
-  line-height: 40px;
-}
-
-.h2,
-h2 {
-  font-size: 30px;
-  line-height: 40px;
-}
-
-.h3,
-h3 {
-  font-size: 24px;
-  line-height: 40px;
-}
-
-.h4,
-h4 {
-  font-size: 18px;
-  line-height: 20px;
-}
-
-.h5,
-h5 {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.h6,
-h6 {
-  font-size: 12px;
-  line-height: 20px;
-}
-
-a {
-  color: $blue;
-  cursor: pointer;
-}
-
+// .h1,
+// h1 {
+//   font-size: 36px;
+//   line-height: 40px;
+// }
+//
+// .h2,
+// h2 {
+//   font-size: 30px;
+//   line-height: 40px;
+// }
+//
+// .h3,
+// h3 {
+//   font-size: 24px;
+//   line-height: 40px;
+// }
+//
+// .h4,
+// h4 {
+//   font-size: 18px;
+//   line-height: 20px;
+// }
+//
+// .h5,
+// h5 {
+//   font-size: 14px;
+//   line-height: 20px;
+// }
+//
+// .h6,
+// h6 {
+//   font-size: 12px;
+//   line-height: 20px;
+// }
+//
 .atlmap {
   height: 100%;
   width: 100%;
@@ -142,6 +175,15 @@ a {
   }
 }
 
-.btn {
-  color: $white;
+.material-icons {
+  font-size: 1.5em;
+}
+
+// TODO need a raster list scss?
+// TODO is there not an icon for this? I'm watching the world series and don't
+// have time to look like right now.
+.reorder-handle {
+  i {
+    margin-left: -.15em;
+  }
 }

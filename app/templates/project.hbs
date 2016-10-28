@@ -1,19 +1,35 @@
+{{!-- {{#md-navbar class='project-top-nav navbar-fixed'}} --}}
+{{!-- {{#md-navbar name=model.name class='project-top-nav navbar-fixed z-depth-3'}} --}}
+{{!-- {{#link-to 'about'}}About{{/link-to}} --}}
+{{!-- {{/md-navbar}} --}}
 {{!-- {{#tether-dialog hasOverlay=false container-class='hack'}} --}}
     {{vector-info}}
 {{!-- {{/tether-dialog}} --}}
+
 
 <div id="base-map" class="fullscreen-map">
     <div id='map' class='atlmap'></div>
     <div class="base-layer-controls"></div>
 </div>
 
-{{project-nav model=model current=current}}
 
-<div class="project-pane">
+{{!-- <div class="project-pane">
     <div class="project-route">
         {{liquid-outlet}}
     </div>
+</div> --}}
+<div class="project-title row z-depth-2">
+  <div class="col s1">
+    {{#link-to 'projects' tagName='a'}}
+      <i class="material-icons">exit_to_app</i>
+    {{/link-to}}
+  </div>
+  <div class="col s11">
+    <h2>{{model.name}}</h2>
+  </div>
 </div>
+{{outlet}}
+{{project-nav model=model current=current class="navbar-fixed"}}
 
 <!-- </div> -->
 {{outlet "browse-results"}}
@@ -22,10 +38,10 @@
 <!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 
 
-{{#if model.hasIntro}}
+{{!-- {{#if model.hasIntro}}
     {{#unless model.suppressIntro}}
         {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class="project-intro" }}
             {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
         {{/tether-dialog}}
     {{/unless}}
-{{/if}}
+{{/if}} --}}

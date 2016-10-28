@@ -9,6 +9,7 @@ const {
     inject: {
         service
     },
+    run,
     set
 } = Ember;
 
@@ -73,18 +74,18 @@ export default Component.extend({
         set(this, 'slider', slider);
 
         // Watch the toggle check box to show/hide all raster layers.
-        let showHideSwitch = document.getElementById('toggle-layer-opacity');
-        showHideSwitch.addEventListener('click', function() {
-            if ($('input#toggle-layer-opacity').prop('checked')) {
-                slider.noUiSlider.set(10);
-                projLayer.setProperties({ showing: true });
-            } else {
-                slider.noUiSlider.set(0);
-                projLayer.setProperties({ showing: false });
-            }
-        });
-
-        set(this, 'toggle', showHideSwitch);
+        // let showHideSwitch = document.getElementById('toggle-layer-opacity');
+        // showHideSwitch.addEventListener('click', function() {
+        //     if ($('input#toggle-layer-opacity').prop('checked')) {
+        //         slider.noUiSlider.set(10);
+        //         projLayer.setProperties({ showing: true });
+        //     } else {
+        //         slider.noUiSlider.set(0);
+        //         projLayer.setProperties({ showing: false });
+        //     }
+        // });
+        //
+        // set(this, 'toggle', showHideSwitch);
 
     },
 

@@ -1,32 +1,6 @@
-{{yield}}
-<div class="navbar main-navbar">
-    <div class="navbar-header">
-        <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button> -->
-        {{#link-to 'index' tagName='a' class='site-title navbar-brand' }}
-            <img class="logo" src="/assets/images/am-logo3.png" /><span class="alt-dark">ATL</span><span>Maps</span>
-        {{/link-to}}
-    </div>
-    <div class="navbar-collapse collapse navbar-inverse-collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                {{#link-to 'projects' tagName='a' }}Projects{{/link-to}}
-            </li>
-            <li>
-                {{#link-to 'about' tagName='a' }}About{{/link-to}}
-            </li>
-            <!--             <li>{{#link-to 'support' tagName='a'}}Help{{/link-to}}</li>
-        <li>{{#link-to 'terms' tagName='a'}}Terms of Use{{/link-to}}</li> -->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {{!-- {{#if currentUser}}
-              <li><a {{action 'invalidateSession' }} title="Logout">{{currentUser.user.displayname}}</a></li>
-            {{else}}
-              <li>{{#link-to 'login' tagName='a'}}Login{{/link-to}}</li>
-            {{/if}} --}}
-        </ul>
-    </div>
-</div>
+{{#md-navbar name='ATLMaps'}}
+  <!-- A workaround to get the "active" class
+    to apply to the active <li> automatically -->
+  {{#link-to 'projects' tagName='li' }}{{link-to 'Projects' 'projects'}}{{/link-to}}
+  {{#link-to 'about' tagName='li' }}{{link-to 'About' 'about'}}{{/link-to}}
+{{/md-navbar}}

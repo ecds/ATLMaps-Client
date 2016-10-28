@@ -1,0 +1,15 @@
+<div class="pane-title row z-depth-1">
+  <div class="col s10">
+    <h3>{{title}}</h3>
+  </div>
+  <div class="col s2">
+    {{#link-to 'project'}}
+      <i class="material-icons">highlight_off</i>
+    {{/link-to}}
+  </div>
+</div>
+<div class="pane-container">
+    <div class="pane-content {{extraClass}}">
+      {{yield}}
+    </div>
+</div>

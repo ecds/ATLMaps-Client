@@ -3,25 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ATLMaps</title>
-    <link rel="icon" href="https://s3.amazonaws.com/atlmaps-staging/assets/images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Atlmaps</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{content-for 'head'}}
+    {{content-for "head"}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/atlmaps.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/atlmaps.css">
 
-    {{content-for 'head-footer'}}
+    {{content-for "head-footer"}}
   </head>
   <body>
-    {{content-for 'body'}}
+    {{content-for "body"}}
 
-    <script src="assets/vendor.js"></script>
-    <script src="assets/atlmaps.js"></script>
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/atlmaps.js"></script>
 
-    {{content-for 'body-footer'}}
+    {{content-for "body-footer"}}
   </body>
- </html>
+</html>

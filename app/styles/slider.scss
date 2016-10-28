@@ -1,115 +1,144 @@
-@import "variables.scss";
-.slider .tooltip.top,
-.tooltip-max,
-.tooltip-min,
-.tooltip.tooltip-main,
-.tooltip.tooltip-max.bottom {
-  display: none;
-}
-.slider:hover .tooltip.tooltip-main {
-  display: block;
-  transition: all .2s ease;
-}
+// @import 'variables';
+//
+$orange: color('deep-orange', 'accent-2');
 
-.slider.slider-horizontal,
-.slider.slider-vertical {
-  background: transparent;
-}
+.opacity-slider {
+  margin-left: 1em;
 
-.slider-selection {
-  background: material-color(md_blue, 100);
-  border-radius: 0;
-  transition: all 0.2s;
-}
+  & input {
+    display: none;
+  }
 
-.slider.slider-horizontal .slider-track {
-  height: 2px;
-  margin-top: -1px;
-}
-
-.slider.slider-vertical .slider-track {
-  margin-left: -3px;
-  width: 2px;
-}
-
-.slider-handle.min-slider-handle.round {
-  height: 10px;
-  margin-top: -4px;
-  transition: all .2s;
-  width: 10px;
-}
-
-.slider:hover .slider-handle.min-slider-handle.round {
-  height: 20px;
-  margin-top: -10px;
-  width: 20px;
-}
-
-.slider.slider-vertical .slider-handle.min-slider-handle.round {
-  margin-left: -4px;
-}
-
-.slider.slider-vertical:hover .slider-handle.min-slider-handle.round {
-  margin-left: -9px;
-}
-
-.slider.slider-horizontal {
-  width: 100%;
-}
-
-.slider.slider-vertical .slider-track {
-  background: material-color(md_pink, 500);
-}
-
-.noUi-connect,
-.slider-material-orange-300 .noUi-handle {
-  background-color: material-color(md_deeporangealt, 200);
-  border: 0;
-  cursor: ew-resize;
+  h6 {
+    color: color('grey', lighten-1);
+  }
 }
 
 .slider {
-  margin: .5em;
-  pointer-events: all;
-  width: 93%;
-}
+  background-color: color('deep-orange', 'accent-1');
+  border: 0;
+  box-shadow: none;
+  height: .1em;
+  width: 96%;
 
-.noUi-handle {
-  background-color: material-color(md_deeporangealt, 200);
-  border-color: material-color(md_deeporangealt, 200);
-}
-
-.noUi-lower {
-  background-color: material-color(md_grey, 400);
-}
-
-.noUi-base {
-  background: material-color(md_deeporangealt, 100);
-}
-
-.year-slider {
-  .noUi-base {
-    background-color: material-color(md_grey, 400);
+  &.noUi-origin {
+    background-color: color('grey', 'lighten-2');
   }
+}
 
-  // .noUi-target {
-  #range {
-    .noUi-base {
-      .noUi-connect {
-        .noUi-handle-lower {
-          background-color: material-color(md_deeporangealt, 200);
-          border-color: material-color(md_deeporangealt, 200)
-        }
-      }
+.noUi-stacking {
+  background-color: color('grey', 'lighten-2');
+}
+
+.noUi-horizontal {
+
+  .noUi-handle {
+    background: $orange;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: ew-resize;
+    height: 1em;
+    left: -1em;
+    top: -.45em;
+    width: 1em;
+
+    &::before,
+    &::after {
+      content: unset;
     }
   }
-  // }
-}
 
-.map-to-tag {
-  .opacity-slider {
-    position: relative;
-    top: 10em;
-    z-index: 999;
-  }
 }
+//
+// .slider {
+//   background-color: color('pink', 'darken-4');
+//   height: 1em;
+//   margin: .5em;
+//   pointer-events: all;
+//   width: 93%;
+//
+//   // &:hover {
+//   //   display: block;
+//   //   transition: all .2s ease;
+//   // }
+//
+//   &.slider-horizontal {
+//     background: transparent;
+//     width: 100%;
+//   }
+// }
+//
+// .slider-horizontal {
+//   &.slider-track {
+//     height: 2px;
+//     margin-top: -1px;
+//   }
+// }
+//
+// // .slider-handle.min-slider-handle.round {
+// //   height: 10px;
+// //   margin-top: -4px;
+// //   transition: all .2s;
+// //   width: 10px;
+// // }
+// //
+// // .slider:hover .slider-handle.min-slider-handle.round {
+// //   height: 20px;
+// //   margin-top: -10px;
+// //   width: 20px;
+// // }
+//
+// // .slider.slider-vertical .slider-handle.min-slider-handle.round {
+// //   margin-left: -4px;
+// // }
+// //
+// // .slider.slider-vertical:hover .slider-handle.min-slider-handle.round {
+// //   margin-left: -9px;
+// // }
+//
+//
+//
+// .slider-track {
+//   background: color('pink', 'darken-1');
+// }
+//
+// .noUi-connect,
+// .noUi-handle {
+//   background-color: $orange;
+//   border: 0;
+//   cursor: ew-resize;
+// }
+//
+// .noUi-handle {
+//   background-color: $orange;
+//   border-color: $orange;
+// }
+//
+// .noUi-lower {
+//   background-color: $orange;
+// }
+//
+// .noUi-base {
+//   background: $orange;
+// }
+//
+// .year-slider {
+//   .noUi-base {
+//     background-color: $orange;
+//   }
+//
+//   // .noUi-target {
+//   .noUi-handle-lower {
+//     background-color: $orange;
+//     border-color: $orange;
+//   }
+// }
+//
+// .map-to-tag {
+//   .opacity-slider {
+//     position: relative;
+//     top: 10em;
+//     z-index: 999;
+//   }
+// }

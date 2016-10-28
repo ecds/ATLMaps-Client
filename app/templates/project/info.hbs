@@ -1,84 +1,14 @@
-{{!partial 'project-intro'}}
-<div class="row layer-heading">
-    <table class="table">
-        <tr>
-            <td>
-                {{if model.edit_success "Success"}}
-                {{if model.edit_fail "Fail"}}
-                <h3>{{if model.editing "Edit Project"}}</h3>
-            </td>
-            <table>
-                <tr>
-                    <td class="pull-right">{{partial 'close-button'}}</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td></td>
-                </tr>
-            </table>
-        </tr>
-    </table>
-</div>
-<div class="route-content {{if model.editing form-group}}">
-    {{#if model.editing}}
-        {{#liquid-if editSuccess}}
-            <div class="alert alert-dismissible alert-success">
-                Project info has been updated!
-            </div>
-        {{/liquid-if}}
-        {{#liquid-if editFail}}
-            <div class="alert alert-dismissible alert-danger">
-                Dang, something went wrong. The project info was not updated.
-            </div>
-        {{/liquid-if}}
-        <div class="row">
-            <div class="col-md-12">
-                <label for="edit_name">Title for the Project</label>
-                {{input value=model.name name='name' id="edit_name" class="form-control h1"}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <!-- <label for="edit_description" class="form-control">Description (Max 255 Characters)</label> -->
-                {{textarea value=model.description id="edit_description" class="form-control" rows="10" placeholder="Enter your project description here..." maxlength="500"}}
-                <div class="row">
-                    <div class="col-md-12">
-                        <a class="btn btn-success" {{route-action 'toggleIntro'}}>Edit Intro</a>
-                    </div>
-                </div>
-                {{!edit-intro-modal project=model update='updateProjectInfo' cancel='cancelUpdate'}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="publish_check col-md-2">
-                <div class="checkbox">
-                    <label>
-                        {{input type="checkbox" checked=model.published}}
-                        <span class="check"></span>
-                        Publish
-                    </label>
-                </div>
-            </div>
-            <div class="text-right col-md-10">
-                <a class="btn btn-warning btn-flat btn-xs" {{action 'cancelUpdate' model}}>Cancel</a>
-                <a class="btn btn-success btn-flat btn-xs" {{action 'updateProjectInfo' model}}>Save</a>
-            </div>
-        </div>
-    {{else}}
-        <div class="row">
-            <div class="col-md-12">
-                <article>{{{model.description}}}</article>
-            </div>
-        </div>
-        {{#if model.hasIntro}}
-        <div class="row">
-            {{!-- <div class="col-md-1"></div> --}}
-            <div class="col-md-12" id="foo">
-              <a class="btn btn-default btn-warning" {{action 'toggleIntro' bubbles=false}}>Show Intro</a>
-
-            </div>
-        </div>
+{{#project-pane title='About this Project'}}
+{{#md-card title="Info" id="basic-card"}}
+    {{#md-card-content}}
+        {{model.description}}
+    {{/md-card-content}}
+    {{#md-card-action}}
+      {{#if model.hasIntro}}
+        {{md-btn text='Show Intro'
+      	 action='toggleIntro'
+      	  class='light-blue darken-2'}}
         {{/if}}
-    {{/if}}
-</div>
+    {{/md-card-action}}
+{{/md-card}}
+{{/project-pane}}

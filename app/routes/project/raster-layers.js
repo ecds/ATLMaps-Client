@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 const {
+    $,
     Route,
     get,
     inject: {
@@ -12,7 +13,13 @@ const {
 export default Route.extend({
     mapObject: service(),
 
+    afterModel() {
+        $('.collapsible').collapsible({ accordion: true });
+    },
+
     actions: {
+        // The sortable action is initilized in the templet using
+        // the ember-sortable addon.
         reorderItems(groupModel, itemModels /*draggedModel*/) {
             let _this = this;
             set(groupModel, 'raster_layer_project_ids', itemModels);

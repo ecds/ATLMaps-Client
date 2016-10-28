@@ -1,4 +1,4 @@
-@import 'variables';
+// @import 'variables';
 
 .content {
   .banner {
@@ -46,12 +46,12 @@
 
     header {
       h2 {
-        color: material-color(md_blue, 400);
+        color: #2196f3; //material-color(md_blue, 400);
         font-size: 5em;
         font-weight: 400;
         line-height: normal;
         margin-bottom: 1.2em;
-        text-shadow: .11em .11em 1em $shadow;
+        // text-shadow: .11em .11em 1em $shadow;
       }
     }
   }

@@ -48,20 +48,25 @@ export default Service.extend({
                 className: 'street base'
             }).addTo(_map);
 
-            L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-                attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
-                subdomains: '1234',
-                base: 'aerial',
-                type: 'maptile',
-                scheme: 'satellite.day',
-                app_id: '1Igi60ZMWDeRNyjXqTZo',
-                app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-                mapID: 'newest',
-                maxZoom: 20,
-                language: 'eng',
-                format: 'png8',
-                size: '256',
-                className: 'satellite base'
+            // L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+            //     attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+            //     subdomains: '1234',
+            //     base: 'aerial',
+            //     type: 'maptile',
+            //     scheme: 'satellite.day',
+            //     app_id: '1Igi60ZMWDeRNyjXqTZo',
+            //     app_code: 'eA64oCoCX3KZV8bwLp92uQ',
+            //     mapID: 'newest',
+            //     maxZoom: 20,
+            //     language: 'eng',
+            //     format: 'png8',
+            //     size: '256',
+            //     className: 'satellite base'
+            // }).addTo(_map);
+
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                className: 'satellite base',
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             }).addTo(_map);
 
             // Zoom contorl, topright
