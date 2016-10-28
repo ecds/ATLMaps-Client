@@ -33,6 +33,11 @@
   }
 }
 
+.close-button {
+  margin-left: .75em;
+  color: color('grey', 'base');
+}
+
 // This is our main wrapping element, it's made 100vh high to
 // ensure it is always the correct size and then moved into place
 // and padded with negative margin and padding
@@ -78,6 +83,10 @@
     box-shadow: none;
     margin-top: 0;
   }
+
+  .scrollable-item {
+    overflow: hidden;
+  }
 }
 
 .collapsible {
@@ -101,6 +110,9 @@
 
   .collapsible-body {
     background: $white;
+    border-bottom: 0;
+    border-radius: .5em;
+    overflow: hidden;
   }
 
   li {

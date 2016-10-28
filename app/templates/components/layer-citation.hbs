@@ -1,7 +1,11 @@
-<div class="col-md-8">
-	<h6>Provided by:</h6>
-	<h4>{{layer.institution.name}}</h4>
-</div>
-<div class="col-md-4">
-	<img src='{{layer.institution.icon}}' alt='Logo' class="institution_logo pull-right" />
-</div>
+{{!-- <div class='container'> --}}
+  <div class='row'>
+    <div class='col l6 s12'>
+	     <h6 class='cite-h6'>Provided by:</h6>
+	     <h5 class='citeh5'>{{layer.institution.name}}</h5>
+     </div>
+     <div class='col l4 offset-l2 s12'>
+       <img src='{{layer.institution.icon}}' alt='Logo' class="institution-logo right" />
+     </div>
+   </div>
+ {{!-- </div> --}}

@@ -3,5 +3,6 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-    classNames: ['layer-citation']
+    classNames: ['page-footer', 'citation-footer'],
+    tagName: 'footer'
 });

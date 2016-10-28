@@ -1,29 +1,52 @@
-.layer-citation {
-    h6 {
-        line-height: 0;
-    }
-    img.institution_logo {
-        width: 50px;
-        height: auto;
-    }
-    a {
-        pointer-events: all;
-        i {
-            // font-size: 50px;
-            &:hover {
-                background-color: material-color(md_grey, 300);
-                border-radius: 50%;
-            }
-
-        }
-    }
-
-    a.pick-color {
-        i {
-            color: material-color(md_blue, 100);
-            &:hover {
-                color: material-color(md_blue, 500);
-            }
-        }
-    }
+.citation-footer {
+  background-color: color('grey', 'lighten-3') !important;
+  // border-bottom-left-radius: .5em;
+  // border-bottom-right-radius: .4em;
+  color: color('grey', 'darken-1');
+  padding-left: .5em;
+  padding-right: 1em;
 }
+
+.cite-h6 {
+  font-size: .75em;
+  line-height: .75em;
+  }
+
+.cite-h5 {
+  font-size: .85em;
+  line-height: 1em;
+}
+
+.institution-logo {
+  height: auto;
+  width: 50px;
+}
+// .layer-citation {
+//     h6 {
+//         line-height: 0;
+//     }
+//     img.institution_logo {
+//         width: 50px;
+//         height: auto;
+//     }
+//     a {
+//         pointer-events: all;
+//         i {
+//             // font-size: 50px;
+//             &:hover {
+//                 background-color: material-color(md_grey, 300);
+//                 border-radius: 50%;
+//             }
+//
+//         }
+//     }
+//
+//     a.pick-color {
+//         i {
+//             color: material-color(md_blue, 100);
+//             &:hover {
+//                 color: material-color(md_blue, 500);
+//             }
+//         }
+//     }
+// }

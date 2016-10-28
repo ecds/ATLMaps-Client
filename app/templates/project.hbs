@@ -7,40 +7,40 @@
 {{!-- {{/tether-dialog}} --}}
 
 
-<div id="base-map" class="fullscreen-map">
+<div id='base-map' class='fullscreen-map'>
     <div id='map' class='atlmap'></div>
-    <div class="base-layer-controls"></div>
+    <div class='base-layer-controls'></div>
 </div>
 
 
-{{!-- <div class="project-pane">
-    <div class="project-route">
+{{!-- <div class='project-pane'>
+    <div class='project-route'>
         {{liquid-outlet}}
     </div>
 </div> --}}
-<div class="project-title row z-depth-2">
-  <div class="col s1">
+<div class='project-title row z-depth-2'>
+  <div class='col s1'>
     {{#link-to 'projects' tagName='a'}}
-      <i class="material-icons">exit_to_app</i>
+      <i class='material-icons exit'>exit_to_app</i>
     {{/link-to}}
   </div>
-  <div class="col s11">
+  <div class='col s11'>
     <h2>{{model.name}}</h2>
   </div>
 </div>
 {{outlet}}
-{{project-nav model=model current=current class="navbar-fixed"}}
+{{project-nav model=model current=current class='navbar-fixed'}}
 
 <!-- </div> -->
-{{outlet "browse-results"}}
+{{outlet 'browse-results'}}
 <!-- </div> -->
 
-<!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
+<!-- <a class=' rotate -fab -sm toggle-results'><i class='material-icons'>chevron_right</i></a> -->
 
 
 {{!-- {{#if model.hasIntro}}
     {{#unless model.suppressIntro}}
-        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class="project-intro" }}
+        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro' }}
             {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
         {{/tether-dialog}}
     {{/unless}}

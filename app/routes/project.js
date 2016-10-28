@@ -6,7 +6,6 @@ const {
         service
     },
     get,
-    getOwner,
     set,
     Route,
     run
@@ -35,18 +34,17 @@ export default Route.extend({
                 may_browse: true,
                 description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.'
             });
-        } else {
-            return this.store.findRecord('project', params.project_id);
         }
+
+        return this.store.findRecord('project', params.project_id);
     },
 
     afterModel() {
-        let project = this.modelFor('project');
-        let projectID = get(project, 'id');
+        const project = this.modelFor('project');
+        const projectID = get(project, 'id');
         if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
             project.setProperties({ suppressIntro: true });
         }
-
     },
 
     map() {
@@ -56,20 +54,18 @@ export default Route.extend({
     current: '',
 
     setUp: function() {
-
-        let project = this.modelFor('project');
-        let cookieService = get(this, 'cookies');
-        let _this = this;
+        const project = this.modelFor('project');
+        const cookieService = get(this, 'cookies');
+        const _this = this;
 
         run.scheduleOnce('afterRender', function() {
             if (!_this.get('mapObject').map) {
-
                 // Create the Leaflet map.
                 _this.map(project);
                 _this.get('mapObject').setUpProjectMap(project);
             }
 
-            let suppressCookie = cookieService.read(`noIntro${project.id}`);
+            const suppressCookie = cookieService.read(`noIntro${project.id}`);
             if (suppressCookie) {
                 project.setProperties(
                     {
@@ -80,7 +76,6 @@ export default Route.extend({
                 set(_this, 'hasSuppressCookie', false);
             }
         });
-
     }.on('activate'),
 
     // Function the runs after we fully exit a project route and clears the map,
@@ -88,7 +83,7 @@ export default Route.extend({
     tearDown: function() {
         get(this, 'browseParams').init();
         // Clear the chekes for the checked categories and tags.
-        let categories = this.store.peekAll('category');
+        const categories = this.store.peekAll('category');
         // categories.setEach('checked', false);
         categories.forEach(function(category) {
             category.setProperties({
@@ -99,21 +94,21 @@ export default Route.extend({
             // category.get('tag_ids').setEach('checked', false);
         });
         // Clear the vector layers that are marked active in this project.
-        let vectors = this.store.peekAll('vector-layer');
+        const vectors = this.store.peekAll('vector-layer');
         vectors.forEach(function(vector) {
             vector.setProperties({
                 active_in_project: false
             });
         });
         // Clear the raster layers that are marked active in this project.
-        let rasters = this.store.peekAll('raster-layer');
+        const rasters = this.store.peekAll('raster-layer');
         rasters.forEach(function(raster) {
             raster.setProperties({
                 active_in_project: false
             });
         });
         // Clear checked institution
-        let institutions = this.store.peekAll('institution');
+        const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
         // Reset the year range.
         // this.store.peekRecord('yearRange', 1).rollback();
@@ -134,7 +129,7 @@ export default Route.extend({
             this.modelFor('project').toggleProperty('may_browse');
         },
 
-        didTransition(/*transition*/) {
+        didTransition(/* transition */) {
             // let current = getOwner(this).lookup('controller:application').currentPath;
             // let currentRoutes = current.split('.');
             // console.log('currentRoutes', currentRoutes);
@@ -153,7 +148,6 @@ export default Route.extend({
 
         // TODO this should be a Component or service
         showLayerInfoDetals(layer) {
-
             try {
                 // Toggle the totally made up property!
                 // The `!` in the second argument toggles the true/false state.
@@ -170,52 +164,50 @@ export default Route.extend({
                 this.set('clickedLayer', layer);
                 // Set the model attribute
                 layer.set('clicked', 'true');
-            }
             // Otherwise, this must be the first time a user has clicked a category.
-            else {
+            } else {
                 set(this, 'clickedLayer', true);
             }
         },
 
         addRemoveLayer(layer) {
-            let project = this.modelFor('project');
+            const project = this.modelFor('project');
 
-            let layerModel = layer._internalModel.modelName;
+            const layerModel = layer._internalModel.modelName;
 
-            let layerObj = this.store.peekRecord(layerModel, layer.get('id'));
+            const layerObj = this.store.peekRecord(layerModel, layer.get('id'));
 
-            let format = layerObj.get('data_format');
+            const format = layerObj.get('data_format');
 
-            let _this = this;
+            const _this = this;
 
             // TODO Q: Do we set `active_in_project` before?
             if (layerObj.get('active_in_project')) {
-
                 let newLayer = '';
                 switch (format) {
-                    case 'raster':
-                        let position = project.get('raster_layer_project_ids').get('length') + 11;
+                case 'raster': {
+                    const position = project.get('raster_layer_project_ids').get('length') + 11;
 
-                        newLayer = this.store.createRecord(`${format}-layer-project`, {
-                            project_id: project.id,
-                            raster_layer_id: layerObj,
-                            data_format: layerObj.get('data_format'),
-                            position // enhanced litrial
-                        });
+                    newLayer = this.store.createRecord(`${format}-layer-project`, {
+                        project_id: project.id,
+                        raster_layer_id: layerObj,
+                        data_format: layerObj.get('data_format'),
+                        position // enhanced litrial
+                    });
+                    break;
+                }
+
+                case 'vector': {
+                    let layerColor = '';
+                    switch (layerObj.get('data_type')) {
+                    case 'point-data': {
+                        const markerColors = this.get('dataColors.markerColors');
+                        layerColor = Math.floor(Math.random() * markerColors.length);
                         break;
-
-                    case 'vector':
-                        let layerColor = '';
-                        switch (layerObj.get('data_type')) {
-                            case 'point-data':
-                                let markerColors = this.get('dataColors.markerColors');
-                                layerColor = Math.floor(Math.random() * markerColors.length);
-                                break;
-                            case 'polygon':
-                            case 'line-data':
-                                let shapeColors = this.get('dataColors.shapeColors');
-                                layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
-                        }
+                    }
+                    default: {
+                        const shapeColors = this.get('dataColors.shapeColors');
+                        layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
 
                         newLayer = this.store.createRecord('vector-layer-project', {
                             project_id: project.id,
@@ -224,6 +216,10 @@ export default Route.extend({
                             marker: layerColor
                         });
                         break;
+                    }
+                    }
+                }
+                // no default
                 }
 
                 project.get(`${format}_layer_project_ids`).addObject(newLayer);
@@ -259,9 +255,9 @@ export default Route.extend({
 
                 // Build a hash for the query. We do this because one key will need
                 // to equal the `format` var.
-                let attrs = {};
-                let layer_id = `${layerModel}_layer_id`;
-                attrs[layer_id] = layer.get('id');
+                const attrs = {};
+                const layerId = `${layerModel}_layer_id`;
+                attrs[layerId] = layer.get('id');
                 // NOTE: This might be wrong. Was `attrs['project_id'] =`
                 attrs.project_id = project.id;
                 // Get the join between layer and project
@@ -278,7 +274,8 @@ export default Route.extend({
                         // TODO figure out how to give feedback on these shared actions
                         // _this.controllerFor('project/browse-layers').set('editSuccess', true);
                         // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers').set('editSuccess', false);
+                        //     _this.controllerFor('project/browse-layers')
+                        //     .set('editSuccess', false);
                         //     // Remove the layer from the map
 
                         _this.get('projectLayers')[layer.get('slug')].remove();
@@ -306,7 +303,6 @@ export default Route.extend({
             ).catch(
                 // this.get('flashMessage').showMessage('Dang, something went wrong!', 'fail')
             );
-
         }
 
     }

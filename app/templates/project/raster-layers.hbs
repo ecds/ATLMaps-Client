@@ -14,7 +14,7 @@
               {{if raster.raster_layer_id.name raster.raster_layer_id.title 'Loading...'}}
             </div>
             <div class='secondary-conent right reorder-handle col s1'>
-              <i class='material-icons'>expand_more</i>
+              <i class='material-icons'>code</i>
             </div>
           </div>
         </div>
@@ -29,6 +29,7 @@
           <p class='black-text'>
             {{if raster.raster_layer_id.description raster.raster_layer_id.description 'No description :('}}
           </p>
+          {{layer-citation layer=raster.raster_layer_id}}
         </div>
       {{/sortable-item}}
 

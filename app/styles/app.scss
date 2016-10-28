@@ -1,7 +1,3 @@
-// @import 'ember-power-select/themes/bootstrap';
-// @import 'ember-power-select';
-// @import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
-
 // TODO: There is a better way to do this right?
 $roboto-font-path: '../assets/';
 
@@ -55,8 +51,6 @@ nav {
     }
     &.s1 {
       cursor: pointer;
-      // font-size: 1em;
-      // line-height: 1em;
       padding: .5em .75em;
       text-align: center;
       width: 4em;
@@ -83,6 +77,7 @@ nav {
 // 'tag-list',
 // 'alert',
 @import 'slider';
+@import 'layer-citation';
 // 'vector-info',
 // 'project-vector-list',
 // 'responsive',
@@ -124,42 +119,6 @@ body {
   width: 100vw;
 }
 
-// .h1,
-// h1 {
-//   font-size: 36px;
-//   line-height: 40px;
-// }
-//
-// .h2,
-// h2 {
-//   font-size: 30px;
-//   line-height: 40px;
-// }
-//
-// .h3,
-// h3 {
-//   font-size: 24px;
-//   line-height: 40px;
-// }
-//
-// .h4,
-// h4 {
-//   font-size: 18px;
-//   line-height: 20px;
-// }
-//
-// .h5,
-// h5 {
-//   font-size: 14px;
-//   line-height: 20px;
-// }
-//
-// .h6,
-// h6 {
-//   font-size: 12px;
-//   line-height: 20px;
-// }
-//
 .atlmap {
   height: 100%;
   width: 100%;
@@ -179,11 +138,16 @@ body {
   font-size: 1.5em;
 }
 
+.exit {
+  transform: rotate(180deg);
+}
+
 // TODO need a raster list scss?
 // TODO is there not an icon for this? I'm watching the world series and don't
 // have time to look like right now.
 .reorder-handle {
   i {
-    margin-left: -.15em;
+    margin-left: -.1em;
+    transform: rotate(-90deg);
   }
 }
