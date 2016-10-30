@@ -21,7 +21,7 @@ $orange: color('deep-orange', 'accent-2');
   height: .1em;
   width: 96%;
 
-  &.noUi-origin {
+  .noUi-origin {
     background-color: color('grey', 'lighten-2');
   }
 }
@@ -46,6 +46,12 @@ $orange: color('deep-orange', 'accent-2');
     &::before,
     &::after {
       content: unset;
+    }
+
+    &:hover {
+      height: 1.5em;
+      top: -.7em;
+      width: 1.5em;
     }
   }
 

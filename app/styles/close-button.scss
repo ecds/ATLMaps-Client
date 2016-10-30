@@ -1,18 +1,19 @@
-a.close-button {
-    color: material-color(md_grey, 600);
-    text-decoration: none;
-    margin-top: .5em;
-    margin-right: .45em;
-    padding: 0;
-    opacity: .7;
-    &:hover {
-        opacity: 1;
-        color: material-color(md_red, 500);
-    }
+.close-button {
+  color: material-color(md_grey, 600);
+  margin-right: .45em;
+  margin-top: .5em;
+  opacity: .7;
+  padding: 0;
+  text-decoration: none;
 
-    i {
-      margin-right: .4em;
-    }
+  &:hover {
+    color: material-color(md_red, 500);
+    opacity: 1;
+  }
+
+  i {
+    margin-right: .4em;
+  }
 }
 
 // .row.close-button-row {

@@ -11,6 +11,8 @@ $primary-color-trans: rgba(3, 169, 244, 1);
 $secondary-color: color('deep-orange', 'accent-3');
 $nav-button: color('grey', 'darken-4');
 
+$col1: 5em;
+
 @import 'components/variables';
 @import 'materialize';
 @import 'ember-cli-materialize';
@@ -49,11 +51,12 @@ nav {
     a {
       color: color('grey', 'lighten-4');
     }
+
     &.s1 {
       cursor: pointer;
       padding: .5em .75em;
       text-align: center;
-      width: 4em;
+      width: $col1;
     }
   }
 
@@ -90,22 +93,28 @@ nav {
 // 'browse-results',
 // 'browse-toolbar',
 // 'atl-checkbox',
-// 'base-picker',
+@import 'base-picker';
 // 'zoom-buttons',
 // 'tagem';
 
 
 body {
-  font-family: 'Roboto', 'Material Icons' sans-serif;
-  font-weight: 300;
   background-color: material-color(md_grey, 200);
   color: material-color(md_grey, 600);
+  font-family: 'Roboto', 'Material Icons' sans-serif;
   font-size: 18px;
+  font-weight: 300;
   height: 100vh;
 }
 
 .project {
   overflow: hidden;
+}
+
+.secondary-conent {
+  i {
+    color: color('grey', 'base');
+  }
 }
 
 .fullscreen-map {
@@ -149,5 +158,10 @@ body {
   i {
     margin-left: -.1em;
     transform: rotate(-90deg);
+
+    &:hover {
+      color: $secondary-color;
+      cursor: ns-resize;
+    }
   }
 }

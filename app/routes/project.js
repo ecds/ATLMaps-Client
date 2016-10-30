@@ -13,7 +13,6 @@ const {
 
 export default Route.extend({
 
-    // mapObject: Ember.inject.service('map-object'),
     mapObject: service(),
     dataColors: service(),
     browseParams: service(),
@@ -110,12 +109,14 @@ export default Route.extend({
         // Clear checked institution
         const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
+        // TODO Why doesn't this work?
         // Reset the year range.
         // this.store.peekRecord('yearRange', 1).rollback();
+        // TODO Can this be done via the vectorDetailContent service?
         $('.vector-info').remove();
         // Clear the map.
-        this.get('mapObject.map').remove();
-        this.set('mapObject.map', '');
+        get(this, 'mapObject.map').remove();
+        set(this, 'mapObject.map', '');
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {

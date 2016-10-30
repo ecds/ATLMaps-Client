@@ -1,8 +1,10 @@
 .project-pane {
   // box-shadow: $shadow;
-  left: 4em;
+  left: 5em;
+  pointer-events: all;
   position: absolute;
   top: 3em;
+  transition: width 3s;
   width: 34%;
   z-index: 999;
 
@@ -34,8 +36,8 @@
 }
 
 .close-button {
-  margin-left: .75em;
   color: color('grey', 'base');
+  margin-left: .75em;
 }
 
 // This is our main wrapping element, it's made 100vh high to
@@ -43,7 +45,6 @@
 // and padded with negative margin and padding
 .pane-container {
   backface-visibility: hidden;
-  // background-color: color('grey', 'lighten-4');
   display: flex;
   height: 100vh;
   overflow: hidden;
@@ -67,7 +68,7 @@
   overflow-style: none;
   // padding: .5rem;
 
-  &.card {
+  .card {
     margin-top: 0;
   }
 }
@@ -118,7 +119,7 @@
   li {
     border: 1px solid color('grey', lighten-1);
     border-radius: .5em;
-    margin: .5em;
+    margin: 1em;
   }
 }
 
@@ -133,6 +134,11 @@
 .active + .slider-container {
   border-bottom: 0;
   margin-bottom: 0;
+}
+
+.hide-nav + .project-pane {
+  display: none;
+  width: 0;
 }
 // Entirely optional – just wanted to remove the scrollbar on
 // WebKit browsers as I find them ugly

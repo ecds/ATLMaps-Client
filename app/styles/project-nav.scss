@@ -4,7 +4,7 @@
   display: table;
   position: absolute;
   top: 3em;
-  width: 4em;
+  width: $col1;
 
   li {
     background-color: color('grey', lighten-4);
@@ -13,7 +13,7 @@
     cursor: pointer;
     font-size: 1em;
     line-height: 1em;
-    opacity: .6;
+    opacity: 1;
     padding: .5em .75em;
     text-align: center;
     text-transform: uppercase;
