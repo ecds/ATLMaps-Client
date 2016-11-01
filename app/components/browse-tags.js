@@ -4,15 +4,14 @@ const {
     Component,
     inject: {
         service
-    },
-    set
+    }
 } = Ember;
 
 export default Component.extend({
 
     browseParams: service(),
 
-    classNames: ['browse-by-tags'],
+    classNames: ['browse-by-tags', 'container'],
 
     actions: {
         checkSingleTag(tag) {
@@ -38,37 +37,37 @@ export default Component.extend({
                 tag.set('checked', category.get('allChecked'));
             });
             this.sendAction('getResults');
-        },
-
-        showTagGroup(category) {
-            // There is a non-api backed boolean on the category model for `clicked`
-            // This is what is used for showing the tags for the clicked category.
-            // A property is set on this component, `clickedCategory` to the clicked
-            // category and that is used to show/hide the tags in the templete.
-
-            // When a category is clicked, we want to clear out the previous one.
-            try {
-                // Toggle the totally made up property!
-                // The `!` in the second argument toggles the true/false state.
-                this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
-            } catch (err) {
-                // The first time, clickedCategory will not be an instance
-                // of `category`. It will just be `undefined`.
-            }
-            // So if the category that is clicked does not match the one in the
-            // `clickedCategory` property, we set the `clicked` attribute to `true`
-            // and that will remove the `hidden` class in the template.
-            if (category !== this.get('clickedCategory')) {
-                // Update the `clickedCategory` property
-                this.set('clickedCategory', category);
-                // Set the model attribute
-                category.set('clicked', 'true');
-            }
-            // Otherwise, this must be the first time a user has clicked a category.
-            else {
-                set(this, 'clickedCategory', true);
-            }
-
         }
+
+    //     showTagGroup(category) {
+    //         // There is a non-api backed boolean on the category model for `clicked`
+    //         // This is what is used for showing the tags for the clicked category.
+    //         // A property is set on this component, `clickedCategory` to the clicked
+    //         // category and that is used to show/hide the tags in the templete.
+    //
+    //         // When a category is clicked, we want to clear out the previous one.
+    //         try {
+    //             // Toggle the totally made up property!
+    //             // The `!` in the second argument toggles the true/false state.
+    //             this.set('clickedCategory.clicked', !this.get('clickedCategory.clicked'));
+    //         } catch (err) {
+    //             // The first time, clickedCategory will not be an instance
+    //             // of `category`. It will just be `undefined`.
+    //         }
+    //         // So if the category that is clicked does not match the one in the
+    //         // `clickedCategory` property, we set the `clicked` attribute to `true`
+    //         // and that will remove the `hidden` class in the template.
+    //         if (category !== this.get('clickedCategory')) {
+    //             // Update the `clickedCategory` property
+    //             this.set('clickedCategory', category);
+    //             // Set the model attribute
+    //             category.set('clicked', 'true');
+    //         }
+    //         // Otherwise, this must be the first time a user has clicked a category.
+    //         else {
+    //             set(this, 'clickedCategory', true);
+    //         }
+    //
+    //     }
     }
 });

@@ -1,7 +1,6 @@
-<h2>Institutions:</h2>
+<h5>Institutions:</h5>
 {{#each model as |institution|}}
     <div class="checkbox institution">
-        <label>
             <input type="checkbox"
                 class='inst-check'
                 id="{{institution.slug}}"
@@ -9,7 +8,7 @@
                 checked="{{if institution.checked "checked" flase}}"
                 onchange={{action "checkInstitution" institution}} />
 
-            <span class="check"></span>
+                <label for='{{institution.slug}}'>
             {{institution.name}}
         </label>
     </div>

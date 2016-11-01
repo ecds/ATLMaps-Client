@@ -9,6 +9,7 @@ export default RESTAdapter.extend(DataAdapterMixin, {
     host: ENV.APP.API_HOST,
     namespace: 'v1',
     suffix: '.json',
+    coalesceFindRequests: true,
     authorizer: 'authorizer:oauth2',
     buildURL: function(record, suffix) {
         let s = this._super(record, suffix);

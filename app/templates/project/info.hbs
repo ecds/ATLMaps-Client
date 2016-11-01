@@ -1,5 +1,5 @@
 {{#project-pane title='About this Project'}}
-{{#md-card title="Info" id="basic-card"}}
+{{#md-card class='z-depth-2' title="Info"}}
     {{#md-card-content}}
         {{model.description}}
     {{/md-card-content}}
@@ -7,7 +7,7 @@
       {{#if model.hasIntro}}
         {{md-btn text='Show Intro'
       	 action='toggleIntro'
-      	  class='light-blue darken-2'}}
+      	  class='light-blue darken-2, waves-effect'}}
         {{/if}}
     {{/md-card-action}}
 {{/md-card}}

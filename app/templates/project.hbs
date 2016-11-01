@@ -38,10 +38,13 @@
 <!-- <a class=' rotate -fab -sm toggle-results'><i class='material-icons'>chevron_right</i></a> -->
 
 
-{{!-- {{#if model.hasIntro}}
+{{#if model.hasIntro}}
     {{#unless model.suppressIntro}}
-        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro' }}
+        {{!-- {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro' }}
             {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
-        {{/tether-dialog}}
+        {{/tether-dialog}} --}}
+        {{#md-modal close='toggleIntro'}}
+          {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true}}
+        {{/md-modal}}
     {{/unless}}
-{{/if}} --}}
+{{/if}}

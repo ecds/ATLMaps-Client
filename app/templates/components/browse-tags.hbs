@@ -1,6 +1,36 @@
-<div>
-    <h2>Tags:</h2>
-    <div class="row">
+{{#md-card-collapsible }}
+  <h5>Tags</h5>
+  {{#each model as |category|}}
+    {{#md-collapsible title=category.name}}
+    <div class="{{if category.checked 'checked'}}">
+
+          <input type="checkbox"
+            class="tags"
+            id='{{category.slug}}'
+            checked="{{if category.allChecked false}}"
+            onchange={{action "checkAllTagsInCategory" category}}
+          />
+          <label for={{category.slug}}>
+            Select All
+        </label>
+        <br />
+        {{#each category.sortedTags as |tag|}}
+          <input type="checkbox"
+              class="tags {{category.slug}}"
+              id="{{tag.slug}}"
+              name="{{tag.name}}"
+              category="{{category.slug}}"
+              checked="{{if tag.checked false}}"
+              onchange={{action "checkSingleTag" tag}}
+          />
+          <label for={{tag.slug}}>{{tag.name}}</label>
+          <br />
+        {{/each}}
+      </div>
+    {{/md-collapsible}}
+  {{/each}}
+{{/md-card-collapsible}}
+    {{!-- <div class="row">
         <ul class="list-unstyled categories col-md-12">
             {{#each model as |category|}}
             <li class="category">
@@ -43,4 +73,4 @@
             {{/each}}
         </ul>
     </div>
-</div>
+</div> --}}

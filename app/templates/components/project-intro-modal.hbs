@@ -1,5 +1,18 @@
+<div class="modal-content">
+  <h4>{{project.name}}</h4>
+  <h5>{{project.owner}}</h5>
+  {{#if project.media}}
+    <div class="video-container">
+      <iframe width="412" height="140" src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  {{/if}}
+  <p class={{if project.media 'top-fix'}}>{{{project.intro}}}</p>
+</div>
+<div class="modal-footer">
+  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+</div>
 {{!FIXME this is awful. there has to be a better way to decide which template to but it in.}}
-<div class="intro-body">
+{{!-- <div class="intro-body">
     <header>
         <div class="row">
             <div class="col-md-8">
@@ -70,4 +83,4 @@
             </div>
         </div>
     </footer>
-</div>
+</div> --}}

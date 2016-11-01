@@ -1,0 +1,53 @@
+.browse-by-tags {
+  .collapsible-header {
+    border-radius: 0;
+    color: color('grey', 'darken-1');
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 2rem;
+    min-height: 2rem;
+    padding: 0 .25rem;
+
+    &::before {
+      content: '\e876';
+      opacity: 0;
+    }
+
+    &::first-letter {
+      color: $secondary-color;
+      font-family: 'Material Icons';
+    }
+
+    &.checked {
+      &::first-letter {
+        opacity: 1;
+      }
+    }
+  }
+
+  .collapsible {
+    border: 0;
+    box-shadow: none;
+
+    li {
+      border: 0;
+      border-radius: 0;
+      margin: 0;
+      padding-left: .5em;
+    }
+  }
+
+  .collapsible-body {
+    border-radius: 0;
+
+    p {
+      padding: 1rem;
+
+      label {
+        color: color('grey', 'darken-3');
+        font-size: 1.5em;
+        // padding-top: .5em;
+      }
+    }
+  }
+}

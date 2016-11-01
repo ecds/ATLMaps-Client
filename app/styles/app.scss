@@ -77,11 +77,11 @@ nav {
 // 'loading',
 'extra-icons';
 // 'login-form',
-// 'tag-list',
+@import 'browse-tags';
 // 'alert',
 @import 'slider';
 @import 'layer-citation';
-// 'vector-info',
+@import 'vector-info';
 // 'project-vector-list',
 // 'responsive',
 // 'gallery',
@@ -162,6 +162,43 @@ body {
     &:hover {
       color: $secondary-color;
       cursor: ns-resize;
+    }
+  }
+}
+
+// Text Search
+.search-button {
+  &.col {
+    padding-top: 1.5em;
+  }
+}
+
+// Leaflet Controls
+.leaflet-top {
+  &.leaflet-right {
+    top: 5em;
+  }
+}
+
+// Intro md-modal
+// TODO get these z-index shit under control
+.ember-modal-overlay {
+  z-index: 1001;
+
+  .modal {
+    height: 85%;
+    width: 85%;
+  }
+
+  .top-fix {
+    margin-top: -20rem;
+  }
+
+  .video-container {
+
+    iframe {
+      height: 50%;
+      width: 50%;
     }
   }
 }

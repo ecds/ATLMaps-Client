@@ -1,6 +1,13 @@
-{{yield}}
-
-<div class="checkbox">
+<a {{action 'searchBounds'}}>
+  {{#if hasBounds}}
+    <i class="material-icons">location_searching</i>
+    Clear bounds limit.
+  {{else}}
+    <i class="material-icons">location_disabled</i>
+    Limit results to visiable area.
+  {{/if}}
+</a>
+{{!-- <div class="checkbox">
     <label>
         <input type="checkbox"
             class=""
@@ -12,7 +19,7 @@
         <span class="check"></span>
         Search Viewable Area
     </label>
-</div>
+</div> --}}
 
 
 {{!-- so here is a task i'm handing off to some GSU CS student. create a service that will identify the polygon(s) on an image that is a map

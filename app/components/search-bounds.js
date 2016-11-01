@@ -10,10 +10,13 @@ const {
 export default Component.extend({
     mapObject: service(),
     browseParams: service(),
+    classNames: ['container'],
+    hasBounds: false,
 
     actions: {
         searchBounds() {
-            let bounds = get(this, 'browseParams.bounds');
+            this.toggleProperty('hasBounds');
+            // let bounds = get(this, 'browseParams.bounds');
             let map = get(this, 'mapObject.map');
             // try {
             //     bounds.getWest();

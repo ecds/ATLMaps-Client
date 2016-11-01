@@ -122,6 +122,7 @@ export default Route.extend({
     actions: {
 
         toggleIntro() {
+            console.log('this', this.modelFor('project'.suppressIntro));
             this.modelFor('project').toggleProperty('suppressIntro');
         },
 

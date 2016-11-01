@@ -1,5 +1,6 @@
 {{#project-pane title='Maps' }}
 
+  <div class='card'>
   {{#sortable-group tagName="ul" class='scrollable-list collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
     {{#each model.sortedRasterLayers as |raster|}}
 
@@ -35,4 +36,5 @@
 
     {{/each}}
   {{/sortable-group}}
+</div>
 {{/project-pane}}

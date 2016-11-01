@@ -1,14 +1,19 @@
 import Ember from 'ember';
 
 const {
-    Service
+    Service,
+    set
 } = Ember;
+
+// TODO this whole thing needs to be an objects and we need to ditch the jQuery inserts.
 
 export default Service.extend({
 
     init() {
         this._super(...arguments);
         this.set('properties', 'foo');
+        set(this, 'title', 'booooo');
+
     },
 
     viewData(feature, layer) {
@@ -28,7 +33,6 @@ export default Service.extend({
             popupContent += '</div>';
         }
         if (feature.properties.images) {
-            fillColor = 'red';
             popupContent += '<div class="gallery"><div class="swiper-wrapper">';
             feature.properties.images.forEach(function(image) {
                 popupContent += '<div class="swiper-slide" ><a href="' + image.url + '" target="_blank"><img class="geojson" src="' + image.url + '" title="' + image.name + '" /></a>"';

@@ -1,6 +1,13 @@
 <div class="row">
-    <form class='col-md-12'>
-        {{input type='text' value=searchTerms class='form-control pull-left' placeholder='Search' submit="textSearch"}}
-        <button {{action "textSearch"}} type="submit" style="opacity:0"><i class="material-icons">search</i></button>
-    </form>
+  <div class="input-field col s9">
+    <input id="icon_prefix" type="text" class="validate" value={{searchTerms}}>
+    <label for="icon_prefix">Search</label>
+  </div>
+  <div class='col s3 search-button'>
+    {{md-btn-submit icon='mdi-content-send'
+      iconPosition='right'
+      text='Go'
+      action='textSearch'
+    }}
+  </div>
 </div>

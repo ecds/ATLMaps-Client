@@ -1,7 +1,7 @@
 .project-pane {
   // box-shadow: $shadow;
   left: 5em;
-  pointer-events: all;
+  // pointer-events: none;
   position: absolute;
   top: 3em;
   transition: width 3s;
@@ -11,6 +11,13 @@
   .row {
     margin-bottom: 0;
   }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid $faded-white;
+    border-top: 1px solid $faded-black;
+    height: 0;
+  }
 }
 
 // The following is the scrolling of the pane was inspired by this
@@ -19,7 +26,8 @@
 // Flexbox gives us the flexiness we need.
 // The top just stays put as there is no scrolling
 // on the body due to the page never exceeding viewport height
-.pane-title {
+.pane-title,
+.vector-detail-title {
   align-items: center;
   background-color: color('grey', 'lighten-3');
   display: flex;
@@ -43,7 +51,8 @@
 // This is our main wrapping element, it's made 100vh high to
 // ensure it is always the correct size and then moved into place
 // and padded with negative margin and padding
-.pane-container {
+.pane-container,
+.vector-detail-container {
   backface-visibility: hidden;
   display: flex;
   height: 100vh;
@@ -51,6 +60,12 @@
   position: relative;
   width: 100%;
   will-change: overflow;
+
+  @media only screen and (min-width: 993px) {
+    .container {
+      width: 85%;
+    }
+  }
 }
 
 // All the scrollable sections should overflow and be whatever
@@ -66,10 +81,11 @@
   overflow: auto;
   // overflow-scrolling: touch;
   overflow-style: none;
-  // padding: .5rem;
+  // pointer-events: none;
 
   .card {
     margin-top: 0;
+    // pointer-events: all;
   }
 }
 
@@ -79,6 +95,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 6em;
+  // pointer-events: all;
 
   &.collapsible {
     box-shadow: none;

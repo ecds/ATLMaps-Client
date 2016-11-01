@@ -14,7 +14,7 @@ export default Service.extend({
         this._super(...arguments);
         this.setProperties({
             searchText: '',
-            tags: '',
+            tags: [],
             institutions: [],
             start_year: '',
             end_year: '',
