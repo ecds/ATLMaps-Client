@@ -73,7 +73,7 @@ nav {
 // 'back-to-project-button',
 // 'list-projects',
 'project-nav',
-// 'project-intro',
+'project-intro',
 // 'loading',
 'extra-icons';
 // 'login-form',
@@ -90,8 +90,8 @@ nav {
 // 'vector-layer-option-panel',
 // 'material-tabs',
 // 'browse-pane',
-// 'browse-results',
-// 'browse-toolbar',
+@import 'browse-results';
+@import 'browse-toolbar';
 // 'atl-checkbox',
 @import 'base-picker';
 // 'zoom-buttons',
@@ -180,25 +180,12 @@ body {
   }
 }
 
-// Intro md-modal
-// TODO get these z-index shit under control
-.ember-modal-overlay {
-  z-index: 1001;
+.close-button {
+  cursor: pointer;
+}
 
-  .modal {
-    height: 85%;
-    width: 85%;
-  }
-
-  .top-fix {
-    margin-top: -20rem;
-  }
-
-  .video-container {
-
-    iframe {
-      height: 50%;
-      width: 50%;
-    }
+.carousel {
+  &.carousel-slider {
+    height: 200px;
   }
 }

@@ -1,4 +1,42 @@
-<div class="modal-content">
+<a {{action 'toggleIntro'}} class='close-button pull-right'>
+                    <i class="material-icons">highlight_off</i>
+                </a>
+<article class='z-depth-3'>
+  <header>
+    {{#if project.media}}
+      <div class="video-container">
+        <iframe width="853" height="480" src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+    {{/if}}
+  </header>
+    <div class='content'>
+      <h4>{{project.name}}</h4>
+      <h5>{{project.owner}}</h5>
+    {{{project.intro}}}
+  </div>
+  <footer>
+    <div class='row'>
+      <div class='col s4 offset-s4 center-align'>
+        {{md-btn text='Explore Project'
+          action='toggleIntro'
+      	  class='light-blue darken-2, waves-effect'}}
+      </div>
+      <div class='col s4'>
+        {{log project.hasSuppressCookie}}
+        {{md-check name="Don't show every time." checked=project.hasSuppressCookie action="supressIntro" model=project}}
+        {{!-- <label class="pull-right">
+            {{input type="checkbox"
+              checked=project.hasSuppressCookie
+              elementId="dont-show"
+              change=(action "supressIntro" project)
+            }}
+            <span class="check"></span> Don't show every time.
+        </label> --}}
+      </div>
+    </div>
+  </footer>
+</article>
+{{!-- <div class="modal-content">
   <h4>{{project.name}}</h4>
   <h5>{{project.owner}}</h5>
   {{#if project.media}}
@@ -10,77 +48,5 @@
 </div>
 <div class="modal-footer">
   <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-</div>
-{{!FIXME this is awful. there has to be a better way to decide which template to but it in.}}
-{{!-- <div class="intro-body">
-    <header>
-        <div class="row">
-            <div class="col-md-8">
-                <h1>{{project.name}}</h1>
-                <h2>By: {{project.owner}}</h2>
-            </div>
-            <div class="col-md-4">
-                <a {{action 'toggleIntro'}} class='close-button pull-right'>
-                    <i class="material-icons">highlight_off</i>
-                </a>
-            </div>
-        </div>
-    </header>
-    <div class="container-fluid">
-        {{#if project.twoColIntro}}
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="jumbotron">
-                        <div class='embed-container'>
-                            <iframe src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <article>
-                        {{{project.intro}}}
-                    </article>
-                </div>
-            </div>
-            {{else if project.media}}
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="jumbotron">
-                        <div class='embed-container'>
-                            <iframe src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        {{else}}
-            <div class="col-md-12">
-                <article>
-                    {{{project.intro}}}
-                </article>
-            </div>
-        {{/if}}
-    </div>
-    <footer>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 text-center">
-                <div class="btn btn-raised btn-info">
-                    <a {{action 'toggleIntro'}}>Explore Project</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label class="pull-right">
-                    {{input type="checkbox"
-                            checked=project.hasSuppressCookie
-                            elementId="dont-show"
-                            change=(action "supressIntro" project)
-                    }}
-                    <span class="check"></span> Don't show every time.
-                </label>
-            </div>
-        </div>
-    </footer>
 </div> --}}
+{{!FIXME this is awful. there has to be a better way to decide which template to but it in.}}

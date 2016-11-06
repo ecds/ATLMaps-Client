@@ -33,20 +33,21 @@ export default Service.extend({
             popupContent += '</div>';
         }
         if (feature.properties.images) {
-            popupContent += '<div class="gallery"><div class="swiper-wrapper">';
+            popupContent += '<div class="carousel carousel-slider" data-indicators="true">';
             feature.properties.images.forEach(function(image) {
-                popupContent += '<div class="swiper-slide" ><a href="' + image.url + '" target="_blank"><img class="geojson" src="' + image.url + '" title="' + image.name + '" /></a>"';
-                if (image.credit) {
-                    popupContent += '<span>Photo Credit: ' + image.credit + '</span></div>';
-                } else {
-                    popupContent += '</div>';
-                }
+
+                popupContent += `<a class="carousel-item" href="javascript:void(0)"><img src="${image.url}"></a>`;
+                // if (image.credit) {
+                //     popupContent += '<span>Photo Credit: ' + image.credit + '</span></div>';
+                // } else {
+                //     popupContent += '</div>';
+                // }
 
                 Ember.$('<img />').load(function() {}).attr('src', image.url);
 
             });
-            popupContent += '</div><div class="swiper-pagination swiper-pagination-white"></div><div class="swiper-button-next swiper-button-black"></div><div class="swiper-button-prev swiper-button-black"></div></div>';
-
+            // popupContent += '</div><div class="swiper-pagination swiper-pagination-white"></div><div class="swiper-button-next swiper-button-black"></div><div class="swiper-button-prev swiper-button-black"></div></div>';
+            popupContent += '</div>'
         }
         if (feature.properties.description) {
             popupContent += feature.properties.description;

@@ -5,27 +5,11 @@
   </a>
 </li>
 
-{{#link-to 'project.info' tagName='li'}}
-  <i class="material-icons">info_outline</i>
-  {{link-to 'Info' 'project.info' tagName='label'}}
-{{/link-to}}
-
-{{#link-to 'project.browse-layers' tagName='li'}}
-  <i class="material-icons">search</i>
-  {{link-to 'Find' 'project.browse-layers' tagName='label'}}
-{{/link-to}}
-
-{{#link-to 'project.raster-layers' tagName='li'}}
-  <i class="material-icons">layers</i>
-  {{link-to 'Maps' 'project.raster-layers' tagName='label'}}
-{{/link-to}}
-
-{{#link-to 'project.vector-layers' tagName='li'}}
-  <i class="material-icons atlmaps-ext database"></i>
-  {{link-to 'Data' 'project.vector-layers' tagName='label'}}
-{{/link-to}}
-
-{{#link-to 'project.base-layers' tagName='li'}}
-  <i class="material-icons">map</i>
-  {{link-to 'Base' 'project.base-layers' tagName='label'}}
-{{/link-to}}
+{{#each links as |link|}}
+  {{!-- A workaround to get the "active" class
+  to apply to the active <li> automatically --}}
+  {{#link-to link.route tagName='li'}}
+    <i class="material-icons {{link.iconClass}}">{{link.icon}}</i>
+    {{link-to link.label link.route tagName='label'}}
+  {{/link-to}}
+{{/each}}

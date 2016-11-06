@@ -8,6 +8,12 @@ module.exports = function(environment) {
         rootURL: '/',
         locationType: 'auto',
 
+        materializeDefaults: {
+            modalIsFooterFxed: true,
+            alignment: 'top center',
+            alignmentTarget: 'top center'
+        },
+
         EmberENV: {
             FEATURES: {
                 // Here you can enable experimental features on an ember canary build

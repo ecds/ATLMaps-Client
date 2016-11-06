@@ -47,7 +47,6 @@ export default Route.extend({
         },
 
         toggleResults() {
-            console.log('title');
             // let project = this.model;
             // project.toggleProperty('showing_browse_results');
         },
@@ -79,9 +78,6 @@ export default Route.extend({
                     institution: this.get('browseParams.institutions'),
                     start_year: this.get('browseParams.start_year'),
                     end_year: this.get('browseParams.end_year')
-                    // bounds: this.get('browseParams.bounds'),
-                    // page: page || 0,
-                    // limit: get(this, 'browseParams.searchLimit')
                 })
             );
             this.setProperties({

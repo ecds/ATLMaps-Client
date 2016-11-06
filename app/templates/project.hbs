@@ -43,7 +43,7 @@
         {{!-- {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro' }}
             {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
         {{/tether-dialog}} --}}
-        {{#md-modal close='toggleIntro'}}
+        {{#md-modal close='toggleIntro' isFooterFixed=true translucentOverlay=false}}
           {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true}}
         {{/md-modal}}
     {{/unless}}

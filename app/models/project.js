@@ -84,6 +84,15 @@ export default Model.extend({
     sortedRasterLayers: computed.sort('raster_layer_project_ids', '_positionSort'),
     _positionSort: ['position:desc'],
 
+    // Used in determing which nave links to show.
+    hasRasters: computed(function() {
+        return get(this, 'raster_layer_project_ids.length') > 0;
+    }),
+
+    hasVectors: computed(function() {
+        return get(this, 'vector_layer_project_ids.length') > 0;
+    }),
+
     // The following computed values are used for the show/hide all toggle switch.
     // The goal is to turn the toggle switch back to true when you make a layer visiable again.
 
@@ -112,6 +121,7 @@ export default Model.extend({
         }
     }),
 
+    // TODO Still needed?
     twoColIntro: computed(function() {
         if (get(this, 'intro') && get(this, 'media')) {
             return true;

@@ -22,6 +22,7 @@ export default Component.extend({
             .draggable({
                 onmove: dragMoveListener
             })
+            .allowFrom('.drag-handle')
             .resizable({
                 preserveAspectRatio: true,
                 edges: {

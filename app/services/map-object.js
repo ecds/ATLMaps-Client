@@ -259,6 +259,7 @@ export default Service.extend({
                                             title: newLayerTitle,
                                             markerDiv
                                         });
+                                        $('.carousel.carousel-slider').carousel({full_width: true});
 
                                         return marker;
                                     },
