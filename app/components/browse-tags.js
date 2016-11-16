@@ -14,9 +14,12 @@ export default Component.extend({
     classNames: ['browse-by-tags', 'container'],
 
     actions: {
-        checkSingleTag(tag) {
+        checkSingleTag(tag, category) {
             if (tag.get('checked') === true) {
                 this.get('browseParams').removeTag(tag);
+                // FIXME This should be computed and not
+                // require an explicit setting
+                category.set('allChecked', false);
             } else if (tag.get('checked') === false) {
                 this.get('browseParams').addTag(tag);
             }

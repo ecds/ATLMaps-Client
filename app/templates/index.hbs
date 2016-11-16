@@ -1,120 +1,60 @@
 {{liquid-outlet}}
 <div class="banner blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-offset-2 col-sm-8">
-                <div class="jumbotron text-center">
-                    <h1>Layers of discovery</h1>
-                    <h2>Mapping the stories of your city</h2>
-                    {{#if session.isAuthenticated}}
-                        <p>
-                            {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
-                        </p>
-                    {{else}}
-                        <p>
-                            {{#link-to 'explore' tagName='a' class="btn btn-raised btn-info" }}
-                                Start Exploring
-                            {{/link-to}}
-                            <!--          <a class="btn btn-info btn-lg" {{action 'createProject'}}>Start Exploring</a> -->
-                        </p>
-                    {{/if}}
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        <div class="text-center">
+          <h1>Layers of discovery</h1>
+          <h2>Mapping the stories of your city</h2>
+          {{#if session.isAuthenticated}}
+            <p>
+              {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
+            </p>
+          {{else}}
+            <p>
+              {{#link-to 'explore' tagName='a' class="btn btn-raised btn-info" }}
+                Start Exploring
+              {{/link-to}}
+            </p>
+          {{/if}}
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="banner blue blurred">
-    <div class="container">
-        <header class="row">
-            <div class="col-md-12">
-                <h3>Featured Projects</h3>
+  <div class="container">
+    <h3>Featured Projects</h3>
+    <hr />{{!-- Featured Projects --}}
+    <div class="row">
+      {{#if model.isPending}}
+        <h2>Loading...</h2>
+      {{else}}
+        {{#each model as |project|}}
+          <div class='col m4 s12'>
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src='/assets/images/turner.jpg'>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{project.name}}<i class="material-icons right">more_vert</i></span>
+                <p>
+                  {{#link-to 'project' project}}
+                    Explore Project
+                  {{/link-to}}
+                </p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{project.name}}<i class="material-icons right">close</i></span> {{project.description}}
+              </div>
             </div>
-        </header>
-        <hr />{{!-- code that shows images. needs more work
-    {{#each model as |project|}}
-        <div class="row">
-            <div class="col-sm-4">
-                {{#link-to 'project' project class="featured" }}
-                    <div class="panel panel-default featured">
-                        <div class="panel-body featured">
-                            <table>
-                                <tr class="head" style='background-image: url("{{project.card_url}}");'>
-                                    <td>
-                                        <h2>{{project.name}}</h2>
-                                    </td>
-                                </tr>
-                                <tr class="des">
-                                    <td>
-                                        <p>{{project.description}}</p>
-                                        <h5>Created by: {{project.owner}}</h5>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                {{/link-to}}
-            </div>
-            {{else}}
-                <p>There are no projects visible at this time :(</p>
-                {{/each}}
-        </div>
-        end of newer look --}}
-        {{! so for now we'll just use the "old" look}}
-        <div class="list-group row project-group-item">
-            {{#if model.isPending}}
-                <h2>Loading...</h2>
-            {{else}}
-                {{#each model as |project|}}
-
-                    <div class="list-group-item col-md-1">
-                        <span class="row-action-primary">
-                            <i class="material-icons">map</i>
-                        </span>
-                      </div>
-                    <div class="col-md-4">
-                        <article class="row-content">
-                            <h4 class="list-group-item-heading">
-                         {{#link-to 'project' project}}
-                           <span>
-                           {{project.name}}</span>
-                         {{/link-to}}
-                       </h4>
-                            <p class="list-group-item-text">{{project.description}}</p>
-                            <h5>Created by: {{project.owner}}</h5>
-                        </article>
-                        <span class="list-group-separator"></span>
-                    </div>
-                      <div class="action-secondary col-md-1"><i class="mdi-material-info"></i></div>
-
-            {{else}}
-                <p>There are no projects visible at this time :(</p>
-                {{/each}}
-            {{/if}}
-        </div>
-        {{! end "old" look}}
+          </div>
+      {{else}}
+        <p>There are no projects visible at this time :(</p>
+        {{/each}}
+      {{/if}}
     </div>
+    {{! end "old" look}}
+  </div>
 </div>
-
-<!-- Partners -->
-{{!-- <div class="container">
-    <section class="text-center">
-        <header class="homepage-header">Project Partners</header>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="partner-logo text-center" src="assets/images/institutions/emory.png" alt="Emory University Libraries and Information Technology Services">
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="partner-logo text-center" src="assets/images/institutions/gsu.png" alt="Georgia State University">
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="partner-logo text-center" src="assets/images/institutions/ksu.png" alt="Kennesaw State University">
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="partner-logo text-center" src="assets/images/institutions/wabe.png" alt="WABE">
-            </div>
-        </div>
-
-    </section>
-</div> --}}
-<!-- End of Partners -->

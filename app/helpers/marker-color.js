@@ -10,7 +10,7 @@ export function markerColor(params) {
 
     if (type === 'point-data') {
         dataColor = markerColors[index].name;
-    } else {
+    } else if (type === 'line-data' || type === 'polygon') {
         dataColor = shapeColors[index].name;
     }
     return `layer-${dataColor}`;

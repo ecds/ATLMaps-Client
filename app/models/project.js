@@ -106,6 +106,9 @@ export default Model.extend({
     }),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
+    // visiable_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
+
+    // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
     hidden_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
 
     // Booleans are easier to deal with.

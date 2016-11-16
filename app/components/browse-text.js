@@ -21,6 +21,7 @@ export default Component.extend({
     actions: {
         textSearch() {
             this.get('browseParams').setSearchText(this.get('searchTerms'));
+            console.log('text', this.get('browseParams'));
             this.sendAction('getResults');
         }
     }

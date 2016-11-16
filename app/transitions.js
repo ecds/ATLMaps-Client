@@ -10,7 +10,8 @@ export default function(){
         'project.help'
     ]),
     this.use('crossFade'),
-    this.reverse('crossFade')
+    // this.reverse('crossFade'),
+    this.debug()
   );
   this.transition(
       this.hasClass('catagory'),

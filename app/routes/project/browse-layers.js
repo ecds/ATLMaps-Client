@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import burgerMenu from 'ember-burger-menu';
 
 const {
     $,
@@ -58,6 +59,7 @@ export default Route.extend({
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(page) {
+            burgerMenu.set('open', true);
             this.modelFor('project').setProperties({ showing_browse_results: true });
             set(this.controller, 'rasters', this.store.query('raster-layer', {
                     search: true,

@@ -1,88 +1,39 @@
-{{#ember-wormhole to="modal-overlays"}}
-{{input type="checkbox"
-        checked=project.showing_browse_results
-        elementId="toggleResultsCheck"
-        change=(route-action "toggleResults" project)
-}}
-{{!-- <label for="toggleResultsCheck" class="show-results-btn"><i class="material-icons">view_list</i></label> --}}
-{{! the `hasResults` helper calculates if there are any rastors or vectors. If there are no results
-    we add the `no-results` class to allow a user to click through the results pane. }}
-    <div class="results-toolbar">
-        <label for="toggleResultsCheck">
-            <h3 class="results-heading text-center">
-              <i class="material-icons">chevron_left</i>
-              Search Results
-            </h3>
-        </label>
-
-    </div>
-    <div class="browse-results">
-    {{!-- <div class="browse-results {{unless (hasResults model) "no-results"}}"> --}}
-    {{raster-results}}
-    <div class="tab-wrap browse-nav">
-        <input type="radio" name="tabs" id="tab1" checked>
-        <div class="tab-label-content" id="tab1-content">
-            <label for="tab1"><i class="material-icons">layers</i> Historical Maps</label>
-            {{!-- <div class="tab-content {{if model "has-results"}}"> --}}
-              <div class="tab-content has-results">
-                <div class="result-count">{{rasters.content.meta.total_count}} Historical Maps found.</div>
-                <div class="results-container">
-                    <div class="col-md-12 result-list">
-                        <ul>
-                            {{#each rasters as |raster|}}
-                                {{! Show "Loading..." if the title hasn't loaded yet.}}
-                                <li class="{{if raster.active_in_project "active" }}">
-                                    <div class="row-eq-height">
-                                        <div class="col-sm-1">
-                                            {{! Uses an Embe CLI wrapper for Transformicons http://alexdiliberto.com/ember-cli-transformicons/#/add}}
-                                            {{t-add a="check" is-added=raster.active_in_project action=(route-action "addRemoveLayer" raster) class="pull-right"}}
-                                        </div>
-                                        <div class="col-sm-11">
-                                            <h3>{{if raster.title raster.title "Loading..."}}</h3>
-                                            <p>{{raster.description}}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {{pagination-links meta=rasters.content.meta}}
-        </div>
-
-        <input type="radio" name="tabs" id="tab2">
-        <div class="tab-label-content" id="tab2-content">
-            <label for="tab2"><i class="material-icons atlmaps-ext database"></i> Data Maps</label>
-            <div class="tab-content">
-                <div class="result-count">{{vectors.length}} Data Layers found.</div>
-                <div class="results-container">
-                    <div class="col-md-12 result-list">
-                        <ul>
-                            {{#each vectors as |vector|}}
-                                <li class="{{if vector.active_in_project "active" }}">
-                                    <div class="row-eq-height">
-                                        <div class="col-sm-1">
-                                            {{! Uses an Embe CLI wrapper for Transformicons http://alexdiliberto.com/ember-cli-transformicons/#/add}}
-                                            {{t-add a="check" is-added=vector.active_in_project action=(route-action "addRemoveLayer" vector) class="pull-right"}}
-                                        </div>
-                                        <div class="col-sm-11">
-                                            <h3>{{if vector.title vector.title "Loading..."}}</h3>
-                                            <p>{{vector.description}}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide"></div>
-
-        {{!else}}
-        <!-- <h5>NOTHING</h5> -->
-    </div>
+{{#ember-wormhole to="results"}}
+<div class="row">
+  <div class="col s12 scroll-top">
+    {{!-- <a {{action burger.state.actions.toggle}} class="close-results scroll-top">Close</a> --}}
+    <ul class="tabs">
+      <li class="tab col s6"><a class="active" href="#rasters"><i class="material-icons">layers</i> Historical Maps</a></li>
+      <li class="tab col s6"><a href="#vectors"><i class="material-icons atlmaps-ext database"></i> Data Maps</a></li>
+    </ul>
+  </div>
+  <div id='rasters' class='col s12 scroll-container'>
+    {{!-- <div class="result-count col s12">{{rasters.content.meta.total_count}} Historical Maps found.</div> --}}
+    <ul class='scroll-content'>
+      {{#each rasters as |raster|}}
+        <li>
+          <input type="checkbox"
+            class="filled-in"
+            id={{raster.slug}}
+            checked={{raster.active_in_project}}
+            onchange={{action (route-action "addRemoveLayer" raster)}}
+          />
+          
+          <label for={{raster.slug}}>
+            {{if raster.title raster.title "Loading..."}}
+          </label>
+          <section>{{raster.description}}</section>
+        </li>
+      {{/each}}
+    </ul>
+    {{pagination-links meta=rasters.content.meta}}
+  </div>
+  <div id='vectors' class='col s12'>
+    <ul>
+      {{#each vectors as |vector|}}
+        <li>{{if vector.title vector.title 'Loading...'}}</li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
 {{/ember-wormhole}}

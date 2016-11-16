@@ -1,13 +1,14 @@
 <div class="row">
   <div class="input-field col s9">
+    {{log searchTerms}}
     <input id="icon_prefix" type="text" class="validate" value={{searchTerms}}>
     <label for="icon_prefix">Search</label>
   </div>
   <div class='col s3 search-button'>
-    {{md-btn-submit icon='mdi-content-send'
-      iconPosition='right'
-      text='Go'
-      action='textSearch'
-    }}
+    {{!-- <a class="waves-effect waves-light btn"><i class="material-icons left">search</i>Go</a> --}}
+    <button class="btn waves-effect waves-light" type="submit" {{action 'textSearch'}}>
+      Go
+      <i class="material-icons left">search</i>
+    </button>
   </div>
 </div>

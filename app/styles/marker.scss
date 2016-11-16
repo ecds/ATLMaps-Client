@@ -1,61 +1,61 @@
-/*general marker style*/
+// general marker style
 
-@import "variables.scss";
-
-/* list of added data layers */
 // $marker-icon is defined in variables
-.point-data:before {
-  content: $marker-icon;
-  font-family: 'material icons';
+.point-data {
+  &::before {
+    content: $marker-icon;
+    font-family: 'material icons';
+  }
 }
 
-.line-data:before{
-  content: $line-icon;
-  font-family: 'material icons';
-  letter-spacing: .25em;
+.line-data {
+  &::before {
+    content: $line-icon;
+    font-family: 'material icons';
+    letter-spacing: .25em;
+  }
 }
 
-/* on the map*/
-.map-marker .map-marker {
+// on the map
+.map-marker {
   border-radius: 26px;
   font-size: 22px;
   font-weight: bold;
   height: 26px;
   line-height: 22px;
-  margin-left: -12px; /*shift by half the marker width*/
-  margin-top: -34px; /*shift by arrow top+height*/
+  margin-left: -12px; // shift by half the marker width
+  margin-top: -34px; // shift by arrow top+height
   position: absolute;
   text-align: center;
   width: 26px;
 }
 
 .leaflet-marker-pane .map-marker div.icon {
-  background-position:center;
-  background-repeat:no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 22px;
-  display:block;
+  display: block;
   font-size: 46px;
-  height: 22px; /*same as marker height*/
+  height: 22px; // same as marker height
   left: -13px;
   margin-left: 0;
   margin-top: 0;
   position: relative;
   top: -30px;
-  width: 22px; /*same as marker width*/
+  width: 22px; // same as marker width
 }
 
 .map-marker div.icon {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, .5);
-  font-family: "material icons";
+  font-family: 'material icons';
   font-size: 32px;
+  font-smoothing: antialiased;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
   line-height: 1;
   speak: none;
-  text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
+  text-shadow: 0 0 2px $white;
+  text-stroke: 1px lighten($white, 50%);
   text-transform: none;
   transition: color .2s;
 }
@@ -93,311 +93,312 @@
   // pointer-events: none;
 }
 
-.map-marker.active_marker div.icon:before{
-  content: $marker-icon;
-  font-size: 80px;
-  left: -18px;
-  position: absolute;
-  top: -22px;
+.active-marker {
+  .icon {
+    &::before {
+      content: $marker-icon;
+      font-size: 80px;
+      left: -18px;
+      position: absolute;
+      top: -22px;
+
+    }
+  }
 }
 
-.map-marker.highlighted div.icon{
-  color: red;
-}
-
-.map-marker.highlighted div.arrow{
-  border-color: #000 transparent transparent transparent;
-}
+// .map-marker.highlighted div.arrow{
+//   border-color: #000 transparent transparent transparent;
+// }
 
 // TODO Make getting the colors a function.
-.map-marker.layer-red, .leaflet-zoom-animated.layer-red {
+.layer-red, .leaflet-zoom-animated.layer-red {
   color: #ef5350;
 }
 
-.map-marker.layer-red-300 {
+.layer-red-300 {
   color: #e57373;
 }
 
-.map-marker.layer-red-400 {
+.layer-red-400 {
   color: #ef5350;
 }
 
-.map-marker.layer-red-500 {
+.layer-red-500 {
   color: #f44336;
 }
 
-.map-marker.layer-red-600 {
+.layer-red-600 {
   color: #e53935;
 }
 
-.map-marker.layer-red-700 {
+.layer-red-700 {
   color: #d32f2f;
 }
 
-.map-marker.layer-pink-400 {
+.layer-pink-400 {
   color: #ec407a;
 }
 
-.map-marker.layer-pink-500 {
+.layer-pink-500 {
   color: #e91e63;
 }
 
-.map-marker.layer-pink-600 {
+.layer-pink-600 {
   color: #d81b60;
 }
 
-.map-marker.layer-pink-700 {
+.layer-pink-700 {
   color: #c2185b;
 }
 
-.map-marker.layer-purple-300 {
+.layer-purple-300 {
   color: #ba68c8;
 }
 
-.map-marker.layer-purple-400 {
+.layer-purple-400 {
   color: #ab47bc;
 }
 
-.map-marker.layer-purple-500 {
+.layer-purple-500 {
   color: #9c27b0;
 }
 
-.map-marker.layer-purple-600 {
+.layer-purple-600 {
   color: #8e24aa;
 }
 
-.map-marker.layer-purple-700 {
+.layer-purple-700 {
   color: #7b1fa2;
 }
 
-.map-marker.layer-deep-purple {
+.layer-deep-purple {
   color: #7e57c2;
 }
 
-.map-marker.layer-deep-purple-300 {
+.layer-deep-purple-300 {
   color: #9575cd;
 }
 
-.map-marker.layer-deep-purple-400 {
+.layer-deep-purple-400 {
   color: #7e57c2;
 }
 
-.map-marker.layer-deep-purple-500 {
+.layer-deep-purple-500 {
   color: #673ab7;
 }
 
-.map-marker.layer-deep-purple-600 {
+.layer-deep-purple-600 {
   color: #5e35b1;
 }
 
-.map-marker.layer-indigo-400 {
+.layer-indigo-400 {
   color: #5c6bc0;
 }
 
-.map-marker.layer-indigo-500 {
+.layer-indigo-500 {
   color: #3f51b5;
 }
 
-.map-marker.layer-indigo-600 {
+.layer-indigo-600 {
   color: #3949ab;
 }
 
-.map-marker.layer-indigo-700 {
+.layer-indigo-700 {
   color: #303f9f;
 }
 
-.map-marker.layer-light-blue-300 {
+.layer-light-blue-300 {
   color: #4FC3F7;
 }
 
-.map-marker.layer-light-blue-400 {
+.layer-light-blue-400 {
   color: #29B6F6;
 }
 
-.map-marker.layer-light-blue-500 {
+.layer-light-blue-500 {
   color: #03A9F4;
 }
 
-.map-marker.layer-blue-500 {
+.layer-blue-500 {
   color: #2196f3;
 }
 
-.map-marker.layer-blue-600 {
+.layer-blue-600 {
   color: #1e88e5;
 }
 
-.map-marker.layer-blue-700 {
+.layer-blue-700 {
   color: #1976d2;
 }
 
-.map-marker.layer-blue-800 {
+.layer-blue-800 {
   color: #1565c0;
 }
 
-.map-marker.layer-blue-900 {
+.layer-blue-900 {
   color: #0d47a1;
 }
 
-.map-marker.layer-cyan {
+.layer-cyan {
   color: #26c6da;
 }
 
-.map-marker.layer-cyan-50 {
+.layer-cyan-50 {
   color: #e0f7fa;
 }
 
-.map-marker.layer-cyan-100 {
+.layer-cyan-100 {
   color: #b2ebf2;
 }
 
-.map-marker.layer-cyan-200 {
+.layer-cyan-200 {
   color: #80deea;
 }
 
-.map-marker.layer-cyan-300 {
+.layer-cyan-300 {
   color: #4dd0e1;
 }
 
-.map-marker.layer-cyan-400 {
+.layer-cyan-400 {
   color: #26c6da;
 }
 
-.map-marker.layer-cyan-500 {
+.layer-cyan-500 {
   color: #00bcd4;
 }
 
-.map-marker.layer-cyan-600 {
+.layer-cyan-600 {
   color: #00acc1;
 }
 
-.map-marker.layer-cyan-700 {
+.layer-cyan-700 {
   color: #0097a7;
 }
 
-.map-marker.layer-cyan-800 {
+.layer-cyan-800 {
   color: #00838f;
 }
 
-.map-marker.layer-cyan-900 {
+.layer-cyan-900 {
   color: #006064;
 }
 
-.map-marker.layer-light-green-600 {
+.layer-light-green-600 {
   color: #7cb342;
 }
 
-.map-marker.layer-light-green-700 {
+.layer-light-green-700 {
   color: #689f38;
 }
 
-.map-marker.layer-green-300 {
+.layer-green-300 {
   color: #81c784;
 }
 
-.map-marker.layer-green-400 {
+.layer-green-400 {
   color: #66bb6a;
 }
 
-.map-marker.layer-green-500 {
+.layer-green-500 {
   color: #4caf50;
 }
 
-.map-marker.layer-green-600 {
+.layer-green-600 {
   color: #43a047;
 }
 
-.map-marker.layer-yellow-400 {
+.layer-yellow-400 {
   color: #ffee58;
 }
 
-.map-marker.layer-yellow-500 {
+.layer-yellow-500 {
   color: #ffeb3b;
 }
 
-.map-marker.layer-yellow-600 {
+.layer-yellow-600 {
   color: #fdd835;
 }
 
-.map-marker.layer-amber {
+.layer-amber {
   color: #ffca28;
 }
 
-.map-marker.layer-amber-50 {
+.layer-amber-50 {
   color: #fff8e1;
 }
 
-.map-marker.layer-amber-100 {
+.layer-amber-100 {
   color: #ffecb3;
 }
 
-.map-marker.layer-amber-200 {
+.layer-amber-200 {
   color: #ffe082;
 }
 
-.map-marker.layer-amber-300 , .leaflet-zoom-animated.layer-amber-300 {
+.layer-amber-300 , .leaflet-zoom-animated.layer-amber-300 {
   color: #ffd54f;
 }
 
-.map-marker.layer-amber-400 {
+.layer-amber-400 {
   color: #ffca28;
 }
 
-.map-marker.layer-amber-500 {
+.layer-amber-500 {
   color: #ffc107;
 }
 
-.map-marker.layer-amber-600 {
+.layer-amber-600 {
   color: #ffb300;
 }
 
-.map-marker.layer-orange-300 {
+.layer-orange-300 {
   color: #ffb74d;
 }
 
-.map-marker.layer-orange-400 {
+.layer-orange-400 {
   color: #ffa726;
 }
 
-.map-marker.layer-orange-500 {
+.layer-orange-500 {
   color: #ff9800;
 }
 
-.map-marker.layer-orange-600 {
+.layer-orange-600 {
   color: #fb8c00;
 }
 
-.map-marker.layer-orange-700 {
+.layer-orange-700 {
   color: #f57c00;
 }
 
-.map-marker.layer-orange-800 {
+.layer-orange-800 {
   color: #ef6c00;
 }
 
-.map-marker.layer-deep-orange-300 {
+.layer-deep-orange-300 {
   color: #ff8a65;
 }
 
-.map-marker.layer-deep-orange-400 {
+.layer-deep-orange-400 {
   color: #ff7043;
 }
 
-.map-marker.layer-deep-orange-500 {
+.layer-deep-orange-500 {
   color: #ff5722;
 }
 
-.map-marker.layer-deep-orange-600 {
+.layer-deep-orange-600 {
   color: #f4511e;
 }
 
-.map-marker.layer-deep-orange-700 {
+.layer-deep-orange-700 {
   color: #e64a19;
 }
 
-.map-marker.layer-teal-600{
+.layer-teal-600{
   color: #00897b;
 }
 
-.map-marker.layer-teal-700 {
+.layer-teal-700 {
   color: #00796b;
 }

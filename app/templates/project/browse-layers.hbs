@@ -1,17 +1,32 @@
 {{browse-results rasters=rasters vectors=vectors getResults='getResults'}}
 {{#project-pane title='Browse Layers'}}
-{{#md-card}}
+{{!-- <div class="row">
+        <div class="col s12"> --}}
+          <div class="card">
+              <span class="card-title">Search Layers</span>
+              {{browse-text getResults='getResults'}}
+              <hr />
+              {{search-bounds getResults='getResults'}}
+              <hr />
+              {{browse-tags model=categories getResults='getResults'}}
+              {{!-- <hr />
+              {{browse-years model=yearRange getResults='getResults'}} --}}
+              {{browse-institution model=institutions getResults='getResults'}}
+          </div>
+        {{!-- </div>
+      </div> --}}
+{{!-- {{#md-card}}
 
       {{browse-text getResults='getResults'}}
       <hr />
       {{search-bounds getResults='getResults'}}
       <hr />
-      {{browse-tags model=categories getResults='getResults'}}
+      {{browse-tags model=categories getResults='getResults'}} --}}
       {{!-- <hr />
       {{browse-years model=yearRange getResults='getResults'}} --}}
-      {{browse-institution model=institutions getResults='getResults'}}
-      
-{{/md-card}}
+      {{!-- {{browse-institution model=institutions getResults='getResults'}} --}}
+
+{{!-- {{/md-card}} --}}
 {{/project-pane}}
 {{!-- <div class="row layer-heading">
     <table class="table">

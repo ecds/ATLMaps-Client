@@ -1,7 +1,9 @@
 <a {{action 'toggleIntro'}} class='close-button pull-right'>
-                    <i class="material-icons">highlight_off</i>
-                </a>
-<article class='z-depth-3'>
+    <i class="material-icons">highlight_off</i>
+</a>
+
+<div class='z-depth-3'>
+  <div class='modal-content'>
   <header>
     {{#if project.media}}
       <div class="video-container">
@@ -9,44 +11,30 @@
       </div>
     {{/if}}
   </header>
-    <div class='content'>
+<article>
       <h4>{{project.name}}</h4>
       <h5>{{project.owner}}</h5>
     {{{project.intro}}}
-  </div>
-  <footer>
+  </article></div>
+  <footer class='modal-fixed-footer'>
     <div class='row'>
       <div class='col s4 offset-s4 center-align'>
-        {{md-btn text='Explore Project'
-          action='toggleIntro'
-      	  class='light-blue darken-2, waves-effect'}}
+        <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action 'toggleIntro'}}>
+          Explore Project
+        </button>
       </div>
       <div class='col s4'>
-        {{log project.hasSuppressCookie}}
-        {{md-check name="Don't show every time." checked=project.hasSuppressCookie action="supressIntro" model=project}}
-        {{!-- <label class="pull-right">
-            {{input type="checkbox"
-              checked=project.hasSuppressCookie
-              elementId="dont-show"
-              change=(action "supressIntro" project)
-            }}
-            <span class="check"></span> Don't show every time.
-        </label> --}}
+        <input type="checkbox"
+            class="filled-in"
+            id="supress"
+            name="supressIntro"
+            checked={{project.hasSuppressCookie}}
+            onchange={{action "supressIntro" project=project}}
+        />
+        <label class="right" for='supress'>
+          <span class="check"></span> Don't show every time.
+        </label>
       </div>
     </div>
   </footer>
-</article>
-{{!-- <div class="modal-content">
-  <h4>{{project.name}}</h4>
-  <h5>{{project.owner}}</h5>
-  {{#if project.media}}
-    <div class="video-container">
-      <iframe width="412" height="140" src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
-    </div>
-  {{/if}}
-  <p class={{if project.media 'top-fix'}}>{{{project.intro}}}</p>
 </div>
-<div class="modal-footer">
-  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-</div> --}}
-{{!FIXME this is awful. there has to be a better way to decide which template to but it in.}}

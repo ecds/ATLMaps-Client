@@ -2,26 +2,27 @@
   .collapsible-header {
     border-radius: 0;
     color: color('grey', 'darken-1');
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: normal;
     line-height: 2rem;
-    min-height: 2rem;
-    padding: 0 .25rem;
+    padding: 0;
 
-    &::before {
-      content: '\e876';
-      opacity: 0;
-    }
+    &.active {
+      font-weight: 700;
 
-    &::first-letter {
-      color: $secondary-color;
-      font-family: 'Material Icons';
-    }
-
-    &.checked {
-      &::first-letter {
+      i {
+        color: color('deep-orange', 'lighten-1');
         opacity: 1;
       }
+    }
+
+    i {
+      color: color('grey', 'base');
+      font-size: 1em;
+      margin-right: .25rem;
+      margin-top: -.5rem;
+      opacity: .4;
+      vertical-align: middle;
     }
   }
 
@@ -32,22 +33,24 @@
     li {
       border: 0;
       border-radius: 0;
+      line-height: 2em;
       margin: 0;
       padding-left: .5em;
+      padding-top: .25em;
     }
   }
 
   .collapsible-body {
     border-radius: 0;
+    padding-left: 1.5em;
+
+    label {
+      color: color('gery', 'darken-3');
+      font-size: 1.5em;
+    }
 
     p {
-      padding: 1rem;
-
-      label {
-        color: color('grey', 'darken-3');
-        font-size: 1.5em;
-        // padding-top: .5em;
-      }
+      padding: 1rem 2rem;
     }
   }
 }

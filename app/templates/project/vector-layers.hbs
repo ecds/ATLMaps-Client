@@ -1,22 +1,29 @@
-{{#project-pane title='Data Layers'}}
+{{#project-pane title='Data Layers' model=model vector=true action="toggleAllVectorLayers"}}
+<div class='card'>
+
   <ul class='scrollable-list collapsible' data-collapsible='accordion'>
     {{#each model.vector_layer_project_ids as |layer|}}
       <li>
         <div class='collapsible-header'>
           <div class='row'>
-            <div class='col s1 vector-icon
+            <div class='col s1 vector-icon left
               {{layer.vector_layer_id.data_type}}
               {{layer.vector_layer_id.data_format}}
               {{!-- marker color is a helper --}}
-              map-marker
               {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}'
             >
             </div>
-            <div class='title col s11'>
-              {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}
+            <div class='title col s8'>
+              {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}: {{layer.vector_layer_id.data_type}}
             </div>
-            <div class='secondary-conent right reorder-handle col s1'>
-              {{!-- <i class='material-icons'>code</i> --}}
+            <div class='col s3'>
+              {{!-- {{md-switch checked=layer.showing onLabel='' offLabel='' action='toggleVectorLayer' layer=layer}} --}}
+              <div class="switch">
+              <label>
+                <input type="checkbox" checked={{layer.showing}} {{action 'toggleVectorLayer' layer checked on="change"}}>
+                <span class="lever"></span>
+              </label>
+            </div>
             </div>
           </div>
         </div>
@@ -29,6 +36,7 @@
       </li>
     {{/each}}
   </ul>
+</div>
 {{/project-pane}}
 {{!-- <div class="row layer-heading">
     <table class="table">

@@ -1,14 +1,32 @@
-<div class="pane-title row z-depth-1">
-  <div class="col s10">
+<div class="pane-title row">
+  <div class="col s8">
     <h3>{{title}}</h3>
   </div>
-  <div class="col s2 right">
+  <div class='col s3 right'>
+    {{#if raster}}
+      <div class="switch right">
+        <label>
+          <input type='checkbox' checked={{model.visiable_raster}} id='toggle-layer-opacity' class='right'>
+          <span class="lever"></span>
+        </label>
+    </div>
+    {{/if}}
+    {{#if vector}}
+      <div class="switch right">
+        <label>
+          <input type="checkbox" {{action (route-action action) layer checked on="change"}} checked={{model.visiable_vector}}>
+          <span class="lever"></span>
+        </label>
+      </div>
+    {{/if}}
+  </div>
+  <div class="col s1">
     {{#link-to 'project'}}
       <i class="material-icons close-button">highlight_off</i>
     {{/link-to}}
   </div>
 </div>
-<div class="pane-container z-depth-3">
+<div class="pane-container">
     <div class="pane-content {{extraClass}}">
       {{yield}}
     </div>

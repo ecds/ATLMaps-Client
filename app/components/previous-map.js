@@ -16,7 +16,6 @@ export default Component.extend({
     classNames: ['btn', 'btn-default'],
 
     click() {
-        let fuckfuckfuck = this.get('currentUser.previous');
         this.sendAction('action', get(this, 'currentUser.previous'));
     }
 });

@@ -1,4 +1,30 @@
+.bm-menu {
+  .scroll-top {
+    display: flex;
+    position: relative;
+  }
+
+  .scroll-container {
+    backface-visibility: hidden;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    will-change: overflow;
+  }
+
+  .scroll-content {
+    height: auto;
+    overflow: auto;
+    overflow-style: none;
+    padding-bottom: 10em;
+  }
+}
+
+
 .browse-results {
+  animation: fadeOutToTopLeft $rabbit;
+  animation-fill-mode: forwards;
   font-size: unset;
   height: 100vh;
   opacity: 1;
@@ -7,6 +33,7 @@
   right: 0;
   top: 3em;
   transform: none;
+  transform-origin: top right;
   width: 50vw;
   z-index: 1003;
 
@@ -14,39 +41,17 @@
     width: 100%;
   }
 
-}
+  .has-results {
+    height: 80vh;
+    opacity: 1;
 
-.browse-results.no-results {
-  pointer-events: none;
-}
-
-.browse-results {
-
-  > .tab-wrap.browse-nav {
-    > .tab-label-content {
-
-      > label {
-        font-size: unset;
-
-        i {
-          opacity: 1;
-        }
-      }
-
-      > .tab-content {
-        height: 10vh;
-        opacity: .7;
-      }
-
-      > .tab-content.has-results {
-        height: 80vh;
-        opacity: 1;
-
-        .result-count {
-          padding: .5em;
-        }
-      }
+    .result-count {
+      padding: .5em;
     }
+  }
+
+  .no-results {
+    pointer-events: none;
   }
 }
 
@@ -76,30 +81,31 @@
         font-size: unset;
         margin-bottom: 0;
         padding: .5rem;
-
-        span {
-          & .result-count {
-            margin-left: 3.5rem;
-          }
-        }
-
-        & .active {
-          background-color: material-color(md_blue, 50);
-        }
       }
+    }
+
+    .result-count {
+      margin-left: 3.5rem;
+    }
+
+    .active {
+      background-color: material-color(md_blue, 50);
     }
   }
 }
 
-#toggleResultsCheck:not(:checked) ~ .browse-results {
-  animation: fadeOutToTopLeft $rabbit;
-  animation-fill-mode: forwards;
-  transform-origin: top left;
-}
 
-#toggleResultsCheck:checked ~ .browse-results {
+
+// #toggleResultsCheck:not(:checked) ~ .browse-results {
+//   animation: fadeOutToTopLeft $rabbit;
+//   animation-fill-mode: forwards;
+//   transform-origin: top right;
+// }
+
+//#toggleResultsCheck:checked ~ .browse-results {
+.showing-results  {
   animation: fadeInFromTopLeft $rabbit;
-  transform-origin: top left;
+  transform-origin: top right;
 }
 @keyframes fadeInFromTopLeft {
   0% {
@@ -128,23 +134,27 @@
 
 // TODO move this to a pagination-links.scss
 .pagination {
-  background-color: material-color(md_grey, 200);
+  background-color: color('grey', 'lighten-3');
+  height: 4em;
   left: 0;
   padding-bottom: 1em;
   position: absolute;
-  top: 80vh;
-  width: 100%;
+  top: calc(100vh - 8em);
+  // width: 100%;
 
   button {
+    background-color: $primary-color;
     pointer-events: all;
   }
 
   .btn-warning {
+    background-color: $secondary-color;
     cursor: not-allowed;
     pointer-events: none;
   }
 
-  i {
+  .material-icons {
+    display: initial;
     vertical-align: bottom;
   }
 }

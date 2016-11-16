@@ -1,7 +1,7 @@
 .project-pane {
   // box-shadow: $shadow;
   left: 5em;
-  // pointer-events: none;
+  pointer-events: none;
   position: absolute;
   top: 3em;
   transition: width 3s;
@@ -29,23 +29,24 @@
 .pane-title,
 .vector-detail-title {
   align-items: center;
-  background-color: color('grey', 'lighten-3');
+  background-color: color('blue-grey', 'lighten-5');
   display: flex;
   font-weight: 900;
   // height: 2em;
   // justify-content: center;
+  pointer-events: all;
   position: relative;
   width: 100%;
   z-index: 10;
 
-  h3 {
-    font-size: 1.5em;
-  }
+  // h3 {
+  //   font-size: 1.5em;
+  // }
 }
 
 .close-button {
   color: color('grey', 'base');
-  margin-left: .75em;
+  // margin-left: .75em;
 }
 
 // This is our main wrapping element, it's made 100vh high to
@@ -55,8 +56,9 @@
 .vector-detail-container {
   backface-visibility: hidden;
   display: flex;
-  height: 100vh;
+  max-height: 100vh;
   overflow: hidden;
+  pointer-events: all;
   position: relative;
   width: 100%;
   will-change: overflow;
@@ -79,13 +81,14 @@
   flex: 1;
   height: auto;
   overflow: auto;
-  // overflow-scrolling: touch;
   overflow-style: none;
-  // pointer-events: none;
 
   .card {
     margin-top: 0;
-    // pointer-events: all;
+  }
+
+  .col {
+    padding: 0;
   }
 }
 
@@ -95,7 +98,6 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 6em;
-  // pointer-events: all;
 
   &.collapsible {
     box-shadow: none;
@@ -113,12 +115,18 @@
     border-bottom: 0;
     border-radius: .5em;
     color: $primary-color-light;
-    font-size: 1.5em;
+    font-size: 1.35em;
     font-weight: bolder;
+    line-height: initial;
     padding: 1rem;
 
     i {
       font-size: 1.5em;
+    }
+
+    .vector-icon {
+      font-size: 1.8em;
+      padding: 0;
     }
   }
 
@@ -131,6 +139,12 @@
     border-bottom: 0;
     border-radius: .5em;
     overflow: hidden;
+    padding: 0;
+    transition: background 5ms;
+
+    &.bye {
+      background: color('red', 'base');
+    }
   }
 
   li {

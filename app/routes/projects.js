@@ -19,7 +19,6 @@ export default Route.extend({
         // The API will only return published projects when asked for all.
         // We'll make seperate calls for a user's projects if a user is authenticated.
         if (this.get('session.isAuthenticated')) {
-            console.log('this', this.get('session.isAuthenticated'));
             return RSVP.hash({
                 published: this.store.findAll('project'),
                 mine: this.store.query('project', {

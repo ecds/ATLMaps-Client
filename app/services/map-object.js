@@ -87,7 +87,7 @@ export default Service.extend({
         let _map = get(this, 'map');
         _map.on('click', function() {
             $('div.vector-info').hide();
-            $('.active_marker').removeClass('active_marker');
+            $('.active-marker').removeClass('active-marker');
             $('.vector-content.marker-content').empty();
             project.setProperties({
                 showing_browse_results: false
@@ -244,7 +244,7 @@ export default Service.extend({
 
                             });
                             let layerClass = `${newLayerSlug} vectorData map-marker layer-${newLayer.get('color_name')}`;
-                            let markerDiv = `<span class='map-marker vector-icon vector ${dataType} layer-${newLayer.get('color_name')}'></span>`;
+                            let markerDiv = `<span class='vector-icon vector ${dataType} layer-${newLayer.get('color_name')}'></span>`;
                             if (newLayerUrl) {
                                 let points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer(feature, latlng) {

@@ -5,17 +5,17 @@ $roboto-font-path: '../assets/';
 @import 'variables';
 
 // Custom color settings go here
-$primary-color: color('light-blue', 'darken-2');
-$primary-color-light: color('light-blue', 'base');
+$primary-color: color('blue-grey', 'darken-1');
+$primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
-$secondary-color: color('deep-orange', 'accent-3');
+$secondary-color: #e24b31;
 $nav-button: color('grey', 'darken-4');
 
 $col1: 5em;
 
 @import 'components/variables';
 @import 'materialize';
-@import 'ember-cli-materialize';
+// @import 'ember-cli-materialize';
 @import 'project-pane';
 
 nav {
@@ -26,6 +26,15 @@ nav {
       background-color: $secondary-color;
     }
   }
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4,
+.card .card-title {
+  font-size: 1.5em;
 }
 
 .project-top-nav {
@@ -47,6 +56,8 @@ nav {
     line-height: 0;
   }
 
+
+
   .col {
     a {
       color: color('grey', 'lighten-4');
@@ -65,7 +76,7 @@ nav {
 @import 'banner',
 'ember-modal-structure',
 'ember-modal-appearance',
-// 'footer',
+'main-footer',
 // 'variables',
 'marker',
 // 'toggle_button',
@@ -88,7 +99,7 @@ nav {
 // 'close-button',
 // 'color-picker',
 // 'vector-layer-option-panel',
-// 'material-tabs',
+@import 'material-tabs';
 // 'browse-pane',
 @import 'browse-results';
 @import 'browse-toolbar';
@@ -99,12 +110,18 @@ nav {
 
 
 body {
-  background-color: material-color(md_grey, 200);
+  background-color: color('grey', 'darken-4');
   color: material-color(md_grey, 600);
   font-family: 'Roboto', 'Material Icons' sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   height: 100vh;
+}
+
+.ember-burger-menu,
+.bm-outlet,
+.bm-content {
+  overflow: hidden !important;
 }
 
 .project {
@@ -123,7 +140,7 @@ body {
   left: 0;
   margin: 0;
   overflow: hidden;
-  position: fixed;
+  position: initial;
   top: 0;
   width: 100vw;
 }
@@ -182,10 +199,16 @@ body {
 
 .close-button {
   cursor: pointer;
+  padding-top: .5em;
 }
 
 .carousel {
   &.carousel-slider {
     height: 200px;
   }
+}
+
+.bm-menu {
+  background-color: $white;
+  box-shadow: $shadow5;
 }

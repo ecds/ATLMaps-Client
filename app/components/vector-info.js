@@ -91,7 +91,7 @@ export default Component.extend({
             $('div.vector-info').hide();
             $('.marker-content iframe').remove();
             $('.div.marker-content').empty();
-            $('.active_marker').removeClass('active_marker');
+            $('.active-marker').removeClass('active-marker');
             // this.get('draggie').destroy();
         }
     }

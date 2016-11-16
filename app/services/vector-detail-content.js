@@ -69,8 +69,8 @@ export default Service.extend({
             Ember.$('.vector-content.layer-title').append(layer.options.title);
             Ember.$('.vector-content.title').append(feature.properties.name);
             Ember.$('.vector-content.marker-content').append(popupContent);
-            Ember.$('.active_marker').removeClass('active_marker');
-            Ember.$(this._icon).addClass('active_marker');
+            Ember.$('.active-marker').removeClass('active-marker');
+            Ember.$(this._icon).addClass('active-marker');
             // new Swiper('.gallery', {
             //     pagination: '.swiper-pagination',
             //     nextButton: '.swiper-button-next',

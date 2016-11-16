@@ -122,7 +122,6 @@ export default Route.extend({
     actions: {
 
         toggleIntro() {
-            console.log('this', this.modelFor('project'.suppressIntro));
             this.modelFor('project').toggleProperty('suppressIntro');
         },
 
@@ -173,6 +172,7 @@ export default Route.extend({
         },
 
         addRemoveLayer(layer) {
+            console.log('layer', layer);
             const project = this.modelFor('project');
 
             const layerModel = layer._internalModel.modelName;
@@ -210,20 +210,19 @@ export default Route.extend({
                     default: {
                         const shapeColors = this.get('dataColors.shapeColors');
                         layerColor = Math.floor(Math.random() * Object.keys(shapeColors).length);
-
-                        newLayer = this.store.createRecord('vector-layer-project', {
-                            project_id: project.id,
-                            vector_layer_id: layerObj,
-                            data_format: layerObj.get('data_format'),
-                            marker: layerColor
-                        });
                         break;
                     }
                     }
+
+                    newLayer = this.store.createRecord('vector-layer-project', {
+                        project_id: project.id,
+                        vector_layer_id: layerObj,
+                        data_format: layerObj.get('data_format'),
+                        marker: layerColor
+                    });
                 }
                 // no default
                 }
-
                 project.get(`${format}_layer_project_ids`).addObject(newLayer);
 
                 _this.get('mapObject').mapLayer(newLayer);

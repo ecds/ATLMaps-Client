@@ -1,4 +1,40 @@
-{{#md-card-collapsible }}
+<h5>Tags</h5>
+<ul class="collapsible" data-collapsible="accordion">
+  {{#each model as |category|}}
+  <li>
+    <div class="collapsible-header"><i class="material-icons">{{if category.checked 'check_box' 'indeterminate_check_box'}}</i>{{category.name}}</div>
+    <div class="collapsible-body">
+      <ul>
+        <li>
+          <input type="checkbox"
+            class="tags filled-in"
+            id='{{category.slug}}'
+            checked={{category.allChecked}}
+            onchange={{action "checkAllTagsInCategory" category}}
+          />
+          <label for={{category.slug}}>
+            Select All
+        </label>
+      </li>
+    {{#each category.sortedTags as |tag|}}
+    <li class='tags'>
+      <input type="checkbox"
+          class="tags {{category.slug}} filled-in"
+          id="{{tag.slug}}"
+          name="{{tag.name}}"
+          category="{{category.slug}}"
+          checked="{{if tag.checked false}}"
+          onchange={{action "checkSingleTag" tag category}}
+      />
+      <label for={{tag.slug}}>{{tag.name}}</label>
+    </li>
+    {{/each}}
+  </ul>
+  </div>
+  </li>
+  {{/each}}
+</ul>
+{{!-- {{#md-card-collapsible }}
   <h5>Tags</h5>
   {{#each model as |category|}}
     {{#md-collapsible title=category.name}}
@@ -29,7 +65,7 @@
       </div>
     {{/md-collapsible}}
   {{/each}}
-{{/md-card-collapsible}}
+{{/md-card-collapsible}} --}}
     {{!-- <div class="row">
         <ul class="list-unstyled categories col-md-12">
             {{#each model as |category|}}
