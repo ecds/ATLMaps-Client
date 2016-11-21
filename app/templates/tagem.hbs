@@ -1,60 +1,39 @@
-<div class="tagem main-navbar">
-    <div class="col-lg-1 col-md-1">
-      {{input type="checkbox"
-              checked=false
-              elementId="toggleUserInfo"
-      }}
-      <label class="user-label" for="toggleUserInfo">
-      <i class="material-icons user">account_box</i>
-    </label>
-    <div class="container tagem-user">
-      <article>
-        {{ tag-count }}{{currentUser}}
-      </article>
-    </div>
-    </div>
-
-    <div class="col-lg-9 col-md-10 tagem-title">
-        {{input type="checkbox"
-                checked=false
-                elementId="toggleDescription"
-        }}
-        {{ model.layer.title }}
-        <label for="toggleDescription">
-          <i class="material-icons">expand_less</i>
-        </label>
-        <div class="container tagem-description">
-          <article>
-            {{model.layer.description}}
-          </article>
-        </div>
-    </div>
-
-    <div class="col-lg-2 hidden-md">
-      <div class='btn-group btn-group-md'>
-      {{#previous-map layer=model.layer action=(route-action "getPreviousMap")}}
+<div class='navbar-fixed'>
+<ul id="user" class="dropdown-content">
+  <li>{{ tag-count }}</li>
+  <li>{{currentUser}}</li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<ul id='title' class='dropdown-content'>
+  <li>dneiierirnvornorvnmornorngon  ioegoejoe4 ogeo</li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <ul class="left hide-on-med-and-down">
+      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="user"><i class="material-icons user">account_box</i></a></li>
+      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="title">some title</a></li>
+      <li>{{#previous-map layer=model.layers action=(route-action "getPreviousMap")}}
         <i class="material-icons">chevron_left</i>Back
-      {{/previous-map}}
-      <button class="btn btn-default btn-warning" onclick={{route-action 'getNextMap' model.layer.id}}>Next<i class="material-icons">chevron_right</i></button>
-    </div>
+      {{/previous-map}}</li>
+      <li><button class="btn btn-default btn-warning" onclick={{route-action 'getNextMap' layer.id}}>Next<i class="material-icons">chevron_right</i></button></li>    </ul>
   </div>
+</nav>
 </div>
-
-<div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col m6">
             {{#each model.categories as |category|}}
                 <h4>{{category.name}}</h4>
                 {{#each category.sortedTags as |tag|}}
-                    {{#draggable-item content=tag layer=model.layer tag=tag tags=model.layer.tag_ids action=(route-action "addTag")}}
+                    {{#draggable-item content=tag layer=model.layers tag=tag tags=layer.tag_ids action=(route-action "addTag")}}
                         <h3><span class='label label-default {{if tag.assigned "tagged"}}'>{{tag.name}}</span></h3>
                     {{/draggable-item}}
                 {{/each}}
             {{/each}}
         </div>
 
-        <div class="map-to-tag col-md-6">
-            {{#draggable-dropzone layer=model.layer dropped=(route-action "addTag")}}
+        <div class="map-to-tag col m6">
+            {{#draggable-dropzone layer=model.layers dropped=(route-action "addTag")}}
                 <div id="map" style="height:90vh;"></div>
                 <a class="next-sm visible-md-* hidden-lg" {{action 'getNextMap'}}>
                   <i class="material-icons">navigate_next</i>
@@ -62,6 +41,5 @@
             {{/draggable-dropzone}}
             <div class="slider-container">
             {{input class="opacity" type='range' min=0 step=0.1 max=1.0 value=1 input=(route-action "opacity")}}
-  </div>      </div>
-    </div>
+  </div>     </div>
 </div>

@@ -57,7 +57,6 @@ module.exports = function() {
     // app.import('bower_components/list.js/dist/list.min.js');
     app.import('bower_components/js-cookie/src/js.cookie.js');
     app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
-    app.import('bower_components/Swiper/dist/js/swiper.min.js');
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
     app.import('bower_components/interact/dist/interact.min.js');
@@ -66,7 +65,6 @@ module.exports = function() {
 
     app.import('bower_components/leaflet/dist/leaflet.css');
     app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
-    app.import('bower_components/Swiper/dist/css/swiper.min.css');
     app.import('bower_components/nouislider/distribute/nouislider.min.css');
 
     // return mergeTrees([

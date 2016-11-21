@@ -1,8 +1,8 @@
-{{#project-pane title='Maps' model=model raster=true}}
+{{#project-pane title='Maps' model=model.project raster=true}}
 
   <div class='card'>
   {{#sortable-group tagName="ul" class='scrollable-list collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
-    {{#each model.sortedRasterLayers as |raster|}}
+    {{#each model.project.sortedRasterLayers as |raster|}}
 
 
       {{#sortable-item tagName="li" class='sortable-item' model=raster group=group handle=".reorder-handle" }}
@@ -11,9 +11,16 @@
             {{!-- <div class='col s1'>
               <i class="material-icons">layers</i>
             </div> --}}
-            <div class='title col s11'>
+            <div class='title col s10'>
               {{if raster.raster_layer_id.name raster.raster_layer_id.title 'Loading...'}}
             </div>
+            <div class='col m1 secondary-conent'>
+              {{#if model.project.may_edit}}
+                <a class='remove-layer secondary-conent' onclick={{action (route-action 'addRemoveLayer' raster.raster_layer_id) preventDefault=true}}>
+                  <i class='remove-layer right material-icons'>delete</i>
+                </a>
+            {{/if}}
+          </div>
             <div class='secondary-conent right reorder-handle col s1'>
               <i class='material-icons'>code</i>
             </div>

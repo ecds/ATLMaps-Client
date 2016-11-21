@@ -1,8 +1,8 @@
-{{#project-pane title='Data Layers' model=model vector=true action="toggleAllVectorLayers"}}
+{{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers"}}
 <div class='card'>
 
   <ul class='scrollable-list collapsible' data-collapsible='accordion'>
-    {{#each model.vector_layer_project_ids as |layer|}}
+    {{#each model.project.vector_layer_project_ids as |layer|}}
       <li>
         <div class='collapsible-header'>
           <div class='row'>
@@ -14,11 +14,11 @@
             >
             </div>
             <div class='title col s8'>
-              {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}: {{layer.vector_layer_id.data_type}}
+              {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}
             </div>
-            <div class='col s3'>
+            <div class='col s2'>
               {{!-- {{md-switch checked=layer.showing onLabel='' offLabel='' action='toggleVectorLayer' layer=layer}} --}}
-              <div class="switch">
+              <div class="switch list">
               <label>
                 <input type="checkbox" checked={{layer.showing}} {{action 'toggleVectorLayer' layer checked on="change"}}>
                 <span class="lever"></span>

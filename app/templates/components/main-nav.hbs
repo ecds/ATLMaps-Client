@@ -1,6 +1,13 @@
-{{!-- {{#md-navbar name='ATLMaps'}} --}}
-  <!-- A workaround to get the "active" class
-    to apply to the active <li> automatically -->
-  {{!-- {{#link-to 'projects' tagName='li' }}{{link-to 'Projects' 'projects'}}{{/link-to}}
-  {{#link-to 'about' tagName='li' }}{{link-to 'About' 'about'}}{{/link-to}}
-{{/md-navbar}} --}}
+<div class='navbar-fixed'>
+  <nav>
+    <div class="nav-wrapper">
+      {{!-- <a href="#" class="brand-logo right">Logo</a> --}}
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        {{#link-to 'index' tagName='li' }}{{link-to 'ATLMaps' 'index'}}{{/link-to}}
+        {{#link-to 'projects' tagName='li' }}{{link-to 'Projects' 'projects'}}{{/link-to}}
+        {{#link-to 'about' tagName='li' }}{{link-to 'About' 'about'}}{{/link-to}}
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>

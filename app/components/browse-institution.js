@@ -11,7 +11,7 @@ export default Component.extend({
 
     browseParams: service(),
 
-    classNames: ['browse-by-institution', 'browse-form', 'container'],
+    classNames: ['browse-by-institution'],
 
     actions: {
         checkInstitution(institution) {

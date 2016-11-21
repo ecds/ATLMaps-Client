@@ -10,7 +10,7 @@ const {
 export default Component.extend({
     mapObject: service(),
     browseParams: service(),
-    classNames: ['container'],
+    classNames: ['search-bounds'],
     hasBounds: false,
 
     actions: {

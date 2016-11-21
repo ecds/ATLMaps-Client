@@ -11,10 +11,11 @@ export default Component.extend({
 
     browseParams: service(),
 
-    classNames: ['browse-by-tags', 'container'],
+    classNames: ['browse-by-tags'],
 
     actions: {
         checkSingleTag(tag, category) {
+            console.log('getResults', this.get('getResults'));
             if (tag.get('checked') === true) {
                 this.get('browseParams').removeTag(tag);
                 // FIXME This should be computed and not

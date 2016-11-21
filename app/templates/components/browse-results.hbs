@@ -1,39 +1,53 @@
-{{#ember-wormhole to="results"}}
-<div class="row">
+{{#ember-wormhole to="results" }}
   <div class="col s12 scroll-top">
-    {{!-- <a {{action burger.state.actions.toggle}} class="close-results scroll-top">Close</a> --}}
     <ul class="tabs">
-      <li class="tab col s6"><a class="active" href="#rasters"><i class="material-icons">layers</i> Historical Maps</a></li>
-      <li class="tab col s6"><a href="#vectors"><i class="material-icons atlmaps-ext database"></i> Data Maps</a></li>
+      <li class="tab col s4">
+        <a class='active' href="#search">
+          <div class='col s12'>
+            <i class="material-icons">search</i>
+          </div>
+          <div class='col s12'>
+            Search
+          </div>
+        </a>
+      </li>
+      <li class="tab col s4">
+        <a href="#rasters">
+          <div class='col s12'>
+            <i class="material-icons result-icon">layers</i>
+            {{#if rasters}}
+              <span class='z-depth-3 result-count'>{{rasters.content.meta.total_count}}</span>
+            {{/if}}
+          </div>
+          <div class='col s12'>
+            Maps
+          </div>
+        </a>
+      </li>
+      <li class="tab col s4">
+        <a href="#vectors">
+          <div class=''>
+            <i class="material-icons atlmaps-ext database result-icon"></i>
+            {{#if vectors}}
+              <span class='z-depth-3 result-count'>{{vectors.content.meta.total_count}}</span>
+            {{/if}}
+            <div class=''>
+              Data
+            </div>
+          </div>
+        </a>
+      </li>
     </ul>
   </div>
-  <div id='rasters' class='col s12 scroll-container'>
-    {{!-- <div class="result-count col s12">{{rasters.content.meta.total_count}} Historical Maps found.</div> --}}
-    <ul class='scroll-content'>
-      {{#each rasters as |raster|}}
-        <li>
-          <input type="checkbox"
-            class="filled-in"
-            id={{raster.slug}}
-            checked={{raster.active_in_project}}
-            onchange={{action (route-action "addRemoveLayer" raster)}}
-          />
-          
-          <label for={{raster.slug}}>
-            {{if raster.title raster.title "Loading..."}}
-          </label>
-          <section>{{raster.description}}</section>
-        </li>
-      {{/each}}
-    </ul>
-    {{pagination-links meta=rasters.content.meta}}
+
+  {{! Search }}
+  <div id='search' class='col s12 scroll-container'>
+    <div class='scroll-content'>
+      {{browse-text getResults=(route-action 'getResults')}}
+      <hr /> {{search-bounds getResults=(route-action 'getResults')}}
+      <hr /> {{browse-tags model=model.categories getResults=(route-action 'getResults')}}
+      <hr /> {{browse-institution model=model.institutions getResults=(route-action 'getResults')}}
+    </div>
   </div>
-  <div id='vectors' class='col s12'>
-    <ul>
-      {{#each vectors as |vector|}}
-        <li>{{if vector.title vector.title 'Loading...'}}</li>
-      {{/each}}
-    </ul>
-  </div>
-</div>
+  {{search-list-results type='rasters' layers=rasters id='rasters'}} {{search-list-results type='vectors' layers=vectors id='vectors'}}
 {{/ember-wormhole}}

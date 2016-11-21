@@ -1,26 +1,21 @@
 {{liquid-outlet}}
-<div class="banner blue">
-  <div class="container">
-    <div class="row">
-      <div class="col s6">
-        <div class="text-center">
-          <h1>Layers of discovery</h1>
-          <h2>Mapping the stories of your city</h2>
+<div class="banner blue valign-wrapper">
+
+        <div class="center-align z-depth-3">
+          <h1 class=''>Layers of discovery</h1>
+          <h2 class=''>Mapping the stories of your city</h2>
+          <span calss=''>
           {{#if session.isAuthenticated}}
-            <p>
               {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
-            </p>
           {{else}}
-            <p>
               {{#link-to 'explore' tagName='a' class="btn btn-raised btn-info" }}
                 Start Exploring
               {{/link-to}}
-            </p>
+
           {{/if}}
+        </span>
         </div>
-      </div>
-    </div>
-  </div>
+
 </div>
 
 <div class="banner blue blurred">
@@ -32,24 +27,21 @@
         <h2>Loading...</h2>
       {{else}}
         {{#each model as |project|}}
-          <div class='col m4 s12'>
-            <div class="card">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src='/assets/images/turner.jpg'>
-              </div>
-              <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{project.name}}<i class="material-icons right">more_vert</i></span>
-                <p>
-                  {{#link-to 'project' project}}
-                    Explore Project
-                  {{/link-to}}
-                </p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">{{project.name}}<i class="material-icons right">close</i></span> {{project.description}}
-              </div>
+        <div class='col l4 m6 s12'>
+          <div class="card small">
+            <div class="card-content">
+              <span class="card-title grey-text text-darken-4">
+                {{#link-to 'project' model.project.id}}
+                {{project.name}}
+                {{/link-to}}
+              </span>
+              <p>
+                <h6>By: {{project.owner}}</h6>
+                {{project.description}}
+              </p>
             </div>
           </div>
+        </div>
       {{else}}
         <p>There are no projects visible at this time :(</p>
         {{/each}}

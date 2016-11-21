@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import burgerMenu from 'ember-burger-menu';
 
 /* globals L */
 
@@ -86,6 +87,8 @@ export default Service.extend({
     setUpProjectMap(project) {
         let _map = get(this, 'map');
         _map.on('click', function() {
+            // Hide the search pane.
+            burgerMenu.toggleProperty('open');
             $('div.vector-info').hide();
             $('.active-marker').removeClass('active-marker');
             $('.vector-content.marker-content').empty();
@@ -123,6 +126,7 @@ export default Service.extend({
     },
 
     mapSingleLayer(layer) {
+        console.log('layer', layer);
         let wmsLayer = L.tileLayer.wms(layer.get('url'), {
             layers: layer.get('layers'),
             format: 'image/png',
@@ -133,7 +137,7 @@ export default Service.extend({
             // zIndex, // Enhanced litrial
             opacity: 1
         });
-
+        console.log('slug', layer.get('slug'));
         this.get('projectLayers')[layer.get('slug')] = wmsLayer;
         wmsLayer.addTo(this.get('map'));
         this.get('map').fitBounds([

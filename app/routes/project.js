@@ -1,11 +1,14 @@
 import Ember from 'ember';
+import burgerMenu from 'ember-burger-menu';
 
 const {
     $,
+    RSVP,
     inject: {
         service
     },
     get,
+    getWithDefault,
     set,
     Route,
     run
@@ -21,8 +24,9 @@ export default Route.extend({
     cookies: service(),
 
     model(params) {
+        let project = '';
         if (params.project_id === 'explore') {
-            return this.store.createRecord('project', {
+            project = this.store.createRecord('project', {
                 name: 'Explore',
                 published: false,
                 center_lat: 33.75440100,
@@ -33,13 +37,21 @@ export default Route.extend({
                 may_browse: true,
                 description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.'
             });
+        } else {
+            project = this.store.findRecord('project', params.project_id);
         }
-
-        return this.store.findRecord('project', params.project_id);
+        return RSVP.hash({
+            project: project,
+            yearRange: this.store.findRecord('yearRange', 1),
+            categories: this.store.findAll('category'),
+            institutions: this.store.findAll('institution'),
+            rasters: this.store.query('raster-layer', { search: true }),
+            vectors: this.store.query('vector-layer', { search: true })
+        });
     },
 
     afterModel() {
-        const project = this.modelFor('project');
+        const project = this.modelFor('project').project;
         const projectID = get(project, 'id');
         if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
             project.setProperties({ suppressIntro: true });
@@ -50,11 +62,10 @@ export default Route.extend({
         return this.get('mapObject').createMap();
     },
 
-    current: '',
-
     setUp: function() {
-        const project = this.modelFor('project');
+        const project = this.modelFor('project').project;
         const cookieService = get(this, 'cookies');
+        // this.controller.setProperties({showingSearch: false});
         const _this = this;
 
         run.scheduleOnce('afterRender', function() {
@@ -122,12 +133,17 @@ export default Route.extend({
     actions: {
 
         toggleIntro() {
-            this.modelFor('project').toggleProperty('suppressIntro');
+            this.modelFor('project').project.toggleProperty('suppressIntro');
         },
 
         toggleEdit() {
-            this.modelFor('project').toggleProperty('editing');
-            this.modelFor('project').toggleProperty('may_browse');
+            this.modelFor('project').project.toggleProperty('editing');
+            this.modelFor('project').project.toggleProperty('may_browse');
+        },
+
+        showSearch() {
+            burgerMenu.toggleProperty('open');
+            this.controller.toggleProperty('showingSearch');
         },
 
         didTransition(/* transition */) {
@@ -147,44 +163,30 @@ export default Route.extend({
             return true;
         },
 
-        // TODO this should be a Component or service
-        showLayerInfoDetals(layer) {
-            try {
-                // Toggle the totally made up property!
-                // The `!` in the second argument toggles the true/false state.
-                this.set('clickedLayer.clicked', !this.get('clickedLayer.clicked'));
-            } catch (err) {
-                // The first time, clickedCategory will not be an instance
-                // of `category`. It will just be `undefined`.
-            }
-            // So if the category that is clicked does not match the one in the
-            // `clickedCategory` property, we set the `clicked` attribute to `true`
-            // and that will remove the `hidden` class in the template.
-            if (layer !== this.get('clickedLayer')) {
-                // Update the `clickedCategory` property
-                this.set('clickedLayer', layer);
-                // Set the model attribute
-                layer.set('clicked', 'true');
-            // Otherwise, this must be the first time a user has clicked a category.
-            } else {
-                set(this, 'clickedLayer', true);
-            }
-        },
-
         addRemoveLayer(layer) {
-            console.log('layer', layer);
-            const project = this.modelFor('project');
-
-            const layerModel = layer._internalModel.modelName;
-
+            // let layerObj = '';
+            // if (layer._internalModel === 'undefined') {
+            //     layerObj = this.store.peekRecord
+            // }
+            // someVar = o.someVar === undefined ? "my default" : o.someVar
+            //
+            // displayName: computed('fullName', {
+            //   get() {
+            //     return get(this, 'fullName') || 'Anonymous';
+            //   }
+            // })
+            const project = this.modelFor('project').project;
+            // This is pretty ugly. When called from the `search-list-results` components
+            // `layer` is an instance of `raster-layer`, when called from the `project.raster-layer`
+            // route, `layer` is an instance of `raster-layer-project`. Maybe we can clean this up
+            // when we move to jsonapi?
+            const layerModel = getWithDefault(layer, '_internalModel.modelName', '"raster_layer_id").get("_internalModel.modelName")');
             const layerObj = this.store.peekRecord(layerModel, layer.get('id'));
-
             const format = layerObj.get('data_format');
-
             const _this = this;
 
             // TODO Q: Do we set `active_in_project` before?
-            if (layerObj.get('active_in_project')) {
+            if (layerObj.get('active_in_project') === false) {
                 let newLayer = '';
                 switch (format) {
                 case 'raster': {
@@ -257,19 +259,16 @@ export default Route.extend({
                 // Build a hash for the query. We do this because one key will need
                 // to equal the `format` var.
                 const attrs = {};
-                const layerId = `${layerModel}_layer_id`;
+                const layerId = `${format}_layer_id`;
                 attrs[layerId] = layer.get('id');
                 // NOTE: This might be wrong. Was `attrs['project_id'] =`
                 attrs.project_id = project.id;
                 // Get the join between layer and project
-                // NOTE: peekRecord doesn't work here? It is 4:17am
-                this.store.queryRecord(`${layerModel}-project`,
-                    attrs
-                ).then(function(layerToRemove) {
+                this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {
                     // Remove the object from the DOM
                     project.get(`${format}_layer_project_ids`).removeObject(layerToRemove);
                     // Delete the record from the project
-                    layerToRemove.deleteRecord().then(function() {
+                    layerToRemove.deleteRecord();//.then(function() {
                         // Set active to false
                         layer.set('active_in_project', false);
                         // TODO figure out how to give feedback on these shared actions
@@ -279,23 +278,61 @@ export default Route.extend({
                         //     .set('editSuccess', false);
                         //     // Remove the layer from the map
 
-                        _this.get('projectLayers')[layer.get('slug')].remove();
-                        if (this.get('session.isAuthenticated')) {
+                        _this.get('mapObject.projectLayers')[layer.get('slug')].remove();
+                        if (_this.get('session.isAuthenticated')) {
                             layerToRemove.save();
                         }
                         // Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
                         //     Ember.$(this).remove();
                         // });
                         // }, 3000);
-                    }, function() {
+                    //}, function() {
                         // TODO figure out how to give feedback on these shared actions
                         // _this.controllerFor('project/browse-layers').set('editFail', true);
                         // Ember.run.later(this, function(){
                         //     _this.controllerFor('project/browse-layers').set('editFail', false);
                         // }, 3000);
-                    });
+                    // });
                 });
             }
+        },
+
+        nextPage(meta) {
+            this.getResults(meta.next_page);
+        },
+
+        // Action to make the query to the API and render the results to the
+        // `project/browse-layers` route.
+        getResults(page) {
+            burgerMenu.set('open', true);
+            // this.modelFor('project').project.setProperties({ showing_browse_results: true });
+            set(this.controller, 'rasters', this.store.query('raster-layer', {
+                    search: true,
+                    tags: this.get('browseParams.tags'),
+                    text_search: this.get('browseParams.searchText'),
+                    institution: this.get('browseParams.institutions'),
+                    start_year: this.get('browseParams.start_year'),
+                    end_year: this.get('browseParams.end_year'),
+                    bounds: this.get('browseParams.bounds'),
+                    meta: this.get('controller.rasters.meta'),
+                    page: page || 0,
+                    limit: get(this, 'browseParams.searchLimit')
+                })
+            );
+            set(this.controller, 'vectors', this.store.query('vector-layer', {
+                    search: true,
+                    tags: this.get('browseParams.tags'),
+                    text_search: this.get('browseParams.searchText'),
+                    institution: this.get('browseParams.institutions'),
+                    start_year: this.get('browseParams.start_year'),
+                    end_year: this.get('browseParams.end_year')
+                })
+            );
+            this.setProperties({
+                searched: true,
+                showingResults: true
+            });
+            // $('#toggleResultsCheck').attr('checked', true);
         },
 
         setColor(layer) {

@@ -6,9 +6,11 @@ $roboto-font-path: '../assets/';
 
 // Custom color settings go here
 $primary-color: color('blue-grey', 'darken-1');
+$primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
 $secondary-color: #e24b31;
+$secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
 
 $col1: 5em;
@@ -18,15 +20,15 @@ $col1: 5em;
 // @import 'ember-cli-materialize';
 @import 'project-pane';
 
-nav {
-
-  li {
-
-    &.active {
-      background-color: $secondary-color;
-    }
-  }
-}
+// nav {
+//
+//   li {
+//
+//     &.active {
+//       background-color: $secondary-color;
+//     }
+//   }
+// }
 
 h3 {
   font-size: 1.75em;
@@ -43,7 +45,7 @@ h4,
 }
 
 .project-title {
-  background-color: $primary-color;
+  background-color: $primary-color-dark;
   color: $white;
   height: 3em;
   position: absolute;
@@ -56,7 +58,19 @@ h4,
     line-height: 0;
   }
 
+  .btn {
+    height: 3em;
+    transition: width $rabbit linear $rabbit;
+    width: 50%;
+  }
 
+  .collapse {
+    width: 0;
+  }
+
+  .reveal-btn {
+    padding-right: 0;
+  }
 
   .col {
     a {
@@ -88,7 +102,7 @@ h4,
 // 'loading',
 'extra-icons';
 // 'login-form',
-@import 'browse-tags';
+// @import 'browse-tags';
 // 'alert',
 @import 'slider';
 @import 'layer-citation';
@@ -99,14 +113,14 @@ h4,
 // 'close-button',
 // 'color-picker',
 // 'vector-layer-option-panel',
-@import 'material-tabs';
+// @import 'material-tabs';
 // 'browse-pane',
 @import 'browse-results';
 @import 'browse-toolbar';
 // 'atl-checkbox',
 @import 'base-picker';
 // 'zoom-buttons',
-// 'tagem';
+@import 'tagem';
 
 
 body {
@@ -116,6 +130,10 @@ body {
   font-size: 16px;
   font-weight: 300;
   height: 100vh;
+}
+
+.content {
+  min-height: 70vh;
 }
 
 .ember-burger-menu,
@@ -150,21 +168,22 @@ body {
   width: 100%;
 }
 
-.row-eq-height {
-  display: flex;
-
-  div {
-    .checkbox {
-      margin-top: -10px;
-    }
-  }
-}
+// .row-eq-height {
+//   display: flex;
+//
+//   div {
+//     .checkbox {
+//       margin-top: -10px;
+//     }
+//   }
+// }
 
 .material-icons {
   font-size: 1.5em;
 }
 
 .exit {
+  padding-bottom: .25em;
   transform: rotate(180deg);
 }
 
@@ -184,9 +203,19 @@ body {
 }
 
 // Text Search
-.search-button {
-  &.col {
-    padding-top: 1.5em;
+// .search-button {
+//   &.col {
+//     padding-top: 1.5em;
+//   }
+// }
+
+.navbar-fixed {
+  nav {
+    background-color: $primary-color-dark;
+  }
+
+  .active {
+    background-color: color('grey', 'darken-4');
   }
 }
 
@@ -211,4 +240,55 @@ body {
 .bm-menu {
   background-color: $white;
   box-shadow: $shadow5;
+}
+
+// Search Tabs
+.search-head {
+  background-color: color('blue-grey', 'darken-1');
+  color: color('grey', 'lighten-5');
+  font-size: 1.5em;
+  height: 2em;
+  padding-top: .25em;
+
+  &.row {
+    margin-bottom: 0;
+  }
+}
+
+.tabs {
+  background-color: color('blue-grey', 'lighten-1');
+  height: 5.2em;
+  // padding-top: .5em;
+
+  .indicator {
+    background-color: $secondary-color;
+    height: .25em;
+  }
+
+  .tab {
+    height: auto;
+    line-height: 1.75em;
+
+    a {
+      color: color('grey', 'lighten-4');
+
+      &:hover {
+        color: color('blue-grey', 'lighten-4');
+      }
+    }
+
+    i {
+      font-size: 2.2em;
+      vertical-align: middle;
+    }
+
+    .result-count {
+      background: $secondary-color;
+      border-radius: 36%;
+      color: color('grey', 'lighten-4');
+      font-size: .9em;
+      font-weight: 400;
+      padding: .2em .3em;
+    }
+  }
 }

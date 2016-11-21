@@ -28,6 +28,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     currentUser: service(),
 
     afterModel() {
+        $(".dropdown-button").dropdown();
         // let foo = this.get('currentUser.user');
         // return foo;
 
@@ -58,10 +59,12 @@ export default Route.extend(AuthenticatedRouteMixin, {
         // }
         return RSVP.hash({
             categories: this.store.findAll('category'),
-            layer: this.store.queryRecord('raster-layer', { tagem: true, page: 0 }),
+            layers: this.store.query('raster-layer', { tagem: true, page: 0 }),
             userTagged: this.store.peekAll('user-tagged')
         });
     },
+
+    layer() {this.get('model.layers').findBy('data_type', 'wms');},
 
     saveTags() {
         let _this = this;
@@ -75,19 +78,21 @@ export default Route.extend(AuthenticatedRouteMixin, {
         });
     },
 
-    loadMap(layer) {
+    loadMap() {
+        let layer = this.get('layer');
+        console.log('layer!', layer);
         // Reset all tags.
         this.store.peekAll('tag').setEach('assigned', false);
 
         // this.store.unloadAll('raster-layer');
-
+        // let layer = layers.findBy('data_type', 'wms');
         this.get('mapObject.map').remove();
         // set(this, 'currentModel.layer', '');
         get(this, 'mapObject').createMap();
 
         set(this, 'layer', layer);
         set(this, 'currentModel.layer', layer);
-        get(this, 'mapObject').mapSingleLayer(layer);
+        get(this, 'mapObject').mapSingleLayer(layer.findBy('data_type', 'wms'));
         $('.opacity').val(1);
     },
 

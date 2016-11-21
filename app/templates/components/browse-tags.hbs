@@ -12,7 +12,7 @@
             checked={{category.allChecked}}
             onchange={{action "checkAllTagsInCategory" category}}
           />
-          <label for={{category.slug}}>
+          <label for={{category.slug}} class='tag-label'>
             Select All
         </label>
       </li>
@@ -26,7 +26,7 @@
           checked="{{if tag.checked false}}"
           onchange={{action "checkSingleTag" tag category}}
       />
-      <label for={{tag.slug}}>{{tag.name}}</label>
+      <label class='tag-label' for={{tag.slug}}>{{tag.name}}</label>
     </li>
     {{/each}}
   </ul>

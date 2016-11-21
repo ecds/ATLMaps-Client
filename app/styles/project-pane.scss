@@ -4,8 +4,8 @@
   pointer-events: none;
   position: absolute;
   top: 3em;
-  transition: width 3s;
-  width: 34%;
+  transition: width $rabbit linear, top $turtle linear;
+  width: 34vw;
   z-index: 999;
 
   .row {
@@ -27,15 +27,17 @@
 // The top just stays put as there is no scrolling
 // on the body due to the page never exceeding viewport height
 .pane-title,
-.vector-detail-title {
+.vector-detail-title,
+.intro-modal-header {
   align-items: center;
   background-color: color('blue-grey', 'lighten-5');
   display: flex;
   font-weight: 900;
-  // height: 2em;
-  // justify-content: center;
+  height: auto;
+  opacity: 1;
   pointer-events: all;
   position: relative;
+  transition: opacity $rabbit linear;
   width: 100%;
   z-index: 10;
 
@@ -44,9 +46,23 @@
   // }
 }
 
+.pane-title {
+  padding: .5rem 2rem;
+
+  .col {
+    padding: 0;
+  }
+}
+
 .close-button {
   color: color('grey', 'base');
   // margin-left: .75em;
+}
+
+.switch {
+  &.list {
+    margin-right: 0;
+  }
 }
 
 // This is our main wrapping element, it's made 100vh high to
@@ -54,12 +70,14 @@
 // and padded with negative margin and padding
 .pane-container,
 .vector-detail-container {
-  backface-visibility: hidden;
+  // backface-visibility: hidden;
   display: flex;
   max-height: 100vh;
+  opacity: 1;
   overflow: hidden;
   pointer-events: all;
-  position: relative;
+  // position: relative;
+  transition: max-height $rabbit, opacity $rabbit;
   width: 100%;
   will-change: overflow;
 
@@ -89,6 +107,7 @@
 
   .col {
     padding: 0;
+    // padding-left: 1em;
   }
 }
 
@@ -122,6 +141,14 @@
 
     i {
       font-size: 1.5em;
+    }
+
+    .remove-layer {
+      opacity: .5;
+
+      &:hover {
+        opacity: 1;
+      }
     }
 
     .vector-icon {
@@ -168,164 +195,96 @@
 }
 
 .hide-nav + .project-pane {
-  display: none;
   width: 0;
+
+  .pane-title,
+  .pane-container {
+    opacity: 0;
+  }
+
+  .pane-container {
+    max-height: 0;
+  }
 }
-// Entirely optional – just wanted to remove the scrollbar on
-// WebKit browsers as I find them ugly
-// .Left::-webkit-scrollbar,
-// .Middle::-webkit-scrollbar,
-// .Right::-webkit-scrollbar {
-//     display: none;
-// }
-//  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
-// .Left {
-//     width: 12.5rem;
-//     background-color: indigo;
-// }
 
-// .Right {
-//     width: 12.5rem;
-//     background-color: violet;
-// }
+// Search Pane
+.search-bounds {
+  a {
+    font-size: 1.25em;
+    vertical-align: middle;
+  }
 
+  i {
+    vertical-align: sub;
+  }
+}
 
-//
-//
-// vvvv OLD vvvv
-//
-//
+.browse-by-tags {
+  .collapsible-header {
+    border-radius: 0;
+    color: color('grey', 'darken-1');
+    font-size: 1.1em;
+    font-weight: normal;
+    line-height: normal;
+    min-height: inherit;
+    padding: 0;
 
+    &.active {
+      font-weight: 700;
 
-// @import 'layer-citation';
-//
-// .project-pane {
-//   left: 5em;
-//   padding: .5em;
-//   pointer-events: auto; // Allow the pane to respond to click.
-//   position: fixed; // This is preventing the scroll and/or causing the problems.
-//   top: 5.65em;
-//   width: calc(33% - 2em);
-//
-//   h3 {
-//     margin: .25em 0;
-//   }
-// }
-//
-// .project-route {
-//   background-color: $white;
-//   border-left: 1px solid $border;
-//   border-right: 1px solid $border;
-//   box-shadow: -3px 0 10px 0 $shadow;
-//
-//   .route-content {
-//     max-height: 95vh;
-//     overflow: scroll;
-//     padding: 1em;
-//   }
-//
-//   // layer controls in edit view
-//   .panel-footer {
-//     // margin-bottom: 1px;
-//     margin: 0;
-//     pointer-events: all;
-//   }
-//
-// }
-//
-// .layer-heading {
-//   padding: 0 1em;
-//   pointer-events: all;
-//
-//   table {
-//     width: 100%;
-//
-//     td {
-//       padding: 0 .5em;
-//     }
-//   }
-//
-//   a {
-//     cursor: pointer;
-//   }
-// }
-//
-// // article {
-// //   color: material-color(md_grey, 800);
-// //   padding: 2em;
-// // }
-//
-// .layer-article {
-//   padding: 0;
-// }
-//
-// ul {
-//   li {
-//     // border-width: 1px;
-//     // border-style: solid;
-//     // border-color: lightgrey;
-//     // border-radius: 0.25em;
-//     // margin-bottom: 0.5em;
-//   }
-//
-//   // li.vector-layer {
-//   //   padding-left: .5em;
-//   // }
-//
-//   .layer-article {
-//     padding: 1em;
-//   }
-// }
-//
-// // Raster Panel Stuff
-// .raster-list {
-//   .panel {
-//     // padding: .25em 1em;
-//   }
-//
-//   .panel-body {
-//     padding: 0 .75em;
-//   }
-//
-//   .row {
-//     padding: 0 1em;
-//   }
-//
-//   .panel-footer {
-//     padding: .5em 1em;
-//   }
-//
-//   .reorder {
-//     padding: .25em 0 0;
-//   }
-//
-//   ul {
-//     list-style: none;
-//     margin-bottom: 17rem;
-//     padding-left: 0;
-//
-//     li {
-//       border-color: none;
-//       border-radius: 0;
-//       border-style: none;
-//       border-width: 0;
-//       margin-bottom: 0;
-//       width: 100%;
-//     }
-//   }
-// }
-//
-// .handle {
-//   cursor: grab;
-//   font-size: 1.75em;
-//   margin-right: 10px;
-//   transform: rotate(90deg);
-// }
-//
-// .opacity-slider {
-//   padding-left: 5px;
-//
-//   input {
-//     display: none;
-//   }
-// }
+      i {
+        color: color('deep-orange', 'lighten-1');
+        opacity: 1;
+      }
+    }
+
+    i {
+      color: color('grey', 'base');
+      font-size: 1.1em;
+      line-height: normal;
+      margin-right: .2em;
+      // margin-right: .25rem;
+      // margin-top: -.5rem;
+      // opacity: .4;
+      vertical-align: middle;
+    }
+
+  }
+
+  .collapsible {
+    border: 0;
+    box-shadow: none;
+
+    li {
+      border: 0;
+      border-radius: 0;
+      margin: 0;
+      padding-left: .5em;
+      padding-top: .25em;
+    }
+  }
+
+  .collapsible-body {
+    border-radius: 0;
+    padding-left: 1.5em;
+    padding-top: .5em;
+
+    p {
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+label {
+  &.tag-label,
+  &.institution-label {
+    color: color('grey', 'darken-3');
+    font-size: 1.2em;
+  }
+}
+
+.checkbox {
+  &.institution {
+    margin-left: 1em;
+  }
+}

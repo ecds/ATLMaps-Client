@@ -2,29 +2,55 @@
   .scroll-top {
     display: flex;
     position: relative;
+
+    i {
+      padding-top: .25em;
+    }
   }
 
   .scroll-container {
-    backface-visibility: hidden;
+    // backface-visibility: hidden;
     display: flex;
     height: 100vh;
     overflow: hidden;
-    position: relative;
+    // position: relative;
     will-change: overflow;
   }
 
   .scroll-content {
     height: auto;
+    margin-bottom: 10em;
     overflow: auto;
     overflow-style: none;
-    padding-bottom: 10em;
+    padding: 1em;
+    width: 100%;
+
+    .result-header {
+      margin-bottom: .5em;
+    }
+
+    .result-title {
+      color: color('blue-grey', 'darken-4');
+      font-size: 1.5em;
+    }
+
+    .result-description {
+      font-size: 1.25em;
+    }
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid $faded-white;
+    border-top: 1px solid $faded-black;
+    height: 0;
   }
 }
 
 
 .browse-results {
-  animation: fadeOutToTopLeft $rabbit;
-  animation-fill-mode: forwards;
+  // animation: fadeOutToTopLeft $rabbit;
+  // animation-fill-mode: forwards;
   font-size: unset;
   height: 100vh;
   opacity: 1;
@@ -32,8 +58,8 @@
   position: absolute;
   right: 0;
   top: 3em;
-  transform: none;
-  transform-origin: top right;
+  // transform: none;
+  // transform-origin: top right;
   width: 50vw;
   z-index: 1003;
 
@@ -95,70 +121,61 @@
 }
 
 
-
-// #toggleResultsCheck:not(:checked) ~ .browse-results {
-//   animation: fadeOutToTopLeft $rabbit;
-//   animation-fill-mode: forwards;
-//   transform-origin: top right;
-// }
-
-//#toggleResultsCheck:checked ~ .browse-results {
-.showing-results  {
-  animation: fadeInFromTopLeft $rabbit;
-  transform-origin: top right;
-}
-@keyframes fadeInFromTopLeft {
-  0% {
-    opacity: 0;
-    transform: scale(0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-}
-
-@keyframes fadeOutToTopLeft {
-  0% {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(0, 0);
-  }
-}
-
-
-// TODO move this to a pagination-links.scss
+// Pagination
 .pagination {
   background-color: color('grey', 'lighten-3');
   height: 4em;
   left: 0;
   padding-bottom: 1em;
-  position: absolute;
-  top: calc(100vh - 8em);
-  // width: 100%;
-
-  button {
-    background-color: $primary-color;
-    pointer-events: all;
-  }
-
-  .btn-warning {
-    background-color: $secondary-color;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  .material-icons {
-    display: initial;
-    vertical-align: bottom;
-  }
-}
-
-.ember-power-select {
   padding-top: .5em;
+  position: absolute;
+  top: calc(100vh - 4em);
+  width: 100%;
+
+  li {
+    background-color: $secondary-color-light;
+    color: color('grey', 'darken-4');
+    opacity: .7;
+
+    &.active {
+      background-color: $secondary-color;
+      color: color('grey', 'lighten-4');
+      opacity: 1;
+    }
+  }
+
+  .disabled {
+    background-color: transparent;
+    padding: 0;
+  }
 }
+//   // width: 100%;
+//
+//   button {
+//     background-color: $primary-color;
+//     pointer-events: all;
+//   }
+//
+//   .btn-warning {
+//     background-color: $secondary-color;
+//     cursor: not-allowed;
+//     pointer-events: none;
+//   }
+//
+//   .material-icons {
+//     display: initial;
+//     vertical-align: bottom;
+//   }
+// }
+//
+// .pagination-centered {
+//   cursor: pointer;
+// }
+//
+// .disabled {
+//   cursor: not-allowed;
+// }
+//
+// .ember-power-select {
+//   padding-top: .5em;
+// }

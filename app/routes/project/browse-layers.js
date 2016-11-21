@@ -2,7 +2,6 @@ import Ember from 'ember';
 import burgerMenu from 'ember-burger-menu';
 
 const {
-    $,
     Route,
     get,
     inject: {
@@ -60,7 +59,6 @@ export default Route.extend({
         // `project/browse-layers` route.
         getResults(page) {
             burgerMenu.set('open', true);
-            this.modelFor('project').setProperties({ showing_browse_results: true });
             set(this.controller, 'rasters', this.store.query('raster-layer', {
                     search: true,
                     tags: this.get('browseParams.tags'),
@@ -86,7 +84,6 @@ export default Route.extend({
                 searched: true,
                 showingResults: true
             });
-            $('#toggleResultsCheck').attr('checked', true);
         }
     }
 });

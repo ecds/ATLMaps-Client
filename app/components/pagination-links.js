@@ -10,8 +10,8 @@ const limits = [
 const { Component, inject: { service }, set } = Ember;
 
 export default Component.extend({
-    classNames: ['pagination'],
-    tagName: 'nav',
+    classNames: ['valign-wrapper'],
+    // tagName: 'nav',
     browseParams: service('browse-params'),
     searchEnabled: false,
     limits,

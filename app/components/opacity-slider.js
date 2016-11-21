@@ -21,7 +21,6 @@ export default Component.extend({
         let _this = this;
         let projLayer = get(this, 'projLayer') || false;
         let layer = get(this, 'layer');
-        // console.log('projLayer', projLayer);
 
         let startOpacity = 10;
         if (projLayer) {
@@ -34,7 +33,6 @@ export default Component.extend({
                 'min': 0,
                 'max': 10
             }
-            // orientation: 'vertical'
         };
 
         let slider = document.getElementById(layer.get('slider_id'));

@@ -48,7 +48,7 @@ Router.map(function() {
     this.route('support', {
         path: '/help'
     });
-    this.route('tagem');
+    // this.route('tagem');
     this.route('404', {
         path: '/*wildcard'
     });

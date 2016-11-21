@@ -38,7 +38,7 @@ export default Component.extend({
 
     didInsertElement() {
         get(this, 'mapObject').createMap();
-        get(this, 'mapObject').mapSingleLayer(this.get('layer'));
+        get(this, 'mapObject').mapSingleLayer(this.get('layer').findBy('data_type', 'wms'));
     }
 
 });

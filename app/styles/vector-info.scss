@@ -1,12 +1,15 @@
 .vector-info {
-  border: .1em solid color('grey', 'lighten-1');
+  border: .1em solid color('grey', 'lighten-2');
   border-radius: .5em;
   display: none;
+  left: 10em;
+  top: 10em;
   transition: none;
 }
 
 // // Also defined in project-pane.scss
 .vector-detail-title {
+  background-color: color('blue-grey', 'lighten-5');
   border-top-left-radius: .5em;
   border-top-right-radius: .5em;
 

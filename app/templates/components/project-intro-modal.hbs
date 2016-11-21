@@ -4,19 +4,21 @@
 
 <div class='z-depth-3'>
   <div class='modal-content'>
-  <header>
+  <header class='intro-modal-header'>
     {{#if project.media}}
       <div class="video-container">
         <iframe width="853" height="480" src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
       </div>
     {{/if}}
   </header>
-<article>
+  <div class='pane-container {{if project.media 'with-media'}}'>
+<article class='pane-content'>
       <h4>{{project.name}}</h4>
       <h5>{{project.owner}}</h5>
     {{{project.intro}}}
-  </article></div>
-  <footer class='modal-fixed-footer'>
+
+  </article>
+  <footer class='modal-fixed-footer intro-modal-footer'>
     <div class='row'>
       <div class='col s4 offset-s4 center-align'>
         <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action 'toggleIntro'}}>
@@ -37,4 +39,6 @@
       </div>
     </div>
   </footer>
+</div></div>
+
 </div>

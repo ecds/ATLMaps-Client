@@ -15,17 +15,10 @@ export default Component.extend({
       this.set('routes', [
         Object.create({
           route: 'project.info',
-          lable: 'Info',
+          label: 'Info',
           icon: 'info_outline',
           iconClass: null,
           show: true
-        }),
-        Object.create({
-          route: 'project.browse-layers',
-          label: 'Find',
-          icon: 'search',
-          iconClass: null,
-          show: true//get(this, 'model.editing')
         }),
         Object.create({
           route: 'project.raster-layers',
