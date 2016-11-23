@@ -6,7 +6,7 @@ var nodeSass = require('node-sass'); // loads the version in your package.json
 
 module.exports = function() {
     var env = EmberApp.env();
-    var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+    var isProductionLikeBuild = ['production'].indexOf(env) > -1;
 
     var app = new EmberApp({
         // 'ember-power-select': {

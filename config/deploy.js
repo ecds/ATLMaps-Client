@@ -1,4 +1,5 @@
 /* jshint node: true */
+/* globals module, process */
 
 module.exports = function(environment) {
   var ENV = {
@@ -9,12 +10,11 @@ module.exports = function(environment) {
         bucket: process.env.BUCKET,
         region: 'us-east-1'
     },
-    // redis: {
-    //     host: process.env.REDIS_HOST,
-    //     password: process.env.REDIS_PW,
-    //     port: 6379,
-    //     filePattern: 'index.html'
-    // }
+    redis: {
+        host: process.env.REDIS_HOST,
+        password: process.env.REDIS_PW,
+        port: 6379
+    }
 
     // include other plugin configuration that applies to all deploy targets here
   };

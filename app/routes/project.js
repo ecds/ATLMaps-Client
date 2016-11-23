@@ -34,9 +34,10 @@ export default Route.extend({
                 zoom_level: 13,
                 default_base_map: 'street',
                 exploring: true,
-                may_browse: true,
+                may_edit: true,
                 description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.'
             });
+            burgerMenu.set('open', true);
         } else {
             project = this.store.findRecord('project', params.project_id);
         }
@@ -198,6 +199,7 @@ export default Route.extend({
                         data_format: layerObj.get('data_format'),
                         position // enhanced litrial
                     });
+                    project.get('raster_layer_project_ids').pushObject(newLayer);
                     break;
                 }
 

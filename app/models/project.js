@@ -87,11 +87,11 @@ export default Model.extend({
     // Used in determing which nave links to show.
     hasRasters: computed(function() {
         return get(this, 'raster_layer_project_ids.length') > 0;
-    }),
+    }).property('raster_layer_project_ids'),
 
     hasVectors: computed(function() {
         return get(this, 'vector_layer_project_ids.length') > 0;
-    }),
+    }).property('vector_layer_project_ids'),
 
     // The following computed values are used for the show/hide all toggle switch.
     // The goal is to turn the toggle switch back to true when you make a layer visiable again.
