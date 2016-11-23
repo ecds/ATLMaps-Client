@@ -9,11 +9,12 @@ module.exports = function(environment) {
         bucket: process.env.BUCKET,
         region: 'us-east-1'
     },
-    redis: {
-        host: process.env.REDIS_HOST,
-        password: process.env.REDIS_PW,
-        port: 6379
-    }
+    // redis: {
+    //     host: process.env.REDIS_HOST,
+    //     password: process.env.REDIS_PW,
+    //     port: 6379,
+    //     filePattern: 'index.html'
+    // }
 
     // include other plugin configuration that applies to all deploy targets here
   };
