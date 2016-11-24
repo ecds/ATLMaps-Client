@@ -139,6 +139,10 @@
     line-height: initial;
     padding: 1rem;
 
+    .data-title {
+      padding-left: .5em;
+    }
+
     i {
       font-size: 1.5em;
     }
@@ -284,11 +288,21 @@
   }
 }
 
-label {
-  &.tag-label,
-  &.institution-label {
-    color: color('grey', 'darken-3');
-    font-size: 1.2em;
+// checkbox
+a {
+  color: $primary-color-dark;
+  font-size: 1em;
+
+  i {
+    vertical-align: text-top;
+
+    &.active {
+      color: $secondary-color;
+    }
+  }
+
+  &.checkbox-link {
+    font-size: 1.25em;
   }
 }
 

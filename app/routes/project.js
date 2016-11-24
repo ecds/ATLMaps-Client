@@ -269,6 +269,8 @@ export default Route.extend({
                     // });
                 });
             }
+
+            return false;
         },
 
         nextPage(meta) {

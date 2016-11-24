@@ -26,7 +26,8 @@
     width: 100%;
 
     .result-header {
-      margin-bottom: .5em;
+      font-size: 1.5em;
+      margin-bottom: .25em;
     }
 
     .result-title {
@@ -149,33 +150,3 @@
     padding: 0;
   }
 }
-//   // width: 100%;
-//
-//   button {
-//     background-color: $primary-color;
-//     pointer-events: all;
-//   }
-//
-//   .btn-warning {
-//     background-color: $secondary-color;
-//     cursor: not-allowed;
-//     pointer-events: none;
-//   }
-//
-//   .material-icons {
-//     display: initial;
-//     vertical-align: bottom;
-//   }
-// }
-//
-// .pagination-centered {
-//   cursor: pointer;
-// }
-//
-// .disabled {
-//   cursor: not-allowed;
-// }
-//
-// .ember-power-select {
-//   padding-top: .5em;
-// }

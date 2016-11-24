@@ -6,27 +6,21 @@
     <div class="collapsible-body">
       <ul>
         <li>
-          <input type="checkbox"
-            class="tags filled-in"
-            id='{{category.slug}}'
-            checked={{category.allChecked}}
-            onchange={{action "checkAllTagsInCategory" category}}
-          />
-          <label for={{category.slug}} class='tag-label'>
-            Select All
-        </label>
+        <a {{action 'checkAllTagsInCategory' category}} class='checkbox-link'>
+          <i class="material-icons {{if category.allChecked 'active'}}">
+            {{if category.allChecked 'check_box' 'check_box_outline_blank'}}
+          </i>
+          Select All
+        </a>
       </li>
     {{#each category.sortedTags as |tag|}}
     <li class='tags'>
-      <input type="checkbox"
-          class="tags {{category.slug}} filled-in"
-          id="{{tag.slug}}"
-          name="{{tag.name}}"
-          category="{{category.slug}}"
-          checked="{{if tag.checked false}}"
-          onchange={{action "checkSingleTag" tag category}}
-      />
-      <label class='tag-label' for={{tag.slug}}>{{tag.name}}</label>
+      <a {{action 'checkSingleTag' tag category}} class='checkbox-link'>
+        <i class="material-icons {{if tag.checked 'active'}}">
+          {{if tag.checked 'check_box' 'check_box_outline_blank'}}
+        </i>
+        {{tag.name}}
+      </a>
     </li>
     {{/each}}
   </ul>
@@ -34,79 +28,3 @@
   </li>
   {{/each}}
 </ul>
-{{!-- {{#md-card-collapsible }}
-  <h5>Tags</h5>
-  {{#each model as |category|}}
-    {{#md-collapsible title=category.name}}
-    <div class="{{if category.checked 'checked'}}">
-
-          <input type="checkbox"
-            class="tags"
-            id='{{category.slug}}'
-            checked="{{if category.allChecked false}}"
-            onchange={{action "checkAllTagsInCategory" category}}
-          />
-          <label for={{category.slug}}>
-            Select All
-        </label>
-        <br />
-        {{#each category.sortedTags as |tag|}}
-          <input type="checkbox"
-              class="tags {{category.slug}}"
-              id="{{tag.slug}}"
-              name="{{tag.name}}"
-              category="{{category.slug}}"
-              checked="{{if tag.checked false}}"
-              onchange={{action "checkSingleTag" tag}}
-          />
-          <label for={{tag.slug}}>{{tag.name}}</label>
-          <br />
-        {{/each}}
-      </div>
-    {{/md-collapsible}}
-  {{/each}}
-{{/md-card-collapsible}} --}}
-    {{!-- <div class="row">
-        <ul class="list-unstyled categories col-md-12">
-            {{#each model as |category|}}
-            <li class="category">
-                <a {{action 'showTagGroup' category}}>
-                    <span><i class="material-icons {{unless category.checked "hidden"}}">done</i></span>
-                    {{category.name}}
-                </a>
-                {{#liquid-if category.clicked class="category"}}
-                <ul class="list-unstyled tag-group pull-left {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
-                    <li class="checkbox">
-                            <label>
-                                <input type="checkbox" class="tags" checked="{{if category.allChecked false}}" onchange={{action "checkAllTagsInCategory" category}} />
-                                <span class="check"></span>
-                                Select All
-                            </label>
-                    </li>
-                    {{#if category.sortedTags}}
-                    {{#each category.sortedTags as |tag|}}
-                    <li class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                class="tags {{category.slug}}"
-                                id="{{tag.name}}"
-                                name="{{tag.name}}"
-                                category="{{category.slug}}"
-                                checked="{{if tag.checked false}}"
-                                onchange={{action "checkSingleTag" tag}}
-                            />
-                            <span class="check"></span>
-                            {{tag.name}}
-                        </label>
-                    </li>
-                    {{/each}}
-                    {{else}}
-                        <li>Loading...</li>
-                    {{/if}}
-                </ul>
-                {{/liquid-if}}
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-</div> --}}

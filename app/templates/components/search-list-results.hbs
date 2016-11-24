@@ -2,15 +2,14 @@
   {{#each layers as |layer|}}
     <div class='row result-header'>
       <div class='col s12'>
-        <input type="checkbox"
-          class="filled-in"
-          id={{layer.slug}}
-          checked={{layer.active_in_project}}
-          onchange={{action (route-action "addRemoveLayer" layer)}}
-        />
-        <label for={{layer.slug}} class='result-title'>
+
+        {{!-- {{input type='checkbox' id=layer.slug checked=layer.active_in_project change=(route-action 'addRemoveLayer' layer)}} --}}
+        <a {{action (route-action 'addRemoveLayer' layer)}}>
+          <i class="material-icons {{if layer.active_in_project 'active'}}">
+            {{if layer.active_in_project 'check_box' 'check_box_outline_blank'}}
+          </i>
           {{if layer.title layer.title "Loading..."}}
-        </label>
+        </a>
       </div>
     </div>
     <div class='row'>
