@@ -9,8 +9,7 @@
     {{/unless}}
 
     {{outlet}}
+    {{#unless isProjectDetail}}
+        {{ main-footer }}
+    {{/unless}}
 </div>
-
-{{#unless isProjectDetail}}
-    {{ main-footer }}
-{{/unless}}
