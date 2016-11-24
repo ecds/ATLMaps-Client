@@ -147,35 +147,7 @@ export default Route.extend({
             this.controller.toggleProperty('showingSearch');
         },
 
-        didTransition(/* transition */) {
-            // let current = getOwner(this).lookup('controller:application').currentPath;
-            // let currentRoutes = current.split('.');
-            // console.log('currentRoutes', currentRoutes);
-            // get(this, 'controller').set('current', currentRoutes);
-            //     // TODO: WTF does this do?
-            //     if (transition.targetName === 'project.browse-layers') {
-            //         this.controllerFor('project').set('showBrowse', true);
-            //     } else {
-            //         this.controllerFor('project').set('showBrowse', false);
-            //     }
-            //     // TODO: Kill the vector info window here.
-            //     // TODO: User test if the vector window should go away.
-            //
-            return true;
-        },
-
         addRemoveLayer(layer) {
-            // let layerObj = '';
-            // if (layer._internalModel === 'undefined') {
-            //     layerObj = this.store.peekRecord
-            // }
-            // someVar = o.someVar === undefined ? "my default" : o.someVar
-            //
-            // displayName: computed('fullName', {
-            //   get() {
-            //     return get(this, 'fullName') || 'Anonymous';
-            //   }
-            // })
             const project = this.modelFor('project').project;
             // This is pretty ugly. When called from the `search-list-results` components
             // `layer` is an instance of `raster-layer`, when called from the `project.raster-layer`
@@ -308,33 +280,40 @@ export default Route.extend({
         getResults(page) {
             burgerMenu.set('open', true);
             // this.modelFor('project').project.setProperties({ showing_browse_results: true });
-            set(this.controller, 'rasters', this.store.query('raster-layer', {
-                    search: true,
-                    tags: this.get('browseParams.tags'),
-                    text_search: this.get('browseParams.searchText'),
-                    institution: this.get('browseParams.institutions'),
-                    start_year: this.get('browseParams.start_year'),
-                    end_year: this.get('browseParams.end_year'),
-                    bounds: this.get('browseParams.bounds'),
-                    meta: this.get('controller.rasters.meta'),
-                    page: page || 0,
-                    limit: get(this, 'browseParams.searchLimit')
-                })
-            );
-            set(this.controller, 'vectors', this.store.query('vector-layer', {
-                    search: true,
-                    tags: this.get('browseParams.tags'),
-                    text_search: this.get('browseParams.searchText'),
-                    institution: this.get('browseParams.institutions'),
-                    start_year: this.get('browseParams.start_year'),
-                    end_year: this.get('browseParams.end_year')
-                })
-            );
-            this.setProperties({
-                searched: true,
-                showingResults: true
-            });
-            // $('#toggleResultsCheck').attr('checked', true);
+            let searchParams = {
+                search: true,
+                tags: this.get('browseParams.tags'),
+                text_search: this.get('browseParams.searchText'),
+                institution: this.get('browseParams.institutions'),
+                start_year: this.get('browseParams.start_year'),
+                end_year: this.get('browseParams.end_year'),
+                bounds: this.get('browseParams.bounds'),
+                meta: this.get('controller.rasters.meta'),
+                page: page || 0,
+                limit: get(this, 'browseParams.searchLimit')
+            };
+            for (let param in searchParams) {
+                if (searchParams[param] === null ||
+                    searchParams[param] === undefined ||
+                    searchParams[param].length === 0)
+                {
+                  delete searchParams[param];
+                }
+            }
+            if (Object.keys(searchParams['bounds']).length === 0) {
+                delete searchParams['bounds'];
+            }
+            if (Object.keys(searchParams).length > 3) {
+                set(this.controller, 'rasters', this.store.query('raster-layer', searchParams));
+                set(this.controller, 'vectors', this.store.query('vector-layer', searchParams));
+                this.setProperties({
+                    searched: true,
+                    showingResults: true
+                });
+            } else {
+                set(this.controller, 'rasters', null);
+                set(this.controller, 'vectors', null);
+            }
         },
 
         setColor(layer) {

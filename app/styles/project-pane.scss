@@ -210,12 +210,21 @@
 // Search Pane
 .search-bounds {
   a {
+    cursor: pointer;
     font-size: 1.25em;
     vertical-align: middle;
   }
 
   i {
     vertical-align: sub;
+  }
+}
+
+.input-field {
+  label {
+    color: $primary-color-light;
+    font-size: 1.25em;
+    font-weight: normal;
   }
 }
 

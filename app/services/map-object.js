@@ -210,6 +210,9 @@ export default Service.extend({
                     _this.get('leafletGroup').addLayer(wmsLayer);
                     wmsLayer.addTo(map);
 
+                    // TODO make use of this
+                    // wmsLayer.on("load",function() { console.log("all visible tiles have been loaded") });
+
                     break;
 
                     // NOTE: At some point we'll move the vector data to GeoServer

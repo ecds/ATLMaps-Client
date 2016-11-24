@@ -19,7 +19,7 @@ export default Service.extend({
             start_year: '',
             end_year: '',
             bounds: {},
-            serrchLimit: '10'
+            searchLimit: '10'
         });
     },
 

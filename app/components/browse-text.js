@@ -12,7 +12,7 @@ export default Component.extend({
 
     browseParams: service(),
 
-    classNames: ['search-by-text'],
+    tagNames: 'form',
 
     searchTerms: function() {
         return this.get('browseParams.searchText');

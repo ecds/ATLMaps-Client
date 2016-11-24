@@ -1,13 +1,4 @@
-<div class="row">
-  <div class="input-field col s9">
-    <input id="icon_prefix" type="text" class="validate" value={{searchTerms}}>
-    <label for="icon_prefix">Search</label>
-  </div>
-  <div class='col s3 search-button'>
-    {{!-- <a class="waves-effect waves-light btn"><i class="material-icons left">search</i>Go</a> --}}
-    <button class="btn waves-effect waves-light" type="submit" {{action 'textSearch'}}>
-      Go
-      <i class="material-icons left">search</i>
-    </button>
-  </div>
+<div class='input-field inline'>
+  {{input id='search-text' type='text' enter='textSearch' value=searchTerms class='search-text-input'}}
+  <label for='serarch-text'>Text Search</label>
 </div>
