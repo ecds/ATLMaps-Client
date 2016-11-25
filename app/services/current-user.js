@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 const {
-    // isEmpty,
-    // RSVP,
     Service,
     inject: {
         service
@@ -23,7 +21,8 @@ export default Service.extend({
                 set(_this, 'user', user);
             });
         } catch(err) {
-
+            // TODO something with this caught error.
+            /* err */
         }
         set(this, 'tags', {});
         set(this, 'previous', '');

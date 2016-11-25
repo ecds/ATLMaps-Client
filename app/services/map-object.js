@@ -178,14 +178,10 @@ export default Service.extend({
                         format: 'image/png',
                         transparent: true,
                         maxZoom: 20,
-                        // detectRetina: true,
-                        // className: newLayerSlug,
                         zIndex, // Enhanced litrial
                         opacity: 1
                     });
 
-                    // let layerObj = {name: newLayerSlug, mapObj: wmsLayer};
-                    // layerObj[newLayerSlug] = wmsLayer;
                     _this.get('projectLayers')[newLayerSlug] = wmsLayer;
 
                     _this.get('leafletGroup').addLayer(wmsLayer);

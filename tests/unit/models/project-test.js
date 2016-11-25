@@ -1,3 +1,5 @@
+import DS from 'ember-data';
+
 import {
   moduleForModel,
   test
@@ -15,7 +17,7 @@ test('it exists', function(assert) {
 });
 
  test('Project is a valid ember-data Model', function (assert) {
-	var store = this.store();
+	// var store = this.store();
 	var project = this.subject({name: 'Stadiumville', owner: 'Brennan Collins'});
 	assert.ok(project);
 	assert.ok(project instanceof DS.Model);

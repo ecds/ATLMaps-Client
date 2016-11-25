@@ -5,8 +5,7 @@ const {
     get,
     inject: {
         service
-    },
-    set
+    }
 } = Ember;
 
 export default Component.extend({
@@ -31,7 +30,6 @@ export default Component.extend({
 
     drop(event) {
         let data = event.dataTransfer.getData('text/data');
-        // console.log('event.dataTransfer', event.dataTransfer);
         this.sendAction('dropped', data);
         this.set('dragClass', 'deactivated');
     },

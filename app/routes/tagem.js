@@ -29,34 +29,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
     afterModel() {
         $(".dropdown-button").dropdown();
-        // let foo = this.get('currentUser.user');
-        // return foo;
-
-        // var Legend = L.Control.extend({
-        //     options: {
-        //         position: 'bottomright'
-        //     },
-        //
-        //     onAdd: function(map) {
-        //         var legend = L.DomUtil.create('div', 'map-legend', L.DomUtil.get('map'));
-        //
-        //         // here we can fill the legend with colors, strings and whatever
-        //
-        //         return legend;
-        //     }
-        // });
-        //
-        // map.addControl(new Legend());
     },
 
-    model(params) {
-        // console.log('params', params);
-        // let tagem;
-        // if (params.tagem === 'tagem') {
-        //     tagem = true;
-        // } else {
-        //     tagem = params.tagem;
-        // }
+    model() {
         return RSVP.hash({
             categories: this.store.findAll('category'),
             layers: this.store.query('raster-layer', { tagem: true, page: 0 }),
@@ -73,14 +48,12 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
         userTagged.save().then(function() {
             _this.store.unloadAll('user-tagged');
-        }, function(errors) {
-            console.log('error', errors.errors.msg);
+        }, function(/* errors */) {
         });
     },
 
     loadMap() {
         let layer = this.get('layer');
-        console.log('layer!', layer);
         // Reset all tags.
         this.store.peekAll('tag').setEach('assigned', false);
 
@@ -114,7 +87,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
                 this.get('currentUser.tags')[tag.get('name')] = tagged;
                 set(count, 'number_tagged', count.get('number_tagged') + 1);
             } else {
-                console.log(this.get('currentUser.tags')[tag.get('name')]);
                 this.store.deleteRecord(this.get('currentUser.tags')[tag.get('name')]);
                 set(count, 'number_tagged', count.get('number_tagged') - 1);
             }
@@ -147,7 +119,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
                         let assigned = _this.store.peekRecord('tag', get(tag, 'tag_id'));
                         assigned.setProperties({ assigned: true });
                     });
-                    // console.log('tags', tags);
                 });
             });
         },
