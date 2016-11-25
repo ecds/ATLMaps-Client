@@ -31,14 +31,13 @@ Router.map(function() {
         this.resource('project', {
             path: '/:project_id'
         }, function() {
-            this.route('view');
-            this.route('edit');
-            this.route('info');
-            this.route('vector-layers');
-            this.route('raster-layers');
-            this.route('base-layers');
-            this.route('help');
-            this.route('browse-layers');
+          this.route('edit');
+          this.route('info');
+          this.route('vector-layers');
+          this.route('raster-layers');
+          this.route('base-layers');
+          this.route('help');
+          this.route('browse-layers');
         });
     });
     this.route('about');
