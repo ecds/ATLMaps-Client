@@ -118,7 +118,8 @@ export default Route.extend({
                 active_in_project: false
             });
         });
-        // Clear checked institution
+        set(this.controller, 'rasters', null);
+        set(this.controller, 'vectors', null);        // Clear checked institution
         const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
         // TODO Why doesn't this work?
@@ -129,6 +130,8 @@ export default Route.extend({
         // Clear the map.
         get(this, 'mapObject.map').remove();
         set(this, 'mapObject.map', '');
+
+        burgerMenu.set('open', false);
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     actions: {

@@ -6,7 +6,7 @@
 
 
       {{#sortable-item tagName="li" class='sortable-item' model=raster group=group handle=".reorder-handle" }}
-        <div class='collapsible-header'>
+        <div class='collapsible-header raster-list-header'>
           <div class='row'>
             {{!-- <div class='col s1'>
               <i class="material-icons">layers</i>
@@ -14,15 +14,13 @@
             <div class='title col s10'>
               {{if raster.raster_layer_id.name raster.raster_layer_id.title 'Loading...'}}
             </div>
-            <div class='col m1 secondary-conent'>
+            <div class='secondary-conent reorder-handle col s2'>
+              <i class='material-icons right'>code</i>
               {{#if model.project.may_edit}}
                 <a class='remove-layer secondary-conent' onclick={{action (route-action 'addRemoveLayer' raster.raster_layer_id) preventDefault=true}}>
                   <i class='remove-layer right material-icons'>delete</i>
                 </a>
             {{/if}}
-          </div>
-            <div class='secondary-conent right reorder-handle col s1'>
-              <i class='material-icons'>code</i>
             </div>
           </div>
         </div>

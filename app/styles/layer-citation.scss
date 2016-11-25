@@ -1,10 +1,11 @@
-.citation-footer {
-  background-color: color('grey', 'lighten-3') !important;
-  // border-bottom-left-radius: .5em;
-  // border-bottom-right-radius: .4em;
-  color: color('grey', 'darken-1');
-  padding-left: .5em;
-  padding-right: 1em;
+footer {
+
+  &.citation-footer {
+    background-color: color('grey', 'lighten-3');
+    color: color('grey', 'darken-1');
+    padding-left: .5em;
+    padding-right: 1em;
+  }
 }
 
 .cite-h6 {
@@ -21,32 +22,3 @@
   height: auto;
   width: 50px;
 }
-// .layer-citation {
-//     h6 {
-//         line-height: 0;
-//     }
-//     img.institution_logo {
-//         width: 50px;
-//         height: auto;
-//     }
-//     a {
-//         pointer-events: all;
-//         i {
-//             // font-size: 50px;
-//             &:hover {
-//                 background-color: material-color(md_grey, 300);
-//                 border-radius: 50%;
-//             }
-//
-//         }
-//     }
-//
-//     a.pick-color {
-//         i {
-//             color: material-color(md_blue, 100);
-//             &:hover {
-//                 color: material-color(md_blue, 500);
-//             }
-//         }
-//     }
-// }

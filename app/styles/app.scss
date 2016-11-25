@@ -227,7 +227,15 @@ a {
 // TODO need a raster list scss?
 // TODO is there not an icon for this? I'm watching the world series and don't
 // have time to look like right now.
+.collapsible-header {
+  &.raster-list-header {
+    padding-right: 0;
+  }
+}
+
 .reorder-handle {
+  height: 2em;
+
   i {
     margin-left: -.1em;
     transform: rotate(-90deg);
@@ -235,6 +243,9 @@ a {
     &:hover {
       color: $secondary-color;
       cursor: ns-resize;
+    }
+    &.remove-layer {
+      transform: none;
     }
   }
 }

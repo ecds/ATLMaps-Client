@@ -1,9 +1,10 @@
-<a {{action 'searchBounds'}}>
+<a {{action 'searchBounds'}} class={{if hasBounds 'has-bounds'}}>
   {{#if hasBounds}}
     <i class="material-icons">location_searching</i>
-    Search all areas.
+    Searching viewable area
   {{else}}
     <i class="material-icons">location_disabled</i>
-    Search viewable ara.
+    Searching all areas
   {{/if}}
 </a>
+<!--hi-->
