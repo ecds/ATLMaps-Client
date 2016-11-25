@@ -20,7 +20,6 @@ export default Route.extend({
     dataColors: service(),
     browseParams: service(),
     session: service(),
-    flashMessage: service(),
     cookies: service(),
 
     model(params) {
@@ -323,7 +322,7 @@ export default Route.extend({
 
         setColor(layer) {
             layer.save().then(
-                this.get('flashMessage').showMessage('New color saved!', 'success')
+                // this.get('flashMessage').showMessage('New color saved!', 'success')
             ).catch(
                 // this.get('flashMessage').showMessage('Dang, something went wrong!', 'fail')
             );
