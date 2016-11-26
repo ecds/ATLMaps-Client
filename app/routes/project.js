@@ -236,24 +236,19 @@ export default Route.extend({
                 const attrs = {};
                 const layerId = `${format}_layer_id`;
                 attrs[layerId] = layer.get('id');
-                // NOTE: This might be wrong. Was `attrs['project_id'] =`
                 attrs.project_id = project.id;
-                // Get the join between layer and project
                 // Remove the object from the map/DOM
                 this.get('mapObject.projectLayers')[layer.get('slug')].remove();
                 // Delete the record from the project
                 this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {
-                    layerToRemove.deleteRecord();//.then(function() {
-                        // Set active to false
-                        layer.set('active_in_project', false);
-                        // TODO give feedback
-                        if (_this.get('session.isAuthenticated') && project.id != 'explore') {
-                            layerToRemove.save();
-                        }
-                        // TODO Give feedback
-                    //}, function() {
-                        // TODO give feedback
-                    // });
+                    layerToRemove.deleteRecord()
+                    // Set active to false
+                    layer.set('active_in_project', false);
+                    // TODO give feedback. One can add `.then()` to the promise to add
+                    // success and fail feedback.
+                    if (_this.get('session.isAuthenticated') && project.id != 'explore') {
+                        layerToRemove.save();
+                    }
                 });
             }
 

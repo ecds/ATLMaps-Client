@@ -149,7 +149,9 @@
     }
 
     .remove-layer {
-      opacity: .5;
+      cursor: pointer;
+      opacity: .7;
+      transform: none;
 
       &:hover {
         opacity: 1;
