@@ -106,8 +106,8 @@ h4 {
 'project-nav',
 'project-intro',
 // 'loading',
-'extra-icons';
-// 'login-form',
+'extra-icons',
+'login-form';
 // @import 'browse-tags';
 // 'alert',
 @import 'slider';
@@ -344,21 +344,3 @@ a {
 .ember-burger-menu {
   position: absolute;
 }
-
-// Icon Checkbox
-// a {
-//
-//   &.checkbox-link {
-//     color: $primary-color-dark;
-//     cursor: pointer;
-//     font-size: .75em;
-//
-//     i {
-//       vertical-align: text-top;
-//     }
-//
-//     .active {
-//       color: $secondary-color;
-//     }
-//   }
-// }

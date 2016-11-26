@@ -49,6 +49,6 @@
       <hr /> {{browse-institution model=model.institutions getResults=(route-action 'getResults')}}
     </div>
   </div>
-  {{search-list-results type='rasters' layers=rasters id='rasters'}}
-  {{search-list-results type='vectors' layers=vectors id='vectors'}}
+  {{search-list-results type='rasters' layers=rasters project=model.project id='rasters'}}
+  {{search-list-results type='vectors' layers=vectors project=model.project id='vectors'}}
 {{/ember-wormhole}}

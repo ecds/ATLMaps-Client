@@ -26,6 +26,7 @@ export default Route.extend({
         let project = '';
         if (params.project_id === 'explore') {
             project = this.store.createRecord('project', {
+                id: 'explore',
                 name: 'Explore',
                 published: false,
                 center_lat: 33.75440100,
@@ -155,7 +156,7 @@ export default Route.extend({
             // `layer` is an instance of `raster-layer`, when called from the `project.raster-layer`
             // route, `layer` is an instance of `raster-layer-project`. Maybe we can clean this up
             // when we move to jsonapi?
-            const layerModel = getWithDefault(layer, '_internalModel.modelName', '"raster_layer_id").get("_internalModel.modelName")');
+            const layerModel = getWithDefault(layer, '_internalModel.modelName', `'raster_layer_id').get('_internalModel.modelName')`);
             const layerObj = this.store.peekRecord(layerModel, layer.get('id'));
             const format = layerObj.get('data_format');
             const _this = this;
@@ -165,8 +166,7 @@ export default Route.extend({
                 let newLayer = '';
                 switch (format) {
                 case 'raster': {
-                    const position = project.get('raster_layer_project_ids').get('length') + 11;
-
+                    const position = project.get('raster_layer_project_ids.length') + 11;
                     newLayer = this.store.createRecord(`${format}-layer-project`, {
                         project_id: project.id,
                         raster_layer_id: layerObj,
@@ -191,7 +191,6 @@ export default Route.extend({
                         break;
                     }
                     }
-
                     newLayer = this.store.createRecord('vector-layer-project', {
                         project_id: project.id,
                         vector_layer_id: layerObj,
@@ -227,7 +226,7 @@ export default Route.extend({
                     });
                 }
 
-                // REMOVE LAYER
+            // REMOVE LAYER
             } else {
                 // TODO This shouldn't call destroyRecord, it should call dealte and then
                 // save if user is authenticated.
@@ -240,34 +239,20 @@ export default Route.extend({
                 // NOTE: This might be wrong. Was `attrs['project_id'] =`
                 attrs.project_id = project.id;
                 // Get the join between layer and project
+                // Remove the object from the map/DOM
+                this.get('mapObject.projectLayers')[layer.get('slug')].remove();
+                // Delete the record from the project
                 this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {
-                    // Remove the object from the DOM
-                    project.get(`${format}_layer_project_ids`).removeObject(layerToRemove);
-                    // Delete the record from the project
                     layerToRemove.deleteRecord();//.then(function() {
                         // Set active to false
                         layer.set('active_in_project', false);
-                        // TODO figure out how to give feedback on these shared actions
-                        // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                        // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers')
-                        //     .set('editSuccess', false);
-                        //     // Remove the layer from the map
-
-                        _this.get('mapObject.projectLayers')[layer.get('slug')].remove();
-                        if (_this.get('session.isAuthenticated')) {
+                        // TODO give feedback
+                        if (_this.get('session.isAuthenticated') && project.id != 'explore') {
                             layerToRemove.save();
                         }
-                        // Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
-                        //     Ember.$(this).remove();
-                        // });
-                        // }, 3000);
+                        // TODO Give feedback
                     //}, function() {
-                        // TODO figure out how to give feedback on these shared actions
-                        // _this.controllerFor('project/browse-layers').set('editFail', true);
-                        // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers').set('editFail', false);
-                        // }, 3000);
+                        // TODO give feedback
                     // });
                 });
             }
