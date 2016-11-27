@@ -19,5 +19,10 @@ export default Layer.extend({
     opacity: attr('number', {
         defaultValue: 10
     }),
-    tagem: attr('boolean')
+    tagem: attr('boolean'),
+
+    // These are attributes that are presisted on the through
+    // table. Adding to layer model on load until we actually
+    // fix this.
+    position: attr('number')
 });
