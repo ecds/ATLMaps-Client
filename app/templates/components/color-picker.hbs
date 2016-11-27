@@ -3,7 +3,6 @@
 </div>
 <div>
     {{#each colors as |color index|}}
-        {{log layer}}
         <div style= {{bgcolor color.hex}} class="col-xs-2 color" onmouseenter= {{action "previewColor" color layer index}} onclick= {{route-action "setColor" layer}}></div>
     {{/each}}
 </div>

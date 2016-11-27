@@ -1,0 +1,16 @@
+@import 'variables';
+
+footer {
+  &.page-footer {
+    margin-top: 0;
+  }
+}
+
+.footer-logo {
+  height: 75px;
+}
+
+.partner-logo {
+  height: 8.3em;
+  padding: .8em;
+}

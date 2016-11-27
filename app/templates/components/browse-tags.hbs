@@ -1,46 +1,30 @@
-<div>
-    <h2>Tags:</h2>
-    <div class="row">
-        <ul class="list-unstyled categories col-md-12">
-            {{#each model as |category|}}
-            <li class="category">
-                <a {{action 'showTagGroup' category}}>
-                    <span><i class="material-icons {{unless category.checked "hidden"}}">done</i></span>
-                    {{category.name}}
-                </a>
-                {{#liquid-if category.clicked class="category"}}
-                <ul class="list-unstyled tag-group pull-left {{unless category.clicked 'hidden'}}" id="{{category.slug}}">
-                    <li class="checkbox">
-                            <label>
-                                <input type="checkbox" class="tags" checked="{{if category.allChecked false}}" onchange={{action "checkAllTagsInCategory" category}} />
-                                <span class="check"></span>
-                                Select All
-                            </label>
-                    </li>
-                    {{#if category.sortedTags}}
-                    {{#each category.sortedTags as |tag|}}
-                    <li class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                class="tags {{category.slug}}"
-                                id="{{tag.name}}"
-                                name="{{tag.name}}"
-                                category="{{category.slug}}"
-                                checked="{{if tag.checked false}}"
-                                onchange={{action "checkSingleTag" tag}}
-                            />
-                            <span class="check"></span>
-                            {{tag.name}}
-                        </label>
-                    </li>
-                    {{/each}}
-                    {{else}}
-                        <li>Loading...</li>
-                    {{/if}}
-                </ul>
-                {{/liquid-if}}
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-</div>
+<h5>Tags</h5>
+<ul class="collapsible" data-collapsible="accordion">
+  {{#each model as |category|}}
+  <li>
+    <div class="collapsible-header"><i class="material-icons">{{if category.checked 'check_box' 'indeterminate_check_box'}}</i>{{category.name}}</div>
+    <div class="collapsible-body">
+      <ul>
+        <li>
+        <a {{action 'checkAllTagsInCategory' category}} class='checkbox-link'>
+          <i class="material-icons {{if category.allChecked 'active'}}">
+            {{if category.allChecked 'check_box' 'check_box_outline_blank'}}
+          </i>
+          Select All
+        </a>
+      </li>
+    {{#each category.sortedTags as |tag|}}
+    <li class='tags'>
+      <a {{action 'checkSingleTag' tag category}} class='checkbox-link'>
+        <i class="material-icons {{if tag.checked 'active'}}">
+          {{if tag.checked 'check_box' 'check_box_outline_blank'}}
+        </i>
+        {{tag.name}}
+      </a>
+    </li>
+    {{/each}}
+  </ul>
+  </div>
+  </li>
+  {{/each}}
+</ul>

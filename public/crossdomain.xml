@@ -5,6 +5,7 @@
 
   <!-- Most restrictive policy: -->
   <site-control permitted-cross-domain-policies="none"/>
+  <!-- <allow-access-from domain="geospatial.library.emory.edu" /> -->
 
   <!-- Least restrictive policy: -->
   <!--

@@ -22,9 +22,11 @@ export default Model.extend({
         defaultValue: false
     }),
     // Non-API attribute to show if the tags in the category have been checked.
-    allChecked: attr('boolean', {
-        defaultValue: false
-    }),
+    // allChecked: attr('boolean', {
+    //     defaultValue: false
+    // }),
+    // TODO This doesn't get re-computed when a single tag is checked.
+    allChecked: computed.equal('tag_ids.length', 'tagsChecked.length'),
 
     // Add that little checkmark next to a category that that has a checked tag
     // because everyone wanted it.

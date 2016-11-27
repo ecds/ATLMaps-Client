@@ -1,4 +1,10 @@
-@import 'variables';
+.tagem {
+  background-color: color('grey', 'lighten-4');
+
+  input {
+    // opacity: 0;
+  }
+}
 
 .draggable-item {
   display: inline-flex;
@@ -26,12 +32,12 @@
   }
 
   .label {
-    background-color: material-color(md_blue, 600);
+    background-color: $primary-color;
     display: inherit;
     font-weight: normal;
 
     &.tagged {
-      background-color: material-color(md_deeporangealt, 400);
+      background-color: $secondary-color;
       opacity: .5;
     }
   }
@@ -50,7 +56,7 @@
 
     i {
       border-radius: 50%;
-      color: material-color(md_deeporangealt, 400);
+      color: $secondary-color;
       font-size: 2em;
       margin-top: .25em;
     }
@@ -73,7 +79,7 @@
 
   i {
     &.user {
-      color: material-color(md_blue, 300);
+      color: $primary-color-light;
       font-size: 3em;
       vertical-align: text-top;
     }
@@ -83,7 +89,7 @@
   .btn-warning {
     // font-size: 1.25em;
     // width: 100%;
-    color: material-color(md_grey, 100) !important;
+    color: color('grey', 'base') !important;
   }
 }
 
@@ -93,9 +99,9 @@
   border-bottom: solid 1px material-color(md_grey, 300);
   border-bottom-left-radius: 1em;
   border-bottom-right-radius: 1em;
-  border-left: solid 1px material-color(md_grey, 300);
-  border-right: solid 1px material-color(md_grey, 300);
-  box-shadow: 0 1em 1.25em -1em material-color(md_grey, 600);
+  border-left: solid 1px color('grey', 'base');
+  border-right: solid 1px color('grey', 'base');
+  box-shadow: 0 1em 1.25em -1em color('grey', 'darken-4');
   display: block;
   margin: .37em 12.5%;
   max-height: 0;
@@ -153,10 +159,10 @@
 
 .draggable-dropzone {
   .next-sm {
-    background-color: material-color(md_deeporangealt, 400);
+    background-color: $primary-color;
     border-radius: 50%;
     bottom: 2em;
-    box-shadow: 0 1px 1.5px 0 $fab-shadow1, 0 1px 1px 0 $fab-shadow2;
+    // box-shadow: 0 1px 1.5px 0 $fab-shadow1, 0 1px 1px 0 $fab-shadow2;
     cursor: pointer;
     font-size: 24px;
     height: 56px;
@@ -169,11 +175,11 @@
     z-index: 999;
 
     &:hover {
-      background-color: material-color(md_deeporangealt, 700);
+      background-color: $secondary-color;
     }
 
     i {
-      color: material-color(md_grey, 200);
+      color: color('grey', 'lighten-2');
       font-size: 2em;
       vertical-align: text-top;
     }

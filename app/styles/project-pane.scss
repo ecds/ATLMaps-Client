@@ -1,132 +1,317 @@
-@import 'layer-citation';
-
 .project-pane {
+  // box-shadow: $shadow;
   left: 5em;
-  padding: .5em;
-  pointer-events: auto; // Allow the pane to respond to click.
-  position: fixed; // This is preventing the scroll and/or causing the problems.
-  top: 5.65em;
-  width: calc(33% - 2em);
-
-  h3 {
-    margin: .25em 0;
-  }
-}
-
-.project-route {
-  background-color: $white;
-  border-left: 1px solid $border;
-  border-right: 1px solid $border;
-  box-shadow: -3px 0 10px 0 $shadow;
-
-  .route-content {
-    max-height: 95vh;
-    overflow: scroll;
-    padding: 1em;
-  }
-
-  // layer controls in edit view
-  .panel-footer {
-    // margin-bottom: 1px;
-    margin: 0;
-    pointer-events: all;
-  }
-
-}
-
-.layer-heading {
-  padding: 0 1em;
-  pointer-events: all;
-
-  table {
-    width: 100%;
-
-    td {
-      padding: 0 .5em;
-    }
-  }
-
-  a {
-    cursor: pointer;
-  }
-}
-
-// article {
-//   color: material-color(md_grey, 800);
-//   padding: 2em;
-// }
-
-.layer-article {
-  padding: 0;
-}
-
-ul {
-  li {
-    // border-width: 1px;
-    // border-style: solid;
-    // border-color: lightgrey;
-    // border-radius: 0.25em;
-    // margin-bottom: 0.5em;
-  }
-
-  // li.vector-layer {
-  //   padding-left: .5em;
-  // }
-
-  .layer-article {
-    padding: 1em;
-  }
-}
-
-// Raster Panel Stuff
-.raster-list {
-  .panel {
-    // padding: .25em 1em;
-  }
-
-  .panel-body {
-    padding: 0 .75em;
-  }
+  pointer-events: none;
+  position: absolute;
+  top: 3em;
+  transition: width $rabbit linear, top $turtle linear;
+  width: 34vw;
+  z-index: 999;
 
   .row {
-    padding: 0 1em;
+    margin-bottom: 0;
   }
 
-  .panel-footer {
-    padding: .5em 1em;
+  hr {
+    border: 0;
+    border-bottom: 1px solid $faded-white;
+    border-top: 1px solid $faded-black;
+    height: 0;
   }
+}
 
-  .reorder {
-    padding: .25em 0 0;
+// The following is the scrolling of the pane was inspired by this
+// https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
+
+// Flexbox gives us the flexiness we need.
+// The top just stays put as there is no scrolling
+// on the body due to the page never exceeding viewport height
+.pane-title,
+.vector-detail-title,
+.intro-modal-header {
+  align-items: center;
+  background-color: color('blue-grey', 'lighten-5');
+  display: flex;
+  font-weight: 900;
+  height: auto;
+  opacity: 1;
+  pointer-events: all;
+  position: relative;
+  transition: opacity $rabbit linear;
+  width: 100%;
+  z-index: 10;
+
+  // h3 {
+  //   font-size: 1.5em;
+  // }
+}
+
+.pane-title {
+  padding: .5rem 2rem;
+
+  .col {
+    padding: 0;
   }
+}
 
-  ul {
-    list-style: none;
-    margin-bottom: 17rem;
-    padding-left: 0;
+.close-button {
+  color: color('grey', 'base');
+  // margin-left: .75em;
+}
 
-    li {
-      border-color: none;
-      border-radius: 0;
-      border-style: none;
-      border-width: 0;
-      margin-bottom: 0;
-      width: 100%;
+.switch {
+  &.list {
+    margin-right: 0;
+  }
+}
+
+// This is our main wrapping element, it's made 100vh high to
+// ensure it is always the correct size and then moved into place
+// and padded with negative margin and padding
+.pane-container,
+.vector-detail-container {
+  // backface-visibility: hidden;
+  display: flex;
+  max-height: 100vh;
+  opacity: 1;
+  overflow: hidden;
+  pointer-events: all;
+  // position: relative;
+  transition: max-height $rabbit, opacity $rabbit;
+  width: 100%;
+  will-change: overflow;
+
+  @media only screen and (min-width: 993px) {
+    .container {
+      width: 85%;
     }
   }
 }
 
-.handle {
-  cursor: grab;
-  font-size: 1.75em;
-  margin-right: 10px;
-  transform: rotate(90deg);
+// All the scrollable sections should overflow and be whatever
+// height they need to be. As they are flex-items (due to being
+// inside a flex container) they could be made to stretch full height
+// at all times if needed.
+
+//WebKit inertia scrolling is being added here for any present/future devices
+//that are able to make use of it.
+.pane-content {
+  flex: 1;
+  height: auto;
+  overflow: auto;
+  overflow-style: none;
+  padding-bottom: 1em;
+
+  .card {
+    margin-top: 0;
+  }
+
+  .col {
+    padding: 0;
+    // padding-left: 1em;
+  }
 }
 
-.opacity-slider {
-  padding-left: 5px;
+.scrollable-list {
+  background-color: $white;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 6em;
 
-  input {
-    display: none;
+  &.collapsible {
+    box-shadow: none;
+    margin-top: 0;
+  }
+
+  .scrollable-item {
+    overflow: hidden;
+  }
+}
+
+.collapsible {
+
+  .collapsible-header {
+    border-bottom: 0;
+    border-radius: .5em;
+    color: $primary-color-light;
+    font-size: 1.35em;
+    font-weight: bolder;
+    line-height: initial;
+    padding: 1rem;
+
+    .data-title {
+      padding-left: .5em;
+    }
+
+    i {
+      font-size: 1.5em;
+    }
+
+    .remove-layer {
+      cursor: pointer;
+      opacity: .7;
+      transform: none;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .vector-icon {
+      font-size: 1.8em;
+      padding: 0;
+    }
+  }
+
+  &:first-child {
+    padding-top: 1em;;
+  }
+
+  .collapsible-body {
+    background: $white;
+    border-bottom: 0;
+    border-radius: .5em;
+    overflow: hidden;
+    padding: 0;
+    transition: background 5ms;
+
+    &.bye {
+      background: color('red', 'base');
+    }
+  }
+
+  li {
+    border: 1px solid color('grey', lighten-1);
+    border-radius: .5em;
+    margin: 1em;
+  }
+}
+
+.slider-container {
+  background: $white;
+  // border-bottom: 1px solid color('grey', 'lighten-2');
+  border-radius: .5em;
+  height: 2rem;
+  margin-bottom: 1em;
+}
+
+.active + .slider-container {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.hide-nav + .project-pane {
+  width: 0;
+
+  .pane-title,
+  .pane-container {
+    opacity: 0;
+  }
+
+  .pane-container {
+    max-height: 0;
+  }
+}
+
+// Search Pane
+.search-bounds {
+  a {
+    // cursor: pointer;
+    font-size: 1.25em;
+    vertical-align: middle;
+
+    &.has-bounds {
+      color: $secondary-color;
+    }
+  }
+
+  i {
+    vertical-align: sub;
+  }
+}
+
+.input-field {
+  label {
+    color: $primary-color-light;
+    font-size: 1.25em;
+    font-weight: normal;
+  }
+}
+
+.browse-by-tags {
+  .collapsible-header {
+    border-radius: 0;
+    color: color('grey', 'darken-1');
+    font-size: 1.1em;
+    font-weight: normal;
+    line-height: normal;
+    min-height: inherit;
+    padding: 0;
+
+    &.active {
+      font-weight: 700;
+
+      i {
+        color: color('deep-orange', 'lighten-1');
+        opacity: 1;
+      }
+    }
+
+    i {
+      color: color('grey', 'base');
+      font-size: 1.1em;
+      line-height: normal;
+      margin-right: .2em;
+      vertical-align: middle;
+    }
+
+  }
+
+  .collapsible {
+    border: 0;
+    box-shadow: none;
+
+    li {
+      border: 0;
+      border-radius: 0;
+      margin: 0;
+      padding-left: .5em;
+      padding-top: .25em;
+    }
+  }
+
+  .collapsible-body {
+    border-radius: 0;
+    padding-left: 1.5em;
+    padding-top: .5em;
+
+    p {
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+// checkbox
+a {
+  color: $primary-color-dark;
+  font-size: 1em;
+
+  i {
+    vertical-align: text-top;
+
+    &.active {
+      color: $secondary-color;
+    }
+  }
+
+  &.checkbox-link {
+    font-size: 1.25em;
+  }
+}
+
+.checkbox {
+  &.institution {
+    margin-left: 1em;
   }
 }

@@ -1,14 +1,25 @@
+/*jshint node:true*/
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var nodeSass = require('node-sass'); // loads the version in your package.json
 
 module.exports = function() {
     var env = EmberApp.env();
-    var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+    var isProductionLikeBuild = ['production'].indexOf(env) > -1;
 
     var app = new EmberApp({
-        'ember-power-select': {
-            theme: 'bootstrap'
+        // 'ember-power-select': {
+        //     theme: 'bootstrap'
+        // },
+        materializeDefaults: {
+            modalIsFooterFixed:  false,
+            buttonIconPosition:  'left',
+            loaderSize:          'big',
+            loaderMode:          'indeterminate',
+            modalContainerId:    'materialize-modal-root-element',
+            dropdownInDuration:  300,
+            dropdownOutDuration: 300
         },
         fingerprint: {
             enabled: isProductionLikeBuild,
@@ -16,8 +27,10 @@ module.exports = function() {
         },
         sassOptions: {
             includePaths: [
-                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
-            ]
+                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog',
+                'bower_components/materialize/sass'
+            ],
+            nodeSass: nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
         },
         sourcemaps: {
             enabled: !isProductionLikeBuild
@@ -27,7 +40,7 @@ module.exports = function() {
     });
 
     var funnel = require('broccoli-funnel');
-    var mergeTrees = require('broccoli-merge-trees');
+    // var mergeTrees = require('broccoli-merge-trees');
 
     var leafletImages = funnel('bower_components/leaflet/dist/images', {
         destDir: 'assets/images'
@@ -39,12 +52,11 @@ module.exports = function() {
 
     app.import('bower_components/leaflet/dist/leaflet.js');
     app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
-    // app.import('bower_components/jquery.easing/js/jquery.easing.min.js');
+    app.import('bower_components/materialize/dist/js/materialize.min.js');
     app.import('bower_components/nouislider/distribute/nouislider.min.js');
     // app.import('bower_components/list.js/dist/list.min.js');
     app.import('bower_components/js-cookie/src/js.cookie.js');
     app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
-    app.import('bower_components/Swiper/dist/js/swiper.min.js');
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
     app.import('bower_components/interact/dist/interact.min.js');
@@ -53,13 +65,14 @@ module.exports = function() {
 
     app.import('bower_components/leaflet/dist/leaflet.css');
     app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
-    app.import('bower_components/Swiper/dist/css/swiper.min.css');
+    app.import('bower_components/nouislider/distribute/nouislider.min.css');
 
-    return mergeTrees([
-        app.toTree(),
-        leafletImages,
-        trumbowygImages
-    ], {
-        overwrite: true
-    });
+    // return mergeTrees([
+    //     app.toTree(),
+    //     leafletImages,
+    //     trumbowygImages
+    // ], {
+    //     overwrite: true
+    // });
+    return app.toTree([leafletImages, trumbowygImages]);
 };

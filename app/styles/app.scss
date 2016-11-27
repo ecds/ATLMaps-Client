@@ -1,130 +1,203 @@
-@import 'ember-power-select/themes/bootstrap';
-@import 'ember-power-select';
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
-
 // TODO: There is a better way to do this right?
+$roboto-font-path: '../assets/';
+
+@import 'components/color';
+@import 'variables';
+
+// Custom color settings go here
+$primary-color: color('blue-grey', 'darken-1');
+$primary-color-dark: color('blue-grey', 'darken-4');
+$primary-color-light: color('blue-grey', 'base');
+$primary-color-trans: rgba(3, 169, 244, 1);
+$secondary-color: #e24b31;
+$secondary-color-light: color('deep-orange', 'accent-1');
+$nav-button: color('grey', 'darken-4');
+
+$col1: 5em;
+
+@import 'components/variables';
+@import 'materialize';
+// @import 'ember-cli-materialize';
+
+
+// nav {
+//
+//   li {
+//
+//     &.active {
+//       background-color: $secondary-color;
+//     }
+//   }
+// }
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+.card {
+  .card-title {
+    font-size: 1.5em;
+  }
+
+}
+
+.project-top-nav {
+  box-shadow: none;
+  height: 2em;
+}
+
+.project-title {
+  background-color: $primary-color-dark;
+  color: $white;
+  height: 3em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+
+  h2 {
+    font-size: 2em;
+    line-height: 0;
+  }
+
+  .btn {
+    height: 3em;
+    transition: width $rabbit linear $rabbit;
+    width: 50%;
+  }
+
+  .collapse {
+    width: 0;
+  }
+
+  .reveal-btn {
+    padding-right: 0;
+  }
+
+  .col {
+    a {
+      color: color('grey', 'lighten-4');
+    }
+
+    &.s1 {
+      cursor: pointer;
+      padding: .5em .75em;
+      text-align: center;
+      width: $col1;
+    }
+  }
+
+}
+
 @import 'banner',
 'ember-modal-structure',
 'ember-modal-appearance',
-'footer',
-'variables',
+'main-footer',
+// 'variables',
 'marker',
-'toggle_button',
-'main-navbar',
-'back-to-project-button',
-'list-projects',
-'project-nav-bar',
+// 'toggle_button',
+// 'main-navbar',
+// 'back-to-project-button',
+// 'list-projects',
+'project-nav',
 'project-intro',
-'loading',
+// 'loading',
 'extra-icons',
-'login-form',
-'tag-list',
-'alert',
-'slider',
-'vector-info',
-'project-pane',
-'project-vector-list',
-'responsive',
-'gallery',
-'close-button',
-'color-picker',
-'vector-layer-option-panel',
-'material-tabs',
-'browse-pane',
-'browse-results',
-'browse-toolbar',
-'atl-checkbox',
-'base-picker',
-'zoom-buttons',
-'tagem';
+'login-form';
+// @import 'browse-tags';
+// 'alert',
+@import 'slider';
+@import 'layer-citation';
+@import 'vector-info';
+// 'project-vector-list',
+// 'responsive',
+// 'gallery',
+// 'close-button',
+// 'color-picker',
+// 'vector-layer-option-panel',
+// @import 'material-tabs';
+// 'browse-pane',
+@import 'browse-results';
+// @import 'browse-toolbar';
+// 'atl-checkbox',
+@import 'base-picker';
+@import 'project-pane';
+// 'zoom-buttons',
+// @import 'tagem';
 
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Roboto', 'Material Icons' sans-serif;
-  font-weight: 300;
-}
 
 body {
-  background-color: material-color(md_grey, 200);
+  background-color: color('grey', 'darken-4');
   color: material-color(md_grey, 600);
-  font-size: 18px;
-  height: 100%;
+  font-family: 'Roboto', 'Material Icons' sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  height: 100vh;
+
+  &.loading {
+    background: $primary-color;
+
+    .preloader-wrapper {
+      height: 10em;
+      margin: 25% 50%;
+      width: 10em;
+    }
+
+    .circle {
+      border-width: 2em;
+    }
+
+    .spinner-layer {
+      border-color: $secondary-color;
+    }
+
+    .navbar-fixed {
+      display: none;
+    }
+
+    footer {
+      display: none;
+    }
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+.content {
+  height: 100vh;
+}
+
+.ember-burger-menu,
+.bm-outlet,
+.bm-content {
+  overflow: hidden !important;
 }
 
 .project {
   overflow: hidden;
 }
 
+.secondary-conent {
+  i {
+    color: color('grey', 'base');
+  }
+}
+
 .fullscreen-map {
   display: block;
-  height: 100%;
+  height: 100vh;
   left: 0;
-  margin: $zero;
+  margin: 0;
   overflow: hidden;
-  position: fixed;
+  position: initial;
   top: 0;
-  width: 100%;
-}
-
-.h1,
-.h2,
-.h3,
-h1,
-h2,
-h3 {
-  font-weight: 100;
-}
-
-.h1,
-h1 {
-  font-size: 36px;
-  line-height: 40px;
-}
-
-.h2,
-h2 {
-  font-size: 30px;
-  line-height: 40px;
-}
-
-.h3,
-h3 {
-  font-size: 24px;
-  line-height: 40px;
-}
-
-.h4,
-h4 {
-  font-size: 18px;
-  line-height: 20px;
-}
-
-.h5,
-h5 {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.h6,
-h6 {
-  font-size: 12px;
-  line-height: 20px;
-}
-
-a {
-  color: $blue;
-  cursor: pointer;
+  width: 100vw;
 }
 
 .atlmap {
@@ -132,16 +205,142 @@ a {
   width: 100%;
 }
 
-.row-eq-height {
-  display: flex;
+// .row-eq-height {
+//   display: flex;
+//
+//   div {
+//     .checkbox {
+//       margin-top: -10px;
+//     }
+//   }
+// }
 
-  div {
-    .checkbox {
-      margin-top: -10px;
+.material-icons {
+  font-size: 1.5em;
+}
+
+.exit {
+  padding-bottom: .25em;
+  transform: rotate(180deg);
+}
+
+// TODO need a raster list scss?
+// TODO is there not an icon for this? I'm watching the world series and don't
+// have time to look like right now.
+.collapsible-header {
+  &.raster-list-header {
+    padding-right: 0;
+  }
+}
+
+.reorder-handle {
+  height: 2em;
+
+  i {
+    margin-left: -.1em;
+    transform: rotate(-90deg);
+
+    &:hover {
+      color: $secondary-color;
+      cursor: ns-resize;
+    }
+
+    // &.remove-layer {
+    //   transform: none;
+    // }
+  }
+}
+
+.navbar-fixed {
+  nav {
+    background-color: $primary-color-dark;
+  }
+
+  .active {
+    background-color: color('grey', 'darken-4');
+  }
+}
+
+.project-nav {
+  .active {
+    background-color: $secondary-color;
+  }
+}
+
+// Leaflet Controls
+.leaflet-top {
+  &.leaflet-right {
+    top: 5em;
+  }
+}
+
+.close-button {
+  cursor: pointer;
+  padding-top: .5em;
+}
+
+.carousel {
+  &.carousel-slider {
+    height: 200px;
+  }
+}
+
+.bm-menu {
+  background-color: $white;
+  box-shadow: $shadow5;
+}
+
+// Search Tabs
+.search-head {
+  background-color: color('blue-grey', 'darken-1');
+  color: color('grey', 'lighten-5');
+  font-size: 1.5em;
+  height: 2em;
+  padding-top: .25em;
+
+  &.row {
+    margin-bottom: 0;
+  }
+}
+
+.tabs {
+  background-color: color('blue-grey', 'lighten-1');
+  height: 5.2em;
+  // padding-top: .5em;
+
+  .indicator {
+    background-color: $secondary-color;
+    height: .25em;
+  }
+
+  .tab {
+    height: auto;
+    line-height: 1.75em;
+
+    a {
+      color: color('grey', 'lighten-4');
+
+      &:hover {
+        color: color('blue-grey', 'lighten-4');
+      }
+    }
+
+    i {
+      font-size: 2em;
+      vertical-align: middle;
+    }
+
+    .result-count {
+      background: $secondary-color;
+      border-radius: 36%;
+      color: color('grey', 'lighten-4');
+      font-size: .9em;
+      font-weight: 400;
+      padding: .2em .3em;
     }
   }
 }
 
-.btn {
-  color: $white;
+.ember-burger-menu {
+  position: absolute;
 }

@@ -1,73 +1,43 @@
-<div class="row layer-heading">
-    <table class="table">
-        <tr>
-            <td>
-                <h2>Historical Maps</h2>
-            </td>
-            <table>
-                <tr>
-                    <td class="pull-right">{{partial 'close-button'}}</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td class="togglebutton opacity toggle-all pull-right">
-                        <label>
-                            <input id="toggle-layer-opacity" type="checkbox" checked={{model.visiable_raster}} />
-                            <span class="toggle"></span>
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </tr>
-    </table>
-</div>
+{{#project-pane title='Maps' model=model.project raster=true}}
 
-<div class="route-content raster-list" id="layer_sort">
-    {{#sortable-group tagName="ul" model=model onChange="reorderItems" as |group|}}
-        {{#each model.sortedRasterLayers as |layer|}}
-            {{#sortable-item tagName="li" model=layer group=group handle=".handle" }}
-                <div class="{{layer.raster_layer_id.slug}} raster-layer panel panel-default" id="{{layer.raster_layer_id.slug}}" data-id="{{layer.id}}">
-                    <!-- <div class="panel panel-default"> -->
-                        <div class="row layer-heading">
-                            <div class="col-md-10">
-                                <h3>
-                                        <a {{action 'showLayerInfoDetals' layer}}>
-                                            {{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}
-                                        </a>
-                                    </h3>
-                            </div>
-                            <div class="col-md-2 reorder">
-                                <i class="material-icons handle pull-right">code</i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {{#if layer.raster_layer_id.slider_id}}
-                                {{opacity-slider projLayer=layer layer=layer.raster_layer_id}}
-                            {{/if}}
-                        </div>
-                        {{#liquid-if layer.clicked}}
-                            <div class="panel-body">
-                              <article class="layer-article">{{layer.raster_layer_id.description}}</article>
-                            </div>
+  <div class='card'>
+  {{#sortable-group tagName="ul" class='scrollable-list collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
+    {{#each model.project.sortedRasterLayers as |raster|}}
 
-                            <div class="panel-footer row">
-                            {{layer-citation layer = layer.raster_layer_id}}
-                            {{#if model.editing}}
-                                <!-- <div class="row"> -->
-                                    <div class="col-md-8">{{layer.raster_layer_id}}</div>
-                                    <div class="col-md-4">
-                                        <a class="btn btn-raised btn-danger pull-right" {{action "removeLayer" layer.raster_layer_id 'raster' }}><i class="material-icons">close</i></a>
-                                    </div>
-                                <!-- </div> -->
-                            {{/if}}
-                          </div>
-                        {{/liquid-if}}
-                    <!-- </div> -->
-                </div>
-                {{else}}
-                    No data layers have been added.
-            {{/sortable-item}}
-        {{/each}}
-    {{/sortable-group}}
+
+      {{#sortable-item tagName="li" class='sortable-item' id=raster.raster_layer_id.name model=raster group=group handle=".reorder-handle" }}
+        <div class='collapsible-header raster-list-header'>
+          <div class='row'>
+            <div class='title col s10'>
+              {{if raster.raster_layer_id.name raster.raster_layer_id.title 'Loading...'}}
+            </div>
+            <div class='secondary-conent reorder-handle col s2'>
+              <i class='material-icons right'>code</i>
+              {{#if model.project.may_edit}}
+                <a class='remove-layer secondary-conent' onclick={{action (route-action 'addRemoveLayer' raster.raster_layer_id) preventDefault=true}}>
+                  <i class='remove-layer right material-icons'>delete</i>
+                </a>
+            {{/if}}
+            </div>
+          </div>
+        </div>
+
+        <div class='slider-container'>
+          {{#if raster.raster_layer_id.slider_id}}
+            {{opacity-slider projLayer=raster layer=raster.raster_layer_id}}
+          {{/if}}
+        </div>
+
+        <div class='collapsible-body card-content'>
+          <p class='black-text'>
+            {{if raster.raster_layer_id.description raster.raster_layer_id.description 'No description :('}}
+          </p>
+          {{layer-citation layer=raster.raster_layer_id}}
+        </div>
+      {{/sortable-item}}
+    {{else}}
+      <h4 class='row'>No maps have been added</h4>
+    {{/each}}
+  {{/sortable-group}}
 </div>
+{{/project-pane}}

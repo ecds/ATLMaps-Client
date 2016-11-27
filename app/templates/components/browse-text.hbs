@@ -1,6 +1,4 @@
-<div class="row">
-    <form class='col-md-12'>
-        {{input type='text' value=searchTerms class='form-control pull-left' placeholder='Search' submit="textSearch"}}
-        <button {{action "textSearch"}} type="submit" style="opacity:0"><i class="material-icons">search</i></button>
-    </form>
+<div class='input-field inline'>
+  {{input id='search-text' type='text' enter='textSearch' value=searchTerms class='search-text-input'}}
+  <label for='serarch-text'>Text Search</label>
 </div>

@@ -21,7 +21,6 @@ export default Component.extend({
         let _this = this;
         let projLayer = get(this, 'projLayer') || false;
         let layer = get(this, 'layer');
-        // console.log('projLayer', projLayer);
 
         let startOpacity = 10;
         if (projLayer) {
@@ -34,7 +33,6 @@ export default Component.extend({
                 'min': 0,
                 'max': 10
             }
-            // orientation: 'vertical'
         };
 
         let slider = document.getElementById(layer.get('slider_id'));
@@ -48,11 +46,14 @@ export default Component.extend({
             let opacity = values[handle] / 10;
             // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
             get(_this, 'mapObject.projectLayers')[get(layer, 'slug')].setOpacity(opacity);
+            projLayer.setProperties({opacity: opacity});
             if (projLayer !== false) {
                 projLayer.setProperties({
                     opacity: values[handle]
                 });
                 if (opacity > 0) {
+                    // TODO This should happen by setting the `showing` attripute.
+                    $('#toggle-layer-opacity input').prop('checked', true)
                     projLayer.setProperties({
                         showing: true
                     });
@@ -74,8 +75,8 @@ export default Component.extend({
 
         // Watch the toggle check box to show/hide all raster layers.
         let showHideSwitch = document.getElementById('toggle-layer-opacity');
-        showHideSwitch.addEventListener('click', function() {
-            if ($('input#toggle-layer-opacity').prop('checked')) {
+        showHideSwitch.addEventListener('change', function() {
+            if ($('#toggle-layer-opacity').prop('checked')) {
                 slider.noUiSlider.set(10);
                 projLayer.setProperties({ showing: true });
             } else {
@@ -84,13 +85,13 @@ export default Component.extend({
             }
         });
 
-        set(this, 'toggle', showHideSwitch);
+        // set(this, 'toggle', showHideSwitch);
 
     },
 
-    update(slider) {
-        slider.noUiSlider.updateOptions({ orientation: 'vertical' });
-    },
+    // update(slider) {
+    //     slider.noUiSlider.updateOptions({ orientation: 'vertical' });
+    // },
 
     willDestroyElement() {
         get(this, 'slider').noUiSlider.destroy();

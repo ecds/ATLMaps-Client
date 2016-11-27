@@ -1,0 +1,28 @@
+<div class='scroll-content'>
+  {{#each layers as |layer|}}
+    <div class='row result-header'>
+      <div class='col s1'>
+        <a {{action (route-action 'addRemoveLayer' layer project)}}>
+          <i class="material-icons {{if layer.active_in_project 'active'}}">
+            {{if layer.active_in_project 'check_box' 'check_box_outline_blank'}}
+          </i>
+        </a>
+      </div>
+      <div class='col s11'>
+        <a {{action (route-action 'addRemoveLayer' layer)}}>
+          {{if layer.title layer.title "Loading..."}}
+        </a>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col s11 offset-s1 result-description'>
+        {{layer.description}}
+      </div >
+    </div>
+    <hr />
+  {{else}}
+    <h4>No layers found</h4>
+    <h5>Use the filters under the search tab to find layers.</h5>
+  {{/each}}
+</div>
+{{pagination-links meta=layers.content.meta}}

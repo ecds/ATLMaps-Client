@@ -1,93 +1,195 @@
-$side-padding: 1.25em;
+// Intro md-modal
+// TODO get these z-index shit under control
+.ember-modal-overlay {
+  z-index: 1001;
+}
+
 .project-intro {
-    height: 85%;
-    width: 75%;
-    padding: 4em;
-    overflow: hidden;
-    .intro-body {
-        height: 100%;
-        overflow: hidden;
-        header {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            // height: 10rem;
-            background-color: material-color(md_grey, 200);
-            padding-left: $side-padding;
-            padding-right: $side-padding;
-            h1 {
-                font-size: 1.75em;
-                line-height: 1em;
-                font-weight: 700;
-            }
-            h2 {
-                font-size: 1.25em;
-                line-height: 1em;
-            }
-            .close-button {
-                padding-top: 0.5em;
-                padding-left: 1.25em;
-                margin: 0;
-            }
-        }
-        article {
-            padding: 0;
-        }
-        div.player {
-            position: fixed;
-            right: 0;
-        }
-        .container-fluid {
-            position: absolute;
-            top: 12rem;
-            bottom: 6rem;
-            right: 0;
-            left: 0;
-            overflow: auto;
-            padding-left: $side-padding;
-            padding-right: $side-padding;
-        }
-        footer {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: material-color(md_grey, 300);
-            height: 6rem;
-            padding: 0;
-            .btn-info {
-                &:hover {
-                    opacity: 0.7;
-                }
-                a {
-                    color: material-color(md_grey, 50);
-                    text-decoration: none;
-                    &:hover {
-                        color: material-color(md_grey, 300);
-                    }
-                }
-            }
-            label {
-                padding: 1em 3em 1em 0;
-                color: material-color(md_grey, 500);
-            }
-        }
+  padding: 0 2em;
+}
+
+.modal {
+  background-color: transparent;
+  box-shadow: none;
+  display: initial;
+  margin-left: 20%;
+  min-height: 100vh;
+  overflow: hidden;
+  // We have to use important here because
+  // transform and top are set inline by the
+  // materlize modal component :(
+  transform: none !important;
+  top: 0 !important;
+  width: 64%;
+  z-index: 1005;
+
+  .modal-content {
+    background-color: $white;
+    height: 100vh;
+    padding: 0;
+
+    .video-container {
+      position: initial;
+      top: -.55em;
     }
-}
-.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    // overflow: hidden;
-    // max-width: 100%;
-}
-.embed-container embed,
-.embed-container iframe,
-.embed-container object {
+
+    .pane-content {
+      padding-bottom: 5em;
+    }
+
+  }
+
+  .close-button {
+    color: color('grey', 'darken-4');
+    font-size: 1.25em;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    top: .5em;
+  }
+
+  .with-media {
+    max-height: calc(100vh - 56.25%);
+  }
+
+  // Code for fixed header and footer from
+  // http://codepen.io/stuntbox/pen/lEdpq
+  article {
+    // background-color: $white;
+    // bottom: 0;
+    // overflow: hidden;
+    // position: absolute;
+    // top: 0;
+    // width: 96%;
+
+    // & header {
+    //   // background-color: color('grey', 'lighten-1');
+    //   // display: none;
+    //   height: 52%;
+    //   width: 100%;
+    // }
+    padding: 2em;
+
+    // & .content {
+    //   bottom: 3em;
+    //   margin: 0 2em;
+    //   overflow: auto;
+    //   padding-bottom: 5em;
+    //   position: absolute;
+    //   top: 60%;
+    //   width: 92%;
+    // }
+    //
+    // & footer {
+    //   background: color('grey', 'lighten-2');
+    //   bottom: 0;
+    //   height: 3em;
+    //   padding-top: .5em;
+    //   position: absolute;
+    //   width: 100%;
+    // }
+  }
 }
+
+.intro-modal-footer {
+  background: color('grey', 'lighten-2');
+  height: 3em;
+  left: 2em;
+  max-width: 100%;
+  padding-top: .5em;
+  position: absolute;
+  right: 2em;
+  top: calc(100vh - 3em);
+}
+// $side-padding: 1.25em;
+// .project-intro {
+//     height: 85%;
+//     width: 75%;
+//     padding: 4em;
+//     overflow: hidden;
+//     .intro-body {
+//         height: 100%;
+//         overflow: hidden;
+//         header {
+//             position: absolute;
+//             left: 0;
+//             right: 0;
+//             top: 0;
+//             // height: 10rem;
+//             background-color: material-color(md_grey, 200);
+//             padding-left: $side-padding;
+//             padding-right: $side-padding;
+//             h1 {
+//                 font-size: 1.75em;
+//                 line-height: 1em;
+//                 font-weight: 700;
+//             }
+//             h2 {
+//                 font-size: 1.25em;
+//                 line-height: 1em;
+//             }
+//             .close-button {
+//                 padding-top: 0.5em;
+//                 padding-left: 1.25em;
+//                 margin: 0;
+//             }
+//         }
+//         article {
+//             padding: 0;
+//         }
+//         div.player {
+//             position: fixed;
+//             right: 0;
+//         }
+//         .container {
+//             position: absolute;
+//             top: 12rem;
+//             bottom: 6rem;
+//             right: 0;
+//             left: 0;
+//             overflow: auto;
+//             padding-left: $side-padding;
+//             padding-right: $side-padding;
+//         }
+//         footer {
+//             position: absolute;
+//             left: 0;
+//             right: 0;
+//             bottom: 0;
+//             background-color: material-color(md_grey, 300);
+//             height: 6rem;
+//             padding: 0;
+//             .btn-info {
+//                 &:hover {
+//                     opacity: 0.7;
+//                 }
+//                 a {
+//                     color: material-color(md_grey, 50);
+//                     text-decoration: none;
+//                     &:hover {
+//                         color: material-color(md_grey, 300);
+//                     }
+//                 }
+//             }
+//             label {
+//                 padding: 1em 3em 1em 0;
+//                 color: material-color(md_grey, 500);
+//             }
+//         }
+//     }
+// }
+// .embed-container {
+//     position: relative;
+//     padding-bottom: 56.25%;
+//     height: 0;
+//     // overflow: hidden;
+//     // max-width: 100%;
+// }
+// .embed-container embed,
+// .embed-container iframe,
+// .embed-container object {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+// }

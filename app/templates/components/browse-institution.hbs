@@ -1,16 +1,16 @@
-<h2>Institutions:</h2>
+<h5>Institutions:</h5>
 {{#each model as |institution|}}
-    <div class="checkbox institution">
-        <label>
-            <input type="checkbox"
-                class='inst-check'
-                id="{{institution.slug}}"
-                name="{{institution.name}}"
-                checked="{{if institution.checked "checked" flase}}"
-                onchange={{action "checkInstitution" institution}} />
+  <div class="checkbox institution">
+    <a {{action 'checkInstitution' institution}} class='checkbox-link'>
+      <i class="material-icons {{if institution.checked 'active'}}">
+        {{if institution.checked 'check_box' 'check_box_outline_blank'}}
+      </i>
+      {{if institution.name institution.name "Loading..."}}
+    </a>
+    {{!-- <input type="checkbox" class='inst-check' id="{{institution.slug}}" name="{{institution.name}}" checked="{{if institution.checked "checked" flase}}" onchange= {{action "checkInstitution" institution}} />
 
-            <span class="check"></span>
+    <label for='{{institution.slug}}' class='institution-label'>
             {{institution.name}}
-        </label>
-    </div>
+        </label> --}}
+  </div>
 {{/each}}

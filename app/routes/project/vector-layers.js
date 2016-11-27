@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const { Route } = Ember;
+
+export default Route.extend({
 
     // dataColors: Ember.inject.service('data-colors'),
 
     actions: {
         toggleAllVectorLayers(){
-            const project = this.currentModel;
+            const project = this.currentModel.project;
             let vectors = project.get('vector_layer_project_ids');
             if (project.get('visiable_vector') === true) {
                 vectors.forEach(function(vectorProj /*index*/ ){

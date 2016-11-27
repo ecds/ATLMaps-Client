@@ -1,41 +1,19 @@
-<div class="row layer-heading">
-    <table class="table">
-        <tr>
-            <td>
-                <h3>Select Base Map</h3>
-            </td>
-            <table>
-                <tr>
-                    <td class="pull-right">{{partial 'close-button'}}</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td></td>
-                </tr>
-            </table>
-        </tr>
-    </table>
-</div>
-<div class="route-content">
-    {{#if model.editing}}
-    {{#liquid-if editSuccess}}
-        <div class="alert alert-dismissible alert-success">
-            {{successMessage}}
+{{#project-pane title='Select Base Map' }}
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Base Maps</span>
+          <p>
+            <a {{action 'setBase' 'street' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
+            <a {{action 'setBase' 'satellite' model isEditing}} title="Satellite" class="btn btn-default base-preview satellite"></a>
+          </p>
         </div>
-    {{/liquid-if}}
-    {{#liquid-if editFail}}
-        <div class="alert alert-dismissible alert-danger">
-            {{failMessage}}
-        </div>
-    {{/liquid-if}}
-    <a class="btn btn-success btn-flat btn-xs" {{action 'setCenterAndZoom' model}}>
-        Set Center and Zoom Level
-    </a>
-{{else}}
-
-{{/if}}
-<a {{action 'setBase' 'street' model isEditing}} title="Open Street Map" class="btn btn-default base-preview street"></a>
-
-<a {{action 'setBase' 'satellite' model isEditing}} title="Satellite" class="btn btn-default base-preview satellite"></a>
-</div>
+        {{!-- <div class="card-action">
+              <a href="#">This is a link</a>
+              <a href="#">This is a link</a>
+            </div> --}}
+      </div>
+    </div>
+  </div>
+{{/project-pane}}

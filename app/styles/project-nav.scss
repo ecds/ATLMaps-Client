@@ -1,0 +1,104 @@
+@import 'components/color';
+
+.project-nav {
+  display: table;
+  position: absolute;
+  top: 3em;
+  width: $col1;
+
+  li {
+    animation: hide 300ms;
+    background-color: color('blue-grey', 'darken-1');
+    // box-shadow: $shadow;
+    color: color('blue-grey', 'lighten-5');
+    cursor: pointer;
+    font-size: 1em;
+    line-height: 1em;
+    max-height: 5.5em;
+    opacity: 1;
+    padding: .5em .75em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity 300ms, color 300ms, max-height 300ms, font-size 300ms, background-color 300ms;
+    transition-timing-function: ease-in-out;
+
+    &.active {
+      background-color: $secondary-color;//$primary-color-light;
+      color: color('grey', 'lighten-4');
+      opacity: 1;
+    }
+
+    label,
+    a {
+      color: color('grey', 'lighten-5');
+      font-weight: 400;
+      transition: color 200ms;
+      transition-timing-function: ease-in-out;
+
+      &.active {
+        color: color('grey', 'lighten-4');
+      }
+    }
+
+    &:hover {
+      background-color: color('blue-grey', 'lighten-3');
+      box-shadow: $shadow;
+      color: color('grey', 'darken-3');
+      // font-size: 1.25em;
+      opacity: 1;
+      // z-index: 1;
+
+      label {
+        color: color('grey', 'darken-4');
+        // font-size: 1.11em;
+      }
+
+      a {
+        color: color('grey', 'lighten-4');
+      }
+    }
+  }
+
+  .material-icons {
+    font-size: 2.11em;
+  }
+}
+
+.hide-nav-button {
+
+  i {
+    padding-top: .25em;
+    transition: transform 300ms, padding-top 300ms;
+  }
+}
+
+.hide-nav {
+
+  box-shadow: none;
+
+  .hide-nav-button {
+    i {
+      padding-top: 0;
+      transform: rotate(180deg);
+    }
+  }
+
+  li {
+
+    &:not(:first-child) {
+
+      // @keyframes hide {
+      //   0% {
+      //     display: block;
+      //   }
+      //
+      //   100% {
+      //     display: none;
+      //   }
+      // }
+
+      max-height: 0;
+      opacity: 0;
+    }
+  }
+}

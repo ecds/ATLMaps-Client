@@ -7,11 +7,11 @@ const limits = [
     { value: 100, label: 'Show: 100 Per Page' }
 ];
 
-const { Component, inject: { service }, get, set } = Ember;
+const { Component, inject: { service }, set } = Ember;
 
 export default Component.extend({
-    classNames: ['pagination'],
-    tagName: 'nav',
+    classNames: ['valign-wrapper'],
+    // tagName: 'nav',
     browseParams: service('browse-params'),
     searchEnabled: false,
     limits,
@@ -20,7 +20,6 @@ export default Component.extend({
     actions: {
 
         updateLimt(newLimit) {
-            console.log('fuck you');
             set(this, 'browseParams.searchLimit', newLimit.value);
             this.sendAction('getResults');
         }

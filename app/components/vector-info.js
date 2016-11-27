@@ -12,9 +12,9 @@ const {
 
 export default Component.extend({
 
-    VectorDetialContent: service(),
+    vectorDetialContent: service(),
 
-    classNames: ['vector-info'],
+    classNames: ['vector-info', 'resize-container', 'project-pane', 'resize-drag', 'hoverable'],
 
     didInsertElement() {
 
@@ -22,6 +22,7 @@ export default Component.extend({
             .draggable({
                 onmove: dragMoveListener
             })
+            .allowFrom('.drag-handle')
             .resizable({
                 preserveAspectRatio: true,
                 edges: {
@@ -36,6 +37,7 @@ export default Component.extend({
                 // This had been written as `let target = event.target`.
                 // This is better?
                 let { target } = { target: event.target };
+                let targetContainer = target.lastElementChild;
 
                 let x = parseFloat(target.getAttribute('data-x')) || 0;
                 let y = parseFloat(target.getAttribute('data-y')) || 0;
@@ -43,6 +45,9 @@ export default Component.extend({
                 // update the element's style
                 target.style.width = `${event.rect.width}px`;
                 target.style.height = `${event.rect.height}px`;
+                // For scorlling, vector-detail-container has a fixed height.
+                // We have to update that too.
+                targetContainer.style.height = `${event.rect.height}px`;
 
                 // translate when resizing from top or left edges
                 x += event.deltaRect.left;
@@ -86,7 +91,7 @@ export default Component.extend({
             $('div.vector-info').hide();
             $('.marker-content iframe').remove();
             $('.div.marker-content').empty();
-            $('.active_marker').removeClass('active_marker');
+            $('.active-marker').removeClass('active-marker');
             // this.get('draggie').destroy();
         }
     }

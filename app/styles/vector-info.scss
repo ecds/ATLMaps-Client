@@ -1,59 +1,53 @@
-// This is a hacky class to hide the parent tether dialog
-// No longer needed?
-.hack {
-  background: transparent;
-  box-shadow: none;
-}
-
-.resize-drag {
-    background-color: white;
-    color: material-color(md_grey, 900);
-    padding: 0 0.75em;
-    margin: 30px 20px;
-    overflow: auto;
-    width: 35em;
-    max-height: 90vh;
-    /* This makes things *much* easier */
-    box-sizing: border-box;
-    border: solid thin material-color(md_grey, 700);
-    border-radius: 0.3em;
-
-    .vector-info-head.row {
-        box-shadow: 0 1em 1.25em -1em material-color(md_grey, 600);
-        margin-bottom: 0.5em;
-        padding-top: 0.5em;
-        background-color: material-color(md_grey, 200);
-
-        .point-data {
-            &:before {
-                font-size: 1.5em;
-            }
-        }
-
-        .title {
-            font-size: 1.5em;
-        }
-    }
-
-    .marker-content {
-        background-color: white;
-        padding: 1.5em;
-
-        img {
-            max-width: 100%;
-            max-height: 45rem;
-            display: block;
-        }
-    }
-}
-
-.resize-container {
-    height: 240px;
-    position: absolute;
-    z-index: 1;
-    top: 5em;
-    left: 7em;
-}
 .vector-info {
-    display: none;
+  border: .1em solid color('grey', 'lighten-2');
+  border-radius: .5em;
+  display: none;
+  left: 10em;
+  top: 10em;
+  transition: none;
+}
+
+// // Also defined in project-pane.scss
+.vector-detail-title {
+  background-color: color('blue-grey', 'lighten-5');
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+
+  .close-button {
+    padding-top: 0;
+  }
+}
+
+// Originally defined in project-pane.scss
+.vector-detail-container {
+  background-color: $white;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
+  height: 50vh;
+}
+
+.vector-content {
+  &.layer-icon {
+    font-size: 3em;
+    padding: 0;
+  }
+
+  &.title {
+    font-size: large;
+  }
+
+  &.layer-title {
+    color: color('grey', darken-1);
+    font-size: medium;
+  }
+}
+
+.marker-content {
+  padding: 1.5em;
+
+  img {
+    display: block;
+    max-height: 45rem;
+    max-width: 100%;
+  }
 }

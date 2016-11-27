@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import burgerMenu from 'ember-burger-menu';
 
 /* globals L */
 
@@ -13,8 +14,6 @@ const {
     Service,
     set
 } = Ember;
-
-// const { max, min } = Math;
 
 export default Service.extend({
 
@@ -48,20 +47,9 @@ export default Service.extend({
                 className: 'street base'
             }).addTo(_map);
 
-            L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-                attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
-                subdomains: '1234',
-                base: 'aerial',
-                type: 'maptile',
-                scheme: 'satellite.day',
-                app_id: '1Igi60ZMWDeRNyjXqTZo',
-                app_code: 'eA64oCoCX3KZV8bwLp92uQ',
-                mapID: 'newest',
-                maxZoom: 20,
-                language: 'eng',
-                format: 'png8',
-                size: '256',
-                className: 'satellite base'
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                className: 'satellite base',
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             }).addTo(_map);
 
             // Zoom contorl, topright
@@ -69,6 +57,7 @@ export default Service.extend({
                 position: 'topright'
             }).addTo(_map);
 
+            // TODO would it be better to also track the layers as a group?
             // this.get('leafletGroup').addTo(_map);
 
             return _map;
@@ -81,8 +70,10 @@ export default Service.extend({
     setUpProjectMap(project) {
         let _map = get(this, 'map');
         _map.on('click', function() {
+            // Hide the search pane.
+            burgerMenu.set('open', false);
             $('div.vector-info').hide();
-            $('.active_marker').removeClass('active_marker');
+            $('.active-marker').removeClass('active-marker');
             $('.vector-content.marker-content').empty();
             project.setProperties({
                 showing_browse_results: false
@@ -128,7 +119,6 @@ export default Service.extend({
             // zIndex, // Enhanced litrial
             opacity: 1
         });
-
         this.get('projectLayers')[layer.get('slug')] = wmsLayer;
         wmsLayer.addTo(this.get('map'));
         this.get('map').fitBounds([
@@ -153,7 +143,7 @@ export default Service.extend({
 
             switch (dataType) {
 
-                case 'planningatlanta':
+                case 'planningatlanta': {
 
                     let tile = L.tileLayer(`http://static.library.gsu.edu/ATLmaps/tiles/${newLayerName}/{z}/{x}/{y}.png`, {
                         layer: newLayerSlug,
@@ -166,8 +156,8 @@ export default Service.extend({
                     $(tile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
-
-                case 'atlTopo':
+                }
+                case 'atlTopo': {
 
                     let topoTile = L.tileLayer('http://disc.library.emory.edu/atlanta1928topo/tilesTopo/{z}/{x}/{y}.jpg', {
                         layer: newLayerSlug,
@@ -181,57 +171,34 @@ export default Service.extend({
                     $(topoTile).addClass(newLayerSlug).addClass('wmsLayer').addClass('atLayer').css('zIndex', zIndex);
 
                     break;
-
-                case 'wms':
+                }
+                case 'wms': {
                     let wmsLayer = L.tileLayer.wms(newLayerUrl, {
                         layers: newLayer.get('layers'),
                         format: 'image/png',
                         transparent: true,
                         maxZoom: 20,
-                        // detectRetina: true,
-                        // className: newLayerSlug,
                         zIndex, // Enhanced litrial
                         opacity: 1
                     });
 
-                    // let layerObj = {name: newLayerSlug, mapObj: wmsLayer};
-                    // layerObj[newLayerSlug] = wmsLayer;
                     _this.get('projectLayers')[newLayerSlug] = wmsLayer;
 
                     _this.get('leafletGroup').addLayer(wmsLayer);
                     wmsLayer.addTo(map);
 
+                    // TODO make use of this
+                    // wmsLayer.on("load",function() { console.log("all visible tiles have been loaded") });
+
                     break;
-
-                    // NOTE: At some point we'll move the vector data to GeoServer
-                    // case 'wfs':
-                    //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON&callback=jQuery21106192189888097346_1421268179487&_=1421268179488
-                    //  //http://geospatial.library.emory.edu:8081/geoserver/Sustainability_Map/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sustainability_Map:Art_Walk_Points&maxFeatures=50&outputFormat=text/javascript
-                    //  var wfsLayer = institution.geoserver + layer.get('url') + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + layer.get('url') + ":" + layer.get('slug') + "&maxFeatures=50&outputFormat=text%2Fjavascript&format_options=callback:processJSON";
-
-                    //  $.ajax(wfsLayer,
-                    //      { dataType: 'jsonp' }
-                    //      ).done(function ( data ) {});
-
-                    //  // This part is the magic that makes the JSONP work
-                    //  // The string at the beginning of the JSONP is processJSON
-                    //  function processJSON(data) {
-                    //      points = wfsLayer(data,{
-                    //          //onEachFeature: onEachFeature,
-                    //          pointToLayer: function (feature, latlng) {
-                    //              return L.marker(latlng);
-                    //          }
-                    //      }).addTo(map);
-                    //  }
-
-                    //  break;
+                }
 
                 case 'point-data':
                 case 'polygon':
-                case 'line-data':
+                case 'line-data': {
 
                     switch (dataType) {
-                        case 'point-data':
+                        case 'point-data': {
                             let markerColors = _this.get('dataColors.markerColors');
                             newLayer.setProperties({
                                 color_name: markerColors[layer.get('marker')].name,
@@ -239,7 +206,7 @@ export default Service.extend({
 
                             });
                             let layerClass = `${newLayerSlug} vectorData map-marker layer-${newLayer.get('color_name')}`;
-                            let markerDiv = `<span class='map-marker vector-icon vector ${dataType} layer-${newLayer.get('color_name')}'></span>`;
+                            let markerDiv = `<span class='vector-icon vector ${dataType} layer-${newLayer.get('color_name')}'></span>`;
                             if (newLayerUrl) {
                                 let points = new L.GeoJSON.AJAX(newLayerUrl, {
                                     pointToLayer(feature, latlng) {
@@ -254,6 +221,7 @@ export default Service.extend({
                                             title: newLayerTitle,
                                             markerDiv
                                         });
+                                        $('.carousel.carousel-slider').carousel({full_width: true});
 
                                         return marker;
                                     },
@@ -264,9 +232,9 @@ export default Service.extend({
                                 points.addTo(map);
                             }
                             break;
-
+                        }
                         case 'polygon':
-                        case 'line-data':
+                        case 'line-data': {
 
                             let shapeColors = _this.get('dataColors.shapeColors');
                             newLayer.setProperties({
@@ -297,8 +265,10 @@ export default Service.extend({
                                 vector.addTo(map);
                             }
                             break;
+                        }
                     }
                     break;
+                }
             }
         });
     },

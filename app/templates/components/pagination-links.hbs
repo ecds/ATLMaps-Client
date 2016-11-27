@@ -1,25 +1,17 @@
-{{yield}}
-<div class="pull-left col-sm-4">
-      {{!-- {{#power-select
-        selected=limit
-        options=limits
-        onchange=(action "updateLimt" getResults='getResults')
-        as |limit|
-      }}
-        {{limit.label}}
-      {{/power-select}} --}}
-    </div><div class='text-center pagination-centered col-md-5 col-sm-8'>
-      {{#if meta.prev_page}}
-        <button {{action (route-action 'getResults' meta.prev_page)}} class='btn btn-raised btn-info'>{{meta.prev_page}}</button>
-      {{else}}
-        <button class='btn btn-raised btn-primary' disabled='disabled'>--</button>
-      {{/if}}
-        <button {{action (route-action 'getResults' meta.current_page)}} class='btn btn-raised btn-warning'>{{meta.current_page}}</button>
-      {{#if meta.next_page}}
-        <button {{action (route-action 'getResults' meta.next_page)}} class='btn btn-raised btn-info'>{{meta.next_page}}</button>
-      {{else}}
-        <button class='btn btn-raised btn-primary' disabled='disabled'>--</button>
-      {{/if}}
-      <i class="material-icons">more_horiz</i>
-        <button {{action (route-action 'getResults' meta.next_page)}} class='btn btn-raised btn-info'>{{meta.total_pages}}</button>
-    </div>
+<ul class="pagination center-align">
+  {{#if meta.prev_page}}
+  <li class="waves-effect"><a {{action (route-action 'getResults' 1)}}>1</a></li>
+  <li class='disabled'>...</li>
+  <li class="waves-effect"><a {{action (route-action 'getResults' meta.prev_page)}}>{{meta.prev_page}}</a></li>
+  {{else}}
+    <li class='disabled'>--</li>
+  {{/if}}
+    <li class="waves-effect active">{{meta.current_page}}</li>
+  {{#if meta.next_page}}
+    <li class="waves-effect"><a {{action (route-action 'getResults' meta.next_page)}}>{{meta.next_page}}</a></li>
+    <li class='disabled'>...</li>
+    <li class="waves-effect"><a {{action (route-action 'getResults' meta.total_pages)}}>{{meta.total_pages}}</a></li>
+  {{else}}
+    <li class='disabled'>--</li>
+  {{/if}}
+  </ul>

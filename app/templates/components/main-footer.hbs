@@ -1,19 +1,26 @@
 {{yield}}
-<footer class="footer">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 footer-row">
-        <div class="app-name">ATLMaps 0.1</div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 footer-logo-container footer-row">
-        <img src="assets/images/KF_logo-stacked.png" class="footer-logo"/>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footer-logo-container footer-row">
-        <img src="assets/images/emory_logo.png" class="footer-logo"/>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 footer-logo-container footer-row">
-        <img src="assets/images/GSULogo-Black.png" class="footer-logo"/>
+      <div class="col l6 s12">
+        <h5 class="white-text">ATLMaps 0.1</h5>
+        {{!-- <p class="grey-text text-lighten-4">
+          Some text
+        </p> --}}
       </div>
     </div>
+    <div class='row'>
+      {{!-- <div class="col l4 s12"> --}}
+      {{!-- <h5 class="white-text">Partners</h5> --}}
+      <div class='col l4 m4 s12'><img src="assets/images/KF_logo-stacked.png" class="footer-logo" /></div>
+      <div class='col l4 m4 s12'><img src="assets/images/emory_logo.png" class="footer-logo" /></div>
+      <div class='col l4 m4 s12'><img src="assets/images/GSULogo-Black.png" class="footer-logo" /></div>
+      {{!-- </div> --}}
+    </div>
   </div>
-</footer>
+  <div class="footer-copyright">
+    <div class="container">
+      © 2016 Copyright Text
+      {{#link-to 'about' class='grey-text text-lighten-4 right'}}About{{/link-to}}
+      {{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
+    </div>
+  </div>

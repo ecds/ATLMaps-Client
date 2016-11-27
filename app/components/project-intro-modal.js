@@ -30,12 +30,12 @@ export default Component.extend(EKMixin, {
             this.sendAction('action');
         },
 
-        supressIntro(model) {
+        supressIntro() {
+            let model = get(this, 'project');
             let cookieService = get(this, 'cookies');
             let cookieName = `noIntro${model.id}`;
-            console.log(get(model, 'hasSuppressCookie'));
 
-            if (get(model, 'hasSuppressCookie') === true) {
+            if (model.hasSuppressCookie === true) {
                 cookieService.clear(cookieName);
                 model.setProperties({ hasSuppressCookie: false });
             } else {

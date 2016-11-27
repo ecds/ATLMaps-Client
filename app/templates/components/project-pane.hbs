@@ -1,0 +1,33 @@
+<div class="pane-title row">
+  <div class="col s9">
+    <h3>{{title}}</h3>
+  </div>
+  <div class='col s2'>
+    {{#if raster}}
+      <div class="switch">
+        <label>
+          <input type='checkbox' checked={{model.visiable_raster}} id='toggle-layer-opacity'>
+          <span class="lever"></span>
+        </label>
+    </div>
+    {{/if}}
+    {{#if vector}}
+      <div class="switch">
+        <label>
+          <input type="checkbox" {{action (route-action 'toggleAllVectorLayers') layer checked on="change"}} checked={{model.visiable_vector}}>
+          <span class="lever"></span>
+        </label>
+      </div>
+    {{/if}}
+  </div>
+  <div class="col s1">
+    {{#link-to 'project'}}
+      <i class="material-icons close-button">highlight_off</i>
+    {{/link-to}}
+  </div>
+</div>
+<div class="pane-container">
+    <div class="pane-content {{extraClass}}">
+      {{yield}}
+    </div>
+</div>

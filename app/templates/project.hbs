@@ -1,31 +1,53 @@
-{{!-- {{#tether-dialog hasOverlay=false container-class='hack'}} --}}
-    {{vector-info}}
-{{!-- {{/tether-dialog}} --}}
-
-<div id="base-map" class="fullscreen-map">
-    <div id='map' class='atlmap'></div>
-    <div class="base-layer-controls"></div>
-</div>
-
-{{project-nav model=model current=current}}
-
-<div class="project-pane">
-    <div class="project-route">
-        {{liquid-outlet}}
+{{vector-info}}
+{{browse-results model=model rasters=rasters vectors=vectors}}
+{{#burger-menu width=600 position='right' translucentOverlay=false dismissOnClick=false as |burger|}}
+  {{#burger.menu as |menu|}}
+    <div class='row search-head'>
+      <div class='col m8'>
+        Search
+      </div>
+      <div class='col m4'>
+        <a {{action burger.state.actions.toggle}} class="close-results scroll-top right">
+          <i class="material-icons close-button">highlight_off</i>
+        </a>
+      </div>
     </div>
-</div>
+    <div id='results' />
+  {{/burger.menu}}
 
-<!-- </div> -->
-{{outlet "browse-results"}}
-<!-- </div> -->
+  {{#burger.outlet}}
+    <a class="" {{action burger.state.actions.toggle}}></a>
+    <div id='base-map' class='fullscreen-map'>
+      <div id='map' class='atlmap'></div>
+      <div class='base-layer-controls'></div>
+    </div>
+    <div class='project-title row z-depth-2'>
+      <div class='col s1'>
+        {{#link-to 'projects' tagName='a' }}
+          <i class='material-icons exit'>exit_to_app</i>
+        {{/link-to}}
+      </div>
+      <div class='col s8'>
+        <h2>{{model.project.name}}</h2>
+      </div>
+      <div class='col m3 right reveal-btn'>
+        {{#if model.project.may_edit}}
+          <button class="btn waves-effect waves-light right {{if burger.state.open 'collapse'}}" type="submit" {{action 'showSearch'}}>
+            <i class='material-icons'>search</i> Search
+          </button>
+        {{/if}}
+      </div>
+    </div>
+    {{project-nav model=model.project current=current class='navbar-fixed'}} {{outlet}}
 
-<!-- <a class=" rotate -fab -sm toggle-results"><i class="material-icons">chevron_right</i></a> -->
 
+  {{/burger.outlet}}
+{{/burger-menu}}
 
-{{#if model.hasIntro}}
-    {{#unless model.suppressIntro}}
-        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class="project-intro" }}
-            {{project-intro-modal action='toggleIntro' project=model keyboardActivated=true }}
-        {{/tether-dialog}}
-    {{/unless}}
+{{#if model.project.hasIntro}}
+  {{#unless model.project.suppressIntro}}
+    {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
+      {{project-intro-modal action='toggleIntro' project=model.project keyboardActivated=true }}
+    {{/tether-dialog}}
+  {{/unless}}
 {{/if}}
