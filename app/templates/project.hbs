@@ -1,5 +1,6 @@
 {{vector-info}}
-{{browse-results model=model rasters=rasters vectors=vectors}}
+{{log rasters_diffResults}}
+{{browse-results model=model rasters=rasters vectors=vectors rasters_diffResults=rasters_diffResults vectors_diffResults=vectors_diffResults}}
 {{#burger-menu width=600 position='right' translucentOverlay=false dismissOnClick=false as |burger|}}
   {{#burger.menu as |menu|}}
     <div class='row search-head'>
@@ -28,7 +29,7 @@
         {{/link-to}}
       </div>
       <div class='col s8'>
-        <h2>{{model.project.name}}</h2>
+        <h2>{{model.project.name}}{{flashMessage}}</h2>
       </div>
       <div class='col m3 right reveal-btn'>
         {{#if model.project.may_edit}}
@@ -38,7 +39,7 @@
         {{/if}}
       </div>
     </div>
-    {{project-nav model=model.project current=current class='navbar-fixed'}} {{outlet}}
+    {{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
 
 
   {{/burger.outlet}}

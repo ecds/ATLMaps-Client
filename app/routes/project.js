@@ -21,6 +21,7 @@ export default Route.extend({
     browseParams: service(),
     session: service(),
     cookies: service(),
+    flashMessage: service(),
 
     model(params) {
         let project = '';
@@ -134,6 +135,13 @@ export default Route.extend({
         burgerMenu.set('open', false);
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
+    updatedResults(type) {
+        set(this.controller, `${type}_diffResults`, true);
+        run.later(this, function() {
+            set(this.controller, `${type}_diffResults`, false);
+        }, 300);
+    },
+
     actions: {
 
         toggleIntro() {
@@ -142,12 +150,33 @@ export default Route.extend({
 
         toggleEdit() {
             this.modelFor('project').project.toggleProperty('editing');
-            this.modelFor('project').project.toggleProperty('may_browse');
         },
 
         showSearch() {
             burgerMenu.toggleProperty('open');
             this.controller.toggleProperty('showingSearch');
+        },
+
+        updateProject(project, route) {
+            const _this = this;
+            run.later(this, function() {
+                project.save().then(function() {
+                    console.log('route', route);
+                    _this.flashMessage.message('route');
+                    _this.toggleProperty('flashMessage.showing');
+                    run.later(this, function() {
+                        _this.toggleProperty('flashMessage.showing');
+                        _this.flashMessage.message('');
+                    }, 3000)
+                }, function() {
+                    // TODO figure out how to give feedback on these shared actions
+                    // _this.controllerFor('project/browse-layers').set('editFail', true);
+                    // Ember.run.later(this, function(){
+                    //     _this.controllerFor('project/browse-layers').set('editFail', false);
+                    // }, 3000);
+                });
+            }, 300);
+            // this.modelFor('project').project.save();
         },
 
         addRemoveLayer(layer) {
@@ -210,15 +239,7 @@ export default Route.extend({
                 // TODO, abstract the save/don't save calls for add and remove.
                 if (this.get('session.isAuthenticated') && (project.id != '123456789')) {
                     newLayer.save().then(function() {
-                        // Add the map to the view
-                        // _this.get('mapObject').mapLayer(newLayer);
-                        // TODO figure out how to give feedback on these shared actions
-                        // Show a success message.
-                        // _this.controllerFor('project/browse-layers').set('editSuccess', true);
-                        // Ember.$('.browse-results').fadeTo(0.2);
-                        run.later(this, function() {
-                            // Ember.$('.browse-results').faddeTo(1);
-                        }, 3000);
+                        // TODO Show a success message.
                     }, function() {
                         // TODO figure out how to give feedback on these shared actions
                         // _this.controllerFor('project/browse-layers').set('editFail', true);
@@ -240,15 +261,12 @@ export default Route.extend({
                 attrs[layerId] = layer.get('id');
                 // NOTE: This might be wrong. Was `attrs['project_id'] =`
                 attrs.project_id = project.id;
-                console.log('attrs', attrs);
                 // Get the join between layer and project
                 // Remove the object from the map/DOM
                 this.get('mapObject.projectLayers')[layer.get('slug')].remove();
                 // $(`#${layer.get('name')}`).remove();
                 // Delete the record from the project
-                console.log('model', this.store.queryRecord(`${layerModel}-project`, attrs));
                 this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {
-                    console.log('layerToRemove', layerToRemove);
                     let layerIdToRemove = _this.store.peekRecord(`${layerModel}-project`, layerToRemove.id)
                     layerIdToRemove.deleteRecord();
                     layerToRemove.deleteRecord();//.then(function() {
@@ -260,7 +278,6 @@ export default Route.extend({
                         // Ember.run.later(this, function(){
                         //     _this.controllerFor('project/browse-layers')
                         //     .set('editSuccess', false);
-                        console.log('project.id', project.id);
                         if (_this.get('session.isAuthenticated') && project.id != '123456789') {
                             layerToRemove.save();
                         }
@@ -278,7 +295,12 @@ export default Route.extend({
                 });
             }
 
-            return false;
+            set(_this.controller, `${format}-updated`, true)
+            run.later(this, function() {
+                set(_this.controller, `${format}-updated`, false)
+            }, 3000);
+
+            // return false;
         },
 
         nextPage(meta) {
@@ -288,6 +310,9 @@ export default Route.extend({
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(page) {
+            const _this = this;
+            let currentRasters = get(this.controller, 'rasters.content.meta.total_count');
+            let currentVectors = get(this.controller, 'vectors.content.meta.total_count');
             burgerMenu.set('open', true);
             // this.modelFor('project').project.setProperties({ showing_browse_results: true });
             let searchParams = {
@@ -314,8 +339,18 @@ export default Route.extend({
                 delete searchParams['bounds'];
             }
             if (Object.keys(searchParams).length > 3) {
-                set(this.controller, 'rasters', this.store.query('raster-layer', searchParams));
-                set(this.controller, 'vectors', this.store.query('vector-layer', searchParams));
+                set(this.controller, 'rasters', this.store.query('raster-layer', searchParams)).then(function(rasters) {
+                    if (currentRasters != rasters.meta.total_count) {
+                        _this.updatedResults('rasters');
+                    }
+                });
+
+                set(this.controller, 'vectors', this.store.query('vector-layer', searchParams)).then(function(vectors) {
+                    if (currentVectors != vectors.meta.total_count) {
+                        _this.updatedResults('vectors');
+                    }
+                });
+
                 this.setProperties({
                     searched: true,
                     showingResults: true

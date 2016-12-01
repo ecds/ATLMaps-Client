@@ -13,14 +13,14 @@ to apply to the active <li> automatically --}}
 {{/link-to}}
 
 {{#if model.hasRasters}}
-{{#link-to 'project.raster-layers' tagName='li'}}
+{{#link-to 'project.raster-layers' tagName='li' class=(if raster-updated 'raster-updated')}}
   <i class="material-icons">layers</i>
   {{link-to 'Maps' 'project.raster-layers' tagName='label'}}
 {{/link-to}}
 {{/if}}
 
 {{#if model.hasVectors}}
-{{#link-to 'project.vector-layers' tagName='li'}}
+{{#link-to 'project.vector-layers' tagName='li' class=(if vector-updated 'vector-updated')}}
   <i class="material-icons atlmaps-ext database"></i>
   {{link-to 'Data' 'project.vector-layers' tagName='label'}}
 {{/link-to}}

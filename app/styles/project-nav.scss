@@ -7,7 +7,6 @@
   width: $col1;
 
   li {
-    animation: hide 300ms;
     background-color: color('blue-grey', 'darken-1');
     // box-shadow: $shadow;
     color: color('blue-grey', 'lighten-5');
@@ -100,5 +99,26 @@
       max-height: 0;
       opacity: 0;
     }
+  }
+}
+
+.raster-updated,
+.vector-updated {
+  animation-duration: 1.5s;
+  animation-name: lightup-project-nav;
+}
+
+@keyframes lightup-project-nav {
+
+  50% {
+    background-color: color('blue-grey', 'lighten-5');
+    color: color('blue-grey', 'darken-1');
+    font-size: 1.5em;
+  }
+
+  100% {
+    background-color: color('blue-grey', 'darken-1');
+    color: color('blue-grey', 'lighten-5');
+    font-size: 1em;
   }
 }

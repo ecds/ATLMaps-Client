@@ -5,12 +5,12 @@
     </header>
   </div>
 </div>
-{{!#if currentUser }}
-<span calss="add-new-project">
-  {{!-- <a class="btn btn-fab btn-default new-project" {{action 'createProject'}}><i class="material-icons">add</i></a> --}}
-</span>{{!/if}}
 <div class="banner orange blurred">
   <div class="container">
+    {{log this.currentUser.user}}
+    {{#if currentUser.user }}
+    <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="material-icons right">add</i>Start New Project</a>
+    {{/if}}
     <h3>Published Projects</h3>
     <hr />
     <div class="row">

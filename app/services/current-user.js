@@ -18,6 +18,7 @@ export default Service.extend({
         let _this = this;
         try {
             this.get('store').findRecord('user', userId).then(function(user) {
+                console.log('user', user);
                 set(_this, 'user', user);
             });
         } catch(err) {

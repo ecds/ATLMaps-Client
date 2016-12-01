@@ -4,6 +4,4 @@ import Ember from 'ember';
 
 const { Controller } = Ember;
 
-export default Controller.extend({
-    showingSearch: false
-});
+export default Controller.extend({});

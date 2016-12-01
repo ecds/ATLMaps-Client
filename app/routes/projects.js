@@ -4,6 +4,7 @@ import Ember from 'ember';
 
 const {
     $,
+    get,
     Route,
     RSVP,
     inject: {
@@ -42,6 +43,7 @@ export default Route.extend({
 
         didTransition() {
             $(document).attr('title', 'ATLMaps: Projects');
+            console.log('currentUser', get(this, 'currentUser'));
         },
 
         createProject() {

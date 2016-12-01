@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 const {
-    $,
     Route,
     get,
     inject: {
@@ -13,9 +12,6 @@ const {
 export default Route.extend({
     mapObject: service(),
 
-    afterModel() {
-        $('.collapsible').collapsible({ accordion: true });
-    },
 
     actions: {
         // The sortable action is initilized in the template using
@@ -24,7 +20,6 @@ export default Route.extend({
             const _this = this;
             set(groupModel, 'project.raster_layer_project_ids', itemModels);
             get(groupModel, 'project.raster_layer_project_ids').forEach(function(item, index) {
-
                 // So here we are taking the length of the array, subtracting
                 // the index of the layer and then adding 10 to reorder them.
                 // It's just that easy.
@@ -34,8 +29,9 @@ export default Route.extend({
 
                 let rasterSlug = item.get('raster_layer_id.slug');
                 _this.get('mapObject.projectLayers')[rasterSlug].setZIndex(newPosition);
-                // TODO Need to figure out how to get edit mode
-                if (groupModel.editing === true) {
+                // TODO if may edit, provide way to save order in not in edit mode
+                // TODO provide feedback on save
+                if (groupModel.project.get('editing') === true) {
                     item.save();
                 }
 

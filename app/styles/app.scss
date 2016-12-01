@@ -288,6 +288,7 @@ a {
 .bm-menu {
   background-color: $white;
   box-shadow: $shadow5;
+  width: 34vw !important;
 }
 
 // Search Tabs
@@ -319,6 +320,7 @@ a {
 
     a {
       color: color('grey', 'lighten-4');
+      font-size: 1.2em;
 
       &:hover {
         color: color('blue-grey', 'lighten-4');
@@ -332,15 +334,54 @@ a {
 
     .result-count {
       background: $secondary-color;
-      border-radius: 36%;
+      border-radius: 25%;
       color: color('grey', 'lighten-4');
-      font-size: .9em;
+      font-size: .7em;
       font-weight: 400;
+      line-height: 1.5em;
       padding: .2em .3em;
+      position: absolute;
+      top: .2em;
     }
   }
 }
 
 .ember-burger-menu {
   position: absolute;
+}
+
+.btn-floating {
+  i {
+    vertical-align: middle;
+  }
+}
+
+.glow-tab {
+  animation-duration: $rabbit;
+  animation-name: lightup;
+  background-color: color('grey', lighten-4);
+  // border-top-left-radius: 50%;
+  // border-top-right-radius: 50%;
+  bottom: 0;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  width: 33%;
+}
+
+@keyframes lightup {
+
+  50% {
+    opacity: .9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+textarea {
+  &.description {
+    height: 8rem;
+  }
 }

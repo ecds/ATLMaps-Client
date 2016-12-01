@@ -1,6 +1,6 @@
 <div class="pane-title row">
   <div class="col s9">
-    <h3>{{title}}</h3>
+    <h3 class='valign-wrapper'>{{title}}{{#if model.may_edit}}    <a {{action (route-action 'toggleEdit')}} class="edit-button"><i class="material-icons valign {{if model.editing 'green-text'}}">edit</i></a>{{/if}}</h3>
   </div>
   <div class='col s2'>
     {{#if raster}}
@@ -26,6 +26,7 @@
     {{/link-to}}
   </div>
 </div>
+<div class='row feedback {{if success 'success' 'fail'}}'>{{flashMessage.message}}</div>
 <div class="pane-container">
     <div class="pane-content {{extraClass}}">
       {{yield}}
