@@ -1,4 +1,5 @@
-<div class='input-field inline'>
-  {{input id='search-text' type='text' enter='textSearch' value=searchTerms class='search-text-input'}}
-  <label for='serarch-text'>Text Search</label>
-</div>
+<form class='input-field inline'>
+  {{input required placeholder='Search for layers' id='search-text' type='text' enter='textSearch' value=searchTerms class='search-text-input'}}
+  <button class='clear-text' type="reset"><i class='material-icons'>close</i></button>
+  <label for='serarch-text' class='active'>Text Search</label>
+</form>

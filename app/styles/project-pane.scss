@@ -110,6 +110,26 @@
     padding: 0;
     // padding-left: 1em;
   }
+
+  .publish-label {
+    font-size: 1em;
+    height: 36px;
+    padding: 0;
+    vertical-align: middle;
+
+    span {
+      line-height: 2.2em;
+
+      i {
+        vertical-align: sub;
+      }
+    }
+
+    &::before {
+      display: none;
+      padding-left: 0;
+    }
+  }
 }
 
 .scrollable-list {
@@ -314,4 +334,33 @@ a {
   &.institution {
     margin-left: 1em;
   }
+}
+
+.feedback {
+  padding: 0 1em;
+  transition: padding $rabbit ease-in-out;
+
+  &.show-flash {
+    padding: 1em;
+  }
+}
+
+// Text Search Clear Button
+.clear-text {
+  background-color: $secondary-color-light;
+  border: 1px solid transparent;
+  border-radius: 25%;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: .5em;
+  visibility: hidden;
+
+  i {
+    vertical-align: top;
+  }
+}
+
+input.required:invalid ~ .clear-text {
+  visibility: visible;;
 }

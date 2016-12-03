@@ -161,19 +161,26 @@ export default Route.extend({
             const _this = this;
             run.later(this, function() {
                 project.save().then(function() {
-                    console.log('route', route);
-                    _this.flashMessage.message('route');
-                    _this.toggleProperty('flashMessage.showing');
+                    set(_this, 'flashMessage.message', route);
+                    set(_this, 'flashMessage.success', true);
+                    set(_this, 'flashMessage.show', true);
+                    // _this.toggleProperty('flashMessage.showing');
                     run.later(this, function() {
-                        _this.toggleProperty('flashMessage.showing');
-                        _this.flashMessage.message('');
+                        set(_this, 'flashMessage.message', '');
+                        set(_this, 'flashMessage.show', false);
+                        set(_this, 'flashMessage.success', true);
+                        // _this.toggleProperty('flashMessage.showing');
                     }, 3000)
                 }, function() {
                     // TODO figure out how to give feedback on these shared actions
-                    // _this.controllerFor('project/browse-layers').set('editFail', true);
-                    // Ember.run.later(this, function(){
-                    //     _this.controllerFor('project/browse-layers').set('editFail', false);
-                    // }, 3000);
+                    set(_this, 'flashMessage.message', 'well shit');
+                    set(_this, 'flashMessage.show', true);
+                    set(_this, 'flashMessage.success', false);
+
+                    Ember.run.later(this, function(){
+                        set(_this, 'flashMessage.message', '');
+                        set(_this, 'flashMessage.show', false);
+                    }, 3000);
                 });
             }, 300);
             // this.modelFor('project').project.save();

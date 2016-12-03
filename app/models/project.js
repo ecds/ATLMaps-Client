@@ -36,6 +36,7 @@ export default Model.extend({
     templateSlug: attr('string'),
     intro: attr('string'),
     media: attr('string'),
+    photo: attr('string'),
     template_id: attr('number'),
     card_url: attr('string'),
 

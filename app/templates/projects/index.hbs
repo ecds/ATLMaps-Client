@@ -8,7 +8,7 @@
 <div class="banner orange blurred">
   <div class="container">
     {{log this.currentUser.user}}
-    {{#if currentUser.user }}
+    {{#if session.isAuthenticated }}
     <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="material-icons right">add</i>Start New Project</a>
     {{/if}}
     <h3>Published Projects</h3>

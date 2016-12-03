@@ -1,12 +1,16 @@
 import Ember from 'ember';
 
-const { Service, set } = Ember;
+const { Service } = Ember;
 
 export default Service.extend({
 
     init() {
         this._super(...arguments);
-        set(this, 'message', '');
-        set(this, 'show', false);
+        this.setProperties({
+            message: '',
+            show: false,
+            success: true
+        });
     }
+
 });

@@ -26,7 +26,7 @@
     {{/link-to}}
   </div>
 </div>
-<div class='row feedback {{if success 'success' 'fail'}}'>{{flashMessage.message}}</div>
+<div class='row feedback white-text {{if flashMessage.success 'green' 'red'}} {{if flashMessage.show 'show-flash'}}'>{{flashMessage.message}}</div>
 <div class="pane-container">
     <div class="pane-content {{extraClass}}">
       {{yield}}

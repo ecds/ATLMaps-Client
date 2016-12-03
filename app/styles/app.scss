@@ -104,7 +104,6 @@ h4 {
 // 'back-to-project-button',
 // 'list-projects',
 'project-nav',
-'project-intro',
 // 'loading',
 'extra-icons',
 'login-form';
@@ -126,6 +125,7 @@ h4 {
 // 'atl-checkbox',
 @import 'base-picker';
 @import 'project-pane';
+@import 'project-intro';
 // 'zoom-buttons',
 // @import 'tagem';
 
@@ -384,4 +384,34 @@ textarea {
   &.description {
     height: 8rem;
   }
+}
+
+// KEEP PLAYING WITH THE COLOR!!!!!!!
+// Making the switches less penis like
+.switch {
+  label {
+    .lever {
+      // background-color: color('blue-grey', 'lighten-4');
+      // height: 25px;
+      // width: 40px;
+
+      &::after {
+        // background-color: $primary-color-light;
+        // box-shadow: none;
+        // height: 23px;
+        // left: 0;
+        // top: 1px;
+        // width: 23px;
+      }
+    }
+  }
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  // background-color: $primary-color;
+  // left: 16px;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+    // background-color: color('blue-grey', lighten-4);
 }

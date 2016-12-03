@@ -55,6 +55,7 @@
     "ember-simple-auth": "1.1.0",
     "ember-sortable": "1.8.2",
     "ember-tether": "0.3.1",
+    "ember-truth-helpers": "1.2.0",
     "eslint": "^3.8.1",
     "eslint-config-airbnb-base": "^9.0.0",
     "eslint-plugin-import": "^2.0.1",

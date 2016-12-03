@@ -5,27 +5,47 @@
         <div class="card-content">
           {{#if model.project.editing}}
             {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='255'}}
-            <span class="character-counter">{{model.project.description.length}}/255</span>
+
+            {{#if (gte model.project.description.length 485)}}
+              <span class='character-counter red-text right'>
+                {{model.project.description.length}}/500
+              </span>
+            {{else}}
+              <span class='character-counter right'>
+                {{model.project.description.length}}/500
+              </span>
+            {{/if}}
+
           {{else}}
             <span class="card-title">About</span>
             <p>{{model.project.description}}</p>
           {{/if}}
         </div>
         <div class="card-action">
-          {{#if model.project.hasIntro}}
+
             {{#if model.project.editing}}
-              <button class="btn waves-effect waves-light" type="submit" {{action 'toggleIntro'}}>
-                edit intro
-              </button> {{input type='checkbox' class='filled-in' id='publish' checked=model.project.published click=(action (route-action 'updateProject' model.project 'info')) }}
-              <label for='publish'>
-              <span class="check"></span> Publish{{this.flashMessage}}
+              <button class="btn waves-effect waves-light blue-grey" type="submit" {{action 'toggleIntro'}}>
+                <i class="material-icons left">edit</i>edit intro
+              </button>
+              {{!-- <a {{action (route-action 'updateProject' model.project 'info')}}
+                class="waves-effect waves-light btn-flat">
+                <i class="material-icons left">cloud</i>
+                Publish
+              </a> --}}
+              {{input type='checkbox' id='publish' checked=model.project.published click=(action (route-action 'updateProject' model.project 'info')) }}
+              <label for='publish' class="waves-effect waves-light btn publish-label">
+                <span class="btn blue-grey waves-effect waves-blue white-text" type="submit">
+                <i class="material-icons">{{if model.project.published 'check_box' 'check_box_outline_blank'}}</i>
+                Publish
+              </span>
             </label>
-            {{else}}
-              <button class="btn waves-effect waves-light" type="submit" {{action 'toggleIntro'}}>
+            <button class="btn waves-effect waves-light green white-text right" type="submit" {{action (route-action 'updateProject' model.project 'info')}}>save</button>
+            {{else if model.project.hasIntro}}
+              <button class="btn-flat waves-effect waves-light" type="submit" {{action 'toggleIntro'}}>
                 learn more
               </button>
             {{/if}}
-          {{/if}}
+
         </div>
       </div>
     </div>

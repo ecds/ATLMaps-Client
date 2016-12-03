@@ -113,7 +113,7 @@ export default Service.extend({
             layers: layer.get('layers'),
             format: 'image/png',
             transparent: true,
-            maxZoom: 20,
+            mzxZoom: 18,
             // detectRetina: true,
             className: 'wms',
             // zIndex, // Enhanced litrial
@@ -149,7 +149,7 @@ export default Service.extend({
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,
-                        maxZoom: 19,
+                        mzxZoom: 18,
                         detectRetina: true
                     }).addTo(map).setZIndex(10).getContainer();
 
@@ -163,7 +163,7 @@ export default Service.extend({
                         layer: newLayerSlug,
                         tms: true,
                         minZoom: 13,
-                        maxZoom: 19,
+                        mzxZoom: 18,
                         detectRetina: true,
                         errorTileUrl: 'http://inspiresara.com/wp-content/uploads/2015/04/Peanut-butter-jelly-time.gif'
                     }).addTo(map).setZIndex(10).getContainer();
@@ -177,7 +177,7 @@ export default Service.extend({
                         layers: newLayer.get('layers'),
                         format: 'image/png',
                         transparent: true,
-                        maxZoom: 20,
+                        mzxZoom: 18,
                         zIndex, // Enhanced litrial
                         opacity: 1
                     });
