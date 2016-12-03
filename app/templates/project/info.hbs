@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-content">
           {{#if model.project.editing}}
-            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='255'}}
+            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='500'}}
 
             {{#if (gte model.project.description.length 485)}}
               <span class='character-counter red-text right'>
