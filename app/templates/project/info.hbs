@@ -32,14 +32,14 @@
                 <i class="material-icons left">cloud</i>
                 Publish
               </a> --}}
-              {{input type='checkbox' id='publish' checked=model.project.published click=(action (route-action 'updateProject' model.project 'info')) }}
+              {{input type='checkbox' id='publish' checked=model.project.published click=(action (route-action 'updateProject' model.project 'Project has been updated!')) }}
               <label for='publish' class="waves-effect waves-light btn publish-label">
                 <span class="btn blue-grey waves-effect waves-blue white-text" type="submit">
                 <i class="material-icons">{{if model.project.published 'check_box' 'check_box_outline_blank'}}</i>
                 Publish
               </span>
             </label>
-            <button class="btn waves-effect waves-light green white-text right" type="submit" {{action (route-action 'updateProject' model.project 'info')}}>save</button>
+            <button class="btn waves-effect waves-light green white-text right" type="submit" {{action (route-action 'updateProject' model.project 'Project has been updated!')}}>save</button>
             {{else if model.project.hasIntro}}
               <button class="btn-flat waves-effect waves-light" type="submit" {{action 'toggleIntro'}}>
                 learn more

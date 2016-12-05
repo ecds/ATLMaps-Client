@@ -13,22 +13,24 @@ $secondary-color: #e24b31;
 $secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
 
-$col1: 5em;
-
-@import 'components/variables';
-@import 'materialize';
-// @import 'ember-cli-materialize';
-
-
-// nav {
-//
-//   li {
-//
-//     &.active {
-//       background-color: $secondary-color;
-//     }
-//   }
-// }
+@import'components/variables',
+'materialize',
+'banner',
+'ember-modal-structure',
+'ember-modal-appearance',
+'main-footer',
+'marker',
+'extra-icons',
+'login-form',
+'slider',
+'layer-citation',
+'vector-info',
+'browse-results',
+'base-picker',
+'project-pane',
+'project-intro',
+'search-pane',
+'project-nav';
 
 h3 {
   font-size: 1.75em;
@@ -37,98 +39,6 @@ h3 {
 h4 {
   font-size: 1.5em;
 }
-
-.card {
-  .card-title {
-    font-size: 1.5em;
-  }
-
-}
-
-.project-top-nav {
-  box-shadow: none;
-  height: 2em;
-}
-
-.project-title {
-  background-color: $primary-color-dark;
-  color: $white;
-  height: 3em;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 998;
-
-  h2 {
-    font-size: 2em;
-    line-height: 0;
-  }
-
-  .btn {
-    height: 3em;
-    transition: width $rabbit linear $rabbit;
-    width: 50%;
-  }
-
-  .collapse {
-    width: 0;
-  }
-
-  .reveal-btn {
-    padding-right: 0;
-  }
-
-  .col {
-    a {
-      color: color('grey', 'lighten-4');
-    }
-
-    &.s1 {
-      cursor: pointer;
-      padding: .5em .75em;
-      text-align: center;
-      width: $col1;
-    }
-  }
-
-}
-
-@import 'banner',
-'ember-modal-structure',
-'ember-modal-appearance',
-'main-footer',
-// 'variables',
-'marker',
-// 'toggle_button',
-// 'main-navbar',
-// 'back-to-project-button',
-// 'list-projects',
-'project-nav',
-// 'loading',
-'extra-icons',
-'login-form';
-// @import 'browse-tags';
-// 'alert',
-@import 'slider';
-@import 'layer-citation';
-@import 'vector-info';
-// 'project-vector-list',
-// 'responsive',
-// 'gallery',
-// 'close-button',
-// 'color-picker',
-// 'vector-layer-option-panel',
-// @import 'material-tabs';
-// 'browse-pane',
-@import 'browse-results';
-// @import 'browse-toolbar';
-// 'atl-checkbox',
-@import 'base-picker';
-@import 'project-pane';
-@import 'project-intro';
-// 'zoom-buttons',
-// @import 'tagem';
-
 
 body {
   background-color: color('grey', 'darken-4');
@@ -169,6 +79,12 @@ a {
   cursor: pointer;
 }
 
+.card {
+  .card-title {
+    font-size: 1.5em;
+  }
+}
+
 .content {
   height: 100vh;
 }
@@ -176,7 +92,7 @@ a {
 .ember-burger-menu,
 .bm-outlet,
 .bm-content {
-  overflow: hidden !important;
+  // overflow: hidden !important;
 }
 
 .project {
@@ -205,15 +121,6 @@ a {
   width: 100%;
 }
 
-// .row-eq-height {
-//   display: flex;
-//
-//   div {
-//     .checkbox {
-//       margin-top: -10px;
-//     }
-//   }
-// }
 
 .material-icons {
   font-size: 1.5em;
@@ -222,33 +129,6 @@ a {
 .exit {
   padding-bottom: .25em;
   transform: rotate(180deg);
-}
-
-// TODO need a raster list scss?
-// TODO is there not an icon for this? I'm watching the world series and don't
-// have time to look like right now.
-.collapsible-header {
-  &.raster-list-header {
-    padding-right: 0;
-  }
-}
-
-.reorder-handle {
-  height: 2em;
-
-  i {
-    margin-left: -.1em;
-    transform: rotate(-90deg);
-
-    &:hover {
-      color: $secondary-color;
-      cursor: ns-resize;
-    }
-
-    // &.remove-layer {
-    //   transform: none;
-    // }
-  }
 }
 
 .navbar-fixed {
@@ -264,6 +144,10 @@ a {
 .project-nav {
   .active {
     background-color: $secondary-color;
+
+    &:hover {
+      background-color: color('blue-grey', 'lighten-3');
+    }
   }
 }
 
@@ -288,96 +172,8 @@ a {
 .bm-menu {
   background-color: $white;
   box-shadow: $shadow5;
+  // The burger menu code only deals in pixels :(
   width: 34vw !important;
-}
-
-// Search Tabs
-.search-head {
-  background-color: color('blue-grey', 'darken-1');
-  color: color('grey', 'lighten-5');
-  font-size: 1.5em;
-  height: 2em;
-  padding-top: .25em;
-
-  &.row {
-    margin-bottom: 0;
-  }
-}
-
-.tabs {
-  background-color: color('blue-grey', 'lighten-1');
-  height: 5.2em;
-  // padding-top: .5em;
-
-  .indicator {
-    background-color: $secondary-color;
-    height: .25em;
-  }
-
-  .tab {
-    height: auto;
-    line-height: 1.75em;
-
-    a {
-      color: color('grey', 'lighten-4');
-      font-size: 1.2em;
-
-      &:hover {
-        color: color('blue-grey', 'lighten-4');
-      }
-    }
-
-    i {
-      font-size: 2em;
-      vertical-align: middle;
-    }
-
-    .result-count {
-      background: $secondary-color;
-      border-radius: 25%;
-      color: color('grey', 'lighten-4');
-      font-size: .7em;
-      font-weight: 400;
-      line-height: 1.5em;
-      padding: .2em .3em;
-      position: absolute;
-      top: .2em;
-    }
-  }
-}
-
-.ember-burger-menu {
-  position: absolute;
-}
-
-.btn-floating {
-  i {
-    vertical-align: middle;
-  }
-}
-
-.glow-tab {
-  animation-duration: $rabbit;
-  animation-name: lightup;
-  background-color: color('grey', lighten-4);
-  // border-top-left-radius: 50%;
-  // border-top-right-radius: 50%;
-  bottom: 0;
-  height: 100%;
-  opacity: 0;
-  position: absolute;
-  width: 33%;
-}
-
-@keyframes lightup {
-
-  50% {
-    opacity: .9;
-  }
-
-  100% {
-    opacity: 0;
-  }
 }
 
 textarea {
@@ -386,32 +182,32 @@ textarea {
   }
 }
 
-// KEEP PLAYING WITH THE COLOR!!!!!!!
+// TODO KEEP PLAYING WITH THE COLOR!!!!!!!
 // Making the switches less penis like
-.switch {
-  label {
-    .lever {
-      // background-color: color('blue-grey', 'lighten-4');
-      // height: 25px;
-      // width: 40px;
-
-      &::after {
-        // background-color: $primary-color-light;
-        // box-shadow: none;
-        // height: 23px;
-        // left: 0;
-        // top: 1px;
-        // width: 23px;
-      }
-    }
-  }
-}
-
-.switch label input[type=checkbox]:checked + .lever:after {
-  // background-color: $primary-color;
-  // left: 16px;
-}
-
-.switch label input[type=checkbox]:checked + .lever {
-    // background-color: color('blue-grey', lighten-4);
-}
+// .switch {
+//   label {
+//     .lever {
+//       // background-color: color('blue-grey', 'lighten-4');
+//       // height: 25px;
+//       // width: 40px;
+//
+//       &::after {
+//         // background-color: $primary-color-light;
+//         // box-shadow: none;
+//         // height: 23px;
+//         // left: 0;
+//         // top: 1px;
+//         // width: 23px;
+//       }
+//     }
+//   }
+// }
+//
+// .switch label input[type=checkbox]:checked + .lever:after {
+//   // background-color: $primary-color;
+//   // left: 16px;
+// }
+//
+// .switch label input[type=checkbox]:checked + .lever {
+//     // background-color: color('blue-grey', lighten-4);
+// }

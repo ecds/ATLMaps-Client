@@ -6,10 +6,10 @@
       <li id={{layer.vector_layer_id.name}}>
         <div class='collapsible-header'>
           <div class='row'>
+            {{!-- marker color is a helper --}}
             <div class='col s1 vector-icon left
               {{layer.vector_layer_id.data_type}}
               {{layer.vector_layer_id.data_format}}
-              {{!-- marker color is a helper --}}
               {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}'
             >
             </div>

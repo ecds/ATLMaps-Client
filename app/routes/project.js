@@ -157,11 +157,11 @@ export default Route.extend({
             this.controller.toggleProperty('showingSearch');
         },
 
-        updateProject(project, route) {
+        updateProject(project, message) {
             const _this = this;
             run.later(this, function() {
                 project.save().then(function() {
-                    set(_this, 'flashMessage.message', route);
+                    set(_this, 'flashMessage.message', message);
                     set(_this, 'flashMessage.success', true);
                     set(_this, 'flashMessage.show', true);
                     // _this.toggleProperty('flashMessage.showing');
@@ -173,7 +173,7 @@ export default Route.extend({
                     }, 3000)
                 }, function() {
                     // TODO figure out how to give feedback on these shared actions
-                    set(_this, 'flashMessage.message', 'well shit');
+                    set(_this, 'flashMessage.message', 'Oh no! Someting went wrong <i class="material-icons">sentiment_dissatisfied</i>');
                     set(_this, 'flashMessage.show', true);
                     set(_this, 'flashMessage.success', false);
 

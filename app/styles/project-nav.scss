@@ -8,7 +8,6 @@
 
   li {
     background-color: color('blue-grey', 'darken-1');
-    // box-shadow: $shadow;
     color: color('blue-grey', 'lighten-5');
     cursor: pointer;
     font-size: 1em;
@@ -21,8 +20,13 @@
     transition: opacity 300ms, color 300ms, max-height 300ms, font-size 300ms, background-color 300ms;
     transition-timing-function: ease-in-out;
 
+    &:first-child {
+      min-height: 5.25em;
+    }
+
+
     &.active {
-      background-color: $secondary-color;//$primary-color-light;
+      background-color: $secondary-color;
       color: color('grey', 'lighten-4');
       opacity: 1;
     }
@@ -31,7 +35,7 @@
     a {
       color: color('grey', 'lighten-5');
       font-weight: 400;
-      transition: color 200ms;
+      transition: background-color $rabbit;
       transition-timing-function: ease-in-out;
 
       &.active {
@@ -43,13 +47,11 @@
       background-color: color('blue-grey', 'lighten-3');
       box-shadow: $shadow;
       color: color('grey', 'darken-3');
-      // font-size: 1.25em;
       opacity: 1;
-      // z-index: 1;
 
       label {
+        background-color: color('blue-grey', 'lighten-3');
         color: color('grey', 'darken-4');
-        // font-size: 1.11em;
       }
 
       a {
@@ -85,17 +87,6 @@
   li {
 
     &:not(:first-child) {
-
-      // @keyframes hide {
-      //   0% {
-      //     display: block;
-      //   }
-      //
-      //   100% {
-      //     display: none;
-      //   }
-      // }
-
       max-height: 0;
       opacity: 0;
     }
@@ -121,4 +112,52 @@
     color: color('blue-grey', 'lighten-5');
     font-size: 1em;
   }
+}
+
+.project-top-nav {
+  box-shadow: none;
+  height: 2em;
+}
+
+.project-title {
+  background-color: $primary-color-dark;
+  color: $white;
+  height: 3em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+
+  h2 {
+    font-size: 2em;
+    line-height: 0;
+  }
+
+  .btn {
+    height: 3em;
+    transition: width $rabbit linear $rabbit;
+    width: 50%;
+  }
+
+  .collapse {
+    width: 0;
+  }
+
+  .reveal-btn {
+    padding-right: 0;
+  }
+
+  .col {
+    a {
+      color: color('grey', 'lighten-4');
+    }
+
+    &.s1 {
+      cursor: pointer;
+      padding: .5em .75em;
+      text-align: center;
+      width: $col1;
+    }
+  }
+
 }

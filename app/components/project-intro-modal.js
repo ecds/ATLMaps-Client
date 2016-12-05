@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { EKMixin, keyUp } from 'ember-keyboard';
 
 const {
+    $,
     Component,
     inject: { service },
     get,
@@ -23,6 +24,13 @@ export default Component.extend(EKMixin, {
         let project = get(this, 'project');
         project.setProperties({ suppressIntro: true });
     }),
+
+    didRender() {
+        $('#intro-body').trumbowyg({
+            fullscreenable: false,
+            removeformatPasted: true
+        });
+    },
 
     actions: {
 

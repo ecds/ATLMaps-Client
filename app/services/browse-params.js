@@ -23,8 +23,8 @@ export default Service.extend({
         });
     },
 
-    setSearchText(searchTerms) {
-        this.setProperties({ searchText: searchTerms });
+    setSearchText(searchText) {
+        this.setProperties({ searchText: searchText });
     },
 
     addTag(tag) {

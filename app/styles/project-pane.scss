@@ -103,6 +103,7 @@
   padding-bottom: 1em;
 
   .card {
+    border-radius: 0 0 2px 2px;
     margin-top: 0;
   }
 
@@ -345,22 +346,31 @@ a {
   }
 }
 
-// Text Search Clear Button
-.clear-text {
-  background-color: $secondary-color-light;
-  border: 1px solid transparent;
-  border-radius: 25%;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  top: .5em;
-  visibility: hidden;
+// input {
+//   &.required {
+//     :invalid ~ .clear-text {
+//       visibility: visible;
+//     }
+//   }
+// }
 
-  i {
-    vertical-align: top;
+// Raster list
+.collapsible-header {
+  &.raster-list-header {
+    padding-right: 0;
   }
 }
 
-input.required:invalid ~ .clear-text {
-  visibility: visible;;
+.reorder-handle {
+  height: 2em;
+
+  i {
+    margin-left: -.1em;
+    transform: rotate(-90deg);
+
+    &:hover {
+      color: $secondary-color;
+      cursor: ns-resize;
+    }
+  }
 }

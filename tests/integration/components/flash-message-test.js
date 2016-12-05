@@ -1,26 +1,23 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-
-moduleForComponent('edit-intro-modal', 'Integration | Component | edit intro modal', {
+moduleForComponent('flash-message', 'Integration | Component | flash message', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
-
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{edit-intro-modal}}`);
+  this.render(hbs`{{flash-message}}`);
 
-  assert.equal(this.$().text(), '');
+  assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#edit-intro-modal}}
+    {{#flash-message}}
       template block text
-    {{/edit-intro-modal}}
+    {{/flash-message}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
