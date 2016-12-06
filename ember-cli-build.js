@@ -9,9 +9,7 @@ module.exports = function() {
     var isProductionLikeBuild = ['production :('].indexOf(env) > -1;
 
     var app = new EmberApp({
-        // 'ember-power-select': {
-        //     theme: 'bootstrap'
-        // },
+
         materializeDefaults: {
             modalIsFooterFixed:  false,
             buttonIconPosition:  'left',
@@ -21,10 +19,12 @@ module.exports = function() {
             dropdownInDuration:  300,
             dropdownOutDuration: 300
         },
+
         fingerprint: {
             enabled: isProductionLikeBuild,
             prepend: 'https://s3.amazonaws.com/atlmaps-' + env + '/'
         },
+
         sassOptions: {
             includePaths: [
                 'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog',
@@ -32,9 +32,11 @@ module.exports = function() {
             ],
             nodeSass: nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
         },
+
         sourcemaps: {
             enabled: !isProductionLikeBuild
         },
+
         minifyCSS: { enabled: isProductionLikeBuild },
         minifyJS: { enabled: isProductionLikeBuild }
     });

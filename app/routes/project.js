@@ -2,7 +2,6 @@ import Ember from 'ember';
 import burgerMenu from 'ember-burger-menu';
 
 const {
-    $,
     RSVP,
     inject: {
         service
@@ -36,7 +35,8 @@ export default Route.extend({
                 default_base_map: 'street',
                 exploring: true,
                 may_edit: true,
-                description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.'
+                description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.',
+                explore: true
             });
             burgerMenu.set('open', true);
         } else {
@@ -112,7 +112,7 @@ export default Route.extend({
                 active_in_project: false
             });
         });
-        // Clear the raster layers that are marked active in this project.
+        // // Clear the raster layers that are marked active in this project.
         const rasters = this.store.peekAll('raster-layer');
         rasters.forEach(function(raster) {
             raster.setProperties({
@@ -123,12 +123,12 @@ export default Route.extend({
         set(this.controller, 'vectors', null);        // Clear checked institution
         const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
-        // TODO Why doesn't this work?
-        // Reset the year range.
-        // this.store.peekRecord('yearRange', 1).rollback();
-        // TODO Can this be done via the vectorDetailContent service?
-        $('.vector-info').remove();
-        // Clear the map.
+        // // TODO Why doesn't this work?
+        // // Reset the year range.
+        // // this.store.peekRecord('yearRange', 1).rollback();
+        // // TODO Can this be done via the vectorDetailContent service?
+        // $('.vector-info').remove();
+        // // Clear the map.
         get(this, 'mapObject.map').remove();
         set(this, 'mapObject.map', '');
 

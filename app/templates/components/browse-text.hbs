@@ -1,14 +1,6 @@
-  {{!-- {{input
-    placeholder='Search for layers'
-    id='search-text'
-    type='text'
-    value=browseParams.searchText
-    class='search-text-input'
-  }}
-  <label for='serarch-text' class='active'>Text Search</label> --}}
-  <div class='input-field inline'>
-    {{input id='search-text' type='text' enter='textSearch' key-up='setShowClearButton' value=searchTerms class='search-text-input active'}}
-    <label for='serarch-text' class='active'>Text Search</label>
-    <button class='clear-text {{if showingClearButton 'show-button'}}' type="reset" {{action 'clearSearch'}}><i class='material-icons'>close</i></button>
-    <h5>{{browseParams.searchTerms}}</h5>
-  </div>
+<div class='input-field inline'>
+  {{input id='search-text' type='text' enter='textSearch' key-up='setShowClearButton' value=searchTerms class='search-text-input active'}}
+  <label for='serarch-text' class='active'>Text Search</label>
+  <button class='clear-text {{if showingClearButton 'show-button'}}' type="reset" {{action 'clearSearch'}}><i class='material-icons'>close</i></button>
+  <h5>{{browseParams.searchTerms}}</h5>
+</div>

@@ -11,7 +11,8 @@
     "jquery": "~3.1.1",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~2.0.1",
-    "materialize": "0.97.6"
+    "materialize": "0.97.6",
+    "froala-wysiwyg-editor": "~2.3.5"
   },
   "devDependencies": {
     "blueimp-md5": "~1.1.0",
@@ -22,7 +23,6 @@
     "leaflet-ajax": "~1.1.0",
     "nouislider": "~8.0.2",
     "resizeThis": "~1.0.2",
-    "trumbowyg": "~1.1.7",
     "osmbuildings": "*",
     "bower": "*",
     "install": "~1.0.4",

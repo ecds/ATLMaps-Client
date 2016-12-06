@@ -45,7 +45,7 @@
   {{/burger.outlet}}
 {{/burger-menu}}
 
-{{#if model.project.hasIntro}}
+{{#if (or model.project.hasIntro model.project.editing)}}
   {{#unless model.project.suppressIntro}}
     {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
       {{project-intro-modal action='toggleIntro' project=model.project keyboardActivated=true }}

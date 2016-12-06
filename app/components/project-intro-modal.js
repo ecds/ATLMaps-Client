@@ -25,12 +25,12 @@ export default Component.extend(EKMixin, {
         project.setProperties({ suppressIntro: true });
     }),
 
-    didRender() {
-        $('#intro-body').trumbowyg({
-            fullscreenable: false,
-            removeformatPasted: true
-        });
-    },
+    // didRender() {
+    //     $('#intro-body').trumbowyg({
+    //         fullscreenable: false,
+    //         removeformatPasted: true
+    //     });
+    // },
 
     actions: {
 
