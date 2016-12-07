@@ -3,9 +3,22 @@
     <div class="col s12">
       <div class="card">
         <div class="card-content">
+          {{#if model.project.editing}}
+            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='500'}}
 
-            <span class="card-title">About</span>
+            {{#if (gte model.project.description.length 485)}}
+              <span class='character-counter red-text right'>
+                {{model.project.description.length}}/500
+              </span>
+            {{else}}
+              <span class='character-counter right'>
+                {{model.project.description.length}}/500
+              </span>
+            {{/if}}
+
+          {{else}}
             <p>{{model.project.description}}</p>
+          {{/if}}
         </div>
         <div class="card-action">
 

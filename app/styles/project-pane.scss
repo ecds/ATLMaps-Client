@@ -172,12 +172,15 @@
     .remove-layer {
       cursor: pointer;
       opacity: .7;
-      padding-left: .75em;
       transform: none;
 
       &:hover {
         opacity: 1;
       }
+    }
+
+    .remove-vector-layer {
+      padding-left: .75em;
     }
 
     .vector-icon {

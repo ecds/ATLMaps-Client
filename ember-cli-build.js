@@ -20,10 +20,10 @@ module.exports = function() {
             dropdownOutDuration: 300
         },
 
-        fingerprint: {
-            enabled: isProductionLikeBuild,
-            prepend: 'https://s3.amazonaws.com/atlmaps-' + env + '/'
-        },
+        // fingerprint: {
+        //     enabled: isProductionLikeBuild,
+        //     prepend: 'https://s3.amazonaws.com/atlmaps-' + env + '/'
+        // },
 
         sassOptions: {
             includePaths: [
