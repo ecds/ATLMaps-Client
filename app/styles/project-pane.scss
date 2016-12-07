@@ -18,6 +18,10 @@
     border-top: 1px solid $faded-black;
     height: 0;
   }
+
+  .save-pane-state {
+    background-color: $secondary-color;
+  }
 }
 
 // The following is the scrolling of the pane was inspired by this
