@@ -100,6 +100,7 @@ export default Route.extend({
     // Function the runs after we fully exit a project route and clears the map,
     // clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
     tearDown: function() {
+        this.currentModel.project.rolledBack();
         get(this, 'browseParams').init();
         // Clear the chekes for the checked categories and tags.
         const categories = this.store.peekAll('category');

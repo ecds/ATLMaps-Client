@@ -38,7 +38,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_HOST: 'http://api.atlmaps-dev.com:3000'
+    //   API_HOST: 'http://api.atlmaps-dev.com:3000'
     },
 
     metricsAdapters: [{
