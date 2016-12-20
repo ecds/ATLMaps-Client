@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import config from './config/environment';
 
+/**
+ * This is a motherfucking router.
+ */
+
 var Router = Ember.Router.extend({
     location: config.locationType,
     metrics: Ember.inject.service(),
@@ -25,11 +29,13 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
     this.route('projects', function() {
+      this.route('show', { path: '/:project_id' });
+    });//, function() {
         // TODO resource has been deprecated. make this a route.
         // Project needs to come out from under projects but we
         // will need to figure out redirects for the bad urls.
-        this.resource('project', {
-            path: '/:project_id'
+        this.route('project', {
+            path: '/project/:project_id'
         }, function() {
           this.route('edit');
           this.route('info');
@@ -39,7 +45,7 @@ Router.map(function() {
           this.route('help');
           this.route('browse-layers');
         });
-    });
+    // });
     this.route('about');
     this.route('login');
     this.route('explore');

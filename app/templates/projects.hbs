@@ -1,0 +1,37 @@
+<div class="banner orange">
+  <div class="container">
+    <header>
+      <h2>Projects</h2>
+    </header>
+  </div>
+</div>
+<div class="banner orange blurred">
+  <div class="container">
+    {{#auth-check}}
+    <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="material-icons right">add</i>Start New Project</a>
+    {{/auth-check}}
+
+      {{#if model.isPending}}
+        <h2>Loading...</h2>
+      {{else}}
+        {{#if model.mine}}
+          <h3>My Projects</h3>
+          <hr />
+          <div class="row">
+          {{#each model.mine as |myProject|}}
+            {{project-card project=myProject mine=true}}
+          {{/each}}
+          </div>
+        {{/if}}
+        <h3>Published Projects</h3>
+        <hr />
+        <div class="row">
+        {{#each model.published as |project|}}
+          {{project-card project=project}}
+        {{else}}
+          <p>There are no projects visible at this time :(</p>
+        {{/each}}
+        </div>
+      {{/if}}
+  </div>
+</div>

@@ -1,4 +1,7 @@
 <div class='navbar-fixed'>
+  <ul id="dropdown1" class="dropdown-content">
+  {{login-form}}
+</ul>
   <nav>
     <div class="nav-wrapper">
       {{!-- <a href="#" class="brand-logo right">Logo</a> --}}
@@ -7,6 +10,15 @@
         {{#link-to 'projects' tagName='li' }}{{link-to 'Projects' 'projects'}}{{/link-to}}
         {{#link-to 'about' tagName='li' }}{{link-to 'About' 'about'}}{{/link-to}}
       </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a {{action (toggle-action 'showUserMenu' this)}} class='title-bar-action'>
+            <i class='material-icons right burger'>menu</i>
+          </a>
+        </li>
+      </ul>
+
     </div>
   </nav>
 </div>
+{{user-menu showUserMenu=showUserMenu class='row'}}

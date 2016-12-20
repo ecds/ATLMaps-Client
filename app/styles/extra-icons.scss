@@ -21,3 +21,18 @@ i.material-icons.atlmaps-ext.database::before{
   font-family: 'atlmaps-ext';
   letter-spacing: .25em;
 }
+
+i.facebook-icon::before {
+  content: '\f09a';
+  font-family: 'atlmaps-ext';
+}
+
+i.twitter-icon::before {
+  content: '\f099';
+  font-family: 'atlmaps-ext';
+}
+
+i.google-icon::before {
+  content: '\f1a0';
+  font-family: 'atlmaps-ext';
+}

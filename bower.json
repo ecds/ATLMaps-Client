@@ -2,7 +2,7 @@
   "name": "atlmaps",
   "dependencies": {
     "ember": "2.10.0",
-    "ember-cli-shims": "0.1.3",
+    "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "ember-cli-test-loader#0.1.3",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.5",
     "ember-qunit": "0.4.10",
@@ -25,7 +25,7 @@
     "osmbuildings": "*",
     "bower": "*",
     "install": "~1.0.4",
-    "interact": "^1.2.6"
+    "interact": "^1.2.8"
   },
   "resolutions": {
     "ember": "2.7.1"

@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'atlmaps-ext';
-  src: url('../font/atlmaps-ext.eot?29660505');
-  src: url('../font/atlmaps-ext.eot?29660505#iefix') format('embedded-opentype'),
-       url('../font/atlmaps-ext.woff?29660505') format('woff'),
-       url('../font/atlmaps-ext.ttf?29660505') format('truetype'),
-       url('../font/atlmaps-ext.svg?29660505#atlmaps-ext') format('svg');
+  src: url('../font/atlmaps-ext.eot?7002857');
+  src: url('../font/atlmaps-ext.eot?7002857#iefix') format('embedded-opentype'),
+       url('../font/atlmaps-ext.woff2?7002857') format('woff2'),
+       url('../font/atlmaps-ext.woff?7002857') format('woff'),
+       url('../font/atlmaps-ext.ttf?7002857') format('truetype'),
+       url('../font/atlmaps-ext.svg?7002857#atlmaps-ext') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'atlmaps-ext';
-    src: url('../font/atlmaps-ext.svg?29660505#atlmaps-ext') format('svg');
+    src: url('../font/atlmaps-ext.svg?7002857#atlmaps-ext') format('svg');
   }
 }
 */
@@ -54,5 +55,7 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-database:before { content: '\e800'; } /* '' */
 .icon-polygon:before { content: '\e801'; } /* '' */
+.icon-twitter:before { content: '\f099'; } /* '' */
+.icon-facebook:before { content: '\f09a'; } /* '' */
+.icon-google:before { content: '\f1a0'; } /* '' */

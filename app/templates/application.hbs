@@ -1,15 +1,9 @@
-{{!outlet 'modal'}}
-
-    {{!-- {{outlet}} --}}
-
 <div class="content">
-
-    {{#unless isProjectDetail}}
-        {{ main-nav session='session'}}
-    {{/unless}}
-
-    {{outlet}}
-    {{#unless isProjectDetail}}
-        {{ main-footer }}
-    {{/unless}}
+  {{#unless isProjectDetail}}
+    {{ main-nav session='session'}}
+  {{/unless}}
+  {{outlet}}
+  {{#unless isProjectDetail}}
+    {{ main-footer }}
+  {{/unless}}
 </div>

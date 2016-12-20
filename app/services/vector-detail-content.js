@@ -17,6 +17,7 @@ export default Service.extend({
     },
 
     viewData(feature, layer) {
+
         let popupContent = '';
 
         if (feature.properties.image) {

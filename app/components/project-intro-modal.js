@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { EKMixin, keyUp } from 'ember-keyboard';
 
 const {
-    $,
     Component,
     inject: { service },
     get,

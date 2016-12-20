@@ -1,31 +1,23 @@
 import Ember from 'ember';
 
-const {
-    Service,
-    inject: {
-        service
-    },
-    set
-} = Ember;
+/**
+ * Service to track currently logged in user.
+ * @type {Object}
+ */
+const { Service, inject: { service } } = Ember;
 
 export default Service.extend({
-    session: service('session'),
-    store: service(),
+  session: service('session'),
+  store: service(),
 
-    init() {
-        this._super(...arguments);
-        let userId = this.get('session.data.authenticated.user.id');
-        let _this = this;
-        try {
-            this.get('store').findRecord('user', userId).then(function(user) {
-                console.log('user', user);
-                set(_this, 'user', user);
-            });
-        } catch(err) {
-            // TODO something with this caught error.
-            /* err */
-        }
-        set(this, 'tags', {});
-        set(this, 'previous', '');
+  user: {},
+
+  load() {
+      let _this = this;
+    if (this.get('session.isAuthenticated')) {
+      return this.get('store').find('user', 'me').then(function(user) {
+        _this.set('user', user);
+      });
     }
+  }
 });

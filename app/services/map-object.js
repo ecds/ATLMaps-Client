@@ -54,7 +54,7 @@ export default Service.extend({
 
             // Zoom contorl, topright
             L.control.zoom({
-                position: 'topright'
+                position: 'bottomright'
             }).addTo(_map);
 
             // TODO would it be better to also track the layers as a group?

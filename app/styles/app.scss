@@ -30,7 +30,9 @@ $nav-button: color('grey', 'darken-4');
 'project-intro',
 'search-pane',
 'vector-info',
-'project-nav';
+'project-nav',
+'user-menu',
+'social-auth';
 
 h3 {
   font-size: 1.75em;
@@ -179,6 +181,15 @@ a {
 textarea {
   &.description {
     height: 8rem;
+  }
+}
+
+.delete-project {
+  color: $secondary-color-light;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary-color;
   }
 }
 

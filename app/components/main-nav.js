@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 const {
     Component,
+    $,
     inject: {
         service
     }
@@ -9,5 +10,9 @@ const {
 
 export default Component.extend({
     currentUser: service(),
-    session: service()
+    session: service(),
+
+    didInsertElement() {
+        $(".dropdown-button").dropdown();
+    }
 });

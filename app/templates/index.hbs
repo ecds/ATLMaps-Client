@@ -5,15 +5,15 @@
     <h1 class=''>Layers of discovery</h1>
     <h2 class=''>Mapping the stories of your city</h2>
     <span calss=''>
-          {{#if session.isAuthenticated}}
-              {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
-          {{else}}
-              {{#link-to 'explore' tagName='a' class="btn btn-raised btn-info" }}
-                Start Exploring
-              {{/link-to}}
+      {{#if session.isAuthenticated}}
+          {{#link-to 'projects' tagName='a' class="btn btn-raised btn-info" }}Go to Projects{{/link-to}}
+      {{else}}
+          {{#link-to 'explore' tagName='a' class="btn btn-raised btn-info" }}
+            Start Exploring
+          {{/link-to}}
 
-          {{/if}}
-        </span>
+      {{/if}}
+    </span>
   </div>
 
 </div>

@@ -16,6 +16,10 @@ export default Route.extend({
     session: service(),
     currentUser: service(),
 
+    beforeModel() {
+        return this._loadCurrentUser();
+    },
+
     model() {
         // The API will only return published projects when asked for all.
         // We'll make seperate calls for a user's projects if a user is authenticated.
@@ -23,10 +27,10 @@ export default Route.extend({
             return RSVP.hash({
                 published: this.store.findAll('project'),
                 mine: this.store.query('project', {
-                    user_id: this.get('session.session.content.authenticated.user.id')
+                    user_id: get(this, 'currentUser.user.id')
                 }),
                 collaborations: this.store.query('project', {
-                    collaborations: this.get('session.session.content.authenticated.user.id')
+                    collaborations: get(this, 'currentUser.user.id')
                 })
             });
         }
@@ -39,11 +43,14 @@ export default Route.extend({
         }
     },
 
+    _loadCurrentUser() {
+        return this.get('currentUser').load();
+    },
+
     actions: {
 
         didTransition() {
             $(document).attr('title', 'ATLMaps: Projects');
-            console.log('currentUser', get(this, 'currentUser'));
         },
 
         createProject() {
@@ -55,7 +62,7 @@ export default Route.extend({
             let project = this.store.createRecord('project', {
                 name: newProjectName,
                 // I really hate this and there has to be a better way.
-                user_id: this.get('session.session.content.authenticated.user.id'),
+                user_id: this.get('currentUser.user.id'),
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,

@@ -4,11 +4,11 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var nodeSass = require('node-sass'); // loads the version in your package.json
 
-module.exports = function() {
+module.exports = function(defaults) {
     var env = EmberApp.env();
     var isProductionLikeBuild = ['production :('].indexOf(env) > -1;
 
-    var app = new EmberApp({
+    var app = new EmberApp(defaults, {
 
         materializeDefaults: {
             modalIsFooterFixed:  false,
@@ -18,6 +18,10 @@ module.exports = function() {
             modalContainerId:    'materialize-modal-root-element',
             dropdownInDuration:  300,
             dropdownOutDuration: 300
+        },
+
+        emberComposableHelpers: {
+            only: ['toggle']
         },
 
         // fingerprint: {
@@ -48,9 +52,9 @@ module.exports = function() {
         destDir: 'assets/images'
     });
 
-    var trumbowygImages = funnel('bower_components/trumbowyg/dist/ui/images', {
-        destDir: 'assets/images'
-    });
+    // var ckeditorPath = funnel('bower_components/ckeditor', {
+    //     destDir: 'assets/ckeditor'
+    // });
 
     app.import('bower_components/leaflet/dist/leaflet.js');
     app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
@@ -58,7 +62,8 @@ module.exports = function() {
     app.import('bower_components/nouislider/distribute/nouislider.min.js');
     // app.import('bower_components/list.js/dist/list.min.js');
     app.import('bower_components/js-cookie/src/js.cookie.js');
-    app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
+    // app.import('bower_components/ckeditor/ckeditor.js');
+    // app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
     app.import('bower_components/interact/dist/interact.min.js');
@@ -76,5 +81,5 @@ module.exports = function() {
     // ], {
     //     overwrite: true
     // });
-    return app.toTree([leafletImages, trumbowygImages]);
+    return app.toTree([leafletImages]);//, ckeditorPath]);
 };

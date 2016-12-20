@@ -2,16 +2,13 @@ import DS from 'ember-data';
 
 const {
     Model,
-    attr,
-    belongsTo
+    attr
 } = DS;
 
 export default Model.extend({
     displayname: attr('string'),
     avatar: attr('string'),
-    institution_id: belongsTo('institution'),
-    institution: attr(),
-    project_ids: attr(),
-    projects: attr(),
+    // institution_: belongsTo('institution'),
+    // projects: hasMany('projects'),
     number_tagged: attr('number')
 });

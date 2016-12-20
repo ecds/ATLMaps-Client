@@ -21,6 +21,14 @@ export default Route.extend({
     session: service(),
     cookies: service(),
     flashMessage: service(),
+    currentUser: service(),
+
+    // This prevents redirection after authentication.
+    beforeModel: function(transition) {
+        if (!this.get('session.isAuthenticated')) {
+          this.set('session.attemptedTransition', transition);
+        }
+    },
 
     model(params) {
         let project = '';
@@ -67,7 +75,6 @@ export default Route.extend({
     setUp: function() {
         const project = this.modelFor('project').project;
         const cookieService = get(this, 'cookies');
-        // this.controller.setProperties({showingSearch: false});
         const _this = this;
 
         run.scheduleOnce('afterRender', function() {
@@ -141,6 +148,8 @@ export default Route.extend({
             set(this.controller, `${type}_diffResults`, false);
         }, 300);
     },
+
+
 
     actions: {
 

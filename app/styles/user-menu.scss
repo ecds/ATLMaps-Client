@@ -1,0 +1,27 @@
+.user-menu {
+  // background-color: color('grey', 'lighten-3');
+  background-color: color('blue-grey', 'lighten-5');
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1em;
+  position: absolute;
+  right: 0;
+  top: 3em;
+  transition: max-height $turtle ease-in-out, overflow $turtle ease-in-out, padding $turtle ease-in-out;
+  width: 25vw;
+
+  .sign-btn {
+    color: $primary-color-dark;
+  }
+
+  label {
+    color: color('blue-grey', 'darken-4');
+  }
+}
+
+.user-menu-show {
+  max-height: 75vh;
+  overflow: auto;
+  padding: 1em;
+  z-index: 1;
+}

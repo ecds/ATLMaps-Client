@@ -128,12 +128,17 @@
   width: 100%;
   z-index: 998;
 
-  h2 {
+  .h2 {
     font-size: 2em;
-    line-height: 0;
+    padding-left: .5em;
   }
 
-  .btn {
+  .burger {
+    font-size: 3em;
+    padding-right: .5em;
+  }
+
+  .search-btn {
     height: 3em;
     transition: width $rabbit linear $rabbit;
     width: 50%;
@@ -147,14 +152,15 @@
     padding-right: 0;
   }
 
+  // Back to Projects Button
   .col {
-    a {
+    .title-bar-action {
       color: color('grey', 'lighten-4');
     }
 
-    &.s1 {
+    &.l1 {
       cursor: pointer;
-      padding: .5em .75em;
+      padding: .25em .75em;
       text-align: center;
       width: $col1;
     }

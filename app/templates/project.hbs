@@ -13,6 +13,7 @@
         </a>
       </div>
     </div>
+    {{!-- empty div is the wormhole --}}
     <div id='results' />
   {{/burger.menu}}
 
@@ -23,21 +24,25 @@
       <div class='base-layer-controls'></div>
     </div>
     <div class='project-title row z-depth-2'>
-      <div class='col s1'>
-        {{#link-to 'projects' tagName='a' }}
+      <div class='col l1'>
+        {{#link-to 'projects' tagName='a' class='title-bar-action'}}
           <i class='material-icons exit'>exit_to_app</i>
         {{/link-to}}
       </div>
-      <div class='col s8'>
-        <h2>{{model.project.name}}</h2>
+      <div class='col l8'>
+        <span class='h2 truncate'>{{model.project.name}}</span>
       </div>
-      <div class='col m3 right reveal-btn'>
+      <div class='col l3 right reveal-btn'>
         {{#if model.project.may_edit}}
-          <button class="btn waves-effect waves-light right {{if burger.state.open 'collapse'}}" type="submit" {{action 'showSearch'}}>
+          <button class="search-btn btn waves-effect waves-light right {{if burger.state.open 'collapse'}}" type="submit" {{action 'showSearch'}}>
             <i class='material-icons'>search</i> Search
           </button>
         {{/if}}
+        <a {{action (toggle-action 'showUserMenu' this)}} class='title-bar-action'>
+          <i class='material-icons right burger'>menu</i>
+        </a>
       </div>
+      {{user-menu showUserMenu=showUserMenu}}
     </div>
     {{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
 
