@@ -36,8 +36,8 @@ export default Component.extend({
             let _this = this;
             layer.get('vector_layer_id').then(function(vector) {
                 vector.setProperties({
-                    color_name: color.name,
-                    color_hex: color.hex
+                    colorName: color.name,
+                    colorHex: color.hex
                 });
                 _this.get('mapObject').updateVectorStyle(vector, color);
             });

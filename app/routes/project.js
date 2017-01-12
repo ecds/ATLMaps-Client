@@ -280,7 +280,8 @@ export default Route.extend({
                 attrs.project_id = project.id;
                 // Get the join between layer and project
                 // Remove the object from the map/DOM
-                this.get('mapObject.projectLayers')[layer.get('slug')].remove();
+                // TODO: better way to organize the projectLayers?
+                this.get('mapObject.projectLayers')[`${format}s`][layer.get('slug')].remove();
                 // $(`#${layer.get('name')}`).remove();
                 // Delete the record from the project
                 this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {

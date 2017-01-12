@@ -1,3 +1,7 @@
+/** @public
+ * Component that inplamnets opacity sliders for raster layers
+ * using noUiSlider (https://refreshless.com/nouislider/)/
+*/
 import Ember from 'ember';
 
 /* globals noUiSlider */
@@ -18,80 +22,58 @@ export default Component.extend({
     classNames: ['opacity-slider'],
 
     didInsertElement() {
-        let _this = this;
-        let projLayer = get(this, 'projLayer') || false;
-        let layer = get(this, 'layer');
+        const self = this;
+        const layer = get(this, 'layer') || false;
+        // const projectLayers = get(this, 'mapObject.projectLayers.rasters');
 
         let startOpacity = 10;
-        if (projLayer) {
-            startOpacity = projLayer.get('opacity');
+        if (layer) {
+            startOpacity = layer.set('opacity', 10);
         }
-        let options = {
+        const options = {
             start: startOpacity,
             connect: false,
             range: {
-                'min': 0,
-                'max': 10
+                min: 0,
+                max: 10
             }
         };
 
-        let slider = document.getElementById(layer.get('slider_id'));
+        const slider = document.getElementById(layer.get('slider_id'));
 
         noUiSlider.create(slider, options, true);
 
-        // Change the opactity when a user moves the slider.
-        let valueInput = document.getElementById(layer.get('slider_id'));
-
-        slider.noUiSlider.on('update', function(values, handle) {
-            let opacity = values[handle] / 10;
+        slider.noUiSlider.on('update', (values, handle) => {
+            const opacity = values[handle] / 10;
             // Get the Leaflet object and use its `setOpacity` to, well, set the opacity.
-            get(_this, 'mapObject.projectLayers')[get(layer, 'slug')].setOpacity(opacity);
-            projLayer.setProperties({opacity: opacity});
-            if (projLayer !== false) {
-                projLayer.setProperties({
+            get(self, 'mapObject.projectLayers.rasters')[get(layer, 'slug')].setOpacity(opacity);
+            layer.setProperties({ opacity });
+            if (layer !== false) {
+                layer.setProperties({
                     opacity: values[handle]
                 });
-                if (opacity > 0) {
-                    // TODO This should happen by setting the `showing` attripute.
-                    $('#toggle-layer-opacity input').prop('checked', true)
-                    projLayer.setProperties({
-                        showing: true
-                    });
-                } else {
-                    projLayer.setProperties({
-                        showing: false
-                    });
-                }
-
             }
         });
 
-        valueInput.addEventListener('change', function() {
-            slider.noUiSlider.set(this.value);
-        });
+        set(layer, 'sliderObject', slider.noUiSlider);
 
         // Make a reference so we can destroy on exit.
         set(this, 'slider', slider);
 
         // Watch the toggle check box to show/hide all raster layers.
-        let showHideSwitch = document.getElementById('toggle-layer-opacity');
-        showHideSwitch.addEventListener('change', function() {
-            if ($('#toggle-layer-opacity').prop('checked')) {
-                slider.noUiSlider.set(10);
-                projLayer.setProperties({ showing: true });
-            } else {
-                slider.noUiSlider.set(0);
-                projLayer.setProperties({ showing: false });
-            }
-        });
-
-        // set(this, 'toggle', showHideSwitch);
-
+        // const showHideSwitch = document.getElementById('toggle-layer-opacity');
+        // showHideSwitch.addEventListener('change', () => {
+        //     if ($('#toggle-layer-opacity').prop('checked')) {
+        //         Object.values(projectLayers).forEach(() => {
+        //             slider.noUiSlider.set(10);
+        //         });
+        //     } else {
+        //         Object.values(projectLayers).forEach(() => {
+        //             slider.noUiSlider.set(0);
+        //         });
+        //     }
+        // });
     },
-
-    // update(slider) {
-    //     slider.noUiSlider.updateOptions({ orientation: 'vertical' });
-    // },
 
     willDestroyElement() {
         get(this, 'slider').noUiSlider.destroy();

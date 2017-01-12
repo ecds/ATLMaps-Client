@@ -1,12 +1,9 @@
-{{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers"}}
-<div class='card'>
-
-  <ul class='scrollable-list collapsible' data-collapsible='accordion'>
-    {{#each model.project.vector_layer_project_ids as |layer|}}
-      <li id={{layer.vector_layer_id.name}}>
-        <div class='collapsible-header'>
-          <div class='row'>
-            {{!-- marker color is a helper --}}
+{{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers" }}
+  <div class='card'>
+    <ul class='scrollable-list project-collapsible collapsible' data-collapsible='accordion'>
+      {{#each model.project.vector_layer_project_ids as |layer|}}
+        <li id= {{layer.vector_layer_id.name}}>
+          {{#layer-list-item layer=layer.vector_layer_id}}
             <div class='col s1 vector-icon left
               {{layer.vector_layer_id.data_type}}
               {{layer.vector_layer_id.data_format}}
@@ -16,41 +13,23 @@
               {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}
             </div>
             <div class='col s2'>
-              {{!-- {{md-switch checked=layer.showing onLabel='' offLabel='' action='toggleVectorLayer' layer=layer}} --}}
               <div class='row'>
                 <div class='col s12'>
                   <div class="switch list">
                     <label>
-                      <input type="checkbox" checked={{layer.showing}} {{action 'toggleVectorLayer' layer checked on="change"}}>
+                      <input type="checkbox" checked={{layer.vector_layer_id.showing}} {{action 'toggleVectorLayer' layer.vector_layer_id checked on="change"}}>
                       <span class="lever"></span>
                     </label>
                   </div>
                 </div>
               </div>
-              {{#if (and model.project.may_edit model.project.editing)}}
-              <div class='row'>
-                <div class='col s12'>
-                  {{#if model.project.may_edit}}
-                    <a class='remove-layer' onclick={{action (route-action 'addRemoveLayer' layer.vector_layer_id) preventDefault=true}}>
-                      <i class='remove-layer remove-vector-layer material-icons'>delete</i>
-                    </a>
-                  {{/if}}
-                </div>
-              </div>
-              {{/if}}
+              {{remove-layer-button model=model layer=layer}}
             </div>
-          </div>
-        </div>
-        <div class='collapsible-body card-content'>
-          <p class='black-text'>
-            {{if layer.vector_layer_id.description layer.vector_layer_id.description 'No description :('}}
-          </p>
-          {{layer-citation layer=layer.vector_layer_id}}
-        </div>
-      </li>
-    {{else}}
-      <h4 class='row'>No data layers have been added</h4>
-    {{/each}}
-  </ul>
-</div>
+          {{/layer-list-item}}
+        </li>
+      {{else}}
+        <h4 class='row'>No data layers have been added</h4>
+      {{/each}}
+    </ul>
+  </div>
 {{/project-pane}}

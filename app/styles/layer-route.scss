@@ -1,0 +1,39 @@
+.layers-route {
+  .project-pane {
+    font-size: 14px;
+    left: .25em;
+    position: absolute;
+    top: 0;
+    width: 25%;
+  }
+
+  .pane-title {
+    display: none;
+  }
+
+  .card {
+    background-color: transparent;
+  }
+
+  ul {
+    background-color: transparent;
+    padding-top: .25em !important;
+  }
+
+  .sortable-item {
+    background-color: $white;
+    margin: .25em;
+    padding: .5em;
+
+    .collapsible-header {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  .reorder-handle {
+    i {
+      margin-right: -.6em;
+    }
+  }
+}

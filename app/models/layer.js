@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 const {
     Model,
@@ -6,6 +7,8 @@ const {
     belongsTo,
     hasMany
 } = DS;
+
+const { computed, get, inject: { service } } = Ember;
 
 export default Model.extend({
     /*
@@ -38,5 +41,20 @@ export default Model.extend({
     active_in_project: attr('boolean', {
         defaultValue: false
     }),
-    url: attr('string')
+    url: attr('string'),
+    leaflet_id: attr('number'),
+    leaflet_object: attr(),
+    opacity: attr('number'),
+    mapObject: service(),
+    showing: computed(function visiableLayer() {
+        if (get(this, 'leaflet_object')) {
+            if (Number.parseInt(get(this, 'opacity'), 10) !== 0) {
+                get(this, 'leaflet_object').addTo(get(this, 'mapObject.map'));
+                return true;
+            }
+            get(this, 'leaflet_object').remove();
+            return false;
+        }
+        return true;
+    }).property('opacity')
 });

@@ -142,7 +142,7 @@
   border: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: 6em;
+  // padding-bottom: 6em;
 
   &.collapsible {
     box-shadow: none;
@@ -154,7 +154,7 @@
   }
 }
 
-.collapsible {
+.project-collapsible {
 
   .collapsible-header {
     border-bottom: 0;
@@ -363,17 +363,17 @@ a {
 // }
 
 // Raster list
-.collapsible-header {
-  &.raster-list-header {
-    padding-right: 0;
-  }
-}
+// .collapsible-header {
+//   &.raster-list-header {
+//     padding-right: 0;
+//   }
+// }
 
 .reorder-handle {
   height: 2em;
 
   i {
-    margin-left: -.1em;
+    margin-right: -.3em;
     transform: rotate(-90deg);
 
     &:hover {

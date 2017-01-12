@@ -30,6 +30,12 @@
   &.layer-icon {
     font-size: 3em;
     padding: 0;
+
+    .map-marker {
+      bottom: .25em;
+      font-size: 1em;
+      left: .5em;
+    }
   }
 
   &.title {

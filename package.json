@@ -43,7 +43,6 @@
     "ember-composability": "0.3.7",
     "ember-composable-helpers": "1.1.2",
     "ember-cookies": "0.0.9",
-    "ember-data": "2.10.0",
     "ember-export-application-global": "^1.0.5",
     "ember-keyboard": "1.0.3",
     "ember-load-initializers": "^0.5.1",
@@ -58,15 +57,17 @@
     "ember-sortable": "1.8.2",
     "ember-tether": "0.3.1",
     "ember-truth-helpers": "1.2.0",
-    "eslint": "^3.8.1",
+    "eslint": "^3.13.0",
     "eslint-config-airbnb-base": "^9.0.0",
-    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-ember-suave": "^1.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "loader.js": "^4.0.10",
     "node-sass": "3.10.0",
     "tether": "1.3.7",
     "torii": "^0.8.1"
   },
   "dependencies": {
-    "ember": "^1.0.0-pre.2"
+    "ember": "^1.0.0-pre.2",
+    "ember-data": "2.10.0"
   }
 }

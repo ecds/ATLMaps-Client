@@ -9,17 +9,9 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
 
+    // Empty hash that gets populated below depending on the environment.
     torii: {
-      providers: {
-        'facebook-oauth2': {
-          apiKey: '382820178724645',
-          redirectUri: 'http://localhost:4200/about'
-        },
-        'google-oauth2': {
-            apiKey: '646382922448-23d242gkptr9jodipnln87f5klhal48i.apps.googleusercontent.com',
-            redirectUri: 'http://localhost:4200/about'
-        }
-      }
+      providers: {}
     },
 
     materializeDefaults: {
@@ -59,6 +51,15 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.API_HOST = 'http://api.atlmaps-dev.com:3000';
     ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-1';
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '382820178724645',
+      redirectUri: 'http://localhost:4200/about'
+    };
+    ENV.torii.providers['google-oauth2'] = {
+        apiKey: '646382922448-23d242gkptr9jodipnln87f5klhal48i.apps.googleusercontent.com',
+        redirectUri: 'http://localhost:4200/about'
+    };
   }
 
   if (environment === 'test') {
@@ -76,11 +77,30 @@ module.exports = function(environment) {
   if (environment === 'staging') {
     ENV.APP.API_HOST = 'http://atlmaps-api.ecdsweb.org';
     ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-1';
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '1622636571366463',
+      redirectUri: 'http://atlmaps.ecdsweb.org/'
+    };
+    ENV.torii.providers['google-oauth2'] = {
+        apiKey: '615924131365-31oenop822l5v4cilaih5s22q6fpps3u.apps.googleusercontent.com',
+        redirectUri: 'http://atlmaps.ecdsweb.org'
+    };
   }
 
   if (environment === 'production') {
     ENV.APP.API_HOST = 'https://api.atlmaps.com';
     ENV.metricsAdapters[0]['config']['id'] = 'UA-71558106-2';
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '425398021183204',
+      redirectUri: 'https://atlmaps.com/'
+    };
+    ENV.torii.providers['google-oauth2'] = {
+        apiKey: '78026432363-8o0b40k5m86ob4o4cn5gkmn8pkc060on.apps.googleusercontent.com',
+        redirectUri: 'https://atlmaps.com'
+    };
+
   }
 
   ENV.contentSecurityPolicy = {

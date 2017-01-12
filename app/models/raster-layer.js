@@ -1,10 +1,10 @@
 import DS from 'ember-data';
+import Layer from './layer';
 
 const {
     attr,
     belongsTo
 } = DS;
-import Layer from './layer';
 
 export default Layer.extend({
     workspace: attr('string'),
@@ -16,13 +16,7 @@ export default Layer.extend({
         inverse: null
     }),
     layers: attr('string'),
-    opacity: attr('number', {
-        defaultValue: 10
-    }),
+    sliderObject: attr(),
     tagem: attr('boolean'),
-
-    // These are attributes that are presisted on the through
-    // table. Adding to layer model on load until we actually
-    // fix this.
     position: attr('number')
 });

@@ -1,0 +1,20 @@
+<div class='collapsible-header'>
+  <div class='row'>
+    {{yield}}
+  </div>
+</div>
+
+{{#if (eq layer.data_format 'raster')}}
+<div class='slider-container'>
+  {{#if layer.leaflet_id}}
+    {{opacity-slider layer=layer}}
+  {{/if}}
+</div>
+{{/if}}
+
+<div class='collapsible-body card-content'>
+  <p class='black-text'>
+    {{if layer.description layer.description 'No description :('}}
+  </p>
+  {{layer-citation layer=layer}}
+</div>

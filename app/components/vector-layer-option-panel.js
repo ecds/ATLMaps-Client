@@ -32,8 +32,8 @@ export default Component.extend({
                     color = this.get('dataColors.shapeColors')[this.get('layer.marker')];
                 }
                 layer.setProperties({
-                    color_name: color.name,
-                    color_hex: color.hex
+                    colorName: color.name,
+                    colorHex: color.hex
                 });
                 this.get('mapObject').updateVectorStyle(this.get('layer.vector_layer_id'));
             }

@@ -1,11 +1,16 @@
 import DS from 'ember-data';
+import Ember from 'ember';
+import LayerProject from './layer-project';
 
 const {
     attr,
     belongsTo
 } = DS;
 
-import LayerProject from './layer-project';
+const {
+    computed,
+    get
+} = Ember;
 
 export default LayerProject.extend({
     data_format: attr(),
@@ -16,7 +21,11 @@ export default LayerProject.extend({
     }),
 
     // Non-API attributes for persisting state.
-    opacity: attr('number', {
-        defaultValue: 10
-    })
+    // opacity: computed(function getOpacity() {
+    //     return get(this, 'raster_layer_id.opacity');
+    // }).property('raster_layer_id.opacity'),
+
+    showing: computed(function isShowing() {
+        return get(this, 'raster_layer_id.showing');
+    }).property('raster_layer_id.showing')
 });

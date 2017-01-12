@@ -5,8 +5,8 @@ const {
     Helper
 } = Ember;
 
-export function bgcolor(params /*, hash*/) {
-    return new Handlebars.SafeString('background-color: ' + params[0] + ';');
+export function bgcolor(params /* hash */) {
+    return new Handlebars.SafeString(`background-color: ${params[0]};`);
 }
 
 export default Helper.helper(bgcolor);

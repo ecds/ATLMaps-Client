@@ -29,7 +29,7 @@ export default Route.extend({
                 item.setProperties({ position: newPosition });
 
                 let rasterSlug = item.get('raster_layer_id.slug');
-                _this.get('mapObject.projectLayers')[rasterSlug].setZIndex(newPosition);
+                _this.get('mapObject.projectLayers.rasters')[rasterSlug].setZIndex(newPosition);
                 // TODO if may edit, provide way to save order in not in edit mode
                 // TODO provide feedback on save
                 if (groupModel.project.get('editing') === true) {

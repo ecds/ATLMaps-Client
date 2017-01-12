@@ -1,0 +1,10 @@
+{{#if (and model.project.may_edit model.project.editing)}}
+{{!log layer}}
+  <div class='row'>
+    <div class='col s12'>
+      <a class='remove-layer secondary-conent right' onclick= {{action (route-action 'addRemoveLayer' layer.raster_layer_id) preventDefault=true}}>
+        <i class='remove-layer right material-icons'>delete</i>
+      </a>
+    </div>
+  </div>
+{{/if}}

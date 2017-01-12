@@ -11,7 +11,7 @@
                     <h3 class="list-group-item-heading">{{#link-to 'project' project}}{{project.name}}{{/link-to}}</h3>
                 </div>
                 <div class="col-xs-2">
-                    {{#if project.is_mine}}
+                    {{#if project.mine}}
                     <div class="action-secondary">
                         <a {{action 'deleteProject' project.id}} title="Delete Project">
                             <i class="material-icons">delete_forever</i>

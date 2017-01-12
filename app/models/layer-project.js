@@ -12,8 +12,5 @@ export default Model.extend({
     // Non-API property. Used to show/hide the layer's description in the list.
     clicked: attr('boolean', {
         defaultValue: false
-    }),
-    showing: attr('boolean', {
-        defaultValue: true
     })
 });

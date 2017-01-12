@@ -10,26 +10,18 @@
   </div>
   <div class='col s2'>
     {{#if raster}}
-      <div class="switch">
-        <label>
-          <input type='checkbox' checked={{model.visiable_raster}} id='toggle-layer-opacity'>
-          <span class="lever"></span>
-        </label>
-    </div>
+    {{show-hide-layers layers=model.raster_layer_ids checked=model.visiable_raster}}
     {{/if}}
     {{#if vector}}
-      <div class="switch">
-        <label>
-          <input type="checkbox" {{action (route-action 'toggleAllVectorLayers') layer checked on="change"}} checked={{model.visiable_vector}}>
-          <span class="lever"></span>
-        </label>
-      </div>
+      {{show-hide-layers layers=model.vector_layer_ids checked=model.visiable_vector}}
     {{/if}}
   </div>
   <div class="col s1">
+    {{#if project}}
     {{#link-to 'project'}}
       <i class="material-icons close-button">highlight_off</i>
     {{/link-to}}
+    {{/if}}
   </div>
 </div>
 <div class='row feedback white-text {{if flashMessage.success 'green' 'red'}} {{if flashMessage.show 'show-flash'}}'>{{flashMessage.message}}</div>

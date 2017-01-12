@@ -1,0 +1,58 @@
+<div class='layers-route'>
+  {{#project-pane title='Maps'}}
+    <div class='card'>
+
+      {{#sortable-group tagName="ul" class='scrollable-list project-collapsible collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
+        {{#each model.rasters as |layer|}}
+          {{#sortable-item tagName="li" class='sortable-item' id=layer.slug model=layer group=group handle=".reorder-handle" }}
+            {{#layer-list-item layer=layer}}
+            <div class='title col s10'>
+              {{if layer.name layer.title 'Loading...'}}
+            </div>
+            <div class='secondary-conent reorder-handle col s2'>
+              <div class='row'>
+                <div class='col s12'>
+                  <i class='material-icons right'>code</i>
+                </div>
+              </div>
+              {{remove-layer-button model=model layer=layer}}
+            </div>
+            {{/layer-list-item}}
+          {{/sortable-item}}
+          {{else}}
+            <h4 class='row'>No maps have been added</h4>
+        {{/each}}
+
+        {{#each model.vectors as |layer|}}
+          <li id= {{layer.name}}>
+            {{#layer-list-item layer=layer}}
+              <div class='col s1'>
+              </div>
+              <div class='title data-title col s8'>
+                {{if layer.name layer.title 'Loading...'}}
+              </div>
+              <div class='col s2'>
+                <div class='row'>
+                  <div class='col s12'>
+                    <div class="switch list">
+                      <label>
+                        <input type="checkbox" checked={{layer.showing}} {{action 'toggleVectorLayer' layer checked on="change"}}>
+                        <span class="lever"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                {{remove-layer-button model=model layer=layer}}
+              </div>
+            {{/layer-list-item}}
+          </li>
+        {{else}}
+          <h4 class='row'>No data layers have been added</h4>
+        {{/each}}
+        {{/sortable-group}}
+    </div>
+  {{/project-pane}}
+  <div id='base-map' class='fullscreen-map'>
+    <div id='map' class='atlmap'></div>
+  </div>
+</div>

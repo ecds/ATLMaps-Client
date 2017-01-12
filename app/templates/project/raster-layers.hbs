@@ -1,51 +1,25 @@
 {{#project-pane title='Maps' model=model.project raster=true}}
-
   <div class='card'>
-  {{#sortable-group tagName="ul" class='scrollable-list collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
-    {{#each model.project.sortedRasterLayers as |raster|}}
-
-
-      {{#sortable-item tagName="li" class='sortable-item' id=raster.raster_layer_id.name model=raster group=group handle=".reorder-handle" }}
-        <div class='collapsible-header raster-list-header'>
-          <div class='row'>
-            <div class='title col s10'>
-              {{if raster.raster_layer_id.name raster.raster_layer_id.title 'Loading...'}}
-            </div>
-            <div class='secondary-conent reorder-handle col s2'>
-              <div class='row'>
-                <div class='col s12'>
-                  <i class='material-icons right'>code</i>
-                </div>
-              </div>
-              {{#if (and model.project.may_edit model.project.editing)}}
-                <div class='row'>
-                  <div class='col s12'>
-                    <a class='remove-layer secondary-conent right' onclick={{action (route-action 'addRemoveLayer' raster.raster_layer_id) preventDefault=true}}>
-                      <i class='remove-layer right material-icons'>delete</i>
-                    </a>
-                  </div>
-                </div>
-              {{/if}}
-                </div>
+    {{#sortable-group tagName="ul" class='scrollable-list project-collapsible collapsible' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
+      {{#each model.project.sortedRasterLayers as |layer|}}
+        {{#sortable-item tagName="li" class='sortable-item' id=raster.raster_layer_id.name model=raster group=group handle=".reorder-handle" }}
+          {{#layer-list-item layer=layer.raster_layer_id}}
+          <div class='title col s10'>
+            {{if layer.raster_layer_id.name layer.raster_layer_id.title 'Loading...'}}
+          </div>
+          <div class='secondary-conent reorder-handle col s2'>
+            <div class='row'>
+              <div class='col s12'>
+                <i class='material-icons right'>code</i>
               </div>
             </div>
-
-        <div class='slider-container'>
-          {{#if raster.raster_layer_id.slider_id}}
-            {{opacity-slider projLayer=raster layer=raster.raster_layer_id}}
-          {{/if}}
-        </div>
-
-        <div class='collapsible-body card-content'>
-          <p class='black-text'>
-            {{if raster.raster_layer_id.description raster.raster_layer_id.description 'No description :('}}
-          </p>
-          {{layer-citation layer=raster.raster_layer_id}}
-        </div>
-      {{/sortable-item}}
-    {{else}}
-      <h4 class='row'>No maps have been added</h4>
-    {{/each}}
-  {{/sortable-group}}
-</div>
+            {{remove-layer-button model=model layer=layer}}
+          </div>
+          {{/layer-list-item}}
+        {{/sortable-item}}
+        {{else}}
+          <h4 class='row'>No maps have been added</h4>
+      {{/each}}
+    {{/sortable-group}}
+  </div>
 {{/project-pane}}

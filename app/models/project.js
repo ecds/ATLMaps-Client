@@ -29,9 +29,15 @@ export default Model.extend({
     vector_layer_project_ids: hasMany('vector_layer_project', {
         async: true
     }),
+    raster_layer_ids: hasMany('raster_layer', {
+        async: true
+    }),
+    vector_layer_ids: hasMany('vector_layer', {
+        async: true
+    }),
     slug: attr('string'),
     owner: attr(),
-    is_mine: attr('boolean'),
+    mine: attr('boolean'),
     may_edit: attr('boolean'),
     templateSlug: attr('string'),
     intro: attr('string'),
@@ -86,11 +92,11 @@ export default Model.extend({
     _positionSort: ['position:desc'],
 
     // Used in determing which nave links to show.
-    hasRasters: computed(function() {
+    hasRasters: computed(function hasRasters() {
         return get(this, 'raster_layer_project_ids.length') > 0;
     }).property('raster_layer_project_ids'),
 
-    hasVectors: computed(function() {
+    hasVectors: computed(function hasVectors() {
         return get(this, 'vector_layer_project_ids.length') > 0;
     }).property('vector_layer_project_ids'),
 
@@ -99,38 +105,37 @@ export default Model.extend({
 
     // We'll call length on this so we can set the toggle switch if all vectors
     // are hidden. See http://emberjs.com/api/classes/Ember.computed.html#method_filterBy
-    hidden_vectors: computed.filterBy('vector_layer_project_ids', 'showing', true),
+    visiable_vectors: computed.filterBy('vector_layer_project_ids', 'showing', true),
 
     // Booleans are easier to deal with.
-    visiable_vector: computed('hidden_vectors', function() {
-        return get(this, 'hidden_vectors').length > 0;
-    }),
+    visiable_vector: computed(function visiableVector() {
+        return get(this, 'visiable_vectors').length > 0;
+    }).property('visiable_vectors'),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
     // visiable_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
-    hidden_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
+    visiable_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
 
     // Booleans are easier to deal with.
-    visiable_raster: computed('hidden_rasters', function() {
-        return get(this, 'hidden_rasters').length > 0;
-    }),
+    visiable_raster: computed(function visiableRaster() {
+        return get(this, 'visiable_rasters').length > 0;
+    }).property('visiable_rasters'),
 
-    hasIntro: computed(function() {
+    hasIntro: computed(function hasIntro() {
         if (get(this, 'intro') || get(this, 'media')) {
             return true;
-        } else {
-            return false;
         }
-    }),
+        return false;
+    })
 
     // TODO Still needed?
-    twoColIntro: computed(function() {
-        if (get(this, 'intro') && get(this, 'media')) {
-            return true;
-        } else {
-            return false;
-        }
-    })
+    // twoColIntro: computed(function() {
+    //     if (get(this, 'intro') && get(this, 'media')) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // })
 });

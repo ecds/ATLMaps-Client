@@ -18,6 +18,11 @@ export default Service.extend({
 
     viewData(feature, layer) {
 
+        // We have to bind a popup or the polygon and line layers
+        // will not show a popup. Inorder to supress Leaflet's pupup
+        // we will close it on click below. Pretty hacky.
+        layer.bindPopup(feature.properties.type);
+
         let popupContent = '';
 
         if (feature.properties.image) {
@@ -57,7 +62,10 @@ export default Service.extend({
         // }
         // popupContent += "</div></div>";
 
+        // TODO: Everything about this is hacky.
         layer.on('click', function() {
+            // Close leaflet's default popup.
+            layer.closePopup();
             Ember.$('.vector-content').empty();
             // Ember.$("div.marker-title").empty();
             // let content = Ember.$("<div/>").html(popupContent);
@@ -68,6 +76,7 @@ export default Service.extend({
             Ember.$('.vector-content.layer-icon').append(layer.options.markerDiv);
             Ember.$('.vector-content.layer-title').append(layer.options.title);
             Ember.$('.vector-content.title').append(feature.properties.name);
+            Ember.$('.vector-content.title').append(feature.properties.NAME);
             Ember.$('.vector-content.marker-content').append(popupContent);
             Ember.$('.active-marker').removeClass('active-marker');
             Ember.$(this._icon).addClass('active-marker');
