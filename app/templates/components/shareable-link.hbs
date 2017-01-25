@@ -1,0 +1,18 @@
+<a {{action "toggleShareableLink"}} class='shareable-link right' title='Get shareable link'><i class='material-icons'>link</i></a> {{log layer.shareable_link_id}}
+{{#if isShowingModal}}
+
+
+    {{#tether-dialog close='toggleShareableLink' container-class='shareable-link-modal' hasOverlay=false target='' clickOutsideToClose=true }}
+        <a {{action 'toggleShareableLink'}} class='close-button right'>
+            <i class="material-icons">highlight_off</i>
+        </a>
+        <p>
+            {{!exampleTargetAttachment}} {{input type='text' value=layer.absolute_url id=layer.shareable_link_id}}
+        </p>
+        {{!#if layer.shareable-link}}
+        {{#copy-button clipboardTarget=layer.shareable_link_id_selector success=(action 'success') error=(action 'error') class='waves-effect waves-light btn' }}
+            copy link <i class="material-icons">content_copy</i>
+        {{/copy-button}}
+        {{!/if}}
+    {{/tether-dialog}}
+{{/if}}

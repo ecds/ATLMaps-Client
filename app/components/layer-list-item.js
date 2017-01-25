@@ -6,4 +6,10 @@ const {
 
 export default Component.extend({
     tagName: '',
+
+    actions: {
+        open() {
+            console.log('hello');
+        }
+    }
 });

@@ -1,3 +1,7 @@
+/**
+ * @public
+ * Component to set color for a vector layer.
+ */
 import Ember from 'ember';
 
 const {
@@ -14,15 +18,15 @@ export default Component.extend({
 
     classNames: ['color-picker'],
 
-    colors: function() {
-        let layer = this.get('layer');
-        let group = layer.get('vector_layer_id.data_type');
+    colors() {
+        const layer = this.get('layer');
+        const group = layer.get('vector_layer_id.data_type');
         if (group === 'point-data') {
             return this.get('dataColors.markerColors');
-        } else {
-            return this.get('dataColors.shapeColors');
         }
-    }.property(),
+
+        return this.get('dataColors.shapeColors');
+    },
 
     mouseLeave() {
         this.get('layer').rollbackAttributes();
@@ -33,13 +37,13 @@ export default Component.extend({
             layer.setProperties({
                 marker: index
             });
-            let _this = this;
-            layer.get('vector_layer_id').then(function(vector) {
+            const self = this;
+            layer.get('vector_layer_id').then((vector) => {
                 vector.setProperties({
                     colorName: color.name,
                     colorHex: color.hex
                 });
-                _this.get('mapObject').updateVectorStyle(vector, color);
+                self.get('mapObject').updateVectorStyle(vector, color);
             });
         }
     }

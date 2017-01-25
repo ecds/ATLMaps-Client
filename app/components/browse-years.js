@@ -1,26 +1,22 @@
+/**
+ * @private
+ * Component to set a range of years to search.
+ */
 import Ember from 'ember';
 /* globals noUiSlider */
 
-const {
-    Component,
-    inject: {
-        service
-    },
-    set
-
-} = Ember;
+const { Component, inject: { service }, set } = Ember;
 
 export default Component.extend({
 
     browseParams: service(),
 
     didInsertElement() {
-
-        let model = this.get('model');
-        let min = model.get('min_year');
-        let max = model.get('max_year');
-
-        let rangeSlider = document.getElementById('range');
+        const self = this;
+        const model = this.get('model');
+        const min = model.get('min_year');
+        const max = model.get('max_year');
+        const rangeSlider = document.getElementById('range');
 
         // Initializing the slider
         noUiSlider.create(rangeSlider, {
@@ -30,10 +26,8 @@ export default Component.extend({
             range: { min, max }
         });
 
-        let _this = this;
-
-        rangeSlider.noUiSlider.on('update', function(values, handle) {
-            let value = values[handle];
+        rangeSlider.noUiSlider.on('update', (values, handle) => {
+            const value = values[handle];
             if (handle) {
                 model.set('max_year', Math.round(value));
             } else {
@@ -41,9 +35,9 @@ export default Component.extend({
             }
         });
 
-        rangeSlider.noUiSlider.on('set', function() {
-            _this.get('browseParams').setYearSearch(model.get('min_year'), model.get('max_year'));
-            _this.sendAction('getResults');
+        rangeSlider.noUiSlider.on('set', () => {
+            self.get('browseParams').setYearSearch(model.get('min_year'), model.get('max_year'));
+            self.sendAction('getResults');
         });
 
         // Make reference so we can destory it when we remove the element.

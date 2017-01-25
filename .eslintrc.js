@@ -19,7 +19,7 @@ module.exports = {
       'no-use-before-define': [2, 'nofunc'],
       'prefer-rest-params': 0,
       'import/no-unresolved': 0,
-    //   'no-underscore-dangle': 0,
+      'no-underscore-dangle': 0,
     //   'comma-dangle': ['error', 'never'],
       'space-before-function-paren': ['error', 'never'],
       'camelcase': 0

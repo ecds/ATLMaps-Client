@@ -5,7 +5,7 @@ import config from './config/environment';
  * This is a motherfucking router.
  */
 
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
     location: config.locationType,
     metrics: Ember.inject.service(),
 
@@ -58,7 +58,7 @@ Router.map(function() {
   this.route('404', {
       path: '/*wildcard'
   });
-  this.route('layers', { path: '/layers/maps/:maps/data/:data'});
+  this.route('layers', { path: '/layers/:maps'});
 });
 
 export default Router;

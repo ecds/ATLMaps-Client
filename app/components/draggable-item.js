@@ -10,7 +10,7 @@ export default Component.extend({
     taggedClass: 'taggable',
 
     dragStart(event) {
-        let tag = this.get('content');
+        const tag = this.get('content');
         return event.dataTransfer.setData('text/data', tag.get('id'), 'obj');
     },
 

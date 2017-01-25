@@ -1,3 +1,6 @@
+/**
+ * Component to initiate UI for search results.
+ */
 import Ember from 'ember';
 import burgerMenu from 'ember-burger-menu';
 
@@ -10,13 +13,14 @@ export default Component.extend({
 
     showingResults: false,
 
-    // Initilizes the MD tabs for the search results.
+    // Initilizes the MaterializeCSS tabs for the search results.
     didRender() {
         $('ul.tabs').tabs();
     },
 
     actions: {
         toggleResults() {
+            // TODO: Get rid of burgerMenu.
             burgerMenu.toggleProperty('open');
         }
     }

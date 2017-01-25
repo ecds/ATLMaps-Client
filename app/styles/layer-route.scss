@@ -1,9 +1,14 @@
+.layers-nav {
+  position: absolute;
+}
+
 .layers-route {
+
   .project-pane {
     font-size: 14px;
-    left: .25em;
+    left: 1.5em;
     position: absolute;
-    top: 0;
+    top: 5.25em;
     width: 25%;
   }
 
@@ -13,23 +18,22 @@
 
   .card {
     background-color: transparent;
+
+    .scrollable-list {
+      background-color: transparent;
+      padding-top: .25em;
+    }
   }
 
-  ul {
-    background-color: transparent;
-    padding-top: .25em !important;
-  }
-
-  .sortable-item {
+  .layer-item {
     background-color: $white;
     margin: .25em;
-    padding: .5em;
 
     .collapsible-header {
       padding-bottom: 0;
       padding-top: 0;
     }
-  }
+}
 
   .reorder-handle {
     i {

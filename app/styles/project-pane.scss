@@ -156,7 +156,18 @@
 
 .project-collapsible {
 
-  .collapsible-header {
+  border: 0;
+  box-shadow: none;
+  margin-top: 0;
+
+  li {
+    border: 1px solid color('grey', lighten-1);
+    border-radius: .5em;
+    margin: 1em;
+    padding-top: .25em;
+  }
+
+  .layer-header {
     border-bottom: 0;
     border-radius: .5em;
     color: $primary-color-light;
@@ -164,6 +175,31 @@
     font-weight: bolder;
     line-height: initial;
     padding: 1rem;
+
+    &.active {
+      .shareable-link {
+        display: block;
+
+        .material-icons {
+          cursor: pointer;
+          transform: none;
+        }
+      }
+    }
+
+    .shareable-link-modal {
+      display: inline-block;
+      min-width: 25%;
+
+      i {
+        color: inherit;
+        font-size: initial;
+      }
+    }
+
+    .shareable-link {
+      display: none;
+    }
 
     .data-title {
       padding-left: .5em;
@@ -197,23 +233,29 @@
     padding-top: 1em;;
   }
 
-  .collapsible-body {
+  .layer-item-body {
     background: $white;
     border-bottom: 0;
     border-radius: .5em;
+    box-sizing: border-box;
+    max-height: 1em;
     overflow: hidden;
     padding: 0;
-    transition: background 5ms;
+    transition: background 5ms, max-height $turtle;
 
     &.bye {
       background: color('red', 'base');
     }
-  }
 
-  li {
-    border: 1px solid color('grey', lighten-1);
-    border-radius: .5em;
-    margin: 1em;
+    &.active {
+      max-height: 100em;
+    }
+
+    p {
+      margin: 0;
+      padding: 2rem;
+    }
+
   }
 }
 
@@ -295,19 +337,6 @@
       vertical-align: middle;
     }
 
-  }
-
-  .collapsible {
-    border: 0;
-    box-shadow: none;
-
-    li {
-      border: 0;
-      border-radius: 0;
-      margin: 0;
-      padding-left: .5em;
-      padding-top: .25em;
-    }
   }
 
   .collapsible-body {

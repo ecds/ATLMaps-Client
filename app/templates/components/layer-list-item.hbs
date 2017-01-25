@@ -1,18 +1,18 @@
-<div class='collapsible-header'>
+<div class='layer-header {{if layer.active_in_list 'active'}}'>
   <div class='row'>
     {{yield}}
   </div>
 </div>
 
-{{#if (eq layer.data_format 'raster')}}
+{{#if showSlider}}
 <div class='slider-container'>
-  {{#if layer.leaflet_id}}
+  {{#if layer.leaflet_object}}
     {{opacity-slider layer=layer}}
   {{/if}}
 </div>
 {{/if}}
 
-<div class='collapsible-body card-content'>
+<div class='layer-item-body card-content {{if layer.active_in_list 'active'}}'>
   <p class='black-text'>
     {{if layer.description layer.description 'No description :('}}
   </p>

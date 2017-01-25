@@ -24,9 +24,9 @@ export default Route.extend({
     currentUser: service(),
 
     // This prevents redirection after authentication.
-    beforeModel: function(transition) {
+    beforeModel(transition) {
         if (!this.get('session.isAuthenticated')) {
-          this.set('session.attemptedTransition', transition);
+            this.set('session.attemptedTransition', transition);
         }
     },
 
@@ -61,7 +61,7 @@ export default Route.extend({
     },
 
     afterModel() {
-        const project = this.modelFor('project').project;
+        const { project } = this.modelFor('project');
         const projectID = get(project, 'id');
         if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
             project.setProperties({ suppressIntro: true });
@@ -72,16 +72,16 @@ export default Route.extend({
         return this.get('mapObject').createMap();
     },
 
-    setUp: function() {
-        const project = this.modelFor('project').project;
+    setUp: function setUp() {
+        const { project } = this.modelFor('project');
         const cookieService = get(this, 'cookies');
-        const _this = this;
+        const self = this;
 
-        run.scheduleOnce('afterRender', function() {
-            if (!_this.get('mapObject').map) {
+        run.scheduleOnce('afterRender', () => {
+            if (!self.get('mapObject').map) {
                 // Create the Leaflet map.
-                _this.map(project);
-                _this.get('mapObject').setUpProjectMap(project);
+                self.map(project);
+                self.get('mapObject').setUpProjectMap(project);
             }
 
             const suppressCookie = cookieService.read(`noIntro${project.id}`);
@@ -92,20 +92,20 @@ export default Route.extend({
                         suppressIntro: true
                     });
             } else {
-                set(_this, 'hasSuppressCookie', false);
+                set(self, 'hasSuppressCookie', false);
             }
         });
     }.on('activate'),
 
     // Function the runs after we fully exit a project route and clears the map,
     // clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
-    tearDown: function() {
+    tearDown: function tearDown() {
         this.currentModel.project.rolledBack();
         get(this, 'browseParams').init();
         // Clear the chekes for the checked categories and tags.
         const categories = this.store.peekAll('category');
         // categories.setEach('checked', false);
-        categories.forEach(function(category) {
+        categories.forEach((category) => {
             category.setProperties({
                 // checked: false,
                 allChecked: false,
@@ -115,14 +115,14 @@ export default Route.extend({
         });
         // Clear the vector layers that are marked active in this project.
         const vectors = this.store.peekAll('vector-layer');
-        vectors.forEach(function(vector) {
+        vectors.forEach((vector) => {
             vector.setProperties({
                 active_in_project: false
             });
         });
         // // Clear the raster layers that are marked active in this project.
         const rasters = this.store.peekAll('raster-layer');
-        rasters.forEach(function(raster) {
+        rasters.forEach((raster) => {
             raster.setProperties({
                 active_in_project: false
             });
@@ -145,12 +145,10 @@ export default Route.extend({
 
     updatedResults(type) {
         set(this.controller, `${type}_diffResults`, true);
-        run.later(this, function() {
+        run.later(this, () => {
             set(this.controller, `${type}_diffResults`, false);
         }, 300);
     },
-
-
 
     actions: {
 
@@ -168,28 +166,28 @@ export default Route.extend({
         },
 
         updateProject(project, message) {
-            const _this = this;
+            const self = this;
             run.later(this, function() {
                 project.save().then(function() {
-                    set(_this, 'flashMessage.message', message);
-                    set(_this, 'flashMessage.success', true);
-                    set(_this, 'flashMessage.show', true);
-                    // _this.toggleProperty('flashMessage.showing');
+                    set(self, 'flashMessage.message', message);
+                    set(self, 'flashMessage.success', true);
+                    set(self, 'flashMessage.show', true);
+                    // self.toggleProperty('flashMessage.showing');
                     run.later(this, function() {
-                        set(_this, 'flashMessage.message', '');
-                        set(_this, 'flashMessage.show', false);
-                        set(_this, 'flashMessage.success', true);
-                        // _this.toggleProperty('flashMessage.showing');
+                        set(self, 'flashMessage.message', '');
+                        set(self, 'flashMessage.show', false);
+                        set(self, 'flashMessage.success', true);
+                        // self.toggleProperty('flashMessage.showing');
                     }, 3000)
                 }, function() {
                     // TODO figure out how to give feedback on these shared actions
-                    set(_this, 'flashMessage.message', 'Oh no! Someting went wrong <i class="material-icons">sentiment_dissatisfied</i>');
-                    set(_this, 'flashMessage.show', true);
-                    set(_this, 'flashMessage.success', false);
+                    set(self, 'flashMessage.message', 'Oh no! Someting went wrong <i class="material-icons">sentiment_dissatisfied</i>');
+                    set(self, 'flashMessage.show', true);
+                    set(self, 'flashMessage.success', false);
 
                     Ember.run.later(this, function(){
-                        set(_this, 'flashMessage.message', '');
-                        set(_this, 'flashMessage.show', false);
+                        set(self, 'flashMessage.message', '');
+                        set(self, 'flashMessage.show', false);
                     }, 3000);
                 });
             }, 300);
@@ -197,16 +195,18 @@ export default Route.extend({
         },
 
         addRemoveLayer(layer) {
-            const project = this.modelFor('project').project;
+            const { project } = this.modelFor('project');
             // This is pretty ugly. When called from the `search-list-results` components
             // `layer` is an instance of `raster-layer`, when called from the `project.raster-layer`
             // route, `layer` is an instance of `raster-layer-project`. Maybe we can clean this up
             // when we move to jsonapi?
             const layerModel = getWithDefault(layer, '_internalModel.modelName', `${format}_layer_project_ids).get('_internalModel.modelName')`);
 
+            console.log('layerModel', layerModel);
+
             const layerObj = this.store.peekRecord(layerModel, layer.get('id'));
             const format = layerObj.get('data_format');
-            const _this = this;
+            const self = this;
 
             // TODO Q: Do we set `active_in_project` before?
             if (layerObj.get('active_in_project') === false) {
@@ -249,19 +249,19 @@ export default Route.extend({
                 }
                 project.get(`${format}_layer_project_ids`).addObject(newLayer);
 
-                _this.get('mapObject').mapLayer(newLayer);
+                self.get('mapObject').mapLayer(newLayer);
                 // Only call save if the session is authenticated.
                 // There is another check on the server that verifies the user is
                 // authenticated and is allowed to edit this project.
                 // TODO, abstract the save/don't save calls for add and remove.
-                if (this.get('session.isAuthenticated') && (project.id != '123456789')) {
-                    newLayer.save().then(function() {
+                if (this.get('session.isAuthenticated') && (project.id !== '123456789')) {
+                    newLayer.save().then(() => {
                         // TODO Show a success message.
-                    }, function() {
+                    }, () => {
                         // TODO figure out how to give feedback on these shared actions
-                        // _this.controllerFor('project/browse-layers').set('editFail', true);
+                        // self.controllerFor('project/browse-layers').set('editFail', true);
                         // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers').set('editFail', false);
+                        //     self.controllerFor('project/browse-layers').set('editFail', false);
                         // }, 3000);
                     });
                 }
@@ -285,18 +285,18 @@ export default Route.extend({
                 // $(`#${layer.get('name')}`).remove();
                 // Delete the record from the project
                 this.store.queryRecord(`${layerModel}-project`, attrs).then(function(layerToRemove) {
-                    let layerIdToRemove = _this.store.peekRecord(`${layerModel}-project`, layerToRemove.id)
+                    let layerIdToRemove = self.store.peekRecord(`${layerModel}-project`, layerToRemove.id)
                     layerIdToRemove.deleteRecord();
                     layerToRemove.deleteRecord();//.then(function() {
                         project.get(`${format}_layer_project_ids`).removeObject(layerIdToRemove);
                         // Set active to false
                         layer.set('active_in_project', false);
                         // TODO figure out how to give feedback on these shared actions
-                        // _this.controllerFor('project/browse-layers').set('editSuccess', true);
+                        // self.controllerFor('project/browse-layers').set('editSuccess', true);
                         // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers')
+                        //     self.controllerFor('project/browse-layers')
                         //     .set('editSuccess', false);
-                        if (_this.get('session.isAuthenticated') && project.id != '123456789') {
+                        if (self.get('session.isAuthenticated') && project.id != '123456789') {
                             layerToRemove.save();
                         }
                         // Ember.$("."+layer.get('slug')).fadeOut( 500, function() {
@@ -305,17 +305,17 @@ export default Route.extend({
                         // }, 3000);
                     //}, function() {
                         // TODO figure out how to give feedback on these shared actions
-                        // _this.controllerFor('project/browse-layers').set('editFail', true);
+                        // self.controllerFor('project/browse-layers').set('editFail', true);
                         // Ember.run.later(this, function(){
-                        //     _this.controllerFor('project/browse-layers').set('editFail', false);
+                        //     self.controllerFor('project/browse-layers').set('editFail', false);
                         // }, 3000);
                     // });
                 });
             }
 
-            set(_this.controller, `${format}-updated`, true)
+            set(self.controller, `${format}-updated`, true)
             run.later(this, function() {
-                set(_this.controller, `${format}-updated`, false)
+                set(self.controller, `${format}-updated`, false)
             }, 3000);
 
             // return false;
@@ -328,7 +328,7 @@ export default Route.extend({
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(page) {
-            const _this = this;
+            const self = this;
             let currentRasters = get(this.controller, 'rasters.content.meta.total_count');
             let currentVectors = get(this.controller, 'vectors.content.meta.total_count');
             burgerMenu.set('open', true);
@@ -359,13 +359,13 @@ export default Route.extend({
             if (Object.keys(searchParams).length > 3) {
                 set(this.controller, 'rasters', this.store.query('raster-layer', searchParams)).then(function(rasters) {
                     if (currentRasters != rasters.meta.total_count) {
-                        _this.updatedResults('rasters');
+                        self.updatedResults('rasters');
                     }
                 });
 
                 set(this.controller, 'vectors', this.store.query('vector-layer', searchParams)).then(function(vectors) {
                     if (currentVectors != vectors.meta.total_count) {
-                        _this.updatedResults('vectors');
+                        self.updatedResults('vectors');
                     }
                 });
 

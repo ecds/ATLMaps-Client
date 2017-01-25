@@ -1,3 +1,7 @@
+/**
+ * @private
+ * https://emberway.io/ember-js-and-html5-drag-and-drop-fa5dfe478a9a#.23x5ssrtm
+ */
 import Ember from 'ember';
 
 const {
@@ -29,7 +33,7 @@ export default Component.extend({
     },
 
     drop(event) {
-        let data = event.dataTransfer.getData('text/data');
+        const data = event.dataTransfer.getData('text/data');
         this.sendAction('dropped', data);
         this.set('dragClass', 'deactivated');
     },

@@ -4,26 +4,26 @@
       {{#each model.project.vector_layer_project_ids as |layer|}}
         <li id= {{layer.vector_layer_id.name}}>
           {{#layer-list-item layer=layer.vector_layer_id}}
-            <div class='col s1 vector-icon left
-              {{layer.vector_layer_id.data_type}}
-              {{layer.vector_layer_id.data_format}}
-              {{marker-color layer.marker dataColors.markerColors dataColors.shapeColors layer.vector_layer_id.data_type}}'>
-            </div>
+          {{#if layer.vector_layer_id}}
+              <div class='col s1 vector-icon left
+                {{layer.vector_layer_id.data_type}}
+                {{layer.vector_layer_id.data_format}}
+                layer-{{layer.colorName}}'>
+              </div>
+              {{/if}}
             <div class='title data-title col s8'>
-              {{if layer.vector_layer_id.name layer.vector_layer_id.title 'Loading...'}}
+              {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
             </div>
             <div class='col s2'>
               <div class='row'>
                 <div class='col s12'>
-                  <div class="switch list">
-                    <label>
-                      <input type="checkbox" checked={{layer.vector_layer_id.showing}} {{action 'toggleVectorLayer' layer.vector_layer_id checked on="change"}}>
-                      <span class="lever"></span>
-                    </label>
-                  </div>
+                  {{toggle-switch layer=layer}}
                 </div>
               </div>
               {{remove-layer-button model=model layer=layer}}
+              {{#if layer.vector_layer_id.name}}
+              {{shareable-link layer=layer.vector_layer_id}}
+              {{/if}}
             </div>
           {{/layer-list-item}}
         </li>

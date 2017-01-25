@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import ENV from '../config/environment';
 
 const {
     Model,
@@ -41,10 +42,23 @@ export default Model.extend({
     active_in_project: attr('boolean', {
         defaultValue: false
     }),
+    active_in_list: attr('boolean', {
+        defaultValue: false
+    }),
+    shareable_link_id: computed(function shareableLinkId() {
+        return `${get(this, 'name')}_sharable`;
+    }),
+    shareable_link_id_selector: computed(function shareableLinkId() {
+        return `#${get(this, 'name')}_sharable`;
+    }),
+    absolute_url: computed(function absoluteUrl() {
+        return `${ENV.absoluteBase}/layers/${get(this, 'name')}`;
+    }),
     url: attr('string'),
     leaflet_id: attr('number'),
     leaflet_object: attr(),
     opacity: attr('number'),
+    slider_id: attr('string'),
     mapObject: service(),
     showing: computed(function visiableLayer() {
         if (get(this, 'leaflet_object')) {

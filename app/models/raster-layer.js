@@ -8,7 +8,6 @@ const {
 
 export default Layer.extend({
     workspace: attr('string'),
-    slider_id: attr('string'),
     slider_value_id: attr('string'),
     position_in_project: attr(''),
     raster_layer_project: belongsTo('raster_layer_project', {

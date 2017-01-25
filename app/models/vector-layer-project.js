@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import LayerProject from './layer-project';
 
-const { computed, get } = Ember;
+const { computed, get, inject: { service } } = Ember;
 
 const {
     attr,
@@ -15,6 +15,20 @@ export default LayerProject.extend({
         inverse: null
     }),
     marker: attr(),
+    data_type: attr('string'),
+    dataColors: service(),
+    colorName: computed(function colorName() {
+        if (get(this, 'data_type') === 'point-data') {
+            return get(this, 'dataColors.markerColors')[this.get('marker')].name;
+        }
+        return get(this, 'dataColors.shapeColors')[this.get('marker')].name;
+    }),
+    colorHex: computed(function colorName() {
+        if (get(this, 'data_type') === 'point-data') {
+            return get(this, 'dataColors.markerColors')[this.get('marker')].hex;
+        }
+        return get(this, 'dataColors.shapeColors')[this.get('marker')].hex;
+    }),
 
     showing: computed(function isShowing() {
         return get(this, 'vector_layer_id.showing');
