@@ -1,3 +1,6 @@
+/**
+ * Route to display list of projects
+ */
 import Ember from 'ember';
 
 /* globals md5 */
@@ -21,26 +24,24 @@ export default Route.extend({
     },
 
     model() {
-        // The API will only return published projects when asked for all.
-        // We'll make seperate calls for a user's projects if a user is authenticated.
+        /**
+         * The API will only return featured projects when asked for all.
+         * We'll make seperate calls for a user's projects if a user is authenticated.
+         */
         if (this.get('session.isAuthenticated')) {
             return RSVP.hash({
-                published: this.store.findAll('project'),
                 mine: this.store.query('project', {
                     user_id: get(this, 'currentUser.user.id')
                 }),
                 collaborations: this.store.query('project', {
                     collaborations: get(this, 'currentUser.user.id')
-                })
+                }),
+                featured: this.store.query('project', { featured: true })
             });
         }
-        // TODO is there a way to not have to do a single item hash without
-        // haveing to duplicate a bunch of stuff in the template?
-        else {
-            return RSVP.hash({
-                published: this.store.findAll('project')
-            });
-        }
+        return RSVP.hash({
+            featured: this.store.findAll('project')
+        });
     },
 
     _loadCurrentUser() {
@@ -54,12 +55,11 @@ export default Route.extend({
         },
 
         createProject() {
-
             // Placehoder name for project.
-            let newProjectName = md5((new Date()).toTimeString());
+            const newProjectName = md5((new Date()).toTimeString());
 
             // Create a new project with some basic data set.
-            let project = this.store.createRecord('project', {
+            const project = this.store.createRecord('project', {
                 name: newProjectName,
                 // I really hate this and there has to be a better way.
                 user_id: this.get('currentUser.user.id'),
@@ -71,9 +71,9 @@ export default Route.extend({
                 editing: true
             });
 
-            let _this = this;
+            const self = this;
 
-            project.save().then(function(newProject) {
+            project.save().then((newProject) => {
                 newProject.setProperties(
                     {
                         name: 'Please enter a title.',
@@ -81,25 +81,28 @@ export default Route.extend({
                     }
                 );
 
-                _this.transitionTo('project.info', newProject.get('id'));
+                self.transitionTo('project.info', newProject.get('id'));
                 // Success callback
                 // Get the newly created project
-                // _this.store.queryRecord('project', {name: newProjectName}).then(function(newProject) {
+                // self.store.queryRecord('project', {
+                //     name: newProjectName
+                // }).then(function(newProject) {
                 //     // Set the name so we don't just have some ugly string in there.
                 //     newProject.set('name', 'Please enter a title.');
                 //     // Transition to our new project
-                //     _this.transitionTo('project.info', newProject.id);
+                //     self.transitionTo('project.info', newProject.id);
                 // }, function(){
                 //     // Error callback
                 //     // TODO What should we do if this fails?
                 // });
             });
-
         },
 
         deleteProject(project_id) {
-
-            let response = confirm('Are you sure you want to DELETE this project?');
+            // eslint-disable-next-line no-alert
+            const response = confirm(
+                'Are you sure you want to DELETE this project?'
+            );
 
             if (response === true) {
                 this.store.peekRecord('project', project_id).destroyRecord();

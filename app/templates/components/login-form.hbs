@@ -1,5 +1,5 @@
 {{#if session.isAuthenticated}}
-  <a {{action 'logOut' }} title="Logout">Logout</a>
+  <div class='center-align row black-text'><a {{action 'logOut' }} title="Logout">Logout</a></div>
 {{else}}
   {{#if login}}
     <form {{action 'authenticateWithOAuth2' on='submit'}}>
@@ -54,14 +54,12 @@
       <div class='social-provider center-align'>Google</div>
     </div>
     <div class='center-align black-text'>OR</div>
-    {{!-- <div class='row'> --}}
       <a {{action 'signUp'}} class='col m5 s12 sign-btn center-align'>
         Sign Up
       </a >
       <a {{action 'login'}} class='col offset-m2 m5 s12 sign-btn center-align'>
         Login
       </a>
-    {{!-- </div> --}}
   {{/if}}
 
   {{#if errorMessage}}
@@ -69,9 +67,9 @@
       <p>
         <strong>Login failed:</strong> <code>{{errorMessage}}</code>
       </p>
-      <p>
+      {{!-- <p>
         Documentation of the error codes can be found in the <a href="http://tools.ietf.org/html/rfc6749#section-5.2" title="RFC 6749 - Error Response">Error Response section of RFC 6749</a>.
-      </p>
+      </p> --}}
     </div>
   {{/if}}
 {{/if}}

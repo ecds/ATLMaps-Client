@@ -3,6 +3,8 @@ $roboto-font-path: '../assets/';
 
 @import 'components/color';
 @import 'variables';
+@import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
+@import 'bower_components/neat/app/assets/stylesheets/neat';
 
 // Custom color settings go here
 $primary-color: color('blue-grey', 'darken-1');
@@ -192,6 +194,41 @@ textarea {
 
   &:hover {
     color: $secondary-color;
+  }
+}
+
+// bourbon test
+.layer-list-item {
+  @include outer-container;
+}
+
+.layer-list-item-icon {
+  @include span-columns(1);
+}
+
+.layer-list-item-title {
+  @include span-columns(10);
+  margin-top: .25em;
+}
+
+.layer-list-item-secondary-action {
+  @include span-columns(1);
+
+  span {
+    @include span-columns(1 of 1);
+  }
+}
+
+.atl-row {
+
+  margin-left: auto;
+  margin-right: auto;
+
+  // Clear floating children
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
   }
 }
 

@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import burgerMenu from 'ember-burger-menu';
 
-/* globals L */
+// brining in Leaflet
+/* global L */
 
 // Service to hold the Leaflet object.
 

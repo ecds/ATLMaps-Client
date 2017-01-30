@@ -23,10 +23,10 @@
           {{/each}}
           </div>
         {{/if}}
-        <h3>Published Projects</h3>
+        <h3>Featured Projects</h3>
         <hr />
         <div class="row">
-        {{#each model.published as |project|}}
+        {{#each model.featured as |project|}}
           {{project-card project=project}}
         {{else}}
           <p>There are no projects visible at this time :(</p>

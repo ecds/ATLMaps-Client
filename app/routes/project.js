@@ -201,9 +201,6 @@ export default Route.extend({
             // route, `layer` is an instance of `raster-layer-project`. Maybe we can clean this up
             // when we move to jsonapi?
             const layerModel = getWithDefault(layer, '_internalModel.modelName', `${format}_layer_project_ids).get('_internalModel.modelName')`);
-
-            console.log('layerModel', layerModel);
-
             const layerObj = this.store.peekRecord(layerModel, layer.get('id'));
             const format = layerObj.get('data_format');
             const self = this;

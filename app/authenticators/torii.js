@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Torii from 'ember-simple-auth/authenticators/torii';
-import ENV from "../config/environment";
+import ENV from '../config/environment';
 /**
  * WTF
  */
@@ -20,16 +20,15 @@ export default Torii.extend({
         const ajax = this.get('ajax');
 
         return this._super(...arguments).then((data) => {
-            let grantType = data.provider === 'password' ? 'password' : `${data.provider}_auth_code`;
-
-            return ajax.request(ENV.APP.API_HOST + '/token', {
+            const grantType = data.provider === 'password' ? 'password' : `${data.provider}_auth_code`;
+            return ajax.request(`${ENV.APP.API_HOST}/token`, {
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    'grant_type': grantType,
-                    'auth_code': data.authorizationCode
+                    grant_type: grantType,
+                    auth_code: data.authorizationCode
                 }
-            }).then((response) => {
+            }).then(function(response) {
                 return {
                     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                     access_token: response.access_token,
@@ -43,14 +42,14 @@ export default Torii.extend({
     logOut() {
         const ajax = get(this, 'ajax');
 
-        return this._super(...arguments.then(function(){
-            return ajax.requext(`${ENV.APP.API_HOST}/revoke`), {
+        return this._super(...arguments.then(function foo() {
+            return ajax.request(`${ENV.APP.API_HOST}/revoke`, {
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    'token': get(this, 'session.content.authenticated.access_token')
+                    token: get(this, 'session.content.authenticated.access_token')
                 }
-            }
+            });
         }));
     }
 });

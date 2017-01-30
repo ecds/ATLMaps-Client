@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, set } = Ember;
 
 export default Component.extend({
-    classNames: ['title', 'col', 's10'],
+    classNames: ['layer-list-item-title'],
 
     actions: {
         expand() {

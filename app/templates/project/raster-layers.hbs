@@ -2,23 +2,30 @@
   <div class='card'>
     {{#sortable-group tagName="ul" class='scrollable-list project-collapsible' model=model onChange="reorderItems" as |group|}}
       {{#each model.project.sortedRasterLayers as |layer|}}
-        {{#sortable-item tagName="li" class='sortable-item' id=raster.raster_layer_id.name model=layer group=group handle=".reorder-handle" }}
+        {{#sortable-item tagName="li" class='sortable-item layer-list-item' id=raster.raster_layer_id.name model=layer group=group handle=".reorder-handle" }}
+          {{#if layer.raster_layer_id.name}}
           {{#layer-list-item layer=layer.raster_layer_id showSlider=true}}
-          {{layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
-          <div class='secondary-conent reorder-handle col s2'>
-            <div class='row'>
-              <div class='col s12'>
-                <i class='material-icons right'>code</i>
-              </div>
+            <div class='layer-list-item-icon'>
+              <i class='material-icons'>layers</i>
             </div>
-            {{remove-layer-button model=model layer=layer}}
-            <div class='row'>
+
+            {{layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
+
+            <div class='layer-list-item-secondary-action reorder-handle'>
+              <span>
+                <i class='material-icons right'>code</i>
+              </span>
+              <span>
+                {{remove-layer-button model=model layer=layer}}
+              </span>
               {{#if layer.raster_layer_id.name}}
-              {{shareable-link layer=layer.raster_layer_id}}
+                {{shareable-link layer=layer.raster_layer_id}}
               {{/if}}
             </div>
-          </div>
           {{/layer-list-item}}
+        {{else}}
+          Loading...
+        {{/if}}
         {{/sortable-item}}
         {{else}}
           <h4 class='row'>No maps have been added</h4>
