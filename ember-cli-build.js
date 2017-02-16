@@ -1,7 +1,7 @@
-/*jshint node:true*/
+/* jshint node:true*/
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var nodeSass = require('node-sass'); // loads the version in your package.json
 
 module.exports = function(defaults) {
@@ -11,12 +11,12 @@ module.exports = function(defaults) {
     var app = new EmberApp(defaults, {
 
         materializeDefaults: {
-            modalIsFooterFixed:  false,
-            buttonIconPosition:  'left',
-            loaderSize:          'big',
-            loaderMode:          'indeterminate',
-            modalContainerId:    'materialize-modal-root-element',
-            dropdownInDuration:  300,
+            modalIsFooterFixed: false,
+            buttonIconPosition: 'left',
+            loaderSize: 'big',
+            loaderMode: 'indeterminate',
+            modalContainerId: 'materialize-modal-root-element',
+            dropdownInDuration: 300,
             dropdownOutDuration: 300
         },
 
@@ -34,7 +34,7 @@ module.exports = function(defaults) {
                 'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog',
                 'bower_components/materialize/sass'
             ],
-            nodeSass: nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
+            nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
         },
 
         sourcemaps: {

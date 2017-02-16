@@ -5,10 +5,11 @@ const { $, Component } = Ember;
 export default Component.extend({
 
     didInsertElement() {
-        $(document).ready(function(){
+        // QUESTION: Is this needed?
+        $(document).ready(() => {
             $('.collapsible').collapsible({
-                accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                accordion: true
             });
         });
-    },
+    }
 });

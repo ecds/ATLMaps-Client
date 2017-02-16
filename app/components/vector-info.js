@@ -17,7 +17,6 @@ export default Component.extend({
     classNames: ['vector-info', 'resize-container', 'project-pane', 'resize-drag', 'hoverable'],
 
     didInsertElement() {
-
         interact('.resize-drag')
             .draggable({
                 onmove: dragMoveListener
@@ -32,12 +31,12 @@ export default Component.extend({
                     top: true
                 }
             })
-            .on('resizemove', function(event) {
+            .on('resizemove', (event) => {
                 // Destructuring
                 // This had been written as `let target = event.target`.
                 // This is better?
-                let { target } = { target: event.target };
-                let targetContainer = target.lastElementChild;
+                const { target } = { target: event.target };
+                const targetContainer = target.lastElementChild;
 
                 let x = parseFloat(target.getAttribute('data-x')) || 0;
                 let y = parseFloat(target.getAttribute('data-y')) || 0;
@@ -53,8 +52,9 @@ export default Component.extend({
                 x += event.deltaRect.left;
                 y += event.deltaRect.top;
 
-                target.style.webkitTransform = target.style.transform =
-                    `translate(${x}px,${y}px)`;
+                target.style.webkitTransform
+                    = target.style.transform
+                    = `translate(${x}px,${y}px)`;
 
                 target.setAttribute('data-x', x);
                 target.setAttribute('data-y', y);
@@ -62,15 +62,15 @@ export default Component.extend({
 
         function dragMoveListener(event) {
             // Destructuring?
-            let { target } = { target: event.target };
+            const { target } = { target: event.target };
             // keep the dragged position in the data-x/data-y attributes
-            let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-            let y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
             // translate the element
-            target.style.webkitTransform =
-                target.style.transform =
-                `translate(${x}px,${y}px)`;
+            target.style.webkitTransform
+                = target.style.transform
+                = `translate(${x}px,${y}px)`;
 
             // update the posiion attributes
             target.setAttribute('data-x', x);

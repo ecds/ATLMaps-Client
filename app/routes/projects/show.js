@@ -24,5 +24,5 @@ export default Route.extend({
      */
     redirect(model) {
         this.transitionTo('project', model.id);
-    },
+    }
 });

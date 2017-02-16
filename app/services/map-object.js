@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import burgerMenu from 'ember-burger-menu';
-
 // brining in Leaflet
 /* global L */
 
@@ -25,6 +23,7 @@ export default Service.extend({
         this._super(...arguments);
         set(this, 'map', '');
         set(this, 'leafletLayerGroup', L.layerGroup());
+        set(this, 'baseMaps', {});
         set(this, 'leafletFeatureGroup', L.featureGroup());
         set(this, 'projectLayers', {
             rasters: {},
@@ -46,15 +45,20 @@ export default Service.extend({
             });
 
             // Add some base layers
-            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            const street = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
                 className: 'street base'
-            }).addTo(atlmap);
+            });
 
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 className: 'satellite base',
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            }).addTo(atlmap);
+            });
+
+            set(this, 'baseMaps', {
+                street,
+                satellite
+            });
 
             // Zoom contorl, topright
             L.control.zoom({
@@ -74,10 +78,8 @@ export default Service.extend({
     },
 
     setUpProjectMap(project) {
-        const atlmap = get(this, 'map');
-        atlmap.on('click', () => {
-            // Hide the search pane.
-            burgerMenu.set('open', false);
+        const { baseMaps, map } = this;
+        map.on('click', () => {
             // TODO: Refactor to remove jQuery syntax.
             $('div.vector-info').hide();
             $('.active-marker').removeClass('active-marker');
@@ -103,25 +105,23 @@ export default Service.extend({
             });
         });
 
-        atlmap.flyTo(
+        map.flyTo(
             L.latLng(
                 project.get('center_lat'),
                 project.get('center_lng')
             ), project.get('zoom_level')
         );
 
-        $('.base').hide();
-
-        $(`.${project.get('default_base_map')}`).show();
+        baseMaps[get(project, 'default_base_map')].addTo(map);
     },
 
     mapSingleLayer(layer) {
         const self = this;
-        const map = get(this, 'map');
-        const markerColorIndex = Math.floor(Math.random() * get(this, 'dataColors.markerColors').length);
-        const markerColor = get(this, 'dataColors.markerColors')[markerColorIndex];
-        const shapeColorIndex = Math.floor(Math.random() * get(this, 'dataColors.shapeColors').length);
-        const shapeColor = get(this, 'dataColors.shapeColors')[shapeColorIndex];
+        const { map, dataColors: { markerColors, shapeColors } } = this;
+        const markerColorIndex = Math.floor(Math.random() * markerColors.length);
+        const markerColor = markerColors[markerColorIndex];
+        const shapeColorIndex = Math.floor(Math.random() * shapeColors.length);
+        const shapeColor = shapeColors[shapeColorIndex];
 
         switch (get(layer, 'data_type')) {
         case 'wms':

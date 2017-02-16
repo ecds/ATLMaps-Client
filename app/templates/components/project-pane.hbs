@@ -1,23 +1,14 @@
-<div class="pane-title row">
-  <div class="col s9">
-    <h3 class='valign-wrapper'>{{title}}
-      {{#if ( xor model.may_edit model.explore)}}
-        <a {{action (route-action 'toggleEdit')}} class="edit-button">
-          <i class="material-icons valign {{if model.editing 'green-text'}}">edit</i>
-        </a>
-      {{/if}}
-    </h3>
+<div class="pane-title">
+  <div class='project-pane-title'>
+    <h3>{{title}}</h3>
   </div>
-  <div class='col s2'>
     {{#if raster}}
     {{show-hide-layers layers=model.raster_layer_ids checked=model.visiable_raster}}
-    
     {{/if}}
     {{#if vector}}
       {{show-hide-layers layers=model.vector_layer_ids checked=model.visiable_vector}}
     {{/if}}
-  </div>
-  <div class="col s1">
+  <div class="">
     {{#if project}}
     {{#link-to 'project'}}
       <i class="material-icons close-button">highlight_off</i>
@@ -26,10 +17,10 @@
   </div>
 </div>
 {{#unless isShowingModal}}
-<div class='row feedback white-text {{if flashMessage.success 'green' 'red'}} {{if flashMessage.show 'show-flash'}}'>{{flashMessage.message}}</div>
+<div class='feedback white-text {{if flashMessage.success 'flash-success' 'flash-error'}} {{if flashMessage.show 'show-flash'}}'>{{flashMessage.message}}</div>
 {{/unless}}
 <div class="pane-container">
     <div class="pane-content {{extraClass}}">
       {{yield}}
     </div>
-</div>
+  </div>

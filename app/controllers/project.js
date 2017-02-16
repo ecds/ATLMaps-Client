@@ -6,4 +6,5 @@ const { Controller } = Ember;
 
 export default Controller.extend({
     // showUserMenu: true
+    // showingSearch: false
 });

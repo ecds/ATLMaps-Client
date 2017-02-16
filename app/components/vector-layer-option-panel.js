@@ -25,7 +25,7 @@ export default Component.extend({
             if (this.get('layer.hasDirtyAttributes')) {
                 this.get('layer').rollbackAttributes();
                 let color;
-                let layer = this.get('layer.vector_layer_id');
+                const layer = this.get('layer.vector_layer_id');
                 if (layer.get('data_type') === 'point-data') {
                     color = this.get('dataColors.markerColors')[this.get('layer.marker')];
                 } else {

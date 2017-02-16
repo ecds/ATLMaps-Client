@@ -1,13 +1,30 @@
 // Search Tabs
 .search-head {
+  @include outer-container;
   background-color: color('blue-grey', 'darken-1');
   color: color('grey', 'lighten-5');
   font-size: 1.5em;
-  height: 2em;
+  height: 60px;
+  overflow: hidden;
   padding-top: .25em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: width $turtle;
+  width: 0%;
+  z-index: 9999;
 
-  &.row {
-    margin-bottom: 0;
+  &.showing-search-head {
+    width: 35%;
+  }
+
+  .search-head-title {
+    @include span-columns(10)
+    padding-left: 1em;
+  }
+
+  .search-close-button {
+    @include span-columns(1)
   }
 }
 

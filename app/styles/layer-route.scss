@@ -5,11 +5,13 @@
 .layers-route {
 
   .project-pane {
+    box-shadow: none;
     font-size: 14px;
     left: 1.5em;
     position: absolute;
     top: 5.25em;
     width: 25%;
+    z-index: 1001;
   }
 
   .pane-title {

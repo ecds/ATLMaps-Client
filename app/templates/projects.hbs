@@ -17,11 +17,11 @@
         {{#if model.mine}}
           <h3>My Projects</h3>
           <hr />
-          <div class="row">
+          {{#refill-flexbox}}
           {{#each model.mine as |myProject|}}
-            {{project-card project=myProject mine=true}}
+            {{refill-flexbox-content model=myProject mine=true}}
           {{/each}}
-          </div>
+          {{/refill-flexbox}}
         {{/if}}
         <h3>Featured Projects</h3>
         <hr />

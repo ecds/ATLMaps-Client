@@ -1,58 +1,18 @@
-{{vector-info}}
 {{browse-results model=model rasters=rasters vectors=vectors rasters_diffResults=rasters_diffResults vectors_diffResults=vectors_diffResults}}
-{{#burger-menu width=600 position='right' translucentOverlay=false dismissOnClick=false as |burger|}}
-  {{#burger.menu as |menu|}}
-    <div class='row search-head'>
-      <div class='col m8'>
-        Search
-      </div>
-      <div class='col m4'>
-        <a {{action burger.state.actions.toggle}} class="close-results scroll-top right">
-          <i class="material-icons close-button">highlight_off</i>
-        </a>
-      </div>
-    </div>
-    {{!-- empty div is the wormhole --}}
-    <div id='results' />
-  {{/burger.menu}}
 
-  {{#burger.outlet}}
-    <a class="" {{action burger.state.actions.toggle}}></a>
-    <div id='base-map' class='fullscreen-map'>
-      <div id='map' class='atlmap'></div>
-      <div class='base-layer-controls'></div>
-    </div>
-    <div class='project-title row z-depth-2'>
-      <div class='col l1'>
-        {{#link-to 'projects' tagName='a' class='title-bar-action'}}
-          <i class='material-icons exit'>exit_to_app</i>
-        {{/link-to}}
-      </div>
-      <div class='col l8'>
-        <span class='h2 truncate'>{{model.project.name}}</span>
-      </div>
-      <div class='col l3 right reveal-btn'>
-        {{#if model.project.may_edit}}
-          <button class="search-btn btn waves-effect waves-light right {{if burger.state.open 'collapse'}}" type="submit" {{action 'showSearch'}}>
-            <i class='material-icons'>search</i> Search
-          </button>
-        {{/if}}
-        <a {{action (toggle-action 'showUserMenu' this)}} class='title-bar-action ignore-click'>
-          <i class='material-icons right burger'>menu</i>
-        </a>
-      </div>
-      {{user-menu showUserMenu=showUserMenu}}
-    </div>
-    {{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
+{{main-nav model=model}}
 
+<div id='base-map' class='fullscreen-map'>
+  <div id='map' class='atlmap'></div>
+  <div class='base-layer-controls'></div>
+</div>
 
-  {{/burger.outlet}}
-{{/burger-menu}}
-
+{{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
+{{vector-info}}
 {{#if (or model.project.hasIntro model.project.editing)}}
   {{#unless model.project.suppressIntro}}
     {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
-      {{project-intro-modal action='toggleIntro' project=model.project keyboardActivated=true }}
+      {{project-intro-modal action='toggleIntro' model=model.project }}
     {{/tether-dialog}}
   {{/unless}}
 {{/if}}

@@ -1,3 +1,4 @@
+// QUESTION: Do we need this?
 import Ember from 'ember';
 
 const { Helper } = Ember;

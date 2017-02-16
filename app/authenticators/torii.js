@@ -1,3 +1,4 @@
+/* eslint arrow-body-style: ["error", "as-needed"] */
 import Ember from 'ember';
 import Torii from 'ember-simple-auth/authenticators/torii';
 import ENV from '../config/environment';
@@ -28,7 +29,7 @@ export default Torii.extend({
                     grant_type: grantType,
                     auth_code: data.authorizationCode
                 }
-            }).then(function(response) {
+            }).then((response) => {
                 return {
                     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                     access_token: response.access_token,

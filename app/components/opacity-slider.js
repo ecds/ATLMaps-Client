@@ -7,7 +7,6 @@ import Ember from 'ember';
 /* globals noUiSlider */
 
 const {
-    $,
     Component,
     get,
     inject: {

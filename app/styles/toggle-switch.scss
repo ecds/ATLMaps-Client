@@ -1,4 +1,8 @@
 // Based on refills components
+.switch {
+  @include span-columns(1);
+}
+
 .label-switch {
   $base-background-color: $white !default;
   $switch-width: 45px;
@@ -20,8 +24,22 @@
 
   input {
     display: none;
+  }
+    input:checked + div:first-of-type {
+        background: $primary-color-light;
 
-    + .checkbox {
+        &::before {
+          transform: scale(0);
+        }
+
+        &::after {
+          left: $switch-width - $knob-width - ($switch-padding);
+        }
+      }
+    // }
+  // }
+
+    .checkbox {
       background: $switch-border-background;
       border: 0;
       border-radius: $switch-radius;
@@ -60,8 +78,9 @@
       }
     }
 
-    &:checked {
-      + .checkbox {
+
+    input.refill-switch:checked + label div {
+
         background: $primary-color-light;
 
         &::before {
@@ -72,6 +91,4 @@
           left: $switch-width - $knob-width - ($switch-padding);
         }
       }
-    }
-  }
 }

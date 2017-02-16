@@ -1,5 +1,4 @@
 {{#project-pane title='Maps' model=model.project raster=true}}
-  <div class='card'>
     {{#sortable-group tagName="ul" class='scrollable-list project-collapsible' model=model onChange="reorderItems" as |group|}}
       {{#each model.project.sortedRasterLayers as |layer|}}
         {{#sortable-item tagName="li" class='sortable-item layer-list-item' id=raster.raster_layer_id.name model=layer group=group handle=".reorder-handle" }}
@@ -11,16 +10,23 @@
 
             {{layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
 
-            <div class='layer-list-item-secondary-action reorder-handle'>
+            <div class='layer-list-item-secondary-action'>
               <span>
-                <i class='material-icons right'>code</i>
-              </span>
-              <span>
-                {{remove-layer-button model=model layer=layer}}
-              </span>
-              {{#if layer.raster_layer_id.name}}
-                {{shareable-link layer=layer.raster_layer_id}}
+              {{#if (eq layer model.project.sortedRasterLayers.firstObject)}}
+                <i class="fa fa-sort-desc reorder-handle" aria-hidden="true"></i>
+              {{else if (eq layer model.project.sortedRasterLayers.lastObject)}}
+                <i class="fa fa-sort-asc reorder-handle" aria-hidden="true"></i>
+              {{else}}
+                <i class="fa fa-sort reorder-handle" aria-hidden="true"></i>
               {{/if}}
+            </span><br />
+                {{#if model.project.editing}}
+                  {{remove-layer-button model=model layer=layer.raster_layer_id}}
+                {{else}}
+                  {{#if layer.raster_layer_id.name}}
+                    {{shareable-link layer=layer.raster_layer_id}}
+                  {{/if}}
+                {{/if}}
             </div>
           {{/layer-list-item}}
         {{else}}
@@ -31,5 +37,4 @@
           <h4 class='row'>No maps have been added</h4>
       {{/each}}
     {{/sortable-group}}
-  </div>
 {{/project-pane}}

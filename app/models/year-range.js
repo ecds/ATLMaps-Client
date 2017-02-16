@@ -1,6 +1,8 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  min_year: DS.attr('number'),
-  max_year: DS.attr('number')
+const { Model, attr } = DS;
+
+export default Model.extend({
+    min_year: attr('number'),
+    max_year: attr('number')
 });

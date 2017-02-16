@@ -22,6 +22,7 @@ module.exports = {
       'no-underscore-dangle': 0,
       'space-before-function-paren': ['error', 'never'],
       'camelcase': 0,
+      'no-restricted-syntax': [0, 'ForInStatmens'],
 
       // ember-suave
       'ember-suave/no-const-outside-module-scope': ['off'],

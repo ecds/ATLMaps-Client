@@ -1,52 +1,43 @@
 {{#project-pane title='About this Project' model=model.project}}
-  <div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content">
-          {{#if model.project.editing}}
-            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='500'}}
+    <div class="pane-card">
+        {{#if model.project.editing}}
+            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='500' rows='40'}}
 
             {{#if (gte model.project.description.length 485)}}
-              <span class='character-counter red-text right'>
+                <span class='character-counter red-text right'>
                 {{model.project.description.length}}/500
               </span>
             {{else}}
-              <span class='character-counter right'>
+                <span class='character-counter right'>
                 {{model.project.description.length}}/500
               </span>
             {{/if}}
 
-          {{else}}
+        {{else}}
             <p>{{model.project.description}}</p>
-          {{/if}}
-        </div>
-        <div class="card-action">
+        {{/if}}
 
-            {{#if model.project.editing}}
-              <button class="btn waves-effect waves-light blue-grey" type="submit" {{action 'toggleIntro'}}>
-                <i class="material-icons left">edit</i>edit intro
-              </button>
-              {{!-- <a {{action (route-action 'updateProject' model.project 'info')}}
-                class="waves-effect waves-light btn-flat">
-                <i class="material-icons left">cloud</i>
-                Publish
-              </a> --}}
-              {{input type='checkbox' id='publish' checked=model.project.published click=(action (route-action 'updateProject' model.project 'Project has been updated!')) }}
-              <label for='publish' class="waves-effect waves-light btn publish-label">
-                <span class="btn blue-grey waves-effect waves-blue white-text" type="submit">
-                <i class="material-icons">{{if model.project.published 'check_box' 'check_box_outline_blank'}}</i>
-                Publish
+        <div class='neat-row'>
+          {{#if model.project.editing}}
+
+              <span class="waves-effect waves-light blue-grey four-col" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
+                <i class="fa fa-pencil" aria-hidden="true"></i> intro
               </span>
-            </label>
-            <button class="btn waves-effect waves-light green white-text right" type="submit" {{action (route-action 'updateProject' model.project 'Project has been updated!')}}>save</button>
-            {{else if model.project.hasIntro}}
-              <button class="btn-flat waves-effect waves-light" type="submit" {{action 'toggleIntro'}}>
-                learn more
-              </button>
-            {{/if}}
 
-        </div>
+              <span class="waves-effect waves-light four-col" type='submit' {{action (route-action 'updateProject' model.project 'Project has been updated!' 'publish') }}>
+                  <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
+              </span>
+
+              <span class="waves-effect waves-light green white-text four-col" type="submit" {{action (route-action 'updateProject' model.project 'Project has been updated!')}}>
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> save
+              </span>
+
+        {{else if model.project.hasIntro}}
+          <button class="waves-effect waves-light" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
+            learn more
+          </button>
+        {{/if}}
       </div>
+
     </div>
-  </div>
 {{/project-pane}}

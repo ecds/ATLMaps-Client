@@ -1,29 +1,47 @@
-.social-auth-btn {
-  cursor: pointer;
-  font-size: 1.25em;
-  font-weight: 400;
-  // margin-bottom: 1em;
-  margin-top: 1em;
-  padding: .25em;
-  // width: 75%;
+.providers {
+  @include outer-container;
+  // margin-left: 15%;
+  // margin-right: 15%;
+  padding: .5em;
+
+  .social-provider {
+    @include span-columns(3);
+    border-radius: 3px;
+    font-size: 1.5em;
+    padding: .5em;
+    text-align: center;
+
+    i {
+      margin: 0 auto;
+    }
+
+    &:first-child {
+      @include shift(3);
+    }
+
+  }
+
+  // .provider-name {
+  //   @include span-columns(10);
+  // }
 }
 
-.google-icon,
-.facebook-icon {
-  margin-top: .1em;
-  padding-left: .25em;
-  vertical-align: middle;
+.login-btns {
+  @include outer-container;
 }
 
-.social-provider {
-  margin-left: 15%;
-  margin-right: 15%;
+.login-btn-group {
+  @include span-columns(6);
+  font-size: 1.75em;
 }
 
-.sign-btn {
-  border: 1px solid color('grey', 'base');
-  color: color('grey', 'darken-4');
-  line-height: 2em;
-  margin-bottom: .25em;
-  margin-top: .25em;
+.login-btn {
+  @include span-columns(12);
+
+}
+
+.login-form {
+  .button-group {
+    margin-bottom: 2em;
+  }
 }

@@ -1,65 +1,47 @@
 {{#if session.isAuthenticated}}
-  <div class='center-align row black-text'><a {{action 'logOut' }} title="Logout">Logout</a></div>
+  <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
 {{else}}
-  {{#if login}}
-    <form {{action 'authenticateWithOAuth2' on='submit'}}>
-      <div class="form-group">
-        <label for="identification">Login</label> {{input value=identification placeholder='Enter Login' class='form-control'}}
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label> {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
-      </div>
-      <button {{action 'cancel'}}type="submit" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-default right blue">Login</button>
-    </form>
-
-  {{else if signUp}}
-    <form {{action 'signUpSubmit' on='submit'}}>
-      <div class='form-grup row'>
-        <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' class='form-control'}}
-      </div>
-      <div class='form-group row'>
-        {{!-- <div class='col m5'> --}}
-          <label for='password'>Password</label> {{input value=newLogin.password placeholder='Choose Password' class='form-control' type='password'}}
-        {{!-- </div>
-        <div class='col m5 offset-m2'> --}}
-          <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
-        {{!-- </div> --}}
-      </div>
-      <button {{action 'cancel'}}type="submit" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-default right blue">Sign Up</button>
-    </form>
-
-  {{else}}
-    <div class='center-align row black-text'>Login with</div>
-    {{! Buttons should probably be a block component.}}
-    <div class="blue darken-4 white-text row social-auth-btn" {{action 'authenticateWithFacebook'}}>
-      <div class='col s1'>
-        <i class="material-icons atlmaps-ext facebook-icon left"></i>
-      </div>
-      <div class='social-provider s10 center-align'>Facebook</div>
-    </div>
-
-    {{!-- <div class="blue white-text row social-auth-btn">
-      <div class='col s1'>
-        <i class="material-icons atlmaps-ext twitter-icon left"></i>
-      </div>
-      <div class='social-provider s10 center-align'>Twitter</div>
-    </div> --}}
-
-    <div class="red white-text row social-auth-btn" {{action 'authenticateWithGoogle'}}>
-      <div class='col s1'>
-        <i class="material-icons atlmaps-ext google-icon left"></i>
-      </div>
-      <div class='social-provider center-align'>Google</div>
-    </div>
-    <div class='center-align black-text'>OR</div>
-      <a {{action 'signUp'}} class='col m5 s12 sign-btn center-align'>
-        Sign Up
-      </a >
-      <a {{action 'login'}} class='col offset-m2 m5 s12 sign-btn center-align'>
-        Login
+    <div class="button-group">
+      <a {{action 'abortSignUp'}}>
+        <label class='login-btn-group'>
+          <input type="radio" name="button-group" value='item' checked={{unless signUp 'checked'}}>
+          <span class="button-group-item">Login</span>
+        </label>
       </a>
+      <a {{action 'startSignUp'}}>
+        <label class='login-btn-group'>
+          <input type="radio" name="button-group" value="other-item" checked={{if signUp 'checked'}}>
+          <span class="button-group-item">Sign Up</span>
+        </label>
+      </a>
+    </div>
+    {{#if signUp}}
+      <form {{action 'signUpSubmit' on='submit'}}>
+        <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
+        <label for='password'>Password</label>
+        {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
+        <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
+        <button {{action 'cancel'}}type="submit" class="">Cancel</button>
+        <button type="submit" class="">Sign Up</button>
+      </form>
+    {{else}}
+      {{! Buttons should probably be a block component.}}
+      <div class="providers">
+        <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>
+          <span class='provider-icon'><i class="fa fa-facebook" aria-hidden="true"></i></span>
+        </div>
+      <div class="red white-text social-provider" {{action 'authenticateWithGoogle'}}>
+        <span class='provider-icon'><i class="fa fa-google" aria-hidden="true"></i></span>
+      </div>
+    </div>
+
+    <div class='neat-row center-align'>- or -</div>
+
+    <form {{action 'authenticateWithOAuth2' on='submit'}}>
+      {{input value=identification placeholder='Enter Login' class='form-control'}}
+      {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
+      <button type="submit" class="blue login-btn">Login</button>
+    </form>
   {{/if}}
 
   {{#if errorMessage}}
@@ -67,9 +49,6 @@
       <p>
         <strong>Login failed:</strong> <code>{{errorMessage}}</code>
       </p>
-      {{!-- <p>
-        Documentation of the error codes can be found in the <a href="http://tools.ietf.org/html/rfc6749#section-5.2" title="RFC 6749 - Error Response">Error Response section of RFC 6749</a>.
-      </p> --}}
     </div>
   {{/if}}
 {{/if}}

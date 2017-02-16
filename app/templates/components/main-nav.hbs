@@ -1,21 +1,47 @@
-<div class='navbar-fixed'>
-  <nav>
-    <div class="nav-wrapper">
-      {{!-- <a href="#" class="brand-logo right">Logo</a> --}}
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        {{#link-to 'index' tagName='li' }}{{link-to 'ATLMaps' 'index'}}{{/link-to}}
-        {{#link-to 'projects' tagName='li' }}{{link-to 'Projects' 'projects'}}{{/link-to}}
-        {{#link-to 'about' tagName='li' }}{{link-to 'About' 'about'}}{{/link-to}}
-      </ul>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a {{action (toggle-action 'showUserMenu' this)}} class='title-bar-action ignore-click'>
-            <i class='material-icons right burger'>menu</i>
-          </a>
-        </li>
-      </ul>
+{{!-- <header class="navigation" role="banner"> --}}
+<div class="navigation-wrapper">
+    {{#link-to 'index' class='logo' }}
+        <img src="/assets/images/atl.png" alt="Logo Image">
+    {{/link-to}}
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+        <ul id="js-navigation-menu" class="navigation-menu show">
+            {{#if model.project}}
+                <li class="project-title">{{model.project.name}}</li>
+            {{else}}
+                <li class='nav-link'>
+                    {{#link-to 'projects'}}Projects{{/link-to}}
+                </li>
+                <li class='nav-link'>
+                    {{#link-to 'about'}}About{{/link-to}}
+                </li>
+            {{/if}}
+        </ul>
+    </nav>
+    <div class="navigation-tools ignore-click {{if showingSearch 'collapse-tools'}} {{unless model.project 'site-page-menu'}}">
+        <a href='javascript:void(0)' class='title-bar-action register-click'>
+            <i class="fa fa-bars toggle-user-menu" aria-hidden="true"></i>
+        </a>
 
+        {{user-menu showUserMenu=showUserMenu model=model}}
+
+        {{#if model.project.may_edit}}
+            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' this)}}>
+              <i class='material-icons'>search</i> Search
+            </button>
+        {{/if}}
     </div>
-  </nav>
 </div>
-{{user-menu showUserMenu=showUserMenu class='row'}}
+{{!-- </header> --}}
+<div class='search-head {{if showingSearch 'showing-search-head'}}'>
+    <div class='search-head-title'>
+        Search
+    </div>
+    <div class='search-close-button'>
+        <a {{action (toggle-action 'showingSearch' this)}} class="close-results scroll-top right">
+            <i class="material-icons close-button">highlight_off</i>
+        </a>
+    </div>
+</div>
+{{!-- empty div is the wormhole --}}
+<div id='results' class='search-pane {{if showingSearch 'showing-search'}}' />

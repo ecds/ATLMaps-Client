@@ -1,49 +1,49 @@
-<a {{action 'toggleIntro'}} class='close-button pull-right'>
+<a {{action (toggle-action 'suppressIntro' project)}} class='close-button pull-right'>
   <i class="material-icons">highlight_off</i>
 </a>
 
 <div class='z-depth-3'>
   <div class='modal-content'>
 
-    {{#if project.editing}}
+    {{#if model.project.editing}}
     {{! EDIT INTRO }}
       <header class='intro-modal-header' />
       <div class='pane-container intro-edit'>
         <div class='pane-content'>
           <div class="row">
             <div class="input-field col s12">
-              <i class="material-icons prefix">insert_photo</i> {{input disabled=project.media value=project.photo id='photo-input'}}
-              <label for="photo-input" class= {{if project.photo 'active'}}>Photo</label>
+              <i class="material-icons prefix">insert_photo</i> {{input disabled=model.project.media value=model.project.photo id='photo-input'}}
+              <label for="photo-input" class= {{if model.project.photo 'active'}}>Photo</label>
             </div>
           </div>
 
-          {{#if project.photo}}
+          {{#if model.project.photo}}
             <div class='row'>
               <div class='col s12'>
-                <img class='intro-photo-edit' src={{project.photo}} />
+                <img class='intro-photo-edit' src={{model.project.photo}} />
               </div>
             </div>
           {{/if}}
 
           <div class="row">
             <div class="input-field col s12">
-              <i class="material-icons prefix">videocam</i> {{input disabled=project.photo value=project.media id='video-input'}}
-              <label for="video" class= {{if project.media 'active'}}>Video</label>
+              <i class="material-icons prefix">videocam</i> {{input disabled=model.project.photo value=model.project.media id='video-input'}}
+              <label for="video" class= {{if model.project.media 'active'}}>Video</label>
             </div>
           </div>
 
-          {{#if project.media}}
+          {{#if model.project.media}}
           <div class='row'>
             <div class='col s12'>
-              <iframe src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
+              <iframe src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
           {{/if}}
 
           <div class="row">
         <div class="input-field col s12">
-          {{textarea id='intro-body' class='materialize-textarea' value=project.intro}}
-          <label for="intro-body" class={{if project.description 'active'}}>Intro Text</label>
+          {{textarea id='intro-body' class='materialize-textarea' value=model.project.suppressIntro}}
+          <label for="intro-body" class={{if model.project.description 'active'}}>Intro Text</label>
         </div>
       </div>
 
@@ -59,18 +59,18 @@
 
     {{! NOT EDITING}}
       <header class='intro-modal-header'>
-        {{#if project.media}}
+        {{#if model.project.media}}
           <div class="video-container">
-            <iframe width="853" height="480" src="{{project.media}}" frameborder="0" allowfullscreen></iframe>
+            <iframe width="853" height="480" src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
           </div>
-          {{else if project.photo}}
-          <div style='height: 45vh; background-image: url({{project.photo}}); background-size: cover' />
+          {{else if model.project.photo}}
+          <div style='height: 45vh; background-image: url({{model.project.photo}}); background-size: cover' />
         {{/if}}
       </header>
-      <div class='pane-container {{if project.media 'with-media'}}'>
+      <div class='pane-container {{if model.project.media 'with-media'}}'>
         <article class='pane-content'>
-          <h4>{{project.name}}</h4>
-          <h5>{{project.owner}}</h5> {{{project.intro}}}
+          <h4>{{model.project.name}}</h4>
+          <h5>{{model.project.owner}}</h5> {{{model.project.intro}}}
 
         </article>
         <footer class='modal-fixed-footer intro-modal-footer'>
@@ -81,7 +81,7 @@
         </button>
             </div>
             <div class='col s4'>
-              <input type="checkbox" class="filled-in" id="supress" name="supressIntro" checked= {{project.hasSuppressCookie}} onchange= {{action "supressIntro" project=project}} />
+              <input type="checkbox" class="filled-in" id="supress" name="suppressIntro" checked= {{model.project.hasSuppressCookie}} onchange= {{action "suppressIntro" project=project}} />
               <label class="right" for='supress'>
           <span class="check"></span> Don't show every time.
         </label>

@@ -1,5 +1,4 @@
 {{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers" }}
-  <div class='card'>
     <ul class='scrollable-list project-collapsible collapsible'>
 
       {{#each model.project.vector_layer_project_ids as |layer|}}
@@ -17,12 +16,10 @@
             {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
 
             <div class='layer-list-item-secondary-action'>
-              <span>
-                {{toggle-switch layer=layer}}
-              </span>
-              <span>
-                {{remove-layer-button model=model layer=layer}}
-              </span>
+                {{#if layer.vector_layer_id.name}}
+                  {{toggle-switch class='right' id=layer.vector_layer_id.name click=(route-action 'hideLayer' layer.vector_layer_id) checked=layer.vector_layer_id.showing}}
+                {{/if}}
+                {{remove-layer-button model=model layer=layer.vector_layer_id}}
               {{#if layer.vector_layer_id.name}}
                 {{shareable-link layer=layer.vector_layer_id tagName='span'}}
               {{/if}}
@@ -36,5 +33,4 @@
         <h4 class='row'>No data layers have been added</h4>
       {{/each}}
     </ul>
-  </div>
 {{/project-pane}}

@@ -12,6 +12,8 @@ const {
 export default Component.extend({
     flashMessage: service(),
     isShowingModal: false,
+    tagName: 'span',
+    // classNames: ['shareable-button'],
 
     actions: {
         toggleShareableLink: function toggleModal() {

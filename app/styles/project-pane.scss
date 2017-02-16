@@ -1,12 +1,12 @@
 .project-pane {
-  // box-shadow: $shadow;
+  @include outer-container;
   left: 5em;
-  pointer-events: none;
+  pointer-events: all;
   position: absolute;
-  top: 3em;
+  top: 60px;
   transition: width $rabbit linear, top $turtle linear;
   width: 34vw;
-  z-index: 999;
+  z-index: 400;
 
   .row {
     margin-bottom: 0;
@@ -21,6 +21,12 @@
 
   .save-pane-state {
     background-color: $secondary-color;
+  }
+
+  .pane-card {
+    @include outer-container;
+    background-color: $white;
+    padding: 2em;
   }
 }
 
@@ -51,10 +57,11 @@
 }
 
 .pane-title {
+  @include outer-container;
   padding: .5rem 2rem;
 
-  .col {
-    padding: 0;
+  .project-pane-title {
+    @include span-columns(11);
   }
 }
 
@@ -176,9 +183,15 @@
     line-height: initial;
     padding: 1rem;
 
+    .shareable-link {
+      opacity: 0;
+      transition: opacity $turtle;
+    }
+
+
     &.active {
       .shareable-link {
-        display: block;
+        opacity: 1;
 
         .material-icons {
           cursor: pointer;
@@ -187,7 +200,14 @@
       }
     }
 
+    // .shareable-button {
+    //   bottom: .5em;
+    //   position: relative;
+    //   right: .5em;
+    // }
+
     .shareable-link-modal {
+      @include outer-container;
       display: inline-block;
       min-width: 25%;
 
@@ -195,23 +215,28 @@
         color: inherit;
         font-size: initial;
       }
-    }
 
-    .shareable-link {
-      display: none;
+      button {
+        font-size: .75em;
+      }
+
+      .close-button {
+        cursor: pointer;
+      }
     }
 
     .data-title {
       padding-left: .5em;
     }
 
-    i {
+    .layer-list-item-icon i {
       font-size: 1.5em;
     }
 
     .remove-layer {
       cursor: pointer;
       opacity: .7;
+      padding-top: .5em;
       transform: none;
 
       &:hover {
@@ -383,6 +408,37 @@ a {
   }
 }
 
+$base-spacing: 1.5em !default;
+$flashes: (
+  'alert': #fff6bf,
+  'error': #fbe3e4,
+  'notice': #e5edf8,
+  'success': color('green', 'base'),
+) !default;
+
+@each $flash-type, $color in $flashes {
+  .flash-#{$flash-type} {
+    background-color: $color;
+    // color: shade($color, 60%);
+    color: $primary-color;
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    a {
+      color: shade($color, 70%);
+      text-decoration: underline;
+
+      &:focus,
+      &:hover {
+        color: shade($color, 90%);
+      }
+    }
+  }
+}
+
+
 // input {
 //   &.required {
 //     :invalid ~ .clear-text {
@@ -397,17 +453,3 @@ a {
 //     padding-right: 0;
 //   }
 // }
-
-.reorder-handle {
-  height: 2em;
-
-  i {
-    margin-right: -.3em;
-    transform: rotate(-90deg);
-
-    &:hover {
-      color: $secondary-color;
-      cursor: ns-resize;
-    }
-  }
-}

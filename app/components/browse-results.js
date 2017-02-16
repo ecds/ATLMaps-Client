@@ -2,16 +2,16 @@
  * Component to initiate UI for search results.
  */
 import Ember from 'ember';
-import burgerMenu from 'ember-burger-menu';
+// import burgerMenu from 'ember-burger-menu';
 
 const { $, Component, inject: { service } } = Ember;
 
 export default Component.extend({
     browseParams: service(),
 
-    classNameBindings: ['showingResults'],
-
-    showingResults: false,
+    // classNameBindings: ['showingResults'],
+    //
+    // showingResults: true,
 
     // Initilizes the MaterializeCSS tabs for the search results.
     didRender() {
@@ -21,7 +21,7 @@ export default Component.extend({
     actions: {
         toggleResults() {
             // TODO: Get rid of burgerMenu.
-            burgerMenu.toggleProperty('open');
+            // burgerMenu.toggleProperty('open');
         }
     }
 });

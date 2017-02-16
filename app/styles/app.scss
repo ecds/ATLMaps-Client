@@ -2,22 +2,24 @@
 $roboto-font-path: '../assets/';
 
 @import 'components/color';
-@import 'variables';
-@import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
-@import 'bower_components/neat/app/assets/stylesheets/neat';
-
 // Custom color settings go here
 $primary-color: color('blue-grey', 'darken-1');
 $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
-$secondary-color: #e24b31;
+$secondary-color: #ff4100;
 $secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
+$mobile: new-breakpoint(max-width 500px 4);
+@import 'materialize';
+@import 'variables';
+@import 'bower_components/bourbon/core/bourbon';
+@import 'bower_components/neat/app/assets/stylesheets/neat';
+@import 'bower_components/bitters/core/base';
+@import 'bower_components/font-awesome/scss/font-awesome';
+// @import 'www/css/material.css';
 
-@import'components/variables',
-'materialize',
-'banner',
+@import'banner',
 'ember-modal-structure',
 'ember-modal-appearance',
 'main-footer',
@@ -36,7 +38,12 @@ $nav-button: color('grey', 'darken-4');
 'user-menu',
 'social-auth',
 'layer-route',
-'toggle-switch';
+'toggle-switch',
+'waves',
+'refill-button-group';
+
+// Refills
+@import 'flexbox';
 
 h3 {
   font-size: 1.75em;
@@ -47,21 +54,18 @@ h4 {
 }
 
 body {
-  background-color: color('grey', 'darken-4');
+  background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
   font-family: 'Roboto', 'Material Icons' sans-serif;
   font-size: 16px;
   font-weight: 300;
   height: 100vh;
 
-  &.loading {
-    background: $primary-color;
+  .preloader-wrapper {
+    height: 10em;
+    margin: 25% 50%;
+    width: 10em;
 
-    .preloader-wrapper {
-      height: 10em;
-      margin: 25% 50%;
-      width: 10em;
-    }
 
     .circle {
       border-width: 2em;
@@ -85,11 +89,32 @@ a {
   cursor: pointer;
 }
 
-.card {
-  .card-title {
-    font-size: 1.5em;
-  }
+// Grid
+.neat-row {
+  @include span-columns(12);
+  padding: 1em 0;
 }
+
+.four-col {
+  @include media($mobile) {
+    @include span-columns(4);
+  }
+
+  @include span-columns(4);
+  @include omega;
+  margin: .2em;
+}
+
+.six-col {
+  @include span-columns(6);
+  margin: .2em;
+}
+
+// .card {
+//   .card-title {
+//     font-size: 1.5em;
+//   }
+// }
 
 .content {
   height: 100vh;
@@ -169,22 +194,22 @@ a {
   padding-top: .5em;
 }
 
-.carousel {
-  &.carousel-slider {
-    height: 200px;
-  }
-}
-
-.bm-menu {
-  background-color: $white;
-  box-shadow: $shadow5;
-  // The burger menu code only deals in pixels :(
-  width: 34vw !important;
-}
+// .carousel {
+//   &.carousel-slider {
+//     height: 200px;
+//   }
+// }
+//
+// .bm-menu {
+//   background-color: $white;
+//   box-shadow: $shadow5;
+//   // The burger menu code only deals in pixels :(
+//   width: 34vw !important;
+// }
 
 textarea {
   &.description {
-    height: 8rem;
+    height: 18rem;
   }
 }
 
@@ -208,11 +233,12 @@ textarea {
 
 .layer-list-item-title {
   @include span-columns(10);
-  margin-top: .25em;
+  // margin-top: .25em;
 }
 
 .layer-list-item-secondary-action {
   @include span-columns(1);
+  height: 0;
 
   span {
     @include span-columns(1 of 1);
@@ -232,32 +258,169 @@ textarea {
   }
 }
 
-// TODO KEEP PLAYING WITH THE COLOR!!!!!!!
-// Making the switches less penis like
-// .switch {
-//   label {
-//     .lever {
-//       // background-color: color('blue-grey', 'lighten-4');
-//       // height: 25px;
-//       // width: 40px;
-//
-//       &::after {
-//         // background-color: $primary-color-light;
-//         // box-shadow: none;
-//         // height: 23px;
-//         // left: 0;
-//         // top: 1px;
-//         // width: 23px;
-//       }
-//     }
-//   }
-// }
-//
-// .switch label input[type=checkbox]:checked + .lever:after {
-//   // background-color: $primary-color;
-//   // left: 16px;
-// }
-//
-// .switch label input[type=checkbox]:checked + .lever {
-//     // background-color: color('blue-grey', lighten-4);
-// }
+// OVERRIDE materialize
+.collapsible {
+  border: 0;
+  box-shadow: none;
+
+  .collapsible-header {
+    font-size: 1.25em;
+    line-height: 1.25em;
+  }
+
+  .collapsible-header,
+  .collapsible-body {
+    border: 0;
+    color: #263238;
+    // font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+  }
+}
+
+.vector-content.marker-content.col-md-12 img {
+  padding: 1em;
+}
+
+#{$all-buttons} {
+  background-color: $action-color;
+  text-transform: uppercase;
+}
+
+
+// Hero Unit
+.hero {
+  $large-screen: 50em !default;
+  align-items: center;
+  background-image: url('/assets/images/backgrounds/bg-blue-map.png');
+  background-position: right;
+  background-size: none;
+  display: flex;
+  justify-content: center;
+  min-height: 25em;
+  padding: 2em;
+
+  @include media($large-screen) {
+    background-position: left;
+    background-size: cover;
+    justify-content: flex-end;
+  }
+
+  .hero-content {
+    max-width: 20em;
+    text-align: center;
+
+    @include media($large-screen) {
+      text-align: left;
+    }
+  }
+
+  .hero-logo {
+    margin: auto;
+  }
+}
+
+// Grid
+.featured-cards {
+  margin: 2em auto;
+  width: 75vw;
+
+  a {
+    all: unset;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  a {
+    all: unset;
+  }
+}
+
+.card {
+  $base-border-color: gainsboro !default;
+  $base-border-radius: 3px !default;
+  $base-background-color: white !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10%);
+  $card-header-background: $card-background;
+  $card-margin: 1em;
+  $card-image-hover-opacity: 0.7;
+  $card-image-hover-color: #F8F2B4;
+
+  background-color: $card-background;
+  border: $card-border;
+  border-radius: $base-border-radius;
+  box-shadow: 0 2px 4px darken($base-background-color, 10%);
+  cursor: pointer;
+  flex-basis: 15em;
+  flex-grow: 1;
+  margin: 0 $card-margin $base-spacing $card-margin;
+  position: relative;
+  transition: all .2s ease-in-out;
+
+  a {
+    all: unset;
+  }
+
+  .card-image {
+    background-color: $card-image-hover-color;
+    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
+
+    img {
+      @include border-top-radius($base-border-radius);
+      opacity: 1;
+      transition: all .2s ease-in-out;
+      width: 100%;
+    }
+  }
+
+  .card-header {
+    background-color: $card-header-background;
+    border-bottom: $card-border;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: ($base-spacing / 3) ($base-spacing / 2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-copy {
+    font-size: .9em;
+    line-height: 1.5em;
+    padding: ($base-spacing / 2) ($base-spacing / 2);
+
+    p {
+      margin: 0 0 ($base-spacing / 2);
+    }
+  }
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+
+    img {
+      opacity: $card-image-hover-opacity;
+    }
+  }
+
+  &:active {
+    background-color: $card-background;
+
+    .card-header {
+      background-color: $card-background;
+    }
+  }
+}
+
+.layers-layer-item {
+  background-color: transparent;
+}

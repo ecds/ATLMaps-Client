@@ -19,6 +19,10 @@ export default Route.extend({
     session: service(),
     currentUser: service(),
 
+    _loadCurrentUser() {
+        return this.get('currentUser').load();
+    },
+
     beforeModel() {
         return this._loadCurrentUser();
     },
@@ -31,22 +35,23 @@ export default Route.extend({
         if (this.get('session.isAuthenticated')) {
             return RSVP.hash({
                 mine: this.store.query('project', {
-                    user_id: get(this, 'currentUser.user.id')
+                    user_id: true
                 }),
-                collaborations: this.store.query('project', {
-                    collaborations: get(this, 'currentUser.user.id')
-                }),
-                featured: this.store.query('project', { featured: true })
+                // collaborations: this.store.query('project', {
+                //     collaborations: get(this, 'currentUser.user.id')
+                // }),
+                featured: this.store.query('project', { user_id: true })
             });
         }
+        console.log('this', this);
         return RSVP.hash({
             featured: this.store.findAll('project')
         });
     },
 
-    _loadCurrentUser() {
-        return this.get('currentUser').load();
-    },
+    // _loadCurrentUser() {
+    //     return this.get('currentUser').load();
+    // },
 
     actions: {
 
@@ -62,7 +67,7 @@ export default Route.extend({
             const project = this.store.createRecord('project', {
                 name: newProjectName,
                 // I really hate this and there has to be a better way.
-                user_id: this.get('currentUser.user.id'),
+                user_id: get(this, 'currentUser.user.id'),
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,

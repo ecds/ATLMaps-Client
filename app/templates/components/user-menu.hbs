@@ -1,1 +1,17 @@
+{{#if currentUser.user}}
+<section>
+  <span  class='welcome-user'>Signed in as:</span>
+  <span><i>{{currentUser.user.displayname}}</i></span>
+</section>
+<hr />
+{{/if}}
+{{#if ( xor model.project.may_edit model.explore)}}
+<section class='ignore-click'>
+  <span>{{toggle-switch click=(toggle-action 'editing' model.project) checked=model.project.editing}}</span>
+  <span>{{if model.project.editing 'Turn off edit mode.' 'Edit project.'}}</span>
+</section>
+<hr />
+{{/if}}
+<section>
 {{login-form}}
+</section>

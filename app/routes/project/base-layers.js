@@ -4,75 +4,84 @@ const {
     Route,
     inject: {
         service
-    }
+    },
+    get,
+    set,
+    run
 } = Ember;
 
 export default Route.extend({
     mapObject: service(),
+    flashMessage: service(),
 
     actions: {
-        setCenterAndZoom: function(model) {
+        setCenterAndZoom(model) {
             // Saves the zoom level and center to the current view.
             // First we need the map object
-            let map = this.get('mapObject.map');
-            let projectController = this.controllerFor('project');
-            let controller = this.controllerFor('project.base-layers');
+            const map = get(this, 'mapObject.map');
+            const flash = get(this, 'flashMessage');
+            set(model, 'center_lat', map.getCenter().lat);
+            set(model, 'center_lng', map.getCenter().lng);
+            set(model, 'zoom_level', map.getZoom());
 
-            model.set('center_lat', map.getCenter().lat);
-            model.set('center_lng', map.getCenter().lng);
-            model.set('zoom_level', map.getZoom());
-
-            model.save().then(function() {
-                // Success callback
-                // Show confirmation.
-                controller.set('successMessage', 'Center and zoom level set!');
-                projectController.set('editSuccess', true);
-                Ember.run.later(this, function() {
-                    projectController.set('editSuccess', false);
+            model.save().then(() => {
+                flash.setProperties({
+                    message: 'CENTER AND ZOOM LEVEL SET',
+                    show: true,
+                    success: true
+                });
+                run.later(this, () => {
+                    flash.setProperties({ message: '', show: false });
                 }, 3000);
-            }, function() {
+            }, () => {
                 // Error callback
-                controller.set('failMessage', 'Dang, center and zoom level not set.');
-                projectController.set('editFail', true);
-                Ember.run.later(this, function() {
-                    projectController.set('editFail', false);
+                flash.setProperties({
+                    message: 'FAILED TO SET CENTER AND ZOOM LEVEL',
+                    show: true,
+                    success: false
+                });
+                run.later(this, () => {
+                    flash.setProperties({ message: '', show: false });
                 }, 3000);
                 model.rollbackAttributes();
-
             });
-
         },
 
-        setBase: function(base, model, editing) {
-            Ember.$('.base').hide();
-            Ember.$('.' + base).show();
-            Ember.$('.leaflet-control-layers-selector').removeAttr('checked');
-            Ember.$('span:contains("' + base + '")').prev().click().attr('checked', 'checked');
-            var projectController = this.controllerFor('project');
-            var controller = this.controllerFor('project.base-layers');
-            model.set('default_base_map', base);
-            if (editing) {
-                model.save().then(function() {
+        setBase(base, model) {
+            const map = get(this, 'mapObject.map');
+            const baseMaps = get(this, 'mapObject.baseMaps');
+            const flash = get(this, 'flashMessage');
+
+            Object.values(baseMaps).forEach((layer) => {
+                map.removeLayer(layer);
+            });
+            baseMaps[base].addTo(map);
+            model.setProperties({ default_base_map: base });
+            if (model.editing) {
+                model.save().then(() => {
                     // Success callback
                     // Show confirmation.
-                    controller.set('successMessage', 'Base layer has been set!');
-                    projectController.set('editSuccess', true);
-                    Ember.run.later(this, function() {
-                        projectController.set('editSuccess', false);
+                    flash.setProperties({
+                        message: 'BASE MAP SET',
+                        show: true,
+                        success: true
+                    });
+                    run.later(this, () => {
+                        flash.setProperties({ message: '', show: false });
                     }, 3000);
-                }, function() {
+                }, () => {
                     // Error callback
-                    controller.set('failMessage', 'Dang, base map was not set.');
-                    projectController.set('editFail', true);
-                    Ember.run.later(this, function() {
-                        projectController.set('editFail', false);
+                    flash.setProperties({
+                        message: 'ERROR BASE MAP NOT SET',
+                        show: true,
+                        success: false
+                    });
+                    run.later(this, () => {
+                        flash.setProperties({ message: '', show: false });
                     }, 3000);
                     model.rollbackAttributes();
-
                 });
             }
-
         }
-
     }
 });

@@ -17,10 +17,8 @@ export default Component.extend({
         searchBounds() {
             this.toggleProperty('hasBounds');
             if (get(this, 'hasBounds')) {
-                let map = get(this, 'mapObject.map');
-                // try {
-                //     bounds.getWest();
-                let currentBounds = map.getBounds();
+                const map = get(this, 'mapObject.map');
+                const currentBounds = map.getBounds();
                 set(this, 'browseParams.bounds', {
                     s: currentBounds.getSouth(),
                     n: currentBounds.getNorth(),
