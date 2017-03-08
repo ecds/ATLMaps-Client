@@ -1,47 +1,44 @@
 .providers {
-  @include outer-container;
+  @include grid-container;
+  // @include grid-shift(2);
+  font-size: 2em;
   // margin-left: 15%;
   // margin-right: 15%;
   padding: .5em;
 
   .social-provider {
-    @include span-columns(3);
+    @include grid-column(6);
     border-radius: 3px;
-    font-size: 1.5em;
+    cursor: pointer;
+    // font-size: 1.5em;
     padding: .5em;
     text-align: center;
 
     i {
-      margin: 0 auto;
+      margin-left: 10%;
     }
 
-    &:first-child {
-      @include shift(3);
-    }
+    // &:first-child {
+    //   @include grid-shift(3);
+    // }
 
   }
 
   // .provider-name {
-  //   @include span-columns(10);
+  //   @include grid-column(10);
   // }
 }
 
-.login-btns {
-  @include outer-container;
-}
+// .login-btns {
+//   @include grid-container;
+// }
 
-.login-btn-group {
-  @include span-columns(6);
-  font-size: 1.75em;
-}
+// .login-btn-group {
+//   @include grid-column(6);
+//   font-size: 1.75em;
+// }
 
 .login-btn {
-  @include span-columns(12);
+  @include grid-column(6);
 
-}
-
-.login-form {
-  .button-group {
-    margin-bottom: 2em;
-  }
 }

@@ -30,7 +30,8 @@
     "bower": "*",
     "install": "~1.0.4",
     "interact": "^1.2.8",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "neat": "^2.0.0"
   },
   "resolutions": {
     "ember": "^2.10.2",

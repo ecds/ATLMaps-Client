@@ -49,10 +49,7 @@ export default Model.extend({
     // The following are non-API based attributes.
 
     // Non-API backed attributes for managing state.
-    is_editing: attr('boolean', {
-        defaultValue: true
-    }),
-    showing_browse_results: attr('boolean', {
+    showingSearch: attr('boolean', {
         defaultValue: false
     }),
     showing_all_vectors: attr('boolean', {
@@ -67,34 +64,26 @@ export default Model.extend({
     hasSuppressCookie: attr('boolean', {
         defaultValue: false
     }),
-    edit_success: attr('boolean', {
-        defaultValue: false
-    }),
-    edit_fail: attr('boolean', {
-        defaultValue: false
-    }),
+    // edit_success: attr('boolean', {
+    //     defaultValue: false
+    // }),
+    // edit_fail: attr('boolean', {
+    //     defaultValue: false
+    // }),
 
     // Attribute that will be set to true if a user is "exploring".
     exploring: attr('boolean', {
         defaultValue: false
     }),
 
-    may_browse: attr('boolean', {
-        defaultValue: false
-    }),
+    // may_browse: attr('boolean', {
+    //     defaultValue: false
+    // }),
 
     // Computed property that sorts rasters by on the position their `position`
     // in the project. See http://emberjs.com/api/classes/Ember.computed.html#method_sort
     sortedRasterLayers: computed.sort('raster_layer_project_ids', '_positionSort'),
     _positionSort: ['position:desc'],
-
-    // If someone is allowed to edit a project, we start with `editing` set to `true`.
-    editing: computed(function startEditing() {
-        if (this.may_edit === true) {
-            return true;
-        }
-        return false;
-    }).property('this.may_edit'),
 
     // Used in determing which nave links to show.
     hasRasters: computed(function hasRasters() {

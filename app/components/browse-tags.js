@@ -39,7 +39,7 @@ export default Component.extend({
             this.sendAction('getResults');
         },
 
-        // Handel checking/un-checking all tags.
+        // handle checking/un-checking all tags.
         checkAllTagsInCategory(category) {
             // FIXME: For real yo!
             const allChecked = category.get('allChecked');

@@ -1,26 +1,33 @@
 <div class="pane-title">
-  <div class='project-pane-title'>
-    <h3>{{title}}</h3>
-  </div>
+  {{#if model}}
+      {{close-button model=model class='project-pane-close-button'}}
+  {{/if}}
+    <div class='project-pane-title'>
+      {{#ember-inline-edit
+        value=model.name
+        onSave=(route-action 'updateProject' model 'Title Updated!')
+        onClose=(route-action 'cancleUpdate' model)
+        as |inline-edit|}}
+        {{#inline-edit.editable}}
+          <h3>{{model.name}}</h3>
+        {{/inline-edit.editable}}
+
+        {{#inline-edit.editor}}
+          {{input value=model.name}}
+        {{/inline-edit.editor}}
+      {{/ember-inline-edit}}
+    </div>
     {{#if raster}}
-    {{show-hide-layers layers=model.raster_layer_ids checked=model.visiable_raster}}
+        {{show-hide-layers class='one-col' layers=model.raster_layer_ids checked=model.visiable_raster}}
+    {{else if vector}}
+        {{show-hide-layers class='one-col' ayers=model.vector_layer_ids checked=model.visiable_vector}}
+    {{else}}
+        <div class="one-col" />
     {{/if}}
-    {{#if vector}}
-      {{show-hide-layers layers=model.vector_layer_ids checked=model.visiable_vector}}
-    {{/if}}
-  <div class="">
-    {{#if project}}
-    {{#link-to 'project'}}
-      <i class="material-icons close-button">highlight_off</i>
-    {{/link-to}}
-    {{/if}}
-  </div>
 </div>
-{{#unless isShowingModal}}
-<div class='feedback white-text {{if flashMessage.success 'flash-success' 'flash-error'}} {{if flashMessage.show 'show-flash'}}'>{{flashMessage.message}}</div>
-{{/unless}}
+
 <div class="pane-container">
     <div class="pane-content {{extraClass}}">
-      {{yield}}
+        {{yield}}
     </div>
-  </div>
+</div>

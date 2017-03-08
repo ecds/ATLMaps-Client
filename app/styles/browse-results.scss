@@ -1,10 +1,9 @@
 .search-pane {
   background-color: $white;
   display: block;
-  // top: 60px;
-  // right: 0;
   position: absolute;
   right: 0;
+  top: 60px;
   transition: width $turtle;
   width: 0%;
   z-index: 11111;
@@ -15,9 +14,7 @@
     // transition: width $turtle;
     width: 35%;
   }
-}
 
-.search-pane {
   .scroll-top {
     display: flex;
     position: relative;

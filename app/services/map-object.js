@@ -45,8 +45,9 @@ export default Service.extend({
             });
 
             // Add some base layers
-            const street = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
+                maxZoom: 18,
                 className: 'street base'
             });
 
@@ -117,7 +118,9 @@ export default Service.extend({
 
     mapSingleLayer(layer) {
         const self = this;
-        const { map, dataColors: { markerColors, shapeColors } } = this;
+        const map = get(this, 'map');
+        const markerColors = get(this, 'dataColors.markerColors');
+        const shapeColors = get(this, 'dataColors.shapeColors');
         const markerColorIndex = Math.floor(Math.random() * markerColors.length);
         const markerColor = markerColors[markerColorIndex];
         const shapeColorIndex = Math.floor(Math.random() * shapeColors.length);
@@ -262,7 +265,9 @@ export default Service.extend({
             case 'point-data':
                 {
                     newLayer.setProperties({
-                        layerClass: `${newLayerSlug} vectorData map-marker layer-${layer.get('colorName')}`
+                        layerClass: `${newLayerSlug} vectorData map-marker layer-${layer.get('colorName')}`,
+                        colorName: layer.get('colorName'),
+                        colorHex: layer.get('colorHex')
 
                     });
                     const points = self.mapPoints(newLayer);

@@ -57,7 +57,7 @@ export default Route.extend({
             });
             baseMaps[base].addTo(map);
             model.setProperties({ default_base_map: base });
-            if (model.editing) {
+            if (model.may_edit) {
                 model.save().then(() => {
                     // Success callback
                     // Show confirmation.

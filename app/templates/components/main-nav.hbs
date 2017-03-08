@@ -1,4 +1,3 @@
-{{!-- <header class="navigation" role="banner"> --}}
 <div class="navigation-wrapper">
     {{#link-to 'index' class='logo' }}
         <img src="/assets/images/atl.png" alt="Logo Image">
@@ -6,42 +5,44 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
         <ul id="js-navigation-menu" class="navigation-menu show">
-            {{#if model.project}}
-                <li class="project-title">{{model.project.name}}</li>
-            {{else}}
-                <li class='nav-link'>
-                    {{#link-to 'projects'}}Projects{{/link-to}}
-                </li>
-                <li class='nav-link'>
-                    {{#link-to 'about'}}About{{/link-to}}
-                </li>
-            {{/if}}
+            {{#link-to 'index'}}
+              <li class='nav-link title'>
+                <span style='font-weight:900'>ATL</span>Maps
+              </li>
+            {{/link-to}}
+              <li class='nav-link project-title'>
+                  {{#link-to 'projects'}}Projects{{/link-to}}
+              </li>
+              <li class='nav-link'>
+                  {{#link-to 'about'}}About{{/link-to}}
+              </li>
         </ul>
     </nav>
-    <div class="navigation-tools ignore-click {{if showingSearch 'collapse-tools'}} {{unless model.project 'site-page-menu'}}">
+    <div class="navigation-tools ignore-click {{if model.project.showingSearch 'collapse-tools'}} {{unless model.project 'site-page-menu'}}">
+      {{#if ( xor model.project.may_edit model.explore)}}
+      {{/if}}
         <a href='javascript:void(0)' class='title-bar-action register-click'>
-            <i class="fa fa-bars toggle-user-menu" aria-hidden="true"></i>
+            <i class="fa fa-cog toggle-user-menu {{if showUserMenu 'showing-user-menu'}}" aria-hidden="true"></i>
         </a>
 
         {{user-menu showUserMenu=showUserMenu model=model}}
 
         {{#if model.project.may_edit}}
-            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' this)}}>
+            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>
               <i class='material-icons'>search</i> Search
             </button>
         {{/if}}
     </div>
 </div>
-{{!-- </header> --}}
-<div class='search-head {{if showingSearch 'showing-search-head'}}'>
+<div class='search-head {{if model.project.showingSearch 'showing-search-head'}}'>
     <div class='search-head-title'>
         Search
     </div>
     <div class='search-close-button'>
-        <a {{action (toggle-action 'showingSearch' this)}} class="close-results scroll-top right">
+        <a {{action (toggle-action 'showingSearch' model.project)}} class="close-results scroll-top right">
             <i class="material-icons close-button">highlight_off</i>
         </a>
     </div>
 </div>
 {{!-- empty div is the wormhole --}}
-<div id='results' class='search-pane {{if showingSearch 'showing-search'}}' />
+<div id='results' class='search-pane {{if model.project.showingSearch 'showing-search'}}' />

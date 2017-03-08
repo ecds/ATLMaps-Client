@@ -33,7 +33,7 @@ export default Route.extend({
                 _this.get('mapObject.projectLayers.rasters')[rasterSlug].setZIndex(newPosition);
                 // TODO if may edit, provide way to save order in not in edit mode
                 // TODO provide feedback on save
-                if (groupModel.project.get('editing') === true) {
+                if (groupModel.project.get('may_edit') === true) {
                     item.save().then(() => {
                         set(_this, 'flashMessage.message', 'Order Updated!');
                         set(_this, 'flashMessage.success', true);

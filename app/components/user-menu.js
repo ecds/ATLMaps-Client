@@ -7,12 +7,13 @@ export default Component.extend({
     classNameBindings: ['userMenuShow'],
     currentUser: service(),
 
-    didInsertElement() {
+    didRender() {
         this.get('currentUser').load();
     },
 
     didUpdateAttrs() {
         // console.log('this2', this);
+        this.get('currentUser').load();
         set(this, 'userMenuShow', get(this, 'showUserMenu'));
     }
 });

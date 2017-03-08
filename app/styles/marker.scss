@@ -4,14 +4,22 @@
 .point-data {
   &::before {
     content: $marker-icon;
-    font-family: 'material icons';
+    font-family: 'FontAwesome';
   }
 }
 
 .line-data {
   &::before {
     content: $line-icon;
-    font-family: 'material icons';
+    font-family: 'atlmaps-ext';
+    letter-spacing: .25em;
+  }
+}
+
+.wms {
+  &::before {
+    content: $layer-icon;
+    font-family: 'FontAwesome';
     letter-spacing: .25em;
   }
 }
@@ -37,16 +45,16 @@
   display: block;
   font-size: 46px;
   height: 22px; // same as marker height
-  left: -13px;
+  left: 0;
   margin-left: 0;
   margin-top: 0;
   position: relative;
-  top: -30px;
+  top: -28px;
   width: 22px; // same as marker width
 }
 
 .map-marker div.icon {
-  font-family: 'material icons';
+  font-family: 'FontAwesome';
   font-size: 32px;
   font-smoothing: antialiased;
   font-style: normal;

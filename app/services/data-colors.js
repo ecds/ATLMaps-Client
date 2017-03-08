@@ -13,7 +13,7 @@ export default Service.extend({
         this._super(...arguments);
 
         this.set('markerColors',
-           [
+            [
                { name: 'red-300', hex: '#E57373' },
                { name: 'red-400', hex: '#EF5350' },
                { name: 'red-500', hex: '#F44336' },
@@ -70,7 +70,7 @@ export default Service.extend({
                { name: 'orange-500', hex: '#FF9800' },
                { name: 'orange-600', hex: '#FB8C00' },
                { name: 'orange-700', hex: '#F57C00' }
-           ]
+            ]
         );
 
         this.set('shapeColors',
@@ -107,6 +107,5 @@ export default Service.extend({
                 { name: 'deep-orange-700', hex: '#E64A19' }
             ]
         );
-
     }
 });

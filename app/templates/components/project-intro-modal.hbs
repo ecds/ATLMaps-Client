@@ -1,11 +1,11 @@
-<a {{action (toggle-action 'suppressIntro' project)}} class='close-button pull-right'>
+<a {{action (toggle-action 'suppressIntro' model.project)}} class='close-button pull-right'>
   <i class="material-icons">highlight_off</i>
 </a>
 
 <div class='z-depth-3'>
   <div class='modal-content'>
 
-    {{#if model.project.editing}}
+    {{#if model.project.may_edit}}
     {{! EDIT INTRO }}
       <header class='intro-modal-header' />
       <div class='pane-container intro-edit'>

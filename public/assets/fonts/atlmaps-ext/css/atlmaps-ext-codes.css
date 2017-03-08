@@ -1,5 +1,5 @@
 
+.icon-database:before { content: '\e800'; } /* '' */
 .icon-polygon:before { content: '\e801'; } /* '' */
-.icon-twitter:before { content: '\f099'; } /* '' */
-.icon-facebook:before { content: '\f09a'; } /* '' */
-.icon-google:before { content: '\f1a0'; } /* '' */
+.icon-hexagon:before { content: '\e802'; } /* '' */
+.icon-polyline:before { content: '\e803'; } /* '' */

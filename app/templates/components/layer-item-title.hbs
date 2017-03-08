@@ -1,1 +1,5 @@
-<a {{action 'expand'}}>{{layer.title}}</a>
+{{#if layer}}
+  <span class='layer-list-item-icon vector-icon
+    layer-{{layer.colorName}} {{layer.data_type}}'>
+  </span>
+{{/if}}<a {{action 'expand'}}>{{layer.title}}</a>

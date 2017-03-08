@@ -13,7 +13,7 @@ export default Component.extend({
     flashMessage: service(),
     isShowingModal: false,
     tagName: 'span',
-    // classNames: ['shareable-button'],
+    classNames: ['shareable-link'],
 
     actions: {
         toggleShareableLink: function toggleModal() {
@@ -23,7 +23,7 @@ export default Component.extend({
         success() {
             const flash = get(this, 'flashMessage');
             flash.setProperties({
-                message: 'URL COPPIED TO CLIPBOARD',
+                message: 'URL COPIED TO CLIPBOARD',
                 show: true,
                 success: true
             });

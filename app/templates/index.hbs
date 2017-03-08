@@ -1,31 +1,35 @@
-<div class="hero">
+{{!-- <div class="hero">
   <div class="hero-content">
     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_square.png" alt="Logo Image" class="hero-logo">
     <h1 class=''>Layers of discovery</h1>
     <h2 class=''>Mapping the stories of your city</h2>
   </div>
-</div>
+</div> --}}
+<div class="banner blue valign-wrapper">
 
+  <div class="center-align z-depth-3">
+    <h1 class=''>Layers of discovery</h1>
+    <h2 class=''>Mapping the stories of your city</h2>
+    <button>
+      {{#if session.isAuthenticated}}
+          {{#link-to 'projects' tagName='a' class="white-text" }}Go to Projects{{/link-to}}
+      {{else}}
+          {{#link-to 'explore' tagName='a' class="white-text" }}
+            Start Exploring
+          {{/link-to}}
+
+      {{/if}}
+    </button>
+  </div>
+
+</div>
 <div class='featured-cards'>
 <div class="cards">
   {{#if model.isPending}}
     <h2>Loading...</h2>
   {{else}}
   {{#each model as |project|}}
-  <div class="card">
-    {{#link-to 'project' project.id}}
-    <div class="card-image">
-      <img src="/assets/images/1928.png" alt="">
-    </div>
-    <div class="card-header">
-      <h1>{{project.name}}</h1>
-      By: {{project.owner}}
-    </div>
-    <div class="card-copy">
-      <p>{{project.description}}</p>
-    </div>
-    {{/link-to}}
-  </div>
+  {{project-card project=project}}
   {{/each}}
   {{/if}}
 </div>

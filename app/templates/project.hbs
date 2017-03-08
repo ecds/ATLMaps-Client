@@ -1,18 +1,23 @@
+{{main-nav model=model}}
+
+{{! FIXME This is a little disjointed. The search button and head
+are in the `main-nav` component. }}
 {{browse-results model=model rasters=rasters vectors=vectors rasters_diffResults=rasters_diffResults vectors_diffResults=vectors_diffResults}}
 
-{{main-nav model=model}}
+{{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
+
+{{vector-info}}
+
+{{#if (or model.project.hasIntro model.project.may_edit)}}
+  {{#unless model.project.suppressIntro}}
+    {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
+      {{project-intro-modal action='toggleIntro' model=model }}
+    {{/tether-dialog}}
+  {{/unless}}
+{{/if}}
 
 <div id='base-map' class='fullscreen-map'>
   <div id='map' class='atlmap'></div>
   <div class='base-layer-controls'></div>
+  {{flash-message}}
 </div>
-
-{{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
-{{vector-info}}
-{{#if (or model.project.hasIntro model.project.editing)}}
-  {{#unless model.project.suppressIntro}}
-    {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
-      {{project-intro-modal action='toggleIntro' model=model.project }}
-    {{/tether-dialog}}
-  {{/unless}}
-{{/if}}

@@ -1,9 +1,9 @@
 {{!
-    The `shareable-link` class has `display: none;` When the layer title div is 
+    The `shareable-link` class has `display: none;` When the layer title div is
     clicked, it gets a class of `active`. When that div has the class of `active`
     `shareable-link` class is set to `display: block`
 }}
-<a {{action "toggleShareableLink"}} class='shareable-link' title='Get shareable link'><i class="fa fa-link" aria-hidden="true"></i></a>
+<a {{action "toggleShareableLink"}} class='secondary-conent {{layer.data_format}}' title='Get shareable link'><i class="fa fa-link" aria-hidden="true"></i></a>
 {{#if isShowingModal}}
 
 

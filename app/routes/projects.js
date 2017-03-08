@@ -43,7 +43,6 @@ export default Route.extend({
                 featured: this.store.query('project', { user_id: true })
             });
         }
-        console.log('this', this);
         return RSVP.hash({
             featured: this.store.findAll('project')
         });
@@ -67,13 +66,11 @@ export default Route.extend({
             const project = this.store.createRecord('project', {
                 name: newProjectName,
                 // I really hate this and there has to be a better way.
-                user_id: get(this, 'currentUser.user.id'),
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,
                 zoom_level: 13,
-                default_base_map: 'street',
-                editing: true
+                default_base_map: 'street'
             });
 
             const self = this;
@@ -81,25 +78,11 @@ export default Route.extend({
             project.save().then((newProject) => {
                 newProject.setProperties(
                     {
-                        name: 'Please enter a title.',
-                        editing: true
+                        name: 'Title.'
                     }
                 );
 
-                self.transitionTo('project.info', newProject.get('id'));
-                // Success callback
-                // Get the newly created project
-                // self.store.queryRecord('project', {
-                //     name: newProjectName
-                // }).then(function(newProject) {
-                //     // Set the name so we don't just have some ugly string in there.
-                //     newProject.set('name', 'Please enter a title.');
-                //     // Transition to our new project
-                //     self.transitionTo('project.info', newProject.id);
-                // }, function(){
-                //     // Error callback
-                //     // TODO What should we do if this fails?
-                // });
+                self.transitionTo('project.info', get(newProject, 'id'));
             });
         },
 

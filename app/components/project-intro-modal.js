@@ -1,30 +1,19 @@
 import Ember from 'ember';
-import { EKMixin, EKOnInsertMixin, keyUp } from 'ember-keyboard';
 
 const {
     Component,
     inject: { service },
-    get,
-    on
+    get
 } = Ember;
 
-// EKX Mixin is Ember Keyboard Mixin so we can use ESC to close modal.
-export default Component.extend(EKMixin, {
+export default Component.extend({
     cookies: service(),
 
     classNames: ['intro-modal-link'],
 
     keyboardActivated: true,
 
-    closeWithEsc: on(keyUp('Escape'), (event) => {
-        console.log('project', this);
-    }),
-
     actions: {
-
-        // toggleIntro() {
-        //     this.sendAction('action');
-        // },
 
         suppressIntro() {
             const model = get(this, 'project');

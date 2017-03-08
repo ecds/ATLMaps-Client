@@ -18,13 +18,13 @@
   box-shadow: none;
   height: .1em;
   top: .5em;
-  width: 94%;
+  width: 100%;
 }
 
 .noUi-origin {
   background-color: color('grey', 'lighten-2');
 
-  // Turn the handels grey whe faded all the way out.
+  // Turn the handles grey whe faded all the way out.
   &[style^='left: 0'] {
     .noUi-handle {
       background: color('grey', lighten-2);

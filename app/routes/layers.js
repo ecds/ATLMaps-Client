@@ -52,8 +52,10 @@ export default Route.extend({
                 set(self, 'mapObject.allBounds', currentBounds.extend(layerBounds));
             });
             map.fitBounds(get(self, 'mapObject.allBounds'));
+            // TODO get rid of this.
             // Activate the according from MaterializeCSS.
             $('.collapsible').collapsible();
+            get(this, 'mapObject.baseMaps.street').addTo(map);
         });
     }
 });

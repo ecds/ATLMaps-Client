@@ -21,6 +21,7 @@ export default Route.extend(ApplicationRouteMixin, {
     session: service(),
 
     sessionAuthenticated() {
+        this._super(...arguments);
         return this.get('currentUser').load();
     },
 

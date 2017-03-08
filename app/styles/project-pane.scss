@@ -1,12 +1,12 @@
 .project-pane {
-  @include outer-container;
+  @include grid-container;
   left: 5em;
   pointer-events: all;
   position: absolute;
   top: 60px;
   transition: width $rabbit linear, top $turtle linear;
   width: 34vw;
-  z-index: 400;
+  z-index: 401;
 
   .row {
     margin-bottom: 0;
@@ -24,21 +24,20 @@
   }
 
   .pane-card {
-    @include outer-container;
+    @include grid-container;
     background-color: $white;
     padding: 2em;
   }
 }
-
 // The following is the scrolling of the pane was inspired by this
 // https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
-
 // Flexbox gives us the flexiness we need.
 // The top just stays put as there is no scrolling
 // on the body due to the page never exceeding viewport height
+
+.intro-modal-header,
 .pane-title,
-.vector-detail-title,
-.intro-modal-header {
+.vector-detail-title {
   align-items: center;
   background-color: color('blue-grey', 'lighten-5');
   display: flex;
@@ -57,17 +56,24 @@
 }
 
 .pane-title {
-  @include outer-container;
+  // @include grid-visual;
+  @include grid-container;
   padding: .5rem 2rem;
 
+  h3 {
+    margin: .25em 0;
+  }
+
   .project-pane-title {
-    @include span-columns(11);
+    @include grid-column(11);
+    margin-left: 0;
   }
 }
 
-.close-button {
-  color: color('grey', 'base');
-  // margin-left: .75em;
+.project-pane-close-button {
+  position: absolute;
+  right: 6px;
+  top: 4px;
 }
 
 .switch {
@@ -75,10 +81,10 @@
     margin-right: 0;
   }
 }
-
 // This is our main wrapping element, it's made 100vh high to
 // ensure it is always the correct size and then moved into place
 // and padded with negative margin and padding
+
 .pane-container,
 .vector-detail-container {
   // backface-visibility: hidden;
@@ -91,21 +97,19 @@
   transition: max-height $rabbit, opacity $rabbit;
   width: 100%;
   will-change: overflow;
-
   @media only screen and (min-width: 993px) {
     .container {
       width: 85%;
     }
   }
 }
-
 // All the scrollable sections should overflow and be whatever
 // height they need to be. As they are flex-items (due to being
 // inside a flex container) they could be made to stretch full height
 // at all times if needed.
-
 //WebKit inertia scrolling is being added here for any present/future devices
 //that are able to make use of it.
+
 .pane-content {
   flex: 1;
   height: auto;
@@ -150,6 +154,7 @@
   display: flex;
   flex-direction: column;
   // padding-bottom: 6em;
+  width: 34vw;
 
   &.collapsible {
     box-shadow: none;
@@ -162,32 +167,31 @@
 }
 
 .project-collapsible {
-
   border: 0;
   box-shadow: none;
   margin-top: 0;
 
   li {
+    @include grid-container;
     border: 1px solid color('grey', lighten-1);
     border-radius: .5em;
+    color: $primary-color-light;
     margin: 1em;
     padding-top: .25em;
   }
 
   .layer-header {
-    border-bottom: 0;
+    // border-bottom: 0;
     border-radius: .5em;
     color: $primary-color-light;
-    font-size: 1.35em;
+    // font-size: 1.35em;
     font-weight: bolder;
-    line-height: initial;
-    padding: 1rem;
-
+    // line-height: initial;
+    // padding: 1rem;
     .shareable-link {
       opacity: 0;
       transition: opacity $turtle;
     }
-
 
     &.active {
       .shareable-link {
@@ -199,15 +203,13 @@
         }
       }
     }
-
     // .shareable-button {
     //   bottom: .5em;
     //   position: relative;
     //   right: .5em;
     // }
-
     .shareable-link-modal {
-      @include outer-container;
+      @include grid-container;
       display: inline-block;
       min-width: 25%;
 
@@ -229,44 +231,39 @@
       padding-left: .5em;
     }
 
-    .layer-list-item-icon i {
-      font-size: 1.5em;
-    }
+    // .layer-list-item-icon i {
+    //   font-size: 1.5em;
+    // }
 
-    .remove-layer {
-      cursor: pointer;
-      opacity: .7;
-      padding-top: .5em;
-      transform: none;
 
-      &:hover {
-        opacity: 1;
-      }
-    }
 
-    .remove-vector-layer {
-      padding-left: .75em;
-    }
+    // .remove-vector-layer {
+    //   padding-left: .75em;
+    // }
 
     .vector-icon {
-      font-size: 1.8em;
+      font-size: 1.5em;
       padding: 0;
+      vertical-align: middle;
     }
   }
 
   &:first-child {
-    padding-top: 1em;;
+    padding-top: 1em;
   }
 
   .layer-item-body {
+    // @include grid-column(12);
     background: $white;
     border-bottom: 0;
     border-radius: .5em;
     box-sizing: border-box;
+    float: right;
     max-height: 1em;
     overflow: hidden;
     padding: 0;
     transition: background 5ms, max-height $turtle;
+    width: 100%;
 
     &.bye {
       background: color('red', 'base');
@@ -280,16 +277,34 @@
       margin: 0;
       padding: 2rem;
     }
-
   }
 }
 
+
+
+.remove-layer,
+.shareable-link {
+  @include grid-column(12);
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-left: 12px;
+}
+
+.shareable-link-modal {
+  font-size: .75em;
+  min-width: 320px;
+}
+
+
 .slider-container {
+  @include grid-column(12);
   background: $white;
-  // border-bottom: 1px solid color('grey', 'lighten-2');
-  border-radius: .5em;
-  height: 2rem;
-  margin-bottom: 1em;
+  margin-left: 4px;
+  padding-bottom: 1em;
+//   // border-bottom: 1px solid color('grey', 'lighten-2');
+//   border-radius: .5em;
+//   height: 2rem;
+//   margin-bottom: 1em;
 }
 
 .active + .slider-container {
@@ -300,8 +315,8 @@
 .hide-nav + .project-pane {
   width: 0;
 
-  .pane-title,
-  .pane-container {
+  .pane-container,
+  .pane-title {
     opacity: 0;
   }
 
@@ -309,8 +324,8 @@
     max-height: 0;
   }
 }
-
 // Search Pane
+
 .search-bounds {
   a {
     // cursor: pointer;
@@ -361,7 +376,6 @@
       margin-right: .2em;
       vertical-align: middle;
     }
-
   }
 
   .collapsible-body {
@@ -374,8 +388,8 @@
     }
   }
 }
-
 // checkbox
+
 a {
   color: $primary-color-dark;
   font-size: 1em;
@@ -400,22 +414,22 @@ a {
 }
 
 .feedback {
-  padding: 0 1em;
-  transition: padding $rabbit ease-in-out;
+  bottom: 1em;
+  font-size: 1.2em;
+  left: 1em;
+  max-width: 20vw;
+  opacity: .7;
+  padding: 0;
+  transition: padding $turtle ease-in-out;
+  z-index: 999;
 
   &.show-flash {
-    padding: 1em;
+    // max-width: 200px;
+    padding: 1em .25em;
   }
 }
-
 $base-spacing: 1.5em !default;
-$flashes: (
-  'alert': #fff6bf,
-  'error': #fbe3e4,
-  'notice': #e5edf8,
-  'success': color('green', 'base'),
-) !default;
-
+$flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 'success': color('green', 'base'), ) !default;
 @each $flash-type, $color in $flashes {
   .flash-#{$flash-type} {
     background-color: $color;
@@ -438,18 +452,22 @@ $flashes: (
   }
 }
 
-
+.reorder-handle {
+  cursor: -webkit-grab;
+  float: right;
+  font-size: 2em;
+  margin-left: 12px;
+}
 // input {
 //   &.required {
-//     :invalid ~ .clear-text {
-//       visibility: visible;
-//     }
+//   :invalid ~ .clear-text {
+//     visibility: visible;
+//   }
 //   }
 // }
-
 // Raster list
 // .collapsible-header {
 //   &.raster-list-header {
-//     padding-right: 0;
+//   padding-right: 0;
 //   }
 // }

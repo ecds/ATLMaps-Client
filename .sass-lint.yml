@@ -79,6 +79,9 @@ linters:
     enabled: true
     max_depth: 3
 
+  NoTransitionAll:
+    enabled: false
+
   PlaceholderInExtend:
     enabled: true
 

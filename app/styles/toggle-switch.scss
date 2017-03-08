@@ -1,6 +1,6 @@
 // Based on refills components
 .switch {
-  @include span-columns(1);
+  // @include grid-column(1);
 }
 
 .label-switch {
@@ -19,7 +19,7 @@
   cursor: pointer;
   display: inline-block;
   height: $switch-height;
-  position: relative;
+  // position: relative;
   width: $switch-width;
 
   input {

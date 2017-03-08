@@ -7,16 +7,20 @@
   padding: 0 1em;
   position: absolute;
   right: 0;
-  top: 54px;
+  top: 60px;
   transition: max-height $turtle ease-in-out, overflow $turtle ease-in-out, padding $turtle ease-in-out;
   width: 300px;
 
   section {
-    @include outer-container;
+    @include grid-container;
 
     span {
-      @include span-columns(12);
+      @include grid-column(6);
       padding: .25em 0;
+    }
+
+    .toggle-action {
+      width: 100%;
     }
   }
 

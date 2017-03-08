@@ -48,7 +48,6 @@ Router.map(function() {
   });
   // });
   this.route('about');
-  this.route('login');
   this.route('explore');
   this.route('terms');
   this.route('support', {

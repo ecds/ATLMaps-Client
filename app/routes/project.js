@@ -42,6 +42,7 @@ export default Route.extend({
                 default_base_map: 'street',
                 exploring: true,
                 may_edit: true,
+                showingSearch: true,
                 description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.',
                 explore: true
             });
@@ -168,15 +169,15 @@ export default Route.extend({
                     set(self, 'flashMessage.message', message);
                     set(self, 'flashMessage.success', true);
                     set(self, 'flashMessage.show', true);
-                    // self.toggleProperty('flashMessage.showing');
                     run.later(this, () => {
                         set(self, 'flashMessage.message', '');
                         set(self, 'flashMessage.show', false);
                         set(self, 'flashMessage.success', true);
-                        // self.toggleProperty('flashMessage.showing');
                     }, 3000);
                 }, () => {
                     // TODO figure out how to give feedback on these shared actions
+                    project.rollbackAttributes();
+                    set(project, 'suppressIntro', true);
                     set(self, 'flashMessage.message', 'Oh no! Someting went wrong <i class="material-icons">sentiment_dissatisfied</i>');
                     set(self, 'flashMessage.show', true);
                     set(self, 'flashMessage.success', false);
@@ -187,7 +188,11 @@ export default Route.extend({
                     }, 3000);
                 });
             }, 300);
-            // this.modelFor('project').project.save();
+        },
+
+        cancleUpdate(project) {
+            project.rollbackAttributes();
+            set(project, 'suppressIntro', true);
         },
 
         addRemoveLayer(layer) {
@@ -349,9 +354,7 @@ export default Route.extend({
 
         setColor(layer) {
             layer.save().then(
-                // this.get('flashMessage').showMessage('New color saved!', 'success')
             ).catch(
-                // this.get('flashMessage').showMessage('Dang, something went wrong!', 'fail')
             );
         }
 

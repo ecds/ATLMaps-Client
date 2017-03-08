@@ -1,14 +1,16 @@
 {{#project-pane title='Select Base Map' model=model.project}}
   <div class="pane-card">
+    {{#if model.project.may_edit}}
     <div class='neat-row'>
       <button class="" {{action 'setCenterAndZoom' model.project}}>
         Set Center and Zoom Level
       </button>
     </div>
-    <a {{action 'setBase' 'street' model.project isEditing}} title="Open Street Map" class="btn btn-default">
+    {{/if}}
+    <a {{action 'setBase' 'street' model.project}} title="Open Street Map" class="btn btn-default">
       <div class='six-col base-preview street' />
     </a>
-    <a {{action 'setBase' 'satellite' model.project isEditing}} title="Satellite" class="btn btn-default">
+    <a {{action 'setBase' 'satellite' model.project}} title="Satellite" class="btn btn-default">
       <div class='six-col base-preview satellite' />
     </a>
   </div>

@@ -1,17 +1,20 @@
 {{#if currentUser.user}}
+{{#if model.project.may_edit}}
+  <h5>Project</h5>
+  <section>
+    <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+      <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
+    </span>
+    <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+      <i class="fa fa-pencil" aria-hidden="true"></i> Edit Intro
+    </span>
+  </section>
+  <hr />
+{{/if}}
+
 <section>
   <span  class='welcome-user'>Signed in as:</span>
   <span><i>{{currentUser.user.displayname}}</i></span>
 </section>
-<hr />
 {{/if}}
-{{#if ( xor model.project.may_edit model.explore)}}
-<section class='ignore-click'>
-  <span>{{toggle-switch click=(toggle-action 'editing' model.project) checked=model.project.editing}}</span>
-  <span>{{if model.project.editing 'Turn off edit mode.' 'Edit project.'}}</span>
-</section>
-<hr />
-{{/if}}
-<section>
 {{login-form}}
-</section>

@@ -7,14 +7,14 @@ $primary-color: color('blue-grey', 'darken-1');
 $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
-$secondary-color: #ff4100;
+$secondary-color: #f58320;
 $secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
 $mobile: new-breakpoint(max-width 500px 4);
 @import 'materialize';
 @import 'variables';
 @import 'bower_components/bourbon/core/bourbon';
-@import 'bower_components/neat/app/assets/stylesheets/neat';
+@import 'bower_components/neat/core/neat';
 @import 'bower_components/bitters/core/base';
 @import 'bower_components/font-awesome/scss/font-awesome';
 // @import 'www/css/material.css';
@@ -45,14 +45,6 @@ $mobile: new-breakpoint(max-width 500px 4);
 // Refills
 @import 'flexbox';
 
-h3 {
-  font-size: 1.75em;
-}
-
-h4 {
-  font-size: 1.5em;
-}
-
 body {
   background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
@@ -60,6 +52,14 @@ body {
   font-size: 16px;
   font-weight: 300;
   height: 100vh;
+
+  h3 {
+    font-size: 1.75em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
 
   .preloader-wrapper {
     height: 10em;
@@ -91,23 +91,39 @@ a {
 
 // Grid
 .neat-row {
-  @include span-columns(12);
+  @include grid-column(12);
   padding: 1em 0;
 }
 
-.four-col {
-  @include media($mobile) {
-    @include span-columns(4);
-  }
+.one-col {
+  @include grid-column(1);
+}
 
-  @include span-columns(4);
-  @include omega;
+.two-col {
+  @include grid-column(2);
+}
+
+.four-col {
+  // @include grid-media($mobile) {
+    // @include grid-column(4);
+  // }
+
+  @include grid-column(4);
   margin: .2em;
 }
 
 .six-col {
-  @include span-columns(6);
+  @include grid-column(6);
   margin: .2em;
+}
+
+.secondary-action-row {
+  @include grid-column(12);
+  margin-left: 25px;
+
+  &.raster {
+    float: right;
+  }
 }
 
 // .card {
@@ -133,6 +149,11 @@ a {
 .secondary-conent {
   i {
     color: color('grey', 'base');
+  }
+
+  &.raster {
+    float: right;
+    padding-right: 3px;
   }
 }
 
@@ -224,99 +245,45 @@ textarea {
 
 // bourbon test
 .layer-list-item {
-  @include outer-container;
+  @include grid-container;
+  // @include grid-visual;
 }
 
-.layer-list-item-icon {
-  @include span-columns(1);
-}
+// .layer-list-item-icon {
+//   @include grid-column(10);
+//   margin-left: 0;
+// }
 
 .layer-list-item-title {
-  @include span-columns(10);
-  // margin-top: .25em;
+  @include grid-column(10);
+  font-size: 1.25em;
+  padding-top: .25em;
+
+  .layer-list-item-icon {
+    letter-spacing: .25em;
+  }
 }
 
 .layer-list-item-secondary-action {
-  @include span-columns(1);
-  height: 0;
+  @include grid-column(2);
+  opacity: .5;
+  padding-top: 12px;
+  transition: opacity $rabbit;
 
-  span {
-    @include span-columns(1 of 1);
+  &:hover {
+    opacity: 1;
   }
-}
-
-.atl-row {
-
-  margin-left: auto;
-  margin-right: auto;
-
-  // Clear floating children
-  &::after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-}
-
-// OVERRIDE materialize
-.collapsible {
-  border: 0;
-  box-shadow: none;
-
-  .collapsible-header {
-    font-size: 1.25em;
-    line-height: 1.25em;
-  }
-
-  .collapsible-header,
-  .collapsible-body {
-    border: 0;
-    color: #263238;
-    // font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-  }
-}
-
-.vector-content.marker-content.col-md-12 img {
-  padding: 1em;
 }
 
 #{$all-buttons} {
-  background-color: $action-color;
+  background-color: $secondary-color;
   text-transform: uppercase;
-}
 
-
-// Hero Unit
-.hero {
-  $large-screen: 50em !default;
-  align-items: center;
-  background-image: url('/assets/images/backgrounds/bg-blue-map.png');
-  background-position: right;
-  background-size: none;
-  display: flex;
-  justify-content: center;
-  min-height: 25em;
-  padding: 2em;
-
-  @include media($large-screen) {
-    background-position: left;
-    background-size: cover;
-    justify-content: flex-end;
-  }
-
-  .hero-content {
-    max-width: 20em;
-    text-align: center;
-
-    @include media($large-screen) {
-      text-align: left;
-    }
-  }
-
-  .hero-logo {
-    margin: auto;
+  &:hover {
+    background-color: $secondary-color;
   }
 }
+
 
 // Grid
 .featured-cards {
@@ -339,11 +306,10 @@ textarea {
 }
 
 .card {
-  $base-border-color: gainsboro !default;
+  $base-border-color: color('grey', 'lighten-4') !default;
   $base-border-radius: 3px !default;
-  $base-background-color: white !default;
+  $base-background-color: $white !default;
   $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
   $dark-gray: #333 !default;
   $base-font-color: $dark-gray !default;
   $card-border-color: $base-border-color;
@@ -351,8 +317,8 @@ textarea {
   $card-background: lighten($card-border-color, 10%);
   $card-header-background: $card-background;
   $card-margin: 1em;
-  $card-image-hover-opacity: 0.7;
-  $card-image-hover-color: #F8F2B4;
+  $card-image-hover-opacity: .7;
+  $card-image-hover-color: color('yellow', 'lighten-4');
 
   background-color: $card-background;
   border: $card-border;
@@ -361,9 +327,13 @@ textarea {
   cursor: pointer;
   flex-basis: 15em;
   flex-grow: 1;
-  margin: 0 $card-margin $base-spacing $card-margin;
+  margin: 0 $card-margin $base-spacing;
   position: relative;
   transition: all .2s ease-in-out;
+
+  &.projects-page {
+    flex-basis: auto;
+  }
 
   a {
     all: unset;
@@ -390,13 +360,13 @@ textarea {
     font-weight: bold;
     line-height: 1.5em;
     padding: ($base-spacing / 3) ($base-spacing / 2);
-    transition: all 0.2s ease-in-out;
+    transition: all .2s ease-in-out;
   }
 
   .card-copy {
     font-size: .9em;
     line-height: 1.5em;
-    padding: ($base-spacing / 2) ($base-spacing / 2);
+    padding: ($base-spacing / 2);
 
     p {
       margin: 0 0 ($base-spacing / 2);

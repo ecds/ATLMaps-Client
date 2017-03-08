@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'atlmaps-ext';
-  src: url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot'),
-  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf'),
-  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot#iefix') format('embedded-opentype'),
-  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.woff') format('woff'),
-  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf') format('truetype'),
-  url('https://s3.amazonaws.com/atlmaps-staging/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
+  src: url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot'),
+  url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf'),
+  url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.eot#iefix') format('embedded-opentype'),
+  url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.woff') format('woff'),
+  url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.ttf') format('truetype'),
+  url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
 }
 
 i.atlmaps-ext {
@@ -16,23 +16,20 @@ i.material-icons.atlmaps-ext.database::before{
   content: '\e800';
 }
 
-.map-marker.polygon::before {
-  content: '\e801';
+.layer-list-item-icon.polygon::before {
+  content: '\e802';
   font-family: 'atlmaps-ext';
-  letter-spacing: .25em;
+  // letter-spacing: .25em;
 }
 
-i.facebook-icon::before {
-  content: '\f09a';
+.layer-list-item-icon.polyline::before {
+  content: '\e803';
   font-family: 'atlmaps-ext';
+  // letter-spacing: .25em;
 }
 
-i.twitter-icon::before {
-  content: '\f099';
-  font-family: 'atlmaps-ext';
-}
-
-i.google-icon::before {
-  content: '\f1a0';
-  font-family: 'atlmaps-ext';
+.fa-drag-handle:before {
+    font-family: 'FontAwesome';
+    content: "\f142 \f142";
+    letter-spacing: 0.1em;
 }

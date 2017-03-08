@@ -1,43 +1,29 @@
 {{#project-pane title='About this Project' model=model.project}}
     <div class="pane-card">
-        {{#if model.project.editing}}
-            {{input value=model.project.name}} {{textarea class='description' value=model.project.description maxlength='500' rows='40'}}
+        {{this.exploring}}
+        {{#ember-inline-edit onSave=(route-action 'updateProject' model.project 'Description Updated!') onClose=(route-action 'cancleUpdate' model.project) as |inline-edit| }}
+            {{#inline-edit.editable}}
+                <article>
+                    {{model.project.description}}
+                </article>
+            {{/inline-edit.editable}}
 
-            {{#if (gte model.project.description.length 485)}}
-                <span class='character-counter red-text right'>
-                {{model.project.description.length}}/500
-              </span>
-            {{else}}
-                <span class='character-counter right'>
-                {{model.project.description.length}}/500
-              </span>
-            {{/if}}
+            {{#inline-edit.editor value=model.project.description }}
+                {{textarea class='description' value=model.project.description maxlength='500' rows='40'}}
+                <span class='character-counter {{if (gte model.project.description.length 485) 'red-text'}} right'>
+                  {{model.project.description.length}}/500
+                </span>
+            {{/inline-edit.editor}}
+        {{/ember-inline-edit}}
 
-        {{else}}
-            <p>{{model.project.description}}</p>
-        {{/if}}
 
-        <div class='neat-row'>
-          {{#if model.project.editing}}
+        {{#if model.project.hasIntro}}
 
-              <span class="waves-effect waves-light blue-grey four-col" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
-                <i class="fa fa-pencil" aria-hidden="true"></i> intro
-              </span>
-
-              <span class="waves-effect waves-light four-col" type='submit' {{action (route-action 'updateProject' model.project 'Project has been updated!' 'publish') }}>
-                  <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
-              </span>
-
-              <span class="waves-effect waves-light green white-text four-col" type="submit" {{action (route-action 'updateProject' model.project 'Project has been updated!')}}>
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> save
-              </span>
-
-        {{else if model.project.hasIntro}}
-          <button class="waves-effect waves-light" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
+            <div class='neat-row'>
+                <button class="waves-effect waves-light" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
             learn more
           </button>
+            </div>
         {{/if}}
-      </div>
-
     </div>
 {{/project-pane}}

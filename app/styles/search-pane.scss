@@ -1,6 +1,6 @@
 // Search Tabs
 .search-head {
-  @include outer-container;
+  @include grid-container;
   background-color: color('blue-grey', 'darken-1');
   color: color('grey', 'lighten-5');
   font-size: 1.5em;
@@ -19,12 +19,12 @@
   }
 
   .search-head-title {
-    @include span-columns(10)
+    @include grid-column(10)
     padding-left: 1em;
   }
 
   .search-close-button {
-    @include span-columns(1)
+    @include grid-column(1)
   }
 }
 

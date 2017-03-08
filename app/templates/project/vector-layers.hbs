@@ -1,36 +1,36 @@
 {{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers" }}
     <ul class='scrollable-list project-collapsible collapsible'>
 
-      {{#each model.project.vector_layer_project_ids as |layer|}}
-        <li id={{layer.vector_layer_id.name}} class='layer-list-item'>
-          {{#if layer.vector_layer_id.name}}
-          {{#layer-list-item layer=layer.vector_layer_id}}
-            {{#if layer.vector_layer_id}}
-              <div class='layer-list-item-icon vector-icon
-                {{layer.vector_layer_id.data_type}}
-                {{layer.vector_layer_id.data_format}}
-                layer-{{layer.colorName}}'>
-              </div>
-            {{/if}}
-
-            {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
-
-            <div class='layer-list-item-secondary-action'>
+        {{#each model.project.vector_layer_project_ids as |layer|}}
+            <li id= {{layer.vector_layer_id.name}} class='layer-list-item'>
                 {{#if layer.vector_layer_id.name}}
-                  {{toggle-switch class='right' id=layer.vector_layer_id.name click=(route-action 'hideLayer' layer.vector_layer_id) checked=layer.vector_layer_id.showing}}
+                    {{#layer-list-item layer=layer.vector_layer_id}}
+
+
+                        {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
+
+                        <div class='layer-list-item-secondary-action'>
+                          <div class='secondary-action-row'>
+                            {{#if layer.vector_layer_id.name}}
+                                {{toggle-switch id=layer.vector_layer_id.name click=(route-action 'hideLayer' layer.vector_layer_id) checked=layer.vector_layer_id.showing}}
+                            {{/if}}
+                          </div>
+                            {{!-- <div class='twelve-col'> --}}
+                            {{#if model.project.may_edit}}
+                            {{remove-layer-button model=model layer=layer.vector_layer_id}}
+                            {{else if (and layer.vector_layer_id layer.vector_layer_id.active_in_list)}}
+                                {{shareable-link layer=layer.vector_layer_id tagName='span'}}
+                            {{/if}}
+                          {{!-- </div> --}}
+                        </div>
+                        {{!-- <div class='one-col' /> --}}
+                    {{/layer-list-item}}
+                {{else}}
+                    Loading...
                 {{/if}}
-                {{remove-layer-button model=model layer=layer.vector_layer_id}}
-              {{#if layer.vector_layer_id.name}}
-                {{shareable-link layer=layer.vector_layer_id tagName='span'}}
-              {{/if}}
-            </div>
-          {{/layer-list-item}}
-          {{else}}
-          Loading...
-          {{/if}}
-        </li>
-      {{else}}
-        <h4 class='row'>No data layers have been added</h4>
-      {{/each}}
+            </li>
+            {{else}}
+                <h4 class='row'>No data layers have been added</h4>
+        {{/each}}
     </ul>
 {{/project-pane}}

@@ -5,8 +5,6 @@
   </a>
 </li>
 
-{{!-- A workaround to get the "active" class
-to apply to the active <li> automatically --}}
 {{#link-to 'project.info' tagName='li'}}
   <i class="material-icons">info_outline</i>
   {{link-to 'Info' 'project.info' tagName='label'}}
@@ -30,9 +28,3 @@ to apply to the active <li> automatically --}}
   <i class="material-icons">map</i>
   {{link-to 'Base' 'project.base-layers' tagName='label'}}
 {{/link-to}}
-{{!-- {{#each links as |link|}}
-  {{#link-to link.route tagName='li'}}
-    <i class="material-icons {{link.iconClass}}">{{link.icon}}</i>
-    {{link-to link.label link.route tagName='label'}}
-  {{/link-to}}
-{{/each}} --}}

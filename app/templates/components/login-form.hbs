@@ -1,49 +1,50 @@
 {{#if session.isAuthenticated}}
   <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
 {{else}}
-    <div class="button-group">
+    <section class="button-group">
       <a {{action 'abortSignUp'}}>
-        <label class='login-btn-group'>
+        <label>
           <input type="radio" name="button-group" value='item' checked={{unless signUp 'checked'}}>
           <span class="button-group-item">Login</span>
         </label>
       </a>
       <a {{action 'startSignUp'}}>
-        <label class='login-btn-group'>
+        <label>
           <input type="radio" name="button-group" value="other-item" checked={{if signUp 'checked'}}>
           <span class="button-group-item">Sign Up</span>
         </label>
       </a>
-    </div>
-    {{#if signUp}}
-      <form {{action 'signUpSubmit' on='submit'}}>
-        <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
-        <label for='password'>Password</label>
-        {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
-        <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
-        <button {{action 'cancel'}}type="submit" class="">Cancel</button>
-        <button type="submit" class="">Sign Up</button>
-      </form>
-    {{else}}
-      {{! Buttons should probably be a block component.}}
-      <div class="providers">
-        <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>
-          <span class='provider-icon'><i class="fa fa-facebook" aria-hidden="true"></i></span>
+    </section>
+
+    <section>
+      {{#if signUp}}
+        <form {{action 'signUpSubmit' on='submit'}}>
+          <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
+          <label for='password'>Password</label>
+          {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
+          <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
+          <button {{action 'cancel'}}type="submit" class="">Cancel</button>
+          <button type="submit" class="">Sign Up</button>
+        </form>
+      {{else}}
+        {{! Buttons should probably be a block component.}}
+        <section class="providers">
+          <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </div>
+        <div class="red white-text social-provider" {{action 'authenticateWithGoogle'}}>
+          <i class="fa fa-google" aria-hidden="true"></i>
         </div>
-      <div class="red white-text social-provider" {{action 'authenticateWithGoogle'}}>
-        <span class='provider-icon'><i class="fa fa-google" aria-hidden="true"></i></span>
-      </div>
-    </div>
+      </section>
+      <div class='neat-row center-align'>- or -</div>
 
-    <div class='neat-row center-align'>- or -</div>
-
-    <form {{action 'authenticateWithOAuth2' on='submit'}}>
-      {{input value=identification placeholder='Enter Login' class='form-control'}}
-      {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
-      <button type="submit" class="blue login-btn">Login</button>
-    </form>
-  {{/if}}
-
+      <form {{action 'authenticateWithOAuth2' on='submit'}}>
+        {{input value=identification placeholder='Enter Login' class='form-control'}}
+        {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
+        <button type="submit" class="blue login-btn">Login</button>
+      </form>
+    {{/if}}
+  </section>
   {{#if errorMessage}}
     <div class="alert alert-danger">
       <p>

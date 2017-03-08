@@ -24,7 +24,7 @@ export default Service.extend({
     },
 
     setSearchText(searchText) {
-        this.setProperties({ searchText: searchText });
+        this.setProperties({ searchText });
     },
 
     addTag(tag) {
