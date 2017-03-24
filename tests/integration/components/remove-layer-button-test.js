@@ -12,13 +12,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{remove-layer-button}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#remove-layer-button}}
-      template block text
-    {{/remove-layer-button}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

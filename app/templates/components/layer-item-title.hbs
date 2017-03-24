@@ -1,5 +1,8 @@
+<span class='{{if layer.active_in_list 'active'}}'>
 {{#if layer}}
   <span class='layer-list-item-icon vector-icon
     layer-{{layer.colorName}} {{layer.data_type}}'>
   </span>
-{{/if}}<a {{action 'expand'}}>{{layer.title}}</a>
+{{/if}}
+<a {{action 'expand'}}>{{layer.title}}</a>
+</span>

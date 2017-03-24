@@ -1,43 +1,35 @@
 {{#ember-wormhole to="results" }}
-  <div class="col s12 scroll-top">
+  <div class="scroll-top">
     <ul class="tabs">
-      <li class="tab col s4">
+      <li class="tab">
         <a class='active' href="#search">
-          <div class='col s12'>
-            <i class="material-icons">search</i>
-          </div>
-          <div class='col s12'>
-            Search
-          </div>
+            <span><i class="material-icons">search</i></span>
+            <span>Search</span>
         </a>
       </li>
-      <li class="tab col s4">
+      <li class="tab">
         <a href="#rasters">
-          <div class='col s12'>
-            <i class="material-icons result-icon">layers</i>
+            <span><i class="material-icons result-icon">layers</i>
             {{#if rasters}}
               <span class='z-depth-3 result-count'>{{rasters.content.meta.total_count}}</span>
-            {{/if}}
-          </div>
-          <div class='col s12'>
-            Maps
-          </div>
+            {{/if}}</span>
+            <span>Maps</span>
         </a>
         <div class='{{if rasters_diffResults  'glow-tab'}}' />
       </li>
-      <li class="tab col s4">
+      <li class="tab">
         <a href="#vectors">
-          <div class=''>
-            <i class="material-icons atlmaps-ext database result-icon"></i>
-            {{#if vectors}}
-              <span class='z-depth-3 result-count'>{{vectors.content.meta.total_count}}</span>
-            {{/if}}
-            <div class=''>
+            <span>
+              <i class="material-icons atlmaps-ext database result-icon"></i>
+              {{#if vectors}}
+                <span class='z-depth-3 result-count'>{{vectors.content.meta.total_count}}</span>
+              {{/if}}
+            </span>
+            <span>
               Data
-            </div>
-          </div>
+            </span>
         </a>
-        <div class='{{if vectors_diffResults  'glow-tab'}} foo' />
+        <div class='{{if vectors_diffResults  'glow-tab'}}' />
       </li>
     </ul>
   </div>

@@ -5,25 +5,8 @@
             <li id= {{layer.vector_layer_id.name}} class='layer-list-item'>
                 {{#if layer.vector_layer_id.name}}
                     {{#layer-list-item layer=layer.vector_layer_id}}
-
-
                         {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
-
-                        <div class='layer-list-item-secondary-action'>
-                          <div class='secondary-action-row'>
-                            {{#if layer.vector_layer_id.name}}
-                                {{toggle-switch id=layer.vector_layer_id.name click=(route-action 'hideLayer' layer.vector_layer_id) checked=layer.vector_layer_id.showing}}
-                            {{/if}}
-                          </div>
-                            {{!-- <div class='twelve-col'> --}}
-                            {{#if model.project.may_edit}}
-                            {{remove-layer-button model=model layer=layer.vector_layer_id}}
-                            {{else if (and layer.vector_layer_id layer.vector_layer_id.active_in_list)}}
-                                {{shareable-link layer=layer.vector_layer_id tagName='span'}}
-                            {{/if}}
-                          {{!-- </div> --}}
-                        </div>
-                        {{!-- <div class='one-col' /> --}}
+                        {{layer-list-item-actions layer=layer.vector_layer_id model=model}}
                     {{/layer-list-item}}
                 {{else}}
                     Loading...

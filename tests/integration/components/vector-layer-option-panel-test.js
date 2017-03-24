@@ -6,20 +6,11 @@ moduleForComponent('vector-layer-option-panel', 'Integration | Component | vecto
 });
 
 test('it renders', function(assert) {
-  
+
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
   this.render(hbs`{{vector-layer-option-panel}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#vector-layer-option-panel}}
-      template block text
-    {{/vector-layer-option-panel}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.notEqual(this.$().text().trim(), '');
 });

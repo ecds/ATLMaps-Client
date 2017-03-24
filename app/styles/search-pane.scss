@@ -38,8 +38,14 @@
   }
 
   .tab {
+    @include grid-column(4);
     height: auto;
     line-height: 1.75em;
+
+    span {
+      display: block;
+      padding-right: 2em;
+    }
 
     a {
       color: color('grey', 'lighten-4');
@@ -56,15 +62,15 @@
     }
 
     .result-count {
+      $small-font-size: .7em;
       background: $secondary-color;
-      border-radius: 25%;
-      color: color('grey', 'lighten-4');
-      font-size: .7em;
-      font-weight: 400;
-      line-height: 1.5em;
-      padding: .2em .3em;
+      border-radius: $small-font-size * 5;
+      display: inline-block;
+      font-size: $small-font-size;
+      line-height: 1;
+      padding: .4em .75em;
       position: absolute;
-      top: .2em;
+      top: $small-font-size;
     }
   }
 }
@@ -83,11 +89,11 @@
 .clear-text {
   background-color: transparent;
   border: 0;
-  border-radius: 25%;
   cursor: pointer;
+  font-size: .5em;
   position: absolute;
-  right: 0;
-  top: .5em;
+  right: 16px;
+  top: 12.35em;
   visibility: hidden;
 
   &:focus {

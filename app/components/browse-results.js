@@ -1,4 +1,5 @@
 /**
+ * TODO This is no longer needed?
  * Component to initiate UI for search results.
  */
 import Ember from 'ember';
@@ -19,9 +20,9 @@ export default Component.extend({
     },
 
     actions: {
-        toggleResults() {
-            // TODO: Get rid of burgerMenu.
-            // burgerMenu.toggleProperty('open');
-        }
+        // toggleResults() {
+        //     // TODO: Get rid of burgerMenu.
+        //     // burgerMenu.toggleProperty('open');
+        // }
     }
 });

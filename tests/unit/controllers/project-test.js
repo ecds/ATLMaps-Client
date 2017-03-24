@@ -9,7 +9,7 @@ moduleFor('controller:project', {
 });
 
 // Replace this with your real tests.
-test('it exists', function(assert) {
-  var controller = this.subject();
-  assert.ok(controller);
-});
+// test('it exists', function(assert) {
+//   var controller = this.subject();
+//   assert.ok(controller);
+// });

@@ -12,6 +12,7 @@ const {
 
 export default Component.extend({
     session: service(),
+    currentUser: service(),
     ajax: service(),
     store: service(),
     flashMessage: service(),

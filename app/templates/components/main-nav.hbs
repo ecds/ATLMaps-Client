@@ -31,6 +31,9 @@
             <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>
               <i class='material-icons'>search</i> Search
             </button>
+        {{else}}
+          {{! FIXME this is just here to keep the cog in the correct vertical space.}}
+          <span class="search-btn btn waves-effect waves-light" />
         {{/if}}
     </div>
 </div>

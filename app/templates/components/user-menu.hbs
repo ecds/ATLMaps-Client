@@ -1,20 +1,46 @@
 {{#if currentUser.user}}
-{{#if model.project.may_edit}}
-  <h5>Project</h5>
-  <section>
-    <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
-      <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
-    </span>
-    <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
-      <i class="fa fa-pencil" aria-hidden="true"></i> Edit Intro
-    </span>
-  </section>
-  <hr />
-{{/if}}
-
-<section>
-  <span  class='welcome-user'>Signed in as:</span>
-  <span><i>{{currentUser.user.displayname}}</i></span>
-</section>
+  {{#if currentUser.user.confirmed}}
+    <section>
+      <span  class='welcome-user'>Signed in as:</span>
+      <span><i>{{currentUser.user.displayname}}</i></span>
+    </section>
+    <hr />
+    {{#if model.project.may_edit}}
+      <h5>Project</h5>
+      <section>
+        <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+          <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
+        </span>
+        <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+          <i class="fa fa-pencil" aria-hidden="true"></i> Edit Intro
+        </span>
+      </section>
+      <hr />
+    {{/if}}
+  {{else}}
+  {{confirm-email}}
+  {{/if}}
 {{/if}}
 {{login-form}}
+    {{!-- {{#if currentUser.user}}
+        {{confirm-email class='' tagName='section'}}
+        {{#if model.project.may_edit}}
+            <h5>Project</h5>
+            <section>
+              <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+                <i class="fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i> Publish
+              </span>
+              <span class='toggle-action' onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit Intro
+              </span>
+            </section>
+            <hr />
+        {{/if}}
+
+    {{else}}
+
+    {{/if}}
+{{else}}
+  {{confirm-email}}
+{{/unless}}
+{{login-form}} --}}

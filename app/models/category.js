@@ -13,9 +13,7 @@ const {
 export default Model.extend({
     name: attr('string'),
     slug: attr('string'),
-    tag_ids: hasMany('tag', {
-        async: true
-    }),
+    tag_ids: hasMany('tag'),
 
     // Non-API attribute to show the tags for the category.
     clicked: attr('boolean', {

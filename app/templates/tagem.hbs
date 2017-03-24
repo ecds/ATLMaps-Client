@@ -11,8 +11,8 @@
 <nav>
   <div class="nav-wrapper">
     <ul class="left hide-on-med-and-down">
-      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="user"><i class="material-icons user">account_box</i></a></li>
-      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="title">some title</a></li>
+      {{!-- <li><a class="dropdown-button" href="javascript:void(0);" data-activates="user"><i class="material-icons user">account_box</i></a></li>
+      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="title">some title</a></li> --}}
       <li>{{#previous-map layer=model.layers action=(route-action "getPreviousMap")}}
         <i class="material-icons">chevron_left</i>Back
       {{/previous-map}}</li>
@@ -20,8 +20,8 @@
   </div>
 </nav>
 </div>
-    <div class="row">
-        <div class="col m6">
+    <div class="neat-row">
+      <div class='half'>
             {{#each model.categories as |category|}}
                 <h4>{{category.name}}</h4>
                 {{#each category.sortedTags as |tag|}}
@@ -30,9 +30,8 @@
                     {{/draggable-item}}
                 {{/each}}
             {{/each}}
-        </div>
-
-        <div class="map-to-tag col m6">
+</div>
+<div class='half'>
             {{#draggable-dropzone layer=model.layers dropped=(route-action "addTag")}}
                 <div id="map" style="height:90vh;"></div>
                 <a class="next-sm visible-md-* hidden-lg" {{action 'getNextMap'}}>
@@ -41,5 +40,6 @@
             {{/draggable-dropzone}}
             <div class="slider-container">
             {{input class="opacity" type='range' min=0 step=0.1 max=1.0 value=1 input=(route-action "opacity")}}
-  </div>     </div>
+  </div>
+</div>
 </div>

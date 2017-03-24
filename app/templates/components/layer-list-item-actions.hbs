@@ -1,0 +1,12 @@
+<div class='secondary-action-row'>
+  {{#if layer.name}}
+      {{toggle-switch id=layer.name click=(route-action 'hideLayer' layer) checked=layer.showing}}
+  {{/if}}
+</div>
+  {{!-- <div class='twelve-col'> --}}
+  {{#if (and layer layer.active_in_list)}}
+      {{shareable-link layer=layer project=model.project tagName='span'}}
+      {{#if model.project.may_edit}}
+        {{remove-layer-button model=model layer=layer}}
+      {{/if}}
+  {{/if}}

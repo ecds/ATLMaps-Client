@@ -32,9 +32,7 @@ export default Model.extend({
     project_ids: hasMany('project', {
         async: true
     }),
-    tag_ids: hasMany('tag', {
-        async: true
-    }),
+    tag_ids: hasMany('tag'),
     institution: attr(),
     institution_id: belongsTo('institution'),
     tag_slugs: attr('string'),

@@ -1,4 +1,5 @@
 .search-pane {
+  @include grid-container;
   background-color: $white;
   display: block;
   position: absolute;
@@ -22,6 +23,7 @@
     i {
       padding-top: .25em;
     }
+
   }
 
   .scroll-container {
@@ -145,7 +147,7 @@
   padding-bottom: 1em;
   padding-top: .5em;
   position: absolute;
-  top: calc(100vh - 4em);
+  top: calc(100vh - 7em);
   width: 100%;
 
   li {

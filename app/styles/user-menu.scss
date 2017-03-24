@@ -31,6 +31,14 @@
   label {
     color: color('blue-grey', 'darken-4');
   }
+
+  .login-form {
+    button {
+      margin-left: 1em;
+      margin-top: .5em;
+      padding: .5em 1em;
+    }
+  }
 }
 
 .user-menu-show {

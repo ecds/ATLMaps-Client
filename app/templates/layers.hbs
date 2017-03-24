@@ -6,35 +6,29 @@
       {{#sortable-group tagName="ul" class='scrollable-list project-collapsible collapsible layers-layer-item' style='background-color: transparent;' data-collapsible="accordion" model=model onChange="reorderItems" as |group|}}
         {{#each model.rasters as |layer|}}
           <li id={{layer.name}} class='layer-item'>
+
             {{#layer-list-item layer=layer}}
-            <div class='col s2'>
-              <i class='material-icons'>maps</i>
-            </div>
-            <div class='title col s7'>
+
               {{layer-item-title layer=layer}}
-            </div>
-            <div class='col s2 right'>
-              {{toggle-switch layer=layer}}
-            </div>
+
+              {{toggle-switch layer=layer class='layer-list-item-secondary-action'}}
+
             {{/layer-list-item}}
           </li>
         {{/each}}
 
         {{#each model.vectors as |layer|}}
-          <li id={{layer.name}} class='layer-item'>
-            {{#layer-list-item layer=layer}}
-            <div class='col s2 vector-icon left
-              {{layer.data_type}}
-              {{layer.data_format}}
-              layer-{{layer.colorName}}'></div>
-              <div class='title data-title col s7'>
-                {{layer-item-title layer=layer}}
-              </div>
-              <div class='col s2 right'>
-                {{toggle-switch layer=layer}}
-              </div>
-            {{/layer-list-item}}
-          </li>
+        <li id={{layer.name}} class='layer-item'>
+
+          {{#layer-list-item layer=layer}}
+
+            {{layer-item-title layer=layer}}
+
+            {{toggle-switch layer=layer class='layer-list-item-secondary-action'}}
+
+          {{/layer-list-item}}
+        </li>
+
         {{/each}}
         {{/sortable-group}}
     {{!-- </div> --}}

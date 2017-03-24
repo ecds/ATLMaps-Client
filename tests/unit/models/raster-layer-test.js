@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('raster-layer', 'Unit | Model | raster layer', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:project', 'model:tag', 'model:institution']
 });
 
 test('it exists', function(assert) {

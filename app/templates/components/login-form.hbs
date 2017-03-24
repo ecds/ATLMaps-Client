@@ -1,55 +1,59 @@
-{{#if session.isAuthenticated}}
-  <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
-{{else}}
+
+{{log session.isAuthenticated}}
+  {{#if session.isAuthenticated}}
+    {{#if currentUser.user.confirmed}}
+    <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
+    {{/if}}
+  {{else}}
     <section class="button-group">
-      <a {{action 'abortSignUp'}}>
-        <label>
-          <input type="radio" name="button-group" value='item' checked={{unless signUp 'checked'}}>
-          <span class="button-group-item">Login</span>
-        </label>
-      </a>
-      <a {{action 'startSignUp'}}>
-        <label>
-          <input type="radio" name="button-group" value="other-item" checked={{if signUp 'checked'}}>
-          <span class="button-group-item">Sign Up</span>
-        </label>
-      </a>
+    <a {{action 'abortSignUp'}}>
+    <label>
+    <input type="radio" name="button-group" value='item' checked={{unless signUp 'checked'}}>
+    <span class="button-group-item">Login</span>
+    </label>
+    </a>
+    <a {{action 'startSignUp'}}>
+    <label>
+    <input type="radio" name="button-group" value="other-item" checked={{if signUp 'checked'}}>
+    <span class="button-group-item">Sign Up</span>
+    </label>
+    </a>
     </section>
 
     <section>
-      {{#if signUp}}
-        <form {{action 'signUpSubmit' on='submit'}}>
-          <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
-          <label for='password'>Password</label>
-          {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
-          <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
-          <button {{action 'cancel'}}type="submit" class="">Cancel</button>
-          <button type="submit" class="">Sign Up</button>
-        </form>
-      {{else}}
-        {{! Buttons should probably be a block component.}}
-        <section class="providers">
-          <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </div>
-        <div class="red white-text social-provider" {{action 'authenticateWithGoogle'}}>
-          <i class="fa fa-google" aria-hidden="true"></i>
-        </div>
+    {{#if signUp}}
+      <form {{action 'signUpSubmit' on='submit'}}>
+      <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
+      <label for='password'>Password</label>
+      {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
+      <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
+      <button {{action 'cancel'}}type="submit" class="">Cancel</button>
+      <button type="submit" class="">Sign Up</button>
+      </form>
+    {{else}}
+      {{! Buttons should probably be a block component.}}
+      <section class="providers">
+      <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+      </div>
+      <div class="red white-text social-provider" {{action 'authenticateWithGoogle'}}>
+      <i class="fa fa-google" aria-hidden="true"></i>
+      </div>
       </section>
       <div class='neat-row center-align'>- or -</div>
 
       <form {{action 'authenticateWithOAuth2' on='submit'}}>
-        {{input value=identification placeholder='Enter Login' class='form-control'}}
-        {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
-        <button type="submit" class="blue login-btn">Login</button>
+      {{input value=identification placeholder='Enter Login' class='form-control'}}
+      {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
+      <button type="submit" class="blue login-btn">Login</button>
       </form>
     {{/if}}
-  </section>
-  {{#if errorMessage}}
+    </section>
+    {{#if errorMessage}}
     <div class="alert alert-danger">
-      <p>
-        <strong>Login failed:</strong> <code>{{errorMessage}}</code>
-      </p>
+    <p>
+    <strong>Login failed:</strong> <code>{{errorMessage}}</code>
+    </p>
     </div>
   {{/if}}
 {{/if}}

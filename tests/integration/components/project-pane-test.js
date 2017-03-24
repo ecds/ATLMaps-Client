@@ -2,8 +2,20 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('project-pane', 'Integration | Component | project pane', {
-  integration: true
-});
+    integration: true,
+    beforeEach(assert) {
+       this.container
+         .registry
+         .registrations['helper:route-action'] = Ember.Helper.helper((arg) => {
+           return this.routeActions[arg];
+         });
+       this.routeActions = {
+         doSomething(arg) {
+           return Ember.RSVP.resolve({arg});
+         },
+       };
+     }
+  });
 
 test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
@@ -11,14 +23,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{project-pane}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#project-pane}}
-      template block text
-    {{/project-pane}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.notEqual(this.$().text().trim(), '');
 });

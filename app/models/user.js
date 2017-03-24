@@ -10,5 +10,6 @@ export default Model.extend({
     avatar: attr('string'),
     // institution_: belongsTo('institution'),
     // projects: hasMany('projects'),
-    number_tagged: attr('number')
+    number_tagged: attr('number'),
+    confirmed: attr('boolean')
 });

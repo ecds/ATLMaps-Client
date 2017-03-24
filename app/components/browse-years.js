@@ -5,7 +5,7 @@
 import Ember from 'ember';
 /* globals noUiSlider */
 
-const { Component, inject: { service }, set } = Ember;
+const { Component, inject: { service }, set, get } = Ember;
 
 export default Component.extend({
 
@@ -46,7 +46,7 @@ export default Component.extend({
     },
 
     willDestroyElement() {
-        this.get('rangeSlider').noUiSlider.destroy();
+        get(this, 'rangeSlider').noUiSlider.destroy();
     }
 
 });

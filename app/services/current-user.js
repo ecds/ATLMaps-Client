@@ -6,6 +6,7 @@ import Ember from 'ember';
  * @type {Object}
  */
 const {
+    get,
     inject: {
         service
     },
@@ -18,21 +19,27 @@ export default Service.extend({
 
     init() {
         this._super(...arguments);
-        this.load();
+        // this.load();
     },
 
     load() {
         if (this.get('session.isAuthenticated')) {
-            // console.log('this', this);
+            if (get(this, 'user')) {
+                return get(this, 'store').peekRecord('user', get(this, 'user.id'));
+            }
             return this.get('store').queryRecord('user', { me: true }).then((user) => {
                 this.set('user', user);
             });
         }
         return false;
+    },
+
+    reLoad() {
+        // get(this, 'store').unloadRecord(get(this, 'user'));
+        // this.load();
+        this.get('store').queryRecord('user', { me: true }).then((user) => {
+            get(this, 'store').unloadRecord(user);
+            this.load();
+        });
     }
-    // if (get(this, 'session.isAuthenticated')) {
-    //     return get(this, 'store').find('user', 'me').then((user) => {
-    //         self.set('user', user);
-    //     });
-    // }
 });

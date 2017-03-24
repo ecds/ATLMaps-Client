@@ -1,10 +1,11 @@
 .project-pane {
   @include grid-container;
   left: 5em;
+  // height: 1000px;
+  max-width: 500px;
   pointer-events: all;
   position: absolute;
   top: 60px;
-  transition: width $rabbit linear, top $turtle linear;
   width: 34vw;
   z-index: 401;
 
@@ -21,6 +22,11 @@
 
   .save-pane-state {
     background-color: $secondary-color;
+  }
+
+  .pane-container {
+    max-height: 100vh;
+    transition: max-height $rabbit;
   }
 
   .pane-card {
@@ -89,7 +95,6 @@
 .vector-detail-container {
   // backface-visibility: hidden;
   display: flex;
-  max-height: 100vh;
   opacity: 1;
   overflow: hidden;
   pointer-events: all;
@@ -153,8 +158,6 @@
   border: 0;
   display: flex;
   flex-direction: column;
-  // padding-bottom: 6em;
-  width: 34vw;
 
   &.collapsible {
     box-shadow: none;
@@ -181,13 +184,10 @@
   }
 
   .layer-header {
-    // border-bottom: 0;
     border-radius: .5em;
     color: $primary-color-light;
-    // font-size: 1.35em;
     font-weight: bolder;
-    // line-height: initial;
-    // padding: 1rem;
+
     .shareable-link {
       opacity: 0;
       transition: opacity $turtle;
@@ -203,11 +203,7 @@
         }
       }
     }
-    // .shareable-button {
-    //   bottom: .5em;
-    //   position: relative;
-    //   right: .5em;
-    // }
+
     .shareable-link-modal {
       @include grid-container;
       display: inline-block;
@@ -231,16 +227,6 @@
       padding-left: .5em;
     }
 
-    // .layer-list-item-icon i {
-    //   font-size: 1.5em;
-    // }
-
-
-
-    // .remove-vector-layer {
-    //   padding-left: .75em;
-    // }
-
     .vector-icon {
       font-size: 1.5em;
       padding: 0;
@@ -253,7 +239,6 @@
   }
 
   .layer-item-body {
-    // @include grid-column(12);
     background: $white;
     border-bottom: 0;
     border-radius: .5em;
@@ -280,14 +265,16 @@
   }
 }
 
-
-
 .remove-layer,
 .shareable-link {
-  @include grid-column(12);
+  @include grid-column(4);
+  @include grid-push(2);
   cursor: pointer;
   font-size: 1.2em;
-  margin-left: 12px;
+
+  &.share-only {
+    //
+  }
 }
 
 .shareable-link-modal {
@@ -301,10 +288,6 @@
   background: $white;
   margin-left: 4px;
   padding-bottom: 1em;
-//   // border-bottom: 1px solid color('grey', 'lighten-2');
-//   border-radius: .5em;
-//   height: 2rem;
-//   margin-bottom: 1em;
 }
 
 .active + .slider-container {
@@ -313,15 +296,12 @@
 }
 
 .hide-nav + .project-pane {
-  width: 0;
-
-  .pane-container,
-  .pane-title {
-    opacity: 0;
-  }
 
   .pane-container {
     max-height: 0;
+    // opacity: 0;
+    // top: -100px;
+    // width: 0;
   }
 }
 // Search Pane
@@ -354,6 +334,7 @@
   .collapsible-header {
     border-radius: 0;
     color: color('grey', 'darken-1');
+    cursor: pointer;
     font-size: 1.1em;
     font-weight: normal;
     line-height: normal;

@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:project/browse-layers', 'Unit | Route | project/browse layers', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:metrics', 'service:sharable']
 });
 
 test('it exists', function(assert) {

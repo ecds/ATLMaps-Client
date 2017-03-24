@@ -122,22 +122,20 @@ export default Route.extend({
                 active_in_project: false
             });
         });
-        // // Clear the raster layers that are marked active in this project.
+        // Clear the raster layers that are marked active in this project.
         const rasters = this.store.peekAll('raster-layer');
         rasters.forEach((raster) => {
             raster.setProperties({
                 active_in_project: false
             });
         });
+
         set(this.controller, 'rasters', null);
         set(this.controller, 'vectors', null);        // Clear checked institution
         const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
-        // // TODO Why doesn't this work?
-        // // Reset the year range.
-        // // this.store.peekRecord('yearRange', 1).rollback();
 
-        // // Clear the map.
+        // Clear the map.
         get(this, 'mapObject.map').remove();
         set(this, 'mapObject.map', '');
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
@@ -154,10 +152,6 @@ export default Route.extend({
         toggleIntro() {
             this.modelFor('project').project.toggleProperty('suppressIntro');
         },
-
-        // showSearch() {
-        //     this.controller.toggleProperty('showingSearch');
-        // },
 
         updateProject(project, message, action) {
             if (action === 'publish') {
@@ -319,16 +313,24 @@ export default Route.extend({
                 page: page || 0,
                 limit: get(this, 'browseParams.searchLimit')
             };
+
+            // If a serch parameter empty, but not null, it will still be
+            // included in the API call. Doing so, will likely return all layers.
             for (const param in searchParams) {
+                // Clear search parameters without making an API call.
                 if (searchParams[param] === null
                     || searchParams[param] === undefined
                     || searchParams[param].length === 0) {
                     delete searchParams[param];
                 }
             }
+
+            // Clear any search parameters
             if (Object.keys(searchParams.bounds).length === 0) {
                 delete searchParams.bounds;
             }
+
+            // `meta`, `page`, and `limit` will always be present
             if (Object.keys(searchParams).length > 3) {
                 set(this.controller, 'rasters', this.store.query('raster-layer', searchParams)).then((rasters) => {
                     if (currentRasters !== rasters.meta.total_count) {

@@ -7,7 +7,7 @@ import {
 
 moduleForModel('project', {
   // Specify the other units that are required for this test.
-  needs: ['model:layer', 'model:tag', 'model:institution']
+  needs: ['model:layer', 'model:tag', 'model:institution','model:raster-layer-project', 'model:vector-layer-project', 'model:raster-layer', 'model:vector-layer']
 });
 
 test('it exists', function(assert) {

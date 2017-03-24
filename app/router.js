@@ -53,11 +53,13 @@ Router.map(function() {
   this.route('support', {
       path: '/help'
   });
-  // this.route('tagem');
+  this.route('tagem');
   this.route('404', {
       path: '/*wildcard'
   });
-  this.route('layers', { path: '/layers/:maps'});
+  this.route('layers', { path: '/layers/:maps' });
+  this.route('error');
+  this.route('confirm', { path: '/confirm/:confirm_token' });
 });
 
 export default Router;

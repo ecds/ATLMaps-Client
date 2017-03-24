@@ -3,6 +3,7 @@ import Ember from 'ember';
 const {
     Component,
     get,
+    set,
     inject: {
         service
     },
@@ -13,7 +14,14 @@ export default Component.extend({
     flashMessage: service(),
     isShowingModal: false,
     tagName: 'span',
-    classNames: ['shareable-link'],
+    classNames: ['shareable-link', 'layer-action'],
+    classNameBindings: ['shareOnly::share-only'],
+
+    shareOlnly: false,
+
+    didInsertElement() {
+        set(this, 'shareOnly', get(this, 'project.may_edit'));
+    },
 
     actions: {
         toggleShareableLink: function toggleModal() {

@@ -20,11 +20,6 @@ export default Route.extend(ApplicationRouteMixin, {
     flashMessage: service(),
     session: service(),
 
-    sessionAuthenticated() {
-        this._super(...arguments);
-        return this.get('currentUser').load();
-    },
-
     actions: {
         error(err) {
             debug(err);

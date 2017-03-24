@@ -30,12 +30,11 @@ export default Torii.extend({
                     auth_code: data.authorizationCode
                 }
             }).then((response) => {
-                return {
-                    // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+                const authData = {
                     access_token: response.access_token,
-                    // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                     provider: data.provider
                 };
+                return authData;
             });
         });
     },

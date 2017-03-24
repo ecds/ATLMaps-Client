@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
     tagName: 'span',
-    classNames: ['remove-layer']
+    classNames: ['remove-layer', 'layer-action']
 });

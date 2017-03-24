@@ -18,7 +18,7 @@
     padding: .5em .75em;
     text-align: center;
     text-transform: uppercase;
-    transition: opacity 300ms, color 300ms, max-height 300ms, font-size 300ms, background-color 300ms;
+    transition: all $rabbit, color $rabbit, max-height $rabbit, font-size $rabbit, background-color $rabbit;
     transition-timing-function: ease-in-out;
 
     &:first-child {
@@ -301,11 +301,13 @@ header.navigation {
 
       i {
         font-size: 2em;
-        vertical-align: top;
+        vertical-align: middle;
       }
+
       .toggle-user-menu {
         transition: transform $turtle;
       }
+
       .showing-user-menu {
         transform: rotate(180deg);
       }
@@ -343,10 +345,8 @@ header.navigation {
   }
 
   .title-bar-action {
-    // font-size: 1.5em;
     i {
-      margin-right: 1em;
-      margin-top: .25em;
+      margin-right: .5em;
     }
   }
 }

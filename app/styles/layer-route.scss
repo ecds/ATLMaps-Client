@@ -18,13 +18,11 @@
     display: none;
   }
 
-  .card {
-    background-color: transparent;
 
-    .scrollable-list {
-      background-color: transparent;
-      padding-top: .25em;
-    }
+  .scrollable-list {
+    background-color: transparent;
+    padding-top: .25em;
+    width: 100%;
   }
 
   .layer-item {
@@ -40,6 +38,14 @@
   .reorder-handle {
     i {
       margin-right: -.6em;
+    }
+  }
+
+  footer {
+    &.citation-footer {
+      padding-bottom: 2em;
+      padding-left: 2em;
+      padding-right: 2em;
     }
   }
 }

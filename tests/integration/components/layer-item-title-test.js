@@ -12,13 +12,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{layer-item-title}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#layer-item-title}}
-      template block text
-    {{/layer-item-title}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

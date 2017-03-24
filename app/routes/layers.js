@@ -17,14 +17,6 @@ export default Route.extend({
             vectors: this.get('store').query('vector-layer', { names: queryParams.maps })
         });
     },
-    afterModel() {
-        // const vectors = this.store.peekAll('vector-layer');
-        // const rasters = this.store.peekAll('raster-layer');
-        // console.log(vectors.get('content')[0])
-        // if (vectors.get('length') === 1) {
-        //     set(vectors.get('content')[0], 'active_in_list', true);
-        // }
-    },
 
     activate() {
         const self = this;
@@ -33,6 +25,7 @@ export default Route.extend({
             const map = self.get('mapObject.map');
             const currentBounds = get(self, 'mapObject.allBounds');
             get(self, 'currentModel.rasters').forEach((raster) => {
+                raster.set('active_in_list', true);
                 get(self, 'mapObject').mapSingleLayer(raster);
 
                 // TODO: This needs be be a reusable function
@@ -43,6 +36,7 @@ export default Route.extend({
                 set(self, 'mapObject.allBounds', currentBounds.extend(layerBounds));
             });
             get(self, 'currentModel.vectors').forEach((vector) => {
+                vector.set('active_in_list', true);
                 get(self, 'mapObject').mapSingleLayer(vector);
                 // TODO: This needs be be a reusable function
                 const layerBounds = L.latLngBounds(
@@ -57,5 +51,15 @@ export default Route.extend({
             $('.collapsible').collapsible();
             get(this, 'mapObject.baseMaps.street').addTo(map);
         });
+    },
+
+    actions: {
+        updateProject() {
+            return true;
+        },
+
+        cancleUpdate() {
+            return false;
+        }
     }
 });

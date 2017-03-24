@@ -6,20 +6,12 @@ moduleForComponent('browse-institution', 'Integration | Component | browse insti
 });
 
 test('it renders', function(assert) {
-  
+
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
   this.render(hbs`{{browse-institution}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Institutions:');
 
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#browse-institution}}
-      template block text
-    {{/browse-institution}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
