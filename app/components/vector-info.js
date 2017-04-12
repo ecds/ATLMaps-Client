@@ -3,7 +3,7 @@ import Ember from 'ember';
 /* globals interact */
 
 const {
-    $,
+    get,
     Component,
     inject: {
         service
@@ -12,7 +12,7 @@ const {
 
 export default Component.extend({
 
-    vectorDetialContent: service(),
+    vectorDetailContent: service(),
 
     classNames: ['vector-info', 'resize-container', 'project-pane', 'resize-drag', 'hoverable'],
 
@@ -52,9 +52,7 @@ export default Component.extend({
                 x += event.deltaRect.left;
                 y += event.deltaRect.top;
 
-                target.style.webkitTransform
-                    = target.style.transform
-                    = `translate(${x}px,${y}px)`;
+                target.style.transform = `translate(${x}px,${y}px)`;
 
                 target.setAttribute('data-x', x);
                 target.setAttribute('data-y', y);
@@ -67,10 +65,7 @@ export default Component.extend({
             const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
             const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-            // translate the element
-            target.style.webkitTransform
-                = target.style.transform
-                = `translate(${x}px,${y}px)`;
+            target.style.transform = `translate(${x}px,${y}px)`;
 
             // update the posiion attributes
             target.setAttribute('data-x', x);
@@ -81,6 +76,7 @@ export default Component.extend({
         window.dragMoveListener = dragMoveListener;
         // Ember.set(this,'dragMoveListener' dragMoveListener);
     },
+
     //
     didDestroyElement() {
         delete(window.dragMoveListener);
@@ -88,11 +84,7 @@ export default Component.extend({
 
     actions: {
         close() {
-            $('div.vector-info').hide();
-            $('.marker-content iframe').remove();
-            $('.div.marker-content').empty();
-            $('.active-marker').removeClass('active-marker');
-            // this.get('draggie').destroy();
+            get(this, 'vectorDetailContent').removePopup();
         }
     }
 });

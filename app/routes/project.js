@@ -44,7 +44,9 @@ export default Route.extend({
                 may_edit: true,
                 showingSearch: true,
                 description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.',
-                explore: true
+                explore: true,
+                suppressIntro: true,
+                hasSuppressCookie: true
             });
         } else {
             project = this.store.findRecord('project', params.project_id);
@@ -60,14 +62,14 @@ export default Route.extend({
     },
 
     afterModel() {
-        const { project } = this.modelFor('project');
-        const projectID = get(project, 'id');
-        if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
-            project.setProperties({ suppressIntro: true });
-        }
-        if (project.may_edit) {
-            project.setProperties({ suppressIntro: true });
-        }
+        // const { project } = this.modelFor('project');
+        // const projectID = get(project, 'id');
+        // if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
+        //     project.setProperties({ suppressIntro: true });
+        // }
+        // if (project.may_edit) {
+        //     project.setProperties({ suppressIntro: true });
+        // }
     },
 
     map() {
@@ -102,7 +104,8 @@ export default Route.extend({
     // Function the runs after we fully exit a project route and clears the map,
     // clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
     tearDown: function tearDown() {
-        this.currentModel.project.rolledBack();
+        const { project } = this.currentModel;
+        project.rollbackAttributes();
         get(this, 'browseParams').init();
         // Clear the chekes for the checked categories and tags.
         const categories = this.store.peekAll('category');
@@ -291,13 +294,13 @@ export default Route.extend({
             // return false;
         },
 
-        nextPage(meta) {
-            this.getResults(meta.next_page);
+        nextPage(meta, type) {
+            this.getResults(meta.next_page, type);
         },
 
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
-        getResults(page) {
+        getResults(page, type) {
             const self = this;
             const currentRasters = get(this.controller, 'rasters.content.meta.total_count');
             const currentVectors = get(this.controller, 'vectors.content.meta.total_count');
@@ -331,18 +334,23 @@ export default Route.extend({
             }
 
             // `meta`, `page`, and `limit` will always be present
+            // console.log('type', type);
             if (Object.keys(searchParams).length > 3) {
-                set(this.controller, 'rasters', this.store.query('raster-layer', searchParams)).then((rasters) => {
-                    if (currentRasters !== rasters.meta.total_count) {
-                        self.updatedResults('rasters');
-                    }
-                });
+                if (type === 'rasters' || !type) {
+                    set(this.controller, 'rasters', this.store.query('raster-layer', searchParams)).then((rasters) => {
+                        if (currentRasters !== rasters.meta.total_count) {
+                            self.updatedResults('rasters');
+                        }
+                    });
+                }
 
-                set(this.controller, 'vectors', this.store.query('vector-layer', searchParams)).then((vectors) => {
-                    if (currentVectors !== vectors.meta.total_count) {
-                        self.updatedResults('vectors');
-                    }
-                });
+                if (type === 'vectors' || !type) {
+                    set(this.controller, 'vectors', this.store.query('vector-layer', searchParams)).then((vectors) => {
+                        if (currentVectors !== vectors.meta.total_count) {
+                            self.updatedResults('vectors');
+                        }
+                    });
+                }
 
                 this.setProperties({
                     searched: true,
@@ -352,14 +360,7 @@ export default Route.extend({
                 set(this.controller, 'rasters', null);
                 set(this.controller, 'vectors', null);
             }
-        },
-
-        setColor(layer) {
-            layer.save().then(
-            ).catch(
-            );
         }
-
     }
 
 });

@@ -1,8 +1,10 @@
 import Ember from 'ember';
+/* globals Swiper */
 
 const {
     $,
     Service,
+    get,
     set
 } = Ember;
 
@@ -14,6 +16,15 @@ export default Service.extend({
         this._super(...arguments);
         this.set('properties', 'foo');
         set(this, 'title', 'booooo');
+        set(this, 'sweiperObj', null);
+    },
+
+    removePopup() {
+        // console.log('this', this);
+        $('div.vector-info').hide();
+        $('.marker-content iframe').remove();
+        $('.div.marker-content').empty();
+        $('.active-marker').removeClass('active-marker');
     },
 
     viewData(feature, layer) {
@@ -36,14 +47,6 @@ export default Service.extend({
             popupContent += `<iframe src=//${feature.properties.gx_media_links}?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>`;
             popupContent += '</div>';
         }
-        if (feature.properties.images) {
-            popupContent += '<div class="carousel carousel-slider" data-indicators="true">';
-            feature.properties.images.forEach((image) => {
-                popupContent += `<a class="carousel-item" href="javascript:void(0)"><img src="${image.url}"></a>`;
-                $('<img />').load(() => {}).attr('src', image.url);
-            });
-            popupContent += '</div>';
-        }
         if (feature.properties.description) {
             popupContent += feature.properties.description;
         }
@@ -53,34 +56,46 @@ export default Service.extend({
         // popupContent += "</div></div>";
 
         // TODO: Everything about this is hacky.
+        const self = this;
         layer.on('click', () => {
+            get(self, 'removePopup');
+            const oldSwiper = get(this, 'swiperObj');
+            if (oldSwiper) {
+                oldSwiper.destroy();
+                set(this, 'swiperObj', null);
+            }
+            $('.swiper-wrapper').empty();
+            if (feature.properties.images) {
+                feature.properties.images.forEach((image) => {
+                    $('.swiper-wrapper').append(`<div class="swiper-slide"><img src="${image}"></div>`);
+                    // $('<img />').load(() => {}).attr('src', image.url);
+                });
+
+                // if (feature.properties.images.length > 1) {
+                const newSwiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    slidesPerView: 1,
+                    paginationClickable: true,
+                    centeredSlides: true,
+                    zoom: true
+                });
+                set(this, 'swiperObj', newSwiper);
+                // }
+            }
             // Close leaflet's default popup.
             layer.closePopup();
-            $('.vector-content').empty();
-            // Ember.$("div.marker-title").empty();
-            // let content = Ember.$("<div/>").html(popupContent);
-            // if (Ember.$('.gallery').length > 0) {
-            //     Ember.$('.gallery')[0].swiper.destroy();
-            // }
+            // let content = $('<div/>').html(popupContent);
             $('div.vector-info').show();
-            $('.vector-content.layer-icon').append(layer.options.markerDiv);
-            $('.vector-content.layer-title').append(layer.options.title);
-            $('.vector-content.title').append(feature.properties.name);
-            $('.vector-content.title').append(feature.properties.NAME);
-            $('.vector-content.marker-content').append(popupContent);
+            $('.vector-content.layer-icon').empty().append(layer.options.markerDiv);
+            $('.vector-detail-title-container .layer-title').empty().append(layer.options.title);
+            $('.vector-detail-title-container .feature-title').empty().append(feature.properties.name).append(feature.properties.NAME);
+            // $('.vector-content.title').empty().append(feature.properties.NAME);
+            $('.vector-content.marker-content').empty().append(popupContent);
+            // $('.dump').empty().append(JSON.stringify(feature.properties, null, '\t'));
             $('.active-marker').removeClass('active-marker');
             $(this._icon).addClass('active-marker');
-            // new Swiper('.gallery', {
-            //     pagination: '.swiper-pagination',
-            //     nextButton: '.swiper-button-next',
-            //     prevButton: '.swiper-button-prev',
-            //     slidesPerView: 1,
-            //     paginationClickable: true,
-            //     spaceBetween: 30,
-            //     loop: true,
-            //     centeredSlides: true
-            //         // autoHeight: true
-            // });
         });
     }
 });

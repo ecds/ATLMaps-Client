@@ -1,27 +1,35 @@
-<div class='vector-detail-title row z-depth-1 drag-handle'>
-  <div class='layer-icon vector-content col s1'>
+<div class='vector-detail-title z-depth-1 drag-handle'>
+  <div class='layer-icon vector-content'>
     {{! Colored icon gets injected here. }}
   </div>
-  <div class='col s9'>
-    <div class='row'>
-      <div class='col s12 vector-content layer-title'>
+
+  <div class='vector-detail-title-container'>
+      <div class='layer-title'>
         {{! Layer title gets injected here. }}
-      </div>
     </div>
-    <div class='row'>
-      <div class='title vector-content col s12'>
+      <div class='feature-title'>
         {{! Layer title from geoJSON gets injected here. }}
       </div>
-    </div>
   </div>
-  <div class='col s1'>
+  <div class='vector-detail-close'>
     <a {{action 'close'}}>
       <i class='material-icons close-button right'>highlight_off</i>
     </a>
   </div>
 </div>
+
 <div class='vector-detail-container'>
-    <div class='pane-content'>
-      <div class='vector-content marker-content col-md-12'></div>
+
+  <div class='pane-content'>
+    <div class='row swiper-container'>
+      <div class='swiper-wrapper'>
+        {{! Inject gallery}}
+      </div>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
+    <div class='vector-content marker-content col-md-12'></div>
+    <div class='dump' />
+  </div>
 </div>

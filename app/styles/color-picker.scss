@@ -1,11 +1,15 @@
 .color-picker {
+  left: 8em;
+  max-width: 350px;
   pointer-events: all;
 
   .color {
     border-radius: 50%;
+    float: left;
     height: 20px;
     margin: .25em;
-    padding: 0;
+    max-width: 15vw;
+    // padding: 0;
     width: 20px;
   }
 }

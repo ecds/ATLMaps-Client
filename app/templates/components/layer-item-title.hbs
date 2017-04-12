@@ -1,8 +1,6 @@
-<span class='{{if layer.active_in_list 'active'}}'>
+<span class='{{if layer.active_in_list 'active'}}' id='{{layer.slug}}-title'>
 {{#if layer}}
-  <span class='layer-list-item-icon vector-icon
-    layer-{{layer.colorName}} {{layer.data_type}}'>
-  </span>
+  {{yield}}
 {{/if}}
-<a {{action 'expand'}}>{{layer.title}}</a>
+<a {{action 'expand' layer=layer}}>{{layer.title}}</a>
 </span>

@@ -24,9 +24,9 @@ export default Service.extend({
 
     load() {
         if (this.get('session.isAuthenticated')) {
-            if (get(this, 'user')) {
-                return get(this, 'store').peekRecord('user', get(this, 'user.id'));
-            }
+            // if (get(this, 'user')) {
+            //     return get(this, 'store').peekRecord('user', get(this, 'user.id'));
+            // }
             return this.get('store').queryRecord('user', { me: true }).then((user) => {
                 this.set('user', user);
             });
@@ -41,5 +41,10 @@ export default Service.extend({
             get(this, 'store').unloadRecord(user);
             this.load();
         });
+    },
+
+    update() {
+        const user = get(this, 'store').peekRecord('user', get(this, 'user.id'));
+        user.save();
     }
 });

@@ -13,6 +13,9 @@
               <li class='nav-link project-title'>
                   {{#link-to 'projects'}}Projects{{/link-to}}
               </li>
+              <li class='nav-link project-title'>
+                  {{#link-to 'explore'}}Explore{{/link-to}}
+              </li>
               <li class='nav-link'>
                   {{#link-to 'about'}}About{{/link-to}}
               </li>
@@ -21,11 +24,11 @@
     <div class="navigation-tools ignore-click {{if model.project.showingSearch 'collapse-tools'}} {{unless model.project 'site-page-menu'}}">
       {{#if ( xor model.project.may_edit model.explore)}}
       {{/if}}
-        <a href='javascript:void(0)' class='title-bar-action register-click'>
+        {{!-- <a href='javascript:void(0)' class='title-bar-action register-click'>
             <i class="fa fa-cog toggle-user-menu {{if showUserMenu 'showing-user-menu'}}" aria-hidden="true"></i>
         </a>
 
-        {{user-menu showUserMenu=showUserMenu model=model}}
+        {{user-menu showUserMenu=showUserMenu model=model}} --}}
 
         {{#if model.project.may_edit}}
             <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>

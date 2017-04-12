@@ -1,4 +1,5 @@
 .vector-info {
+  @include grid-container;
   border: .1em solid color('grey', 'lighten-2');
   border-radius: .5em;
   display: none;
@@ -27,8 +28,13 @@
   height: 50vh;
 }
 
+$vector-detail-title-layout: (
+  columns: 1
+);
+
 .vector-content {
   &.layer-icon {
+    @include grid-column(1);
     font-size: 3em;
     padding: 0;
 
@@ -38,12 +44,26 @@
       left: .5em;
     }
   }
+}
 
-  &.title {
+.vector-detail-close {
+  @include grid-column(1);
+}
+
+.vector-detail-title-container {
+  @include grid-column(10);
+  @include grid-container($vector-detail-title-layout);
+
+  .feature-title,
+  .layer-title {
+    @include grid-column(1, $vector-detail-title-layout);
+  }
+
+  .feature-title {
     font-size: large;
   }
 
-  &.layer-title {
+  .layer-title {
     color: color('grey', darken-1);
     font-size: medium;
   }
@@ -56,5 +76,25 @@
     display: block;
     max-height: 45rem;
     max-width: 100%;
+  }
+}
+
+.swiper-wrapper {
+  img {
+    display: table;
+    height: 33vh;
+    margin: 0 auto;
+    max-width: 80%;
+  }
+
+  .swiper-slide {
+    padding-top: 1em;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  &.swiper-button-disabled {
+    opacity: 0;
   }
 }

@@ -64,19 +64,39 @@
 }
 
 .intro-modal-footer {
+  @include grid-container;
   background: color('grey', 'lighten-2');
-  height: 3em;
+  height: 3.5em;
   left: 2em;
   max-width: 100%;
   padding-top: .5em;
   position: absolute;
   right: 2em;
-  top: calc(100vh - 3em);
+  top: calc(100vh - 3.5em);
+}
+
+.explore-button {
+  @include grid-column(3);
+  @include grid-push(4);
+}
+
+.supress-check {
+  @include grid-column(3);
+  @include grid-push(2);
+
+  label {
+    display: inline;
+  }
 }
 
 .intro-edit {
   margin: 0 4em;
   width: 85%;
+}
+
+.intro-photo {
+  background-size: cover;
+  height: 45vh;
 }
 
 img {

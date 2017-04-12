@@ -1,13 +1,16 @@
 <a {{action (toggle-action 'suppressIntro' model.project)}} class='close-button pull-right'>
-  <i class="material-icons">highlight_off</i>
+  <i class="fa fa-times-circle" aria-hidden="true"></i>
 </a>
+{{!-- <a {{action (toggle-action 'suppressIntro' model.project)}} class='edit-intro-button'>
+  <i class="fa fa-pencil" aria-hidden="true"></i>
+</a> --}}
 
 <div class='z-depth-3'>
   <div class='modal-content'>
 
-    {{#if model.project.may_edit}}
+    {{!#if model.project.may_edit}}
     {{! EDIT INTRO }}
-      <header class='intro-modal-header' />
+      {{!-- <header class='intro-modal-header' />
       <div class='pane-container intro-edit'>
         <div class='pane-content'>
           <div class="row">
@@ -55,7 +58,7 @@
 
         </div>
       </div>
-    {{else}}
+    {{else}} --}}
 
     {{! NOT EDITING}}
       <header class='intro-modal-header'>
@@ -64,32 +67,29 @@
             <iframe width="853" height="480" src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
           </div>
           {{else if model.project.photo}}
-          <div style='height: 45vh; background-image: url({{model.project.photo}}); background-size: cover' />
+          <div class='intro-photo' style={{model.project.safe_background_photo}} />
         {{/if}}
       </header>
-      <div class='pane-container {{if model.project.media 'with-media'}}'>
+      <div class='pane-container {{if (or model.project.photo model.project.media) 'with-media'}}'>
         <article class='pane-content'>
           <h4>{{model.project.name}}</h4>
           <h5>{{model.project.owner}}</h5> {{{model.project.intro}}}
 
         </article>
         <footer class='modal-fixed-footer intro-modal-footer'>
-          <div class='row'>
-            <div class='col s4 offset-s4 center-align'>
+            <div class='explore-button'>
               <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action 'toggleIntro'}}>
-          Explore Project
-        </button>
+                Explore Project
+              </button>
             </div>
-            <div class='col s4'>
-              <input type="checkbox" class="filled-in" id="supress" name="suppressIntro" checked= {{model.project.hasSuppressCookie}} onchange= {{action "suppressIntro" project=project}} />
-              <label class="right" for='supress'>
-          <span class="check"></span> Don't show every time.
-        </label>
+            <div class='supress-check'>
+              <input type="checkbox" class="filled-in" id="supress" name="suppressIntro" checked= {{model.project.hasSuppressCookie}} onchange= {{action "suppressIntro" project=project}} /><label for='supress'>
+                Don't show every time.
+              </label>
             </div>
-          </div>
         </footer>
       </div>
-    {{/if}}
+    {{!/if}}
   </div>
 
 </div>

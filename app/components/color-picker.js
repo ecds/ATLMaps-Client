@@ -6,6 +6,8 @@ import Ember from 'ember';
 
 const {
     Component,
+    get,
+    set,
     inject: {
         service
     }
@@ -18,32 +20,49 @@ export default Component.extend({
 
     classNames: ['color-picker'],
 
-    colors() {
-        const layer = this.get('layer');
-        const group = layer.get('vector_layer_id.data_type');
+    colors: [],
+
+    didInsertElement() {
+        const group = get(this, 'projectLayer.vector_layer_id.data_type');
         if (group === 'point-data') {
-            return this.get('dataColors.markerColors');
+            set(this, 'colors', get(this, 'dataColors.safeMarkerColors'));
+        } else {
+            set(this, 'colors', get(this, 'dataColors.safeShapeColors'));
         }
-
-        return this.get('dataColors.shapeColors');
-    },
-
-    mouseLeave() {
-        this.get('layer').rollbackAttributes();
     },
 
     actions: {
-        previewColor(color, layer, index) {
-            layer.setProperties({
+        // Updates the color on the map, but does not save it.
+        previewColor(color, index) {
+            const projectLayer = get(this, 'projectLayer');
+            const layer = get(this, 'projectLayer.vector_layer_id');
+
+            projectLayer.setProperties({
                 marker: index
             });
             const self = this;
-            layer.get('vector_layer_id').then((vector) => {
+            layer.then((vector) => {
                 vector.setProperties({
                     colorName: color.name,
                     colorHex: color.hex
                 });
-                self.get('mapObject').updateVectorStyle(vector, color);
+                get(self, 'mapObject').updateVectorStyle(vector, color);
+            });
+        },
+
+        // This is to reset the color when the cussor leaves the color picker
+        // without having set a new color.
+        // NOTE: I really hope this gets simplier when we move to JSONAPI.
+        reset() {
+            const self = this;
+            const projectLayer = get(this, 'projectLayer');
+            projectLayer.rollbackAttributes();
+            get(this, 'projectLayer.vector_layer_id').then((vector) => {
+                vector.setProperties({
+                    colorName: get(projectLayer, 'colorName'),
+                    colorHex: get(projectLayer, 'colorHex')
+                });
+                get(self, 'mapObject').updateVectorStyle(vector);
             });
         }
     }

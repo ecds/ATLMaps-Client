@@ -9,9 +9,14 @@
 
             {{#layer-list-item layer=layer}}
 
-              {{layer-item-title layer=layer}}
-
-              {{toggle-switch layer=layer class='layer-list-item-secondary-action'}}
+              {{#layer-item-title layer=layer}}
+              <span class='layer-list-item-icon vector-icon
+                layer-{{layer.colorName}} {{layer.data_type}}'>
+              </span>
+              {{/layer-item-title}}
+              {{#if layer.leaflet_object}}
+                {{show-hide-layers layer=layer class='layer-list-item-secondary-action'}}
+              {{/if}}
 
             {{/layer-list-item}}
           </li>
@@ -22,9 +27,13 @@
 
           {{#layer-list-item layer=layer}}
 
-            {{layer-item-title layer=layer}}
-
-            {{toggle-switch layer=layer class='layer-list-item-secondary-action'}}
+            {{#layer-item-title layer=layer}}
+            <span class='layer-list-item-icon vector-icon layer-{{layer.colorName}} {{layer.data_type}}'>
+            </span>
+            {{/layer-item-title}}
+            {{#if layer.leaflet_object}}
+              {{show-hide-layers layer=layer class='layer-list-item-secondary-action'}}
+            {{/if}}
 
           {{/layer-list-item}}
         </li>

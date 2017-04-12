@@ -1,16 +1,17 @@
 <ul class="pagination center-align">
   {{#if meta.prev_page}}
-  <li class="waves-effect"><a {{action (route-action 'getResults' 1)}}>1</a></li>
-  <li class='disabled'>...</li>
-  <li class="waves-effect"><a {{action (route-action 'getResults' meta.prev_page)}}>{{meta.prev_page}}</a></li>
-  {{else}}
-    <li class='disabled'>--</li>
+    {{#if (gt meta.prev_page 1)}}
+    <a {{action (route-action 'getResults' 1 layerType)}}><li class="waves-effect">1</li></a>
+    <li class='disabled'>...</li>
+    {{/if}}
+    <a {{action (route-action 'getResults' meta.prev_page layerType)}}><li class="waves-effect">{{meta.prev_page}}</li></a>
+
   {{/if}}
     <li class="waves-effect active">{{meta.current_page}}</li>
   {{#if meta.next_page}}
-    <li class="waves-effect"><a {{action (route-action 'getResults' meta.next_page)}}>{{meta.next_page}}</a></li>
+    <a {{action (route-action 'getResults' meta.next_page layerType)}}><li class="waves-effect">{{meta.next_page}}</li></a>
     <li class='disabled'>...</li>
-    <li class="waves-effect"><a {{action (route-action 'getResults' meta.total_pages)}}>{{meta.total_pages}}</a></li>
+    <a {{action (route-action 'getResults' meta.total_pages layerType)}}><li class="waves-effect">{{meta.total_pages}}</li></a>
   {{else}}
     <li class='disabled'>--</li>
   {{/if}}

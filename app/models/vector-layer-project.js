@@ -15,7 +15,9 @@ export default LayerProject.extend({
         inverse: null
     }),
     marker: attr(),
-    data_type: attr('string'),
+    data_type: computed(function dateType() {
+        return get(this, 'vector_layer_id.data_type');
+    }),
     dataColors: service(),
     colorName: computed(function colorName() {
         if (get(this, 'data_type') === 'point-data') {

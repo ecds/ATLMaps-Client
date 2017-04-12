@@ -80,29 +80,26 @@ export default Service.extend({
 
     setUpProjectMap(project) {
         const { baseMaps, map } = this;
+        // TODO: Move this to common remove function.
         map.on('click', () => {
-            // TODO: Refactor to remove jQuery syntax.
-            $('div.vector-info').hide();
-            $('.active-marker').removeClass('active-marker');
-            $('.vector-content.marker-content').empty();
+            get(this, 'vectorDetailContent').removePopup();
             project.setProperties({
-                showing_browse_results: false
+                showingSearch: false
             });
             $('#toggleResultsCheck').attr('checked', false);
         });
 
         // Add all the vector layers to the map.
-        const self = this;
         project.get('vector_layer_project_ids').then((vectors) => {
             vectors.forEach((vector) => {
-                self.mapLayer(vector);
+                this.mapLayer(vector);
             });
         });
 
         // Add all the raster layers to the map.
         project.get('raster_layer_project_ids').then((rasters) => {
             rasters.forEach((raster) => {
-                self.mapLayer(raster);
+                this.mapLayer(raster);
             });
         });
 
@@ -143,7 +140,8 @@ export default Service.extend({
         case 'point-data':
             {
                 layer.setProperties({
-                    layerClass: `${get(layer, 'slug')} vectorData map-marker layer-${markerColor.name}`,
+                    layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${markerColor.name}`,
+                    // layer-list-item-icon vector-icon layer-deep-orange-700 line-data
                     colorName: markerColor.name,
                     colorHex: markerColor.hex
                 });
@@ -160,6 +158,7 @@ export default Service.extend({
         case 'line-data':
             {
                 layer.setProperties({
+                    layerClass: `${get(layer, 'slug')} layer-${shapeColor.name}`,
                     colorName: shapeColor.name,
                     colorHex: shapeColor.hex
                 });
@@ -194,33 +193,33 @@ export default Service.extend({
     },
 
     mapPoints(layer) {
-        const markerDiv = `<span class='vector-icon vector ${get(layer, 'data_type')} layer-${get(layer, 'colorName')}'></span>`;
-
-        return new L.GeoJSON.AJAX(get(layer, 'url'), {
+        // console.log('class', get(layer, 'layerClass'));
+        const points = new L.GeoJSON.AJAX(get(layer, 'url'), {
             pointToLayer(feature, latlng) {
                 const icon = L.divIcon({
-                    className: get(layer, ('layerClass')),
+                    className: get(layer, 'layerClass'),
                     iconSize: null,
                     html: '<div class="shadow"></div><div class="icon"></div>'
                 });
 
                 const marker = L.marker(latlng, {
+                    color: get(layer, 'colorName'),
                     icon,
-                    title: layer.get('title'),
-                    markerDiv
+                    title: get(layer, 'title'),
+                    markerDiv: `<div class='${get(layer, 'layerClass')}'><div class='icon' /></div>`
                 });
-                // $('.carousel.carousel-slider').carousel({full_width: true});
-
                 return marker;
             },
 
             onEachFeature: this.get('vectorDetailContent.viewData')
         });
+
+        layer.setProperties({ leaflet_object: points });
+        return points;
     },
 
     mapPaths(layer) {
-        const shapeLayerClass = `${get(layer, 'slug')} vectorData map-marker layer-${get(layer, 'colorName')}`;
-        const vectorDiv = `<span class="atlmaps-ext vector-icon vector ${get(layer, 'data_type')} layer-${get(layer, 'colorName')}"></span>`;
+        const shapeLayerClass = `${get(layer, 'slug')} layer-${get(layer, 'colorName')}`;
 
         const polyStyle = {
             color: get(layer, 'colorHex'),
@@ -229,13 +228,15 @@ export default Service.extend({
             interactive: true
         };
 
-        return new L.GeoJSON.AJAX(get(layer, 'url'), {
+        const geojson = new L.GeoJSON.AJAX(get(layer, 'url'), {
             style: polyStyle,
-            className: shapeLayerClass,
+            // className: shapeLayerClass,
             title: get(layer, 'title'),
-            markerDiv: vectorDiv,
+            markerDiv: `<span class="layer-list-item-icon vector-icon vector ${get(layer, 'data_type')} layer-${get(layer, 'colorName')}"></span>`,
             onEachFeature: this.get('vectorDetailContent.viewData')
         });
+
+        return geojson;
     },
 
     mapLayer(layer) {
@@ -274,9 +275,9 @@ export default Service.extend({
                     self.get('projectLayers.vectors')[newLayerSlug] = points;
                     self.get('leafletFeatureGroup').addLayer(points);
                     points.addTo(map);
-                    newLayer.setProperties({
-                        leaflet_object: points
-                    });
+                    // newLayer.setProperties({
+                    //     leaflet_object: points
+                    // });
                     break;
                 }
             case 'polygon':
@@ -317,9 +318,8 @@ export default Service.extend({
             });
         } else if (dataType === 'point-data') {
             // The Icon class doesn't have any methods like setStyle.
-            $(`'.leaflet-marker-icon.${slug}`).css({
-                color: vector.get('colorHex')
-            });
+            const domClass = `.${slug}`;
+            $(domClass).css('color', get(vector, 'colorHex'));
         }
     }
 });

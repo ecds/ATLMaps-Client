@@ -1,19 +1,34 @@
 {{#project-pane title='Data Layers' model=model.project vector=true action="toggleAllVectorLayers" }}
-    <ul class='scrollable-list project-collapsible collapsible'>
+  <ul class='scrollable-list project-collapsible collapsible'>
 
-        {{#each model.project.vector_layer_project_ids as |layer|}}
-            <li id= {{layer.vector_layer_id.name}} class='layer-list-item'>
-                {{#if layer.vector_layer_id.name}}
-                    {{#layer-list-item layer=layer.vector_layer_id}}
-                        {{layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
-                        {{layer-list-item-actions layer=layer.vector_layer_id model=model}}
-                    {{/layer-list-item}}
-                {{else}}
-                    Loading...
+    {{#each model.project.vector_layer_project_ids as |layer|}}
+      <li id= {{layer.vector_layer_id.name}} class='layer-list-item'>
+        {{#if layer.vector_layer_id.name}}
+          {{#layer-list-item layer=layer.vector_layer_id}}
+            {{#layer-item-title layer=layer.vector_layer_id layers=model.project.vector_layer_ids}}
+              {{#if model.project.may_edit}}
+                {{#if layer.showColorPicker}}
+                  {{#tether-dialog close=(toggle "showColorPicker" layer) container-class='color-picker' hasOverlay=false target='' clickOutsideToClose=true }}
+                    <span onclick={{action (toggle "showColorPicker" layer)}} class='close-button right'>
+                        <i class="material-icons">highlight_off</i>
+                    </span>
+                    {{color-picker projectLayer=layer}}
+                  {{/tether-dialog}}
                 {{/if}}
-            </li>
-            {{else}}
-                <h4 class='row'>No data layers have been added</h4>
-        {{/each}}
-    </ul>
+              {{/if}}
+              <span class='layer-list-item-icon vector-icon layer-{{layer.vector_layer_id.colorName}} {{layer.vector_layer_id.data_type}}' onclick={{action (toggle "showColorPicker" layer)}}>
+              </span>
+            {{/layer-item-title}}
+          {{layer-list-item-actions layer=layer.vector_layer_id model=model}}
+        {{/layer-list-item}}
+      {{else}}
+        <h3>Loading...</h3>
+      {{/if}}
+    </li>
+  {{else}}
+  <div class='neat-row'>
+    <h4>No data layers have been added</h4>
+  </div>
+  {{/each}}
+  </ul>
 {{/project-pane}}

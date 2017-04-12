@@ -7,13 +7,7 @@ export default Component.extend({
     classNames: ['label-switch']
 
     // actions: {
-    //     toggleLayer(layer) {
-    //         if (get(layer, 'opacity') === 0) {
-    //             layer.setProperties({ opacity: 10 });
-    //         } else {
-    //             layer.setProperties({ opacity: 0 });
-    //         }
-    //     },
+
     //
     //     toggleAll(layers) {
     //         const toggleSwitch = document.getElementById('toggle-all');

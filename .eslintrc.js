@@ -23,6 +23,7 @@ module.exports = {
       'space-before-function-paren': ['error', 'never'],
       'camelcase': 0,
       'no-restricted-syntax': [0, 'ForInStatmens'],
+      /*eslint new-cap: ["error", { "newIsCap": false }]*/
 
       // ember-suave
       'ember-suave/no-const-outside-module-scope': ['off'],

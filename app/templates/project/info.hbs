@@ -1,5 +1,7 @@
 {{#project-pane title='About this Project' model=model.project}}
     <div class="pane-card">
+      <div class='neat-row'>
+
         {{this.exploring}}
         {{#ember-inline-edit onSave=(route-action 'updateProject' model.project 'Description Updated!') onClose=(route-action 'cancleUpdate' model.project) as |inline-edit| }}
             {{#inline-edit.editable}}
@@ -16,7 +18,7 @@
             {{/inline-edit.editor}}
         {{/ember-inline-edit}}
 
-
+</div>
         {{#if model.project.hasIntro}}
 
             <div class='neat-row'>

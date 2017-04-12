@@ -1,6 +1,6 @@
 <div class='secondary-action-row'>
   {{#if layer.name}}
-      {{toggle-switch id=layer.name click=(route-action 'hideLayer' layer) checked=layer.showing}}
+    {{show-hide-layers layer=layer}}
   {{/if}}
 </div>
   {{!-- <div class='twelve-col'> --}}

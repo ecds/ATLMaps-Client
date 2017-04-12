@@ -1,4 +1,8 @@
 // Based on refills components
+.switch {
+  @include grid-column(1);
+  margin-left: 40px;
+}
 
 .label-switch {
   $base-background-color: $white !default;

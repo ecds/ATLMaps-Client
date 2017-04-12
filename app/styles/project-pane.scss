@@ -243,11 +243,11 @@
     border-bottom: 0;
     border-radius: .5em;
     box-sizing: border-box;
+    display: none;
     float: right;
-    max-height: 1em;
     overflow: hidden;
     padding: 0;
-    transition: background 5ms, max-height $turtle;
+    transition: max-height $rabbit linear 0ms;
     width: 100%;
 
     &.bye {
@@ -261,6 +261,7 @@
     p {
       margin: 0;
       padding: 2rem;
+      // padding-top:
     }
   }
 }
@@ -287,7 +288,7 @@
   @include grid-column(12);
   background: $white;
   margin-left: 4px;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 
 .active + .slider-container {

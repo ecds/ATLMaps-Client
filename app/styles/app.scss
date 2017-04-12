@@ -1,8 +1,6 @@
 // TODO: There is a better way to do this right?
 $roboto-font-path: '../assets/';
-
-@import 'components/color';
-// Custom color settings go here
+@import 'components/color'; // Custom color settings go here
 $primary-color: color('blue-grey', 'darken-1');
 $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
@@ -16,57 +14,34 @@ $mobile: new-breakpoint(max-width 500px 4);
 @import 'bower_components/bourbon/core/bourbon';
 @import 'bower_components/neat/core/neat';
 @import 'bower_components/bitters/core/base';
-@import 'bower_components/font-awesome/scss/font-awesome';
-// @import 'www/css/material.css';
-
-@import'banner',
-'ember-modal-structure',
-'ember-modal-appearance',
-'main-footer',
-'marker',
-'extra-icons',
-'login-form',
-'slider',
-'layer-citation',
-'browse-results',
-'base-picker',
-'project-pane',
-'project-intro',
-'search-pane',
-'vector-info',
-'project-nav',
-'user-menu',
-'social-auth',
-'layer-route',
-'toggle-switch',
-'waves',
-'refill-button-group',
-'tagem';
-
-// Refills
+@import 'bower_components/font-awesome/css/font-awesome';
+@import 'fontawesome-local';
+@import 'bower_components/swiper/dist/css/swiper.min.css';
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'browse-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker'; // Refills
 @import 'flexbox';
 
 body {
   background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
   font-family: 'Roboto', 'Material Icons' sans-serif;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: $base-font-size;
+  font-smoothing: antialiased;
   height: 100vh;
+  line-height: $base-line-height;
 
-  h3 {
-    font-size: 1.75em;
-  }
-
-  h4 {
-    font-size: 1.5em;
-  }
+  // h3 {
+  //   font-size: 1.75em;
+  // }
+  //
+  // h4 {
+  //   font-size: 1.5em;
+  //   padding: 1em;
+  // }
 
   .preloader-wrapper {
     height: 10em;
     margin: 25% 50%;
     width: 10em;
-
 
     .circle {
       border-width: 2em;
@@ -89,8 +64,8 @@ body {
 a {
   cursor: pointer;
 }
-
 // Grid
+
 .neat-row {
   @include grid-column(12);
   padding: 1em 0;
@@ -105,10 +80,6 @@ a {
 }
 
 .four-col {
-  // @include grid-media($mobile) {
-    // @include grid-column(4);
-  // }
-
   @include grid-column(4);
   margin: .2em;
 }
@@ -127,20 +98,8 @@ a {
   }
 }
 
-// .card {
-//   .card-title {
-//     font-size: 1.5em;
-//   }
-// }
-
 .content {
   height: 100vh;
-}
-
-.ember-burger-menu,
-.bm-outlet,
-.bm-content {
-  // overflow: hidden !important;
 }
 
 .project {
@@ -174,7 +133,6 @@ a {
   width: 100%;
 }
 
-
 .material-icons {
   font-size: 1.5em;
 }
@@ -203,8 +161,8 @@ a {
     }
   }
 }
-
 // Leaflet Controls
+
 .leaflet-top {
   &.leaflet-right {
     top: 5em;
@@ -230,29 +188,34 @@ textarea {
     color: $secondary-color;
   }
 }
-
 // bourbon test
+
 .layer-list-item {
   @include grid-container;
 }
 
 .layer-list-item-title {
   @include grid-column(10);
-  font-size: 1.25em;
-  padding-top: .25em;
+  padding-bottom: .7em;
+
+  span {
+    font-size: 1.25em;
+    padding-top: .25em;
+    transition: font-size 500ms;
+  }
 
   .layer-list-item-icon {
-    font-size: 1.5em;
-    letter-spacing: .25em;
-  }
+    letter-spacing: .5em;
 
-  .active {
-    font-size: 1.5em;
-
-    a {
-      margin-left: -20px;
+    &.wms {
+      letter-spacing: 1em;
     }
   }
+
+  a {
+    margin-left: -20px;
+  }
+  // }
 }
 
 .layer-list-item-secondary-action {
@@ -261,13 +224,12 @@ textarea {
 
   .layer-action {
     font-size: 1em;
-    opacity: .5;
     transition: opacity $rabbit;
 
-    &:hover {
-      font-size: 1.5em;
-      opacity: 1;
-    }
+    // &:hover {
+    //   font-size: 1.5em;
+    //   opacity: 1;
+    // }
   }
 }
 
@@ -279,9 +241,8 @@ textarea {
     background-color: $secondary-color;
   }
 }
-
-
 // Grid
+
 .featured-cards {
   margin: 2em auto;
   width: 75vw;
@@ -315,7 +276,6 @@ textarea {
   $card-margin: 1em;
   $card-image-hover-opacity: .7;
   $card-image-hover-color: color('yellow', 'lighten-4');
-
   background-color: $card-background;
   border: $card-border;
   border-radius: $base-border-radius;

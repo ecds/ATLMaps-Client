@@ -15,7 +15,8 @@
     "trumbowyg": "^2.4.2",
     "tooltipster": "^4.1.6",
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v5.0.0.beta.7",
-    "bitters": "^1.5.0"
+    "bitters": "^1.5.0",
+    "swiper": "~3.4.1"
   },
   "devDependencies": {
     "blueimp-md5": "~1.1.0",

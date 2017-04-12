@@ -22,5 +22,15 @@ export default Component.extend({
         //     set(this, 'userMenuShow', get(this, 'showUserMenu'));
         // }
         set(this, 'userMenuShow', get(this, 'showUserMenu'));
+    },
+
+    actions: {
+        updateDisplayName() {
+            get(this, 'currentUser').update();
+        },
+
+        cancelUpdate() {
+            //
+        }
     }
 });

@@ -52,6 +52,10 @@ module.exports = function(defaults) {
         destDir: 'assets/images'
     });
 
+    var fa = funnel('bower_components/font-awesome/fonts/', {
+        destDir: 'fonts'
+    });
+
     // var ckeditorPath = funnel('bower_components/ckeditor', {
     //     destDir: 'assets/ckeditor'
     // });
@@ -81,5 +85,5 @@ module.exports = function(defaults) {
     // ], {
     //     overwrite: true
     // });
-    return app.toTree([leafletImages]);//, ckeditorPath]);
+    return app.toTree([leafletImages, fa]);//, ckeditorPath]);
 };

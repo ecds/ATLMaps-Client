@@ -16,11 +16,11 @@ export default Component.extend({
     actions: {
 
         suppressIntro() {
-            const model = get(this, 'project');
+            const model = get(this, 'model.project');
             const cookieService = get(this, 'cookies');
             const cookieName = `noIntro${model.id}`;
 
-            if (model.hasSuppressCookie === true) {
+            if (model.hasSuppressCookie) {
                 cookieService.clear(cookieName);
                 model.setProperties({ hasSuppressCookie: false });
             } else {

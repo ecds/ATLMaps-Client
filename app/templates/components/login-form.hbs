@@ -1,5 +1,5 @@
 
-{{log session.isAuthenticated}}
+{{!log session.isAuthenticated}}
   {{#if session.isAuthenticated}}
     {{#if currentUser.user.confirmed}}
     <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
@@ -23,7 +23,7 @@
     <section>
     {{#if signUp}}
       <form {{action 'signUpSubmit' on='submit'}}>
-      <label for='username'>Username</label> {{input value=newLogin.identification placeholder='Username' name='identification'}}
+      <label for='email'>Email</label> {{input value=newLogin.identification placeholder='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
       <label for='password'>Password</label>
       {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
       <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}

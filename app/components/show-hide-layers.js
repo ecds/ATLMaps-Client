@@ -10,8 +10,6 @@ const { Component, get, inject: { service } } = Ember;
 export default Component.extend({
     mapObject: service(),
 
-    classNames: ['switch'],
-
     actions: {
         /**
          * @public
@@ -33,6 +31,15 @@ export default Component.extend({
                     }
                 }
             });
+        },
+
+        toggleOne(layer) {
+            // console.log('layer', layer);
+            if (get(layer, 'opacity') === 0) {
+                layer.setProperties({ opacity: 10 });
+            } else {
+                layer.setProperties({ opacity: 0 });
+            }
         }
     }
 });

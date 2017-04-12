@@ -1,12 +1,19 @@
 import Ember from 'ember';
-
+/* eslint new-cap: ["error", { "newIsCap": false }] */
 // Service to hold arrays of colors to be used for vector layers.
 // In `vector_layer_project` the `marker` attribute is used as an
 // index of the arrays.
 
 // Made a second one for shapes and lines. The lighter colors looked like crap.
 
-const { Service } = Ember;
+const {
+    Service,
+    String: {
+        htmlSafe
+    },
+    get,
+    set
+} = Ember;
 
 export default Service.extend({
     init() {
@@ -107,5 +114,24 @@ export default Service.extend({
                 { name: 'deep-orange-700', hex: '#E64A19' }
             ]
         );
+
+        set(this, 'safeMarkerColors', this.makeSafe(get(this, 'markerColors')));
+        set(this, 'safeShapeColors', this.makeSafe(get(this, 'shapeColors')));
+    },
+
+    makeSafe(group) {
+        const safeGroup = [];
+        group.forEach((color) => {
+            const safe = new htmlSafe(`background-color: ${color.hex}`);
+            safeGroup.push(
+                {
+                    name: color.name,
+                    hex: color.hex,
+                    safe
+                }
+            );
+        });
+        return safeGroup;
     }
+
 });

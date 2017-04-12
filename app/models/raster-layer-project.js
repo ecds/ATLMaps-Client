@@ -13,7 +13,6 @@ const {
 } = Ember;
 
 export default LayerProject.extend({
-    data_format: attr(),
     position: attr(),
     raster_layer_id: belongsTo('raster_layer', {
         async: true,

@@ -5,7 +5,11 @@
                 {{#if layer.raster_layer_id.name}}
                     {{#layer-list-item layer=layer.raster_layer_id showSlider=true}}
 
-                        {{layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
+                        {{#layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
+                          <span class='layer-list-item-icon vector-icon
+                            layer-{{layerraster_layer_id.colorName}} {{layer.raster_layer_id.data_type}}'>
+                          </span>
+                        {{/layer-item-title}}
 
                         <div class='layer-list-item-secondary-action'>
                           <div class='secondary-action-row raster'>
@@ -13,10 +17,11 @@
                             </div>
                             <div class='secondary-action-row raster'>
                             {{!-- <div class='twelve-col'> --}}
-                            {{#if model.project.may_edit}}
-                                {{remove-layer-button model=model layer=layer.raster_layer_id}}
-                            {{else if (and layer.raster_layer_id layer.raster_layer_id.active_in_list)}}
-                                    {{shareable-link layer=layer.raster_layer_id}}
+                            {{#if (and layer.raster_layer_id layer.raster_layer_id.active_in_list)}}
+                                {{shareable-link layer=layer.raster_layer_id project=model.project tagName='span'}}
+                                {{#if model.project.may_edit}}
+                                  {{remove-layer-button model=model layer=layer.raster_layer_id}}
+                                {{/if}}
                             {{/if}}
                           </div>
                         </div>
@@ -26,7 +31,9 @@
                 {{/if}}
             {{/sortable-item}}
             {{else}}
-                <h4 class='row'>No maps have been added</h4>
+              <div class='neat-row'>
+                <h4>No maps have been added</h4>
+              </div>
         {{/each}}
     {{/sortable-group}}
 {{/project-pane}}

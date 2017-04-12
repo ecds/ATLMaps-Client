@@ -1,8 +1,6 @@
-<div class="row">
-    <div class='col-sm-12'>Pick a color (click to save).</div>
-</div>
-<div>
+<div class=''>Pick a color (click to save).</div>
+<div onmouseleave={{action "reset"}}>
     {{#each colors as |color index|}}
-        <div style= {{bgcolor color.hex}} class="col-xs-2 color" onmouseenter= {{action "previewColor" color layer index}} onclick= {{route-action "setColor" layer}}></div>
+        <div style={{color.safe}} class='color' onmouseenter={{action "previewColor" color index}} onclick={{route-action "setColor" projectLayer}}></div>
     {{/each}}
 </div>

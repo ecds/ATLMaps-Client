@@ -43,18 +43,28 @@
     padding: 1em;
     width: 100%;
 
+    .result-container {
+      @include grid-container;
+    }
+
     .result-header {
-      font-size: 1.5em;
+      // font-size: 1.25em;
       margin-bottom: .25em;
     }
 
+    .result-action {
+      @include grid-column(1);
+    }
+
     .result-title {
+      @include grid-column(11);
       color: color('blue-grey', 'darken-4');
       font-size: 1.5em;
     }
 
     .result-description {
-      font-size: 1.25em;
+      @include grid-column(11);
+      @include grid-push(1);
     }
   }
 
@@ -151,19 +161,21 @@
   width: 100%;
 
   li {
-    background-color: $secondary-color-light;
-    color: color('grey', 'darken-4');
+    background-color: $primary-color-light;
+    color: color('grey', 'lighten-4');
+    font-weight: 100;
     opacity: .7;
 
     &.active {
       background-color: $secondary-color;
-      color: color('grey', 'lighten-4');
+      font-weight: 600;
       opacity: 1;
     }
   }
 
   .disabled {
     background-color: transparent;
+    color: color('grey', 'darken-4');
     padding: 0;
   }
 }

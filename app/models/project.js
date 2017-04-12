@@ -1,3 +1,4 @@
+/* eslint new-cap: ["error", { "newIsCapExceptions": ['htmlSafe'] }] */
 import DS from 'ember-data';
 import Ember from 'ember';
 
@@ -8,7 +9,10 @@ const {
 } = DS;
 const {
     computed,
-    get
+    get,
+    String: {
+        htmlSafe
+    }
 } = Ember;
 
 export default Model.extend({
@@ -64,12 +68,9 @@ export default Model.extend({
     hasSuppressCookie: attr('boolean', {
         defaultValue: false
     }),
-    // edit_success: attr('boolean', {
-    //     defaultValue: false
-    // }),
-    // edit_fail: attr('boolean', {
-    //     defaultValue: false
-    // }),
+    safe_background_photo: computed(function safeBackgroundPhoto() {
+        return new htmlSafe(`background-image: url(${get(this, 'photo')};`);
+    }),
 
     // Attribute that will be set to true if a user is "exploring".
     exploring: attr('boolean', {
