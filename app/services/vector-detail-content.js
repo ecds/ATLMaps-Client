@@ -36,10 +36,10 @@ export default Service.extend({
         let popupContent = '';
 
         if (feature.properties.image) {
-            popupContent += `<a href='${feature.properties.image.url}' 'target="_blank"><img class="geojson" src='${feature.properties.image.url} title='${feature.properties.image.name}' /></a>
+            popupContent += `<a href='${feature.properties.image.url}' 'target="_blank"><img class="geojson" src='${feature.properties.image.url}' title='${feature.properties.image.name}' /></a>
                 <span>Photo Credit: ${feature.properties.image.credit}</span>`;
 
-            // Ember.$('<img />').load(function() {}).attr('src', feature.properties.image.url);
+            // $('<img />').load(() => {}).attr('src', feature.properties.image.url);
         }
 
         if (feature.properties.gx_media_links) {

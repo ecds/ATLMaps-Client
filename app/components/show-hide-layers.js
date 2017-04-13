@@ -34,7 +34,6 @@ export default Component.extend({
         },
 
         toggleOne(layer) {
-            // console.log('layer', layer);
             if (get(layer, 'opacity') === 0) {
                 layer.setProperties({ opacity: 10 });
             } else {

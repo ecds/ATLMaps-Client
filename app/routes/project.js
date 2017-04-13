@@ -134,13 +134,14 @@ export default Route.extend({
         });
 
         set(this.controller, 'rasters', null);
-        set(this.controller, 'vectors', null);        // Clear checked institution
+        set(this.controller, 'vectors', null); // Clear checked institution
         const institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
 
         // Clear the map.
         get(this, 'mapObject.map').remove();
         set(this, 'mapObject.map', '');
+        this.store.unloadAll();
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     updatedResults(type) {
