@@ -39,7 +39,22 @@ export default Component.extend({
                 set(this, 'showUserMenu', false);
             }
         };
+
         $(document).on('click', handleClick);
+        const menuToggle = $('#js-mobile-menu').unbind();
+        $('#js-navigation-menu').removeClass('show');
+
+        // This is taken from refills.bourbon.io
+        // It collapses the links for smaller screens.
+        // I'm not sure we need to bother.
+        menuToggle.on('click', (e) => {
+            e.preventDefault();
+            $('#js-navigation-menu').slideToggle(() => {
+                if ($('#js-navigation-menu').is(':hidden')) {
+                    $('#js-navigation-menu').removeAttr('style');
+                }
+            });
+        });
     },
 
     willDestroyElement() {

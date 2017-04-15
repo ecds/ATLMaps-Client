@@ -201,7 +201,12 @@ textarea {
   span {
     font-size: 1.25em;
     padding-top: .25em;
-    transition: font-size 500ms;
+    // transition: font-size 100ms;
+    // transition-timing-function: ease-in-out;
+
+    &.active {
+      font-size: 1.5em;
+    }
   }
 
   .layer-list-item-icon {

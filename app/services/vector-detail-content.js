@@ -43,9 +43,9 @@ export default Service.extend({
         }
 
         if (feature.properties.gx_media_links) {
-            popupContent += '<div class="embed-container">';
+            popupContent += '<div class="video"><div class="video-wrapper">';
             popupContent += `<iframe src=//${feature.properties.gx_media_links}?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>`;
-            popupContent += '</div>';
+            popupContent += '</div></div>';
         }
         if (feature.properties.description) {
             popupContent += feature.properties.description;
@@ -61,7 +61,16 @@ export default Service.extend({
             get(self, 'removePopup');
             const oldSwiper = get(this, 'swiperObj');
             if (oldSwiper) {
-                oldSwiper.destroy();
+                // If you don't remove all the slides, the next
+                // gallery will start where the last one left off.
+                // For example, a marker has two images and someone
+                // closes it while looking at the second image. The next
+                // one they open only has one. They will see a blank
+                // container, but could swipe right to see the image.
+                oldSwiper.removeAllSlides();
+                oldSwiper.destroy({
+                    deleteInstance: true
+                });
                 set(this, 'swiperObj', null);
             }
             $('.swiper-wrapper').empty();

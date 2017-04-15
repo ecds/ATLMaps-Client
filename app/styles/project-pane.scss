@@ -258,10 +258,15 @@
       max-height: 100em;
     }
 
+    article {
+      font-size: 1.1em;
+      padding: 0 2rem;
+      padding-bottom: 1rem;
+    }
+
     p {
       margin: 0;
-      padding: 2rem;
-      // padding-top:
+      padding-bottom: 1rem;
     }
   }
 }

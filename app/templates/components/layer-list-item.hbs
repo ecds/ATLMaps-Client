@@ -9,8 +9,8 @@
 {{/if}}
 
 <div class='layer-item-body card-content' id='{{layer.slug}}-content'>
-  <p class='black-text'>
-    {{if layer.description layer.description 'No description :('}}
-  </p>
+  <article class='black-text'>
+    {{if layer.description layer.safe_description 'No description :('}}
+  </article>
   {{layer-citation layer=layer}}
 </div>

@@ -26,7 +26,7 @@
   border-bottom-left-radius: .5em;
   border-bottom-right-radius: .5em;
   cursor: default;
-  height: 50vh;
+  max-height: 50vh;
 }
 
 $vector-detail-title-layout: (
@@ -97,5 +97,19 @@ $vector-detail-title-layout: (
 .swiper-button-next {
   &.swiper-button-disabled {
     opacity: 0;
+  }
+}
+
+.video-wrapper {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%; // For ratio 16:9. 75% if ratio is 4:3
+  position: relative;
+
+  embed,
+  object,
+  iframe {
+    @include position(absolute, 0 null null 0);
+    @include size(100%);
   }
 }

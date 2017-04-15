@@ -1,25 +1,38 @@
+/* eslint new-cap: ["error", { "newIsCapExceptions": ['htmlSafe'] }] */
 import DS from 'ember-data';
 import Ember from 'ember';
 import ENV from '../config/environment';
 
 const {
-    Model,
-    attr,
-    belongsTo,
-    hasMany
+  Model,
+  attr,
+  belongsTo,
+  hasMany
 } = DS;
 
-const { computed, get, inject: { service } } = Ember;
+const {
+  computed,
+  get,
+  inject: {
+    service
+  },
+  String: {
+      htmlSafe
+  }
+} = Ember;
 
 export default Model.extend({
     /*
-     * Extended by RasterLayer and VectorLayer
-     */
+    * Extended by RasterLayer and VectorLayer
+    */
     name: attr('string'),
     title: attr('string'),
     slug: attr('string'),
     keywords: attr('string'),
     description: attr('string'),
+    safe_description: computed(function safeDescription() {
+        return new htmlSafe(`${get(this, 'description')}`);
+    }),
     layer: attr('string'),
     date: attr('date'),
     data_type: attr('string'),
