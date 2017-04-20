@@ -1,6 +1,2 @@
-<div class='input-field inline'>
-  {{input id='search-text' type='text' enter='textSearch' key-up='setShowClearButton' value=searchTerms class='search-text-input active'}}
-  <label for='serarch-text' class='active'>Text Search</label>
-  <button class='clear-text {{if showingClearButton 'show-button'}}' type="reset" {{action 'clearSearch'}}><i class='material-icons'>close</i></button>
-  <h5>{{browseParams.searchTerms}}</h5>
-</div>
+  <h4>Text Search</h4>
+  {{input id='search-text' type='search' value=searchTerms class='search-text-input' name='textsearch'}}

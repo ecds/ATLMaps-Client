@@ -1,9 +1,14 @@
 <a {{action 'searchBounds'}} class={{if hasBounds 'has-bounds'}}>
-  {{#if hasBounds}}
-    <i class="material-icons">my_location</i>
-    Searching viewable area
-  {{else}}
-    <i class="material-icons">location_disabled</i>
-    Searching all areas
-  {{/if}}
-</a>
+    <i class="fa {{if hasBounds 'has-bounds fa-check-square-o' 'fa-square-o'}}" aria-hidden="true"></i>
+</a> Search this area
+
+{{!-- <a {{action 'checkSingleTag' tag category}} class='checkbox-link'>
+  <i class="material-icons {{if tag.checked 'active'}}">
+    {{if tag.checked 'check_box' 'check_box_outline_blank'}}
+  </i>
+  {{tag.name}}
+</a> --}}
+
+{{#if this.moved}}
+<button {{action 'updateBounds'}} class='update-bounds'>Search this area</button>
+{{/if}}

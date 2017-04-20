@@ -313,9 +313,9 @@
 // Search Pane
 
 .search-bounds {
-  a {
-    // cursor: pointer;
-    font-size: 1.25em;
+  font-size: 1.25em;
+
+  i {
     vertical-align: middle;
 
     &.has-bounds {
@@ -323,8 +323,11 @@
     }
   }
 
-  i {
-    vertical-align: sub;
+  .update-bounds {
+    left: 50%;
+    position: fixed;
+    right: 50%;
+    top: 5em;
   }
 }
 
@@ -336,69 +339,67 @@
   }
 }
 
-.browse-by-tags {
-  .collapsible-header {
-    border-radius: 0;
-    color: color('grey', 'darken-1');
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: normal;
-    line-height: normal;
-    min-height: inherit;
-    padding: 0;
-
-    &.active {
-      font-weight: 700;
-
-      i {
-        color: color('deep-orange', 'lighten-1');
-        opacity: 1;
-      }
-    }
-
-    i {
-      color: color('grey', 'base');
-      font-size: 1.1em;
-      line-height: normal;
-      margin-right: .2em;
-      vertical-align: middle;
-    }
-  }
-
-  .collapsible-body {
-    border-radius: 0;
-    padding-left: 1.5em;
-    padding-top: .5em;
-
-    p {
-      padding: 1rem 2rem;
-    }
-  }
-}
+// .browse-by-tags {
+//   .collapsible-header {
+//     border-radius: 0;
+//     color: color('grey', 'darken-1');
+//     cursor: pointer;
+//     font-size: 1.1em;
+//     font-weight: normal;
+//     line-height: normal;
+//     min-height: inherit;
+//     padding: 0;
+//
+//     &.active {
+//       font-weight: 700;
+//
+//       i {
+//         color: color('deep-orange', 'lighten-1');
+//         opacity: 1;
+//       }
+//     }
+//
+//     i {
+//       color: color('grey', 'base');
+//       font-size: 1.1em;
+//       line-height: normal;
+//       margin-right: .2em;
+//       vertical-align: middle;
+//     }
+//   }
+//
+//   .collapsible-body {
+//     border-radius: 0;
+//     padding-left: 1.5em;
+//     padding-top: .5em;
+//
+//     p {
+//       padding: 1rem 2rem;
+//     }
+//   }
+// }
 // checkbox
+//
 
-a {
-  color: $primary-color-dark;
-  font-size: 1em;
-
-  i {
-    vertical-align: text-top;
-
-    &.active {
-      color: $secondary-color;
-    }
-  }
-
-  &.checkbox-link {
-    font-size: 1.25em;
-  }
-}
-
-.checkbox {
-  &.institution {
-    margin-left: 1em;
-  }
-}
+//
+//   i {
+//     vertical-align: text-top;
+//
+//     &.active {
+//       color: $secondary-color;
+//     }
+//   }
+//
+//   &.checkbox-link {
+//     font-size: 1.25em;
+//   }
+// }
+//
+// .checkbox {
+//   &.institution {
+//     margin-left: 1em;
+//   }
+// }
 
 .feedback {
   bottom: 1em;

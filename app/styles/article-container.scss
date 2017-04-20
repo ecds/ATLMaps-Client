@@ -1,0 +1,10 @@
+.article-container {
+  max-height: 25vh;
+  overflow: hidden;
+  transition: max-height $rabbit, overflow $rabbit;
+
+  &.expanded {
+    max-height: 100vh;
+    overflow: visible;
+  }
+}

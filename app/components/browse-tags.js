@@ -7,6 +7,7 @@ import Ember from 'ember';
 
 const {
     $,
+    get,
     Component,
     inject: {
         service
@@ -18,10 +19,6 @@ export default Component.extend({
     browseParams: service(),
 
     classNames: ['browse-by-tags'],
-
-    didInsertElement() {
-        $('.collapsible').collapsible();
-    },
 
     actions: {
         // If the tag is already checked, we remove it from the qurey. Otherwise
@@ -48,6 +45,11 @@ export default Component.extend({
 
             if (allChecked === false) {
                 this.get('browseParams').addAllTags(tags);
+                // This is so the tag list will expand when someone selects all.
+                // It will not collapse when someone deselects all.
+                if (!$(`#${get(category, 'slug')}`).hasClass('tfa-panel-tab--expanded')) {
+                    $(`#${get(category, 'slug')}`).click();
+                }
             } else {
                 this.get('browseParams').removeAllTags(tags);
             }

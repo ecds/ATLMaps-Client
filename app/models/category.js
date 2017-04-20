@@ -7,7 +7,8 @@ const {
     hasMany
 } = DS;
 const {
-    computed
+    computed,
+    get
 } = Ember;
 
 export default Model.extend({
@@ -24,7 +25,16 @@ export default Model.extend({
     //     defaultValue: false
     // }),
     // TODO This doesn't get re-computed when a single tag is checked.
-    allChecked: computed.equal('tag_ids.length', 'tagsChecked.length'),
+    // allChecked: computed.equal('tag_ids.length', 'tagsChecked.length').property('tagsChecked'),
+    allChecked: computed(function allChecked() {
+        return get(this, 'tag_ids.length') === get(this, 'tagsChecked.length');
+    }).property('tagsChecked'),
+    // displayName: computed(function absoluteUrl() {
+    //     return get(this, 'tag_ids.length');
+    // }),
+    // displayName: computed(function absoluteUrl() {
+    //     return get(this, 'tag_ids.length');
+    // }),
 
     // Add that little checkmark next to a category that that has a checked tag
     // because everyone wanted it.

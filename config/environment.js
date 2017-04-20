@@ -29,7 +29,10 @@ module.exports = function setUp(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
-            //   API_HOST: 'http://api.atlmaps-dev.com:3000'
+
+            // Ember does not have the search event built in. This is used
+            // for text search and fires when the clear button is clicked.
+            customEvents: { search: 'search' }
         },
 
         metricsAdapters: [{

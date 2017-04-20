@@ -61,15 +61,13 @@ export default Route.extend({
         });
     },
 
-    afterModel() {
-        // const { project } = this.modelFor('project');
-        // const projectID = get(project, 'id');
-        // if (get(this, 'cookies').read(`noIntro${projectID}`) === true) {
-        //     project.setProperties({ suppressIntro: true });
-        // }
-        // if (project.may_edit) {
-        //     project.setProperties({ suppressIntro: true });
-        // }
+    afterModel(model) {
+        this.get('meta').update({
+            title: `${get(model.project, 'name')}: ATLMaps`,
+            description: get(model.project, 'description')
+            // 'og:image': 'https://exemple.net/latest-news.png',
+            // 'twitter:author': '@j15e'
+        });
     },
 
     map() {

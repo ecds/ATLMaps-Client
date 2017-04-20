@@ -4,7 +4,7 @@
  */
 import Ember from 'ember';
 
-const { Component, inject: { service }, get, set } = Ember;
+const { Component, inject: { service }, get } = Ember;
 
 export default Component.extend({
 
@@ -12,28 +12,9 @@ export default Component.extend({
 
     tagNames: 'form',
 
-    showingClearButton: false,
-
-    actions: {
-        // Take the contents of the search field and send them on to the
-        // search function.
-        // FIXME: I don't tink `sendAction` is still a thing.
-        textSearch() {
-            this.get('browseParams').setSearchText(this.get('searchTerms'));
-            this.sendAction('getResults');
-        },
-
-        // Triggered when someone starts typing in input field.
-        // Action shows a button to clear the search field.
-        setShowClearButton() {
-            set(this, 'showingClearButton', true);
-        },
-
-        // Triggered by the clear button in search field.
-        clearSearch() {
-            get(this, 'browseParams').setSearchText('');
-            set(this, 'searchTerms', '');
-            this.sendAction('getResults');
-        }
+    // Had to add the search event as a custom event in `config/environment.js`.
+    search() {
+        get(this, 'browseParams').setSearchText(get(this, 'searchTerms'));
+        this.sendAction('getResults');
     }
 });

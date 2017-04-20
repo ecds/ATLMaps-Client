@@ -10,7 +10,8 @@ const {
     Component,
     inject: {
         service
-    }
+    },
+    get
 } = Ember;
 
 export default Component.extend({
@@ -24,12 +25,14 @@ export default Component.extend({
          * Adds or remove institution from filter.
          */
         checkInstitution(institution) {
-            if (institution.get('checked') === true) {
-                this.get('browseParams').removeInstution(institution);
-            } else if (institution.get('checked') === false) {
-                this.get('browseParams').addInstitution(institution);
+            if (institution) {
+                get(this, 'browseParams').addInstitution(institution);
+                this.sendAction('getResults');
             }
-            institution.toggleProperty('checked');
+        },
+
+        removeInstitution(institution) {
+            this.get('browseParams').removeInstution(institution);
             this.sendAction('getResults');
         }
     }

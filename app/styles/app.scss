@@ -17,7 +17,7 @@ $mobile: new-breakpoint(max-width 500px 4);
 @import 'bower_components/font-awesome/css/font-awesome';
 @import 'fontawesome-local';
 @import 'bower_components/swiper/dist/css/swiper.min.css';
-@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'browse-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker'; // Refills
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'browse-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container'; // Refills
 @import 'flexbox';
 
 body {
@@ -29,14 +29,14 @@ body {
   height: 100vh;
   line-height: $base-line-height;
 
-  // h3 {
-  //   font-size: 1.75em;
-  // }
-  //
-  // h4 {
-  //   font-size: 1.5em;
-  //   padding: 1em;
-  // }
+  h6 {
+    font-size: 1.1em;
+  }
+
+  a {
+    color: $primary-color-dark;
+    font-size: 1em;
+  }
 
   .preloader-wrapper {
     height: 10em;
@@ -61,8 +61,16 @@ body {
   }
 }
 
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+
 a {
   cursor: pointer;
+}
+
+.active {
+  color: $secondary-color;
 }
 // Grid
 
@@ -355,3 +363,5 @@ textarea {
 .layers-layer-item {
   background-color: transparent;
 }
+
+@import "ember-power-select";

@@ -36,11 +36,14 @@ export default Service.extend({
     },
 
     addInstitution(institution) {
-        this.get('institutions').pushObject(institution.get('name'));
+        const institutions = get(this, 'institutions');
+        if (!institutions.includes(get(institution, 'name'))) {
+            institutions.pushObject(institution.get('name'));
+        }
     },
 
     removeInstution(institution) {
-        get(this, 'institutions').removeObject(institution.get('name'));
+        get(this, 'institutions').removeObject(institution);
     },
 
     addAllTags(allTags) {

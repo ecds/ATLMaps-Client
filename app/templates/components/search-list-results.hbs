@@ -20,7 +20,9 @@
       </div>
 
       <div class='result-description'>
-        <article>{{layer.safe_description}}</article>
+        {{!-- {{layer.description}} --}}
+        {{article-container article=layer.description}}
+        {{!-- <article>{{layer.safe_description}}</article> --}}
       </div >
     </div>
     <hr />
