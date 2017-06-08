@@ -9,7 +9,7 @@ const { Component, inject: { service }, get } = Ember;
 export default Component.extend({
 
     browseParams: service(),
-
+    classNames: ['search-box'],
     tagNames: 'form',
 
     // Had to add the search event as a custom event in `config/environment.js`.

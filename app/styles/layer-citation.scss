@@ -1,12 +1,21 @@
 footer {
 
   &.citation-footer {
+    @include grid-container
     background-color: color('grey', 'lighten-3');
     color: color('grey', 'darken-1');
     padding-left: .5em;
     padding-right: 1em;
     padding-top: 1em;
   }
+}
+
+.provider-name {
+  @include grid-column(8);
+}
+
+.provider-logo {
+  @include grid-column(4);
 }
 
 .cite-h6 {

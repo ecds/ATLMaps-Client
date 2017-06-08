@@ -2,9 +2,9 @@ import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import ENV from '../config/environment';
 
-const { RESTAdapter } = DS;
+const { JSONAPIAdapter } = DS;
 
-export default RESTAdapter.extend(DataAdapterMixin, {
+export default JSONAPIAdapter.extend(DataAdapterMixin, {
     host: ENV.APP.API_HOST,
     namespace: 'v1',
     suffix: '.json',

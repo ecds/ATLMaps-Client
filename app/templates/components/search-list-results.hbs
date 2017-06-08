@@ -11,18 +11,16 @@
           </a>
         </div>
 
-        <div class='result-title'>
+        <h2 class='result-title'>
           <a {{action (route-action 'addRemoveLayer' layer)}}>
             {{if layer.title layer.title "Loading..."}}
           </a>
-        </div>
+        </h2>
 
       </div>
 
       <div class='result-description'>
-        {{!-- {{layer.description}} --}}
         {{article-container article=layer.description}}
-        {{!-- <article>{{layer.safe_description}}</article> --}}
       </div >
     </div>
     <hr />
@@ -32,4 +30,4 @@
   {{/each}}
 </div>
 {{!I'm not sure how `this.id` is defined.}}
-{{pagination-links meta=layers.content.meta layerType=this.id}}
+{{pagination-links meta=layers.meta layerType=this.id}}

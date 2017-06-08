@@ -14,8 +14,8 @@ const {
 
 export default LayerProject.extend({
     position: attr(),
-    raster_layer_id: belongsTo('raster_layer', {
-        async: true,
+    raster_layer: belongsTo('raster_layer', {
+        async: false,
         inverse: null
     }),
 
@@ -25,6 +25,6 @@ export default LayerProject.extend({
     // }).property('raster_layer_id.opacity'),
 
     showing: computed(function isShowing() {
-        return get(this, 'raster_layer_id.showing');
-    }).property('raster_layer_id.showing')
+        return get(this, 'raster_layer.showing');
+    }).property('raster_layer.showing')
 });

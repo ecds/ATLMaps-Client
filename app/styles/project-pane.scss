@@ -25,7 +25,7 @@
   }
 
   .pane-container {
-    max-height: 100vh;
+    max-height: 70vh;
     transition: max-height $rabbit;
   }
 
@@ -33,6 +33,14 @@
     @include grid-container;
     background-color: $white;
     padding: 2em;
+
+    .fa-ul {
+      li {
+        cursor: pointer;
+        font-size: 1.1em;
+        margin-bottom: 1em;
+      }
+    }
   }
 }
 // The following is the scrolling of the pane was inspired by this
@@ -260,6 +268,7 @@
 
     article {
       font-size: 1.1em;
+      font-weight: 100;
       padding: 0 2rem;
       padding-bottom: 1rem;
     }
@@ -339,70 +348,8 @@
   }
 }
 
-// .browse-by-tags {
-//   .collapsible-header {
-//     border-radius: 0;
-//     color: color('grey', 'darken-1');
-//     cursor: pointer;
-//     font-size: 1.1em;
-//     font-weight: normal;
-//     line-height: normal;
-//     min-height: inherit;
-//     padding: 0;
-//
-//     &.active {
-//       font-weight: 700;
-//
-//       i {
-//         color: color('deep-orange', 'lighten-1');
-//         opacity: 1;
-//       }
-//     }
-//
-//     i {
-//       color: color('grey', 'base');
-//       font-size: 1.1em;
-//       line-height: normal;
-//       margin-right: .2em;
-//       vertical-align: middle;
-//     }
-//   }
-//
-//   .collapsible-body {
-//     border-radius: 0;
-//     padding-left: 1.5em;
-//     padding-top: .5em;
-//
-//     p {
-//       padding: 1rem 2rem;
-//     }
-//   }
-// }
-// checkbox
-//
-
-//
-//   i {
-//     vertical-align: text-top;
-//
-//     &.active {
-//       color: $secondary-color;
-//     }
-//   }
-//
-//   &.checkbox-link {
-//     font-size: 1.25em;
-//   }
-// }
-//
-// .checkbox {
-//   &.institution {
-//     margin-left: 1em;
-//   }
-// }
-
 .feedback {
-  bottom: 1em;
+  bottom: 5em;
   font-size: 1.2em;
   left: 1em;
   max-width: 20vw;
@@ -412,7 +359,6 @@
   z-index: 999;
 
   &.show-flash {
-    // max-width: 200px;
     padding: 1em .25em;
   }
 }
@@ -442,20 +388,12 @@ $flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 
 
 .reorder-handle {
   cursor: -webkit-grab;
+  cursor: -moz-grab;
   float: right;
   font-size: 2em;
-  margin-left: 12px;
+
+  &:active {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+  }
 }
-// input {
-//   &.required {
-//   :invalid ~ .clear-text {
-//     visibility: visible;
-//   }
-//   }
-// }
-// Raster list
-// .collapsible-header {
-//   &.raster-list-header {
-//   padding-right: 0;
-//   }
-// }

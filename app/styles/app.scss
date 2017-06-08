@@ -6,6 +6,7 @@ $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
 $secondary-color: #f58320;
+$secondary-color-dark: #f97a0c;
 $secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
 $mobile: new-breakpoint(max-width 500px 4);
@@ -28,10 +29,6 @@ body {
   font-smoothing: antialiased;
   height: 100vh;
   line-height: $base-line-height;
-
-  h6 {
-    font-size: 1.1em;
-  }
 
   a {
     color: $primary-color-dark;
@@ -59,6 +56,10 @@ body {
       display: none;
     }
   }
+}
+
+.leaflet-control-attribution {
+  display: none;
 }
 
 input[type=search]::-webkit-search-cancel-button {
@@ -97,12 +98,23 @@ a {
   margin: .2em;
 }
 
+$custom-grid--half: (
+  columns: 2,
+  gutter: 3px,
+);
+
 .secondary-action-row {
-  @include grid-column(12);
-  margin-left: 25px;
+  @include grid-container;
 
   &.raster {
     float: right;
+    left: 10px;
+    position: relative;
+
+  }
+
+  span {
+    @include grid-column(1, $custom-grid--half);
   }
 }
 
@@ -204,17 +216,13 @@ textarea {
 
 .layer-list-item-title {
   @include grid-column(10);
+  line-height: 1.5em;
   padding-bottom: .7em;
+  padding-top: .7em;
 
   span {
     font-size: 1.25em;
     padding-top: .25em;
-    // transition: font-size 100ms;
-    // transition-timing-function: ease-in-out;
-
-    &.active {
-      font-size: 1.5em;
-    }
   }
 
   .layer-list-item-icon {
@@ -228,7 +236,6 @@ textarea {
   a {
     margin-left: -20px;
   }
-  // }
 }
 
 .layer-list-item-secondary-action {
@@ -238,11 +245,13 @@ textarea {
   .layer-action {
     font-size: 1em;
     transition: opacity $rabbit;
+  }
 
-    // &:hover {
-    //   font-size: 1.5em;
-    //   opacity: 1;
-    // }
+  &.vector {
+    .secondary-action-row {
+      margin-left: 25px;
+    }
+
   }
 }
 
@@ -262,6 +271,10 @@ textarea {
 
   a {
     all: unset;
+  }
+
+  .project-card-title-link {
+    font-size: 1.75em;
   }
 }
 
@@ -298,6 +311,7 @@ textarea {
   flex-grow: 1;
   margin: 0 $card-margin $base-spacing;
   position: relative;
+  text-transform: none;
   transition: all .2s ease-in-out;
 
   &.projects-page {
@@ -323,13 +337,32 @@ textarea {
   }
 
   .card-header {
+    @include grid-container;
     background-color: $card-header-background;
     border-bottom: $card-border;
     border-radius: $base-border-radius $base-border-radius 0 0;
+    font-size: .75em;
     font-weight: bold;
     line-height: 1.5em;
     padding: ($base-spacing / 3) ($base-spacing / 2);
     transition: all .2s ease-in-out;
+
+    .project-card-title-link {
+      @include grid-column(10);
+    }
+
+    .project-card-action-link {
+      @include grid-column(2);
+      align-items: center;
+    }
+  }
+
+  .project-actions-list {
+    @include grid-container;
+  }
+
+  .project-action-menu {
+    width: 150px;
   }
 
   .card-copy {
@@ -364,4 +397,20 @@ textarea {
   background-color: transparent;
 }
 
-@import "ember-power-select";
+@import 'ember-power-select';
+
+// Power Select Overrides
+.ember-basic-dropdown-content--below {
+  // border-left: 0;
+  // border-right: 0;
+}
+
+.ember-power-select-options {
+  border-left: 1px solid #aaaaaa;
+  border-right: 1px solid #aaaaaa;
+}
+
+.button-new {
+  display: block;
+  margin-bottom: 1em;
+}

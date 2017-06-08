@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-const { get, Route, inject: { service } } = Ember;
+const { Route, inject: { service } } = Ember;
 
 export default Route.extend({
     currentUser: service(),
+    session: service(),
 
     model(params) {
         return this.store.query('confirmation-token', { confirm_token: params.confirm_token });
@@ -11,7 +12,9 @@ export default Route.extend({
 
     afterModel() {
         if (this.modelFor(this.routeName).isLoaded) {
-            get(this, 'currentUser').reLoad();
+            // if (get(this, 'session.isAuthenticated')) {
+            //     get(this, 'session').invalidate();
+            // }
             this.transitionTo('index');
         }
     }

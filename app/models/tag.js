@@ -9,13 +9,13 @@ const {
 export default Model.extend({
     name: attr('string'),
     slug: attr('string'),
-    rasterLayer_ids: hasMany('raster_layer', {
+    rasterLayer: hasMany('raster_layer', {
         async: true
     }),
-    vectorLayer_ids: hasMany('vector_layer', {
+    vectorLayer: hasMany('vector_layer', {
         async: true
     }),
-    category_ids: hasMany('category', {
+    category: hasMany('category', {
         async: true
     }),
     checked: attr('boolean', {

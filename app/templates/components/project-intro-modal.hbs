@@ -1,5 +1,5 @@
 <a {{action (toggle-action 'suppressIntro' model.project)}} class='close-button pull-right'>
-  <i class="fa fa-times-circle" aria-hidden="true"></i>
+  <i class="fa fa-pull-right fa-times-circle" aria-hidden="true"></i>
 </a>
 {{!-- <a {{action (toggle-action 'suppressIntro' model.project)}} class='edit-intro-button'>
   <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -7,58 +7,6 @@
 
 <div class='z-depth-3'>
   <div class='modal-content'>
-
-    {{!#if model.project.may_edit}}
-    {{! EDIT INTRO }}
-      {{!-- <header class='intro-modal-header' />
-      <div class='pane-container intro-edit'>
-        <div class='pane-content'>
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">insert_photo</i> {{input disabled=model.project.media value=model.project.photo id='photo-input'}}
-              <label for="photo-input" class= {{if model.project.photo 'active'}}>Photo</label>
-            </div>
-          </div>
-
-          {{#if model.project.photo}}
-            <div class='row'>
-              <div class='col s12'>
-                <img class='intro-photo-edit' src={{model.project.photo}} />
-              </div>
-            </div>
-          {{/if}}
-
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">videocam</i> {{input disabled=model.project.photo value=model.project.media id='video-input'}}
-              <label for="video" class= {{if model.project.media 'active'}}>Video</label>
-            </div>
-          </div>
-
-          {{#if model.project.media}}
-          <div class='row'>
-            <div class='col s12'>
-              <iframe src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
-            </div>
-          </div>
-          {{/if}}
-
-          <div class="row">
-        <div class="input-field col s12">
-          {{textarea id='intro-body' class='materialize-textarea' value=model.project.suppressIntro}}
-          <label for="intro-body" class={{if model.project.description 'active'}}>Intro Text</label>
-        </div>
-      </div>
-
-      <div class='row'>
-        <div class='col s12'>
-          <button class="btn waves-effect waves-light green white-text right" type="submit" {{action (route-action 'updateProject' project 'info')}}>save</button>
-        </div>
-      </div>
-
-        </div>
-      </div>
-    {{else}} --}}
 
     {{! NOT EDITING}}
       <header class='intro-modal-header'>
@@ -72,8 +20,16 @@
       </header>
       <div class='pane-container {{if (or model.project.photo model.project.media) 'with-media'}}'>
         <article class='pane-content'>
+          {{#if model.project.new_project}}
+          <h2>Welcome to your new ATLMaps project!</h2>
+            <p>Any user can search for and stack layers through the explore function. Creating an account will allow you to save layers as a project for a class, presentation, or research.</p>
+            <p>You will be able to access your projects online whenever you are logged in. If you would like to share your project publicly, submit it for approval.</p>
+            <p>Currently, only the ATLmaps team can add layers, but if you have ideas for a layer, let us know.</p>
+          {{else}}
+
           <h4>{{model.project.name}}</h4>
-          <h5>{{model.project.owner}}</h5> {{{model.project.intro}}}
+          {{{model.project.intro}}}
+          {{/if}}
 
         </article>
         <footer class='modal-fixed-footer intro-modal-footer'>
@@ -89,7 +45,5 @@
             </div>
         </footer>
       </div>
-    {{!/if}}
   </div>
-
 </div>

@@ -1,6 +1,5 @@
   <label  class='label-switch'>
     {{#if toggleAll}}
-    {{log layers}}
     <input type="checkbox" {{action 'toggleAll' layers on="change"}} checked={{checked}} id='toggle-all'>
     {{else}}
     <input type="checkbox" {{action 'toggleOne' layer on="change"}} checked={{layer.showing}} />

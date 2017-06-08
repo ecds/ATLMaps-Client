@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, Logger, get, set } = Ember;
+const { Component, get, set } = Ember;
 
 export default Component.extend({
     tagName: 'article',
@@ -13,7 +13,6 @@ export default Component.extend({
 
     didInsertElement() {
         const article = get(this, 'article');
-        Logger.debug('Artile length:', article.length);
         if (article.length > 250) {
             this.setProperties(
                 {

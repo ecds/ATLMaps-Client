@@ -1,17 +1,19 @@
 import Ember from 'ember';
 // brining in Leaflet
-/* global L */
+/* globals L, Swiper */
 
 // Service to hold the Leaflet object.
 
 const {
     $,
     get,
+    getProperties,
     inject: {
         service
     },
     Service,
-    set
+    set,
+    Logger
 } = Ember;
 
 export default Service.extend({
@@ -46,24 +48,33 @@ export default Service.extend({
 
             // Add some base layers
             const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
-                maxZoom: 18,
+                maxZoom: 20,
                 className: 'street base'
             });
 
-            const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                className: 'satellite base',
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                className: 'satellite base'
             });
+
+            const labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
+                className: 'labels base'
+            });
+
+            const greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                className: 'greyscale base'
+            });
+
+            const satellite = L.layerGroup([sat, labels]);
 
             set(this, 'baseMaps', {
                 street,
-                satellite
+                satellite,
+                greyscale
             });
 
             // Zoom contorl, topright
             L.control.zoom({
-                position: 'bottomright'
+                position: 'bottomleft'
             }).addTo(atlmap);
 
             // TODO would it be better to also track the layers as a group?
@@ -90,17 +101,15 @@ export default Service.extend({
         });
 
         // Add all the vector layers to the map.
-        project.get('vector_layer_project_ids').then((vectors) => {
-            vectors.forEach((vector) => {
-                this.mapLayer(vector);
-            });
+        const vectors = project.get('vector_layer_project');
+        vectors.forEach((vector) => {
+            this.mapLayer(vector);
         });
 
         // Add all the raster layers to the map.
-        project.get('raster_layer_project_ids').then((rasters) => {
-            rasters.forEach((raster) => {
-                this.mapLayer(raster);
-            });
+        const rasters = project.get('raster_layer_project');
+        rasters.forEach((raster) => {
+            this.mapLayer(raster);
         });
 
         map.flyTo(
@@ -110,23 +119,42 @@ export default Service.extend({
             ), project.get('zoom_level')
         );
 
+        map.on('move', () => {
+            project.setProperties({
+                center_lat: map.getCenter().lat.toFixed(8),
+                center_lng: map.getCenter().lng.toFixed(8),
+                zoom_level: map.getZoom()
+            });
+        });
+
+        map.on('zoom', () => {
+            project.setProperties({
+                zoom_level: map.getZoom()
+            });
+        });
+
         baseMaps[get(project, 'default_base_map')].addTo(map);
     },
 
     mapSingleLayer(layer) {
         const self = this;
         const map = get(this, 'map');
-        const markerColors = get(this, 'dataColors.markerColors');
-        const shapeColors = get(this, 'dataColors.shapeColors');
-        const markerColorIndex = Math.floor(Math.random() * markerColors.length);
-        const markerColor = markerColors[markerColorIndex];
-        const shapeColorIndex = Math.floor(Math.random() * shapeColors.length);
-        const shapeColor = shapeColors[shapeColorIndex];
+        const { markerColors, shapeColors } = get(this, 'dataColors');
+
+        // const colorIndexes = {
+        //     markerColorIndex: Math.floor(Math.random() * markerColors.length),
+        //     shapeColorIndex: Math.floor(Math.random() * shapeColors.length)
+        // };
+
+        const colorValues = {
+            markerColor: markerColors[Math.floor(Math.random() * markerColors.length)],
+            shapeColor: shapeColors[Math.floor(Math.random() * shapeColors.length)]
+        };
 
         switch (get(layer, 'data_type')) {
         case 'wms':
             {
-                const wmsLayer = self.mapWms(layer);
+                const wmsLayer = this.mapWms(layer);
                 wmsLayer.addTo(map);
                 layer.setProperties({
                     leaflet_object: wmsLayer
@@ -140,35 +168,24 @@ export default Service.extend({
         case 'point-data':
             {
                 layer.setProperties({
-                    layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${markerColor.name}`,
-                    // layer-list-item-icon vector-icon layer-deep-orange-700 line-data
-                    colorName: markerColor.name,
-                    colorHex: markerColor.hex
+                    layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${colorValues.markerColor.name}`,
+                    colorName: colorValues.markerColor.name,
+                    colorHex: colorValues.markerColor.hex
                 });
-                const points = self.mapPoints(layer);
-                self.get('projectLayers.vectors')[get(layer, 'slug')] = points;
-                self.get('leafletFeatureGroup').addLayer(points);
-                points.addTo(map);
-                layer.setProperties({
-                    leaflet_object: points
-                });
+                self.mapVector(layer);
+
                 break;
             }
         case 'polygon':
         case 'line-data':
             {
                 layer.setProperties({
-                    layerClass: `${get(layer, 'slug')} layer-${shapeColor.name}`,
-                    colorName: shapeColor.name,
-                    colorHex: shapeColor.hex
+                    layerClass: `${get(layer, 'slug')} layer-${colorValues.hapeColor.name}`,
+                    colorName: colorValues.hapeColor.name,
+                    colorHex: colorValues.hapeColor.hex
                 });
-                const vector = self.mapPaths(layer);
-                self.get('projectLayers.vectors')[get(layer, 'slug')] = vector;
-                self.get('leafletFeatureGroup').addLayer(vector);
-                vector.addTo(map);
-                layer.setProperties({
-                    leaflet_object: vector
-                });
+                self.mapVector(layer);
+
                 break;
             }
         default: return true;
@@ -181,7 +198,7 @@ export default Service.extend({
             layers: layer.get('layers'),
             format: 'image/png',
             transparent: true,
-            mzxZoom: 18,
+            mzxZoom: 20,
             zIndex,
             opacity: 1
         });
@@ -192,134 +209,205 @@ export default Service.extend({
         return wmsLayer;
     },
 
-    mapPoints(layer) {
-        // console.log('class', get(layer, 'layerClass'));
-        const points = new L.GeoJSON.AJAX(get(layer, 'url'), {
-            pointToLayer(feature, latlng) {
-                const icon = L.divIcon({
-                    className: get(layer, 'layerClass'),
-                    iconSize: null,
-                    html: '<div class="shadow"></div><div class="icon"></div>'
-                });
+    mapVector(layer) {
+        const atlMap = get(this, 'map');
+        set(layer, 'leaflet_object', L.featureGroup());
+        const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features');
 
-                const marker = L.marker(latlng, {
-                    color: get(layer, 'colorName'),
-                    icon,
-                    title: get(layer, 'title'),
-                    markerDiv: `<div class='${get(layer, 'layerClass')}'><div class='icon' /></div>`
-                });
-                return marker;
-            },
-
-            onEachFeature: this.get('vectorDetailContent.viewData')
-        });
-
-        layer.setProperties({ leaflet_object: points });
-        return points;
-    },
-
-    mapPaths(layer) {
-        const shapeLayerClass = `${get(layer, 'slug')} layer-${get(layer, 'colorName')}`;
-
-        const polyStyle = {
-            color: get(layer, 'colorHex'),
-            fillColor: get(layer, 'colorHex'),
-            className: shapeLayerClass,
-            interactive: true
-        };
-
-        const geojson = new L.GeoJSON.AJAX(get(layer, 'url'), {
-            style: polyStyle,
-            // className: shapeLayerClass,
-            title: get(layer, 'title'),
-            markerDiv: `<span class="layer-list-item-icon vector-icon vector ${get(layer, 'data_type')} layer-${get(layer, 'colorName')}"></span>`,
-            onEachFeature: this.get('vectorDetailContent.viewData')
-        });
-
-        return geojson;
-    },
-
-    mapLayer(layer) {
-        const self = this;
-        const map = this.get('map');
-
-        layer.get(`${layer.get('data_format')}_layer_id`).then((newLayer) => {
-            const newLayerSlug = newLayer.get('slug');
-            const dataType = newLayer.get('data_type');
-            newLayer.set('active_in_project', true);
-
-            switch (dataType) {
-            case 'wms':
+        const features = get(layer, 'vector_feature');
+        features.forEach((feature) => {
+            const featureProps = getProperties(feature, 'geometry_type', 'geojson');
+            feature.setProperties({
+                colorName: layerProps.colorName,
+                colorHex: layerProps.colorHex,
+                markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+            });
+            let newLeafletFeature = null;
+            switch (featureProps.geometry_type) {
+            case 'Point':
                 {
-                    const wmsLayer = self.mapWms(newLayer);
-                    wmsLayer.addTo(map);
-                    newLayer.setProperties({
-                        leaflet_object: wmsLayer
+                    const point = L.geoJSON(featureProps.geojson, {
+                        pointToLayer(foo, latlng) {
+                            const icon = L.divIcon({
+                                className: layerProps.layerClass,
+                                iconSize: null,
+                                html: '<div class="shadow"></div><div class="icon" />'
+                            });
+
+                            newLeafletFeature = L.marker(latlng, {
+                                color: layerProps.colorName,
+                                icon,
+                                title: layerProps.title,
+                                markerDiv: feature.markerDiv
+                            });
+                            return newLeafletFeature;
+                        }
                     });
+                    point.on('add', () => {});
+                    point.addTo(atlMap);
 
-                    // TODO make use of this
-                    wmsLayer.on('load', () => {});
-
-                    break;
-                }
-
-            case 'point-data':
-                {
-                    newLayer.setProperties({
-                        layerClass: `${newLayerSlug} vectorData map-marker layer-${layer.get('colorName')}`,
-                        colorName: layer.get('colorName'),
-                        colorHex: layer.get('colorHex')
-
-                    });
-                    const points = self.mapPoints(newLayer);
-                    self.get('projectLayers.vectors')[newLayerSlug] = points;
-                    self.get('leafletFeatureGroup').addLayer(points);
-                    points.addTo(map);
-                    // newLayer.setProperties({
-                    //     leaflet_object: points
-                    // });
-                    break;
-                }
-            case 'polygon':
-            case 'line-data':
-                {
-                    newLayer.setProperties({
-                        colorName: layer.get('colorName'),
-                        colorHex: layer.get('colorHex')
-
-                    });
-                    const vector = self.mapPaths(newLayer);
-                    self.get('projectLayers.vectors')[newLayerSlug] = vector;
-                    self.get('leafletFeatureGroup').addLayer(vector);
-                    vector.addTo(map);
-                    newLayer.setProperties({
-                        leaflet_object: vector
+                    layerProps.leaflet_object.addLayer(point);
+                    newLeafletFeature.on('click', () => {
+                        this.showDetails(feature);
                     });
                     break;
                 }
-            default:
-                return true;
+            case 'LineString':
+            case 'Polygon':
+            case 'MultiPolygon':
+                {
+                    const style = {
+                        color: layerProps.colorHex,
+                        fillColor: layerProps.colorHex,
+                        className: `${layerProps.slug} layer-${layerProps.colorName}`
+                    };
+
+                    newLeafletFeature = L.geoJSON(featureProps.geojson, {
+                        style,
+                        title: get(layer, 'title'),
+                        markerDiv: feature.markerDiv,
+                        interactive: true
+                    });
+                    layerProps.leaflet_object.addLayer(newLeafletFeature);
+                    newLeafletFeature.bindPopup();
+                    newLeafletFeature.addTo(atlMap);
+                    newLeafletFeature.on('add', () => {
+                        Logger.debug(newLeafletFeature);
+                    });
+                    newLeafletFeature.on('click', (event) => {
+                        event.target.closePopup();
+                        this.showDetails(feature);
+                    });
+                    feature.setProperties({ leaflet_object: newLeafletFeature });
+                    break;
+                }
+            default: return true;
             }
             return true;
         });
+
+        // layerProps.leaflet_object.addTo(atlMap);
+        return layerProps.leaflet_object;
+    },
+
+    mapLayer(layer) {
+        const map = this.get('map');
+        const layerProps = getProperties(layer, 'data_format', 'colorName', 'colorHex');
+        const newLayer = layer.get(`${layerProps.data_format}_layer`);
+        const newLayerProps = getProperties(newLayer, 'slug', 'data_type');
+
+        newLayer.set('active_in_project', true);
+
+        switch (newLayerProps.data_type) {
+        case 'wms':
+            {
+                const wmsLayer = this.mapWms(newLayer);
+                wmsLayer.addTo(map);
+                wmsLayer.setZIndex(get(layer, 'position'));
+                newLayer.setProperties({
+                    leaflet_object: wmsLayer
+                });
+
+                // TODO make use of this
+                wmsLayer.on('load', () => {});
+
+                break;
+            }
+
+        case 'point-data':
+        case 'polygon':
+        case 'line-data':
+            {
+                newLayer.setProperties({
+                    layerClass: `${newLayerProps.slug} vectorData map-marker layer-${layerProps.colorName}`,
+                    colorName: layer.get('colorName'),
+                    colorHex: layer.get('colorHex')
+
+                });
+                this.mapVector(newLayer);
+                break;
+            }
+        default:
+            return true;
+        }
+        return true;
     },
 
     updateVectorStyle(vector) {
         const slug = vector.get('slug');
         const dataType = vector.get('data_type');
-        if (dataType === 'polygon') {
-            this.get('projectLayers.vectors')[slug].setStyle({
-                color: vector.get('colorHex'),
-                fillColor: vector.get('colorHex')
-            });
-        } else if (dataType === 'line-data') {
-            this.get('projectLayers.vectors')[slug].setStyle({
-                color: vector.get('colorHex')
-            });
-        } else if (dataType === 'point-data') {
-            // The Icon class doesn't have any methods like setStyle.
-            const domClass = `.${slug}`;
-            $(domClass).css('color', get(vector, 'colorHex'));
+        vector.get('vector_feature').forEach((feature) => {
+            if (dataType === 'polygon') {
+                feature.get('leaflet_object').setStyle({
+                    color: vector.get('colorHex'),
+                    fillColor: vector.get('colorHex')
+                });
+            } else if (dataType === 'line-data') {
+                feature.get('leaflet_object').setStyle({
+                    color: vector.get('colorHex')
+                });
+            } else if (dataType === 'point-data') {
+                // The Icon class doesn't have any methods like setStyle.
+                const domClass = `.${slug}`;
+                $(domClass).css('color', get(vector, 'colorHex'));
+            }
+        });
+    },
+
+    showDetails(properties) {
+        Logger.debug(properties);
+        let popupContent = properties;
+        if (get(properties, 'youtube')) {
+            popupContent += '<div class="video"><div class="video-wrapper">';
+            popupContent += `<iframe src=//${get(properties, 'youtube')}?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>`;
+            popupContent += '</div></div>';
         }
+        if (get(properties, 'description')) {
+            popupContent += get(properties, 'description');
+        }
+
+        // START GALLERY
+        const oldSwiper = get(this, 'swiperObj');
+        if (oldSwiper) {
+            // If you don't remove all the slides, the next
+            // gallery will start where the last one left off.
+            // For example, a marker has two images and someone
+            // closes it while looking at the second image. The next
+            // one they open only has one. They will see a blank
+            // container, but could swipe right to see the image.
+            oldSwiper.removeAllSlides();
+            oldSwiper.destroy({
+                deleteInstance: true
+            });
+            set(this, 'swiperObj', null);
+        }
+        $('.swiper-wrapper').empty();
+        if (get(properties, 'images')) {
+            get(properties, 'images').forEach((image) => {
+                $('.swiper-wrapper').append(`<div class="swiper-slide"><img src="${image}"></div>`);
+                // $('<img />').load(() => {}).attr('src', image.url);
+            });
+
+            // if (feature.properties.images.length > 1) {
+            const newSwiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                slidesPerView: 1,
+                paginationClickable: true,
+                centeredSlides: true,
+                zoom: true
+            });
+            set(this, 'swiperObj', newSwiper);
+            // }
+        }
+        // END GALLERY
+
+        $('div.vector-info').show();
+        $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
+        $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
+        $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
+        // $('.vector-content.title').empty().append(feature.properties.NAME);
+        $('.vector-content.marker-content').empty().append(popupContent);
     }
 });

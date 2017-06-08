@@ -1,55 +1,110 @@
-.user-menu {
-  // background-color: color('grey', 'lighten-3');
-  background-color: color('blue-grey', 'lighten-5');
-  font-size: 16px;
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 1em;
-  position: absolute;
-  right: 0;
-  top: 60px;
-  transition: max-height $turtle ease-in-out, overflow $turtle ease-in-out, padding $turtle ease-in-out;
-  width: 300px;
+// .user-menu {
+//   // background-color: color('grey', 'lighten-3');
+//   background-color: color('blue-grey', 'lighten-5');
+//   font-size: 16px;
+//   max-height: 0;
+//   overflow: hidden;
+//   padding: 0 1em;
+//   position: absolute;
+//   right: 0;
+//   top: 60px;
+//   transition: max-height $turtle ease-in-out, overflow $turtle ease-in-out, padding $turtle ease-in-out;
+//   width: 300px;
+//
+//   section {
+//     @include grid-container;
+//
+//     span {
+//       @include grid-column(12);
+//       padding: .25em 0;
+//     }
+//
+//     .toggle-action {
+//       width: 100%;
+//     }
+//   }
+//
+//   .sign-btn {
+//     color: $primary-color-dark;
+//   }
+//
+//   label {
+//     color: color('blue-grey', 'darken-4');
+//   }
+//
+//
+
+.login-form {
+  @include grid-container;
+  background-color: $white;
+  margin: 8em auto;
+  width: 35vw;
+
+  button {
+    margin-left: 1em;
+    margin-top: .5em;
+    padding: .5em 1em;
+  }
 
   section {
-    @include grid-container;
-
-    span {
-      @include grid-column(6);
-      padding: .25em 0;
-    }
-
-    .toggle-action {
-      width: 100%;
-    }
+    @include grid-column(12);
+    padding: .75em .25em;
+    text-align: center;
   }
 
-  .sign-btn {
-    color: $primary-color-dark;
+  a {
+    color: $secondary-color;
+    font-weight: 900;
   }
 
-  label {
-    color: color('blue-grey', 'darken-4');
-  }
-
-  .login-form {
-    button {
-      margin-left: 1em;
-      margin-top: .5em;
-      padding: .5em 1em;
-    }
+  .fine-print {
+    font-size: .7em;
+    font-weight: 200;
+    margin-top: .5rem;
+    text-align: center;
   }
 }
 
-.user-menu-show {
-  max-height: 75vh;
-  overflow: auto;
-  padding: 1em;
-  padding-top: 2em;
-  z-index: 1;
+// .providers {
+//   font-size: 2em;
+//   padding: .5em;
+
+  .social-provider {
+    @include grid-column(6);
+    border-radius: 3px;
+    font-size: 2em;
+    cursor: pointer;
+    padding: .5em;
+    text-align: center;
+
+    i {
+      // margin-left: 10%;
+    }
+
+  }
+
+// }
+
+.login-btn {
+  width: 100%;
+
 }
 
-.ignore-click {
-  padding-bottom: 1em;
-  vertical-align: top;
+.button-group-item {
+  // pointer-events: none;
 }
+// }
+//
+// .user-menu-show {
+//   max-height: 75vh;
+//   overflow: auto;
+//   padding: 1em;
+//   padding-top: 2em;
+//   z-index: 1;
+// }
+//
+// .ignore-click {
+//   padding-bottom: 1em;
+//   vertical-align: top;
+// }
+//

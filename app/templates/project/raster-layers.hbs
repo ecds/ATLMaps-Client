@@ -1,26 +1,26 @@
 {{#project-pane title='Maps' model=model.project raster=true}}
     {{#sortable-group tagName="ul" class='scrollable-list project-collapsible' model=model onChange="reorderItems" as |group|}}
         {{#each model.project.sortedRasterLayers as |layer|}}
-            {{#sortable-item tagName="li" class='sortable-item layer-list-item' id=raster.raster_layer_id.name model=layer group=group handle=".reorder-handle" }}
-                {{#if layer.raster_layer_id.name}}
-                    {{#layer-list-item layer=layer.raster_layer_id showSlider=true}}
+            {{#sortable-item tagName="li" class='sortable-item layer-list-item' id=raster.raster_layer.name model=layer group=group handle=".reorder-handle" }}
+                {{#if layer.raster_layer.name}}
+                    {{#layer-list-item layer=layer.raster_layer showSlider=true}}
 
-                        {{#layer-item-title layer=layer.raster_layer_id layers=model.project.raster_layer_ids}}
+                        {{#layer-item-title layer=layer.raster_layer layers=model.project.raster_layer}}
                           <span class='layer-list-item-icon vector-icon
-                            layer-{{layerraster_layer_id.colorName}} {{layer.raster_layer_id.data_type}}'>
+                            layer-{{layerraster_layer.colorName}} {{layer.raster_layer.data_type}}'>
                           </span>
                         {{/layer-item-title}}
 
                         <div class='layer-list-item-secondary-action'>
-                          <div class='secondary-action-row raster'>
+                          <div class='secondary-action-row'>
                             <i class="fa fa-drag-handle reorder-handle" aria-hidden="true"></i>
                             </div>
                             <div class='secondary-action-row raster'>
                             {{!-- <div class='twelve-col'> --}}
-                            {{#if (and layer.raster_layer_id layer.raster_layer_id.active_in_list)}}
-                                {{shareable-link layer=layer.raster_layer_id project=model.project tagName='span'}}
+                            {{#if (and layer.raster_layer layer.raster_layer.active_in_list)}}
+                                {{shareable-link layer=layer.raster_layer project=model.project tagName='span'}}
                                 {{#if model.project.may_edit}}
-                                  {{remove-layer-button model=model layer=layer.raster_layer_id}}
+                                  {{remove-layer-button model=model layer=layer.raster_layer}}
                                 {{/if}}
                             {{/if}}
                           </div>

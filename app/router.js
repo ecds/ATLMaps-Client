@@ -42,10 +42,9 @@ Router.map(function() {
     this.route('info');
     this.route('vector-layers');
     this.route('raster-layers');
-    this.route('base-layers');
-    this.route('help');
-    this.route('browse-layers');
+    this.route('settings');
   });
+
   // });
   this.route('about');
   this.route('explore');
@@ -60,6 +59,7 @@ Router.map(function() {
   this.route('layers', { path: '/layers/:maps' });
   this.route('error');
   this.route('confirm', { path: '/confirm/:confirm_token' });
+  this.route('login');
 });
 
 export default Router;

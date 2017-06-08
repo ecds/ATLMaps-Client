@@ -1,26 +1,49 @@
 {{yield}}
-  <div class="container">
-    <div class="row">
+  {{!-- <div class="container"> --}}
+    {{!-- <div class="row">
       <div class="col l6 s12">
-        <h5 class="white-text">ATLMaps 0.1</h5>
-        {{!-- <p class="grey-text text-lighten-4">
+        <h5 class="white-text"></h5>
+        <p class="grey-text text-lighten-4">
           Some text
-        </p> --}}
+        </p>
       </div>
-    </div>
-    <div class='row'>
+    </div> --}}
+    <div class='partners'>
       {{!-- <div class="col l4 s12"> --}}
       {{!-- <h5 class="white-text">Partners</h5> --}}
-      <div class='col l4 m4 s12'><img src="/assets/images/KF_logo-stacked.png" class="footer-logo" /></div>
-      <div class='col l4 m4 s12'><img src="/assets/images/emory_logo.png" class="footer-logo" /></div>
-      <div class='col l4 m4 s12'><img src="/assets/images/GSULogo-Black.png" class="footer-logo" /></div>
+      <div class='partner-logo'><img src="/assets/images/KF_logo-stacked.png" class="footer-logo" /></div>
+      <div class='partner-logo'><img src="/assets/images/emory_logo.png" class="footer-logo" /></div>
+      <div class='partner-logo'><img src="/assets/images/GSULogo-Black.png" class="footer-logo" /></div>
       {{!-- </div> --}}
     </div>
-  </div>
-  <div class="footer-copyright">
+  {{!-- </div> --}}
+  {{!-- <div class="footer-copyright">
     <div class="container">
-      © 2016 Copyright Text
+      <a href='#' class='grey-text text-lighten-4 right' target='_blank'>Terms and Privacy</a>
+      <span class='right'> | </span>
       {{#link-to 'about' class='grey-text text-lighten-4 right'}}About{{/link-to}}
-      {{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
     </div>
+  </div> --}}
+  <div class="sub-footer" role="contentinfo">
+  <div class="sub-footer-logo">
+    <img src='/assets/images/atl-bw.png' alt="Logo image">
   </div>
+    <ul>
+      <li>{{#link-to 'about' class='grey-text text-lighten-4 right'}}About{{/link-to}}</li>
+    </ul>
+
+    <div class="footer-secondary-links">
+      <ul>
+        <li><a href='http://digitalscholarship.emory.edu/about/center/privacy-policy.html' target='_blank'>Terms and Privacy</a></li>
+      </ul>
+
+      <ul class="footer-social">
+        <li><a href="javascript:void(0)">
+          <i class="fa fa-github fa-2x" aria-hidden="true"></i><span class='sr-only'>ATLMaps on GitHub</span>
+          </a></li>
+        <li><a href="javascript:void(0)">
+          <i class="fa fa-twitter fa-2x" aria-hidden="true" ></i><span class='sr-only'>ATLMaps on Twitter</span>
+        </a></li>
+      </ul>
+    </div>
+</div>

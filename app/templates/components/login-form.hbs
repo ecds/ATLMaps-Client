@@ -1,26 +1,14 @@
 
-{{!log session.isAuthenticated}}
-  {{#if session.isAuthenticated}}
-    {{#if currentUser.user.confirmed}}
-    <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
-    {{/if}}
-  {{else}}
-    <section class="button-group">
-    <a {{action 'abortSignUp'}}>
-    <label>
-    <input type="radio" name="button-group" value='item' checked={{unless signUp 'checked'}}>
-    <span class="button-group-item">Login</span>
-    </label>
-    </a>
-    <a {{action 'startSignUp'}}>
-    <label>
-    <input type="radio" name="button-group" value="other-item" checked={{if signUp 'checked'}}>
-    <span class="button-group-item">Sign Up</span>
-    </label>
-    </a>
-    </section>
+{{#if accountCreated}}
+  Your account has been created. Check your email to confirm your account.
+{{else if session.isAuthenticated}}
+  {{#if currentUser.user.confirmed}}
+  <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
+  {{/if}}
+{{else}}
+    {{!-- <section class="button-group"> --}}
+    <section><h2>LOGIN</h2></section>
 
-    <section>
     {{#if signUp}}
       <form {{action 'signUpSubmit' on='submit'}}>
       <label for='email'>Email</label> {{input value=newLogin.identification placeholder='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
@@ -40,20 +28,26 @@
       <i class="fa fa-google" aria-hidden="true"></i>
       </div>
       </section>
-      <div class='neat-row center-align'>- or -</div>
 
+      <section>- or -</section>
+      <section>
       <form {{action 'authenticateWithOAuth2' on='submit'}}>
       {{input value=identification placeholder='Enter Login' class='form-control'}}
       {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
       <button type="submit" class="blue login-btn">Login</button>
       </form>
+    </section>
+    <section>No account? <a {{action 'startSignUp'}}>Sign up now!</a></section>
     {{/if}}
+    <hr />
+    <section class='fine-print'>
+      Creating an account means you're okay wth Emory Center for Digitial Scholarship's <a href='http://digitalscholarship.emory.edu/about/center/privacy-policy.html' target='_blank'>Terms of Service and Privacy Policy</a>.
     </section>
     {{#if errorMessage}}
     <div class="alert alert-danger">
-    <p>
+    <section>
     <strong>Login failed:</strong> <code>{{errorMessage}}</code>
-    </p>
+  </section>
     </div>
   {{/if}}
 {{/if}}

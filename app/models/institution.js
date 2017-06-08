@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 
 const {
     Model,
@@ -7,19 +6,18 @@ const {
     hasMany
 } = DS;
 
-const {
-    computed,
-    get
-} = Ember;
-
 export default Model.extend({
     name: attr('string'),
     slug: attr('string'),
     geoserver: attr('string'),
-    layer_ids: hasMany('layer', {
+    icon: attr('string'),
+    raster_layers: hasMany('raster_layer', {
         async: true
     }),
-    user_ids: hasMany('user', {
+    vector_layers: hasMany('vector_layer', {
+        async: true
+    }),
+    users: hasMany('user', {
         async: true
     }),
     checked: attr('boolean', {

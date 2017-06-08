@@ -6,15 +6,30 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 30px 0 120px;
+    padding-left: 30px;
+    text-transform: uppercase;
 
     h1 {
-      // font-size: 3em;
+      font-size: 2em;
       margin-top: 1em;
     }
 
     h2 {
       font-size: 2em;
+    }
+
+    p {
+      font-size: 1.25em;
+      font-weight: 200;
+      line-height: 1.25em;
+      // padding: 0 5em;
+      text-align: left;
+      text-transform: none;
+
+      a {
+        color: $secondary-color-dark;
+        font-weight: 500;
+      }
     }
 
     button {
@@ -25,9 +40,25 @@
       background-color: color('grey', 'lighten-4');
       color: color('grey', 'darken-3');
       margin: 120px auto 0;
+      max-width: 800px;
       opacity: .9;
       padding-bottom: 2em;
       width: 60%;
+
+      h1 {
+        font-size: 3em;
+        padding: 0 3em;
+      }
+
+      p {
+        padding: 0 5em 1em;
+        text-align: justify;
+      }
+
+    }
+
+    .container {
+      padding-top: 1em;
     }
 
     &.blurred {
@@ -37,6 +68,7 @@
 
     &.blue {
       background-image: url('/assets/images/backgrounds/bg-blue-map.png');
+      padding-bottom: 120px;
 
       &.blurred {
         background-image: url('/assets/images/backgrounds/bg-blue-map-blurred.png');
@@ -53,6 +85,7 @@
 
     &.orange {
       background-image: url('/assets/images/backgrounds/bg-orange-map.png');
+      padding-bottom: 1px;
 
       &.blurred {
         background-image: url('/assets/images/backgrounds/bg-orange-map-blurred.png');
@@ -60,7 +93,6 @@
     }
 
     &.light-orange {
-
       &.blurred {
         background-image: url('/assets/images/backgrounds/bg-lightorange-map-blurred.png');
       }
@@ -68,13 +100,115 @@
 
     header {
       h2 {
-        color: #2196f3; //material-color(md_blue, 400);
+        color: rgba($primary-color, .8);
+        font-family: 'Open Sans', sans-serif;
         font-size: 5em;
         font-weight: 400;
         line-height: normal;
         margin-bottom: 1.2em;
         padding-top: 1em;
-        // text-shadow: .11em .11em 1em $shadow;
+        // text-shadow: .001em .001em .01em $primary-color-light;
+      }
+    }
+
+    article {
+      $base-border-radius: 3px !default;
+      $base-line-height: 1.5em !default;
+      $base-spacing: 1.5em !default;
+      $action-color: $secondary-color !default;
+      $dark-gray: $primary-color-dark !default;
+      $light-gray: $primary-color-light !default;
+      $medium-screen: 40em !default;
+      $base-font-color: $dark-gray !default;
+      $sans-serif: 'Open Sans', sans-serif;
+      $serif: 'Roboto Slab', serif;
+      @include clearfix;
+      font-family: $serif;
+      text-align: left;
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      hr {
+        border-bottom: 1px solid $light-gray;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        margin: $base-spacing 0;
+        width: 3em;
+      }
+
+      p {
+        color: $base-font-color;
+        font-family: $serif;
+        font-weight: 300;
+        letter-spacing: 1;
+        line-height: $base-line-height;
+        margin-bottom: 1.5em;
+        text-transform: none;
+
+        span {
+          font-family: $sans-serif;
+          font-size: .8em;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+
+      a {
+        color: $action-color;
+        text-decoration: none;
+      }
+
+      .type {
+        border-bottom: 1px solid;
+        display: inline-block;
+        font-family: $sans-serif;
+        font-size: .7em;
+        font-weight: 600;
+        margin-bottom: 2em;
+        padding: .1em 0;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-family: $serif;
+        font-size: 1.6em;
+        font-weight: 400;
+        margin-bottom: .6em;
+      }
+
+      h2 {
+        font-family: $sans-serif;
+        font-size: 1.1em;
+        font-weight: 400;
+        line-height: 1.5em;
+        margin-bottom: 1.2em;
+      }
+
+      h3 {
+        font-family: $serif;
+        font-size: 1em;
+        font-weight: 600;
+        line-height: 1.4em;
+        margin-bottom: .5em;
+        text-transform: uppercase;
+      }
+
+      ul {
+        list-style-type: disc;
+        margin: 1em;
+        text-transform: none;
+
+        li {
+          list-style: inherit;
+          margin: .5em;
+        }
       }
     }
   }

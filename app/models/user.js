@@ -8,8 +8,5 @@ const {
 export default Model.extend({
     displayname: attr('string'),
     avatar: attr('string'),
-    // institution_: belongsTo('institution'),
-    // projects: hasMany('projects'),
-    number_tagged: attr('number'),
     confirmed: attr('boolean')
 });

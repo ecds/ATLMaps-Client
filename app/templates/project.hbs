@@ -2,7 +2,7 @@
 
 {{! FIXME This is a little disjointed. The search button and head
 are in the `main-nav` component. }}
-{{browse-results model=model rasters=rasters vectors=vectors rasters_diffResults=rasters_diffResults vectors_diffResults=vectors_diffResults}}
+{{browse-results model=model rasters=rasters vectors=vectors rasters_diffResults=rasters_diffResults vectors_diffResults=vectors_diffResults searchingRasters=searchingRasters searchingVectors=searchingVectors}}
 
 {{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
 
@@ -20,4 +20,5 @@ are in the `main-nav` component. }}
   <div id='map' class='atlmap'></div>
   <div class='base-layer-controls'></div>
   {{flash-message}}
+  {{base-map-selector class='base-map-selector'}}
 </div>

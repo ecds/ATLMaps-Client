@@ -23,7 +23,7 @@ export default Component.extend({
     colors: [],
 
     didInsertElement() {
-        const group = get(this, 'projectLayer.vector_layer_id.data_type');
+        const group = get(this, 'projectLayer.vector_layer.data_type');
         if (group === 'point-data') {
             set(this, 'colors', get(this, 'dataColors.safeMarkerColors'));
         } else {
@@ -35,35 +35,31 @@ export default Component.extend({
         // Updates the color on the map, but does not save it.
         previewColor(color, index) {
             const projectLayer = get(this, 'projectLayer');
-            const layer = get(this, 'projectLayer.vector_layer_id');
 
             projectLayer.setProperties({
                 marker: index
             });
-            const self = this;
-            layer.then((vector) => {
-                vector.setProperties({
-                    colorName: color.name,
-                    colorHex: color.hex
-                });
-                get(self, 'mapObject').updateVectorStyle(vector, color);
+            const vector = projectLayer.get('vector_layer');
+            vector.setProperties({
+                colorName: color.name,
+                colorHex: color.hex
             });
+            get(this, 'mapObject').updateVectorStyle(vector, color);
         },
 
         // This is to reset the color when the cussor leaves the color picker
         // without having set a new color.
         // NOTE: I really hope this gets simplier when we move to JSONAPI.
         reset() {
-            const self = this;
+            // const self = this;
             const projectLayer = get(this, 'projectLayer');
             projectLayer.rollbackAttributes();
-            get(this, 'projectLayer.vector_layer_id').then((vector) => {
-                vector.setProperties({
-                    colorName: get(projectLayer, 'colorName'),
-                    colorHex: get(projectLayer, 'colorHex')
-                });
-                get(self, 'mapObject').updateVectorStyle(vector);
+            const vector = get(this, 'projectLayer.vector_layer');
+            vector.setProperties({
+                colorName: get(projectLayer, 'colorName'),
+                colorHex: get(projectLayer, 'colorHex')
             });
+            get(this, 'mapObject').updateVectorStyle(vector);
         }
     }
 

@@ -20,12 +20,12 @@ export default Component.extend({
             const cookieService = get(this, 'cookies');
             const cookieName = `noIntro${model.id}`;
 
-            if (model.hasSuppressCookie) {
+            if (get(model, 'hasSuppressCookie')) {
                 cookieService.clear(cookieName);
                 model.setProperties({ hasSuppressCookie: false });
             } else {
                 cookieService.write(cookieName, `Surppress-intro-for-project-${model.id}-on-ATLMaps.`);
-                model.setProperties({ hasSuppressCookie: true });
+                model.setProperties({ hasSuppressCookie: true, suppressIntro: true });
             }
         }
     }

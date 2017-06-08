@@ -2,11 +2,18 @@
     <div class="pane-card">
       <div class='neat-row'>
 
-        {{this.exploring}}
-        {{#ember-inline-edit onSave=(route-action 'updateProject' model.project 'Description Updated!') onClose=(route-action 'cancleUpdate' model.project) as |inline-edit| }}
+        {{#ember-inline-edit
+          onSave=(route-action 'updateProject' model.project 'Description Updated!')
+          onClose=(route-action 'cancleUpdate' model.project)
+          enabled=model.project.may_edit
+          as |inline-edit| }}
             {{#inline-edit.editable}}
                 <article>
+                    {{#if model.project.exploring}}
+                    <p>Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must {{#link-to 'login'}}login{{/link-to}}</p>
+                    {{else}}
                     {{model.project.description}}
+                    {{/if}}
                 </article>
             {{/inline-edit.editable}}
 

@@ -25,6 +25,7 @@ export default Route.extend({
 
     beforeModel() {
         return this._loadCurrentUser();
+        // console.log('title', get(this, 'currentUser.user'));
     },
 
     model() {
@@ -32,25 +33,12 @@ export default Route.extend({
          * The API will only return featured projects when asked for all.
          * We'll make seperate calls for a user's projects if a user is authenticated.
          */
-        if (this.get('session.isAuthenticated')) {
-            return RSVP.hash({
-                mine: this.store.query('project', {
-                    user_id: true
-                }),
-                // collaborations: this.store.query('project', {
-                //     collaborations: get(this, 'currentUser.user.id')
-                // }),
-                featured: this.store.query('project', { user_id: true })
-            });
-        }
         return RSVP.hash({
-            featured: this.store.findAll('project')
+            mine: get(this, 'session.isAuthenticated') ? this.store.query('project', { user_id: true }) : undefined,
+            featured: this.store.findAll('project'),
+            currentUser: this.store.peekRecord('user', get(this, 'currentUser.user.id'))
         });
     },
-
-    // _loadCurrentUser() {
-    //     return this.get('currentUser').load();
-    // },
 
     actions: {
 
@@ -58,30 +46,28 @@ export default Route.extend({
             $(document).attr('title', 'ATLMaps: Projects');
         },
 
-        createProject() {
-            // Placehoder name for project.
-            const newProjectName = md5((new Date()).toTimeString());
+        willTransition() {
+            this.store.unloadAll('project');
+        },
 
+        createProject() {
             // Create a new project with some basic data set.
             const project = this.store.createRecord('project', {
-                name: newProjectName,
+                name: 'Click Here to Update Title',
+                description: 'Click here to add a description.',
                 // I really hate this and there has to be a better way.
                 published: false,
                 center_lat: 33.75440100,
                 center_lng: -84.3898100,
                 zoom_level: 13,
-                default_base_map: 'street'
+                default_base_map: 'street',
+                suppressIntro: true,
+                showingSearch: true
             });
 
             const self = this;
 
             project.save().then((newProject) => {
-                newProject.setProperties(
-                    {
-                        name: 'Title.'
-                    }
-                );
-
                 self.transitionTo('project.info', get(newProject, 'id'));
             });
         },

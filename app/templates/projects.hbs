@@ -7,9 +7,11 @@
 </div>
 <div class="banner orange blurred">
   <div class="container">
-    {{#auth-check}}
-    {{!-- <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="material-icons right">add</i>Start New Project</a> --}}
-    {{/auth-check}}
+    {{#if model.currentUser.confirmed}}
+    <span class='button-new'>
+      <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="fa fa-plus" aria-hidden="true"></i> Start New Project</a>
+    </span>
+    {{/if}}
 
       {{#if model.isPending}}
         <h2>Loading...</h2>
@@ -23,7 +25,7 @@
           {{/each}}
         </div>
         {{/if}}
-        <h3>Featured Projects</h3>
+        <h3>Public Projects</h3>
         <hr />
         <div class="row">
         {{#each model.featured as |project|}}

@@ -1,24 +1,24 @@
 import Ember from 'ember';
 
 const {
-    $,
     Component,
     inject: {
         service
     },
-    set
+    get
 } = Ember;
 
 export default Component.extend({
-    currentUser: service(),
     session: service(),
+    currentUser: service(),
     tagName: 'header',
     classNames: ['navigation'],
     showingSearch: false,
-    toggling: false,
-    showUserMenu: false,
 
-    didInsertElement() {
+    didRender() {
+        // this.get('currentUser').load();
+        // const foo = get(this, 'session.isAuthenticated');
+        // console.log('foo', foo);
         /*
             I'm not a huge fan of this. But got it from the same logic that
             the modal addon uses. https://github.com/yapplabs/ember-modal-dialog/blob/806ec6c18fa7b9af711311652e4d151512841ead/addon/components/modal-dialog.js#L34-L39
@@ -30,34 +30,50 @@ export default Component.extend({
             element with a class of `user-menu`.
             Showing is toggled only by an element with the class of `toggle-user-menu`.
          */
-        const handleClick = (event) => {
-            if ($(event.target).closest('.user-menu').length > 0) {
-                set(this, 'showUserMenu', true);
-            } else if ($(event.target).hasClass('toggle-user-menu')) {
-                this.toggleProperty('showUserMenu');
-            } else {
-                set(this, 'showUserMenu', false);
-            }
-        };
+        // const handleClick = (event) => {
+        //     if ($(event.target).closest('.user-menu').length > 0) {
+        //         set(this, 'showUserMenu', true);
+        //     } else if ($(event.target).hasClass('toggle-user-menu')) {
+        //         this.toggleProperty('showUserMenu');
+        //     } else if ($(event.target).hasClass('user-menu-action')) {
+        //         set(this, 'showUserMenu', true);
+        //     } else {
+        //         set(this, 'showUserMenu', false);
+        //     }
+        // };
 
-        $(document).on('click', handleClick);
-        const menuToggle = $('#js-mobile-menu').unbind();
-        $('#js-navigation-menu').removeClass('show');
-
-        // This is taken from refills.bourbon.io
-        // It collapses the links for smaller screens.
-        // I'm not sure we need to bother.
-        menuToggle.on('click', (e) => {
-            e.preventDefault();
-            $('#js-navigation-menu').slideToggle(() => {
-                if ($('#js-navigation-menu').is(':hidden')) {
-                    $('#js-navigation-menu').removeAttr('style');
-                }
-            });
-        });
+        // $(document).on('click', handleClick);
+        // const menuToggle = $('#js-mobile-menu').unbind();
+        // $('#js-navigation-menu').removeClass('show');
+        //
+        // // This is taken from refills.bourbon.io
+        // // It collapses the links for smaller screens.
+        // // I'm not sure we need to bother.
+        // menuToggle.on('click', (e) => {
+        //     e.preventDefault();
+        //     $('#js-navigation-menu').slideToggle(() => {
+        //         if ($('#js-navigation-menu').is(':hidden')) {
+        //             $('#js-navigation-menu').removeAttr('style');
+        //         }
+        //     });
+        // });
     },
 
-    willDestroyElement() {
-        $(document).off('click');
+    // willDestroyElement() {
+    //     $(document).off('click');
+    // }
+
+    actions: {
+        invalidateSession() {
+            get(this, 'session').invalidate();
+        },
+
+        updateDisplayName() {
+            get(this, 'currentUser').update();
+        },
+
+        cancelUpdate() {
+            //
+        }
     }
 });

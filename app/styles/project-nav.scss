@@ -11,11 +11,11 @@
     background-color: color('blue-grey', 'darken-1');
     color: color('blue-grey', 'lighten-5');
     cursor: pointer;
-    font-size: .75em;
+    font-size: 0.75em;
     line-height: 1em;
     max-height: 5.5em;
     opacity: 1;
-    padding: .5em .75em;
+    padding: 0.5em 0.75em;
     text-align: center;
     text-transform: uppercase;
     transition: all $rabbit, color $rabbit, max-height $rabbit, font-size $rabbit, background-color $rabbit;
@@ -25,15 +25,14 @@
       min-height: 5.25em;
     }
 
-
     &.active {
       background-color: $secondary-color;
       color: color('grey', 'lighten-4');
       opacity: 1;
     }
 
-    label,
-    a {
+    a,
+    label {
       color: color('grey', 'lighten-5');
       font-weight: 400;
       transition: background-color $rabbit;
@@ -63,20 +62,18 @@
 
   .fa {
     font-size: 2.11em;
-    padding-bottom: .2em;
+    padding-bottom: 0.2em;
   }
 }
 
 .hide-nav-button {
-
   i {
-    padding-top: .25em;
+    padding-top: 0.25em;
     transition: transform 300ms, padding-top 300ms;
   }
 }
 
 .hide-nav {
-
   box-shadow: none;
 
   .hide-nav-button {
@@ -87,7 +84,6 @@
   }
 
   li {
-
     &:not(:first-child) {
       max-height: 0;
       opacity: 0;
@@ -100,9 +96,7 @@
   animation-duration: 1.5s;
   animation-name: lightup-project-nav;
 }
-
 @keyframes lightup-project-nav {
-
   50% {
     background-color: color('blue-grey', 'lighten-5');
     color: color('blue-grey', 'darken-1');
@@ -115,12 +109,10 @@
     font-size: 1em;
   }
 }
-
 // .project-top-nav {
 //   box-shadow: none;
 //   height: 2em;
 // }
-
 
 header.navigation {
   $base-border-color: gainsboro !default;
@@ -142,7 +134,6 @@ header.navigation {
   $navigation-submenu-padding: 1em;
   $navigation-submenu-width: 12em;
   $horizontal-bar-mode: $large-screen;
-
   background-color: $primary-color-dark;
   // border-bottom: $primary-color;
   max-height: 60px;
@@ -161,16 +152,14 @@ header.navigation {
     float: left;
     max-height: $navigation-height;
     padding-left: $navigation-padding;
-    padding-right: .5em;
+    padding-right: 0.5em;
 
     img {
       max-height: $navigation-height;
-      padding: .8em 0;
+      padding: 0.8em 0;
     }
   }
-
   // Mobile view
-
   .navigation-menu-button {
     color: $navigation-color;
     display: block;
@@ -180,7 +169,6 @@ header.navigation {
     padding-right: 1em;
     text-decoration: none;
     text-transform: uppercase;
-
     @include grid-media ($horizontal-bar-mode) {
       display: none;
     }
@@ -190,14 +178,11 @@ header.navigation {
       color: $navigation-color-hover;
     }
   }
-
   // Nav menu
-
   nav {
     float: none;
     min-height: $navigation-height;
     z-index: 9999999;
-
     @include grid-media ($horizontal-bar-mode) {
       float: left;
     }
@@ -215,7 +200,6 @@ header.navigation {
     &.show {
       display: block;
     }
-
     @include grid-media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
@@ -232,19 +216,16 @@ header.navigation {
       }
     }
   }
-
   // The nav items
-
   ul li.nav-link {
     background: $navigation-background;
     display: block;
     line-height: $navigation-height;
     overflow: hidden;
-    padding-right: .8em;
+    padding-right: 0.8em;
     text-align: right;
     width: 100%;
     z-index: 9999;
-
     @include grid-media ($horizontal-bar-mode) {
       background: transparent;
       display: inline;
@@ -257,7 +238,6 @@ header.navigation {
       color: $navigation-color;
       display: inline-block;
       text-decoration: none;
-
       @include grid-media ($horizontal-bar-mode) {
         padding-right: 1em;
       }
@@ -273,9 +253,7 @@ header.navigation {
     border-bottom: 1px solid $navigation-active-link-color;
     padding-bottom: 3px;
   }
-
   // Elements on the far right
-
   .navigation-tools {
     // background: #505050;
     clear: both;
@@ -284,40 +262,19 @@ header.navigation {
     position: absolute;
     right: 0;
     transition: all $turtle ease $rabbit;
-
-    &.collapse-tools  {
-      right: 0;
-    }
-
+    // &.collapse-tools  {
+    //   right: 0;
+    // }
     @include grid-media($horizontal-bar-mode) {
       background: transparent;
       clear: none;
       float: right;
     }
 
-    .title-bar-action {
-      color: color('grey', 'lighten-4');
-      right: 1em;
-      top: 25%;
-
-      i {
-        font-size: 2em;
-        vertical-align: middle;
-      }
-
-      .toggle-user-menu {
-        transition: transform $turtle;
-      }
-
-      .showing-user-menu {
-        transform: rotate(180deg);
-      }
-    }
-
     .tool-label {
       display: inline-flex;
       font-weight: 500;
-      margin-right: .5em;
+      margin-right: 0.5em;
       max-width: 0;
       overflow: hidden;
       transition: max-width $turtle ease $rabbit;
@@ -344,10 +301,90 @@ header.navigation {
       }
     }
   }
+}
+
+.navigation-tools {
+  .title-bar-action {
+    color: color('grey', 'base');
+    position: relative;
+    right: 1em;
+    top: 45%;
+
+    i {
+      font-size: 1.25em;
+      vertical-align: text-top;
+    }
+
+    .toggle-user-menu {
+      transition: transform $turtle;
+    }
+
+    .showing-user-menu {
+      transform: rotate(180deg);
+    }
+  }
+
+  .ember-basic-dropdown-content {
+    border-radius: 4px;
+  }
+
+  .trigger-bootstrap-feel {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    // border: 1px solid #ccc;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    // border-radius: 4px;
+    color: #ccc;
+    // background-color: #fff;
+    outline: none;
+    position: relative;
+    right: 1em;
+    top: 25%;
+
+    &:hover {
+      // background-color: 0;
+      // border-color: red;
+    }
+
+  }
 
   .title-bar-action {
+    color: color('grey', 'base');
+    position: relative;
+    right: 1em;
+    top: 45%;
+
     i {
-      margin-right: .5em;
+      font-size: 1.25em;
+      vertical-align: text-top;
     }
+
+    .toggle-user-menu {
+      transition: transform $turtle;
+    }
+
+    .showing-user-menu {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.tite-bar-action-project {
+  top: 0;
+}
+
+.content-bootstrap-feel {
+  border-radius: 4px;
+  min-width: 15vw;
+}
+
+.account-fa-ul {
+  padding: 0.75em;
+
+  li {
+    padding-bottom: 1em;
   }
 }

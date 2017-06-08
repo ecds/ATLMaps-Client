@@ -20,8 +20,8 @@ export default Route.extend({
         // the ember-sortable addon.
         reorderItems(groupModel, itemModels /* draggedModel */) {
             const _this = this;
-            set(groupModel, 'project.raster_layer_project_ids', itemModels);
-            get(groupModel, 'project.raster_layer_project_ids').forEach((item, index) => {
+            set(groupModel, 'project.raster_layer_project', itemModels);
+            get(groupModel, 'project.raster_layer_project').forEach((item, index) => {
                 // So here we are taking the length of the array, subtracting
                 // the index of the layer and then adding 10 to reorder them.
                 // It's just that easy.
@@ -29,7 +29,7 @@ export default Route.extend({
 
                 item.setProperties({ position: newPosition });
 
-                const rasterSlug = item.get('raster_layer_id.slug');
+                const rasterSlug = item.get('raster_layer.slug');
                 _this.get('mapObject.projectLayers.rasters')[rasterSlug].setZIndex(newPosition);
                 // TODO if may edit, provide way to save order in not in edit mode
                 // TODO provide feedback on save

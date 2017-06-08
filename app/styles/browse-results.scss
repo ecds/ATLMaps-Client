@@ -19,19 +19,12 @@
   .scroll-top {
     display: flex;
     position: relative;
-
-    i {
-      padding-top: .25em;
-    }
-
   }
 
   .scroll-container {
-    // backface-visibility: hidden;
     display: flex;
     height: 100vh;
     overflow: hidden;
-    // position: relative;
     will-change: overflow;
   }
 
@@ -45,10 +38,13 @@
 
     .result-container {
       @include grid-container;
+      // font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+      // font-weight: 100;
     }
 
     .result-header {
       // font-size: 1.25em;
+      // font-weight: 300;
       margin-bottom: .25em;
     }
 
@@ -59,7 +55,8 @@
     .result-title {
       @include grid-column(11);
       color: color('blue-grey', 'darken-4');
-      font-size: 1.5em;
+      // font-size: 1.5em;
+      // line-height: 1.25em;
     }
 
     .result-description {

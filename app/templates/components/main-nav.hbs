@@ -21,22 +21,50 @@
               </li>
         </ul>
     </nav>
-    <div class="navigation-tools ignore-click {{if model.project.showingSearch 'collapse-tools'}} {{unless model.project 'site-page-menu'}}">
-      {{#if ( xor model.project.may_edit model.explore)}}
-      {{/if}}
-        {{!-- <a href='javascript:void(0)' class='title-bar-action register-click'>
+    <div class="navigation-tools">
+        {{!-- <a href='javascript:void(0)' class='title-bar-action register-click {{if model.project.may_edit "tite-bar-action-project"}}' id='user-menu-link'>
             <i class="fa fa-cog toggle-user-menu {{if showUserMenu 'showing-user-menu'}}" aria-hidden="true"></i>
-        </a>
+        </a> --}}
+        {{#unless model.project}}
+        {{#if session.isAuthenticated}}
+        {{#basic-dropdown as |dd|}}
+          {{#dd.trigger class="trigger-bootstrap-feel"}}<i class="fa fa-user" aria-hidden="true"></i> Account{{/dd.trigger}}
 
-        {{user-menu showUserMenu=showUserMenu model=model}} --}}
+          {{#dd.content class="content-bootstrap-feel z-depth-3"}}
+          <ul class="account-fa-ul fa-ul title-bar-action">
+            <li onclick={{action 'invalidateSession'}}>
+              <i class='fa-li fa fa-sign-out' aria-hidden='true'></i> Logout
+            </li>
+            <li>{{#ember-inline-edit
+              value=currentUser.user.displayname
+              onSave=(action 'updateDisplayName' currentUser.user)
+              onCancel=(action 'cancelUpdate' currentUser.user)
+              as |inline-edit|}}
+              {{#inline-edit.editable}}
+                <span><i>{{currentUser.user.displayname}}</i> <i class="fa-li fa fa-pencil-square" aria-hidden="true"></i></span>
+              {{/inline-edit.editable}}
 
-        {{#if model.project.may_edit}}
-            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>
-              <i class='material-icons'>search</i> Search
-            </button>
+              {{#inline-edit.editor}}
+                {{input value=currentUser.user.displayname}}
+              {{/inline-edit.editor}}
+            {{/ember-inline-edit}}
+            </li>
+          </ul>
+          {{/dd.content}}
+        {{/basic-dropdown}}
+        {{!-- <a onclick={{action 'invalidateSession'}} class='title-bar-action'>
+          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+        </a> --}}
         {{else}}
-          {{! FIXME this is just here to keep the cog in the correct vertical space.}}
-          <span class="search-btn btn waves-effect waves-light" />
+        {{#link-to 'login' class='title-bar-action'}}<i class="fa fa-sign-in" aria-hidden="true"></i> Login{{/link-to}}
+        {{/if}}
+        {{/unless}}
+        {{!user-menu showUserMenu=showUserMenu model=model}}
+
+        {{#if (or model.project.may_edit (is-equal model.project.name 'Explore'))}}
+            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>
+              <i class="fa fa-search" aria-hidden="true"></i> Find Layers
+            </button>
         {{/if}}
     </div>
 </div>

@@ -1,27 +1,24 @@
-{{!-- <div class="preloader-wrapper active">
-  <div class="spinner-layer spinner-orange-only">
-    <div class="circle-clipper left">
-      <div class="circle"></div>
-    </div>
-    <div class="gap-patch">
-      <div class="circle"></div>
-    </div>
-    <div class="circle-clipper right">
-      <div class="circle"></div>
-    </div>
-  </div>
-</div> --}}
 {{#unless codeSent}}
-  <h5>Confirmation Needed</h5>
-  <p>An email has been sent. Please click the link in that message to confirm your account.</p>
-  <section class="button-group">
-    <a {{action 'resend'}}>
-        <button class="button-group-item">Resend</button>
-    </a>
-    <a {{action 'editEmail'}}>
-        <button class="button-group-item">Edit Email</button>
-    </a>
-  </section>
+  {{#if thinking}}
+    <h5>Thinkin'</h5>
+  {{else if editEmail}}
+  <form {{action 'updateEmail'}}>
+  <label for='email'>Email</label>
+  {{input value=newLogin.identification placeholder='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
+  <button type='submit'>Save</button>
+</form>
+  {{else}}
+    <h5>Confirmation Needed</h5>
+    <p>An email has been sent. Please click the link in that message to confirm your account.</p>
+    <section class="button-group">
+      <a {{action 'resend'}}>
+          <button class="button-group-item user-menu-action">Resend</button>
+      </a>
+      {{!-- <a {{action 'editEmail'}}>
+          <button class="button-group-item user-menu-action">Edit Email</button>
+      </a> --}}
+    </section>
+  {{/if}}
 {{else}}
   <h5>Message Sent</h5>
   <p>Please check your email and confirm your address.</p>

@@ -1,0 +1,20 @@
+{{#project-pane title='About this Project' model=model.project}}
+  <div class="pane-card">
+    <section>
+      <ul class="fa-ul">
+        <li onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+          <i class="fa-li fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i>Publish
+        </li>
+        {{!-- <li onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+          <i class="fa-li fa fa-pencil"></i>Edit Intro
+        </li> --}}
+      </ul>
+      <hr />
+      <h2>Set Default Center and Zoom Level</h2>
+      {{set-center-zoom project=model.project}}
+      <hr />
+      <h2>Select Default Base Map</h2>
+      {{base-map-selector project=model.project class='project-settings-base-map-selector'}}
+    </section>
+  </div>
+{{/project-pane}}

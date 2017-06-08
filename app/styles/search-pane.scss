@@ -21,15 +21,20 @@ $small-font-size: .7em;
   }
 
   .search-head-title {
-    @include grid-column(10)
+    @include grid-column(10);
+    margin-top: .45em;
     padding-left: 1em;
   }
 
 }
 
+.search-close-button {
+  margin-right: 1.5em;
+}
+
 .tabs {
   background-color: color('blue-grey', 'lighten-1');
-  height: 5.2em;
+  height: 4.5em;
 
   .indicator {
     background-color: $secondary-color;
@@ -40,6 +45,7 @@ $small-font-size: .7em;
     @include grid-column(4);
     height: auto;
     line-height: 1.75em;
+    padding-top: .5em;
 
     span {
       display: block;
@@ -48,7 +54,7 @@ $small-font-size: .7em;
 
     a {
       color: color('grey', 'lighten-4');
-      font-size: 1.2em;
+      font-size: 1em;
 
       &:hover {
         color: color('blue-grey', 'lighten-4');
@@ -56,7 +62,7 @@ $small-font-size: .7em;
     }
 
     i {
-      font-size: 2em;
+      font-size: 1.8em;
       vertical-align: middle;
     }
 
@@ -66,6 +72,7 @@ $small-font-size: .7em;
       display: inline-block;
       font-size: $small-font-size;
       line-height: 1;
+      margin-left: .5rem;
       padding: .4em .75em;
       position: absolute;
       top: $small-font-size;
@@ -156,4 +163,57 @@ $small-font-size: .7em;
 .tag-list {
   font-size: .85em;
   padding-bottom: 1em;
+}
+
+// Material Design type input
+.search-box {
+  height: 4em;
+
+  input 				{
+    border: 0;
+    border-bottom: 1px solid $primary-color-dark;
+    display: block;
+    font-size: 18px;
+    padding: 10px 10px 0 5px;
+    width: 90%;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  // LABEL
+  label 				 {
+    bottom: 45px;
+    color: $primary-color;
+    font-size: 1.2em;
+    font-weight: normal;
+    pointer-events: none;
+    position: relative;
+    transition: bottom $rabbit ease, font-size $rabbit ease, color $rabbit ease;
+  }
+
+  // active state
+  input:focus ~ label, input:valid ~ label 		{
+    bottom: 75px;
+    color: $secondary-color;
+    font-size: .8em;
+  }
+
+  // active state
+  input:focus ~ .highlight {
+    animation: inputHighlighter $rabbit ease;
+  }
+
+  // ANIMATIONS ================
+  @keyframes inputHighlighter {
+    from {
+      background: $secondary-color;
+    }
+
+    to {
+      background: transparent;
+      width: 0;
+    }
+  }
 }

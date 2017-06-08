@@ -7,4 +7,9 @@
     max-height: 100vh;
     overflow: visible;
   }
+
+  span {
+    color: $secondary-color-light;
+    cursor: pointer;
+  }
 }

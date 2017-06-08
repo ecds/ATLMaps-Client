@@ -26,6 +26,7 @@ export default Model.extend({
     * Extended by RasterLayer and VectorLayer
     */
     name: attr('string'),
+    type: attr('string'),
     title: attr('string'),
     slug: attr('string'),
     keywords: attr('string'),
@@ -46,8 +47,7 @@ export default Model.extend({
         async: true
     }),
     tag_ids: hasMany('tag'),
-    institution: attr(),
-    institution_id: belongsTo('institution'),
+    institution: belongsTo('institution'),
     tag_slugs: attr('string'),
     active: attr('boolean'),
     active_in_project: attr('boolean', {

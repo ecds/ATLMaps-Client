@@ -20,6 +20,8 @@ export default Component.extend({
 
     newLogin: {},
 
+    accountCreated: false,
+
     signUp: false,
 
     actions: {
@@ -53,25 +55,13 @@ export default Component.extend({
 
         signUpSubmit() {
             get(this, 'newLogin').save().then(() => {
-                set(this, 'signUp', false);
-                set(self, 'flashMessage.message', 'Login Created');
-                set(self, 'flashMessage.success', true);
-                set(self, 'flashMessage.show', true);
-                // self.toggleProperty('flashMessage.showing');
+                set(this, 'accountCreated', true);
                 run.later(this, () => {
-                    set(self, 'flashMessage.message', '');
-                    set(self, 'flashMessage.show', false);
-                    set(self, 'flashMessage.success', true);
-                    // self.toggleProperty('flashMessage.showing');
+                    // maybe we can not redirect
                 }, () => {
-                    // TODO figure out how to give feedback on these shared actions
-                    set(self, 'flashMessage.message', 'Oh no! We were unable to create your user <i class="material-icons">sentiment_dissatisfied</i>');
-                    set(self, 'flashMessage.show', true);
-                    set(self, 'flashMessage.success', false);
-
+                    // Error callback
                     run.later(this, () => {
-                        set(self, 'flashMessage.message', '');
-                        set(self, 'flashMessage.show', false);
+                        // clear
                     }, 3000);
                 });
             }, 300);

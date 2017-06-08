@@ -23,20 +23,20 @@ export default Model.extend({
     zoom_level: attr('number'),
     default_base_map: attr('string'),
     user_id: attr(),
-    saved: attr('boolean'),
+    new_project: attr('boolean'),
     published: attr('boolean'),
     featured: attr('boolean'),
     user: attr(),
-    raster_layer_project_ids: hasMany('raster_layer_project', {
+    raster_layer_project: hasMany('raster_layer_project', {
+        async: false
+    }),
+    vector_layer_project: hasMany('vector_layer_project', {
+        async: false
+    }),
+    raster_layers: hasMany('raster_layer', {
         async: true
     }),
-    vector_layer_project_ids: hasMany('vector_layer_project', {
-        async: true
-    }),
-    raster_layer_ids: hasMany('raster_layer', {
-        async: true
-    }),
-    vector_layer_ids: hasMany('vector_layer', {
+    vector_layers: hasMany('vector_layer', {
         async: true
     }),
     slug: attr('string'),
@@ -83,24 +83,24 @@ export default Model.extend({
 
     // Computed property that sorts rasters by on the position their `position`
     // in the project. See http://emberjs.com/api/classes/Ember.computed.html#method_sort
-    sortedRasterLayers: computed.sort('raster_layer_project_ids', '_positionSort'),
+    sortedRasterLayers: computed.sort('raster_layer_project', '_positionSort'),
     _positionSort: ['position:desc'],
 
     // Used in determing which nave links to show.
     hasRasters: computed(function hasRasters() {
-        return get(this, 'raster_layer_project_ids.length') > 0;
-    }).property('raster_layer_project_ids'),
+        return get(this, 'raster_layer_project.length') > 0;
+    }).property('raster_layer_project'),
 
     hasVectors: computed(function hasVectors() {
-        return get(this, 'vector_layer_project_ids.length') > 0;
-    }).property('vector_layer_project_ids'),
+        return get(this, 'vector_layer_project.length') > 0;
+    }).property('vector_layer_project'),
 
     // The following computed values are used for the show/hide all toggle switch.
     // The goal is to turn the toggle switch back to true when you make a layer visiable again.
 
     // We'll call length on this so we can set the toggle switch if all vectors
     // are hidden. See http://emberjs.com/api/classes/Ember.computed.html#method_filterBy
-    visiable_vectors: computed.filterBy('vector_layer_project_ids', 'showing', true),
+    visiable_vectors: computed.filterBy('vector_layer_project', 'showing', true),
 
     // Booleans are easier to deal with.
     visiable_vector: computed(function visiableVector() {
@@ -111,7 +111,7 @@ export default Model.extend({
     // visiable_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
 
     // Like `hidden_vectors` we'll call length to see if any rasters are visiable.
-    visiable_rasters: computed.filterBy('raster_layer_project_ids', 'showing', true),
+    visiable_rasters: computed.filterBy('raster_layer_project', 'showing', true),
 
     // Booleans are easier to deal with.
     visiable_raster: computed(function visiableRaster() {
@@ -123,7 +123,11 @@ export default Model.extend({
             return true;
         }
         return false;
-    })
+    }),
+
+    editable: computed(function editable() {
+        return get(this, 'may_edit') && !get(this, 'exploring');
+    }).property('may_edit')
 
     // TODO Still needed?
     // twoColIntro: computed(function() {

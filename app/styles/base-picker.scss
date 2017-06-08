@@ -1,9 +1,31 @@
 .base-preview {
   background-repeat: no-repeat;
   background-size: cover;
-  height: 10em;
+  float: left;
+  height: 63px;
+  margin-left: 20px;
   text-align: center;
-  width: 48%;
+  width: 100px;
+}
+
+.base-map-selector {
+  bottom: 2em;
+  height: 44px;
+  left: 3em;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
+.project-settings-base-map-selector {
+  @include grid-container;
+
+  .base-preview {
+    @include grid-column(6);
+    box-shadow: none;
+    height: 100px;
+    margin-bottom: 1em;
+  }
 }
 
 .satellite {
@@ -12,4 +34,30 @@
 
 .street {
   background-image: url('/assets/images/street_map.png');
+}
+
+.greyscale {
+  background-image: url('/assets/images/carto.png');
+}
+
+// Center and Zoom set
+$center-zoom-grid: (
+  columns: 12,
+  gutter: 1.2em,
+);
+
+.set-center-zoom {
+  @include grid-container;
+
+  button {
+    font-size: .75em;
+  }
+}
+
+.set-center {
+  @include grid-column(5, $center-zoom-grid);
+}
+
+.set-zoom {
+  @include grid-column(2, $center-zoom-grid);
 }

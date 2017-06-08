@@ -24,7 +24,14 @@
 {{/link-to}}
 {{/if}}
 
-{{#link-to 'project.base-layers' tagName='li'}}
+{{!-- {{#link-to 'project.base-layers' tagName='li'}}
   <i class="fa fa-globe" aria-hidden="true"></i>
   {{link-to 'Base' 'project.base-layers' tagName='label'}}
+{{/link-to}} --}}
+
+{{#if model.may_edit}}
+{{#link-to 'project.settings' tagName='li'}}
+  <i class="fa fa-cog" aria-hidden="true"></i>
+  {{link-to 'Settings' 'project.settings' tagName='label'}}
 {{/link-to}}
+{{/if}}

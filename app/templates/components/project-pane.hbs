@@ -15,9 +15,9 @@
       {{/ember-inline-edit}}
     </div>
     {{#if raster}}
-        {{show-hide-layers toggleAll=true layers=model.raster_layer_ids checked=model.visiable_raster class='switch'}}
+        {{show-hide-layers toggleAll=true layers=model.raster_layers checked=model.visiable_raster class='switch'}}
     {{else if vector}}
-        {{show-hide-layers toggleAll=true layers=model.vector_layer_ids checked=model.visiable_vector class='switch'}}
+        {{show-hide-layers toggleAll=true layers=model.vector_layers checked=model.visiable_vector class='switch'}}
     {{else}}
         <div class="one-col" />
     {{/if}}
