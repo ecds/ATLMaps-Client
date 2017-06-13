@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:explore', 'Unit | Route | explore', {
   // Specify the other units that are required for this test.
-  needs: ['service:metrics', 'service:sharable']
+  needs: ['service:metrics']
 });
 
 test('it exists', function(assert) {

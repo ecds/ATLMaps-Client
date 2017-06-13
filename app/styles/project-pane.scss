@@ -25,7 +25,7 @@
   }
 
   .pane-container {
-    max-height: 70vh;
+    max-height: calc(100vh - 200px);
     transition: max-height $rabbit;
   }
 
@@ -124,6 +124,7 @@
 //that are able to make use of it.
 
 .pane-content {
+  cursor: default;
   flex: 1;
   height: auto;
   overflow: auto;
@@ -396,4 +397,25 @@ $flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
   }
+}
+
+/* basic positioning */
+.color-key {
+  display: flex;
+  font-size: 1.2em;
+  text-transform: capitalize;
+  ul {
+    list-style: none;
+  }
+
+  li {
+    border: 0; float: left; margin-right: 10px;
+  }
+
+  span { border: 1px solid #ccc; float: left; width: .75em; height: .75em; margin: 2px; }
+/* your colors */
+.color-key-0 { background-color: #4CAF50; }
+.color-key-1 { background-color: #1E88E5; }
+.color-key-2 { background-color: #FFEB3B; }
+.color-key-3 { background-color: #F44336; }
 }

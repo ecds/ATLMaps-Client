@@ -8,7 +8,7 @@
   }
 }
 
-.line-data {
+span.line-data {
   &::before {
     content: $line-icon;
     font-family: 'atlmaps-ext';
@@ -21,6 +21,19 @@
     content: $layer-icon;
     font-family: 'FontAwesome';
     letter-spacing: .25em;
+  }
+}
+
+.database {
+  &::before {
+    content: $data-icon;
+  }
+}
+
+.dataset {
+  &::before {
+    content: $dataset-icon;
+    font-family: 'FontAwesome';
   }
 }
 
@@ -72,14 +85,14 @@
   content: $marker-icon;
 }
 
-.layer-marker div.icon:before {
-  content: $layer-icon;
-  font-family: 'material-design-icons';
-}
+// .layer-marker div.icon:before {
+//   content: $layer-icon;
+//   font-family: 'material-design-icons';
+// }
 
-.laoding div.icon:before {
-  content: "\e8c0";
-}
+// .laoding div.icon:before {
+//   content: "\e8c0";
+// }
 
 .map-marker div.shadow {
   background-image:url('/assets/images/marker-shadow.png');
@@ -91,9 +104,11 @@
   width: 40px;
 }
 
-/*marker states*/
-.map-marker.inactive {
-  opacity: .6;
+// marker states
+.map-marker {
+  &.inactive {
+    opacity: .6;
+  }
 }
 
 .map-marker.active_marker{
@@ -102,6 +117,9 @@
 }
 
 .active-marker {
+  fill-opacity: 1 !important;
+  stroke-width: 6px !important;
+
   .icon {
     &::before {
       content: $marker-icon;

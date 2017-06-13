@@ -12,6 +12,18 @@
   <article class='black-text'>
     {{if layer.description layer.safe_description 'No description :('}}
   </article>
+  {{#if layer.filters}}
+  <section class='color-key'>
+    {{#each-in layer.filters as |key value|}}
+       <ul>
+         <li>{{key}}:</li>
+       {{#each value as |v index|}}
+        <li><span class='color-key-{{index}}'></span>{{v}}</li>
+      {{/each}}
+    </ul>
+    {{/each-in}}
+  </section>
+  {{/if}}
   <footer class='citation-footer'>
       <div class='provider-name'>
   	     <h6 class='cite-h6'>Provided by:</h6>

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 const {
+    $,
     Component,
     inject: {
         service
@@ -43,25 +44,25 @@ export default Component.extend({
         // };
 
         // $(document).on('click', handleClick);
-        // const menuToggle = $('#js-mobile-menu').unbind();
-        // $('#js-navigation-menu').removeClass('show');
+        const menuToggle = $('#js-mobile-menu').unbind();
+        $('#js-navigation-menu').removeClass('show');
         //
-        // // This is taken from refills.bourbon.io
-        // // It collapses the links for smaller screens.
-        // // I'm not sure we need to bother.
-        // menuToggle.on('click', (e) => {
-        //     e.preventDefault();
-        //     $('#js-navigation-menu').slideToggle(() => {
-        //         if ($('#js-navigation-menu').is(':hidden')) {
-        //             $('#js-navigation-menu').removeAttr('style');
-        //         }
-        //     });
-        // });
+        // This is taken from refills.bourbon.io
+        // It collapses the links for smaller screens.
+        // I'm not sure we need to bother.
+        menuToggle.on('click', (e) => {
+            e.preventDefault();
+            $('#js-navigation-menu').slideToggle(() => {
+                if ($('#js-navigation-menu').is(':hidden')) {
+                    $('#js-navigation-menu').removeAttr('style');
+                }
+            });
+        });
     },
 
-    // willDestroyElement() {
-    //     $(document).off('click');
-    // }
+    willDestroyElement() {
+        $(document).off('click');
+    },
 
     actions: {
         invalidateSession() {

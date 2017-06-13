@@ -45,7 +45,7 @@
   }
 
   .close-button {
-    color: color('grey', 'darken-5');
+    color: $primary-color-dark;
     font-size: 1.25em;
     position: absolute;
     right: 0;

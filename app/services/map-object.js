@@ -12,8 +12,7 @@ const {
         service
     },
     Service,
-    set,
-    Logger
+    set
 } = Ember;
 
 export default Service.extend({
@@ -216,12 +215,40 @@ export default Service.extend({
 
         const features = get(layer, 'vector_feature');
         features.forEach((feature) => {
-            const featureProps = getProperties(feature, 'geometry_type', 'geojson');
-            feature.setProperties({
-                colorName: layerProps.colorName,
-                colorHex: layerProps.colorHex,
-                markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
-            });
+            const featureProps = getProperties(feature, 'geometry_type', 'geojson', 'properties', 'feature_id');
+            if (featureProps.properties.holc_grade) {
+                const grade = featureProps.properties.holc_grade;
+                if (grade === 'A') {
+                    feature.setProperties({
+                        colorName: 'green-500',
+                        colorHex: '#4CAF50'
+                    });
+                } else if (grade === 'B') {
+                    feature.setProperties({
+                        colorName: 'blue-700',
+                        colorHex: '#1E88E5'
+                    });
+                } else if (grade === 'C') {
+                    feature.setProperties({
+                        colorName: 'yellow-500',
+                        colorHex: '#FFEB3B'
+                    });
+                } else if (grade === 'D') {
+                    feature.setProperties({
+                        colorName: 'red-500',
+                        colorHex: '#F44336'
+                    });
+                }
+                feature.setProperties({
+                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+                });
+            } else {
+                feature.setProperties({
+                    colorName: layerProps.colorName,
+                    colorHex: layerProps.colorHex,
+                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+                });
+            }
             let newLeafletFeature = null;
             switch (featureProps.geometry_type) {
             case 'Point':
@@ -229,27 +256,29 @@ export default Service.extend({
                     const point = L.geoJSON(featureProps.geojson, {
                         pointToLayer(foo, latlng) {
                             const icon = L.divIcon({
-                                className: layerProps.layerClass,
+                                className: `${layerProps.layerClass} ${featureProps.feature_id}`,
                                 iconSize: null,
                                 html: '<div class="shadow"></div><div class="icon" />'
                             });
 
                             newLeafletFeature = L.marker(latlng, {
-                                color: layerProps.colorName,
+                                color: get(feature, 'colorHex'),
                                 icon,
-                                title: layerProps.title,
-                                markerDiv: feature.markerDiv
+                                title: layerProps.title
                             });
                             return newLeafletFeature;
                         }
                     });
                     point.on('add', () => {});
-                    point.addTo(atlMap);
+                    // point.addTo(atlMap);
 
-                    layerProps.leaflet_object.addLayer(point);
                     newLeafletFeature.on('click', () => {
                         this.showDetails(feature);
                     });
+
+                    layerProps.leaflet_object.addLayer(newLeafletFeature);
+                    feature.setProperties({ leaflet_object: newLeafletFeature });
+
                     break;
                 }
             case 'LineString':
@@ -257,22 +286,25 @@ export default Service.extend({
             case 'MultiPolygon':
                 {
                     const style = {
-                        color: layerProps.colorHex,
-                        fillColor: layerProps.colorHex,
-                        className: `${layerProps.slug} layer-${layerProps.colorName}`
+                        color: get(feature, 'colorHex'),
+                        fillColor: get(feature, 'colorHex'),
+                        className: `${layerProps.slug} layer-${get(feature, 'colorName')} ${featureProps.feature_id}`
                     };
 
                     newLeafletFeature = L.geoJSON(featureProps.geojson, {
                         style,
                         title: get(layer, 'title'),
-                        markerDiv: feature.markerDiv,
+                        // markerDiv: feature.markerDiv,
                         interactive: true
                     });
+                    if (featureProps.geometry_type === 'MultiPolygon') {
+                        newLeafletFeature.setStyle({ opacity: 0.7 });
+                    }
                     layerProps.leaflet_object.addLayer(newLeafletFeature);
                     newLeafletFeature.bindPopup();
-                    newLeafletFeature.addTo(atlMap);
+                    // newLeafletFeature.addTo(atlMap);
                     newLeafletFeature.on('add', () => {
-                        Logger.debug(newLeafletFeature);
+                        // Do someting to show layers are loading/loaded?
                     });
                     newLeafletFeature.on('click', (event) => {
                         event.target.closePopup();
@@ -286,7 +318,7 @@ export default Service.extend({
             return true;
         });
 
-        // layerProps.leaflet_object.addTo(atlMap);
+        layerProps.leaflet_object.addTo(atlMap);
         return layerProps.leaflet_object;
     },
 
@@ -317,6 +349,7 @@ export default Service.extend({
         case 'point-data':
         case 'polygon':
         case 'line-data':
+        case 'dataset':
             {
                 newLayer.setProperties({
                     layerClass: `${newLayerProps.slug} vectorData map-marker layer-${layerProps.colorName}`,
@@ -355,7 +388,6 @@ export default Service.extend({
     },
 
     showDetails(properties) {
-        Logger.debug(properties);
         let popupContent = properties;
         if (get(properties, 'youtube')) {
             popupContent += '<div class="video"><div class="video-wrapper">';
@@ -363,7 +395,7 @@ export default Service.extend({
             popupContent += '</div></div>';
         }
         if (get(properties, 'description')) {
-            popupContent += get(properties, 'description');
+            popupContent += unescape(get(properties, 'description'));
         }
 
         // START GALLERY
@@ -401,8 +433,12 @@ export default Service.extend({
             set(this, 'swiperObj', newSwiper);
             // }
         }
+        if (get(properties, 'image')) {
+            $('.swiper-wrapper').append(`<img src="${get(properties, 'image')}">`);
+        }
         // END GALLERY
-
+        $('.active-marker').removeClass('active-marker');
+        $(`.${get(properties, 'feature_id')}`).addClass('active-marker');
         $('div.vector-info').show();
         $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
         $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));

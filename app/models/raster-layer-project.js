@@ -18,7 +18,6 @@ export default LayerProject.extend({
         async: false,
         inverse: null
     }),
-
     // Non-API attributes for persisting state.
     // opacity: computed(function getOpacity() {
     //     return get(this, 'raster_layer_id.opacity');

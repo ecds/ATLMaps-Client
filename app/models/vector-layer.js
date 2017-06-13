@@ -10,5 +10,6 @@ export default Layer.extend({
     }),
     // vector_feature: attr(),
     vector_feature: hasMany('vector-feature', { async: false }),
-    features: attr()
+    features: attr(),
+    filters: attr()
 });

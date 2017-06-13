@@ -5,7 +5,7 @@ import {
 
 moduleFor('route:about', {
   // Specify the other units that are required for this test.
-  needs: ['service:metrics', 'service:sharable']
+  needs: ['service:metrics']
 });
 
 test('it exists', function(assert) {

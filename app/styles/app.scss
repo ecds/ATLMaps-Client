@@ -216,6 +216,7 @@ textarea {
 
 .layer-list-item-title {
   @include grid-column(10);
+  cursor: pointer;
   line-height: 1.5em;
   padding-bottom: .7em;
   padding-top: .7em;

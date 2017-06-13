@@ -65,8 +65,8 @@ export default Route.extend({
                 showingSearch: true
             });
 
-            const self = this;
-
+            // project.setProperties({id: Ember.guidFor(project)});
+            // this.transitionTo('project.info', get(project, 'id'));
             project.save().then((newProject) => {
                 self.transitionTo('project.info', get(newProject, 'id'));
             });

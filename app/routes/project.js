@@ -33,7 +33,6 @@ export default Route.extend({
         let project = '';
         if (params.project_id === 'explore') {
             project = this.store.createRecord('project', {
-                id: '123456789',
                 name: 'Explore',
                 published: false,
                 center_lat: 33.75440100,
@@ -163,6 +162,31 @@ export default Route.extend({
             this.modelFor('project').project.toggleProperty('suppressIntro');
         },
 
+        saveProject(project) {
+            const flash = get(this, 'flashMessage');
+            project.save().then((savedProject) => {
+                savedProject.get('raster_layer_project').invoke('save');
+                savedProject.get('vector_layer_project').invoke('save');
+                flash.setProperties({
+                    message: 'PROJECT SAVED',
+                    show: true,
+                    success: true
+                });
+                run.later(this, () => {
+                    flash.setProperties({ message: '', show: false });
+                }, 3000);
+            }, () => {
+                flash.setProperties({
+                    message: 'ERROR UPDATING PROJECT',
+                    show: true,
+                    success: false
+                });
+                run.later(this, () => {
+                    flash.setProperties({ message: '', show: false });
+                }, 3000);
+            });
+        },
+
         updateProject(project, message, action) {
             const flash = get(this, 'flashMessage');
             if (action === 'publish') {
@@ -217,14 +241,14 @@ export default Route.extend({
                     const position = project.get('raster_layer_project.length') + 11;
 
                     newLayer = this.store.createRecord('raster_layer_project', {
-                        project_id: project.id,
+                        project,
                         raster_layer: layerObj,
                         data_format: layerObj.get('data_format'),
                         position // enhanced litrial
                     });
                     // Pushes the object into the model show it will appear
                     // in the list.
-                    project.get('raster_layer_project').pushObject(newLayer);
+                    // project.get('raster_layer_project').pushObject(newLayer);
                     break;
                 }
 
@@ -243,22 +267,23 @@ export default Route.extend({
                     }
                     }
                     newLayer = this.store.createRecord('vector-layer-project', {
-                        project_id: project.id,
+                        project,
                         vector_layer: layerObj,
                         data_format: layerObj.get('data_format'),
-                        marker: layerColor
+                        marker: layerColor,
+                        data_type: layerObj.get('data_type')
                     });
                 }
                 // no default
                 }
-                project.get(`${format}_layer_project`).addObject(newLayer);
+                project.get(`${format}_layer_project`).pushObject(newLayer);
 
                 this.get('mapObject').mapLayer(newLayer);
                 // Only call save if the session is authenticated.
                 // There is another check on the server that verifies the user is
                 // authenticated and is allowed to edit this project.
                 // TODO, abstract the save/don't save calls for add and remove.
-                if (this.get('session.isAuthenticated') && (project.id !== '123456789')) {
+                if (this.get('session.isAuthenticated') && (get(project, 'exploring') === false)) {
                     newLayer.save().then(() => {
                         flash.setProperties({
                             message: 'LAYER ADDED',

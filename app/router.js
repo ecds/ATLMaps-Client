@@ -28,12 +28,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('projects', function() {
-    /**
-     * This is here to support legacy urls.
-     */
-    this.route('show', { path: '/:project_id' });
-  });
+  this.route('projects', function() {});
 
   this.route('project', {
       path: '/project/:project_id'
@@ -48,11 +43,6 @@ Router.map(function() {
   // });
   this.route('about');
   this.route('explore');
-  this.route('terms');
-  this.route('support', {
-      path: '/help'
-  });
-  this.route('tagem');
   this.route('404', {
       path: '/*wildcard'
   });

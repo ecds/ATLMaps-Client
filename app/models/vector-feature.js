@@ -19,5 +19,6 @@ export default Model.extend({
     images: attr(),
     youtube: attr('string'),
     vimeo: attr('string'),
-    audio: attr('string')
+    audio: attr('string'),
+    feature_id: attr('string')
 });

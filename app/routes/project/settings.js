@@ -15,6 +15,11 @@ export default Route.extend(AuthenticatedRouteMixin, {
     flashMessage: service(),
 
     actions: {
+
+        // showHideIntro: () => {
+        //
+        // },
+
         setBase(base, model) {
             const map = get(this, 'mapObject.map');
             const baseMaps = get(this, 'mapObject.baseMaps');

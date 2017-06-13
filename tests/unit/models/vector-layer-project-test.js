@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('vector-layer-project', 'Unit | Model | vector layer project', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:project']
 });
 
 test('it exists', function(assert) {

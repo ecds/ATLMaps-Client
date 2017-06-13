@@ -5,7 +5,7 @@
         <li onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
           <i class="fa-li fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i>Publish
         </li>
-        {{!-- <li onclick={{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+        {{!-- <li onclick={{action (route-action 'showHideIntro')}}>
           <i class="fa-li fa fa-pencil"></i>Edit Intro
         </li> --}}
       </ul>

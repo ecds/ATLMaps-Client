@@ -68,7 +68,9 @@ export default Model.extend({
     url: attr('string'),
     leaflet_id: attr('number'),
     leaflet_object: attr(),
-    opacity: attr('number'),
+    opacity: attr('number', {
+        defaultValue: 10
+    }),
     slider_id: attr('string'),
     mapObject: service(),
     showing: computed(function visiableLayer() {
