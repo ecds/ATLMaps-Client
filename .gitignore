@@ -21,3 +21,4 @@ testem.log
 .env*
 Untitled
 esdoc
+yarn-error.log

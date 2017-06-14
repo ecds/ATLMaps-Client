@@ -3,8 +3,6 @@
  */
 import Ember from 'ember';
 
-/* globals md5 */
-
 const {
     $,
     get,
