@@ -24,6 +24,8 @@ export default Component.extend({
 
     signUp: false,
 
+    showingPassword: false,
+
     actions: {
         authenticateWithOAuth2() {
             const {

@@ -5,8 +5,7 @@
 
         <div class='result-action'>
           <a {{action (route-action 'addRemoveLayer' layer project)}}>
-            <i class="material-icons {{if layer.active_in_project 'active'}}">
-              {{if layer.active_in_project 'check_box' 'check_box_outline_blank'}}
+            <i class="fa {{if layer.active_in_project 'active fa-check-square-o' 'fa-square-o'}}">
             </i>
           </a>
         </div>

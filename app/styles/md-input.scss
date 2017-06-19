@@ -1,0 +1,54 @@
+// Material Design type input
+.md-input {
+  // height: 4em;
+
+  input 				{
+    border: 0;
+    border-bottom: 1px solid $primary-color-dark;
+    display: block;
+    font-size: 18px;
+    padding: 10px 10px 0 5px;
+    width: 90%;
+    will-change: background, width;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  // LABEL
+  label 				 {
+    bottom: 45px;
+    color: $primary-color;
+    font-size: 1.2em;
+    font-weight: normal;
+    pointer-events: none;
+    position: relative;
+    transition: bottom $rabbit ease, font-size $rabbit ease, color $rabbit ease;
+    will-change: bottom, font-size, color;
+  }
+
+  // active state
+  input:focus ~ label, input:valid ~ label 		{
+    bottom: 75px;
+    color: $secondary-color;
+    font-size: .8em;
+  }
+
+  // active state
+  input:focus ~ .highlight {
+    animation: inputHighlighter $rabbit ease;
+  }
+
+  // ANIMATIONS ================
+  @keyframes inputHighlighter {
+    from {
+      background: $secondary-color;
+    }
+
+    to {
+      background: transparent;
+      width: 0;
+    }
+  }
+}

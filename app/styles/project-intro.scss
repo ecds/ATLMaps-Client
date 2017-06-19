@@ -34,8 +34,13 @@
     padding: 0;
 
     .video-container {
-      position: initial;
-      top: -.55em;
+      // position: initial;
+      // top: -.55em;
+
+    }
+
+    &.editing {
+      overflow: scroll;
     }
 
     .pane-content {
@@ -58,7 +63,8 @@
 
   // Code for fixed header and footer from
   // http://codepen.io/stuntbox/pen/lEdpq
-  article {
+  article,
+  section {
     padding: 2em;
   }
 }
@@ -78,6 +84,11 @@
 .explore-button {
   @include grid-column(3);
   @include grid-push(4);
+}
+
+.edit-button {
+  @include grid-column(7);
+  // @include grid-push(3);
 }
 
 .supress-check {

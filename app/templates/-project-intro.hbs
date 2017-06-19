@@ -1,7 +1,0 @@
-{{#if model.intro}}
-    {{#if showIntro.show}}
-        {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=true container-class="project-intro" }}
-            {{project-intro-modal action='toggleIntro' project=model }}
-        {{/tether-dialog}}
-    {{/if}}
-{{/if}}

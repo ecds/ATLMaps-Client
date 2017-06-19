@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
 const {
+    $,
     Component,
     inject: { service },
-    get
+    get,
+    getOwner,
+    set
 } = Ember;
 
 export default Component.extend({
@@ -12,6 +15,19 @@ export default Component.extend({
     classNames: ['intro-modal-link'],
 
     keyboardActivated: true,
+
+    editing: false,
+
+    didRender() {
+        const currentRoute = getOwner(this).lookup('controller:application').currentPath;
+        if ((currentRoute.indexOf('settings') !== -1) && get(this, 'model.project.may_edit')) {
+            set(this, 'editing', true);
+            $('#edit-project-intro').trumbowyg({
+                fullscreenable: false,
+                removeformatPasted: true
+            });
+        }
+    },
 
     actions: {
 

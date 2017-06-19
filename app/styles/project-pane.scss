@@ -1,11 +1,14 @@
 .project-pane {
   @include grid-container;
+  border-bottom-color: $white;
+  border-bottom-style: solid;
+  border-bottom-width: 1em;
   left: 5em;
   // height: 1000px;
   max-width: 500px;
   pointer-events: all;
   position: absolute;
-  top: 60px;
+  top: $navigation-height;
   width: 34vw;
   z-index: 401;
 
@@ -25,7 +28,7 @@
   }
 
   .pane-container {
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 250px);
     transition: max-height $rabbit;
   }
 
@@ -51,6 +54,7 @@
 
 .intro-modal-header,
 .pane-title,
+.secondary-pane-title,
 .vector-detail-title {
   align-items: center;
   background-color: color('blue-grey', 'lighten-5');
@@ -64,14 +68,13 @@
   width: 100%;
   z-index: 10;
 
-  .edit-button {
-    padding-left: 1em;
-  }
 }
 
-.pane-title {
+.pane-title,
+.secondary-pane-title {
   // @include grid-visual;
   @include grid-container;
+  height: 4em;
   padding: .5rem 2rem;
 
   h3 {
@@ -82,12 +85,30 @@
     @include grid-column(11);
     margin-left: 0;
   }
+
+  .project-pane-save {
+    @include grid-column(1);
+    // color: light-gray;
+    cursor: pointer;
+    opacity: .4;
+    // padding: .25em;
+    width: auto;
+
+    &:hover {
+      color: $secondary-color;
+      opacity: 1;
+    }
+  }
+
+  .dirty {
+    opacity: 1;
+  }
 }
 
-.project-pane-close-button {
-  position: absolute;
-  right: 6px;
-  top: 4px;
+.secondary-pane-title {
+  background-color: $white;
+  height: auto;
+  padding-top: 1rem;
 }
 
 .switch {
@@ -129,7 +150,7 @@
   height: auto;
   overflow: auto;
   overflow-style: none;
-  padding-bottom: 1em;
+  // padding-bottom: 1em;
 
   .card {
     border-radius: 0 0 2px 2px;
@@ -159,6 +180,17 @@
       display: none;
       padding-left: 0;
     }
+  }
+}
+
+span.pane-content {
+  background-color: #2196F3;
+  padding: .5em;
+  text-align: center;
+
+  a {
+    color: $white;
+
   }
 }
 
@@ -241,10 +273,6 @@
       padding: 0;
       vertical-align: middle;
     }
-  }
-
-  &:first-child {
-    padding-top: 1em;
   }
 
   .layer-item-body {

@@ -53,12 +53,12 @@ module.exports = function(defaults) {
     });
 
     var fa = funnel('bower_components/font-awesome/fonts/', {
-        destDir: 'fonts'
+        destDir: 'assets/fonts'
     });
 
-    // var ckeditorPath = funnel('bower_components/ckeditor', {
-    //     destDir: 'assets/ckeditor'
-    // });
+    var trumbowyg = funnel('bower_components/trumbowyg/dist/ui', {
+        destDir: 'assets/ui'
+    })
 
     app.import('bower_components/leaflet/dist/leaflet.js');
     app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
@@ -66,8 +66,7 @@ module.exports = function(defaults) {
     app.import('bower_components/nouislider/distribute/nouislider.min.js');
     // app.import('bower_components/list.js/dist/list.min.js');
     app.import('bower_components/js-cookie/src/js.cookie.js');
-    // app.import('bower_components/ckeditor/ckeditor.js');
-    // app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
+    app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
     app.import('bower_components/interact/dist/interact.min.js');
@@ -85,5 +84,5 @@ module.exports = function(defaults) {
     // ], {
     //     overwrite: true
     // });
-    return app.toTree([leafletImages, fa]);//, ckeditorPath]);
+    return app.toTree([leafletImages, fa, trumbowyg]); // , ckeditorPath]);
 };

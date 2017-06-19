@@ -1,28 +1,39 @@
 <div class="pane-title">
     <div class='project-pane-title'>
-      {{#ember-inline-edit
-        value=model.name
-        onSave=(route-action 'updateProject' model 'Title Updated!')
-        onClose=(route-action 'cancleUpdate' model)
-        as |inline-edit|}}
-        {{#inline-edit.editable}}
-          <h3>{{model.name}}</h3>
-        {{/inline-edit.editable}}
-
-        {{#inline-edit.editor}}
-          {{input value=model.name}}
-        {{/inline-edit.editor}}
-      {{/ember-inline-edit}}
+      <h3>{{model.name}}</h3>
+      {{#if model.exploring}}
+        {{#if session.isAuthenticated}}
+          {{#link-to 'login'}}Login or register to save{{/link-to}}
+        {{else}}
+          <span class='btn'>Save as Project</span>
+        {{/if}}
+      {{/if}}
     </div>
-    {{#if raster}}
-        {{show-hide-layers toggleAll=true layers=model.raster_layers checked=model.visiable_raster class='switch'}}
-    {{else if vector}}
-        {{show-hide-layers toggleAll=true layers=model.vector_layers checked=model.visiable_vector class='switch'}}
-    {{else}}
-        <div class="one-col" />
-    {{/if}}
+    {{#if model.may_edit}}
+    <div class='project-pane-save {{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model}}>
+      SAVE
+    </div>
+      {{/if}}
 </div>
+{{!-- {{#if model.exploring}}
 
+<div class='pane-container'>
+  <span class='pane-content'>
+    {{#link-to 'login'}}Login or register to save{{/link-to}}
+  </span>
+</div>{{/if}} --}}
+{{#if (or raster vector)}}
+<div class="secondary-pane-title">
+<div class='project-pane-title'>
+  {{title}}
+</div>
+{{#if raster}}
+{{show-hide-layers toggleAll=true layers=model.raster_layers checked=model.visiable_raster class='switch'}}
+{{else if vector}}
+{{show-hide-layers toggleAll=true layers=model.vector_layers checked=model.visiable_vector class='switch'}}
+{{/if}}
+</div>
+{{/if}}
 <div class="pane-container">
     <div class="pane-content {{extraClass}}">
         {{yield}}

@@ -1,20 +1,43 @@
+.search-head {
+  @include grid-container;
+  background-color: $secondary-color;
+  color: color('grey', 'lighten-5');
+  cursor: pointer;
+  height: 2.5em;
+  margin-top: calc(-50px - -#{$navigation-height});
+  overflow: hidden;
+  padding: .25em;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+  transition: background-color $turtle;
+  will-change: width;
+  z-index: 9999;
+
+  .fa {
+    transform: none;
+    transition: transform $turtle linear $rabbit;
+  }
+
+  .search-head-title {
+    @include grid-column(10);
+    font-size: 1.25em;
+    margin-left: 0;
+    padding: .25em;
+    width: 100%;
+  }
+
+}
+
 .search-pane {
   @include grid-container;
   background-color: $white;
   display: block;
   position: absolute;
   right: 0;
-  top: 60px;
-  transition: width $turtle;
-  width: 0%;
+  top: calc(2em + 6px + #{$navigation-height});
+  will-change: width;
   z-index: 11111;
-
-
-  &.showing-search {
-    // right: -.1;
-    // transition: width $turtle;
-    width: 35%;
-  }
 
   .scroll-top {
     display: flex;
@@ -38,13 +61,9 @@
 
     .result-container {
       @include grid-container;
-      // font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-      // font-weight: 100;
     }
 
     .result-header {
-      // font-size: 1.25em;
-      // font-weight: 300;
       margin-bottom: .25em;
     }
 
@@ -55,8 +74,6 @@
     .result-title {
       @include grid-column(11);
       color: color('blue-grey', 'darken-4');
-      // font-size: 1.5em;
-      // line-height: 1.25em;
     }
 
     .result-description {
@@ -118,7 +135,6 @@
 
   .result-list {
     padding: 0;
-    // position: relative;
 
     ul {
       list-style: none;
@@ -154,7 +170,7 @@
   padding-bottom: 1em;
   padding-top: .5em;
   position: absolute;
-  top: calc(100vh - 7em);
+  top: calc(100vh - 9em);
   width: 100%;
 
   li {
@@ -174,5 +190,67 @@
     background-color: transparent;
     color: color('grey', 'darken-4');
     padding: 0;
+  }
+}
+
+.showing-search {
+  animation-duration: $rabbit;
+  animation-fill-mode: forwards;
+  animation-name: expand;
+  width: 0;
+}
+
+.showing-search-head {
+  animation-duration: $rabbit;
+  animation-fill-mode: forwards;
+  animation-name: expand;
+  background-color: $primary-color;
+
+  .fa {
+    transform: rotateY(150deg);
+  }
+}
+
+.collapse-head {
+  animation-duration: $rabbit;
+  animation-fill-mode: forwards;
+  animation-name: collapse-head;
+  width: 33%;
+}
+
+.collapse-pane {
+  animation-duration: $rabbit;
+  animation-fill-mode: forwards;
+  animation-name: collapse-pane;
+  width: 33%;
+}
+
+@keyframes expand {
+  25% {
+    width: 17ch;
+  }
+
+  100% {
+    width: 33%;
+  }
+}
+
+@keyframes collapse-head {
+  75% {
+    width: 17ch;
+  }
+
+  100% {
+    width: 17ch;
+  }
+}
+
+@keyframes collapse-pane {
+  75% {
+    width: 17ch;
+  }
+
+  100% {
+    width: 0%;
   }
 }

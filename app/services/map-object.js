@@ -389,6 +389,7 @@ export default Service.extend({
 
     showDetails(properties) {
         let popupContent = properties;
+        popupContent += "<img src='/assets/images/doc.png' />";
         if (get(properties, 'youtube')) {
             popupContent += '<div class="video"><div class="video-wrapper">';
             popupContent += `<iframe src=//${get(properties, 'youtube')}?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>`;

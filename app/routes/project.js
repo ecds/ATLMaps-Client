@@ -193,7 +193,9 @@ export default Route.extend({
                 project.toggleProperty('published');
             }
             run.later(this, () => {
-                project.save().then(() => {
+                project.save().then((savedProject) => {
+                    savedProject.get('raster_layer_project').invoke('save');
+                    savedProject.get('vector_layer_project').invoke('save');
                     flash.setProperties({
                         message: 'PROJECT UPDATED',
                         show: true,

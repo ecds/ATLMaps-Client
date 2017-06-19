@@ -24,6 +24,7 @@ export default Model.extend({
     default_base_map: attr('string'),
     user_id: attr(),
     new_project: attr('boolean'),
+    saved: attr('boolean'),
     published: attr('boolean'),
     featured: attr('boolean'),
     user: attr(),
@@ -69,8 +70,8 @@ export default Model.extend({
         defaultValue: false
     }),
     safe_background_photo: computed(function safeBackgroundPhoto() {
-        return new htmlSafe(`background-image: url(${get(this, 'photo')};`);
-    }),
+        return new htmlSafe(`background-image: url("${get(this, 'photo')}");`);
+    }).property('photo'),
 
     // Attribute that will be set to true if a user is "exploring".
     exploring: attr('boolean', {
