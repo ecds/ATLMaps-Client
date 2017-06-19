@@ -10,15 +10,15 @@ module.exports = function(defaults) {
 
     var app = new EmberApp(defaults, {
 
-        materializeDefaults: {
-            modalIsFooterFixed: false,
-            buttonIconPosition: 'left',
-            loaderSize: 'big',
-            loaderMode: 'indeterminate',
-            modalContainerId: 'materialize-modal-root-element',
-            dropdownInDuration: 300,
-            dropdownOutDuration: 300
-        },
+        // materializeDefaults: {
+        //     modalIsFooterFixed: false,
+        //     buttonIconPosition: 'left',
+        //     loaderSize: 'big',
+        //     loaderMode: 'indeterminate',
+        //     modalContainerId: 'materialize-modal-root-element',
+        //     dropdownInDuration: 300,
+        //     dropdownOutDuration: 300
+        // },
 
         emberComposableHelpers: {
             only: ['toggle']
@@ -31,8 +31,7 @@ module.exports = function(defaults) {
 
         sassOptions: {
             includePaths: [
-                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog',
-                'bower_components/materialize/sass'
+                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
             ],
             nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
         },
