@@ -20,5 +20,5 @@ before_install:
 install:
   - yarn install
 
-script:
-  - ember test
+# script:
+#   - ember test
