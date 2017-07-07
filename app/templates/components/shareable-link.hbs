@@ -3,20 +3,20 @@
     clicked, it gets a class of `active`. When that div has the class of `active`
     `shareable-link` class is set to `display: block`
 }}
-<a {{action "toggleShareableLink"}} class='secondary-conent {{layer.data_format}}' title='Get shareable link'><i class="fa fa-link" aria-hidden="true"></i></a>
+<span {{action "toggleShareableLink"}}><i class="fa fa-link" aria-hidden="true"></i> Share Layer</span>
 {{#if isShowingModal}}
 
 
     {{#tether-dialog close='toggleShareableLink' container-class='shareable-link-modal' hasOverlay=false target='' clickOutsideToClose=true }}
         <a {{action 'toggleShareableLink'}} class='close-button right'>
-            <i class="material-icons">highlight_off</i>
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
         </a>
         <p>
             {{!exampleTargetAttachment}} {{input type='text' value=layer.absolute_url id=layer.shareable_link_id}}
         </p>
         {{!#if layer.shareable-link}}
         {{#copy-button clipboardTarget=layer.shareable_link_id_selector success=(action 'success') error=(action 'error') class='waves-effect waves-light btn' }}
-            copy link <i class="material-icons">content_copy</i>
+            <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
         {{/copy-button}}
         {{!/if}}
     {{/tether-dialog}}

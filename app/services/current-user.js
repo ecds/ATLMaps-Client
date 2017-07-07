@@ -24,9 +24,6 @@ export default Service.extend({
 
     load() {
         if (this.get('session.isAuthenticated')) {
-            // if (get(this, 'user')) {
-            //     return get(this, 'store').peekRecord('user', get(this, 'user.id'));
-            // }
             return this.get('store').queryRecord('user', { me: true }).then((user) => {
                 this.set('user', user);
             });

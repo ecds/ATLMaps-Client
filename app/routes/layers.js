@@ -43,6 +43,7 @@ export default Route.extend({
             }
 
             try {
+                // get(this, 'currentModel.vectors').then(() => {
                 get(self, 'currentModel.vectors').forEach((vector) => {
                     // set(vector, 'active_in_list', true);
                     vector.setProperties({ active_in_list: true, opacity: 1 });
@@ -57,7 +58,7 @@ export default Route.extend({
             } catch(error) {
                 // Don't care.
             }
-            map.fitBounds(get(self, 'mapObject.allBounds'));
+            // map.fitBounds(get(self, 'mapObject.allBounds'));
             // TODO get rid of this.
             // Activate the according from MaterializeCSS.
             $('.collapsible').collapsible();

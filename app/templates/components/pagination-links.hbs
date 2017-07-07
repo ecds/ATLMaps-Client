@@ -1,7 +1,7 @@
 <ul class="pagination center-align">
   {{#if meta.prev_page}}
     {{#if (gt meta.prev_page 1)}}
-    <a {{action (route-action 'getResults' 1 layerType)}}><li class="waves-effect">1</li></a>
+    <li onclick={{action (route-action 'getResults' 1 layerType)}} class="waves-effect">1</li>
     <li class='disabled'>...</li>
     {{/if}}
     <a {{action (route-action 'getResults' meta.prev_page layerType)}}><li class="waves-effect">{{meta.prev_page}}</li></a>
@@ -9,12 +9,12 @@
   {{/if}}
     <li class="waves-effect active">{{meta.current_page}}</li>
   {{#if meta.next_page}}
-    <a {{action (route-action 'getResults' meta.next_page layerType)}}><li class="waves-effect">{{meta.next_page}}</li></a>
+    <li onclick={{action (route-action 'getResults' meta.next_page layerType)}} class="waves-effect">{{meta.next_page}}</li>
     {{#if (gt meta.total_pages 2)}}
       <li class='disabled'>...</li>
-      <a {{action (route-action 'getResults' meta.total_pages layerType)}}><li class="waves-effect">{{meta.total_pages}}</li></a>
+      <li onclick={{action (route-action 'getResults' meta.total_pages layerType)}} class="waves-effect">{{meta.total_pages}}</li>
     {{/if}}
   {{else}}
     <li class='disabled'>--</li>
   {{/if}}
-  </ul>
+</ul>

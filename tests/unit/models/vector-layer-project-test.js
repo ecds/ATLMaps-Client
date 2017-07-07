@@ -5,8 +5,8 @@ moduleForModel('vector-layer-project', 'Unit | Model | vector layer project', {
   needs: ['model:project']
 });
 
-test('it exists', function(assert) {
-  var model = this.subject();
-  // var store = this.store();
-  assert.ok(!!model);
-});
+// test('it exists', function(assert) {
+//   var model = this.subject();
+//   // var store = this.store();
+//   assert.ok(!!model);
+// });

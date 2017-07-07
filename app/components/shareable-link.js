@@ -14,7 +14,6 @@ export default Component.extend({
     flashMessage: service(),
     isShowingModal: false,
     tagName: 'span',
-    classNames: ['shareable-link', 'layer-action'],
     classNameBindings: ['shareOnly::share-only'],
 
     shareOlnly: false,

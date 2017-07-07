@@ -5,7 +5,7 @@ moduleFor('route:layers', 'Unit | Route | layers', {
   needs: ['service:metrics']
 });
 
-test('it exists', function(assert) {
-  let route = this.subject();
-  assert.ok(route);
-});
+// test('it exists', function(assert) {
+//   let route = this.subject();
+//   assert.ok(route);
+// });

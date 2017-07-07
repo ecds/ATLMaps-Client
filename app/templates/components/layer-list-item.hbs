@@ -24,6 +24,12 @@
     {{/each-in}}
   </section>
   {{/if}}
+  <section class='layer-list-item-actions'>
+    {{shareable-link layer=layer tagName='button' class='flat'}}
+    {{#if project.may_edit}}
+      {{remove-layer-button model=model layer=layer tagName='button' class='flat'}}
+    {{/if}}
+  </section>
   <footer class='citation-footer'>
       <div class='provider-name'>
   	     <h6 class='cite-h6'>Provided by:</h6>

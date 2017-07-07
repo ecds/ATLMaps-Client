@@ -37,8 +37,25 @@
 .login-form {
   @include grid-container;
   background-color: $white;
-  margin: 8em auto;
+  margin: 0 auto;
   width: 35vw;
+
+  .authenticating {
+    background-color: rgba(255, 255, 255, .84);
+    font-size: 20vh;
+    height: 100%;
+    left: 0;
+    // padding: 25% 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+
+    i {
+      color: $secondary-color;
+      margin: 25% auto;
+    }
+  }
 
   button {
     margin-left: 1em;
@@ -72,8 +89,8 @@
   .social-provider {
     @include grid-column(6);
     border-radius: 3px;
-    font-size: 2em;
     cursor: pointer;
+    font-size: 2em;
     padding: .5em;
     text-align: center;
 

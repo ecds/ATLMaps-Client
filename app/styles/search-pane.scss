@@ -57,14 +57,14 @@ $small-font-size: .7em;
   }
 }
 
-// .ember-burger-menu {
-//   position: absolute;
-// }
-
 .btn-floating {
   i {
     vertical-align: middle;
   }
+}
+
+.search-box {
+  height: 4em;
 }
 
 .remove-institutions {
@@ -83,10 +83,6 @@ $small-font-size: .7em;
     cursor: pointer;
   }
 }
-
-// .search-text-input {
-//   width: 80%;
-// }
 
 .glow-tab {
   animation-duration: $rabbit;
@@ -131,13 +127,14 @@ $small-font-size: .7em;
   outline: 0;
   padding: .4em;
   text-transform: none;
-
-  // &:hover {
-  //   background-color: transparent;
-  // }
 }
 
 .tag-list {
   font-size: .85em;
   padding-bottom: 1em;
+}
+
+// FIXME: this should not exist. Somehow, `.active` gets applied to the searc pane.
+#search {
+  color: black;
 }

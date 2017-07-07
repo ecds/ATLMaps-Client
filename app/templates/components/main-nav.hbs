@@ -22,19 +22,6 @@
         </ul>
     </nav>
     <div class="navigation-tools">
-        {{!-- <a href='javascript:void(0)' class='title-bar-action register-click {{if model.project.may_edit "tite-bar-action-project"}}' id='user-menu-link'>
-            <i class="fa fa-cog toggle-user-menu {{if showUserMenu 'showing-user-menu'}}" aria-hidden="true"></i>
-        </a> --}}
-        {{!-- {{#unless model.project}} --}}
-
-        {{!-- {{/unless}} --}}
-        {{!user-menu showUserMenu=showUserMenu model=model}}
-
-        {{!-- {{#if (or model.project.may_edit (is-equal model.project.name 'Explore'))}}
-            <button class="search-btn btn waves-effect waves-light" type="submit" {{action (toggle-action 'showingSearch' model.project)}}>
-              <i class="fa fa-search" aria-hidden="true"></i> Find Layers
-            </button>
-        {{/if}} --}}
         {{#if session.isAuthenticated}}
         {{#basic-dropdown as |dd|}}
           {{#dd.trigger class="trigger-bootstrap-feel"}}<i class="fa fa-user" aria-hidden="true"></i> Account{{/dd.trigger}}
@@ -61,24 +48,16 @@
           </ul>
           {{/dd.content}}
         {{/basic-dropdown}}
-        {{!-- <a onclick={{action 'invalidateSession'}} class='title-bar-action'>
-          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
-        </a> --}}
         {{else}}
-        {{#link-to 'login' class='title-bar-action'}}<i class="fa fa-sign-in" aria-hidden="true"></i> Login{{/link-to}}
+        {{#login-link}}<i class="fa fa-sign-in" aria-hidden="true"></i> Log in{{/login-link}}
         {{/if}}
     </div>
 </div>
-{{#if model.project.may_edit}}
+{{#if (or model.project.may_edit model.project.exploring)}}
 <div class='search-head {{if model.project.showingSearch 'showing-search-head' 'collapse-head'}}'>
     <div class='search-head-title' onclick={{action (toggle-action 'showingSearch' model.project)}}>
         <i class="fa fa-chevron-left" aria-hidden="true"></i><i class="fa fa-chevron-left" aria-hidden="true"></i> Find Layers
     </div>
-    {{!-- <div class='search-close-button'>
-        <a {{action (toggle-action 'showingSearch' model.project)}} class="">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </a>
-    </div> --}}
 </div>
 {{!-- empty div is the wormhole --}}
 {{/if}}

@@ -164,7 +164,7 @@ export default Service.extend({
 
                 break;
             }
-        case 'point-data':
+        default:
             {
                 layer.setProperties({
                     layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${colorValues.markerColor.name}`,
@@ -175,19 +175,6 @@ export default Service.extend({
 
                 break;
             }
-        case 'polygon':
-        case 'line-data':
-            {
-                layer.setProperties({
-                    layerClass: `${get(layer, 'slug')} layer-${colorValues.hapeColor.name}`,
-                    colorName: colorValues.hapeColor.name,
-                    colorHex: colorValues.hapeColor.hex
-                });
-                self.mapVector(layer);
-
-                break;
-            }
-        default: return true;
         }
         return true;
     },
@@ -300,7 +287,6 @@ export default Service.extend({
                     if (featureProps.geometry_type === 'MultiPolygon') {
                         newLeafletFeature.setStyle({ opacity: 0.7 });
                     }
-                    layerProps.leaflet_object.addLayer(newLeafletFeature);
                     newLeafletFeature.bindPopup();
                     // newLeafletFeature.addTo(atlMap);
                     newLeafletFeature.on('add', () => {
@@ -311,13 +297,14 @@ export default Service.extend({
                         this.showDetails(feature);
                     });
                     feature.setProperties({ leaflet_object: newLeafletFeature });
+                    layerProps.leaflet_object.addLayer(newLeafletFeature);
                     break;
                 }
             default: return true;
             }
+
             return true;
         });
-
         layerProps.leaflet_object.addTo(atlMap);
         return layerProps.leaflet_object;
     },
@@ -389,14 +376,16 @@ export default Service.extend({
 
     showDetails(properties) {
         let popupContent = properties;
-        popupContent += "<img src='/assets/images/doc.png' />";
+        if (get(properties, 'properties.holc_id')) {
+            popupContent += `<a href='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.pdf' target='_blank'><img style='float: right; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding-left: 2px;' src='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.png' /></a>`;
+        }
         if (get(properties, 'youtube')) {
             popupContent += '<div class="video"><div class="video-wrapper">';
             popupContent += `<iframe src=//${get(properties, 'youtube')}?modestbranding=1&rel=0&showinfo=0&theme=light" frameborder="0" allowfullscreen></iframe>`;
             popupContent += '</div></div>';
         }
         if (get(properties, 'description')) {
-            popupContent += unescape(get(properties, 'description'));
+            popupContent += `${get(properties, 'safe_description')}`;
         }
 
         // START GALLERY

@@ -10,9 +10,11 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 const {
     Route,
     debug,
+    get,
     inject: {
         service
-    }
+    },
+    set
 } = Ember;
 
 export default Route.extend(ApplicationRouteMixin, {
@@ -20,9 +22,24 @@ export default Route.extend(ApplicationRouteMixin, {
     flashMessage: service(),
     session: service(),
 
+    sessionAuthenticated() {
+        this._super(...arguments);
+        set(this.controller, 'showingLogin', false);
+    },
+
     actions: {
         error(err) {
             debug(err);
+        },
+
+        didTransition() {
+            if (!get(this, 'currentUser')) {
+                get(this, 'currentUser').load();
+            }
+        },
+
+        toggleShowingLogin() {
+            this.controller.toggleProperty('showingLogin');
         }
     }
 });

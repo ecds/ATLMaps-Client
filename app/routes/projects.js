@@ -21,7 +21,10 @@ export default Route.extend({
         return this.get('currentUser').load();
     },
 
-    beforeModel() {
+    beforeModel(params) {
+        if (params.project_id) {
+            this.transitionTo('/project', params.project_id);
+        }
         return this._loadCurrentUser();
         // console.log('title', get(this, 'currentUser.user'));
     },
@@ -49,25 +52,7 @@ export default Route.extend({
         },
 
         createProject() {
-            // Create a new project with some basic data set.
-            const project = this.store.createRecord('project', {
-                name: 'Click Here to Update Title',
-                description: 'Click here to add a description.',
-                // I really hate this and there has to be a better way.
-                published: false,
-                center_lat: 33.75440100,
-                center_lng: -84.3898100,
-                zoom_level: 13,
-                default_base_map: 'street',
-                suppressIntro: true,
-                showingSearch: true
-            });
-
-            // project.setProperties({id: Ember.guidFor(project)});
-            // this.transitionTo('project.info', get(project, 'id'));
-            project.save().then((newProject) => {
-                self.transitionTo('project.info', get(newProject, 'id'));
-            });
+            this.transitionTo('project.info', 'new');
         },
 
         deleteProject(project_id) {

@@ -2,20 +2,29 @@
     <div class="pane-card">
       <div class='neat-row'>
 
-        {{#ember-inline-edit
+        {{!-- {{#ember-inline-edit
           onSave=(route-action 'updateProject' model.project 'Description Updated!')
           onClose=(route-action 'cancleUpdate' model.project)
           enabled=model.project.may_edit
           as |inline-edit| }}
-            {{#inline-edit.editable}}
+            {{#inline-edit.editable}} --}}
                 <article>
                     {{#if model.project.exploring}}
-                    <p>Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must {{#link-to 'login'}}login{{/link-to}}</p>
+                      <p>Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must {{#link-to 'login'}}login{{/link-to}}</p>
                     {{else}}
-                    {{model.project.description}}
+                      {{#if model.project.may_edit}}
+                        {{#inline-edit
+                          model=model.project
+                          value=model.project.description
+                        }}
+                        {{textarea value=model.project.description rows="12"}}
+                        {{/inline-edit}}
+                        {{else}}
+                          {{model.project.description}}
+                        {{/if}}
                     {{/if}}
                 </article>
-            {{/inline-edit.editable}}
+            {{!-- {{/inline-edit.editable}}
 
             {{#inline-edit.editor value=model.project.description }}
                 {{textarea class='description' value=model.project.description maxlength='500' rows='40'}}
@@ -23,7 +32,7 @@
                   {{model.project.description.length}}/500
                 </span>
             {{/inline-edit.editor}}
-        {{/ember-inline-edit}}
+        {{/ember-inline-edit}} --}}
 
 </div>
         {{#if model.project.hasIntro}}

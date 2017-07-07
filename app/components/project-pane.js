@@ -5,6 +5,7 @@ const { Component, inject: { service } } = Ember;
 export default Component.extend({
     classNames: ['project-pane'],
     flashMessage: service(),
+    session: service(),
 
     didInsertElement() {}
 });

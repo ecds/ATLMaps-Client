@@ -21,8 +21,7 @@ module.exports = function setUp(environment) {
 
         EmberENV: {
             FEATURES: {
-                // Here you can enable experimental features on an ember canary build
-                // e.g. 'with-controller': true
+                'ds-rollback-attribute': true
             }
         },
 
@@ -118,29 +117,6 @@ module.exports = function setUp(environment) {
         'img-src': '* data:',
         'frame-src': "'self' http://www.youtube.com https://www.youtube.com https://youtu.be"
     };
-
-    // ENV['ember-simple-auth'] = {
-    //   //authorizer: 'simple-auth-authorizer:oauth2-bearer',
-    //   crossOriginWhitelist: [ENV.APP.API_HOST]
-    // };
-    //
-    // ENV['ember-simple-auth-oauth2'] = {
-    //   serverTokenEndpoint: ENV.APP.API_HOST+'/oauth/token',
-    //   serverTokenRevocationEndpoint: ENV.APP.API_HOST+'/oauth/revoke',
-    // };
-    //
-    // // var apiHost = 'https://api.atlmaps.com/';
-    //
-    // ENV['ember-simple-auth'] = {
-    //   authorizer: 'ember-simple-auth-authorizer:oauth2-bearer',
-    //   crossOriginWhitelist: [ENV.APP.API_HOST]
-    // };
-
-    //   ENV.sassOptions = {
-    //   includePaths: [
-    //     'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
-    //   ]
-    // };
 
     return ENV;
 };

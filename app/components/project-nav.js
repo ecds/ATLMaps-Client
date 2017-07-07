@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const {
     Component,
-    Object,
+    Object: EmberObject,
     computed,
     get
 } = Ember;
@@ -13,14 +13,14 @@ export default Component.extend({
     init() {
         this._super(...arguments);
         this.set('routes', [
-            Object.create({
+            EmberObject.create({
                 route: 'project.info',
                 label: 'Info',
                 icon: 'info_outline',
                 iconClass: null,
                 show: true
             }),
-            Object.create({
+            EmberObject.create({
                 route: 'project.raster-layers',
                 label: 'Maps',
                 icon: 'layers',
@@ -28,14 +28,14 @@ export default Component.extend({
                 show: get(this, 'model.hasRasters')
             }),
             // Vector layers uses a custom icon.
-            Object.create({
+            EmberObject.create({
                 route: 'project.vector-layers',
                 label: 'Data',
                 icon: null,
                 iconClass: 'atlmaps-ext database',
                 show: get(this, 'model.hasVectors')
             }),
-            Object.create({
+            EmberObject.create({
                 route: 'project.base-layers',
                 label: 'Base',
                 icon: 'map',

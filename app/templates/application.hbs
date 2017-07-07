@@ -1,3 +1,9 @@
+{{#if showingLogin}}
+{{#tether-dialog close='toggleShowingLogin' translucentOverlay=true clickOutsideToClose=true}}
+{{login-form}}
+{{/tether-dialog}}
+{{/if}}
+
 <div class="content">
   {{#unless isProjectDetail}}
     {{ main-nav model=model}}

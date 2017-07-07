@@ -1,4 +1,6 @@
-
+{{#if authenticating}}
+<span class='authenticating'><i class="fa fa-circle-o-notch fa-spin"></i></span>
+{{/if}}
 {{#if accountCreated}}
   Your account has been created. Check your email to confirm your account.
 {{else if session.isAuthenticated}}
@@ -6,9 +8,7 @@
   <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
   {{/if}}
 {{else}}
-    {{!-- <section class="button-group"> --}}
-    <section><h2>LOGIN</h2></section>
-
+    <section><h2>LOG IN</h2></section>
     {{#if signUp}}
       <form {{action 'signUpSubmit' on='submit'}}>
       <label for='email'>Email</label> {{input value=newLogin.identification placeholder='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
@@ -19,6 +19,7 @@
       <button type="submit" class="">Sign Up</button>
       </form>
     {{else}}
+
       {{! Buttons should probably be a block component.}}
       <section class="providers">
       <div class="blue darken-4 white-text social-provider" {{action 'authenticateWithFacebook'}}>

@@ -4,13 +4,13 @@
     {{#each model.project.vector_layer_project as |layer|}}
       <li id= {{layer.vector_layer.name}} class='layer-list-item'>
         {{#if layer.vector_layer.name}}
-          {{#layer-list-item layer=layer.vector_layer}}
+          {{#layer-list-item layer=layer.vector_layer project=model.project}}
             {{#layer-item-title layer=layer.vector_layer layers=model.project.vector_layers}}
               {{#if model.project.may_edit}}
                 {{#if layer.showColorPicker}}
                   {{#tether-dialog close=(toggle "showColorPicker" layer) container-class='color-picker' hasOverlay=false target='' clickOutsideToClose=true }}
                     <span onclick={{action (toggle "showColorPicker" layer)}} class='close-button right'>
-                        <i class="material-icons">highlight_off</i>
+                        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                     </span>
                     {{color-picker projectLayer=layer}}
                   {{/tether-dialog}}
@@ -19,7 +19,12 @@
               <span class='layer-list-item-icon vector-icon layer-{{layer.vector_layer.colorName}} {{layer.vector_layer.data_type}}' onclick={{action (toggle "showColorPicker" layer)}}>
               </span>
             {{/layer-item-title}}
-          {{layer-list-item-actions layer=layer.vector_layer model=model class='vector'}}
+            <div class='layer-list-item-secondary-action'>
+            <div class='secondary-action-row'>
+                {{show-hide-layers layer=layer.vector_layer}}
+            </div>
+            </div>
+
         {{/layer-list-item}}
       {{else}}
         <h3>Loading...</h3>

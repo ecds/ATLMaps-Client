@@ -10,7 +10,7 @@ const {
 export default Controller.extend({
     session: service(),
 
-    // showUserMenu: false,
+    showingLogin: false,
 
     // TODO: I don't like this. Not one bit.
     // This is here to hide the main navbar while looliking at a project.

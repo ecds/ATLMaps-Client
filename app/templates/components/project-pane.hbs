@@ -1,19 +1,17 @@
 <div class="pane-title">
-    <div class='project-pane-title'>
-      <h3>{{model.name}}</h3>
+  <div class='project-pane-title'>
+    <h3>{{model.name}}</h3>
+  </div>
+
+  <div class='project-pane-save'>
+    {{#if (and session.isAuthenticated model.may_edit)}}
+      <span class='{{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model}}>SAVE</span>
+    {{else}}
       {{#if model.exploring}}
-        {{#if session.isAuthenticated}}
-          {{#link-to 'login'}}Login or register to save{{/link-to}}
-        {{else}}
-          <span class='btn'>Save as Project</span>
-        {{/if}}
+        {{#login-link class='faint-link'}}Log in or sign up to save{{/login-link}}
       {{/if}}
-    </div>
-    {{#if model.may_edit}}
-    <div class='project-pane-save {{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model}}>
-      SAVE
-    </div>
-      {{/if}}
+    {{/if}}
+  </div>
 </div>
 {{!-- {{#if model.exploring}}
 

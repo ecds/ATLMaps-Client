@@ -163,6 +163,11 @@
 
 
 // Pagination
+.pagination-bar {
+  position: absolute;
+  top: calc(100vh - 6em);
+}
+
 .pagination {
   background-color: color('grey', 'lighten-3');
   height: 4em;
@@ -170,12 +175,12 @@
   padding-bottom: 1em;
   padding-top: .5em;
   position: absolute;
-  top: calc(100vh - 9em);
-  width: 100%;
+  width: 33vw;
 
   li {
     background-color: $primary-color-light;
     color: color('grey', 'lighten-4');
+    display: initial;
     font-weight: 100;
     opacity: .7;
 
@@ -227,7 +232,7 @@
 
 @keyframes expand {
   25% {
-    width: 17ch;
+    width: 20ch;
   }
 
   100% {
@@ -237,17 +242,17 @@
 
 @keyframes collapse-head {
   75% {
-    width: 17ch;
+    width: 20ch;
   }
 
   100% {
-    width: 17ch;
+    width: 20ch;
   }
 }
 
 @keyframes collapse-pane {
   75% {
-    width: 17ch;
+    width: 20ch;
   }
 
   100% {

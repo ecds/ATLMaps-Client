@@ -319,6 +319,7 @@ header.navigation {
 .navigation-tools {
   .title-bar-action {
     color: color('grey', 'base');
+    cursor: pointer;
     position: relative;
     right: 1em;
     top: 45%;
@@ -364,7 +365,7 @@ header.navigation {
     color: color('grey', 'base');
     position: relative;
     right: 1em;
-    top: 45%;
+    top: 7px;
 
     i {
       font-size: 1.25em;
@@ -392,6 +393,7 @@ header.navigation {
 }
 
 .account-fa-ul {
+  cursor: pointer;
   padding: .75em;
 
   li {

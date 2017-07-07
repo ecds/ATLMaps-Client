@@ -26,8 +26,11 @@ export default Component.extend({
 
     showingPassword: false,
 
+    authenticating: false,
+
     actions: {
         authenticateWithOAuth2() {
+            set(this, 'authenticating', true);
             const {
                 identification,
                 password
@@ -38,11 +41,25 @@ export default Component.extend({
         },
 
         authenticateWithFacebook() {
-            this.get('session').authenticate('authenticator:torii', 'facebook');
+            set(this, 'authenticating', true);
+            this.get('session').authenticate('authenticator:torii', 'facebook').then(() => {
+                set(this, 'authenticating', false);
+                get(this, 'currentUser').load();
+            }, (e) => {
+                this.set('authenticating', false);
+                this.set('errorMessage', e.error || e);
+            });
         },
 
         authenticateWithGoogle() {
-            this.get('session').authenticate('authenticator:torii', 'google');
+            set(this, 'authenticating', true);
+            this.get('session').authenticate('authenticator:torii', 'google').then(() => {
+                set(this, 'authenticating', false);
+                get(this, 'currentUser').load();
+            }, (e) => {
+                this.set('authenticating', false);
+                this.set('errorMessage', e.error || e);
+            });
         },
 
         startSignUp() {

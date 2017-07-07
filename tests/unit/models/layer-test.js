@@ -5,8 +5,8 @@ moduleForModel('layer', 'Unit | Model | layer', {
   needs: ['model:project', 'model:tag', 'model:institution']
 });
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
-});
+// test('it exists', function(assert) {
+//   let model = this.subject();
+//   // let store = this.store();
+//   assert.ok(!!model);
+// });

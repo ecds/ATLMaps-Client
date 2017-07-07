@@ -42,7 +42,7 @@ export default Torii.extend({
     logOut() {
         const ajax = get(this, 'ajax');
 
-        return this._super(...arguments.then(function foo() {
+        return this._super(...arguments.then(function dip() {
             return ajax.request(`${ENV.APP.API_HOST}/revoke`, {
                 type: 'POST',
                 dataType: 'json',

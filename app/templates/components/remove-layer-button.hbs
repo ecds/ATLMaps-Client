@@ -1,5 +1,3 @@
-{{#if model.project.may_edit}}
-  <a class='secondary-conent {{layer.data_format}}' onclick={{action (route-action 'addRemoveLayer' layer) preventDefault=true}}>
-    <i class="fa fa-trash" aria-hidden="true"></i>
-  </a>
-{{/if}}
+<span onclick={{action (route-action 'addRemoveLayer' layer)}}>
+  <i class="fa fa-trash" aria-hidden="true"></i> Remove
+</span>

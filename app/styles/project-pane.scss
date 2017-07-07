@@ -1,5 +1,6 @@
 .project-pane {
   @include grid-container;
+  background-color: $white;
   border-bottom-color: $white;
   border-bottom-style: solid;
   border-bottom-width: 1em;
@@ -45,6 +46,11 @@
       }
     }
   }
+
+  &.layers-pane {
+    background-color: transparent;
+    border: 0
+  }
 }
 // The following is the scrolling of the pane was inspired by this
 // https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
@@ -72,7 +78,6 @@
 
 .pane-title,
 .secondary-pane-title {
-  // @include grid-visual;
   @include grid-container;
   height: 4em;
   padding: .5rem 2rem;
@@ -88,10 +93,8 @@
 
   .project-pane-save {
     @include grid-column(1);
-    // color: light-gray;
     cursor: pointer;
     opacity: .4;
-    // padding: .25em;
     width: auto;
 
     &:hover {
@@ -229,21 +232,21 @@ span.pane-content {
     color: $primary-color-light;
     font-weight: bolder;
 
-    .shareable-link {
-      opacity: 0;
-      transition: opacity $turtle;
-    }
-
-    &.active {
-      .shareable-link {
-        opacity: 1;
-
-        .material-icons {
-          cursor: pointer;
-          transform: none;
-        }
-      }
-    }
+    // .shareable-link {
+    //   opacity: 0;
+    //   transition: opacity $turtle;
+    // }
+    //
+    // &.active {
+    //   .shareable-link {
+    //     opacity: 1;
+    //
+    //     .material-icons {
+    //       cursor: pointer;
+    //       transform: none;
+    //     }
+    //   }
+    // }
 
     .shareable-link-modal {
       @include grid-container;
@@ -412,18 +415,6 @@ $flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 
         color: shade($color, 90%);
       }
     }
-  }
-}
-
-.reorder-handle {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  float: right;
-  font-size: 2em;
-
-  &:active {
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
   }
 }
 

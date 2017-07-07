@@ -1,0 +1,7 @@
+{{#if editing}}
+  {{yield}}
+    <button onclick={{action (pipe (route-action 'updateProject' model) (toggle 'editing' this))}}>Save</button>
+    <button onclick={{action 'abort'}} class='secondary-action'>Cancel</button>
+{{else}}
+  {{value}}
+{{/if}}

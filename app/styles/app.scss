@@ -2,6 +2,7 @@
 $roboto-font-path: '../assets/';
 @import 'components/color'; // Custom color settings go here
 $primary-color: color('blue-grey', 'darken-1');
+$action-color: $primary-color;
 $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
@@ -10,21 +11,17 @@ $secondary-color-dark: #f97a0c;
 $secondary-color-light: color('deep-orange', 'accent-1');
 $nav-button: color('grey', 'darken-4');
 $mobile: new-breakpoint(max-width 500px 4);
-@import 'materialize';
+$font-stack-system: 'Roboto';
+@import 'materialize', 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
 @import 'variables';
-@import 'bower_components/bourbon/core/bourbon';
-@import 'bower_components/neat/core/neat';
-@import 'bower_components/bitters/core/base';
-@import 'bower_components/font-awesome/css/font-awesome';
-@import 'fontawesome-local';
-@import 'bower_components/swiper/dist/css/swiper.min.css';
+@import 'bourbon', 'neat', 'base'; // base is bitters
 @import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container', 'md-input'; // Refills
 @import 'flexbox';
 
 body {
   background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
-  font-family: 'Roboto', 'Material Icons' sans-serif;
+  font-family: $font-stack-system;
   font-size: $base-font-size;
   font-smoothing: antialiased;
   height: 100vh;
@@ -33,6 +30,7 @@ body {
   a {
     color: $primary-color-dark;
     font-size: 1em;
+    outline: none !important;
   }
 
   .preloader-wrapper {
@@ -58,20 +56,38 @@ body {
   }
 }
 
+.ember-modal-dialog {
+      z-index: 10001;
+}
+
 .leaflet-control-attribution {
   display: none;
 }
 
-input[type=search]::-webkit-search-cancel-button {
-    -webkit-appearance: searchfield-cancel-button;
-}
+// input[type=search]::-webkit-search-cancel-button {
+//     -webkit-appearance: searchfield-cancel-button;
+// }
 
 a {
   cursor: pointer;
 }
 
+textarea {
+  height: auto;
+}
+
 .active {
-  color: $secondary-color;
+  // color: $secondary-color;
+}
+
+.faint-link {
+  float: right;
+  margin-left: 4em;
+  opacity: .3;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 // Grid
 
@@ -252,8 +268,23 @@ textarea {
     .secondary-action-row {
       margin-left: 25px;
     }
-
   }
+
+  .reorder-handle {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    float: right;
+    font-size: 2em;
+
+    &:active {
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+    }
+  }
+}
+
+.layer-list-item-actions {
+  display: inline-block;
 }
 
 #{$all-buttons} {
@@ -263,6 +294,24 @@ textarea {
   &:hover {
     background-color: $secondary-color;
   }
+
+  &.secondary-action {
+    background-color: $primary-color-light;
+    opacity: .7;
+
+    &:hover {
+      background-color: $primary-color-light;
+      opacity: 1;
+    }
+  }
+
+  &.flat {
+    background-color: transparent;
+    color: inherit;
+    display: inline-block;
+    font-size: .75em;
+  }
+
 }
 // Grid
 

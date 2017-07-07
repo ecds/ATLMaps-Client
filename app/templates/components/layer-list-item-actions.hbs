@@ -1,12 +1,1 @@
-<div class='secondary-action-row'>
-  {{#if layer.name}}
-    {{show-hide-layers layer=layer}}
-  {{/if}}
-</div>
-  {{!-- <div class='twelve-col'> --}}
-  {{#if (and layer layer.active_in_list)}}
-      {{shareable-link layer=layer project=model.project tagName='span'}}
-      {{#if model.project.may_edit}}
-        {{remove-layer-button model=model layer=layer}}
-      {{/if}}
-  {{/if}}
+

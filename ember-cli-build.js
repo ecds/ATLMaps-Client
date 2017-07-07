@@ -10,18 +10,8 @@ module.exports = function(defaults) {
 
     var app = new EmberApp(defaults, {
 
-        // materializeDefaults: {
-        //     modalIsFooterFixed: false,
-        //     buttonIconPosition: 'left',
-        //     loaderSize: 'big',
-        //     loaderMode: 'indeterminate',
-        //     modalContainerId: 'materialize-modal-root-element',
-        //     dropdownInDuration: 300,
-        //     dropdownOutDuration: 300
-        // },
-
         emberComposableHelpers: {
-            only: ['toggle']
+            only: ['toggle', 'pipe']
         },
 
         // fingerprint: {
@@ -31,7 +21,15 @@ module.exports = function(defaults) {
 
         sassOptions: {
             includePaths: [
-                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog'
+                'node_modules/ember-modal-dialog/app/styles/ember-modal-dialog',
+                'bower_components/leaflet/dist',
+                'bower_components/trumbowyg/dist/ui/sass',
+                'bower_components/nouislider/src',
+                'bower_components/bourbon/core',
+                'bower_components/bitters/core',
+                'bower_components/neat/core',
+                'bower_components/swiper/dist/css',
+                'bower_components/font-awesome/scss'
             ],
             nodeSass // Workaround for ember-cli-sass bug https://github.com/aexmachina/ember-cli-sass/issues/117
         },
@@ -60,28 +58,20 @@ module.exports = function(defaults) {
     })
 
     app.import('bower_components/leaflet/dist/leaflet.js');
-    app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
+    // app.import('bower_components/leaflet-ajax/dist/leaflet.ajax.min.js');
     app.import('bower_components/materialize/dist/js/materialize.min.js');
     app.import('bower_components/nouislider/distribute/nouislider.min.js');
-    // app.import('bower_components/list.js/dist/list.min.js');
-    app.import('bower_components/js-cookie/src/js.cookie.js');
     app.import('bower_components/trumbowyg/dist/trumbowyg.min.js');
+    app.import('bower_components/swiper/dist/js/swiper.min.js')
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
-    app.import('bower_components/interact/dist/interact.min.js');
+    app.import('bower_components/interact/dist/interact.js');
 
-    app.import('bower_components/blueimp-md5/js/md5.js');
+    // app.import('bower_components/blueimp-md5/js/md5.js');
 
-    app.import('bower_components/leaflet/dist/leaflet.css');
-    app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
-    app.import('bower_components/nouislider/distribute/nouislider.min.css');
+    // app.import('bower_components/leaflet/dist/leaflet.css');
+    // app.import('bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
+    // app.import('bower_components/nouislider/distribute/nouislider.min.css');
 
-    // return mergeTrees([
-    //     app.toTree(),
-    //     leafletImages,
-    //     trumbowygImages
-    // ], {
-    //     overwrite: true
-    // });
-    return app.toTree([leafletImages, fa, trumbowyg]); // , ckeditorPath]);
+    return app.toTree([leafletImages, trumbowyg, fa]);
 };
