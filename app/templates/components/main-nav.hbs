@@ -28,6 +28,7 @@
 
           {{#dd.content class="content-bootstrap-feel z-depth-3"}}
           <ul class="account-fa-ul fa-ul title-bar-action">
+            {{#if currentUser.confirmed}}
             <li onclick={{action 'invalidateSession'}}>
               <i class='fa-li fa fa-sign-out' aria-hidden='true'></i> Logout
             </li>
@@ -45,6 +46,9 @@
               {{/inline-edit.editor}}
             {{/ember-inline-edit}}
             </li>
+            {{else}}
+            <p>Your account has not been confirmed. Please check your email.</p>
+            {{/if}}
           </ul>
           {{/dd.content}}
         {{/basic-dropdown}}

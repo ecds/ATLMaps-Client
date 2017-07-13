@@ -33,7 +33,7 @@ export default Route.extend(ApplicationRouteMixin, {
         },
 
         didTransition() {
-            if (!get(this, 'currentUser')) {
+            if (!get(this, 'currentUser.displayname')) {
                 get(this, 'currentUser').load();
             }
         },

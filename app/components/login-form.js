@@ -35,8 +35,12 @@ export default Component.extend({
                 identification,
                 password
             } = this.getProperties('identification', 'password');
-            this.get('session').authenticate('authenticator:oauth2', identification, password).catch((reason) => {
-                this.set('errorMessage', reason.error || reason);
+            this.get('session').authenticate('authenticator:oauth2', identification, password).then(() => {
+                set(this, 'authenticating', false);
+                get(this, 'currentUser').load();
+            }, (e) => {
+                set(this, 'authenticating', false);
+                set(this, 'errorMessage', e.error || e);
             });
         },
 

@@ -8,17 +8,25 @@
   <button {{action 'logOut' }}><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
   {{/if}}
 {{else}}
-    <section><h2>LOG IN</h2></section>
     {{#if signUp}}
+    <section><h2>SIGN UP</h2></section>
       <form {{action 'signUpSubmit' on='submit'}}>
-      <label for='email'>Email</label> {{input value=newLogin.identification placeholder='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
-      <label for='password'>Password</label>
-      {{input value=newLogin.password placeholder='Choose Password' class='' type='password'}}
-      <label for='confirm-password'>Confirm Password</label> {{input placeholder='Confirm Password' class='form-control' type='password' pattern=newLogin.password}}
-      <button {{action 'cancel'}}type="submit" class="">Cancel</button>
-      <button type="submit" class="">Sign Up</button>
+        {{!-- <label for='email'>Email</label>
+        {{input value=newLogin.identification type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
+
+        <label for='password'>Password</label>
+        {{input value=newLogin.password class='' type='password'}} --}}
+
+        {{!-- <label for='confirm-password'>Confirm Password</label> --}}
+
+        {{md-input value=identification label='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
+        {{md-input value=newLogin.password label='Password' type=(if showingPassword 'text' 'password')}}
+        {{md-input label='Confirm Password' type=(if showingPassword 'text' 'password')}}
+        <button type="submit" class="">Sign Up</button>
+        <button {{action 'cancel'}}type="submit" class="">Cancel</button>
       </form>
     {{else}}
+    <section><h2>LOG IN</h2></section>
 
       {{! Buttons should probably be a block component.}}
       <section class="providers">
@@ -33,16 +41,15 @@
       <section>- or -</section>
       <section>
       <form {{action 'authenticateWithOAuth2' on='submit'}}>
-      {{input value=identification placeholder='Enter Login' class='form-control'}}
-      <input type={{if showingPassword 'text' 'password'}} name=password class='form-control' placeholder='Password' />
-      {{!-- {{input value=password placeholder='Enter Password' class='form-control' type='password'}} --}}
+      {{md-input value=identification label='Email'}}
+      {{md-input value=password label='Password' type=(if showingPassword 'text' 'password')}}
       <section onclick={{action (toggle-action 'showingPassword' this)}}>
         <i class="fa {{if showingPassword 'fa-check-square-o' 'fa-square-o'}}" aria-hidden="true"></i> Show Password
       </section>
       <button type="submit" class="blue login-btn">Login</button>
       </form>
     </section>
-    <section>No account? <a {{action 'startSignUp'}}>Sign up now!</a></section>
+    <section>No account? <a onclick={{action 'startSignUp'}}>Sign up now!</a></section>
     {{/if}}
     <hr />
     <section class='fine-print'>

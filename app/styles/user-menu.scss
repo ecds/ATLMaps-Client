@@ -67,6 +67,10 @@
     @include grid-column(12);
     padding: .75em .25em;
     text-align: center;
+
+    label {
+      text-align: left;
+    }
   }
 
   a {

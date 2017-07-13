@@ -16,6 +16,7 @@ export default Torii.extend({
     torii: service(),
     ajax: service(),
     session: service(),
+    currentUser: service(),
 
     authenticate() {
         const ajax = this.get('ajax');
@@ -34,6 +35,7 @@ export default Torii.extend({
                     access_token: response.access_token,
                     provider: data.provider
                 };
+                get(this, 'currentUser').load();
                 return authData;
             });
         });
