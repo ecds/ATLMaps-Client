@@ -28,7 +28,7 @@
 
           {{#dd.content class="content-bootstrap-feel z-depth-3"}}
           <ul class="account-fa-ul fa-ul title-bar-action">
-            {{#if currentUser.confirmed}}
+            {{#if currentUser.user.confirmed}}
             <li onclick={{action 'invalidateSession'}}>
               <i class='fa-li fa fa-sign-out' aria-hidden='true'></i> Logout
             </li>

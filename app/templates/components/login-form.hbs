@@ -19,7 +19,7 @@
 
         {{!-- <label for='confirm-password'>Confirm Password</label> --}}
 
-        {{md-input value=identification label='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
+        {{md-input value=newLogin.identification label='Email' type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
         {{md-input value=newLogin.password label='Password' type=(if showingPassword 'text' 'password')}}
         {{md-input label='Confirm Password' type=(if showingPassword 'text' 'password')}}
         <button type="submit" class="">Sign Up</button>
