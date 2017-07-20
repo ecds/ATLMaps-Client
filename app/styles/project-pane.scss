@@ -60,8 +60,7 @@
 
 .intro-modal-header,
 .pane-title,
-.secondary-pane-title,
-.vector-detail-title {
+.secondary-pane-title {
   align-items: center;
   background-color: color('blue-grey', 'lighten-5');
   display: flex;
@@ -123,22 +122,8 @@
 // ensure it is always the correct size and then moved into place
 // and padded with negative margin and padding
 
-.pane-container,
-.vector-detail-container {
-  // backface-visibility: hidden;
-  display: flex;
-  opacity: 1;
-  overflow: hidden;
-  pointer-events: all;
-  // position: relative;
-  transition: max-height $rabbit, opacity $rabbit;
-  width: 100%;
-  will-change: overflow;
-  @media only screen and (min-width: 993px) {
-    .container {
-      width: 85%;
-    }
-  }
+.pane-container {
+  @include scroll-container;
 }
 // All the scrollable sections should overflow and be whatever
 // height they need to be. As they are flex-items (due to being
@@ -232,41 +217,6 @@ span.pane-content {
     color: $primary-color-light;
     font-weight: bolder;
 
-    // .shareable-link {
-    //   opacity: 0;
-    //   transition: opacity $turtle;
-    // }
-    //
-    // &.active {
-    //   .shareable-link {
-    //     opacity: 1;
-    //
-    //     .material-icons {
-    //       cursor: pointer;
-    //       transform: none;
-    //     }
-    //   }
-    // }
-
-    .shareable-link-modal {
-      @include grid-container;
-      display: inline-block;
-      min-width: 25%;
-
-      i {
-        color: inherit;
-        font-size: initial;
-      }
-
-      button {
-        font-size: .75em;
-      }
-
-      .close-button {
-        cursor: pointer;
-      }
-    }
-
     .data-title {
       padding-left: .5em;
     }
@@ -312,23 +262,16 @@ span.pane-content {
   }
 }
 
-.remove-layer,
 .shareable-link {
+  @include grid-column(6);
+}
+
+.remove-layer {
   @include grid-column(4);
   @include grid-push(2);
   cursor: pointer;
   font-size: 1.2em;
-
-  &.share-only {
-    //
-  }
 }
-
-.shareable-link-modal {
-  font-size: .75em;
-  min-width: 320px;
-}
-
 
 .slider-container {
   @include grid-column(12);
@@ -418,7 +361,7 @@ $flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 
   }
 }
 
-/* basic positioning */
+// Coloring HOLC ledgend
 .color-key {
   display: flex;
   font-size: 1.2em;
@@ -432,9 +375,12 @@ $flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 
   }
 
   span { border: 1px solid #ccc; float: left; width: .75em; height: .75em; margin: 2px; }
-/* your colors */
-.color-key-0 { background-color: #4CAF50; }
-.color-key-1 { background-color: #1E88E5; }
-.color-key-2 { background-color: #FFEB3B; }
-.color-key-3 { background-color: #F44336; }
+  .color-key-0 { background-color: #4CAF50; }
+  .color-key-1 { background-color: #1E88E5; }
+  .color-key-2 { background-color: #FFEB3B; }
+  .color-key-3 { background-color: #F44336; }
+}
+
+.shareable-link {
+  padding: 2em;
 }

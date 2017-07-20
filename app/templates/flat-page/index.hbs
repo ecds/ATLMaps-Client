@@ -1,10 +1,3 @@
-{{!-- <div class="hero">
-  <div class="hero-content">
-    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_square.png" alt="Logo Image" class="hero-logo">
-    <h1 class=''>Layers of discovery</h1>
-    <h2 class=''>Mapping the stories of your city</h2>
-  </div>
-</div> --}}
 <div class="banner blue valign-wrapper">
 
   <div class="center-align z-depth-3">
@@ -24,13 +17,13 @@
 
 </div>
 <div class='featured-cards'>
-<div class="cards">
-  {{#if model.isPending}}
-    <h2>Loading...</h2>
-  {{else}}
-  {{#each model as |project|}}
-  {{project-card project=project}}
-  {{/each}}
-  {{/if}}
-</div>
+  <div class="cards">
+    {{#if model.isPending}}
+      <h2>Loading...</h2>
+    {{else}}
+      {{#each model as |project|}}
+        {{project-card project=project}}
+      {{/each}}
+    {{/if}}
+  </div>
 </div>

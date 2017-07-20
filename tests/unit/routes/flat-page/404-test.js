@@ -1,11 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:index', 'Unit | Route | index', {
+moduleFor('route:flat-page/404', 'Unit | Route | flat page/404', {
   // Specify the other units that are required for this test.
-  needs: ['service:metrics']
+  // needs: ['controller:foo']
 });
 
 test('it exists', function(assert) {
-  var route = this.subject();
+  let route = this.subject();
   assert.ok(route);
 });

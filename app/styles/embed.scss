@@ -1,0 +1,40 @@
+// .embed-footer {
+  // background-color: $primary-color-dark;
+  // bottom: 0;
+  // display: block;
+  // height: 40px;
+  // position: absolute;
+  // width: 100%;
+  // z-index: 999;
+//
+//   img {
+//     float: left;
+//     height: 30px;
+//     margin-left: 2.5px;
+//     margin-top: 2.5px;
+//   }
+//
+//   h2 {
+//     color: $white;
+//     font-size: 25px;
+//     line-height: 40px;
+//     margin-left: 20px;
+//   }
+// }
+.embed-header {
+  @include header;
+  background-color: $half-faded-black;
+
+}
+
+.watermark {
+  bottom: 0;
+  opacity: .5;
+  position: absolute;
+  right: 8px;
+  z-index: 999;
+
+  &:hover {
+    opacity: 1;
+  }
+}

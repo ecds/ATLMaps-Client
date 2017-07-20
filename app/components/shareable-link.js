@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 const {
+    $,
     Component,
     get,
     set,
@@ -12,19 +13,41 @@ const {
 
 export default Component.extend({
     flashMessage: service(),
-    isShowingModal: false,
-    tagName: 'span',
-    classNameBindings: ['shareOnly::share-only'],
+    dataColors: service(),
+    mapObject: service(),
+    tagName: '',
 
-    shareOlnly: false,
+    shareUrlId: '',
+    embedCodeId: '',
+    embedUrl(layer) {
+        layer.rollbackAttribute('embedUrl');
+        return `${get(layer, 'embedUrl')}${$.param(this.embedParms)}`;
+    },
+    height: 600,
+    width: 800,
+    embedParams: {
+        color: 'red',
+        base: 'street'
+    },
+    selectedColor: null,
+    baseMaps: ['street', 'satellite', 'greyscale'],
 
     didInsertElement() {
-        set(this, 'shareOnly', get(this, 'project.may_edit'));
+        const layer = get(this, 'layer');
+        this.setProperties(
+            {
+                shareUrlId: `${get(layer, 'slug')}_sharable`,
+                embedCodeId: `${get(layer, 'slug')}_embedable`,
+                selectedColor: get(this, 'dataColors.safeEmbedColors')[0]
+            }
+        );
     },
 
     actions: {
-        toggleShareableLink: function toggleModal() {
-            this.toggleProperty('isShowingModal');
+
+        setColor(color) {
+            set(this, 'embedParams.color', color.name);
+            set(this, 'selectedColor', color);
         },
 
         success() {

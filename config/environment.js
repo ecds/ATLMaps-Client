@@ -45,22 +45,22 @@ module.exports = function setUp(environment) {
     };
 
     if (environment === 'development') {
-        ENV.absoluteBase = 'localhost:4200';
+        ENV.absoluteBase = 'https://localhost:4200';
         // ENV.APP.LOG_RESOLVER = true;
         // ENV.APP.LOG_ACTIVE_GENERATION = true;
         ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
-        ENV.APP.API_HOST = 'http://api.atlmaps-dev.com:3000';
+        ENV.APP.API_HOST = 'https://api.atlmaps-dev.com:3000';
         ENV.metricsAdapters[0].config.id = 'UA-71558106-1';
 
         ENV.torii.providers['facebook-oauth2'] = {
             apiKey: '382820178724645',
-            redirectUri: 'http://localhost:4200/about'
+            redirectUri: 'https://localhost:4200/about'
         };
         ENV.torii.providers['google-oauth2'] = {
             apiKey: '646382922448-23d242gkptr9jodipnln87f5klhal48i.apps.googleusercontent.com',
-            redirectUri: 'http://localhost:4200/about'
+            redirectUri: 'https://localhost:4200/about'
         };
     }
 

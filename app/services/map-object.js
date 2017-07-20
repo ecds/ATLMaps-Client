@@ -72,9 +72,9 @@ export default Service.extend({
             });
 
             // Zoom contorl, topright
-            L.control.zoom({
-                position: 'bottomleft'
-            }).addTo(atlmap);
+            // L.control.zoom({
+            //     position: 'bottomleft'
+            // }).addTo(atlmap);
 
             // TODO would it be better to also track the layers as a group?
             // this.get('leafletLayerGroup').addTo(atlmap);
@@ -136,7 +136,6 @@ export default Service.extend({
     },
 
     mapSingleLayer(layer) {
-        const self = this;
         const map = get(this, 'map');
         const { markerColors, shapeColors } = get(this, 'dataColors');
 
@@ -166,12 +165,14 @@ export default Service.extend({
             }
         default:
             {
+                const hex = get(layer, 'colorHex') || colorValues.markerColor.hex;
+                const colorName = get(layer, 'colorName') || colorValues.markerColor.name;
                 layer.setProperties({
-                    layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${colorValues.markerColor.name}`,
-                    colorName: colorValues.markerColor.name,
-                    colorHex: colorValues.markerColor.hex
+                    layerClass: `${get(layer, 'data-type')} ${get(layer, 'slug')} map-marker vector-icon layer-${colorName}`,
+                    colorName,
+                    colorHex: hex
                 });
-                self.mapVector(layer);
+                this.mapVector(layer);
 
                 break;
             }
@@ -198,7 +199,7 @@ export default Service.extend({
     mapVector(layer) {
         const atlMap = get(this, 'map');
         set(layer, 'leaflet_object', L.featureGroup());
-        const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features');
+        const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features', 'data_type');
 
         const features = get(layer, 'vector_feature');
         features.forEach((feature) => {
@@ -227,7 +228,7 @@ export default Service.extend({
                     });
                 }
                 feature.setProperties({
-                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${layer.slug} ${layer.data_type} layer-${layerProps.colorName}'></span>`
                 });
             } else {
                 feature.setProperties({
@@ -243,7 +244,7 @@ export default Service.extend({
                     const point = L.geoJSON(featureProps.geojson, {
                         pointToLayer(foo, latlng) {
                             const icon = L.divIcon({
-                                className: `${layerProps.layerClass} ${featureProps.feature_id}`,
+                                className: `${layerProps.layerClass} ${featureProps.feature_id} ${layer.slug}`,
                                 iconSize: null,
                                 html: '<div class="shadow"></div><div class="icon" />'
                             });
@@ -263,8 +264,8 @@ export default Service.extend({
                         this.showDetails(feature);
                     });
 
-                    layerProps.leaflet_object.addLayer(newLeafletFeature);
-                    feature.setProperties({ leaflet_object: newLeafletFeature });
+                    layerProps.leaflet_object.addLayer(point);
+                    feature.setProperties({ leaflet_object: point });
 
                     break;
                 }
@@ -433,6 +434,7 @@ export default Service.extend({
         $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
         $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
         $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
+        $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));
         // $('.vector-content.title').empty().append(feature.properties.NAME);
         $('.vector-content.marker-content').empty().append(popupContent);
     }

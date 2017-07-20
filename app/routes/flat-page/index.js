@@ -16,15 +16,4 @@ export default Route.extend({
             document.getElementById('user-menu-link').click();
         }
     }
-
-//     didTransition() {
-//         console.log('foo');
-//     $('.content').click(function(e) {
-//     if(!$(e.target).hasClass('user-menu') )
-//     {
-//     console.log('self', self);
-//     set(self, 'showUserMenu', false);
-//     }
-//     });
-// }
 });

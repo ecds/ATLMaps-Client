@@ -1,5 +1,17 @@
+$vector-detail-header-layout: (
+  gutter: .25em
+);
+
 .vector-info {
   @include grid-container;
+  @include grid-media($responsive-grid--sm-up) {
+    bottom: 0;
+    left: 0;
+    max-height: 33vh;
+    min-width: 100vw;
+    position: absolute;
+    top: auto;
+  }
   border: .1em solid color('grey', 'lighten-2');
   border-radius: .5em;
   display: none;
@@ -9,21 +21,8 @@
   z-index: 1001;
 }
 
-// // Also defined in project-pane.scss
-.vector-detail-title {
-  background-color: color('blue-grey', 'lighten-5');
-  border-top-left-radius: .5em;
-  border-top-right-radius: .5em;
-  min-height: 4em;
-  padding: .5em 0;
-
-  .close-button {
-    padding-top: 0;
-  }
-}
-
-// Originally defined in project-pane.scss
 .vector-detail-container {
+  @include scroll-container;
   background-color: $white;
   border-bottom-left-radius: .5em;
   border-bottom-right-radius: .5em;
@@ -31,44 +30,135 @@
   max-height: 50vh;
 }
 
-$vector-detail-title-layout: (
-  columns: 1
-);
+// Also defined in project-pane.scss
+.vector-detail-title {
+  @include grid-container;
+  @include grid-media($responsive-grid--sm-up) {
+    background-color: $primary-color-dark;
+    color: $white;
+    display: block;
+    min-height: auto;
+    padding-top: .5em;
+  }
+  align-items: center;
+  background-color: color('blue-grey', 'lighten-5');
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+  display: flex;
+  line-height: 1.5em;
+  min-height: 4em;
+  word-wrap: break-word;
 
-.vector-content {
-  &.layer-icon {
-    @include grid-column(1);
+  .layer-icon {
+    @include grid-column(1, $vector-detail-header-layout);
+    // padding: 0;
+
+    @include grid-media($responsive-grid--med-up) {
+      @include grid-column(1);
+      font-size: 2.75em;
+      margin-left: .2em;
+      margin-right: .2em;
+
+      .polygon {
+        font-size: .75em;
+      }
+
+      .line-data {
+        font-size: .6em;
+        &::before {
+            right: .2em;
+        }
+      }
+    }
+
+    @include grid-media($responsive-grid--sm-up) {
+      display: none;
+    }
+
     font-size: 3em;
-    padding: 0;
 
-    .map-marker {
-      bottom: .25em;
-      font-size: 1em;
-      left: .5em;
+    .line-data {
+      &::before {
+          right: .1em;
+      }
     }
   }
-}
 
-.vector-detail-close {
-  @include grid-column(1);
-}
+  .vector-detail-title-container {
+    @include grid-column(10, $vector-detail-header-layout);
+    @include grid-container($vector-detail-title-layout);
+    // @include grid-shift(12);
 
-.vector-detail-title-container {
-  @include grid-column(10);
-  @include grid-container($vector-detail-title-layout);
+    .feature-title,
+    .layer-title {
+      @include grid-column(1, $vector-detail-title-layout);
 
-  .feature-title,
-  .layer-title {
-    @include grid-column(1, $vector-detail-title-layout);
+      // @include grid-collapse
+    }
+
+    .sm-title {
+      display: none;
+    }
+
+    .feature-title {
+      font-size: 1.2em;
+    }
+
+    .layer-title {
+      color: color('grey', darken-1);
+    }
+
+    @include grid-media($responsive-grid--med-up) {
+      .layer-title {
+        display: none;
+      }
+      .feature-title {
+        font-size: 1.5em;
+      }
+    }
+
+    @include grid-media($responsive-grid--sm-up) {
+      @include grid-column(11);
+      font-size: 1.2em;
+      font-weight: bold;
+
+      .feature-title,
+      .layer-title {
+        display: none;
+      }
+
+      .sm-title,
+      .vector-detail-close-sm {
+        display: block;
+      }
+    }
+
   }
 
-  .feature-title {
-    font-size: large;
-  }
+  .vector-detail-close {
+    @include grid-column(1, $vector-detail-header-layout);
+    @include grid-media($responsive-grid--sm-up) {
+      display: block;
+      font-size: 1.5em;
+      margin-bottom: .5em;
+      min-height: auto;
+      top: .5em;
 
-  .layer-title {
-    color: color('grey', darken-1);
-    font-size: medium;
+      a {
+        color: $white;
+      }
+
+      .vector-detail-close-sm {
+        display: none;
+      }
+    }
+
+    font-size: 2em;
+    min-height: 3em;
+
+    i {
+      margin-top: .2em;
+    }
   }
 }
 

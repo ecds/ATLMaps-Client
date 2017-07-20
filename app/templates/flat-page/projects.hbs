@@ -7,6 +7,7 @@
 </div>
 <div class="banner orange blurred">
   <div class="container">
+    {{log model.currentUser}}
     {{#if model.currentUser.confirmed}}
     <span class='button-new'>
       <a {{action 'createProject'}} class="waves-effect waves-light btn"><i class="fa fa-plus" aria-hidden="true"></i> Start New Project</a>

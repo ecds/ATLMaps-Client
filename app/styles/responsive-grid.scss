@@ -1,0 +1,15 @@
+// This uses Burbon Neat.
+$responsive-grid--med-up: (
+  media: '(max-width: 1048px)',
+  gutter: .5em
+);
+
+$responsive-grid--sm-up: (
+  media: '(max-width: 768px)',
+  gutter: .5em
+);
+
+$vector-detail-title-layout: (
+  columns: 1,
+  gutter: 1em
+);
