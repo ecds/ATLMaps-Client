@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 const {
-    $,
     RSVP,
     inject: {
         service
@@ -32,38 +31,51 @@ export default Route.extend({
 
     model(params) {
         let project = null;
-        let defaults = {
-            published: false,
-            center_lat: 33.75440100,
-            center_lng: -84.3898100,
-            zoom_level: 13,
-            default_base_map: 'street',
-            suppressIntro: true,
-            showingSearch: true,
-            hasSuppressCookie: true
-        };
+        // let defaults = {
+        //     published: false,
+        //     center_lat: 33.75440100,
+        //     center_lng: -84.3898100,
+        //     zoom_level: 13,
+        //     default_base_map: 'street',
+        //     suppressIntro: true,
+        //     showingSearch: true,
+        //     hasSuppressCookie: true
+        // };
 
         if (params.project_id === 'explore') {
-            project = this.store.createRecord('project', $.extend(
-                defaults,
+            project = this.store.createRecord('project',
                 {
-                    defaults,
+                    published: false,
+                    center_lat: 33.75440100,
+                    center_lng: -84.3898100,
+                    zoom_level: 13,
+                    default_base_map: 'street',
+                    suppressIntro: true,
+                    showingSearch: true,
+                    hasSuppressCookie: true,
                     name: 'Explore',
                     description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.',
                     exploring: true
-                })
+                }
             );
         } else if (params.project_id === 'new') {
-            defaults = null;
-            project = this.store.createRecord('project', $.extend(
-                defaults,
+            // defaults = null;
+            project = this.store.createRecord('project',
                 {
+                    published: false,
+                    center_lat: 33.75440100,
+                    center_lng: -84.3898100,
+                    zoom_level: 13,
+                    default_base_map: 'street',
+                    suppressIntro: true,
+                    showingSearch: true,
+                    hasSuppressCookie: true,
                     name: `New: ${new Date()}`,
                     description: 'ATLMaps is very much a work in progress. We will be updating the insturctions soon. For now, play with the filters to the right, add some layers, and have fun.',
                     is_mine: true,
                     may_edit: true
                 }
-            ));
+            );
         } else {
             project = this.store.findRecord('project', params.project_id);
         }
