@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "ember": "^1.0.0-pre.2",
-    "ember-data": "github:emberjs/data#master",
+    "ember-data": "github:emberjs/data#release",
     "ember-keyboard": "2.1.9",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
