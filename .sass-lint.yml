@@ -1,5 +1,3 @@
-# For SCSS-Lint v0.31.0
-
 linters:
 
   BangFormat:

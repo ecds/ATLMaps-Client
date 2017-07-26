@@ -1,13 +1,14 @@
 // TODO: There is a better way to do this right?
-@import 'components/color'; // Custom color settings go here
+@import '../../bower_components/materialize/sass/components/color'; // Custom color settings go here
 @import 'variables';
 @import 'mixins';
-
-@import 'materialize', 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import 'materialize';
+@import 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
 
 @import 'bourbon', 'neat', 'base'; // base is bitters
 @import 'responsive-grid'; // local grid using bourbon neat.
-@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed'; // Refills
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message'; // Refills
 @import 'flexbox';
 
 body {

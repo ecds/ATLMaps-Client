@@ -71,10 +71,10 @@ export default Service.extend({
                 greyscale
             });
 
-            // Zoom contorl, topright
-            // L.control.zoom({
-            //     position: 'bottomleft'
-            // }).addTo(atlmap);
+            // Zoom contorl, bottom left
+            L.control.zoom({
+                position: 'bottomleft'
+            }).addTo(atlmap);
 
             // TODO would it be better to also track the layers as a group?
             // this.get('leafletLayerGroup').addTo(atlmap);
@@ -437,5 +437,15 @@ export default Service.extend({
         $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));
         // $('.vector-content.title').empty().append(feature.properties.NAME);
         $('.vector-content.marker-content').empty().append(popupContent);
+    },
+
+    switchBaseMap(base) {
+        const map = get(this, 'map');
+        const baseMaps = get(this, 'baseMaps');
+
+        Object.values(baseMaps).forEach((layer) => {
+            map.removeLayer(layer);
+        });
+        baseMaps[base].addTo(map);
     }
 });

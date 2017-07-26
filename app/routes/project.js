@@ -351,6 +351,7 @@ export default Route.extend({
                 // Get the join between layer and project
                 // Remove the object from the map/DOM
                 // TODO: better way to organize the projectLayers?
+                // FIXME: Remove project layer without loop.
                 get(layer, 'leaflet_object').remove();
                 get(project, `${format}_layer_project`).forEach((layerToRemove) => {
                     if (layer.get('id') === get(layerToRemove, `${format}_layer.id`)) {

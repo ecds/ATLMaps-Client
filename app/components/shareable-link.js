@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 const {
-    $,
     Component,
     get,
     set,
@@ -19,10 +18,6 @@ export default Component.extend({
 
     shareUrlId: '',
     embedCodeId: '',
-    embedUrl(layer) {
-        layer.rollbackAttribute('embedUrl');
-        return `${get(layer, 'embedUrl')}${$.param(this.embedParms)}`;
-    },
     height: 600,
     width: 800,
     embedParams: {
@@ -30,17 +25,20 @@ export default Component.extend({
         base: 'street'
     },
     selectedColor: null,
-    baseMaps: ['street', 'satellite', 'greyscale'],
 
     didInsertElement() {
         const layer = get(this, 'layer');
-        this.setProperties(
-            {
-                shareUrlId: `${get(layer, 'slug')}_sharable`,
-                embedCodeId: `${get(layer, 'slug')}_embedable`,
-                selectedColor: get(this, 'dataColors.safeEmbedColors')[0]
-            }
-        );
+        // Run once after reender to make sure we have the base maps.
+        run.scheduleOnce('afterRender', () => {
+            this.setProperties(
+                {
+                    shareUrlId: `${get(layer, 'slug')}_sharable`,
+                    embedCodeId: `${get(layer, 'slug')}_embedable`,
+                    selectedColor: get(this, 'dataColors.safeEmbedColors')[0],
+                    baseMaps: Object.keys(get(this, 'mapObject.baseMaps'))
+                }
+            );
+        });
     },
 
     actions: {

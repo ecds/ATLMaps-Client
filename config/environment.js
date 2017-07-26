@@ -106,17 +106,17 @@ module.exports = function setUp(environment) {
         };
     }
 
-    ENV.contentSecurityPolicy = {
-        'default-src': "'none'",
-        // 'script-src': "'self' 'unsafe-eval'",
-        'script-src': '*',
-        'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com https://fonts.gstatic.com https://s3.amazonaws.com",
-        'connect-src': "'self' http://api.atlmaps-dev.com:3000 http://api.atlmaps-dev.org https://api.atlmaps.com https://s3.amazonaws.com http://vimeo.com https://vimeo.com",
-        'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
-        'media-src': "'self'",
-        'img-src': '* data:',
-        'frame-src': "'self' http://www.youtube.com https://www.youtube.com https://youtu.be"
-    };
+    // ENV.contentSecurityPolicy = {
+    //     'default-src': "'none'",
+    //     // 'script-src': "'self' 'unsafe-eval'",
+    //     'script-src': '*',
+    //     'font-src': "'self' http://fonts.googleapis.com http://fonts.googleapis.com http://fonts.gstatic.com https://fonts.gstatic.com https://s3.amazonaws.com",
+    //     'connect-src': "'self' https://api.atlmaps-dev.com:3000 http://api.atlmaps-dev.org https://api.atlmaps.com https://s3.amazonaws.com http://vimeo.com https://vimeo.com http://gis.atlantaga.gov/",
+    //     'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com",
+    //     'media-src': "'self'",
+    //     'img-src': '* data:',
+    //     'frame-src': "'self' http://www.youtube.com https://www.youtube.com https://youtu.be"
+    // };
 
     return ENV;
 };

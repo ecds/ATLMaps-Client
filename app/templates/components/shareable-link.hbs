@@ -37,6 +37,22 @@
       <div style={{color.safe}} class='color' />
     {{/power-select}}
   </section>
+  {{!-- Base maps names are capitalized with CSS --}}
+  {{log baseMaps}}
+  <section class='base-picker'><label>Pick a Base: </label>
+    {{#power-select
+      options=baseMaps
+      selected=baseMaps.firstObject
+      dropdownClass='basemap-picker'
+      class='basemap-list'
+      searchEnabled=false
+      tagName='div'
+      onchange=(action (mut embedParams.base))
+      as |base|
+    }}
+      {{base}}
+    {{/power-select}}
+  </section>
   <hr />
   {{!-- <section>
     {{base-map-selector}}

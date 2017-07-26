@@ -38,3 +38,11 @@
     opacity: 1;
   }
 }
+
+.layer-control {
+  bottom: 80px;
+  font-size: 48px;
+  left: 10px;
+  position: absolute;
+  z-index: 999;
+}
