@@ -22,7 +22,7 @@ export default Component.extend({
     width: 800,
     embedParams: {
         color: 'red',
-        base: 'street'
+        base: 'greyscale'
     },
     selectedColor: null,
 
