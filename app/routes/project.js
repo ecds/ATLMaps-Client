@@ -55,7 +55,8 @@ export default Route.extend({
                     hasSuppressCookie: true,
                     name: 'Explore',
                     description: 'Here you can explore almost 3,000 maps of Atlanta from collections held by Emory University and Georgia State University. Go ahead and click the search glass to the left and say good bye to next few hours.',
-                    exploring: true
+                    exploring: true,
+                    is_mine: true
                 }
             );
         } else if (params.project_id === 'new') {

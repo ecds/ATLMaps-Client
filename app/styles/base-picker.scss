@@ -1,3 +1,9 @@
+@mixin base-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .base-preview {
   background-repeat: no-repeat;
   background-size: contain;
@@ -29,14 +35,17 @@
 }
 
 .satellite {
+  @include base-image;
   background-image: url('/assets/images/satellite.png');
 }
 
 .street {
+  @include base-image;
   background-image: url('/assets/images/street_map.png');
 }
 
 .greyscale {
+  @include base-image;
   background-image: url('/assets/images/carto.png');
 }
 
@@ -60,4 +69,12 @@ $center-zoom-grid: (
 
 .set-zoom {
   @include grid-column(2, $center-zoom-grid);
+}
+
+.vertical {
+  a {
+    float: left;
+    margin: .5em 0;
+    width: 100%;
+  }
 }

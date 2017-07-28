@@ -157,20 +157,9 @@ export default Service.extend({
     getColorHexByName(group, name) {
         group.every((colorName) => {
             if (colorName.name === name) {
-                return colorName.hex
+                return colorName.hex;
             }
             return false;
         });
-        // console.log('name', name);
-        // group.find((color) => {
-        //     console.log('color', color.name === name);
-        //     let hex = '';
-        //     if (color.name === name) {
-        //         hex = color.hex;
-        //         return color.hex;
-        //     }
-        //     // return false;
-        // });
     }
-
 });

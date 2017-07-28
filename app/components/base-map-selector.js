@@ -14,6 +14,12 @@ export default Component.extend({
     mapObject: service(),
     flashMessage: service(),
 
+    didInsertElement() {
+        this.setProperties({
+            vertical: get(this, 'orientation') === 'vertical'
+        });
+    },
+
     actions: {
         setBase(base) {
             const map = get(this, 'mapObject.map');

@@ -51,9 +51,11 @@ export default Mixin.create({
                 // Don't care.
             }
             map.fitBounds(get(this, 'mapObject.allBounds'));
+            map.setMaxBounds(get(this, 'mapObject.allBounds'));
+            map.setMinZoom(map.getZoom());
             // TODO get rid of this.
             // Activate the according from MaterializeCSS.
-            $('.collapsible').collapsible();
+            // $('.collapsible').collapsible();
             get(this, 'mapObject.baseMaps.street').addTo(map);
             $('.layer-item-body').first().slideToggle();
         });

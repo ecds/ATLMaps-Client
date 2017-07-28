@@ -35,7 +35,8 @@ export default Component.extend({
                     shareUrlId: `${get(layer, 'slug')}_sharable`,
                     embedCodeId: `${get(layer, 'slug')}_embedable`,
                     selectedColor: get(this, 'dataColors.safeEmbedColors')[0],
-                    baseMaps: Object.keys(get(this, 'mapObject.baseMaps'))
+                    baseMaps: Object.keys(get(this, 'mapObject.baseMaps')),
+                    showColorPicker: get(this, 'layer.data_format') === 'vector'
                 }
             );
         });
@@ -48,10 +49,10 @@ export default Component.extend({
             set(this, 'selectedColor', color);
         },
 
-        success() {
+        success(type) {
             const flash = get(this, 'flashMessage');
             flash.setProperties({
-                message: 'URL COPIED TO CLIPBOARD',
+                message: `${type} COPIED TO CLIPBOARD`,
                 show: true,
                 success: true
             });
@@ -63,7 +64,7 @@ export default Component.extend({
         error() {
             const flash = get(this, 'flashMessage');
             flash.setProperties({
-                message: 'FAILED TO COPY URL',
+                message: 'FAILED TO COPY',
                 show: true,
                 success: false
             });

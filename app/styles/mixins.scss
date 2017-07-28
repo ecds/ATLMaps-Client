@@ -1,21 +1,25 @@
 @mixin header {
   background-color: $primary-color-dark;
   max-height: 44px;
-  padding: 0 1em;
+  padding: .5em;
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 999;
 
-  h1 {
+  h1,
+  i {
     color: $white;
     font-weight: bolder;
     letter-spacing: .1em;
-    line-height: 2em;
     margin: 0;
     position: relative;
     text-transform: uppercase;
     top: 50%;
+  }
+
+  i {
+    font-weight: normal;
   }
 }
 

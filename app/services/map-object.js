@@ -39,7 +39,7 @@ export default Service.extend({
         try {
             const atlmap = L.map('map', {
                 center: [33.7489954, -84.3879824],
-                zoom: 13,
+                zoom: 10,
                 // zoomControl defaults to true
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false
@@ -47,12 +47,15 @@ export default Service.extend({
 
             // Add some base layers
             const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-                maxZoom: 20,
-                className: 'street base'
+            // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                // maxZoom: 20,
+                className: 'street base',
+                thumbnail: '/assets/images/street_map.png'
             });
 
             const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                className: 'satellite base'
+                className: 'satellite base',
+                thumbnail: '/assets/images/satellite.png'
             });
 
             const labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
@@ -60,7 +63,8 @@ export default Service.extend({
             });
 
             const greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-                className: 'greyscale base'
+                className: 'greyscale base',
+                thumbnail: '/assets/images/carto.png'
             });
 
             const satellite = L.layerGroup([sat, labels]);
@@ -185,7 +189,7 @@ export default Service.extend({
             layers: layer.get('layers'),
             format: 'image/png',
             transparent: true,
-            mzxZoom: 20,
+            // mzxZoom: 20,
             zIndex,
             opacity: 1
         });

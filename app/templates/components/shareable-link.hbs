@@ -10,7 +10,7 @@
 
   {{#link.content class="content-bootstrap-feel z-depth-3 shareable-link"}}
       {{input type='text' value=layer.shareUrl id=shareUrlId}}
-      {{#copy-button clipboardTarget=(concat '#' shareUrlId) success=(action 'success') error=(action 'error') class='waves-effect waves-light btn' }}
+      {{#copy-button clipboardTarget=(concat '#' shareUrlId) success=(action 'success' 'url') error=(action 'error') class='waves-effect waves-light btn' }}
         <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
         {{/copy-button}}
   {{/link.content}}
@@ -23,6 +23,7 @@
   {{#embed.content class="content-bootstrap-feel z-depth-3 shareable-link"}}
   {{input type='text' size=100 value=(concat '<iframe height=' height ' width=' width ' src=' layer.embedUrl 'color=' embedParams.color '&' 'base=' embedParams.base ' />') id=embedCodeId}}
   <hr />
+  {{#if showColorPicker}}
   <section class='color-picker'><label>Pick a Color: </label>
     {{#power-select
       options=dataColors.safeEmbedColors
@@ -37,8 +38,8 @@
       <div style={{color.safe}} class='color' />
     {{/power-select}}
   </section>
+  {{/if}}
   {{!-- Base maps names are capitalized with CSS --}}
-  {{log baseMaps}}
   <section class='base-picker'><label>Pick a Base: </label>
     {{#power-select
       options=baseMaps
@@ -58,7 +59,7 @@
     {{base-map-selector}}
   </section>
   <hr /> --}}
-    {{#copy-button clipboardTarget=(concat '#' embedCodeId) success=(action 'success') error=(action 'error') class='waves-effect waves-light btn' }}
+    {{#copy-button clipboardTarget=(concat '#' embedCodeId) success=(action 'success' 'embed code') error=(action 'error') class='waves-effect waves-light btn' }}
     <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
     {{/copy-button}}
     {{!-- {{#each dataColors.safeEmbedColors as |color index|}}<span style={{color.safe}}>{{color.name}}</span>{{log color.hex}}{{/each}} --}}
