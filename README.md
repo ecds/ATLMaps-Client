@@ -1,4 +1,4 @@
-![](https://travis-ci.org/emory-libraries-ecds/ATLMaps-Client.svg?branch=develop)
+![](https://travis-ci.org/ecds/ATLMaps-Client.svg?branch=develop)
 **ATLMaps is in heavy development. Feel free to open an issue to make a feature request. If you want to use the code in your own project, please open an issue or contact [libsysdev-l@listserv.cc.emory.edu](mailto:libsysdev-l@listserv.cc.emory.edu).**
 
 # About the ATLMaps Project

@@ -246,7 +246,7 @@ export default Service.extend({
             case 'Point':
                 {
                     const point = L.geoJSON(featureProps.geojson, {
-                        pointToLayer(foo, latlng) {
+                        pointToLayer(stankonia, latlng) {
                             const icon = L.divIcon({
                                 className: `${layerProps.layerClass} ${featureProps.feature_id} ${layer.slug}`,
                                 iconSize: null,

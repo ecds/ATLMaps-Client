@@ -36,6 +36,7 @@ export default Route.extend(MapLayerMixin, {
             const vector = get(model.vectors, 'firstObject');
             if (vector) {
                 this.setColor(vector, params.queryParams.color);
+                get(this, 'mapObject.updateVectorStyle')(vector);
                 this.controllerFor('embed').set('layer', get(model.vectors, 'firstObject'));
             }
 

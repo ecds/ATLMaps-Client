@@ -46,7 +46,7 @@ module.exports = function setUp(environment) {
 
     if (environment === 'development') {
         ENV.absoluteBase = 'https://localhost:4200';
-        // ENV.APP.LOG_RESOLVER = true;
+        ENV.APP.LOG_RESOLVER = true;
         // ENV.APP.LOG_ACTIVE_GENERATION = true;
         ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
