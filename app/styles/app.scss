@@ -63,10 +63,6 @@ body {
   z-index: 10001;
 }
 
-.leaflet-control-attribution {
-  display: none;
-}
-
 // input[type=search]::-webkit-search-cancel-button {
 //     -webkit-appearance: searchfield-cancel-button;
 // }
@@ -466,4 +462,30 @@ textarea {
 .button-new {
   display: block;
   margin-bottom: 1em;
+}
+
+
+// Leaflet attribution
+.leaflet-control-attribution {
+  color: $white;
+  cursor: pointer;
+  font-size: 2em;
+  height: 24px;
+  max-width: 29px;
+  padding-right: 1em;
+  transition: max-width $rabbit, color $turtle;
+  will-change: max-width, color;
+
+  &:hover {
+    color: $black;
+    max-width: 100%;
+  }
+
+  i {
+    color: $black;
+    float: right;
+    font-size: 2em;
+    margin-bottom: 1em;
+    padding-left: .5em;
+  }
 }

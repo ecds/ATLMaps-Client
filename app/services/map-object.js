@@ -50,21 +50,27 @@ export default Service.extend({
             // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
                 // maxZoom: 20,
                 className: 'street base',
-                thumbnail: '/assets/images/street_map.png'
+                thumbnail: '/assets/images/street_map.png',
+                attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             });
 
             const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 className: 'satellite base',
-                thumbnail: '/assets/images/satellite.png'
+                thumbnail: '/assets/images/satellite.png',
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
 
             const labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
-                className: 'labels base'
+                className: 'labels base',
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                subdomains: 'abcd'
             });
 
             const greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
                 className: 'greyscale base',
-                thumbnail: '/assets/images/carto.png'
+                thumbnail: '/assets/images/carto.png',
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                subdomains: 'abcd'
             });
 
             const satellite = L.layerGroup([sat, labels]);
@@ -79,6 +85,8 @@ export default Service.extend({
             L.control.zoom({
                 position: 'bottomleft'
             }).addTo(atlmap);
+
+            atlmap.attributionControl.setPrefix('<i class="fa fa-info-circle" aria-hidden="true"></i>');
 
             // TODO would it be better to also track the layers as a group?
             // this.get('leafletLayerGroup').addTo(atlmap);
