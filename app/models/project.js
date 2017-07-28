@@ -7,6 +7,7 @@ const {
     attr,
     hasMany
 } = DS;
+
 const {
     computed,
     get,

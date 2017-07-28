@@ -1,23 +1,23 @@
 <div class="navigation-wrapper">
-    {{#link-to 'index' class='logo' }}
+    {{#link-to 'flat-page' class='logo' }}
         <img src="/assets/images/atl.png" alt="Logo Image">
     {{/link-to}}
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
         <ul id="js-navigation-menu" class="navigation-menu show">
-            {{#link-to 'index'}}
+            {{#link-to 'flat-page'}}
               <li class='nav-link title'>
                 <span style='font-weight:900'>ATL</span>Maps
               </li>
             {{/link-to}}
               <li class='nav-link project-title'>
-                  {{#link-to 'projects'}}Projects{{/link-to}}
+                  {{#link-to 'flat-page.projects'}}Projects{{/link-to}}
               </li>
               <li class='nav-link project-title'>
                   {{#link-to 'explore'}}Explore{{/link-to}}
               </li>
               <li class='nav-link'>
-                  {{#link-to 'about'}}About{{/link-to}}
+                  {{#link-to 'flat-page.about'}}About{{/link-to}}
               </li>
         </ul>
     </nav>
@@ -28,10 +28,10 @@
 
           {{#dd.content class="content-bootstrap-feel z-depth-3"}}
           <ul class="account-fa-ul fa-ul title-bar-action">
-            {{#if currentUser.user.confirmed}}
             <li onclick={{action 'invalidateSession'}}>
               <i class='fa-li fa fa-sign-out' aria-hidden='true'></i> Logout
             </li>
+            {{#if currentUser.user.confirmed}}
             <li>{{#ember-inline-edit
               value=currentUser.user.displayname
               onSave=(action 'updateDisplayName' currentUser.user)

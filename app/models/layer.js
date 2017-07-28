@@ -4,21 +4,21 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 
 const {
-  Model,
-  attr,
-  belongsTo,
-  hasMany
+    Model,
+    attr,
+    belongsTo,
+    hasMany
 } = DS;
 
 const {
-  computed,
-  get,
-  inject: {
-    service
-  },
-  String: {
-      htmlSafe
-  }
+    computed,
+    get,
+    inject: {
+        service
+    },
+    String: {
+        htmlSafe
+    }
 } = Ember;
 
 export default Model.extend({
@@ -56,14 +56,11 @@ export default Model.extend({
     active_in_list: attr('boolean', {
         defaultValue: false
     }),
-    shareable_link_id: computed(function shareableLinkId() {
-        return `${get(this, 'name')}_sharable`;
-    }),
-    shareable_link_id_selector: computed(function shareableLinkId() {
-        return `#${get(this, 'name')}_sharable`;
-    }),
-    absolute_url: computed(function absoluteUrl() {
+    shareUrl: computed(function absoluteUrl() {
         return `${ENV.absoluteBase}/layers/${get(this, 'name')}`;
+    }),
+    embedUrl: computed(function absoluteUrl() {
+        return `${ENV.absoluteBase}/embed/${get(this, 'name')}?`;
     }),
     url: attr('string'),
     leaflet_id: attr('number'),

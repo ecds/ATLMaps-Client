@@ -3,21 +3,66 @@
     clicked, it gets a class of `active`. When that div has the class of `active`
     `shareable-link` class is set to `display: block`
 }}
-<span {{action "toggleShareableLink"}}><i class="fa fa-link" aria-hidden="true"></i> Share Layer</span>
-{{#if isShowingModal}}
 
+<button class='flat'>
+{{#basic-dropdown as |link|}}
+  {{#link.trigger class="trigger-bootstrap-feel"}}<i class="fa fa-link" aria-hidden="true"></i> Share Layer{{/link.trigger}}
 
-    {{#tether-dialog close='toggleShareableLink' container-class='shareable-link-modal' hasOverlay=false target='' clickOutsideToClose=true }}
-        <a {{action 'toggleShareableLink'}} class='close-button right'>
-            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-        </a>
-        <p>
-            {{!exampleTargetAttachment}} {{input type='text' value=layer.absolute_url id=layer.shareable_link_id}}
-        </p>
-        {{!#if layer.shareable-link}}
-        {{#copy-button clipboardTarget=layer.shareable_link_id_selector success=(action 'success') error=(action 'error') class='waves-effect waves-light btn' }}
-            <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
+  {{#link.content class="content-bootstrap-feel z-depth-3 shareable-link"}}
+      {{input type='text' value=layer.shareUrl id=shareUrlId}}
+      {{#copy-button clipboardTarget=(concat '#' shareUrlId) success=(action 'success' 'url') error=(action 'error') class='waves-effect waves-light btn' }}
+        <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
         {{/copy-button}}
-        {{!/if}}
-    {{/tether-dialog}}
-{{/if}}
+  {{/link.content}}
+{{/basic-dropdown}}
+</button>
+
+<button class='flat'>
+{{#basic-dropdown as |embed|}}
+  {{#embed.trigger class="trigger-bootstrap-feel"}}<i class="fa fa-code" aria-hidden="true"></i> Embed Layer{{/embed.trigger}}
+  {{#embed.content class="content-bootstrap-feel z-depth-3 shareable-link"}}
+  {{input type='text' size=100 value=(concat '<iframe height=' height ' width=' width ' src=' layer.embedUrl 'color=' embedParams.color '&' 'base=' embedParams.base ' />') id=embedCodeId}}
+  <hr />
+  {{#if showColorPicker}}
+  <section class='color-picker'><label>Pick a Color: </label>
+    {{#power-select
+      options=dataColors.safeEmbedColors
+      searchEnabled=false
+      selected=selectedColor
+      dropdownClass='color-picker'
+      class='set-color'
+      tagName='div'
+      onchange=(action 'setColor')
+      as |color|
+    }}
+      <div style={{color.safe}} class='color' />
+    {{/power-select}}
+  </section>
+  {{/if}}
+  {{!-- Base maps names are capitalized with CSS --}}
+  <section class='base-picker'><label>Pick a Base: </label>
+    {{#power-select
+      options=baseMaps
+      selected=baseMaps.firstObject
+      dropdownClass='basemap-picker'
+      class='basemap-list'
+      searchEnabled=false
+      tagName='div'
+      onchange=(action (mut embedParams.base))
+      as |base|
+    }}
+      {{base}}
+    {{/power-select}}
+  </section>
+  <hr />
+  {{!-- <section>
+    {{base-map-selector}}
+  </section>
+  <hr /> --}}
+    {{#copy-button clipboardTarget=(concat '#' embedCodeId) success=(action 'success' 'embed code') error=(action 'error') class='waves-effect waves-light btn' }}
+    <i class="fa fa-clipboard" aria-hidden="true"></i> copy link
+    {{/copy-button}}
+    {{!-- {{#each dataColors.safeEmbedColors as |color index|}}<span style={{color.safe}}>{{color.name}}</span>{{log color.hex}}{{/each}} --}}
+  {{/embed.content}}
+{{/basic-dropdown}}
+</button>

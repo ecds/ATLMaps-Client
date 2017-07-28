@@ -11,7 +11,7 @@ export default Route.extend({
     actions: {
         didTransition() {
             this._super(...arguments);
-            this.transitionTo('project.info', 'explore');
+            this.transitionTo('project', 'explore');
         }
 
     }

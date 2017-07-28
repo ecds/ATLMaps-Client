@@ -10,7 +10,7 @@
             {{#inline-edit.editable}} --}}
                 <article>
                     {{#if model.project.exploring}}
-                      <p>Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must {{#link-to 'login'}}login{{/link-to}}</p>
+                      <p>Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must {{#login-link class='faint-link'}}log in{{/login-link}}.</p>
                     {{else}}
                       {{#if model.project.may_edit}}
                         {{#inline-edit

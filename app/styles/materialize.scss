@@ -1,39 +1,39 @@
-@charset "UTF-8";
-
+@charset 'UTF-8';
+$path: '../../bower_components/materialize/sass/';
 // Mixins
-// @import "components/prefixer";
-@import "components/mixins";
-@import "components/color";
+// @import '../../bower_components/materialize/sass/components/prefixer';
+@import '../../bower_components/materialize/sass/components/mixins';
 
 // Variables;
-@import "components/variables";
+@import '../../bower_components/materialize/sass/components/variables';
 
 // Reset
-@import "components/normalize";
+@import '../../bower_components/materialize/sass/components/normalize';
 
 // components
-@import "components/global";
-@import "components/icons-material-design";
-@import "components/grid";
-@import "components/roboto";
-@import "components/typography";
-@import "components/cards";
-@import "components/toast";
-@import "components/tabs";
-@import "components/tooltip";
-@import "components/buttons";
-@import "components/dropdown";
-@import "components/waves";
-@import "components/modal";
-@import "components/collapsible";
-@import "components/chips";
-@import "components/materialbox";
-@import "components/forms/forms";
-@import "components/table_of_contents";
-@import "components/sideNav";
-@import "components/preloader";
-@import "components/slider";
-@import "components/carousel";
-@import "components/date_picker/default";
-@import "components/date_picker/default.date";
-@import "components/date_picker/default.time";
+@import '../../bower_components/materialize/sass/components/global';
+@import '../../bower_components/materialize/sass/components/icons-material-design';
+@import '../../bower_components/materialize/sass/components/grid';
+// @import '../../bower_components/materialize/sass/components/navbar';
+@import '../../bower_components/materialize/sass/components/roboto';
+@import '../../bower_components/materialize/sass/components/typography';
+@import '../../bower_components/materialize/sass/components/cards';
+@import '../../bower_components/materialize/sass/components/toast';
+@import '../../bower_components/materialize/sass/components/tabs';
+@import '../../bower_components/materialize/sass/components/tooltip';
+@import '../../bower_components/materialize/sass/components/buttons';
+@import '../../bower_components/materialize/sass/components/dropdown';
+@import '../../bower_components/materialize/sass/components/waves';
+@import '../../bower_components/materialize/sass/components/modal';
+@import '../../bower_components/materialize/sass/components/collapsible';
+@import '../../bower_components/materialize/sass/components/chips';
+@import '../../bower_components/materialize/sass/components/materialbox';
+// @import '../../bower_components/materialize/sass/components/forms/forms';
+@import '../../bower_components/materialize/sass/components/table_of_contents';
+@import '../../bower_components/materialize/sass/components/sideNav';
+@import '../../bower_components/materialize/sass/components/preloader';
+@import '../../bower_components/materialize/sass/components/slider';
+@import '../../bower_components/materialize/sass/components/carousel';
+@import '../../bower_components/materialize/sass/components/date_picker/default';
+@import '../../bower_components/materialize/sass/components/date_picker/default.date';
+@import '../../bower_components/materialize/sass/components/date_picker/default.time';

@@ -12,25 +12,47 @@ const {
 
 export default Component.extend({
     flashMessage: service(),
-    isShowingModal: false,
-    tagName: 'span',
-    classNameBindings: ['shareOnly::share-only'],
+    dataColors: service(),
+    mapObject: service(),
+    tagName: '',
 
-    shareOlnly: false,
+    shareUrlId: '',
+    embedCodeId: '',
+    height: 600,
+    width: 800,
+    embedParams: {
+        color: 'red',
+        base: 'street'
+    },
+    selectedColor: null,
 
     didInsertElement() {
-        set(this, 'shareOnly', get(this, 'project.may_edit'));
+        const layer = get(this, 'layer');
+        // Run once after reender to make sure we have the base maps.
+        run.scheduleOnce('afterRender', () => {
+            this.setProperties(
+                {
+                    shareUrlId: `${get(layer, 'slug')}_sharable`,
+                    embedCodeId: `${get(layer, 'slug')}_embedable`,
+                    selectedColor: get(this, 'dataColors.safeEmbedColors')[0],
+                    baseMaps: Object.keys(get(this, 'mapObject.baseMaps')),
+                    showColorPicker: get(this, 'layer.data_format') === 'vector'
+                }
+            );
+        });
     },
 
     actions: {
-        toggleShareableLink: function toggleModal() {
-            this.toggleProperty('isShowingModal');
+
+        setColor(color) {
+            set(this, 'embedParams.color', color.name);
+            set(this, 'selectedColor', color);
         },
 
-        success() {
+        success(type) {
             const flash = get(this, 'flashMessage');
             flash.setProperties({
-                message: 'URL COPIED TO CLIPBOARD',
+                message: `${type} COPIED TO CLIPBOARD`,
                 show: true,
                 success: true
             });
@@ -42,7 +64,7 @@ export default Component.extend({
         error() {
             const flash = get(this, 'flashMessage');
             flash.setProperties({
-                message: 'FAILED TO COPY URL',
+                message: 'FAILED TO COPY',
                 show: true,
                 success: false
             });

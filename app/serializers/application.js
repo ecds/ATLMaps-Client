@@ -3,12 +3,12 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 const {
-  JSONAPISerializer
+    JSONAPISerializer
 } = DS;
 const {
-  String: {
-    underscore
-  }
+    String: {
+        underscore
+    }
 } = Ember;
 
 export default JSONAPISerializer.extend({

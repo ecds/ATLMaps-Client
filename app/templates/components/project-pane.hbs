@@ -4,22 +4,13 @@
   </div>
 
   <div class='project-pane-save'>
-    {{#if (and session.isAuthenticated model.may_edit)}}
+    {{#if (and session.isAuthenticated (or model.may_edit model.exploring))}}
       <span class='{{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model}}>SAVE</span>
-    {{else}}
-      {{#if model.exploring}}
+    {{else if model.exploring}}
         {{#login-link class='faint-link'}}Log in or sign up to save{{/login-link}}
-      {{/if}}
     {{/if}}
   </div>
 </div>
-{{!-- {{#if model.exploring}}
-
-<div class='pane-container'>
-  <span class='pane-content'>
-    {{#link-to 'login'}}Login or register to save{{/link-to}}
-  </span>
-</div>{{/if}} --}}
 {{#if (or raster vector)}}
 <div class="secondary-pane-title">
 <div class='project-pane-title'>

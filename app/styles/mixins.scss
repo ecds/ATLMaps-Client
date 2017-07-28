@@ -1,0 +1,40 @@
+@mixin header {
+  background-color: $primary-color-dark;
+  max-height: 44px;
+  padding: .5em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+
+  h1,
+  i {
+    color: $white;
+    font-weight: bolder;
+    letter-spacing: .1em;
+    margin: 0;
+    position: relative;
+    text-transform: uppercase;
+    top: 50%;
+  }
+
+  i {
+    font-weight: normal;
+  }
+}
+
+@mixin scroll-container {
+  backface-visibility: hidden;
+  display: flex;
+  opacity: 1;
+  overflow: hidden;
+  pointer-events: all;
+  transition: max-height $rabbit, opacity $rabbit;
+  width: 100%;
+  will-change: overflow;
+  @media only screen and (min-width: 993px) {
+    .container {
+      width: 85%;
+    }
+  }
+}

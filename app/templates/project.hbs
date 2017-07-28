@@ -1,3 +1,4 @@
+{{vector-info}}
 {{main-nav model=model}}
 
 {{! FIXME This is a little disjointed. The search button and head
@@ -6,14 +7,12 @@ are in the `main-nav` component. }}
 
 {{project-nav model=model.project current=current class='navbar-fixed' raster-updated=raster-updated vector-updated=vector-updated}} {{outlet}}
 
-{{vector-info}}
-
 {{#if (or model.project.hasIntro model.project.may_edit)}}
-  {{#unless model.project.suppressIntro}}
+  {{#if (xor model.project.hasIntro model.project.suppressIntro)}}
     {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
       {{project-intro-modal action='toggleIntro' model=model }}
     {{/tether-dialog}}
-  {{/unless}}
+  {{/if}}
 {{/if}}
 <div id='base-map' class='fullscreen-map'>
   <div id='map' class='atlmap'></div>

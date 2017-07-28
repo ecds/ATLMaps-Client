@@ -39,7 +39,7 @@ export default Service.extend({
         try {
             const atlmap = L.map('map', {
                 center: [33.7489954, -84.3879824],
-                zoom: 13,
+                zoom: 10,
                 // zoomControl defaults to true
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false
@@ -47,12 +47,15 @@ export default Service.extend({
 
             // Add some base layers
             const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-                maxZoom: 20,
-                className: 'street base'
+            // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                // maxZoom: 20,
+                className: 'street base',
+                thumbnail: '/assets/images/street_map.png'
             });
 
             const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                className: 'satellite base'
+                className: 'satellite base',
+                thumbnail: '/assets/images/satellite.png'
             });
 
             const labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
@@ -60,7 +63,8 @@ export default Service.extend({
             });
 
             const greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-                className: 'greyscale base'
+                className: 'greyscale base',
+                thumbnail: '/assets/images/carto.png'
             });
 
             const satellite = L.layerGroup([sat, labels]);
@@ -71,7 +75,7 @@ export default Service.extend({
                 greyscale
             });
 
-            // Zoom contorl, topright
+            // Zoom contorl, bottom left
             L.control.zoom({
                 position: 'bottomleft'
             }).addTo(atlmap);
@@ -136,7 +140,6 @@ export default Service.extend({
     },
 
     mapSingleLayer(layer) {
-        const self = this;
         const map = get(this, 'map');
         const { markerColors, shapeColors } = get(this, 'dataColors');
 
@@ -166,12 +169,14 @@ export default Service.extend({
             }
         default:
             {
+                const hex = get(layer, 'colorHex') || colorValues.markerColor.hex;
+                const colorName = get(layer, 'colorName') || colorValues.markerColor.name;
                 layer.setProperties({
-                    layerClass: `${get(layer, 'data-type')} map-marker vector-icon layer-${colorValues.markerColor.name}`,
-                    colorName: colorValues.markerColor.name,
-                    colorHex: colorValues.markerColor.hex
+                    layerClass: `${get(layer, 'data-type')} ${get(layer, 'slug')} map-marker vector-icon layer-${colorName}`,
+                    colorName,
+                    colorHex: hex
                 });
-                self.mapVector(layer);
+                this.mapVector(layer);
 
                 break;
             }
@@ -184,7 +189,7 @@ export default Service.extend({
             layers: layer.get('layers'),
             format: 'image/png',
             transparent: true,
-            mzxZoom: 20,
+            // mzxZoom: 20,
             zIndex,
             opacity: 1
         });
@@ -198,7 +203,7 @@ export default Service.extend({
     mapVector(layer) {
         const atlMap = get(this, 'map');
         set(layer, 'leaflet_object', L.featureGroup());
-        const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features');
+        const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features', 'data_type');
 
         const features = get(layer, 'vector_feature');
         features.forEach((feature) => {
@@ -227,7 +232,7 @@ export default Service.extend({
                     });
                 }
                 feature.setProperties({
-                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${layer.slug} ${layer.data_type} layer-${layerProps.colorName}'></span>`
                 });
             } else {
                 feature.setProperties({
@@ -243,7 +248,7 @@ export default Service.extend({
                     const point = L.geoJSON(featureProps.geojson, {
                         pointToLayer(foo, latlng) {
                             const icon = L.divIcon({
-                                className: `${layerProps.layerClass} ${featureProps.feature_id}`,
+                                className: `${layerProps.layerClass} ${featureProps.feature_id} ${layer.slug}`,
                                 iconSize: null,
                                 html: '<div class="shadow"></div><div class="icon" />'
                             });
@@ -263,8 +268,8 @@ export default Service.extend({
                         this.showDetails(feature);
                     });
 
-                    layerProps.leaflet_object.addLayer(newLeafletFeature);
-                    feature.setProperties({ leaflet_object: newLeafletFeature });
+                    layerProps.leaflet_object.addLayer(point);
+                    feature.setProperties({ leaflet_object: point });
 
                     break;
                 }
@@ -433,7 +438,18 @@ export default Service.extend({
         $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
         $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
         $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
+        $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));
         // $('.vector-content.title').empty().append(feature.properties.NAME);
         $('.vector-content.marker-content').empty().append(popupContent);
+    },
+
+    switchBaseMap(base) {
+        const map = get(this, 'map');
+        const baseMaps = get(this, 'baseMaps');
+
+        Object.values(baseMaps).forEach((layer) => {
+            map.removeLayer(layer);
+        });
+        baseMaps[base].addTo(map);
     }
 });

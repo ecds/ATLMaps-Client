@@ -1,21 +1,14 @@
 // TODO: There is a better way to do this right?
-$roboto-font-path: '../assets/';
-@import 'components/color'; // Custom color settings go here
-$primary-color: color('blue-grey', 'darken-1');
-$action-color: $primary-color;
-$primary-color-dark: color('blue-grey', 'darken-4');
-$primary-color-light: color('blue-grey', 'base');
-$primary-color-trans: rgba(3, 169, 244, 1);
-$secondary-color: #f58320;
-$secondary-color-dark: #f97a0c;
-$secondary-color-light: color('deep-orange', 'accent-1');
-$nav-button: color('grey', 'darken-4');
-$mobile: new-breakpoint(max-width 500px 4);
-$font-stack-system: 'Roboto';
-@import 'materialize', 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
+@import '../../bower_components/materialize/sass/components/color'; // Custom color settings go here
 @import 'variables';
+@import 'mixins';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import 'materialize';
+@import 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
+
 @import 'bourbon', 'neat', 'base'; // base is bitters
-@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container', 'md-input'; // Refills
+@import 'responsive-grid'; // local grid using bourbon neat.
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'layer-citation', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'refill-button-group', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message'; // Refills
 @import 'flexbox';
 
 body {
@@ -54,10 +47,20 @@ body {
       display: none;
     }
   }
+
+  button {
+
+    &:focus,
+    &:active {
+      -webkit-outline: 0;
+      user-select: none;
+    }
+  }
+
 }
 
 .ember-modal-dialog {
-      z-index: 10001;
+  z-index: 10001;
 }
 
 .leaflet-control-attribution {
@@ -159,7 +162,7 @@ $custom-grid--half: (
   left: 0;
   margin: 0;
   overflow: hidden;
-  position: initial;
+  position: absolute;
   top: 0;
   width: 100vw;
 }

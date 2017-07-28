@@ -1,0 +1,43 @@
+<header class='embed-header'>
+  <div class="embed-menu-open {{if rasterOnly "with-raster"}}" onclick={{action (toggle "showing" this)}}>
+    <i class='fa {{if showing 'fa-times' 'fa-bars'}}' aria-hidden="true"></i>
+  </div>
+  <div class='embed-title-container'>
+    <div class='embed-title-title'>
+    <h1>{{layer.title}}</h1>
+  </div>
+    {{#if rasterOnly}}
+      <div class='embed-slider-container'>
+        <input class='embed-slider' id={{raster.name}} type="range" min="0" max="100" value='100' oninput={{action (route-action 'setOpacity')}} onchange={{action (route-action 'setOpacity')}} />
+      </div>
+    {{/if}}
+  </div>
+</header>
+<div class='layer-menu {{if showing 'showing'}}'>
+  <h2>Select Base Layer</h2>
+  <span onclick={{action (toggle "showing" this)}}><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+
+  {{log rasterOnly}}
+  {{#if rasterOnly}}
+  {{#base-map-selector base='greyscale' class='greyscale thumb'}}
+    <span class='clickable' />
+  {{/base-map-selector}}
+  {{else}}
+  {{#base-map-selector base='greyscale' class='raster greyscale thumb'}}
+    <span class='clickable' style="{{raster.safe_background_thumb}}" />
+  {{/base-map-selector}}
+  {{/if}}
+
+  {{#base-map-selector base='street' class='street thumb'}}
+    <span class='clickable' />
+  {{/base-map-selector}}
+
+  {{#base-map-selector base='satellite' class='satellite thumb'}}
+    <span class='clickable' />
+  {{/base-map-selector}}
+</div>
+<div id='base-map' class='fullscreen-map'>
+  <div id='map' class='atlmap'></div>
+  <a href='{{layer.shareUrl}}' target='_blank' title='Open in ATLMaps'><img class='watermark' src='/assets/images/logo-small.png' /></a>
+</div>
+{{vector-info}}

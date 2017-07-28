@@ -5,7 +5,6 @@
   border-bottom-style: solid;
   border-bottom-width: 1em;
   left: 5em;
-  // height: 1000px;
   max-width: 500px;
   pointer-events: all;
   position: absolute;
@@ -49,9 +48,11 @@
 
   &.layers-pane {
     background-color: transparent;
-    border: 0
+    border: 0;
   }
 }
+
+// TODO: make the scrollable-list stuff a mixin
 // The following is the scrolling of the pane was inspired by this
 // https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
 // Flexbox gives us the flexiness we need.
@@ -60,8 +61,7 @@
 
 .intro-modal-header,
 .pane-title,
-.secondary-pane-title,
-.vector-detail-title {
+.secondary-pane-title {
   align-items: center;
   background-color: color('blue-grey', 'lighten-5');
   display: flex;
@@ -123,23 +123,10 @@
 // ensure it is always the correct size and then moved into place
 // and padded with negative margin and padding
 
-.pane-container,
-.vector-detail-container {
-  // backface-visibility: hidden;
-  display: flex;
-  opacity: 1;
-  overflow: hidden;
-  pointer-events: all;
-  // position: relative;
-  transition: max-height $rabbit, opacity $rabbit;
-  width: 100%;
-  will-change: overflow;
-  @media only screen and (min-width: 993px) {
-    .container {
-      width: 85%;
-    }
-  }
+.pane-container {
+  @include scroll-container;
 }
+
 // All the scrollable sections should overflow and be whatever
 // height they need to be. As they are flex-items (due to being
 // inside a flex container) they could be made to stretch full height
@@ -186,16 +173,16 @@
   }
 }
 
-span.pane-content {
-  background-color: #2196F3;
-  padding: .5em;
-  text-align: center;
-
-  a {
-    color: $white;
-
-  }
-}
+// span.pane-content {
+//   background-color: #2196F3;
+//   padding: .5em;
+//   text-align: center;
+//
+//   a {
+//     color: $white;
+//
+//   }
+// }
 
 .scrollable-list {
   background-color: $white;
@@ -231,41 +218,6 @@ span.pane-content {
     border-radius: .5em;
     color: $primary-color-light;
     font-weight: bolder;
-
-    // .shareable-link {
-    //   opacity: 0;
-    //   transition: opacity $turtle;
-    // }
-    //
-    // &.active {
-    //   .shareable-link {
-    //     opacity: 1;
-    //
-    //     .material-icons {
-    //       cursor: pointer;
-    //       transform: none;
-    //     }
-    //   }
-    // }
-
-    .shareable-link-modal {
-      @include grid-container;
-      display: inline-block;
-      min-width: 25%;
-
-      i {
-        color: inherit;
-        font-size: initial;
-      }
-
-      button {
-        font-size: .75em;
-      }
-
-      .close-button {
-        cursor: pointer;
-      }
-    }
 
     .data-title {
       padding-left: .5em;
@@ -312,23 +264,26 @@ span.pane-content {
   }
 }
 
-.remove-layer,
+.basemap-list {
+  text-transform: capitalize;
+  width: 150px;
+}
+
+.basemap-picker {
+  text-transform: capitalize;
+}
+
 .shareable-link {
+  @include grid-column(6);
+  padding: 2em;
+}
+
+.remove-layer {
   @include grid-column(4);
   @include grid-push(2);
   cursor: pointer;
   font-size: 1.2em;
-
-  &.share-only {
-    //
-  }
 }
-
-.shareable-link-modal {
-  font-size: .75em;
-  min-width: 320px;
-}
-
 
 .slider-container {
   @include grid-column(12);
@@ -346,13 +301,10 @@ span.pane-content {
 
   .pane-container {
     max-height: 0;
-    // opacity: 0;
-    // top: -100px;
-    // width: 0;
   }
 }
-// Search Pane
 
+// Search Pane
 .search-bounds {
   font-size: 1.25em;
 
@@ -380,61 +332,33 @@ span.pane-content {
   }
 }
 
-.feedback {
-  bottom: 5em;
-  font-size: 1.2em;
-  left: 1em;
-  max-width: 20vw;
-  opacity: .7;
-  padding: 0;
-  transition: padding $turtle ease-in-out;
-  z-index: 999;
-
-  &.show-flash {
-    padding: 1em .25em;
-  }
-}
-$base-spacing: 1.5em !default;
-$flashes: ( 'alert': #fff6bf, 'error': color('red', 'base'), 'notice': #e5edf8, 'success': color('green', 'base'), ) !default;
-@each $flash-type, $color in $flashes {
-  .flash-#{$flash-type} {
-    background-color: $color;
-    // color: shade($color, 60%);
-    color: $primary-color;
-    display: block;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-
-    a {
-      color: shade($color, 70%);
-      text-decoration: underline;
-
-      &:focus,
-      &:hover {
-        color: shade($color, 90%);
-      }
-    }
-  }
-}
-
-/* basic positioning */
+// Coloring HOLC ledgend
 .color-key {
+  // sass-lint:disable-block no-color-literals
   display: flex;
   font-size: 1.2em;
   text-transform: capitalize;
+
   ul {
     list-style: none;
   }
 
   li {
-    border: 0; float: left; margin-right: 10px;
+    border: 0;
+    float: left;
+    margin-right: 10px;
   }
 
-  span { border: 1px solid #ccc; float: left; width: .75em; height: .75em; margin: 2px; }
-/* your colors */
-.color-key-0 { background-color: #4CAF50; }
-.color-key-1 { background-color: #1E88E5; }
-.color-key-2 { background-color: #FFEB3B; }
-.color-key-3 { background-color: #F44336; }
+  span {
+    border: 1px solid #ccc;
+    float: left;
+    height: .75em;
+    margin: 2px;
+    width: .75em;
+  }
+
+  .color-key-0 { background-color: #4caf50; }
+  .color-key-1 { background-color: #1e88e5; }
+  .color-key-2 { background-color: #ffeb3b; }
+  .color-key-3 { background-color: #f44336; }
 }

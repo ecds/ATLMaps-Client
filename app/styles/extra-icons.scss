@@ -16,16 +16,22 @@ i.material-icons.atlmaps-ext.database::before{
   content: '\e800';
 }
 
-.layer-list-item-icon.polygon::before {
-  content: '\e802';
-  font-family: 'atlmaps-ext';
-  // letter-spacing: .25em;
+.layer-list-item-icon {
+  &.polygon {
+    &::before {
+      content: '\e802';
+      font-family: 'atlmaps-ext';
+      font-size: .8em;
+    }
+  }
 }
 
-.layer-list-item-icon.polyline::before {
+.layer-list-item-icon.line-data::before {
   content: '\e803';
   font-family: 'atlmaps-ext';
-  // letter-spacing: .25em;
+  font-size: .7em;
+  position: relative;
+  right: .2em;
 }
 
 .fa-drag-handle:before {
