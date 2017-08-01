@@ -1,4 +1,5 @@
 @charset 'UTF-8';
+.light { font-weight: 300; } // had to add when i removed typography
 $path: '../../bower_components/materialize/sass/';
 // Mixins
 // @import '../../bower_components/materialize/sass/components/prefixer';
@@ -16,15 +17,15 @@ $path: '../../bower_components/materialize/sass/';
 @import '../../bower_components/materialize/sass/components/grid';
 // @import '../../bower_components/materialize/sass/components/navbar';
 @import '../../bower_components/materialize/sass/components/roboto';
-@import '../../bower_components/materialize/sass/components/typography';
+// @import '../../bower_components/materialize/sass/components/typography';
 @import '../../bower_components/materialize/sass/components/cards';
 @import '../../bower_components/materialize/sass/components/toast';
 @import '../../bower_components/materialize/sass/components/tabs';
 @import '../../bower_components/materialize/sass/components/tooltip';
-@import '../../bower_components/materialize/sass/components/buttons';
+// @import '../../bower_components/materialize/sass/components/buttons';
 @import '../../bower_components/materialize/sass/components/dropdown';
 @import '../../bower_components/materialize/sass/components/waves';
-@import '../../bower_components/materialize/sass/components/modal';
+// @import '../../bower_components/materialize/sass/components/modal';
 @import '../../bower_components/materialize/sass/components/collapsible';
 @import '../../bower_components/materialize/sass/components/chips';
 @import '../../bower_components/materialize/sass/components/materialbox';

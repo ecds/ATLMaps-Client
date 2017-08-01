@@ -1,7 +1,7 @@
 {
   "name": "atlmaps",
   "dependencies": {
-    "ember": "release",
+    "ember": "~2.14",
     "ember-cli-shims": "~0.1.1",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.5",
     "ember-resolver": "~4.1.0",
@@ -9,7 +9,7 @@
     "loader.js": "ember-cli/loader.js#3.2.1",
     "materialize": "0.97.6",
     "qunit": "~2.0.1",
-    "trumbowyg": "^2.4.2",
+    "trumbowyg": "2.4.2",
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v5.0.0.beta.7",
     "bitters": "^1.5.0",
     "swiper": "~3.4.1",

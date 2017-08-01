@@ -1,338 +1,69 @@
 .project-pane {
-  @include grid-container;
   background-color: $white;
-  border-bottom-color: $white;
-  border-bottom-style: solid;
-  border-bottom-width: 1em;
   left: 5em;
-  max-width: 500px;
-  pointer-events: all;
   position: absolute;
   top: $navigation-height;
   width: 34vw;
   z-index: 401;
+}
 
-  .row {
-    margin-bottom: 0;
-  }
+// Styles an empty div that acts as the fixed header that content scrolls beneth.
+.fixer {
+  @include scrollable-top;
+}
 
-  hr {
-    border: 0;
-    border-bottom: 1px solid $faded-white;
-    border-top: 1px solid $faded-black;
-    height: 0;
-  }
+.pane-container {
+  @include scrollable-container;
+  // Calculate the full height of the screen minus the heights of
+  // the top nav bar, the pane title height, and the base map thumbnails.
+  max-height: calc(100vh - (#{$navigation-height} + 5.5em + 75px));
+  transition: max-height $rabbit;
+  will-change: max-height;
+}
 
-  .save-pane-state {
-    background-color: $secondary-color;
-  }
-
-  .pane-container {
-    max-height: calc(100vh - 250px);
-    transition: max-height $rabbit;
-  }
-
-  .pane-card {
-    @include grid-container;
-    background-color: $white;
-    padding: 2em;
-
-    .fa-ul {
-      li {
-        cursor: pointer;
-        font-size: 1.1em;
-        margin-bottom: 1em;
-      }
+.hide-nav {
+  &+ .project-pane {
+    .pane-container {
+      max-height: 0;
     }
-  }
-
-  &.layers-pane {
-    background-color: transparent;
-    border: 0;
   }
 }
 
-// TODO: make the scrollable-list stuff a mixin
-// The following is the scrolling of the pane was inspired by this
-// https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
-// Flexbox gives us the flexiness we need.
-// The top just stays put as there is no scrolling
-// on the body due to the page never exceeding viewport height
-
-.intro-modal-header,
-.pane-title,
-.secondary-pane-title {
-  align-items: center;
-  background-color: color('blue-grey', 'lighten-5');
-  display: flex;
-  font-weight: 900;
-  height: auto;
-  opacity: 1;
-  pointer-events: all;
-  position: relative;
-  transition: opacity $rabbit linear;
+.pane-content {
+  @include scrollable-content;
   width: 100%;
-  z-index: 10;
-
 }
 
-.pane-title,
-.secondary-pane-title {
-  @include grid-container;
-  height: 4em;
-  padding: .5rem 2rem;
+.pane {
+  padding: 1em;
 
-  h3 {
-    margin: .25em 0;
-  }
-
-  .project-pane-title {
-    @include grid-column(11);
-    margin-left: 0;
-  }
-
-  .project-pane-save {
-    @include grid-column(1);
+  .action {
     cursor: pointer;
-    opacity: .4;
-    width: auto;
-
-    &:hover {
-      color: $secondary-color;
-      opacity: 1;
-    }
-  }
-
-  .dirty {
-    opacity: 1;
   }
 }
 
-.secondary-pane-title {
-  background-color: $white;
-  height: auto;
+.project-pane-header {
+  @include grid-container;
+  background-color: $blue-grey-100;
+  height: 5.25em;
   padding-top: 1rem;
 }
 
-.switch {
-  &.list {
-    margin-right: 0;
-  }
-}
-// This is our main wrapping element, it's made 100vh high to
-// ensure it is always the correct size and then moved into place
-// and padded with negative margin and padding
-
-.pane-container {
-  @include scroll-container;
+.project-pane-title {
+  @include grid-column(10);
 }
 
-// All the scrollable sections should overflow and be whatever
-// height they need to be. As they are flex-items (due to being
-// inside a flex container) they could be made to stretch full height
-// at all times if needed.
-//WebKit inertia scrolling is being added here for any present/future devices
-//that are able to make use of it.
-
-.pane-content {
-  cursor: default;
-  flex: 1;
-  height: auto;
-  overflow: auto;
-  overflow-style: none;
-  // padding-bottom: 1em;
-
-  .card {
-    border-radius: 0 0 2px 2px;
-    margin-top: 0;
-  }
-
-  .col {
-    padding: 0;
-    // padding-left: 1em;
-  }
-
-  .publish-label {
-    font-size: 1em;
-    height: 36px;
-    padding: 0;
-    vertical-align: middle;
-
-    span {
-      line-height: 2.2em;
-
-      i {
-        vertical-align: sub;
-      }
-    }
-
-    &::before {
-      display: none;
-      padding-left: 0;
-    }
-  }
+.project-pane-subtitle {
+  text-transform: uppercase;
 }
 
-// span.pane-content {
-//   background-color: #2196F3;
-//   padding: .5em;
-//   text-align: center;
-//
-//   a {
-//     color: $white;
-//
-//   }
-// }
-
-.scrollable-list {
-  background-color: $white;
-  border: 0;
-  display: flex;
-  flex-direction: column;
-
-  &.collapsible {
-    box-shadow: none;
-    margin-top: 0;
-  }
-
-  .scrollable-item {
-    overflow: hidden;
-  }
-}
-
-.project-collapsible {
-  border: 0;
-  box-shadow: none;
-  margin-top: 0;
-
-  li {
-    @include grid-container;
-    border: 1px solid color('grey', lighten-1);
-    border-radius: .5em;
-    color: $primary-color-light;
-    margin: 1em;
-    padding-top: .25em;
-  }
-
-  .layer-header {
-    border-radius: .5em;
-    color: $primary-color-light;
-    font-weight: bolder;
-
-    .data-title {
-      padding-left: .5em;
-    }
-
-    .vector-icon {
-      font-size: 1.5em;
-      padding: 0;
-      vertical-align: middle;
-    }
-  }
-
-  .layer-item-body {
-    background: $white;
-    border-bottom: 0;
-    border-radius: .5em;
-    box-sizing: border-box;
-    display: none;
-    float: right;
-    overflow: hidden;
-    padding: 0;
-    transition: max-height $rabbit linear 0ms;
-    width: 100%;
-
-    &.bye {
-      background: color('red', 'base');
-    }
-
-    &.active {
-      max-height: 100em;
-    }
-
-    article {
-      font-size: 1.1em;
-      font-weight: 100;
-      padding: 0 2rem;
-      padding-bottom: 1rem;
-    }
-
-    p {
-      margin: 0;
-      padding-bottom: 1rem;
-    }
-  }
-}
-
-.basemap-list {
-  text-transform: capitalize;
-  width: 150px;
-}
-
-.basemap-picker {
-  text-transform: capitalize;
-}
-
-.shareable-link {
-  @include grid-column(6);
-  padding: 2em;
-}
-
-.remove-layer {
-  @include grid-column(4);
-  @include grid-push(2);
+.project-pane-action {
+  @include grid-column(2);
   cursor: pointer;
-  font-size: 1.2em;
+  text-align: center;
 }
 
-.slider-container {
-  @include grid-column(12);
-  background: $white;
-  margin-left: 4px;
-  padding-bottom: 2em;
-}
-
-.active + .slider-container {
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
-.hide-nav + .project-pane {
-
-  .pane-container {
-    max-height: 0;
-  }
-}
-
-// Search Pane
-.search-bounds {
-  font-size: 1.25em;
-
-  i {
-    vertical-align: middle;
-
-    &.has-bounds {
-      color: $secondary-color;
-    }
-  }
-
-  .update-bounds {
-    left: 50%;
-    position: fixed;
-    right: 50%;
-    top: 5em;
-  }
-}
-
-.input-field {
-  label {
-    color: $primary-color-light;
-    font-size: 1.25em;
-    font-weight: normal;
-  }
-}
-
-// Coloring HOLC ledgend
+// Very literal code for the HOLC layer.
 .color-key {
   // sass-lint:disable-block no-color-literals
   display: flex;

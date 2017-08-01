@@ -57,7 +57,7 @@ export default Mixin.create({
             // Activate the according from MaterializeCSS.
             // $('.collapsible').collapsible();
             get(this, 'mapObject.baseMaps.street').addTo(map);
-            $('.layer-item-body').first().slideToggle();
+            // $('.layer-item-body').first().slideToggle();
         });
     },
 

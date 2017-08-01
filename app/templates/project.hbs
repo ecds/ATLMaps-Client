@@ -9,7 +9,7 @@ are in the `main-nav` component. }}
 
 {{#if (or model.project.hasIntro model.project.may_edit)}}
   {{#if (xor model.project.hasIntro model.project.suppressIntro)}}
-    {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro modal' }}
+    {{#tether-dialog close='toggleIntro' translucentOverlay=true clickOutsideToClose=false container-class='project-intro-ff' }}
       {{project-intro-modal action='toggleIntro' model=model }}
     {{/tether-dialog}}
   {{/if}}

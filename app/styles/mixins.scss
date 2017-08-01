@@ -23,18 +23,30 @@
   }
 }
 
-@mixin scroll-container {
+// Scrollabe container mixins!
+// These are used to content scroll under a fixed header.
+// Thanks Ben Frain!
+// https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
+@mixin scrollable-top {
+  display: flex;
+  height: auto;
+  position: relative;
+}
+
+@mixin scrollable-container {
   backface-visibility: hidden;
   display: flex;
+  max-height: 100vh;
   opacity: 1;
   overflow: hidden;
-  pointer-events: all;
-  transition: max-height $rabbit, opacity $rabbit;
+  position: relative;
   width: 100%;
   will-change: overflow;
-  @media only screen and (min-width: 993px) {
-    .container {
-      width: 85%;
-    }
-  }
+}
+
+@mixin scrollable-content {
+  height: auto;
+  overflow: auto;
+  // overflow-scrolling: touch;
+  overflow-style: none;
 }

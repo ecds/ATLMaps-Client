@@ -1,0 +1,129 @@
+// <ul> of layers-layer-items
+.layer-list-items,
+.raster-layer-list-items {
+  padding: 2em 0;
+}
+
+.layer-list-item {
+  @include grid-container;
+  // @include grid-visual;
+}
+
+.layer-list-item-icon {
+  @include grid-column(1);
+  font-size: 2.25em;
+}
+
+.layer-list-item-title {
+  @include grid-column(9);
+
+  label {
+    cursor: pointer;
+    font-size: 1.25em;
+    line-height: 1.5em;
+  }
+}
+
+.layer-list-item-secondary-action {
+  @include grid-column(2);
+  text-align: center;
+}
+
+.layer-list-item-content {
+  @include grid-column(10);
+  @include grid-push(1);
+  line-height: 1.5em;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.layer-list-item-provider {
+  font-size: .75em;
+  padding-top: .5em;
+}
+
+.layer-list-item-actions {
+  @include grid-column(12);
+  background-color: $blue-grey-50;
+  padding: 1em 0;
+}
+
+.layer-list-item-detail {
+  display: block;
+  float: left;
+  max-height: 0;
+  overflow: hidden;
+  // transform: scaleY(0);
+  transition: max-height $rabbit;
+  width: 100%;
+  will-change: max-height;
+}
+
+.layer-list-item-detail-toggle {
+  display: none;
+
+  &:checked {
+    &~ .layer-list-item-detail {
+      max-height: 50vh;
+    }
+  }
+}
+
+// Special stuff for raster layers.
+$raster-title-layout: (
+  columns: 8
+);
+
+.raster-layer-list-items {
+
+  .layer-list-item-icon {
+    @include grid-column(2);
+
+    .raster-thumbnail {
+      // background-image: url('https://atlmaps-staging.s3.amazonaws.com/raster-thumbnails/atlpp0177_22.png');
+      border: 1px solid $primary-color;
+      display: block;
+      height: 3em;
+      width: 60px;
+    }
+  }
+
+  .raster-middle {
+    @include grid-column(8);
+  }
+
+  .layer-list-item-title {
+    @include grid-collapse($raster-title-layout);
+    @include grid-container;
+  }
+
+  .raster-layer-list-item-detail-toggle-label {
+    @include grid-column(8, $raster-title-layout);
+  }
+}
+
+.reorder-handle {
+
+  &.fa {
+    color: $primary-color-light;
+    cursor: grab;
+    font-size: 3em;
+    padding-left: .25em;
+
+    &:hover {
+      color: $primary-color-dark;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+
+.slider-container {
+  @include grid-column(8, $raster-title-layout);
+
+  .opacity-slider {
+    margin-left: 0;
+  }
+}

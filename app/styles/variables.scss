@@ -1,9 +1,10 @@
 @fa-font-path: '../assets/font';
 $primary-color: color('blue-grey', 'darken-1');
-$action-color: $primary-color;
 $primary-color-dark: color('blue-grey', 'darken-4');
 $primary-color-light: color('blue-grey', 'base');
 $primary-color-trans: rgba(3, 169, 244, 1);
+$blue-grey-100: #cfd8dc;
+$blue-grey-50: #eceff1;
 $secondary-color: #f58320;
 $secondary-color-dark: #f97a0c;
 $secondary-color-light: color('deep-orange', 'accent-1');

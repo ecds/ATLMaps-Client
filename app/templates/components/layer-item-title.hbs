@@ -1,6 +1,6 @@
-<span class='{{if layer.active_in_list 'active'}}' id='{{layer.slug}}-title'>
+{{!-- <span class='{{if layer.active_in_list 'active'}}' id='{{layer.slug}}-title'> --}}
 {{#if layer}}
   {{yield}}
 {{/if}}
-<a {{action 'expand' layer=layer}}>{{layer.title}}</a>
-</span>
+{{layer.title}}
+{{!-- </span> --}}

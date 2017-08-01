@@ -1,35 +1,38 @@
-<a {{action (toggle-action 'suppressIntro' model.project)}} class='close-button pull-right'>
-  <i class="fa fa-pull-right fa-times-circle" aria-hidden="true"></i>
-</a>
-{{!-- <a {{action (toggle-action 'suppressIntro' model.project)}} class='edit-intro-button'>
-  <i class="fa fa-pencil" aria-hidden="true"></i>
-</a> --}}
+{{#if model.project.media}}
+  <div class='intro-video-container'>
+    <div class='video-container'>
+      <iframe width="90%" height="280" src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{else if model.project.photo}}
+  <div class='intro-photo' style= {{model.project.safe_background_photo}} />
+{{/if}}
+<header class='intro-modal-header'>
+</header>
 
-<div class='z-depth-3'>
-  <header class='intro-modal-header'>
-    {{#if model.project.media}}
-      <div class="video-container">
-        <iframe width="853" height="480" src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
-      </div>
-    {{else if model.project.photo}}
-      <div class='intro-photo' style= {{model.project.safe_background_photo}} />
-    {{/if}}
-  </header>
-  <div class='modal-content {{if editing "editing"}}'>
-    <div class='pane-container {{if (or model.project.photo model.project.media) 'with-media'}}'>
-      <article class='pane-content'>
-  {{#if editing}}
+<div class='modal-container {{if editing "editing"}}'>
+  <div class='pane-content {{if withMedia 'with-media'}}'>
+    <article>
 
-      <span>
-        {{md-input value=model.project.media label='Video'}}
-        {{md-input value=model.project.photo label='Photo'}}
+      {{#if editing}}
+        <h3>Project Introduction</h3>
+        <hr />
+        <span>
+          {{md-input value=model.project.media label='Video'}}
+          {{md-input value=model.project.photo label='Photo'}}
 
-        <label>Project Description</label>
-        {{textarea value=model.project.intro id="edit-project-intro"}}
-      </span>
-  {{else}}
-  {{! NOT EDITING}}
+          <label>Project Introduction</label>
+          <textarea id='edit-project-intro' value=model.project.intro  onchange={{action (mut model.project.intro) value="target.value"}}>{{model.project.intro}}</textarea>
+          <button class='waves-effect waves-light {{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model.project}}>
+            SAVE
+          </button>
+          <button class="waves-effect waves-light flat" type="submit" {{action (toggle-action 'suppressIntro' model.project)}}>
+            close
+          </button>
+        </span>
+      {{else}}
 
+      {{! NOT EDITING}}
 
         {{#if model.project.new_project}}
           <h2>Welcome to your new ATLMaps project!</h2>
@@ -37,34 +40,18 @@
           <p>You will be able to access your projects online whenever you are logged in. If you would like to share your project publicly, submit it for approval.</p>
           <p>Currently, only the ATLmaps team can add layers, but if you have ideas for a layer, let us know.</p>
         {{else}}
-          <h4>{{model.project.name}}</h4> {{{model.project.intro}}}
+          <h4>{{model.project.name}}</h4>
+          {{{model.project.intro}}}
         {{/if}}
-        {{/if}}
-      </article>
-      <footer class='modal-fixed-footer intro-modal-footer'>
-          {{#if editing}}
-          <div class='edit-button'>
-            <button class='btn waves-effect waves-light btn-pramary {{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model.project}}>
-              SAVE
-            </button>
-            <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action 'toggleIntro'}}>
-              close
-            </button>
-          </div>
-    {{else}}
-    <div class='explore-button'>
-          <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action 'toggleIntro'}}>
-            Explore Project
-          </button>
-</div>
-          {{/if}}
-        <div class='supress-check'>
-          <input type="checkbox" class="filled-in" id="supress" name="suppressIntro" checked= {{model.project.hasSuppressCookie}} onchange= {{action "suppressIntro" project=project}} />
-          <label for='supress'>
-            Don't show every time.
-          </label>
-        </div>
-      </footer>
-    </div>
+      {{/if}}
+    </article>
   </div>
 </div>
+{{#unless editing}}
+  <div class='intro-modal-footer'>
+    <button class="btn waves-effect waves-light btn-pramary" type="submit" {{action (route-action 'toggleIntro')}}>
+          Explore Project
+        </button>
+    <span onclick={{action "suppressIntro" project=model.project}}><i class="fa {{if model.project.hasSuppressCookie "fa-check-square-o" "fa-square-o"}}" aria-hidden="true"></i> Don't show every time.</span>
+  </div>
+{{/unless}}

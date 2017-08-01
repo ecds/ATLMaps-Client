@@ -5,16 +5,18 @@
   input 				{
     border: 0;
     border-bottom: 1px solid $primary-color-dark;
+    box-shadow: none;
     display: block;
-    font-size: 18px;
-    padding: 10px 10px 0 5px;
+    font-size: modular-scale(2);
+    margin-bottom: .25em;
     width: 90%;
     will-change: background, width;
-  }
 
-  input:focus {
-    outline: none;
+    &:focus {
+      box-shadow: none;
+      outline: none;
   }
+}
 
   // LABEL
   label 				 {
@@ -30,7 +32,7 @@
 
   // active state
   input:focus ~ label, input:valid ~ label 		{
-    bottom: 75px;
+    bottom: 5.25em;
     color: $secondary-color;
     font-size: .8em;
   }

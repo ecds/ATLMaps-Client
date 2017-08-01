@@ -1,43 +1,31 @@
-    {{yield}}
-
-{{#if showSlider}}
-<div class='slider-container'>
-  {{#if layer.leaflet_object}}
-    {{opacity-slider layer=layer}}
-  {{/if}}
-</div>
-{{/if}}
-
-<div class='layer-item-body card-content' id='{{layer.slug}}-content'>
-  <article class='black-text'>
-    {{if layer.description layer.safe_description 'No description :('}}
-  </article>
-  {{#if layer.filters}}
-  <section class='color-key'>
-    {{#each-in layer.filters as |key value|}}
-       <ul>
-         <li>{{key}}:</li>
-       {{#each value as |v index|}}
-        <li><span class='color-key-{{index}}'></span>{{v}}</li>
-      {{/each}}
-    </ul>
-    {{/each-in}}
-  </section>
-  {{/if}}
-  <section class='layer-list-item-actions'>
-    {{shareable-link layer=layer}}
-    {{#if project.may_edit}}
-      {{remove-layer-button model=model layer=layer tagName='button' class='flat'}}
+{{yield}}
+<div class='layer-list-item-detail'>
+  <div class='layer-list-item-content' id='{{layer.slug}}-content'>
+    <article class='black-text'>
+      {{if layer.description layer.safe_description 'No description :('}}
+    </article>
+    {{#if layer.filters}}
+      <section class='color-key'>
+        {{#each-in layer.filters as |key value|}}
+          <ul>
+            <li>{{key}}:</li>
+            {{#each value as |v index|}}
+              <li><span class='color-key-{{index}}'></span>{{v}}</li>
+            {{/each}}
+          </ul>
+        {{/each-in}}
+      </section>
     {{/if}}
-  </section>
-  <footer class='citation-footer'>
-      <div class='provider-name'>
-  	     <h6 class='cite-h6'>Provided by:</h6>
-  	     <h5 class='citeh5'>{{layer.institution.name}}</h5>
-       </div>
-       <div class='provider-logo'>
-         <img src='{{layer.institution.icon}}' alt='Logo' class="institution-logo right" />
-       </div>
-   </footer>
-
+    <section class='layer-list-item-provider'>
+      Layer Provided by: {{layer.institution.name}}
+    </section>
+  </div>
+  <div class='layer-list-item-footer'>
+    <section class='layer-list-item-actions'>
+      {{shareable-link layer=layer}}
+        {{#if project.may_edit}}
+          {{remove-layer-button model=model layer=layer tagName='button' class='flat'}}
+        {{/if}}
+    </section>
+  </div>
 </div>

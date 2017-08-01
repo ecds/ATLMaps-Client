@@ -1,15 +1,15 @@
-{{#project-pane title='About this Project' model=model.project}}
-  <div class="pane-card">
-    <form>
-    {{md-input value=model.project.name label='Project Title'}}
-  </form>
-    <hr />
+{{#project-pane title='Project Settings' model=model.project}}
+  <div class="pane">
+
     <section>
+      <form class='one-line'>
+      {{md-input value=model.project.name label='Project Title'}}
+    </form>
       <ul class="fa-ul">
-        <li onclick= {{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}}>
+        <li onclick= {{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}} class='action'>
           <i class="fa-li fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i>Publish
         </li>
-        <li onclick={{action (route-action 'toggleIntro')}}>
+        <li onclick={{action (route-action 'toggleIntro')}} class='action'>
           <i class="fa-li fa fa-pencil"></i>Edit Intro
         </li>
       </ul>

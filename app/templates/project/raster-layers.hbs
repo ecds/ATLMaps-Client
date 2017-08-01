@@ -1,31 +1,38 @@
 {{#project-pane title='Maps' model=model.project raster=true}}
-    {{#sortable-group tagName="ul" class='scrollable-list project-collapsible' model=model onChange="reorderItems" as |group|}}
+    {{#sortable-group tagName='ul' class='raster-layer-list-items' model=model onChange='reorderItems' as |group|}}
+
         {{#each model.project.sortedRasterLayers as |layer|}}
-            {{#sortable-item tagName="li" class='sortable-item layer-list-item' id=raster.raster_layer.name model=layer group=group handle=".reorder-handle" }}
+            {{#sortable-item tagName='li' class='sortable-item layer-list-item' id=raster.raster_layer.name model=layer group=group handle='.reorder-handle' }}
                 {{#if layer.raster_layer.name}}
+                  {{input type='checkbox' class='layer-list-item-detail-toggle' name='raster-layer' id=(concat layer.raster_layer.slug '-checkbox') }}
+                  {{#layer-list-item layer=layer.raster_layer project=model.project showSlider=true}}
+                    <div class='layer-list-item-icon'><span class='raster-thumbnail' style={{layer.raster_layer.safe_background_thumb}} /></div>
+                    <div class='raster-middle'>
+                    <div class='layer-list-item-title'>
+                      <label for='{{concat layer.raster_layer.slug '-checkbox'}}' class='raster-layer-list-item-detail-toggle-label'>
+                        {{layer.raster_layer.title}}
+                      </label>
+                      <div class='slider-container'>
+                        {{#if layer.raster_layer.leaflet_object}}
+                          {{opacity-slider layer=layer.raster_layer}}
+                        {{/if}}
+                      </div>
+                    </div>
+                  </div>
 
-                    {{#layer-list-item layer=layer.raster_layer project=model.project showSlider=true}}
-
-                        {{#layer-item-title layer=layer.raster_layer layers=model.project.raster_layer}}
-                          <span class='layer-list-item-icon vector-icon
-                            layer-{{layerraster_layer.colorName}} {{layer.raster_layer.data_type}}'>
-                          </span>
-                        {{/layer-item-title}}
-
-                        <div class='layer-list-item-secondary-action'>
-                          <div class='secondary-action-row'>
-                            <i class="fa fa-drag-handle reorder-handle" aria-hidden="true"></i>
-                            </div>
-                        </div>
+                    <div class='layer-list-item-secondary-action'>
+                      <i class='fa fa-drag-handle reorder-handle' aria-hidden='true'></i>
+                    </div>
                     {{/layer-list-item}}
                 {{else}}
                     Loading...
                 {{/if}}
             {{/sortable-item}}
+            {{#unless (eq layer model.project.sortedRasterLayers.lastObject)}}
+            <hr />
+            {{/unless}}
             {{else}}
-              <div class='neat-row'>
                 <h4>No maps have been added</h4>
-              </div>
         {{/each}}
     {{/sortable-group}}
 {{/project-pane}}

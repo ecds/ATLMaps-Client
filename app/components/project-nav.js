@@ -45,7 +45,7 @@ export default Component.extend({
         ]);
     },
 
-    classNames: ['project-nav', 'container', 'z-depth-3'],
+    classNames: ['project-nav'],
     classNameBindings: ['hideNav'],
     tagName: 'ul',
     hideNav: false,

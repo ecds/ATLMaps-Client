@@ -22,7 +22,7 @@ $vector-detail-header-layout: (
 }
 
 .vector-detail-container {
-  @include scroll-container;
+  @include scrollable-container;
   background-color: $white;
   border-bottom-left-radius: .5em;
   border-bottom-right-radius: .5em;

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { EKMixin, keyDown } from 'ember-keyboard';
 
 const {
     RSVP,
@@ -7,12 +8,13 @@ const {
     },
     get,
     getWithDefault,
+    on,
     set,
     Route,
     run
 } = Ember;
 
-export default Route.extend({
+export default Route.extend(EKMixin, {
 
     mapObject: service(),
     dataColors: service(),
@@ -107,7 +109,8 @@ export default Route.extend({
     setUp: function setUp() {
         const { project } = this.modelFor('project');
         const cookieService = get(this, 'cookies');
-        this.get('dataColors');
+        get(this, 'dataColors');
+        set(this, 'keyboardActivated', true);
 
         run.scheduleOnce('afterRender', () => {
             if (!this.get('mapObject').map) {
@@ -132,12 +135,12 @@ export default Route.extend({
     // Function the runs after we fully exit a project route and clears the map,
     // clears the serarch parameteres and items checked. Fired by the `deactivate` hook.
     tearDown: function tearDown() {
-        const { project } = this.currentModel;
+        let { project } = this.currentModel;
         project.rollbackAttributes();
         get(this, 'browseParams').init();
         // // Clear the chekes for the checked categories and tags.
         this.store.peekAll('tag').setEach('checked', false);
-        const categories = this.store.peekAll('category');
+        let categories = this.store.peekAll('category');
         categories.forEach((category) => {
             category.setProperties({
                 checked: false,
@@ -147,14 +150,14 @@ export default Route.extend({
             // category.get('tag_ids').setEach('checked', false);
         });
         // Clear the vector layers that are marked active in this project.
-        const vectors = this.store.peekAll('vector-layer');
+        let vectors = this.store.peekAll('vector-layer');
         vectors.forEach((vector) => {
             vector.setProperties({
                 active_in_project: false
             });
         });
         // Clear the raster layers that are marked active in this project.
-        const rasters = this.store.peekAll('raster-layer');
+        let rasters = this.store.peekAll('raster-layer');
         rasters.forEach((raster) => {
             raster.setProperties({
                 active_in_project: false
@@ -164,7 +167,7 @@ export default Route.extend({
         set(this.controller, 'rasters', null);
         set(this.controller, 'vectors', null);
         // Clear checked institution
-        const institutions = this.store.peekAll('institution');
+        let institutions = this.store.peekAll('institution');
         institutions.setEach('checked', false);
 
         // // Clear the map.
@@ -172,12 +175,17 @@ export default Route.extend({
         set(this, 'mapObject.map', '');
         // Uload the store. It would be nice to just unload all at once, but we
         // need to keep the user in the store.
-        this.store.unloadAll('raster-layer');
-        this.store.unloadAll('raster-layer-project');
-        this.store.unloadAll('vector-layer');
-        this.store.unloadAll('vector-layer-project');
-        this.store.unloadAll('vector-feature');
-        this.store.unloadAll('project');
+        // this.store.unloadAll('raster-layer');
+        // this.store.unloadAll('raster-layer-project');
+        // this.store.unloadAll('vector-layer');
+        // this.store.unloadAll('vector-layer-project');
+        // this.store.unloadAll('vector-feature');
+        // this.store.unloadAll('project');
+        project = null;
+        categories = null;
+        vectors = null;
+        rasters = null;
+        institutions = null;
     }.on('deactivate'), // This is the hook that makes the run when we exit the project route.
 
     updatedResults(type) {
@@ -186,6 +194,10 @@ export default Route.extend({
             set(this.controller, `${type}_diffResults`, false);
         }, 300);
     },
+
+    closeIntroOnEscape: on(keyDown('Escape'), function close() {
+        set(this, 'currentModel.project.suppressIntro', true);
+    }),
 
     actions: {
 
@@ -417,10 +429,10 @@ export default Route.extend({
                 });
             }
 
-            this.setProperties({
-                searched: true,
-                showingResults: true
-            });
+            // this.setProperties({
+            //     searched: true,
+            //     showingResults: true
+            // });
         }
     }
 

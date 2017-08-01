@@ -1,118 +1,83 @@
-// Intro md-modal
-// TODO get these z-index shit under control
-.ember-modal-overlay {
-  z-index: 1001;
+.ember-modal-dialog {
+  max-width: 65vw;
+  min-width: 50vw;
+}
+
+.intro-modal-header {
+  @include scrollable-top;
+  // height: 300px;
+}
+
+.modal-container {
+  @include scrollable-container;
+  max-height: 85vh;
 }
 
 .project-intro {
-  padding: 0 2em;
-
-  header {
-    display: inherit;
-  }
-}
-
-// TODO Does this really need to style all modals?
-.modal {
-  background-color: transparent;
-  box-shadow: none;
-  display: initial;
-  margin-left: 20%;
-  min-height: 100vh;
   overflow: hidden;
-  // We have to use important here because
-  // transform and top are set inline by the
-  // materlize modal component :(
-  transform: none !important;
-  top: 0 !important;
-  width: 64%;
-  z-index: 1005;
 
-  .modal-content {
-    background-color: $white;
-    height: 100vh;
-    padding: 0;
+  .pane-content {
+    @include grid-container;
+    @include scrollable-content;
+    margin-bottom: 4em;
+    padding: .5rem;
+    width: 100%;
 
-    .video-container {
-      // position: initial;
-      // top: -.55em;
-
+    &.with-media {
+      margin-top: 45vh;
     }
-
-    &.editing {
-      overflow: scroll;
-    }
-
-    .pane-content {
-      padding-bottom: 5em;
-    }
-
-  }
-
-  .close-button {
-    color: $primary-color-dark;
-    font-size: 1.25em;
-    position: absolute;
-    right: 0;
-    top: .5em;
-  }
-
-  .with-media {
-    max-height: calc(100vh - 56.25%);
-  }
-
-  // Code for fixed header and footer from
-  // http://codepen.io/stuntbox/pen/lEdpq
-  article,
-  section {
-    padding: 2em;
   }
 }
 
-.intro-modal-footer {
-  @include grid-container;
-  background: color('grey', 'lighten-2');
-  height: 3.5em;
-  left: 2em;
-  max-width: 100%;
-  padding-top: .5em;
-  position: absolute;
-  right: 2em;
-  top: calc(100vh - 3.5em);
-}
-
-.explore-button {
-  @include grid-column(3);
-  @include grid-push(4);
-}
-
-.edit-button {
-  @include grid-column(7);
-  // @include grid-push(3);
-}
-
-.supress-check {
-  @include grid-column(3);
-  @include grid-push(2);
-
-  label {
-    display: inline;
-  }
-}
-
-.intro-edit {
-  margin: 0 4em;
-  width: 85%;
+.intro-video-container,
+.intro-photo {
+  left: 0;
+  position: fixed;
+  width: 100%;
 }
 
 .intro-photo {
+  background-position: top;
+  background-repeat: no-repeat;
   background-size: cover;
-  height: 45vh;
+  height: 45%;
 }
 
-img {
-  &.intro-photo-edit {
-    height: 10em;
+.with-media {
+  margin-top: 40%;
+}
+
+$intro-modal-footer: (
+  columns: 3,
+  gutter: 1px
+);
+
+.intro-modal-footer {
+  background-color: $blue-grey-100;
+  padding: .5em 0;
+  width: 100%;
+
+  // Mimicks the gird-conainer mixin to give it height.
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
   }
 
+  button,
+  span {
+    @include grid-column(1, $intro-modal-footer);
+    cursor: pointer;
+    text-align: center;
+  }
+
+  button {
+    @include grid-push(1, $intro-modal-footer);
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: baseline;
+    vertical-align: -webkit-baseline-middle;
+  }
 }
