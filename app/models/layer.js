@@ -1,3 +1,6 @@
+// TODO make all computed properties camlecase and all API attributes
+// snake case. This will make it easier to tell them apart in templates
+// and modules...and to identify ones we no longer need.
 /* eslint new-cap: ["error", { "newIsCapExceptions": ['htmlSafe'] }] */
 import DS from 'ember-data';
 import Ember from 'ember';
@@ -43,6 +46,7 @@ export default Model.extend({
     miny: attr('number'),
     maxx: attr('number'),
     maxy: attr('number'),
+    attribution: attr('string'),
     project_ids: hasMany('project', {
         async: true
     }),

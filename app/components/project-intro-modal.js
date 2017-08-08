@@ -21,6 +21,7 @@ export default Component.extend({
     // classNameBindings: ['withMedia:with-media'],
     //
     withMedia: false,
+    videoOnly: false,
 
     keyboardActivated: true,
 
@@ -33,6 +34,9 @@ export default Component.extend({
         }
         if (get(this, 'model.project.media') || get(this, 'model.project.photo')) {
             set(this, 'withMedia', true);
+        }
+        if (get(this, 'model.project.media') && !get(this, 'model.project.intro')) {
+            set(this, 'videoOnly', true);
         }
         $('#edit-project-intro').trumbowyg({
             fullscreenable: false,

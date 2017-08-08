@@ -1,51 +1,65 @@
-.layers-nav {
-  position: absolute;
-}
-
 .layers-route {
+  background: $white;
+  // padding: 1em;
+  position: absolute;
+  top: $navigation-height;
+  width: 33vw;
+  z-index: 999;
 
-  .project-pane {
-    box-shadow: none;
-    font-size: 14px;
-    left: 1.5em;
-    position: absolute;
-    top: 5.25em;
-    width: 25%;
-    z-index: 1001;
-  }
-
-  .pane-title {
-    display: none;
-  }
-
-
-  .scrollable-list {
-    background-color: transparent;
-    padding-top: .25em;
-    width: 100%;
-  }
-
-  .layer-item {
-    background-color: $white;
-    margin: .25em;
-
-    .collapsible-header {
-      padding-bottom: 0;
-      padding-top: 0;
-    }
-}
-
-  .reorder-handle {
-    i {
-      margin-right: -.6em;
-    }
-  }
-
-  footer {
-    &.citation-footer {
-      padding-bottom: 2em;
-      padding-left: 2em;
-      padding-right: 2em;
+  &.raster-layer-list-items {
+    .raster-middle {
+      @include grid-column(10);
     }
   }
 }
+// .layers-nav {
+//   position: absolute;
+// }
+//
+// .layers-route {
+//
+//   .project-pane {
+//     box-shadow: none;
+//     font-size: 14px;
+//     left: 1.5em;
+//     position: absolute;
+//     top: 5.25em;
+//     width: 25%;
+//     z-index: 1001;
+//   }
+//
+//   .pane-title {
+//     display: none;
+//   }
+//
+//
+//   .scrollable-list {
+//     background-color: transparent;
+//     padding-top: .25em;
+//     width: 100%;
+//   }
+//
+//   .layer-item {
+//     background-color: $white;
+//     margin: .25em;
+//
+//     .collapsible-header {
+//       padding-bottom: 0;
+//       padding-top: 0;
+//     }
+// }
+//
+//   .reorder-handle {
+//     i {
+//       margin-right: -.6em;
+//     }
+//   }
+//
+//   footer {
+//     &.citation-footer {
+//       padding-bottom: 2em;
+//       padding-left: 2em;
+//       padding-right: 2em;
+//     }
+//   }
+// }

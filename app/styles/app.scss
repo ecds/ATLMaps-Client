@@ -6,14 +6,14 @@
 @import 'materialize-local';
 @import 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
 
-@import 'bourbon', 'neat', 'base'; // base is bitters
+@import 'bourbon', 'neat', 'bitters';
 @import 'responsive-grid'; // local grid using bourbon neat.
-@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'vector-info', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message', 'layer-list-item' ; // Refills
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message', 'layer-list-item', 'vector-info', 'table' ; // Refills
 
-body {
+:root {
   background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
-  // font-family: $font-stack-system;
+  font-family: $font-stack-system;
   font-size: $base-font-size;
   font-smoothing: antialiased;
   height: 100vh;
@@ -22,7 +22,13 @@ body {
   a {
     color: $primary-color-dark;
     font-size: 1em;
-    outline: none !important;
+  }
+
+  // Get rid of blue outline in chrome;
+  button {
+    &:focus {
+      outline: 0;
+    }
   }
 
   .preloader-wrapper {
@@ -71,10 +77,17 @@ a {
 }
 
 form {
+  input,
+  textarea {
+    &:invalid {
+      border: 2px solid color('red', 'lighten-3');
+    }
+  }
   &.one-line {
     margin: 0;
   }
 }
+
 textarea {
   height: auto;
 }
@@ -439,6 +452,19 @@ textarea {
   }
 }
 
+// Style for excel2geojson
+.preview {
+  @include grid-container;
+}
+
+.select,
+.geojson {
+  @include grid-column(6);
+
+  .leaflet-container {
+    height: 25vh;
+  }
+}
 
 // body {
 //   font-size: 100%;

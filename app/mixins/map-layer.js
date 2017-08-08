@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 /* globals L */
 
-const { Mixin, $, RSVP, get, run, set, inject: { service } } = Ember;
+const { Mixin, RSVP, get, run, set, inject: { service } } = Ember;
 
 export default Mixin.create({
     mapObject: service(),

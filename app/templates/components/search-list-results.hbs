@@ -5,7 +5,7 @@
 
         <div class='result-action'>
           <a {{action (route-action 'addRemoveLayer' layer project)}}>
-            <i class="fa {{if layer.active_in_project 'active fa-check-square-o' 'fa-square-o'}}">
+            <i class="fa {{if layer.active_in_project 'active fa-check-square-o active' 'fa-square-o'}}">
             </i>
           </a>
         </div>
@@ -19,8 +19,15 @@
       </div>
 
       <div class='result-description'>
-        {{article-container article=layer.description}}
+        {{#if layer.description}}
+          {{article-container article=layer.description}}
+        {{else}}
+          <span>Description missing.</span>
+        {{/if}}
       </div >
+      {{!-- <div class='result-preview'>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+      </div> --}}
     </div>
     <hr />
   {{else}}

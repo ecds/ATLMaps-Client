@@ -13,7 +13,8 @@
     "bourbon": "https://github.com/thoughtbot/bourbon.git#v5.0.0.beta.7",
     "bitters": "^1.5.0",
     "swiper": "~3.4.1",
-    "corejs-typeahead": "~1.1.1"
+    "corejs-typeahead": "~1.1.1",
+    "js-xlsx": "0.11.0"
   },
   "devDependencies": {
     "ember-qunit": "0.4.10",

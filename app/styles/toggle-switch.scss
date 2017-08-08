@@ -56,6 +56,7 @@
       border-radius: $switch-radius;
       content: '';
       height: $knob-radius;
+      left: 3px;
       position: absolute;
       top: 2px;
       transform: scale(1);
@@ -70,6 +71,7 @@
       border-radius: $knob-radius;
       box-shadow: $switch-shadow;
       content: '';
+      left: 5px;
       position: absolute;
       top: 2px;
       transition: all .3s ease;

@@ -81,6 +81,7 @@ $raster-title-layout: (
 
     .raster-thumbnail {
       // background-image: url('https://atlmaps-staging.s3.amazonaws.com/raster-thumbnails/atlpp0177_22.png');
+      background-position: center;
       border: 1px solid $primary-color;
       display: block;
       height: 3em;
@@ -106,7 +107,10 @@ $raster-title-layout: (
 
   &.fa {
     color: $primary-color-light;
+    cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
     font-size: 3em;
     padding-left: .25em;
 
@@ -116,6 +120,8 @@ $raster-title-layout: (
 
     &:active {
       cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
     }
   }
 }

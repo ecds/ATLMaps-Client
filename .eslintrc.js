@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    server: true,
+  },
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module'

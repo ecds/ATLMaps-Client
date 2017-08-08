@@ -1,11 +1,7 @@
 {{#if model.project.media}}
-  <div class='intro-video-container'>
-    <div class='video-container'>
-      <iframe width="90%" height="280" src="{{model.project.media}}" frameborder="0" allowfullscreen></iframe>
+    <div class='intro-video-container {{if videoOnly 'video-container'}}'>
+      <iframe width="60%" height="280" src="{{model.project.media}}" frameborder="0" allowfullscreen align='center'></iframe>
     </div>
-  </div>
-{{else if model.project.photo}}
-  <div class='intro-photo' style= {{model.project.safe_background_photo}} />
 {{/if}}
 <header class='intro-modal-header'>
 </header>

@@ -69,6 +69,12 @@ Router.map(function() {
   this.route('embed', {
     path: '/embed/:maps'
   });
+
+  this.route('admin', function() {
+    this.route('data', function() {
+      this.route('new');
+    });
+  });
 });
 
 export default Router;

@@ -23,29 +23,30 @@
     padding: .5rem;
     width: 100%;
 
-    &.with-media {
-      margin-top: 45vh;
-    }
+    // &.with-media {
+    //   margin-top: 45vh;
+    // }
   }
 }
 
 .intro-video-container,
 .intro-photo {
   left: 0;
-  position: fixed;
+  // position: fixed;
+  text-align: center;
   width: 100%;
 }
 
 .intro-photo {
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 45%;
+  height: 200px;
 }
 
-.with-media {
-  margin-top: 40%;
-}
+// .with-media {
+//   margin-top: 40%;
+// }
 
 $intro-modal-footer: (
   columns: 3,

@@ -65,6 +65,7 @@ module.exports = function(defaults) {
     // TODO this is for the drag and drop for reorderings.
     // use HTML5 instead.
     app.import('bower_components/interact/dist/interact.js');
+    app.import('bower_components/js-xlsx/dist/xlsx.full.min.js');
 
     return app.toTree([leafletImages, trumbowyg, fa]);
 };

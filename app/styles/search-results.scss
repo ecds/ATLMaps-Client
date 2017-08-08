@@ -69,6 +69,12 @@
 
     .result-action {
       @include grid-column(1);
+      font-size: 1.75em;
+
+      .active {
+        color: $secondary-color;
+      }
+
     }
 
     .result-title {
@@ -80,6 +86,12 @@
       @include grid-column(11);
       @include grid-push(1);
     }
+
+    // .result-preview {
+    //   @include grid-column(1);
+    //   color: $grey;
+    //   font-size: 3em;
+    // }
   }
 
   hr {

@@ -8,6 +8,27 @@
 import Ember from 'ember';
 import MapLayerMixin from '../mixins/map-layer';
 
-const { Route } = Ember;
+const { $, Route, get, run } = Ember;
 
-export default Route.extend(MapLayerMixin, {});
+export default Route.extend(MapLayerMixin, {
+    setupController(controller, model, params) {
+        this._super(controller, model, params);
+        run.scheduleOnce('afterRender', () => {
+            const raster = get(model.rasters, 'firstObject');
+            const vector = get(model.vectors, 'firstObject');
+            if (raster) {
+                this.controllerFor('layers').set('raster', raster);
+            }
+            if (vector) {
+                this.controllerFor('layers').set('vector', vector);
+            }
+        });
+    },
+
+    actions: {
+        setOpacity() {
+            const value = $(`#${get(this, 'controller.raster.name')}`).val();
+            get(this, 'controller.raster.leaflet_object').setOpacity(value / 100);
+        }
+    }
+});
