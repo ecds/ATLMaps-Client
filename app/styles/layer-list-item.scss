@@ -76,11 +76,11 @@ $raster-title-layout: (
 
 .raster-layer-list-items {
 
+  // TODO is this level needed?
   .layer-list-item-icon {
     @include grid-column(2);
 
     .raster-thumbnail {
-      // background-image: url('https://atlmaps-staging.s3.amazonaws.com/raster-thumbnails/atlpp0177_22.png');
       background-position: center;
       border: 1px solid $primary-color;
       display: block;

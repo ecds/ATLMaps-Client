@@ -18,13 +18,13 @@ export default LayerProject.extend({
     data_type: attr('string'),
     dataColors: service(),
     colorName: computed(function colorName() {
-        if (get(this, 'data_type') === 'point-data') {
+        if (get(this, 'data_type') === 'Point') {
             return get(this, 'dataColors.markerColors')[this.get('marker')].name || null;
         }
         return get(this, 'dataColors.shapeColors')[this.get('marker')].name || null;
     }).property('marker'),
     colorHex: computed(function colorName() {
-        if (get(this, 'data_type') === 'point-data') {
+        if (get(this, 'data_type') === 'Point') {
             return get(this, 'dataColors.markerColors')[this.get('marker')].hex || null;
         }
         return get(this, 'dataColors.shapeColors')[this.get('marker')].hex || null;

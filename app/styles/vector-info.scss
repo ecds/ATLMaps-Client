@@ -50,20 +50,20 @@ $vector-detail-header-layout: (
   word-wrap: break-word;
 
   .layer-icon {
-    @include grid-column(2, $vector-detail-header-layout);
+    @include grid-column(1, $vector-detail-header-layout);
     // padding: 0;
 
     @include grid-media($responsive-grid--med-up) {
       @include grid-column(1);
-      font-size: 1.75em;
+      // font-size: 2em;
       margin-left: .2em;
       margin-right: .2em;
 
-      .polygon {
+      .MultiPolygon {
         font-size: .75em;
       }
 
-      .line-data {
+      .LineString {
         font-size: .6em;
         &::before {
             right: .2em;
@@ -77,19 +77,16 @@ $vector-detail-header-layout: (
 
     font-size: 3em;
 
-    .line-data {
+    .LineString {
       &::before {
           right: .1em;
       }
     }
 
-    .layer-list-item-icon {
-      font-size: 1.75em;
-    }
   }
 
   .vector-detail-title-container {
-    @include grid-column(9, $vector-detail-header-layout);
+    @include grid-column(10, $vector-detail-header-layout);
     @include grid-container($vector-detail-title-layout);
     // @include grid-shift(12);
 

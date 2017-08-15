@@ -32,7 +32,12 @@ export default Model.extend({
     audio: attr('string'),
     feature_id: attr('string'),
 
+    // Ember SafeString to render HTML
     safe_description: computed(function safeDescription() {
         return new htmlSafe(get(this, 'description'));
-    }).property('photo')
+    }).property('photo'),
+
+    // Temporary properties for editing
+    lat: attr(),
+    lon: attr()
 });

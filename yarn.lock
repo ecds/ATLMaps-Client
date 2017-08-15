@@ -552,6 +552,10 @@ babel-plugin-htmlbars-inline-precompile@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-0.1.1.tgz#a878c1771224429dd6e546ba6d39c2c35073be92"
 
+babel-plugin-htmlbars-inline-precompile@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-0.2.3.tgz#cd365e278af409bfa6be7704c4354beee742446b"
+
 babel-plugin-inline-environment-variables@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-inline-environment-variables/-/babel-plugin-inline-environment-variables-1.0.1.tgz#1f58ce91207ad6a826a8bf645fafe68ff5fe3ffe"
@@ -1159,12 +1163,6 @@ broccoli-clean-css@^1.1.0:
     inline-source-map-comment "^1.0.5"
     json-stable-stringify "^1.0.0"
 
-broccoli-cli@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/broccoli-cli/-/broccoli-cli-1.0.0.tgz#69444521a5e631569300fbc196e85e18097b22a4"
-  dependencies:
-    resolve "~0.6.1"
-
 broccoli-concat@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/broccoli-concat/-/broccoli-concat-3.2.2.tgz#86ffdc52606eb590ba9f6b894c5ec7a016f5b7b9"
@@ -1268,7 +1266,7 @@ broccoli-funnel@1.0.2:
     symlink-or-copy "^1.0.0"
     walk-sync "^0.2.6"
 
-broccoli-funnel@1.2.0, broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.2, broccoli-funnel@^1.0.6, broccoli-funnel@^1.0.7, broccoli-funnel@^1.1.0, broccoli-funnel@^1.2.0:
+broccoli-funnel@1.2.0, broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.6, broccoli-funnel@^1.0.7, broccoli-funnel@^1.1.0, broccoli-funnel@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-1.2.0.tgz#cddc3afc5ff1685a8023488fff74ce6fb5a51296"
   dependencies:
@@ -2408,14 +2406,12 @@ ember-cli-eslint@3.0.3:
     walk-sync "^0.3.0"
 
 "ember-cli-excel2geojson@git://github.com/jayvarner/ember-cli-excel2geojson.git#develop":
-  version "0.0.1"
-  resolved "git://github.com/jayvarner/ember-cli-excel2geojson.git#f24085f8c5a983693c67b076e0d16f2e682cca48"
+  version "0.0.0"
+  resolved "git://github.com/jayvarner/ember-cli-excel2geojson.git#e40d6e49f7e2b6d80368f6f769b334a6dd818cbc"
   dependencies:
-    broccoli-cli "^1.0.0"
-    ember-cli-babel "^5.1.7"
-    ember-cli-htmlbars "^1.0.10"
-    ember-cli-htmlbars-inline-precompile "^0.3.3"
-    ember-light-table "~1.9.0"
+    ember-cli-babel "^6.0.0"
+    ember-cli-htmlbars "^2.0.3"
+    ember-cli-htmlbars-inline-precompile "^0.4.0"
 
 ember-cli-get-component-path-option@^1.0.0:
   version "1.0.0"
@@ -2438,6 +2434,15 @@ ember-cli-htmlbars-inline-precompile@^0.3.3:
     semver "^5.3.0"
     silent-error "^1.1.0"
 
+ember-cli-htmlbars-inline-precompile@^0.4.0:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars-inline-precompile/-/ember-cli-htmlbars-inline-precompile-0.4.4.tgz#24a7617152630d64a047e553b72e00963a4f8d73"
+  dependencies:
+    babel-plugin-htmlbars-inline-precompile "^0.2.3"
+    ember-cli-version-checker "^2.0.0"
+    hash-for-dep "^1.0.2"
+    silent-error "^1.1.0"
+
 ember-cli-htmlbars@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-1.1.1.tgz#8776cf59796dac8f32e8625fc6d1ea45ffa55de1"
@@ -2458,7 +2463,7 @@ ember-cli-htmlbars@^1.0.0, ember-cli-htmlbars@^1.0.1, ember-cli-htmlbars@^1.0.10
     json-stable-stringify "^1.0.0"
     strip-bom "^2.0.0"
 
-ember-cli-htmlbars@^2.0.2:
+ember-cli-htmlbars@^2.0.2, ember-cli-htmlbars@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-2.0.3.tgz#e116e1500dba12f29c94b05b9ec90f52cb8bb042"
   dependencies:
@@ -2501,26 +2506,7 @@ ember-cli-lodash-subset@^1.0.11, ember-cli-lodash-subset@^1.0.7:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-1.0.12.tgz#af2e77eba5dcb0d77f3308d3a6fd7d3450f6e537"
 
-ember-cli-mirage@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.3.4.tgz#eeb9d6e02c0c49c81915762178bab9a42d86ada8"
-  dependencies:
-    broccoli-funnel "^1.0.2"
-    broccoli-merge-trees "^1.1.0"
-    broccoli-stew "^1.5.0"
-    chalk "^1.1.1"
-    ember-cli-babel "^5.1.7"
-    ember-cli-node-assets "^0.1.4"
-    ember-get-config "0.2.1"
-    ember-inflector "^2.0.0"
-    ember-lodash "^4.17.3"
-    exists-sync "0.0.3"
-    fake-xml-http-request "^1.4.0"
-    faker "^3.0.0"
-    pretender "^1.4.2"
-    route-recognizer "^0.2.3"
-
-ember-cli-node-assets@^0.1.1, ember-cli-node-assets@^0.1.4:
+ember-cli-node-assets@^0.1.1:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ember-cli-node-assets/-/ember-cli-node-assets-0.1.6.tgz#6488a2949048c801ad6d9e33753c7bce32fc1146"
   dependencies:
@@ -2938,7 +2924,7 @@ ember-keyboard@2.1.9:
   dependencies:
     ember-cli-babel "^5.1.6"
 
-ember-leaflet@^3.0.12:
+ember-leaflet@~3.0.12:
   version "3.0.12"
   resolved "https://registry.yarnpkg.com/ember-leaflet/-/ember-leaflet-3.0.12.tgz#ad64a3137cff3dbd2a7b00ea0b525fd69cb14dea"
   dependencies:
@@ -2959,7 +2945,7 @@ ember-lifeline@^1.0.4:
   dependencies:
     ember-cli-babel "^5.1.7"
 
-ember-light-table@^1.9.0, ember-light-table@~1.9.0:
+ember-light-table@~1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/ember-light-table/-/ember-light-table-1.9.0.tgz#ed35ea2f59eae94ec503721cb9177b7584646ffe"
   dependencies:
@@ -2976,17 +2962,6 @@ ember-light-table@^1.9.0, ember-light-table@~1.9.0:
 ember-load-initializers@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ember-load-initializers/-/ember-load-initializers-0.5.1.tgz#76e3db23c111dbdcd3ae6f687036bf0b56be0cbe"
-
-ember-lodash@^4.17.3:
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/ember-lodash/-/ember-lodash-4.17.5.tgz#bda557402facae144567d1ef530b3de7c38bcde1"
-  dependencies:
-    broccoli-debug "^0.6.1"
-    broccoli-funnel "^1.1.0"
-    broccoli-merge-trees "^2.0.0"
-    broccoli-string-replace "^0.1.1"
-    ember-cli-babel "^6.4.1"
-    lodash-es "^4.17.4"
 
 ember-maybe-import-regenerator@^0.1.5:
   version "0.1.6"
@@ -3654,14 +3629,6 @@ extglob@^0.3.1:
 extsprintf@1.3.0, extsprintf@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
-
-fake-xml-http-request@^1.4.0, fake-xml-http-request@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/fake-xml-http-request/-/fake-xml-http-request-1.6.0.tgz#bd0ac79ae3e2660098282048a12c730a6f64d550"
-
-faker@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/faker/-/faker-3.1.0.tgz#0f908faf4e6ec02524e54a57e432c5c013e08c9f"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -4861,10 +4828,6 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.4:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
-
 lodash._baseassign@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash._baseassign/-/lodash._baseassign-3.2.0.tgz#8c38a099500f215ad09e59f1722fd0c52bfe0a4e"
@@ -5830,13 +5793,6 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-pretender@^1.4.2:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/pretender/-/pretender-1.5.1.tgz#bd9098c03d39c3bc7dcb84a28ee27e096e2e32b8"
-  dependencies:
-    fake-xml-http-request "^1.6.0"
-    route-recognizer "^0.3.3"
-
 printf@^0.2.3:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/printf/-/printf-0.2.5.tgz#c438ca2ca33e3927671db4ab69c0e52f936a4f0f"
@@ -6273,10 +6229,6 @@ resolve@^1.1.2, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0, resolve@^1.3.0, 
   dependencies:
     path-parse "^1.0.5"
 
-resolve@~0.6.1:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.6.3.tgz#dd957982e7e736debdf53b58a4dd91754575dd46"
-
 restore-cursor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-1.0.1.tgz#34661f46886327fed2991479152252df92daa541"
@@ -6305,14 +6257,6 @@ rollup@^0.41.4:
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.41.6.tgz#e0d05497877a398c104d816d2733a718a7a94e2a"
   dependencies:
     source-map-support "^0.4.0"
-
-route-recognizer@^0.2.3:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.2.10.tgz#024b2283c2e68d13a7c7f5173a5924645e8902df"
-
-route-recognizer@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.3.3.tgz#1d365e27fa6995e091675f7dc940a8c00353bd29"
 
 rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.1, rsvp@^3.3.3, rsvp@^3.5.0:
   version "3.6.2"

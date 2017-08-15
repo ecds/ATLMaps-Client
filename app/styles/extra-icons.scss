@@ -8,6 +8,14 @@
   url('/assets/fonts/atlmaps-ext/font/atlmaps-ext.svg#atlmaps-ext') format('svg');
 }
 
+@mixin polygon {
+  &::before {
+    content: '\e802';
+    font-family: 'atlmaps-ext';
+    font-size: .8em;
+  }
+}
+
 i.atlmaps-ext {
   font-family: 'atlmaps-ext';
 }
@@ -17,16 +25,21 @@ i.material-icons.atlmaps-ext.database::before{
 }
 
 .layer-list-item-icon {
-  &.polygon {
-    &::before {
-      content: '\e802';
-      font-family: 'atlmaps-ext';
-      font-size: .8em;
-    }
+
+  &.GeometryCollection {
+    @include polygon;
+  }
+
+  &.MultiPolygon {
+    @include polygon;
+  }
+
+  &.Polygon {
+    @include polygon;
   }
 }
 
-.layer-list-item-icon.line-data::before {
+.layer-list-item-icon.LineString::before {
   content: '\e803';
   font-family: 'atlmaps-ext';
   font-size: .7em;

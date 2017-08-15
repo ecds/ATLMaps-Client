@@ -60,13 +60,13 @@ export default Service.extend({
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
 
-            const labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
+            const labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
                 className: 'labels base',
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                 subdomains: 'abcd'
             });
 
-            const greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            const greyscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
                 className: 'greyscale base',
                 thumbnail: '/assets/images/carto.png',
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -170,9 +170,6 @@ export default Service.extend({
                     leaflet_object: wmsLayer
                 });
 
-                // TODO make use of this
-                wmsLayer.on('load', () => {});
-
                 break;
             }
         default:
@@ -246,7 +243,7 @@ export default Service.extend({
                 feature.setProperties({
                     colorName: layerProps.colorName,
                     colorHex: layerProps.colorHex,
-                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
+                    markerDiv: `<span class='vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
                 });
             }
             let newLeafletFeature = null;
@@ -284,6 +281,7 @@ export default Service.extend({
             case 'LineString':
             case 'Polygon':
             case 'MultiPolygon':
+            case 'GeometryCollection':
                 {
                     const style = {
                         color: get(feature, 'colorHex'),
@@ -297,7 +295,11 @@ export default Service.extend({
                         // markerDiv: feature.markerDiv,
                         interactive: true
                     });
-                    if (featureProps.geometry_type === 'MultiPolygon') {
+                    if (
+                       (featureProps.geometry_type === 'MultiPolygon')
+                       || (featureProps.geometry_type === 'Polygon')
+                       || (featureProps.geometry_type === 'GeometryCollection')
+                   ) {
                         newLeafletFeature.setStyle({ opacity: 0.7 });
                     }
                     newLeafletFeature.bindPopup();
@@ -341,14 +343,15 @@ export default Service.extend({
                 });
 
                 // TODO make use of this
-                wmsLayer.on('load', () => {});
+                wmsLayer.on('load', () => { console.log('load', 'load');});
 
                 break;
             }
 
-        case 'point-data':
-        case 'polygon':
-        case 'line-data':
+        case 'Point':
+        case 'MultiPolygon':
+        case 'LineString':
+        case 'GeometryCollection':
         case 'dataset':
             {
                 newLayer.setProperties({
@@ -370,16 +373,16 @@ export default Service.extend({
         const slug = vector.get('slug');
         const dataType = vector.get('data_type');
         vector.get('vector_feature').forEach((feature) => {
-            if (dataType === 'polygon') {
+            if (dataType === 'MultiPolygon') {
                 feature.get('leaflet_object').setStyle({
                     color: vector.get('colorHex'),
                     fillColor: vector.get('colorHex')
                 });
-            } else if (dataType === 'line-data') {
+            } else if (dataType === 'LineString') {
                 feature.get('leaflet_object').setStyle({
                     color: vector.get('colorHex')
                 });
-            } else if (dataType === 'point-data') {
+            } else if (dataType === 'Point') {
                 // The Icon class doesn't have any methods like setStyle.
                 const domClass = `.${slug}`;
                 $(domClass).css('color', get(vector, 'colorHex'));

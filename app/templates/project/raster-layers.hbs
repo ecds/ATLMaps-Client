@@ -12,13 +12,12 @@
                       <label for='{{concat layer.raster_layer.slug '-checkbox'}}' class='raster-layer-list-item-detail-toggle-label'>
                         {{layer.raster_layer.title}}
                       </label>
-                      <div class='slider-container'>
-                        {{#if layer.raster_layer.leaflet_object}}
-                          {{opacity-slider layer=layer.raster_layer}}
-                        {{/if}}
-                      </div>
                     </div>
-                  </div>
+                    <div class='slider-container'>
+                      {{#if layer.raster_layer.leaflet_object}}
+                        {{opacity-slider layer=layer.raster_layer}}
+                      {{/if}}
+                    </div>                  </div>
 
                     <div class='layer-list-item-secondary-action'>
                       <i class='fa fa-drag-handle reorder-handle' aria-hidden='true'></i>

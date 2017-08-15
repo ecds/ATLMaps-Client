@@ -16,6 +16,8 @@
 .project-intro {
   overflow: hidden;
 
+  // TODO: make mixin for `pane-content` instead of reusing it like this.
+  // That will make it safer and clearer.
   .pane-content {
     @include grid-container;
     @include scrollable-content;
@@ -23,9 +25,10 @@
     padding: .5rem;
     width: 100%;
 
-    // &.with-media {
-    //   margin-top: 45vh;
-    // }
+    article {
+      line-height: 1.5em;
+      padding: 2em;
+    }
   }
 }
 

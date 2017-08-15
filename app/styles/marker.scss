@@ -1,7 +1,7 @@
 // general marker style
 
 // $marker-icon is defined in variables
-.point-data {
+.Point {
   &::before {
     content: $marker-icon;
     font-family: 'FontAwesome';

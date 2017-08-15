@@ -25,11 +25,11 @@ export default Route.extend(EKMixin, {
     currentUser: service(),
 
     // This prevents redirection after authentication.
-    beforeModel(transition) {
-        if (!this.get('session.isAuthenticated')) {
-            this.set('session.attemptedTransition', transition);
-        }
-    },
+    // beforeModel(transition) {
+    //     if (!this.get('session.isAuthenticated')) {
+    //         this.set('session.attemptedTransition', transition);
+    //     }
+    // },
 
     model(params) {
         let project = null;
@@ -108,9 +108,12 @@ export default Route.extend(EKMixin, {
 
     setUp: function setUp() {
         const { project } = this.modelFor('project');
+        console.log('vectors', get(project, 'vector_layer_project').lenght);
         const cookieService = get(this, 'cookies');
         get(this, 'dataColors');
         set(this, 'keyboardActivated', true);
+        // Unlikely, but just incase an error message is hanging around.
+        get(this, 'flashMessage').clearMessage();
 
         run.scheduleOnce('afterRender', () => {
             if (!this.get('mapObject').map) {
@@ -210,23 +213,9 @@ export default Route.extend(EKMixin, {
             project.save().then((savedProject) => {
                 savedProject.get('raster_layer_project').invoke('save');
                 savedProject.get('vector_layer_project').invoke('save');
-                flash.setProperties({
-                    message: 'PROJECT SAVED',
-                    show: true,
-                    success: true
-                });
-                run.later(this, () => {
-                    flash.setProperties({ message: '', show: false });
-                }, 3000);
-            }, () => {
-                flash.setProperties({
-                    message: 'ERROR UPDATING PROJECT',
-                    show: true,
-                    success: false
-                });
-                run.later(this, () => {
-                    flash.setProperties({ message: '', show: false });
-                }, 3000);
+                flash.savedMessage('PROJECT SAVED');
+            }, (error) => {
+                flash.failedMessage(`ERROR UPDATING PROJECT: ${error.message}`);
             });
         },
 
@@ -239,23 +228,9 @@ export default Route.extend(EKMixin, {
                 project.save().then((savedProject) => {
                     savedProject.get('raster_layer_project').invoke('save');
                     savedProject.get('vector_layer_project').invoke('save');
-                    flash.setProperties({
-                        message: 'PROJECT UPDATED',
-                        show: true,
-                        success: true
-                    });
-                    run.later(this, () => {
-                        flash.setProperties({ message: '', show: false });
-                    }, 3000);
-                }, () => {
-                    flash.setProperties({
-                        message: 'ERROR UPDATING PROJECT',
-                        show: true,
-                        success: false
-                    });
-                    run.later(this, () => {
-                        flash.setProperties({ message: '', show: false });
-                    }, 3000);
+                    flash.savedMessage('PROJECT UPDATED');
+                }, (error) => {
+                    flash.failedMessage(`ERROR UPDATING PROJECT: ${error.message}`);
                 });
             }, 300);
         },
@@ -300,7 +275,7 @@ export default Route.extend(EKMixin, {
                 case 'vector': {
                     let layerColor = '';
                     switch (layerObj.get('data_type')) {
-                    case 'point-data': {
+                    case 'Point': {
                         const markerColors = this.get('dataColors.markerColors');
                         layerColor = Math.floor(Math.random() * markerColors.length);
                         break;
@@ -428,12 +403,8 @@ export default Route.extend(EKMixin, {
                     set(this.controller, 'searchingVectors', false);
                 });
             }
-
-            // this.setProperties({
-            //     searched: true,
-            //     showingResults: true
-            // });
         }
+
     }
 
 });

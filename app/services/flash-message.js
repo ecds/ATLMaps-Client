@@ -25,7 +25,7 @@ export default Service.extend({
         set(this, 'success', false);
         run.later(this, () => {
             self.clearMessage();
-        }, 3000);
+        }, 9000);
     },
 
     clearMessage() {

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 /**
  * Ember application route.
  *
@@ -9,7 +8,7 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 
 const {
     Route,
-    debug,
+    get,
     inject: {
         service
     },
@@ -25,8 +24,10 @@ export default Route.extend(ApplicationRouteMixin, {
     },
 
     actions: {
-        error(err) {
-            debug(err);
+        error(error /* , transition */) {
+            const flash = get(this, 'flashMessage');
+            flash.setProperties({ message: error.message });
+            this.transitionTo('error');
         },
 
         toggleShowingLogin() {

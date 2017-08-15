@@ -24,7 +24,7 @@ export default Component.extend({
 
     didInsertElement() {
         const group = get(this, 'projectLayer.vector_layer.data_type');
-        if (group === 'point-data') {
+        if (group === 'Point') {
             set(this, 'colors', get(this, 'dataColors.safeMarkerColors'));
         } else {
             set(this, 'colors', get(this, 'dataColors.safeShapeColors'));

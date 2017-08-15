@@ -50,7 +50,6 @@ Router.map(function() {
   this.route('project', {
     path: '/project/:project_id'
   }, function() {
-    this.route('edit');
     this.route('info');
     this.route('vector-layers');
     this.route('raster-layers');
