@@ -8,7 +8,7 @@
 
 @import 'bourbon', 'neat', 'bitters';
 @import 'responsive-grid'; // local grid using bourbon neat.
-@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message', 'layer-list-item', 'vector-info', 'table', 'loading' ; // Refills
+@import 'banner', 'ember-modal-structure', 'ember-modal-appearance', 'main-footer', 'marker', 'extra-icons', 'login-form', 'slider', 'search-results', 'base-picker', 'project-pane', 'project-intro', 'search-pane', 'project-nav', 'user-menu', 'social-auth', 'layer-route', 'toggle-switch', 'waves', 'tagem', 'color-picker', 'article-container', 'md-input', 'embed', 'flash-message', 'layer-list-item', 'vector-info', 'table', 'loading', 'bios', 'grid' ; // Refills
 
 :root {
   background-color: color('grey', 'lighten-4');
@@ -468,5 +468,11 @@ textarea {
 
   .leaflet-container {
     height: 25vh;
+  }
+}
+
+.static {
+  article {
+    padding: 2em 4%;
   }
 }

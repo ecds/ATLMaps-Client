@@ -51,7 +51,9 @@ export default Mixin.create({
                 // Don't care.
             }
             map.fitBounds(get(this, 'mapObject.allBounds'));
-            map.setMaxBounds(get(this, 'mapObject.allBounds'));
+            // TODO This was too restrictive. The idea was to limit the bounds
+            // when a raster is the base layer. Needs rethinking.
+            // map.setMaxBounds(get(this, 'mapObject.allBounds'));
             map.setMinZoom(map.getZoom());
             // TODO get rid of this.
             // Activate the according from MaterializeCSS.

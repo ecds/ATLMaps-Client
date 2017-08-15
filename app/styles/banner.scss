@@ -212,6 +212,18 @@
       }
     }
   }
+
+  .static {
+    text-align: inherit;
+    text-transform: none;
+
+    section {
+      font-family: 'Roboto';
+      font-size: 1.1em;
+      line-height: 1.5em;
+      word-spacing: .2em;
+    }
+  }
 }
 
 // .vector-detail-container {article {

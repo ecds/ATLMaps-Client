@@ -51,7 +51,7 @@ export default Service.extend({
                 // maxZoom: 20,
                 className: 'street base',
                 thumbnail: '/assets/images/street_map.png',
-                attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: 'Tiles courtesy of <a href="https://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             });
 
             const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -343,7 +343,7 @@ export default Service.extend({
                 });
 
                 // TODO make use of this
-                wmsLayer.on('load', () => { console.log('load', 'load');});
+                wmsLayer.on('load', () => {});
 
                 break;
             }
