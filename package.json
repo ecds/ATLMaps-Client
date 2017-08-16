@@ -45,6 +45,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-swiper": "0.6.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-excel2geojson": "git://github.com/atlanta-explorer/ember-cli-excel2geojson.git#develop",
     "ember-composability": "0.3.7",
     "ember-composable-helpers": "1.1.2",
     "ember-cookies": "^0.0.13",
@@ -57,7 +58,6 @@
     "ember-modal-dialog": "0.8.8",
     "ember-new-computed": "1.0.3",
     "ember-power-select": "1.7.1",
-    "ember-responsive": "^2.0.4",
     "ember-route-action-helper": "2.0.0",
     "ember-sortable": "1.8.2",
     "ember-tether": "0.3.1",
@@ -79,6 +79,7 @@
     "ember-keyboard": "2.1.9",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "ember-responsive": "^2.0.4",
     "ember-simple-auth": "^1.2.2",
     "torii": "^0.8.1"
   }

@@ -15,7 +15,13 @@
     &:focus {
       box-shadow: none;
       outline: none;
-  }
+    }
+
+    &:invalid {
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+    }
 }
 
   // LABEL

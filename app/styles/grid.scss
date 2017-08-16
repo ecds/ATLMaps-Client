@@ -1,10 +1,21 @@
 .burbon {
   @include grid-container;
-  margin-bottom: 3em;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto 3em 0;
 }
 
 .three {
   @include grid-column(3);
+}
+
+.four {
+  @include grid-column(4);
+}
+
+.eight {
+  @include grid-column(8);
 }
 
 .nine {

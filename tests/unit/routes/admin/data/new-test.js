@@ -5,7 +5,7 @@ moduleFor('route:admin/data/new', 'Unit | Route | admin/data/new', {
   // needs: ['controller:foo']
 });
 
-test('it exists', function(assert) {
-  let route = this.subject();
-  assert.ok(route);
-});
+// test('it exists', function(assert) {
+//   let route = this.subject();
+//   assert.ok(route);
+// });

@@ -60,7 +60,7 @@ export default Service.extend({
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
 
-            const labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
+            const labels = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_only_labels/{z}/{x}/{y}.png', {
                 className: 'labels base',
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                 subdomains: 'abcd'
@@ -269,8 +269,8 @@ export default Service.extend({
                     point.on('add', () => {});
                     // point.addTo(atlMap);
 
-                    newLeafletFeature.on('click', () => {
-                        this.showDetails(feature);
+                    newLeafletFeature.on('click', (event) => {
+                        this.showDetails(feature, event);
                     });
 
                     layerProps.leaflet_object.addLayer(point);
@@ -309,7 +309,7 @@ export default Service.extend({
                     });
                     newLeafletFeature.on('click', (event) => {
                         event.target.closePopup();
-                        this.showDetails(feature);
+                        this.showDetails(feature, event);
                     });
                     feature.setProperties({ leaflet_object: newLeafletFeature });
                     layerProps.leaflet_object.addLayer(newLeafletFeature);
@@ -372,6 +372,7 @@ export default Service.extend({
     updateVectorStyle(vector) {
         const slug = vector.get('slug');
         const dataType = vector.get('data_type');
+        // set(vector.properties, 'colorName', get(vector, 'colorName'))
         vector.get('vector_feature').forEach((feature) => {
             if (dataType === 'MultiPolygon') {
                 feature.get('leaflet_object').setStyle({
@@ -390,7 +391,7 @@ export default Service.extend({
         });
     },
 
-    showDetails(properties) {
+    showDetails(properties, event) {
         let popupContent = properties;
         if (get(properties, 'properties.holc_id')) {
             popupContent += `<a href='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.pdf' target='_blank'><img style='float: right; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding-left: 2px;' src='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.png' /></a>`;
@@ -447,10 +448,12 @@ export default Service.extend({
         $(`.${get(properties, 'feature_id')}`).addClass('active-marker');
         $('div.vector-info').show();
         $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
+        // This is ugly. One embeds, the color does get updated here. So...we get the
+        // color of the feature that was clicked to update the color.
+        $('.vector-content.layer-icon').children().css('color', $(event.target.getElement()).css('color'));
         $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
         $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
         $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));
-        // $('.vector-content.title').empty().append(feature.properties.NAME);
         $('.vector-content.marker-content').empty().append(popupContent);
     },
 
