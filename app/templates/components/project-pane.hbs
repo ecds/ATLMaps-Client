@@ -7,7 +7,7 @@
     {{#if (and session.isAuthenticated (or model.may_edit model.exploring))}}
       <span class='{{if model.hasDirtyAttributes "dirty"}}' onclick={{route-action "updateProject" model}}>SAVE</span>
     {{else if model.exploring}}
-        {{#login-link class='faint-link'}}Log in or sign up to save{{/login-link}}
+        {{#login-link class='faint-link'}}Log to save{{/login-link}}
     {{/if}}
   </div>
 

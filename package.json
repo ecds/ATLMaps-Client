@@ -35,6 +35,7 @@
     "ember-cli-deploy-s3": "^1.1.0",
     "ember-cli-deprecation-workflow": "0.2.3",
     "ember-cli-eslint": "3.0.3",
+    "ember-cli-excel2geojson": "*",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -45,7 +46,6 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-swiper": "0.6.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-cli-excel2geojson": "git://github.com/atlanta-explorer/ember-cli-excel2geojson.git#develop",
     "ember-composability": "0.3.7",
     "ember-composable-helpers": "1.1.2",
     "ember-cookies": "^0.0.13",
@@ -81,6 +81,7 @@
     "ember-resolver": "^2.0.3",
     "ember-responsive": "^2.0.4",
     "ember-simple-auth": "^1.2.2",
+    "puppeteer": "^0.9.0",
     "torii": "^0.8.1"
   }
 }
