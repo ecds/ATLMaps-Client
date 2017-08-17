@@ -86,11 +86,11 @@ module.exports = function setUp(environment) {
 
         ENV.torii.providers['facebook-oauth2'] = {
             apiKey: '425398021183204',
-            redirectUri: 'https://atlmaps.com/'
+            redirectUri: 'https://atlmaps.org/'
         };
         ENV.torii.providers['google-oauth2'] = {
             apiKey: '78026432363-8o0b40k5m86ob4o4cn5gkmn8pkc060on.apps.googleusercontent.com',
-            redirectUri: 'https://atlmaps.com'
+            redirectUri: 'https://atlmaps.org'
         };
     }
 
