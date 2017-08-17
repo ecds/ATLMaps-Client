@@ -53,7 +53,9 @@ export default Model.extend({
     tag_ids: hasMany('tag'),
     institution: belongsTo('institution'),
     tag_slugs: attr('string'),
-    active: attr('boolean'),
+    active: attr('boolean', {
+        defaultValue: false
+    }),
     active_in_project: attr('boolean', {
         defaultValue: false
     }),

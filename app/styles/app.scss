@@ -2,7 +2,7 @@
 @import '../../bower_components/materialize/sass/components/color'; // Custom color settings go here
 @import 'variables';
 @import 'mixins';
-// @import url('https://fonts.googleapis.com/css?family=Roboto');
+
 @import 'materialize-local';
 @import 'leaflet', 'trumbowyg', 'nouislider', 'font-awesome', 'swiper';
 
@@ -13,7 +13,7 @@
 :root {
   background-color: color('grey', 'lighten-4');
   color: material-color(md_grey, 600);
-  font-family: $font-stack-system;
+  font-family: 'Roboto', sans-serif;
   font-size: $base-font-size;
   font-smoothing: antialiased;
   height: 100vh;
@@ -463,12 +463,17 @@ textarea {
 }
 
 .select,
-.geojson {
-  @include grid-column(6);
+.geojson,
+.description-preview {
+  @include grid-column(4);
 
   .leaflet-container {
     height: 25vh;
   }
+}
+
+.description-preview {
+  border: $primary-color-dark;
 }
 
 .static {

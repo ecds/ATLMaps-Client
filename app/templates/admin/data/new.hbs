@@ -8,6 +8,7 @@
   {{textarea rows='12' value=(mut model.description) required='required'}}
   <label>Attribution</label>
   {{input value=(mut model.attribution) required='required'}}
+  {{input type='checkbox' checked=model.active action=(toggle model.active model)}}!
   <button {{action 'save' model}}>save</button>
 </form>
 {{/parse-spreadsheet}}
