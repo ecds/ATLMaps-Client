@@ -1,8 +1,3 @@
-{{outlet}}
-{{!-- {{#unless model.id}}
-{{#parse-spreadsheet layer=model}}
-{{else}}
-{{#if model.name}}<a href='{{model.shareUrl}}'><h2>{{model.shareUrl}}</h2></a>{{/if}}
 <form>
   <label>Title</label>
   {{input value=(mut model.title) required='required'}}
@@ -10,8 +5,8 @@
   {{textarea rows='12' value=(mut model.description) required='required'}}
   <label>Attribution</label>
   {{input value=(mut model.attribution) required='required'}}
+  <label>Active</label>
+  {{input type='checkbox' checked=model.active action=(toggle model.active model)}}
   <button {{action 'save' model}}>save</button>
+  <button class='flat' {{action 'save' model}}>cancle</button>
 </form>
-{{/parse-spreadsheet}}
-{{flash-message}}
-{{/unless}} --}}

@@ -73,7 +73,7 @@ Router.map(function() {
     this.route('data', function() {
       this.route('new');
       this.route('edit', {
-          path: '/edit/:layer_id'
+          path: 'edit/:layer_id'
       });
     });
   });

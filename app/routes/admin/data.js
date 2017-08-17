@@ -5,11 +5,8 @@ const { Route, get, run, inject: { service } } = Ember;
 export default Route.extend({
     flashMessage: service(),
 
-    model(params) {
-        if (params) {
-            return this.store.findRecord('vector-layer', params.layer_id);
-        }
-        return this.store.createRecord('vector-layer');
+    model() {
+        return this.store.findAll('vector-layer');
     },
 
     actions: {
