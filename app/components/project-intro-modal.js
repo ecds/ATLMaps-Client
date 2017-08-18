@@ -28,6 +28,7 @@ export default Component.extend({
     editing: false,
 
     didRender() {
+        this._super(...arguments);
         const currentRoute = getOwner(this).lookup('controller:application').currentPath;
         if ((currentRoute.indexOf('settings') !== -1) && get(this, 'model.project.may_edit')) {
             set(this, 'editing', true);

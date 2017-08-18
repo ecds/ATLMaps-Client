@@ -1,13 +1,14 @@
-{{#if model.project.media}}
-    <div class='intro-video-container {{if videoOnly 'video-container'}}'>
-      <iframe width="60%" height="280" src="{{model.project.media}}" frameborder="0" allowfullscreen align='center'></iframe>
-    </div>
-{{/if}}
+
 <header class='intro-modal-header'>
 </header>
 
 <div class='modal-container {{if editing "editing"}}'>
-  <div class='pane-content {{if withMedia 'with-media'}}'>
+  <div class='pane-content'>
+    {{#if model.project.media}}
+        <div class='intro-video-container {{if videoOnly 'video-container'}}'>
+          <iframe width="60%" height="280" src="{{model.project.media}}" frameborder="0" allowfullscreen align='center'></iframe>
+        </div>
+    {{/if}}
     <article>
 
       {{#if editing}}

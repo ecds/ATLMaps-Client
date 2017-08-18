@@ -9,6 +9,7 @@ export default Route.extend({
 
     actions: {
         willTransition() {
+            this._super(...arguments);
             this.store.unloadAll('project');
         },
 

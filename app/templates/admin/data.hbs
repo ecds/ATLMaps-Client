@@ -1,1 +1,17 @@
 {{outlet}}
+{{!-- {{#unless model.id}}
+{{#parse-spreadsheet layer=model}}
+{{else}}
+{{#if model.name}}<a href='{{model.shareUrl}}'><h2>{{model.shareUrl}}</h2></a>{{/if}}
+<form>
+  <label>Title</label>
+  {{input value=(mut model.title) required='required'}}
+  <label>Description</label>
+  {{textarea rows='12' value=(mut model.description) required='required'}}
+  <label>Attribution</label>
+  {{input value=(mut model.attribution) required='required'}}
+  <button {{action 'save' model}}>save</button>
+</form>
+{{/parse-spreadsheet}}
+{{/unless}} --}}
+{{flash-message}}

@@ -25,6 +25,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
     actions: {
         error(error /* , transition */) {
+            console.log('error', error);
             const flash = get(this, 'flashMessage');
             flash.setProperties({ message: error.message });
             this.transitionTo('error');
