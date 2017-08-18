@@ -6,35 +6,34 @@ export default Route.extend({
     flashMessage: service(),
 
     model() {
-        return this.store.findAll('vector-layer');
+        return this.store.query('vector-layer', {limit: 100});
     },
 
     actions: {
         save(layer) {
             const flash = get(this, 'flashMessage');
+            const saveType = get(layer, 'dirtyType');
             layer.save().then(() => {
+                if (saveType !== 'updated') {
                 get(layer, 'vector_feature').forEach((vf) => {
                     vf.save().then(() => {
-                        flash.setProperties({
-                            message: 'Features Created',
-                            show: true,
-                            success: true
-                        });
-                        run.later(this, () => {
-                            flash.setProperties({ message: '', show: false });
-                        }, 3000);
+                        flash.savedMessage('Feature Saved!');
                     }, (error) => {
-                        // error
-                        flash.setProperties({
-                            message: `ERROR ${error}`,
-                            show: true,
-                            success: false
-                        });
+                        flash.failedMessage(`Feature Did Not Save :( ${error.message}`);
                     });
                 });
+            }
+            flash.savedMessage('Layer Saved!');
             }, (error) => {
-                Logger.debug('error', error);
+                flash.failedMessage(`Layer Did Not Save :( ${error.message}`);
             });
+        },
+
+        delete(layer) {
+            const d = confirm(`Delete ${get(layer, 'title')}`);
+            if (d === true) {
+                layer.destroyRecord();
+            }
         }
     }
 });

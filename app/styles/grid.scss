@@ -6,6 +6,10 @@
   margin: 0 auto 3em 0;
 }
 
+.two {
+  @include grid-column(2);
+}
+
 .three {
   @include grid-column(3);
 }
@@ -20,6 +24,10 @@
 
 .nine {
   @include grid-column(9);
+}
+
+.ten {
+  @include grid-column(10);
 }
 
 .twelve {
