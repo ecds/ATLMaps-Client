@@ -3,11 +3,9 @@
 <div class='ten'>
   {{#link-to 'admin.data.edit' layer.id}}{{layer.title}}{{/link-to}}
 </div>
-{{!-- <div class='two'>
-  {{#link-to 'admin.data.edit' layer.id}}edit{{/link-to}}
-</div> --}}
 <div class='two'>
   <a {{action (route-action 'delete' layer)}}>delete</a>
 </div>
 {{/each}}
+{{#link-to 'admin.data.new'}}<button>New</button>{{/link-to}}
 </div>

@@ -80,7 +80,7 @@ module.exports = function setUp(environment) {
     }
 
     if (environment === 'production') {
-        ENV.absoluteBase = 'https://atlmaps.com';
+        ENV.absoluteBase = 'https://atlmaps.org';
         ENV.APP.API_HOST = 'https://api.atlmaps.com';
         ENV.metricsAdapters[0].config.id = 'UA-71558106-2';
 

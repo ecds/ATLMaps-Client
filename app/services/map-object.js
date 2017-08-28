@@ -1,8 +1,6 @@
-import Ember from 'ember';
-// brining in Leaflet
-/* globals L, Swiper */
-
 // Service to hold the Leaflet object.
+import Ember from 'ember';
+/* globals L, Swiper */
 
 const {
     $,
@@ -444,13 +442,29 @@ export default Service.extend({
             $('.swiper-wrapper').append(`<img src="${get(properties, 'image')}">`);
         }
         // END GALLERY
+        // START AUDIO
+        if (get(properties, 'audio')) {
+            $('.audio').empty();
+            if (get(properties, 'audio').startsWith('http')) {
+                $('.audio').html(`<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${get(properties, 'audio')}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>`);
+            } else if (get(properties, 'audio').startsWith('<iframe')) {
+                $('.audio').append(get(properties, 'audio'));
+            } else {
+                $('.audio').html('<p>error</p>');
+            }
+        }
+        // END AUDIO
         $('.active-marker').removeClass('active-marker');
         $(`.${get(properties, 'feature_id')}`).addClass('active-marker');
         $('div.vector-info').show();
         $('.vector-content.layer-icon').empty().append(get(properties, 'markerDiv'));
         // This is ugly. One embeds, the color does get updated here. So...we get the
         // color of the feature that was clicked to update the color.
-        $('.vector-content.layer-icon').children().css('color', $(event.target.getElement()).css('color'));
+        try {
+            $('.vector-content.layer-icon').children().css('color', $(event.target.getElement()).css('color'));
+        } catch(error) {
+            //
+        }
         $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
         $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
         $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));

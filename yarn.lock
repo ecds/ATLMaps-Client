@@ -2606,7 +2606,7 @@ ember-cli-string-utils@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-string-utils/-/ember-cli-string-utils-1.1.0.tgz#39b677fc2805f55173735376fcef278eaa4452a1"
 
-ember-cli-swiper@0.6.0:
+ember-cli-swiper@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/ember-cli-swiper/-/ember-cli-swiper-0.6.0.tgz#f886e6149f2c3f095ee3196cf0973022ceed06c4"
   dependencies:

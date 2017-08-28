@@ -35,7 +35,7 @@
 
 .select,
 .geojson,
-.description-preview {
+.preview-detail {
   @include grid-column(4);
 
   .leaflet-container {
