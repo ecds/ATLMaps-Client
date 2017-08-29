@@ -326,6 +326,8 @@ export default Service.extend({
         const map = this.get('map');
         const layerProps = getProperties(layer, 'data_format', 'colorName', 'colorHex');
         const newLayer = layer.get(`${layerProps.data_format}_layer`);
+        // const newLayer = layerProps.data_type ? layer.get('vector_layer')
+        // : layer.get('raster_layer')
         const newLayerProps = getProperties(newLayer, 'slug', 'data_type');
 
         newLayer.set('active_in_project', true);
@@ -443,8 +445,8 @@ export default Service.extend({
         }
         // END GALLERY
         // START AUDIO
+        $('.audio').empty();
         if (get(properties, 'audio')) {
-            $('.audio').empty();
             if (get(properties, 'audio').startsWith('http')) {
                 $('.audio').html(`<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${get(properties, 'audio')}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>`);
             } else if (get(properties, 'audio').startsWith('<iframe')) {

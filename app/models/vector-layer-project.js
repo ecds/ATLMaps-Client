@@ -16,6 +16,9 @@ export default LayerProject.extend({
     }),
     marker: attr(),
     data_type: attr('string'),
+    data_format: attr('string', {
+        defaultValue: 'vector'
+    }),
     dataColors: service(),
     colorName: computed(function colorName() {
         if (get(this, 'data_type') === 'Point') {
