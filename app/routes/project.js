@@ -178,12 +178,13 @@ export default Route.extend(EKMixin, {
         set(this, 'mapObject.map', '');
         // Uload the store. It would be nice to just unload all at once, but we
         // need to keep the user in the store.
-        // this.store.unloadAll('raster-layer');
-        // this.store.unloadAll('raster-layer-project');
-        // this.store.unloadAll('vector-layer');
-        // this.store.unloadAll('vector-layer-project');
-        // this.store.unloadAll('vector-feature');
-        // this.store.unloadAll('project');
+        // NOTE: This creates an awful memroy leak with dev tools open.
+        this.store.unloadAll('raster-layer');
+        this.store.unloadAll('raster-layer-project');
+        this.store.unloadAll('vector-layer');
+        this.store.unloadAll('vector-layer-project');
+        this.store.unloadAll('vector-feature');
+        this.store.unloadAll('project');
         project = null;
         categories = null;
         vectors = null;
