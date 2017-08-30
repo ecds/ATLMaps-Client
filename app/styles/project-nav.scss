@@ -17,8 +17,11 @@
     padding: .5em .75em;
     text-align: center;
     text-transform: uppercase;
-    transition: all $rabbit, color $rabbit, max-height $rabbit, font-size $rabbit, background-color $rabbit;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: transform $rabbit;
     transition-timing-function: ease-in-out;
+    will-change: transform;
 
     &:first-child {
       min-height: 5.25em;
@@ -84,8 +87,8 @@
 
   li {
     &:not(:first-child) {
-      max-height: 0;
-      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top;
     }
   }
 }
