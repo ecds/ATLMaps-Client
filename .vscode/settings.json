@@ -1,0 +1,24 @@
+{
+  "git.enableSmartCommit": true,
+  "files.exclude": {
+    ".DS_Store": "explorerExcludedFiles",
+    "dist": "explorerExcludedFiles",
+    "tmp": "explorerExcludedFiles",
+    "node_modules": "explorerExcludedFiles",
+    "bower_components": "explorerExcludedFiles",
+    ".sass-cache": "explorerExcludedFiles",
+    "connect.lock": "explorerExcludedFiles",
+    "coverage/*": "explorerExcludedFiles",
+    "libpeerconnection.log": "explorerExcludedFiles",
+    "npm-debug.log": "explorerExcludedFiles",
+    "testem.log": "explorerExcludedFiles",
+    ".bowerrc": "explorerExcludedFiles",
+    ".ember-cli": "explorerExcludedFiles",
+    ".watchmanconfig": "explorerExcludedFiles",
+    ".env*": "explorerExcludedFiles",
+    "Untitled": "explorerExcludedFiles",
+    "esdoc": "explorerExcludedFiles",
+    "yarn-error.log": "explorerExcludedFiles",
+    "tests/puppeteer": "explorerExcludedFiles"
+  }
+}

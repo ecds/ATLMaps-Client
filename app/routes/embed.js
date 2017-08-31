@@ -9,6 +9,9 @@ export default Route.extend(MapLayerMixin, {
 
     setColor(layer, color) {
         get(this, 'dataColors.embedColors').find((color_values) => {
+            if (layer.filters.length > 0) {
+                return false;
+            }
             if (color_values.name === color) {
                 layer.setProperties(
                     {
@@ -34,10 +37,12 @@ export default Route.extend(MapLayerMixin, {
             this.controllerFor('embed').set('rasterOnly', false);
             // Deal with vector layers.
             const vector = get(model.vectors, 'firstObject');
-            if (vector) {
+            this.controllerFor('embed').set('layer', get(model.vectors, 'firstObject'));
+            // FIXME: This is doubeling down on the hack to make the HOLC
+            // layer work. Plan is to address this when we move to ember-leaflet.
+            if ((vector) && (vector.get('filters') === null)) {
                 this.setColor(vector, params.queryParams.color);
                 get(this, 'mapObject.updateVectorStyle')(vector);
-                this.controllerFor('embed').set('layer', get(model.vectors, 'firstObject'));
             }
 
             // Deal with raster layers.

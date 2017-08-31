@@ -35,9 +35,7 @@ export default Mixin.create({
             }
 
             try {
-                // get(this, 'currentModel.vectors').then(() => {
                 get(this, 'currentModel.vectors').forEach((vector) => {
-                    // set(vector, 'active_in_list', true);
                     vector.setProperties({ active_in_list: true, opacity: 1 });
                     get(this, 'mapObject').mapSingleLayer(vector);
                     // TODO: This needs be be a reusable function

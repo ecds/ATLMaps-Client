@@ -3,7 +3,11 @@
   left: 5em;
   position: absolute;
   top: $navigation-height;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform $rabbit;
   width: 34vw;
+  will-change: transform;
   z-index: 401;
 }
 
@@ -23,9 +27,8 @@
 
 .hide-nav {
   &+ .project-pane {
-    .pane-container {
-      max-height: 0;
-    }
+    transform: scaleY(0);
+    transform-origin: top;
   }
 }
 
@@ -68,6 +71,7 @@
   // sass-lint:disable-block no-color-literals
   display: flex;
   font-size: 1.2em;
+  padding: 1em 0;
   text-transform: capitalize;
 
   ul {

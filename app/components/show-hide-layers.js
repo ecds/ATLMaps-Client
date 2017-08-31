@@ -18,18 +18,20 @@ export default Component.extend({
          */
         toggleAll(layers) {
             const toggleSwitch = document.getElementById('toggle-all');
-            layers.forEach((layer) => {
-                if (toggleSwitch.checked) {
-                    layer.setProperties({ opacity: 10 });
-                    if (get(layer, 'sliderObject')) {
-                        get(layer, 'sliderObject').set(10);
+            layers.then((activeLayers) => {
+                activeLayers.forEach((layer) => {
+                    if (toggleSwitch.checked) {
+                        layer.setProperties({ opacity: 10 });
+                        if (get(layer, 'sliderObject')) {
+                            get(layer, 'sliderObject').set(10);
+                        }
+                    } else {
+                        layer.setProperties({ opacity: 0 });
+                        if (get(layer, 'sliderObject')) {
+                            get(layer, 'sliderObject').set(0);
+                        }
                     }
-                } else {
-                    layer.setProperties({ opacity: 0 });
-                    if (get(layer, 'sliderObject')) {
-                        get(layer, 'sliderObject').set(0);
-                    }
-                }
+                });
             });
         },
 

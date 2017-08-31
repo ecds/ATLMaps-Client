@@ -2405,8 +2405,9 @@ ember-cli-eslint@3.0.3:
     rsvp "^3.2.1"
     walk-sync "^0.3.0"
 
-"ember-cli-excel2geojson@file:../../ember-cli-excel2geojson":
+"ember-cli-excel2geojson@git://github.com/Atlanta-Explorer/ember-cli-excel2geojson.git#develop":
   version "0.0.0"
+  resolved "git://github.com/Atlanta-Explorer/ember-cli-excel2geojson.git#49e98bb4ce5c19512296607bef3e2c4b9b64cc80"
   dependencies:
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^2.0.3"

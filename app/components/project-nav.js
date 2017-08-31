@@ -4,7 +4,8 @@ const {
     Component,
     Object: EmberObject,
     computed,
-    get
+    get,
+    $
 } = Ember;
 
 export default Component.extend({
@@ -51,6 +52,12 @@ export default Component.extend({
     hideNav: false,
 
     links: computed.filterBy('routes', 'show', true),
+
+    // TODO: This is bad. Make vector detail a proper component.
+    click() {
+        $('div.vector-info').hide();
+        $('.active-marker').removeClass('active-marker');
+    },
 
     actions: {
         toggleNav() {
