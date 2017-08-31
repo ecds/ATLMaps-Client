@@ -1,7 +1,9 @@
 {
   "//": [
     "install ember-cli-excel2geojson from local disk",
-    "ember-cli-excel2geojson: file:../../ember-cli-excel2geojson"
+    "ember-cli-excel2geojson: file:../../ember-cli-excel2geojson",
+    "or from github",
+    "git://github.com/Atlanta-Explorer/ember-cli-excel2geojson.git#develop"
   ],
   "name": "atlmaps",
   "version": "0.1.0",

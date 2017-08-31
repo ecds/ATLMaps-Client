@@ -108,7 +108,6 @@ export default Route.extend(EKMixin, {
 
     setUp: function setUp() {
         const { project } = this.modelFor('project');
-        console.log('vectors', get(project, 'vector_layer_project').lenght);
         const cookieService = get(this, 'cookies');
         get(this, 'dataColors');
         set(this, 'keyboardActivated', true);

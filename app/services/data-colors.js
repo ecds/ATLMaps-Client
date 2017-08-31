@@ -6,12 +6,6 @@ import Ember from 'ember';
 
 // Made a second one for shapes and lines. The lighter colors looked like crap.
 // Use the safe versions to set inline style.
-// ```
-// {{#each dataColors.safeEmbedColors as |color index|}}
-//     <span style={{color.safe}}>{{color.name}}</span>
-//     {{log color.hex}}
-// {{/each}}
-// ```
 
 const {
     Service,
