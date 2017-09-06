@@ -6,8 +6,11 @@
       {{md-input value=model.project.name label='Project Title'}}
     </form>
       <ul class="fa-ul">
-        <li onclick= {{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}} class='action'>
-          <i class="fa-li fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i>Publish
+        <li id="publish-tooltip" onclick= {{action (pipe (route-action 'updateProject' model.project 'Project published!') (toggle "published" model.project))}} class='action'>
+          <i class="fa-li fa {{if model.project.published 'fa-check-square' 'fa-square-o'}}" aria-hidden="true"></i>Publish 
+          {{#popover-on-element target='#publish-tooltip' side='top'}}
+            If checked, this project is publicly viewable on atlmaps.org 
+          {{/popover-on-element}}
         </li>
         <li onclick={{action (route-action 'toggleIntro')}} class='action'>
           <i class="fa-li fa fa-pencil"></i>Edit Intro
