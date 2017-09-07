@@ -20,7 +20,7 @@
 
       <div class='result-description'>
         {{#if layer.description}}
-          {{article-container article=layer.description}}
+          {{{article-container article=layer.safe_description}}}
         {{else}}
           <span>Description missing.</span>
         {{/if}}
