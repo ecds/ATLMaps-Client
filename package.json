@@ -72,6 +72,7 @@
     "ember-sortable": "1.8.2",
     "ember-tether": "0.3.1",
     "ember-ticketfly-accordion": "0.6.2",
+    "ember-tooltips": "^2.9.0",
     "ember-truth-helpers": "1.2.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",

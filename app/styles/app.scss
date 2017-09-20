@@ -475,3 +475,8 @@ textarea {
   margin: 0 0 1em 1em;
   max-width: 300px;
 }
+
+.ember-tooltip,
+.ember-popover {
+z-index: 5000;
+}
