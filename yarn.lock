@@ -543,6 +543,12 @@ babel-plugin-ember-modules-api-polyfill@^2.0.1:
   dependencies:
     ember-rfc176-data "^0.2.7"
 
+babel-plugin-ember-modules-api-polyfill@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-2.0.1.tgz#baaf26dcebe2ed1de120021bc42be29f520497b3"
+  dependencies:
+    ember-rfc176-data "^0.2.7"
+
 babel-plugin-eval@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-eval/-/babel-plugin-eval-1.0.1.tgz#a2faed25ce6be69ade4bfec263f70169195950da"
@@ -1107,7 +1113,7 @@ broccoli-babel-transpiler@^5.5.0, broccoli-babel-transpiler@^5.6.2:
     rsvp "^3.5.0"
     workerpool "^2.2.1"
 
-broccoli-babel-transpiler@^6.0.0, broccoli-babel-transpiler@^6.1.2:
+broccoli-babel-transpiler@^6.0.0, broccoli-babel-transpiler@^6.1.1, broccoli-babel-transpiler@^6.1.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/broccoli-babel-transpiler/-/broccoli-babel-transpiler-6.1.2.tgz#26019c045b5ea3e44cfef62821302f9bd483cabd"
   dependencies:
@@ -1453,6 +1459,17 @@ broccoli-sass-source-maps@^1.4.0:
     include-path-searcher "^0.1.0"
     mkdirp "^0.3.5"
     node-sass "^3.8.0"
+    object-assign "^2.0.0"
+    rsvp "^3.0.6"
+
+broccoli-sass-source-maps@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/broccoli-sass-source-maps/-/broccoli-sass-source-maps-2.0.0.tgz#7f25f9f4b296918cec6e00672c63e75abce33d45"
+  dependencies:
+    broccoli-caching-writer "^3.0.3"
+    include-path-searcher "^0.1.0"
+    mkdirp "^0.3.5"
+    node-sass "^4.1.0"
     object-assign "^2.0.0"
     rsvp "^3.0.6"
 
@@ -2326,6 +2343,23 @@ ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.11, ember-cli-babel@^6.0.0-b
     clone "^2.0.0"
     ember-cli-version-checker "^2.0.0"
 
+ember-cli-babel@^6.3.0:
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.8.2.tgz#eac2785964f4743f4c815cd53c6288f00cc087d7"
+  dependencies:
+    amd-name-resolver "0.0.7"
+    babel-plugin-debug-macros "^0.1.11"
+    babel-plugin-ember-modules-api-polyfill "^2.0.1"
+    babel-plugin-transform-es2015-modules-amd "^6.24.0"
+    babel-polyfill "^6.16.0"
+    babel-preset-env "^1.5.1"
+    broccoli-babel-transpiler "^6.1.2"
+    broccoli-debug "^0.6.2"
+    broccoli-funnel "^1.0.0"
+    broccoli-source "^1.1.0"
+    clone "^2.0.0"
+    ember-cli-version-checker "^2.0.0"
+
 ember-cli-broccoli-sane-watcher@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-2.0.4.tgz#f43f42f75b7509c212fb926cd9aea86ae19264c6"
@@ -2510,7 +2544,7 @@ ember-cli-lodash-subset@^1.0.11, ember-cli-lodash-subset@^1.0.7:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-1.0.12.tgz#af2e77eba5dcb0d77f3308d3a6fd7d3450f6e537"
 
-ember-cli-node-assets@^0.1.1:
+ember-cli-node-assets@^0.1.1, ember-cli-node-assets@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ember-cli-node-assets/-/ember-cli-node-assets-0.1.6.tgz#6488a2949048c801ad6d9e33753c7bce32fc1146"
   dependencies:
@@ -2603,6 +2637,15 @@ ember-cli-sass@5.3.1:
     broccoli-sass-source-maps "^1.4.0"
     ember-cli-version-checker "^1.0.2"
     merge "^1.2.0"
+
+ember-cli-sass@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-sass/-/ember-cli-sass-7.0.0.tgz#24bdf6e6c13610c57cbddb1f077715588aedcf13"
+  dependencies:
+    broccoli-funnel "^1.0.0"
+    broccoli-merge-trees "^1.1.0"
+    broccoli-sass-source-maps "^2.0.0"
+    ember-cli-version-checker "^1.0.2"
 
 ember-cli-sri@^2.1.0:
   version "2.1.1"
@@ -3155,6 +3198,14 @@ ember-tether@0.3.1:
     ember-cli-node-assets "^0.1.1"
     tether "^1.3.2"
 
+ember-tether@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/ember-tether/-/ember-tether-0.4.1.tgz#b3fa3910bb4c430e14007e016774f78ced478cf7"
+  dependencies:
+    ember-cli-babel "^5.2.1"
+    ember-cli-node-assets "^0.1.6"
+    tether "^1.4.0"
+
 ember-text-measurer@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/ember-text-measurer/-/ember-text-measurer-0.3.3.tgz#0762809a71c2e1f2e60ab00c53c6eb1b63c9f963"
@@ -3167,6 +3218,16 @@ ember-ticketfly-accordion@0.6.2:
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
+
+ember-tooltips@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/ember-tooltips/-/ember-tooltips-2.9.0.tgz#3aeb108168c6d73d6bea2d9944f7985f06331872"
+  dependencies:
+    ember-cli-babel "^6.3.0"
+    ember-cli-htmlbars "^1.1.1"
+    ember-cli-sass "^7.0.0"
+    ember-hash-helper-polyfill "^0.1.1"
+    ember-tether "^0.4.1"
 
 ember-truth-helpers@1.2.0:
   version "1.2.0"
@@ -5663,6 +5724,29 @@ node-sass@^3.8.0:
     request "^2.61.0"
     sass-graph "^2.1.1"
 
+node-sass@^4.1.0:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.5.3.tgz#d09c9d1179641239d1b97ffc6231fdcec53e1568"
+  dependencies:
+    async-foreach "^0.1.3"
+    chalk "^1.1.1"
+    cross-spawn "^3.0.0"
+    gaze "^1.0.0"
+    get-stdin "^4.0.1"
+    glob "^7.0.3"
+    in-publish "^2.0.0"
+    lodash.assign "^4.2.0"
+    lodash.clonedeep "^4.3.2"
+    lodash.mergewith "^4.6.0"
+    meow "^3.7.0"
+    mkdirp "^0.5.1"
+    nan "^2.3.2"
+    node-gyp "^3.3.1"
+    npmlog "^4.0.0"
+    request "^2.79.0"
+    sass-graph "^2.1.1"
+    stdout-stream "^1.4.0"
+
 "nopt@2 || 3", nopt@^3.0.3, nopt@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
@@ -6220,7 +6304,7 @@ readable-stream@1.1.x:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@2, readable-stream@^2, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2:
+readable-stream@2, readable-stream@^2, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -6397,7 +6481,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@2, request@^2.61.0, request@^2.81.0:
+request@2, request@^2.61.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -6892,6 +6976,12 @@ stable@~0.1.3:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
+stdout-stream@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/stdout-stream/-/stdout-stream-1.4.0.tgz#a2c7c8587e54d9427ea9edb3ac3f2cd522df378b"
+  dependencies:
+    readable-stream "^2.0.1"
+
 string-template@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/string-template/-/string-template-0.2.1.tgz#42932e598a352d01fc22ec3367d9d84eec6c9add"
@@ -7124,7 +7214,7 @@ tether@1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/tether/-/tether-1.3.7.tgz#65578104741694f9672c808eae04a9adae7b0304"
 
-tether@^1.3.2:
+tether@^1.3.2, tether@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.0.tgz#0f9fa171f75bf58485d8149e94799d7ae74d1c1a"
 
