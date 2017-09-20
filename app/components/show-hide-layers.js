@@ -9,6 +9,7 @@ const { Component, get, inject: { service } } = Ember;
 
 export default Component.extend({
     mapObject: service(),
+    store: service(),
 
     actions: {
         /**
@@ -16,10 +17,11 @@ export default Component.extend({
          * @method
          * @param {object} layers array of `raster_layer`s or `vector_layer`s
          */
-        toggleAll(layers) {
+        toggleAll(layers, type) {
+            const store = get(this, 'store');
             const toggleSwitch = document.getElementById('toggle-all');
-            layers.then((activeLayers) => {
-                activeLayers.forEach((layer) => {
+            store.peekAll(type).forEach((layer) => {
+                if (get(layer, 'active_in_project')) {
                     if (toggleSwitch.checked) {
                         layer.setProperties({ opacity: 10 });
                         if (get(layer, 'sliderObject')) {
@@ -31,7 +33,7 @@ export default Component.extend({
                             get(layer, 'sliderObject').set(0);
                         }
                     }
-                });
+                }
             });
         },
 

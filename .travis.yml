@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "6"
+  - "7"
 
 sudo: false
 
@@ -19,3 +19,6 @@ before_install:
 
 install:
   - yarn install
+
+scripts:
+  test: ''

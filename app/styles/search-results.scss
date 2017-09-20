@@ -85,6 +85,11 @@
     .result-description {
       @include grid-column(11);
       @include grid-push(1);
+
+      // Hide images in results
+      img {
+        display: none;
+      }
     }
 
     // .result-preview {

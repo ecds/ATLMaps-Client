@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
-const { Route, get, run, inject: { service } } = Ember;
+const { Route, get, inject: { service } } = Ember;
 
 export default Route.extend({
     flashMessage: service(),
 
     model() {
-        return this.store.query('vector-layer', {limit: 100});
+        return this.store.query('vector-layer', { limit: 100 });
     },
 
     actions: {
@@ -15,15 +15,15 @@ export default Route.extend({
             const saveType = get(layer, 'dirtyType');
             layer.save().then(() => {
                 if (saveType !== 'updated') {
-                get(layer, 'vector_feature').forEach((vf) => {
-                    vf.save().then(() => {
-                        flash.savedMessage('Feature Saved!');
-                    }, (error) => {
-                        flash.failedMessage(`Feature Did Not Save :( ${error.message}`);
+                    get(layer, 'vector_feature').forEach((vf) => {
+                        vf.save().then(() => {
+                            flash.savedMessage('Feature Saved!');
+                        }, (error) => {
+                            flash.failedMessage(`Feature Did Not Save :( ${error.message}`);
+                        });
                     });
-                });
-            }
-            flash.savedMessage('Layer Saved!');
+                }
+                flash.savedMessage('Layer Saved!');
             }, (error) => {
                 flash.failedMessage(`Layer Did Not Save :( ${error.message}`);
             });
