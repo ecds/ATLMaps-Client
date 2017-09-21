@@ -11,11 +11,6 @@ export default Route.extend({
     },
 
     afterModel() {
-        if (this.modelFor(this.routeName).isLoaded) {
-            // if (get(this, 'session.isAuthenticated')) {
-            //     get(this, 'session').invalidate();
-            // }
-            this.transitionTo('index');
-        }
+        this.transitionTo('/');
     }
 });

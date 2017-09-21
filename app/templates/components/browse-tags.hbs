@@ -1,30 +1,18 @@
 <h5>Tags</h5>
-{{#tf-accordion animatable=false as |accordion|}}
-  {{#each model as |item|}}
-  <a {{action 'checkAllTagsInCategory' item}}>  <i class="fa {{if item.checked 'fa-check-square-o' 'fa-square-o'}} {{if item.allChecked 'active'}}" aria-hidden="true"></i></a>
-  {{#accordion.panel class='search-tag-list' as |panel|}}
-  {{panel.tab title=item.name id=item.slug class='tag-button'}}
+{{#accordion-panel items=model as |category panel|}}
+  {{#panel.header id=category.slug class='tag-button'}}
+  <a {{action 'checkAllTagsInCategory' category}}>  <i class="fa {{if category.checked 'fa-check-square-o' 'fa-square-o'}} {{if category.allChecked 'active'}}" aria-hidden="true"></i></a>
+    {{category.name}}
+  {{/panel.header}}
   {{#panel.body tagName="ul" class='tag-list'}}
-      {{!-- <li>
-        <a {{action 'checkAllTagsInCategory' category}} class='checkbox-link'>
-          <i class="material-icons {{if item.allChecked 'active'}}">
-            {{if item.allChecked 'check_box' 'check_box_outline_blank'}}
-          </i>
-          Select All
-        </a>
-      </li> --}}
-    {{#each item.sortedTags as |tag|}}
+        {{#each category.sortedTags as |tag|}}
     <li class='listed-tag'>
-      <a {{action 'checkSingleTag' tag item}} class='checkbox-link'>
+      <a {{action 'checkSingleTag' tag category}} class='checkbox-link'>
         <i class="fa {{if tag.checked 'fa-check-square-o active' 'fa-square-o'}}" aria-hidden="true"></i>
-        {{!-- <i class="material-icons {{if tag.checked 'active'}}">
-          {{if tag.checked 'check_box' 'check_box_outline_blank'}}
-        </i> --}}
+
         {{if tag.name tag.name 'Loading...'}}
       </a>
     </li>
     {{/each}}
   {{/panel.body}}
-  {{/accordion.panel}}
-{{/each}}
-{{/tf-accordion}}
+{{/accordion-panel}}

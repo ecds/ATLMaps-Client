@@ -1,7 +1,7 @@
 {
   "name": "atlmaps",
   "dependencies": {
-    "ember": "~2.14",
+    "ember": "~2.15",
     "ember-cli-shims": "~0.1.1",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.5",
     "ember-resolver": "~4.1.0",
@@ -31,7 +31,7 @@
     "neat": "^2.0.0"
   },
   "resolutions": {
-    "ember": "^2.10.2",
+    "ember": "^2.15.0",
     "ember-cli-shims": "0.1.0",
     "ember-resolver": "~2.0.3",
     "qunit": "~2.0.1",

@@ -319,6 +319,7 @@ export default Service.extend({
             return true;
         });
         layerProps.leaflet_object.addTo(atlMap);
+        console.log(layerProps.leaflet_object.toGeoJSON());
         return layerProps.leaflet_object;
     },
 

@@ -56,7 +56,6 @@ Router.map(function() {
     this.route('settings');
   });
 
-  // });
   this.route('explore');
   this.route('layers', {
     path: '/layers/:maps'

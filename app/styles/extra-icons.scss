@@ -47,6 +47,16 @@ i.material-icons.atlmaps-ext.database::before{
   right: .2em;
 }
 
+.atls-logo::before {
+  content: '\e804';
+  font-family: 'atlmaps-ext';
+  font-size: .7em;
+  line-height: .55em;
+  position: relative;
+  right: .2em;
+  vertical-align: text-bottom;
+}
+
 .fa-drag-handle:before {
     font-family: 'FontAwesome';
     content: "\f142 \f142";

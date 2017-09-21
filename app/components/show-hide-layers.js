@@ -16,11 +16,14 @@ export default Component.extend({
          * @public
          * @method
          * @param {object} layers array of `raster_layer`s or `vector_layer`s
+         * Hopefully most, if not all, will go away when we refactor for ember-leaflet.
          */
         toggleAll(layers, type) {
             const store = get(this, 'store');
             const toggleSwitch = document.getElementById('toggle-all');
             store.peekAll(type).forEach((layer) => {
+                // Only toggle the ones that have been added to the map, not all that
+                // are currently in the store.
                 if (get(layer, 'active_in_project')) {
                     if (toggleSwitch.checked) {
                         layer.setProperties({ opacity: 10 });

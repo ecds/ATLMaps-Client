@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'atlmaps-ext';
-  src: url('../font/atlmaps-ext.eot?53749621');
-  src: url('../font/atlmaps-ext.eot?53749621#iefix') format('embedded-opentype'),
-       url('../font/atlmaps-ext.woff2?53749621') format('woff2'),
-       url('../font/atlmaps-ext.woff?53749621') format('woff'),
-       url('../font/atlmaps-ext.ttf?53749621') format('truetype'),
-       url('../font/atlmaps-ext.svg?53749621#atlmaps-ext') format('svg');
+  src: url('../font/atlmaps-ext.eot?20308661');
+  src: url('../font/atlmaps-ext.eot?20308661#iefix') format('embedded-opentype'),
+       url('../font/atlmaps-ext.woff2?20308661') format('woff2'),
+       url('../font/atlmaps-ext.woff?20308661') format('woff'),
+       url('../font/atlmaps-ext.ttf?20308661') format('truetype'),
+       url('../font/atlmaps-ext.svg?20308661#atlmaps-ext') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'atlmaps-ext';
-    src: url('../font/atlmaps-ext.svg?53749621#atlmaps-ext') format('svg');
+    src: url('../font/atlmaps-ext.svg?20308661#atlmaps-ext') format('svg');
   }
 }
 */
@@ -59,4 +59,3 @@
 .icon-polygon:before { content: '\e801'; } /* '' */
 .icon-hexagon:before { content: '\e802'; } /* '' */
 .icon-polyline:before { content: '\e803'; } /* '' */
-.icon-atls-logo:before { content: '\e804'; } /* '' */

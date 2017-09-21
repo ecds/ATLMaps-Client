@@ -6,7 +6,6 @@ const { JSONAPIAdapter } = DS;
 
 export default JSONAPIAdapter.extend(DataAdapterMixin, {
     host: ENV.APP.API_HOST,
-    namespace: 'v1',
     suffix: '.json',
     coalesceFindRequests: true,
     authorizer: 'authorizer:oauth2',

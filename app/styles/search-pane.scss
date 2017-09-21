@@ -124,17 +124,38 @@ $small-font-size: .7em;
 .tag-button:focus {
   background-color: transparent;
   color: $primary-color-dark;
+  cursor: pointer;
+  font-size: 1.25em;
   outline: 0;
   padding: .4em;
   text-transform: none;
 }
 
 .tag-list {
-  font-size: .85em;
+  // display: none;
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-left: 1em;
   padding-bottom: 1em;
+  transform: translateY(0%) scaleY(0);
+  transform-origin: top;
+  transition: transform $rabbit, max-height $rabbit;
+
+  li {
+    max-height: 0;
+    transition: transform $rabbit, max-height $rabbit;
+  }
+
+  &.expanded {
+    transform: translateY(0%) scaleY(1);
+
+    li {
+      max-height: 1.5em;
+    }
+  }
 }
 
-// FIXME: this should not exist. Somehow, `.active` gets applied to the searc pane.
+// FIXME: this should not exist. Somehow, `.active` gets applied to the search pane.
 #search {
   color: black;
 }

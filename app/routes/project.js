@@ -84,7 +84,7 @@ export default Route.extend(EKMixin, {
         }
         return RSVP.hash({
             project,
-            yearRange: this.store.findRecord('yearRange', 1),
+            // yearRange: this.store.findRecord('yearRange', 1),
             categories: this.store.findAll('category'),
             institutions: this.store.findAll('institution'),
             rasters: this.store.query('raster-layer', { search: true }),
@@ -374,8 +374,8 @@ export default Route.extend(EKMixin, {
                 tags: this.get('browseParams.tags'),
                 text_search: this.get('browseParams.searchText'),
                 institution: this.get('browseParams.institutions'),
-                start_year: this.get('browseParams.start_year'),
-                end_year: this.get('browseParams.end_year'),
+                // start_year: this.get('browseParams.start_year'),
+                // end_year: this.get('browseParams.end_year'),
                 bounds: this.get('browseParams.bounds'),
                 meta: this.get('controller.rasters.meta'),
                 page: page || 0,
