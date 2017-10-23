@@ -14,7 +14,7 @@ export default Component.extend({
 
     vectorDetailContent: service(),
 
-    classNames: ['vector-info', 'resize-container', 'project-pane', 'resize-drag', 'hoverable'],
+    classNames: ['vector-info', 'resize-container', 'resize-drag', 'hoverable'],
 
     didInsertElement() {
         interact('.resize-drag')

@@ -59,6 +59,7 @@
     "ember-composable-helpers": "1.1.2",
     "ember-cookies": "^0.0.13",
     "ember-export-application-global": "^1.0.5",
+    "ember-font-awesome": "^4.0.0-alpha.13",
     "ember-inline-edit": "0.2.0",
     "ember-leaflet": "~3.0.12",
     "ember-light-table": "~1.9.0",

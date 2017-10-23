@@ -4,20 +4,21 @@ $vector-detail-header-layout: (
 
 .vector-info {
   @include grid-container;
-  @include grid-media($responsive-grid--sm-up) {
-    bottom: 0;
-    left: 0;
-    max-height: 33vh;
-    min-width: 100vw;
-    position: absolute;
-    top: auto;
-  }
+  @include grid-media($responsive-grid--sm-up);
+  background-color: $white;
   border: .1em solid color('grey', 'lighten-2');
   border-radius: .5em;
+  bottom: 0;
   display: none;
   left: 10em;
+  max-height: 33vh;
+  max-width: 40vw;
+  min-width: 30em;
+  position: absolute;
   top: 7em;
+  transform-origin: top;
   transition: none;
+  will-change: transform;
   z-index: 1001;
 }
 
@@ -59,7 +60,8 @@ $vector-detail-header-layout: (
       margin-left: .2em;
       margin-right: .2em;
 
-      .MultiPolygon {
+      .MultiPolygon,
+      .GeometryCollection {
         font-size: .75em;
       }
 
@@ -69,6 +71,10 @@ $vector-detail-header-layout: (
             right: .2em;
         }
       }
+
+      // span {
+
+      // }
     }
 
     @include grid-media($responsive-grid--sm-up) {
@@ -155,7 +161,7 @@ $vector-detail-header-layout: (
     }
 
     font-size: 2em;
-    min-height: 3em;
+    min-height: 2em;
 
     i {
       margin-top: .2em;
@@ -170,6 +176,15 @@ $vector-detail-header-layout: (
     display: block;
     max-height: 45rem;
     max-width: 100%;
+  }
+
+  tr {
+    border-bottom: solid 1px $primary-color;
+  }
+
+  td {
+    font-weight: 500;
+    text-transform: uppercase;
   }
 }
 
@@ -205,4 +220,16 @@ $vector-detail-header-layout: (
     @include position(absolute, 0 null null 0);
     @include size(100%);
   }
+}
+
+.GeometryCollection {
+  @include polygon;
+}
+
+.MultiPolygon {
+  @include polygon;
+}
+
+.Polygon {
+  @include polygon;
 }

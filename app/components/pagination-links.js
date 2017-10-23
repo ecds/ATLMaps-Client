@@ -7,7 +7,7 @@ const limits = [
     { value: 100, label: 'Show: 100 Per Page' }
 ];
 
-const { Component, inject: { service }, set } = Ember;
+const { Component, get, inject: { service }, set } = Ember;
 
 export default Component.extend({
     classNames: ['valign-wrapper'],

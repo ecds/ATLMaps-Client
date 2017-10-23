@@ -48,7 +48,11 @@ export default Mixin.create({
             } catch(error) {
                 // Don't care.
             }
-            map.fitBounds(get(this, 'mapObject.allBounds'));
+            try {
+                map.fitBounds(get(this, 'mapObject.allBounds'));
+            } catch(error) {
+                // Don't care.
+            }
             // TODO This was too restrictive. The idea was to limit the bounds
             // when a raster is the base layer. Needs rethinking.
             // map.setMaxBounds(get(this, 'mapObject.allBounds'));

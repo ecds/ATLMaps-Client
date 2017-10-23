@@ -366,6 +366,9 @@ export default Route.extend(EKMixin, {
         // Action to make the query to the API and render the results to the
         // `project/browse-layers` route.
         getResults(page, type) {
+            // This scrolls the results to the top while clicking through the pages.
+             // TODO: Will need to fix this for fastboot.
+            document.getElementById(type).childNodes[0].scrollTop = 0;
             const data = this.modelFor('project');
             const currentRasters = get(data, 'rasters.meta.total_count');
             const currentVectors = get(data, 'vectors.meta.total_count');

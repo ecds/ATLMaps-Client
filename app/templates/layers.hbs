@@ -21,10 +21,6 @@
                   </div>
                 </div>
               </div>
-
-                {{!-- <div class='layer-list-item-secondary-action'>
-                  <i class='fa fa-drag-handle reorder-handle' aria-hidden='true'></i>
-                </div> --}}
                 {{/layer-list-item}}
             {{else}}
                 Loading...
@@ -76,67 +72,6 @@
 {{else}}
 <h4>No data layers have been added</h4>
 {{/if}}
-{{!-- {{#each model.rasters as |layer|}}
-<div class='layers-route'>
-  <div class='layers-list-items raster-layer-list-items'>
-{{#layer-list-item layer=layer}}
-<div class='layer-list-item-icon'><span class='raster-thumbnail' style={{layer.safe_background_thumb}} /></div>
-<div class='raster-middle'>
-<div class='layer-list-item-title'>
-  <div class='layer-list-item-title'>
-    <input class='embed-slider' id={{layer.name}} type="range" min="0" max="100" value='100' oninput={{action (route-action 'setOpacity')}} onchange={{action (route-action 'setOpacity')}} />
-  </div>
-{{layer.title}}
-</div>
-</div>
-
-{{/layer-list-item}}
-</div>
-</div>
-{{/each}} --}}
-  {{!-- <ul class='layer-list-items'>
-        {{#each model.rasters as |layer|}}
-          <li id={{layer.name}} class='layer-item'>
-
-            {{#layer-list-item layer=layer showSlider=true}}
-              <div class='layer-list-item-icon'><span class='raster-thumbnail' style={{layer.safe_background_thumb}} /></div>
-              <div class='raster-middle'>
-              <div class='layer-list-item-title'>
-                <label for='{{concat layer.slug '-checkbox'}}' class='raster-layer-list-item-detail-toggle-label'>
-                  {{layer.title}}
-                </label>
-                <div class='slider-container'>
-                  {{#if layer.leaflet_object}}
-                  <div class='embed-slider-container'>
-                    <input class='embed-slider' id={{layer.name}} type="range" min="0" max="100" value='100' oninput={{action (route-action 'setOpacity')}} onchange={{action (route-action 'setOpacity')}} />
-                  </div>
-                  {{/if}}
-                </div>
-              </div>
-            </div>
-              {{/layer-list-item}}
-          </li>
-        {{/each}}
-
-        {{#each model.vectors as |layer|}}
-        <li id={{layer.name}} class='layer-item'>
-
-          {{#layer-list-item layer=layer}}
-
-            {{#layer-item-title layer=layer}}
-            <span class='layer-list-item-icon vector-icon layer-{{layer.colorName}} {{layer.data_type}}'>
-            </span>
-            {{/layer-item-title}}
-            {{#if layer.leaflet_object}}
-              {{show-hide-layers layer=layer class='layer-list-item-secondary-action'}}
-            {{/if}}
-
-          {{/layer-list-item}}
-        </li>
-
-        {{/each}}
-      </ul> --}}
-    {{!-- </div> --}}
   <div id='base-map' class='fullscreen-map'>
     <div id='map' class='atlmap'></div>
   </div>

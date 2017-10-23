@@ -45,7 +45,7 @@ export default Service.extend({
 
             // Add some base layers
             const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-            // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
                 // maxZoom: 20,
                 className: 'street base',
                 thumbnail: '/assets/images/street_map.png',
@@ -99,7 +99,10 @@ export default Service.extend({
     },
 
     setUpProjectMap(project) {
-        const { baseMaps, map } = this;
+        const {
+            baseMaps,
+            map
+        } = this;
         // TODO: Move this to common remove function.
         map.on('click', () => {
             get(this, 'vectorDetailContent').removePopup();
@@ -147,7 +150,10 @@ export default Service.extend({
 
     mapSingleLayer(layer) {
         const map = get(this, 'map');
-        const { markerColors, shapeColors } = get(this, 'dataColors');
+        const {
+            markerColors,
+            shapeColors
+        } = get(this, 'dataColors');
 
         // const colorIndexes = {
         //     markerColorIndex: Math.floor(Math.random() * markerColors.length),
@@ -209,117 +215,150 @@ export default Service.extend({
         const layerProps = getProperties(layer, 'colorHex', 'colorName', 'layerClass', 'leaflet_object', 'slug', 'title', 'features', 'data_type');
 
         const features = get(layer, 'vector_feature');
-        features.forEach((feature) => {
-            const featureProps = getProperties(feature, 'geometry_type', 'geojson', 'properties', 'feature_id');
-            if (featureProps.properties.holc_grade) {
-                const grade = featureProps.properties.holc_grade;
-                if (grade === 'A') {
-                    feature.setProperties({
-                        colorName: 'green-500',
-                        colorHex: '#4CAF50'
-                    });
-                } else if (grade === 'B') {
-                    feature.setProperties({
-                        colorName: 'blue-700',
-                        colorHex: '#1E88E5'
-                    });
-                } else if (grade === 'C') {
-                    feature.setProperties({
-                        colorName: 'yellow-500',
-                        colorHex: '#FFEB3B'
-                    });
-                } else if (grade === 'D') {
-                    feature.setProperties({
-                        colorName: 'red-500',
-                        colorHex: '#F44336'
-                    });
-                }
-                feature.setProperties({
-                    markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${layer.slug} ${layer.data_type} layer-${layerProps.colorName}'></span>`
-                });
-            } else {
-                feature.setProperties({
-                    colorName: layerProps.colorName,
-                    colorHex: layerProps.colorHex,
-                    markerDiv: `<span class='vector-icon vector icon ${get(layer, 'data_type')} layer-${layerProps.colorName}'></span>`
-                });
-            }
-            let newLeafletFeature = null;
-            switch (featureProps.geometry_type) {
-            case 'Point':
-                {
-                    const point = L.geoJSON(featureProps.geojson, {
-                        pointToLayer(stankonia, latlng) {
-                            const icon = L.divIcon({
-                                className: `${layerProps.layerClass} ${featureProps.feature_id} ${layer.slug}`,
-                                iconSize: null,
-                                html: '<div class="shadow"></div><div class="icon" />'
-                            });
-
-                            newLeafletFeature = L.marker(latlng, {
-                                color: get(feature, 'colorHex'),
-                                icon,
-                                title: layerProps.title
-                            });
-                            return newLeafletFeature;
-                        }
-                    });
-                    point.on('add', () => {});
-                    // point.addTo(atlMap);
-
-                    newLeafletFeature.on('click', (event) => {
-                        this.showDetails(feature, event);
-                    });
-
-                    layerProps.leaflet_object.addLayer(point);
-                    feature.setProperties({ leaflet_object: point });
-
-                    break;
-                }
-            case 'LineString':
-            case 'Polygon':
-            case 'MultiPolygon':
-            case 'GeometryCollection':
-                {
-                    const style = {
-                        color: get(feature, 'colorHex'),
-                        fillColor: get(feature, 'colorHex'),
-                        className: `${layerProps.slug} layer-${get(feature, 'colorName')} ${featureProps.feature_id}`
-                    };
-
-                    newLeafletFeature = L.geoJSON(featureProps.geojson, {
-                        style,
-                        title: get(layer, 'title'),
-                        // markerDiv: feature.markerDiv,
-                        interactive: true
-                    });
-                    if (
-                       (featureProps.geometry_type === 'MultiPolygon')
-                       || (featureProps.geometry_type === 'Polygon')
-                       || (featureProps.geometry_type === 'GeometryCollection')
-                   ) {
-                        newLeafletFeature.setStyle({ opacity: 0.7 });
-                    }
-                    newLeafletFeature.bindPopup();
-                    // newLeafletFeature.addTo(atlMap);
-                    newLeafletFeature.on('add', () => {
-                        // Do someting to show layers are loading/loaded?
-                    });
-                    newLeafletFeature.on('click', (event) => {
+        if (features.length === 0) {
+            const geojsonLayer = new L.GeoJSON.AJAX(get(layer, 'url'), {
+                style: () => ({
+                    color: layerProps.colorHex,
+                    fillColor: layerProps.colorHex
+                }),
+                onEachFeature: (feature, layerObj) => {
+                    layerObj.bindPopup();
+                    layerObj.on('click', (event) => {
                         event.target.closePopup();
-                        this.showDetails(feature, event);
+                        this.showDetails(feature.properties, event, layerProps);
                     });
-                    feature.setProperties({ leaflet_object: newLeafletFeature });
-                    layerProps.leaflet_object.addLayer(newLeafletFeature);
-                    break;
+                    if (feature.properties.class) {
+                        layerObj.setStyle({
+                            fillColor: feature.properties.style.color,
+                            opacity: 1,
+                            fillOpacity: 1,
+                            dashArray: '3',
+                            color: 'white',
+                            weight: 2
+                        });
+                    }
                 }
-            default: return true;
-            }
+            });
+            set(layer, 'leaflet_object', geojsonLayer);
+            layerProps.leaflet_object.addLayer(geojsonLayer);
+        } else {
+            features.forEach((feature) => {
+                const featureProps = getProperties(feature, 'geometry_type', 'geojson', 'properties', 'feature_id');
+                if (featureProps.properties.holc_grade) {
+                    const grade = featureProps.properties.holc_grade;
+                    if (grade === 'A') {
+                        feature.setProperties({
+                            colorName: 'green-500',
+                            colorHex: '#4CAF50'
+                        });
+                    } else if (grade === 'B') {
+                        feature.setProperties({
+                            colorName: 'blue-700',
+                            colorHex: '#1E88E5'
+                        });
+                    } else if (grade === 'C') {
+                        feature.setProperties({
+                            colorName: 'yellow-500',
+                            colorHex: '#FFEB3B'
+                        });
+                    } else if (grade === 'D') {
+                        feature.setProperties({
+                            colorName: 'red-500',
+                            colorHex: '#F44336'
+                        });
+                    }
+                    feature.setProperties({
+                        markerDiv: `<span class='layer-list-item-icon vector-icon vector icon ${layer.slug} ${layer.data_type} layer-${layerProps.colorName}'></span>`
+                    });
+                } else {
+                    feature.setProperties({
+                        colorName: layerProps.colorName,
+                        colorHex: layerProps.colorHex,
+                        markerDiv: `<span class='vector-icon vector icon ${layerProps.data_type} layer-${layerProps.colorName}'></span>`
+                    });
+                }
+                let newLeafletFeature = null;
+                switch (featureProps.geometry_type) {
+                case 'Point':
+                    {
+                        const point = L.geoJSON(featureProps.geojson, {
+                            pointToLayer(stankonia, latlng) {
+                                const icon = L.divIcon({
+                                    className: `${layerProps.layerClass} ${featureProps.feature_id} ${layer.slug}`,
+                                    iconSize: null,
+                                    html: '<div class="shadow"></div><div class="icon" />'
+                                });
 
-            return true;
-        });
+                                newLeafletFeature = L.marker(latlng, {
+                                    color: get(feature, 'colorHex'),
+                                    icon,
+                                    title: layerProps.title
+                                });
+                                return newLeafletFeature;
+                            }
+                        });
+                        point.on('add', () => {});
+                            // point.addTo(atlMap);
+
+                        newLeafletFeature.on('click', (event) => {
+                            this.showDetails(feature, event);
+                        });
+
+                        layerProps.leaflet_object.addLayer(point);
+                        feature.setProperties({
+                            leaflet_object: point
+                        });
+
+                        break;
+                    }
+                case 'LineString':
+                case 'Polygon':
+                case 'MultiPolygon':
+                case 'GeometryCollection':
+                    {
+                        const style = {
+                            color: get(feature, 'colorHex'),
+                            fillColor: get(feature, 'colorHex'),
+                            className: `${layerProps.slug} layer-${get(feature, 'colorName')} ${featureProps.feature_id}`
+                        };
+
+                        newLeafletFeature = L.geoJSON(featureProps.geojson, {
+                            style,
+                            title: get(layer, 'title'),
+                                // markerDiv: feature.markerDiv,
+                            interactive: true
+                        });
+                        if (
+                                (featureProps.geometry_type === 'MultiPolygon')
+                                || (featureProps.geometry_type === 'Polygon')
+                                || (featureProps.geometry_type === 'GeometryCollection')
+                            ) {
+                            newLeafletFeature.setStyle({
+                                opacity: 0.7
+                            });
+                        }
+                        newLeafletFeature.bindPopup();
+                            // newLeafletFeature.addTo(atlMap);
+                        newLeafletFeature.on('add', () => {
+                                // Do someting to show layers are loading/loaded?
+                        });
+                        newLeafletFeature.on('click', (event) => {
+                            event.target.closePopup();
+                            this.showDetails(feature, event);
+                        });
+                        feature.setProperties({
+                            leaflet_object: newLeafletFeature
+                        });
+                        layerProps.leaflet_object.addLayer(newLeafletFeature);
+                        break;
+                    }
+                default:
+                    return true;
+                }
+                return true;
+            });
+        }
         layerProps.leaflet_object.addTo(atlMap);
-        console.log(layerProps.leaflet_object.toGeoJSON());
         return layerProps.leaflet_object;
     },
 
@@ -343,7 +382,7 @@ export default Service.extend({
                     leaflet_object: wmsLayer
                 });
 
-                // TODO make use of this
+                    // TODO make use of this
                 wmsLayer.on('load', () => {});
 
                 break;
@@ -392,8 +431,16 @@ export default Service.extend({
         });
     },
 
-    showDetails(properties, event) {
-        let popupContent = properties;
+    getColor(d) {
+        return d >= 32 ? '#bd0026'
+            : d >= 24 ? '#f03b20'
+            : d >= 16 ? '#fd8d3c'
+            : d >= 8 ? '#fecc5c'
+            : '#ffffb2';
+    },
+
+    showDetails(properties, event, layerProps) {
+        let popupContent = '';
         if (get(properties, 'properties.holc_id')) {
             popupContent += `<a href='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.pdf' target='_blank'><img style='float: right; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding-left: 2px;' src='https://atlmaps-data.s3.amazonaws.com/holc/${get(properties, 'properties.holc_id')}.png' /></a>`;
         }
@@ -403,7 +450,7 @@ export default Service.extend({
             popupContent += '</div></div>';
         }
         if (get(properties, 'description')) {
-            popupContent += `${get(properties, 'safe_description')}`;
+            popupContent += get(properties, 'safe_description') ? `${get(properties, 'safe_description')}` : '';
         }
 
         // START GALLERY
@@ -440,9 +487,11 @@ export default Service.extend({
             });
             set(this, 'swiperObj', newSwiper);
             // }
+            popupContent += ' ';
         }
         if (get(properties, 'image')) {
             $('.swiper-wrapper').append(`<img src="${get(properties, 'image')}">`);
+            popupContent += ' ';
         }
         // END GALLERY
         // START AUDIO
@@ -455,6 +504,7 @@ export default Service.extend({
             } else {
                 $('.audio').html('<p>error</p>');
             }
+            popupContent += ' ';
         }
         // END AUDIO
         $('.active-marker').removeClass('active-marker');
@@ -468,9 +518,28 @@ export default Service.extend({
         } catch(error) {
             //
         }
-        $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title'));
+        $('.vector-detail-title-container .layer-title').empty().append(get(properties, 'layer_title') || layerProps.title);
         $('.vector-detail-title-container .feature-title').empty().append(get(properties, 'name'));
         $('.vector-detail-title-container .sm-title').empty().append(get(properties, 'name'));
+
+        if (popupContent === '') {
+            popupContent += `<article>${properties.about}</article>`;
+            popupContent += '<table>';
+            if (properties.class) {
+                for (const key in properties.data) {
+                    $('.vector-content.layer-icon').empty().append(`<span class='vector-icon vector icon ${layerProps.data_type}' style='color:${properties.style.color}'></span>`);
+                    $('.vector-detail-title-container .feature-title').empty().append(properties.title);
+                    popupContent += `<tr><td>${key}</td><td>${properties.data[key]}</td></tr>`;
+                }
+            } else {
+                for (const key in properties) {
+                    popupContent += `<tr><td>${key}</td><td>${properties[key]}</td></tr>`;
+                }
+            }
+            popupContent += '</table>';
+            $('.vector-content.dump').empty().append(popupContent);
+        }
+
         $('.vector-content.marker-content').empty().append(popupContent);
     },
 
