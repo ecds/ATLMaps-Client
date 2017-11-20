@@ -17,6 +17,7 @@ export default Service.extend({
 
     dataColors: service(),
     vectorDetailContent: service(),
+    browseParams: service(),
 
     init() {
         this._super(...arguments);
@@ -38,18 +39,16 @@ export default Service.extend({
             const atlmap = L.map('map', {
                 center: [33.7489954, -84.3879824],
                 zoom: 10,
+                maxZoom: 20,
                 // zoomControl defaults to true
                 // We add the zoom buttons just below to the top right.
                 zoomControl: false
             });
 
             // Add some base layers
-            const street = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-                // const street = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                // maxZoom: 20,
-                className: 'street base',
-                thumbnail: '/assets/images/street_map.png',
-                attribution: 'Tiles courtesy of <a href="https://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            const street = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             });
 
             const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -132,6 +131,13 @@ export default Service.extend({
         );
 
         map.on('move', () => {
+            // const currentBounds = map.getBounds();
+            // set(this, 'browseParams.bounds', {
+            //     s: currentBounds.getSouth(),
+            //     n: currentBounds.getNorth(),
+            //     e: currentBounds.getEast(),
+            //     w: currentBounds.getWest()
+            // });
             project.setProperties({
                 center_lat: map.getCenter().lat.toFixed(8),
                 center_lng: map.getCenter().lng.toFixed(8),

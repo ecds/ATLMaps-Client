@@ -51,7 +51,7 @@ export default Route.extend(EKMixin, {
                     center_lat: 33.75440100,
                     center_lng: -84.3898100,
                     zoom_level: 13,
-                    default_base_map: 'street',
+                    default_base_map: 'greyscale',
                     suppressIntro: true,
                     showingSearch: true,
                     hasSuppressCookie: true,
@@ -69,7 +69,7 @@ export default Route.extend(EKMixin, {
                     center_lat: 33.75440100,
                     center_lng: -84.3898100,
                     zoom_level: 13,
-                    default_base_map: 'street',
+                    default_base_map: 'greyscale',
                     suppressIntro: true,
                     showingSearch: true,
                     hasSuppressCookie: true,
@@ -368,7 +368,9 @@ export default Route.extend(EKMixin, {
         getResults(page, type) {
             // This scrolls the results to the top while clicking through the pages.
              // TODO: Will need to fix this for fastboot.
-            document.getElementById(type).childNodes[0].scrollTop = 0;
+            if (type) {
+                document.getElementById(type).childNodes[0].scrollTop = 0;
+            }
             const data = this.modelFor('project');
             const currentRasters = get(data, 'rasters.meta.total_count');
             const currentVectors = get(data, 'vectors.meta.total_count');
