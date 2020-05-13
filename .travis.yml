@@ -8,6 +8,10 @@ dist: trusty
 addons:
   chrome: stable
 
+before_install:
+  - mv .ember-cli.dst .ember.cli
+  - mv config/environment.js.dst /config/environment.js
+
 cache:
   directories:
     - $HOME/.npm
