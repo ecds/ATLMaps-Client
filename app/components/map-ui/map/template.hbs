@@ -1,0 +1,33 @@
+<LeafletMap
+  @lat = {{@project.centerLat}}
+  @lng = {{@project.centerLng}}
+  @zoom = {{@project.zoomLevel}}
+  @onLoad = {{this.initMap}}
+as |layers|>
+  <layers.tile
+    @url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
+  />
+
+  {{#if @project.hasRasters}}
+    {{#each @project.rasters as |raster|}}
+      <layers.wmsTile
+        @url={{raster.rasterLayer.url}}
+        @layers={{raster.rasterLayer.layers}}
+        @format="image/png"
+        @transparent={{true}}
+        @zIndex={{raster.position}}
+        @opacity={{raster.opacityTenths}}
+      />
+    {{/each}}
+  {{/if}}
+
+</LeafletMap>
+
+<div class="testing" id="map-component">
+  <span id="center">
+    {{@project.centerLat}} : {{@project.centerLng}}
+  </span>
+  <span id="zoom">
+    {{@project.zoomLevel}}
+  </span>
+</div>

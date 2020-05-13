@@ -1,0 +1,81 @@
+<ul class="map-ui-project-menu" id="uk-accordion" {{did-insert this.initUkAccordion}}>
+  <li class="main-menu-toggle uk-text-center uk-text-middle uk-open">
+    <div class="uk-margin-remove" uk-grid>
+      <a class="uk-accordion-title uk-padding-small atl-map-menu-button" href="#">
+        <span>
+          <FaIcon @icon={{if this.ukAccordionOpen "minus-circle" "plus-circle"}} />
+        </span>
+        {{if this.ukAccordionOpen "Hide" "Show"}} Menu
+      </a>
+      <div
+        class="atl-project-title uk-text-left uk-width-expand uk-padding-small
+          {{if this.ukAccordionOpen "uk-animation-slide-left-small uk-animation-fast" "uk-animation-slide-right-small uk-animation-reverse uk-hidden"}}"
+      >
+        <div class="uk-card-header uk-padding-remove">
+          <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+              <h3 class="uk-card-title uk-margin-remove-bottom">{{@project.name}}</h3>
+              <p class="uk-text-meta uk-margin-remove-top">{{this.panelTitle}}</p>
+            </div>
+            {{#if this.showToggle}}
+              <MapUi::ToggleSwitch @project={{@project}} @status={{@project.allRastersHidden}} @type={{this.panelTitle}} />
+            {{else}}
+              <div></div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-accordion-content atl-project-panel uk-margin-remove-top" uk-grid>
+      <div class="uk-width-auto@m">
+        <ul class="map-ui-project-menu-options uk-tab-left" {{did-insert this.initUkTabs}}>
+          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+            <a href="#" class="uk-child-width-1-1 atl-map-menu-button">
+              <span>
+                <FaIcon @icon="info" />
+              </span>
+              info
+            </a>
+          </li>
+          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+            <a class="atl-map-menu-button" href="#">
+              <span>
+                <FaIcon @icon="map" />
+              </span>
+              maps
+            </a>
+          </li>
+          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+            <a class="atl-map-menu-button" href="#">
+              <span>
+                <FaIcon @icon="database" />
+              </span>
+              data
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="uk-width-expand@m uk-panel uk-panel-scrollable">
+        <ul id="component-tab-left" class="uk-switcher uk-text-left">
+          <li>
+            <article class="atl-project-description">
+              {{@project.description}}
+            </article>
+          </li>
+          {{#if @project.hasRasters}}
+            <li data-panel-title="Map Layers" data-type="panel">
+              <MapUi::RasterPanel @rasters={{@project.sortedRasters}} />
+            </li>
+          {{/if}}
+          {{#if @project.hasVectors}}
+            <li data-panel-title="Data Layers" data-type="panel">
+              {{#each @project.vectors as |vector|}}
+                <h3>{{vector.vectorLayer.title}}</h3>
+              {{/each}}
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </li>
+</ul>

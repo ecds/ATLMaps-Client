@@ -1,0 +1,9 @@
+<ol>
+  {{#each @model as |project|}}
+    <li>
+      <LinkTo @route="project" @model={{project}}>
+        {{project.name}}
+      </LinkTo>
+    </li>
+  {{/each}}
+</ol>

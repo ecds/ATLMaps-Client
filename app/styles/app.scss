@@ -1,0 +1,152 @@
+@import 'ember-uikit';
+
+:root {
+  font-size: 18px;
+}
+
+article {
+  font-size: 1rem;;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+  background-color: #263238;
+}
+
+.uk-accordion-title {
+  &:before {
+    content: unset;
+  }
+
+  &:focus {
+    outline-width: .2rem;
+    outline-style: solid;
+    outline-color: #39f;
+  }
+}
+
+.uk-tab-left {
+  a {
+    text-align: center;
+  }
+}
+
+.uk-panel {
+  background-color: white;
+}
+
+a.home {
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+
+  img {
+    height: 2.5rem;
+  }
+}
+
+.testing {
+  left: -1000px;
+  position: absolute;
+  z-index: -1;
+}
+
+.atl-project-title {
+  background-color: #cfd8dc;
+
+  h1 {
+    font-size: 1.625rem;
+  }
+}
+
+.atl-text-lead {
+  font-size: 1.25rem;
+}
+
+.atl-opacity-range-input {
+  width: 100%;
+}
+
+.atl-toggle-switch {
+  font-size: 1.5rem;
+}
+
+.leaflet-container {
+  height: calc(100vh - 80px);
+  width: 100vw;
+}
+
+.map-ui-project-menu {
+  font-size: .75rem;
+  left: 59px;
+  position: absolute;
+  top: 100px;
+  width: 33vw;
+  z-index: 400;
+    
+  a.atl-map-menu-button {
+    color: white;
+    font-size: 1em;
+    min-height: 40px;
+    max-width: 100px;
+    min-width: 80px;
+    
+    &.uk-accordion-title {
+      background-color: #546e7a;
+      border-radius: 20% 0% 0% 0%;
+
+      &:hover {
+        background-color: #b0bec5;
+      }
+
+      &:focus {
+        color: white;
+      }
+    }
+  }
+
+  li {
+    span {
+      font-size: 2em;
+      display: block;
+    }
+  }
+
+  .map-ui-project-menu-options {
+    
+    li {
+      background-color: #546e7a;
+      width: 110px;
+
+      &:hover {
+        background-color: #b0bec5;
+      }
+
+      &.uk-active {
+        background-color: #f58320;
+        
+        a.atl-map-menu-button {
+          border: none;
+          color: white;
+        }
+      }
+    }
+
+    li:last-of-type {
+      border-radius: 0 0 0 20%;
+    }
+  }
+
+  .uk-panel-scrollable {
+    height: auto;
+    max-height: 66vh;
+  }
+}
+
+.atl-grip {
+  font-size: 1.5rem;
+}
+
+.atl-layer-list-item {
+  border-color: lightgray;
+  border-style: solid;
+}

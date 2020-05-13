@@ -1,0 +1,24 @@
+<div
+  class="uk-text-center uk-grid-collapse uk-child-width-1-1 atl-toggle"
+  tabindex="0"
+  role="button"
+  {{on 'click' this.toggleVisible}}
+  {{on 'keyup' this.toggleVisible }}
+  uk-grid
+>
+  {{#if @status}}
+    <div class="atl-toggle-switch">
+      <FaIcon @icon="toggle-off" />
+    </div>
+    <div class="atl-toggle-status">
+      Show all
+    </div>
+  {{else}}
+    <div class="atl-toggle-switch">
+      <FaIcon @icon="toggle-on" />
+    </div>
+    <div class="atl-toggle-status">
+      Hide all
+    </div>
+  {{/if}}
+</div>

@@ -1,0 +1,32 @@
+<div uk-sticky> 
+    <nav class="uk-navbar-container" uk-navbar>
+       <div class="uk-navbar-left">
+        <LinkTo @route="index" class="home uk-margin-left">
+          <img src="/assets/images/atl.png" alt="ATLMaps branding - map marker that looks like a peach">
+          ATLMaps
+        </LinkTo>
+        <ul class="uk-navbar-nav">
+          <li>
+            <LinkTo @route="projects" class="projects">
+              Projects
+            </LinkTo>
+          </li>
+          <li>
+            <LinkTo @route="explore" class="explore">
+              Explore
+            </LinkTo>
+          </li>
+        </ul>
+       </div>
+       <div class="uk-navbar-right">
+         <ul class="uk-navbar-nav">
+           <li>
+             Sign In
+           </li>
+         </ul>
+       </div>
+    </nav>
+</div>
+<div id="main">
+  {{outlet}}
+</div>

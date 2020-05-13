@@ -20,5 +20,8 @@
     "esdoc": "explorerExcludedFiles",
     "yarn-error.log": "explorerExcludedFiles",
     "tests/puppeteer": "explorerExcludedFiles"
-  }
+  },
+  "cSpell.words": [
+    "bottomleft"
+  ]
 }
