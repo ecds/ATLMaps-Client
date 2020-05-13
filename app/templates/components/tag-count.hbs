@@ -1,8 +1,0 @@
-{{yield}}
-{{ currentUser.user.displayname }}<br />
-{{ currentUser.user.number_tagged }} tags added.
-{{#if currentUser}}
-    <li><a {{action 'invalidateSession' }} title="Logout">Logout</a></li>
-  {{else}}
-    <li>{{#link-to 'login' tagName='a'}}Login{{/link-to}}</li>
-  {{/if}}

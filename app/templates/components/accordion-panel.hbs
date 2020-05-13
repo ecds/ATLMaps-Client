@@ -1,8 +1,0 @@
-{{#each items as |listItem|}}
-  {{#accordion-item item=listItem activeItem=activeItem as |isExpanded| }}
-  {{yield listItem
-          (hash isExpanded=isExpanded
-                header=(component 'accordion-header' click=(action 'toggleActiveItem' listItem))
-                body=(component 'accordion-body' isExpanded=isExpanded))}}
-  {{/accordion-item}}
-{{/each}}

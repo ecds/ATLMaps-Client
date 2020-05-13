@@ -1,6 +1,0 @@
-{{outlet}}
-{{#parse-spreadsheet layer=model}}
-{{#if model.name}}<a href='{{model.shareUrl}}'><h2>{{model.shareUrl}}</h2></a>{{/if}}
-{{admin/vector-layer-form model=model}}
-{{/parse-spreadsheet}}
-{{flash-message}}

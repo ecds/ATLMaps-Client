@@ -1,6 +1,0 @@
-<div class=''>Pick a color (click to save).</div>
-<div onmouseleave={{action "reset"}}>
-    {{#each colors as |color index|}}
-        <div style={{color.safe}} class='color' onmouseenter={{action "previewColor" color index}} onclick={{route-action "setColor" projectLayer}}></div>
-    {{/each}}
-</div>

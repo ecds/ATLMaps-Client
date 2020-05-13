@@ -1,5 +1,0 @@
-{
-  "source": "./app",
-  "destination": "./esdoc",
-  "includes": ["\\.(js|es6)$"]
-}
