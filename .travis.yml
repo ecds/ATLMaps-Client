@@ -11,6 +11,7 @@ addons:
 before_install:
   - cp .ember-cli.dst .ember.cli
   - cp config/environment.js.dst config/environment.js
+  - npm install
 
 cache:
   directories:
