@@ -34,7 +34,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
     // Menu Shows
     assert.dom('li.main-menu-toggle').hasClass('uk-open');
     await settled();
-    assert.dom('.atl-project-title').doesNotHaveClass('uk-animation-reverse');
+    // assert.dom('.atl-project-title').doesNotHaveClass('uk-animation-reverse');
     assert.dom(".uk-accordion-content.atl-project-panel").doesNotHaveAttribute('hidden');
     // Menu hidden
     await click('#uk-accordion.uk-accordion li a.uk-accordion-title');

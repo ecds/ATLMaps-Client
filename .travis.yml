@@ -23,4 +23,4 @@ env:
     - JOBS=1
 
 script:
-  - npm test
+  - yarn test
