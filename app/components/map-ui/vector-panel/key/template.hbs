@@ -2,7 +2,7 @@
   {{#if @layer.colorMap}}
     <section class="uk-width-1-1">{{uppercase @layer.property}}</section>
     {{#each-in @layer.colorMap as |index step|}}
-        <div class="uk-width-1-6" id={{concat "color-" index}} style={{concat "background-color: " step.color ";"}}>&nbsp;</div>
+        <div class="uk-width-1-6" id={{concat "color-" index}} style={{html-safe (concat "background-color: " step.color ";")}}>&nbsp;</div>
       {{#if step.bottom}}
         <div class="uk-width-5-6" id={{concat "step-" index}}>{{step.bottom}} - {{step.top}}</div>
       {{else}}
