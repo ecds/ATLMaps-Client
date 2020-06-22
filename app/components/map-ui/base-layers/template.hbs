@@ -1,7 +1,5 @@
-{{log this.baseMaps.baseMaps}}
 <ul class="uk-thumbnav atlm-base-map-selector" uk-margin>
   {{#each this.baseMaps.baseMaps as |base|}}
-    {{log base}}
     <li class="uk-box-shadow-xlarge">
       <UkButton @color="link" {{on 'click' (fn this.switchBase base)}}>
         <img src={{base.thumbnail}} width="150" alt={{base.label}}>

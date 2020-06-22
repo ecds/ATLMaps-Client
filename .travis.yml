@@ -23,4 +23,4 @@ env:
     - JOBS=1
 
 script:
-  - yarn test
+  - ember t
