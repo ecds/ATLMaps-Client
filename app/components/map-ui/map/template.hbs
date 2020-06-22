@@ -1,15 +1,26 @@
+<MapUi::Popup @activeFeature={{this.activeFeature}} @close={{this.clearActiveFeature}} @closeKey={{this.clearActiveFeatureKey}} />
 <LeafletMap
   @lat = {{@project.centerLat}}
   @lng = {{@project.centerLng}}
   @zoom = {{@project.zoomLevel}}
   @onLoad = {{this.initMap}}
+  @onMoveend = {{this.captureBounds}}
+  @onZoomend = {{this.captureBounds}}
+  @onResize = {{this.addZoomControl}}
+  {{on 'keyup' this.clearActiveFeatureKey}}
 as |layers|>
-  <layers.tile
-    @url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
-  />
 
+{{#if this.map}}
+  {{#each @project.base.layers as |layer index|}}
+    <layers.tile
+      @url={{layer}}
+      @zIndex={{index}}
+      @onLoading={{fn this.baseChange @project.base}}
+      @onLoad={{this.baseChanged}}
+    />
+  {{/each}}
   {{#if @project.hasRasters}}
-    {{#each @project.rasters as |raster|}}
+    {{#each @project.sortedRasters as |raster|}}
       <layers.wmsTile
         @url={{raster.rasterLayer.url}}
         @layers={{raster.rasterLayer.layers}}
@@ -17,10 +28,30 @@ as |layers|>
         @transparent={{true}}
         @zIndex={{raster.position}}
         @opacity={{raster.opacityTenths}}
+        @onLoad={{fn this.rasterAdded raster.rasterLayer}}
       />
     {{/each}}
   {{/if}}
 
+  {{#if @project.hasVectors}}
+    {{#each @project.reverseVectors as |vector|}}
+    {{#if vector.show }}
+      {{#each vector.vectorLayer.vectorFeatures as |feature|}}
+        <layers.geojson
+          @geoJSON={{feature.geojson}}
+          @onEachFeature={{fn this.onEachFeature feature vector.color}}
+          @pointToLayer={{fn this.addMarker feature}}
+          @color={{if (eq feature.geometryType 'LineString') (vector-color vector feature this.dataColors) "#263238"}}
+          @fillColor={{vector-color vector feature this.dataColors}}
+          @fillOpacity={{feature.opacity}}
+          @weight={{feature.weight}}
+          @pane={{vector.vectorLayer.name}}
+        />
+      {{/each}}
+      {{/if}}
+    {{/each}}
+  {{/if}}
+{{/if}}
 </LeafletMap>
 
 <div class="testing" id="map-component">
@@ -31,3 +62,4 @@ as |layers|>
     {{@project.zoomLevel}}
   </span>
 </div>
+

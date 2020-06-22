@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class RasterLayerModel extends Model {
   @attr('string') name;
@@ -8,5 +8,10 @@ export default class RasterLayerModel extends Model {
   @attr('string') description;
   @attr() thumb;
   @hasMany('rasterLayerProject') rasterLayerProjects;
-  // @belongsTo('project', { async: false }) project;
+  @belongsTo('institution') institution;
+  @attr('boolean', {
+    defaultValue() { return false; }
+  }) onMap;
+
+  @attr() leafletObject;
 }

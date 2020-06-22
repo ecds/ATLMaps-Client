@@ -23,7 +23,7 @@ export default class MapUiRasterPanelComponent extends Component {
     this.ukSortable = UIkit.sortable(
       element,
       {
-        handle: '.atl-grip',
+        handle: '.atlm-grip',
         animation: 150
       }
     );
@@ -43,23 +43,40 @@ export default class MapUiRasterPanelComponent extends Component {
   @action
   keyboardReorder(raster, direction, event) {
     if (event.key == 'Enter' || event.type == 'click') {
-      const layers = document.getElementsByClassName('atl-layer-list-item');
-      for (let layer of layers) {
-        if (direction == 'up') {
-          if (layer.attributes['data-position'].value == raster.position + 1) {
-            const layerDown = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
-            layerDown.setProperties({ position: raster.position});
-            raster.setProperties({ position: raster.position + 1 });
-          }
-        } else if (direction == 'down') {
-          if (layer.attributes['data-position'].value == raster.position - 1) {
-            const layerUp = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
-            layerUp.setProperties({ position: raster.position});
-            raster.setProperties({ position: raster.position - 1 });
-            break;
-          }
-        }
+      // const layers = document.getElementsByClassName('atlm-layer-list-item');
+      if (direction == 'up') {
+        const rasterDown = this.args.project.rasters.filterBy('position', raster.position + 1).findBy('isDeleted', false);
+        raster.setProperties({
+          position: rasterDown.position
+        });
+        rasterDown.setProperties({
+          position: rasterDown.position - 1
+        });
+      } else {
+        const rasterUp = this.args.project.rasters.filterBy('position', raster.position - 1).findBy('isDeleted', false);
+        raster.setProperties({
+          position: rasterUp.position
+        });
+        rasterUp.setProperties({
+          position: rasterUp.position + 1
+        });
       }
+      // for (let layer of layers) {
+      //   if (direction == 'up') {
+      //     if (layer.attributes['data-position'].value == raster.position + 1) {
+      //       const layerDown = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
+      //       layerDown.setProperties({ position: raster.position});
+      //       raster.setProperties({ position: raster.position + 1 });
+      //     }
+      //   } else if (direction == 'down') {
+      //     if (layer.attributes['data-position'].value == raster.position - 1) {
+      //       const layerUp = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
+      //       layerUp.setProperties({ position: raster.position});
+      //       raster.setProperties({ position: raster.position - 1 });
+      //       break;
+      //     }
+      //   }
+      // }
     }
   }
 }

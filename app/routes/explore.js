@@ -1,8 +1,11 @@
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 
 export default class ExploreRoute extends Route {
-  async model() {
-    // return this.store.findAll('project');
-    return {};
+  model() {
+    return RSVP.hash({
+      rasters: this.store.findAll('rasterLayer'),
+      vectors: this.store.findAll('vectorLayer')
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Factory } from 'ember-cli-mirage';
+import { Factory, trait } from 'ember-cli-mirage';
 import faker from 'faker';
 import ENV from 'atlmaps-client/config/environment';
 
@@ -21,5 +21,22 @@ export default Factory.extend({
 
   zoomLevel() {
     return ENV.APP.INITIAL_ZOOM;
+  },
+
+  withRasters: trait({
+    hasRasters: true
+  }),
+
+  withVectors: trait({
+    hasVectors: true
+  }),
+
+  afterCreate(project, server) {
+    if (project.hasRasters) {
+      [1, 2, 3].forEach(num => {
+        server.create('raster-layer-project', { project, position: num + 11  });
+      });
+
+    }
   }
 });

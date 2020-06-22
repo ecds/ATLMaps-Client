@@ -1,0 +1,44 @@
+<ul {{did-insert this.initInteraction}}>
+  {{#each @project.sortedVectors as |vector|}}
+    <li class="uk-margin-remove-left uk-padding-small atlm-layer-list-item atlm-vector-item" data-layer={{vector.id}} uk-grid>
+      <div class="uk-width-1-6 uk-padding-remove-left atlm-data-type" style={{vector.style}}>
+        <FaIcon @icon={{vector.vectorLayer.icon}} />
+      </div>
+      <div class="uk-width-2-3 uk-child-width-1-1 uk-grid-small" uk-gird>
+        <a class="uk-text-lead atlm-text-lead uk-accordion-title" href="#">
+          {{vector.vectorLayer.title}}
+        </a>
+        {{#if vector.show}}
+          <MapUi::VectorPanel::OpacitySlider @vectorLayer={{vector.vectorLayer}} />
+        {{else}}
+        <div class="uk-padding-small">
+          <UkButton @size="small" @color="secondary" {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
+        </div>
+        {{/if}}
+      </div>
+      <div class="uk-width-1-6 uk-text-center uk-grid-collapse uk-child-width-1-1 uk-padding-small uk-padding-remove-vertical" uk-grid>
+        {{#unless vector.onTop}}
+        <div role="button" tabindex="0" class="uk-text-center atlm-reorder-button-up uk-grid-collapse uk-child-width-1-1 uk-inline"
+          {{on 'click' (fn this.bringToFront vector)}} uk-grid>
+          <div class="uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">
+            <FaIcon @icon="chevron-up" />
+          </div>
+          <div>
+            Move to Top
+          </div>
+        </div>
+        {{/unless}}
+      </div>
+      <div class="uk-accordion-content uk-width-1-1">
+        <article class="uk-article">
+          {{vector.vectorLayer.safeDescription}}
+          <MapUi::VectorPanel::Key @layer={{vector}} />
+          {{#if vector.vectorLayer.institution}}
+            <p class="uk-article-meta">Layer provided by: {{vector.vectorLayer.institution.name}}</p>
+          {{/if}}
+        </article>
+        <MapUi::ShareLayer @layer={{vector.vectorLayer}} />
+      </div>
+    </li>
+  {{/each}}
+</ul>

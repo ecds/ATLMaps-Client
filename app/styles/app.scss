@@ -1,22 +1,33 @@
+$peach: #f58320;
+$primary-dark-gray: #263238;
+$primary-light-gray: #546e7a;
+$secondary-light-gray: #cfd8dc;
+$secondary-dark-gray: #78909c;
+$dark-text: #333;
+$white-text: #fff;
+
+// UIKit overrides.
+$global-primary-background: $peach !default;
+$global-secondary-background: $primary-light-gray !default;
+$offcanvas-bar-background: #fff;
+$offcanvas-bar-color-mode: "dark";
+$subnav-pill-item-active-background: #fff;
+$subnav-pill-item-active-color: $dark-text;
+$subnav-pill-item-color: $white-text;
+$button-link-color: #eee;
+$navbar-background: $primary-dark-gray;
+$pagination-item-color: $white-text;
+$pagination-item-hover-color: $secondary-light-gray;
+$button-link-hover-color: $secondary-light-gray;
+
 @import 'ember-uikit';
 
-:root {
-  font-size: 18px;
-}
-
-article {
-  font-size: 1rem;;
-}
-
-.uk-navbar-container:not(.uk-navbar-transparent) {
-  background-color: #263238;
+.uk-button:focus {
+  outline-color: $primary-light-gray;
+  outline-style: solid;
 }
 
 .uk-accordion-title {
-  &:before {
-    content: unset;
-  }
-
   &:focus {
     outline-width: .2rem;
     outline-style: solid;
@@ -34,6 +45,35 @@ article {
   background-color: white;
 }
 
+.uk-offcanvas-bar {
+  .uk-text-lead {
+    color: $dark-text;
+  }
+}
+
+.uk-offcanvas-bar .uk-list-divider > li:nth-child(n+2) {
+  border-top-color: $dark-text;
+}
+
+// End UIKit overrides
+
+
+@import 'data-colors';
+@import 'embeds';
+@import 'atlm';
+@import 'mobile';
+
+:root {
+  font-size: 18px;
+}
+
+
+article {
+  font-size: 1rem;;
+}
+
+
+
 a.home {
   color: white;
   font-size: 2rem;
@@ -50,24 +90,10 @@ a.home {
   z-index: -1;
 }
 
-.atl-project-title {
-  background-color: #cfd8dc;
-
-  h1 {
-    font-size: 1.625rem;
-  }
-}
-
-.atl-text-lead {
-  font-size: 1.25rem;
-}
-
-.atl-opacity-range-input {
-  width: 100%;
-}
-
-.atl-toggle-switch {
-  font-size: 1.5rem;
+// Comment out to see where markers really should be.
+.leaflet-div-icon {
+  background: none;
+  border: none;
 }
 
 .leaflet-container {
@@ -75,78 +101,14 @@ a.home {
   width: 100vw;
 }
 
-.map-ui-project-menu {
-  font-size: .75rem;
-  left: 59px;
-  position: absolute;
-  top: 100px;
-  width: 33vw;
-  z-index: 400;
-    
-  a.atl-map-menu-button {
-    color: white;
-    font-size: 1em;
-    min-height: 40px;
-    max-width: 100px;
-    min-width: 80px;
-    
-    &.uk-accordion-title {
-      background-color: #546e7a;
-      border-radius: 20% 0% 0% 0%;
-
-      &:hover {
-        background-color: #b0bec5;
-      }
-
-      &:focus {
-        color: white;
-      }
-    }
-  }
-
-  li {
-    span {
-      font-size: 2em;
-      display: block;
-    }
-  }
-
-  .map-ui-project-menu-options {
-    
-    li {
-      background-color: #546e7a;
-      width: 110px;
-
-      &:hover {
-        background-color: #b0bec5;
-      }
-
-      &.uk-active {
-        background-color: #f58320;
-        
-        a.atl-map-menu-button {
-          border: none;
-          color: white;
-        }
-      }
-    }
-
-    li:last-of-type {
-      border-radius: 0 0 0 20%;
-    }
-  }
-
-  .uk-panel-scrollable {
-    height: auto;
-    max-height: 66vh;
-  }
+// Fix for the scroll bar on the raster and vector panels.
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 1px;
 }
 
-.atl-grip {
-  font-size: 1.5rem;
-}
-
-.atl-layer-list-item {
-  border-color: lightgray;
-  border-style: solid;
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }

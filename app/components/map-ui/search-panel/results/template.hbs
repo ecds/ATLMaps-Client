@@ -1,0 +1,16 @@
+<ul class="uk-padding-remove uk-list uk-list-divider">
+  {{#if @getTask.isRunning}}
+    <li>
+      <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <FaIcon @icon="spinner" @spin={{true}} />
+            Fetching more {{@resultType}}
+          </div>
+        </div>
+      </div>
+    </li>
+  {{else}}
+    {{yield}}
+  {{/if}}
+</ul>

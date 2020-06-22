@@ -28,29 +28,29 @@ module('Integration | Component | map-ui/toggle-switch', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`<MapUi::ToggleSwitch @project={{this.project}} @status={{this.project.allRastersHidden}} @type={{"map"}} />`);
-    assert.dom('div.atl-toggle-switch svg').hasClass('fa-toggle-on');
-    assert.dom('div.atl-toggle-status').hasText('Hide all');
+    assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
+    assert.dom('div.atlm-toggle-status').hasText('Hide all');
 
-    await click('div.atl-toggle');
-    assert.dom('div.atl-toggle-switch svg').hasClass('fa-toggle-off');
-    assert.dom('div.atl-toggle-status').hasText('Show all');
+    await click('div.atlm-toggle');
+    assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
+    assert.dom('div.atlm-toggle-status').hasText('Show all');
     assert.equal(this.project.allRastersHidden, true);
     
-    await click('div.atl-toggle');
-    assert.dom('div.atl-toggle-switch svg').hasClass('fa-toggle-on');
-    assert.dom('div.atl-toggle-status').hasText('Hide all');
+    await click('div.atlm-toggle');
+    assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
+    assert.dom('div.atlm-toggle-status').hasText('Hide all');
     assert.equal(this.project.allRastersHidden, false);
 
-    await triggerKeyEvent('div.atl-toggle', 'keyup', 'Enter');
-    assert.dom('div.atl-toggle-switch svg').hasClass('fa-toggle-off');
-    assert.dom('div.atl-toggle-status').hasText('Show all');
+    await triggerKeyEvent('div.atlm-toggle', 'keyup', 'Enter');
+    assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
+    assert.dom('div.atlm-toggle-status').hasText('Show all');
     assert.equal(this.project.allRastersHidden, true);
     
     let layer = this.store.peekRecord('rasterLayerProject', 2);
     layer.setProperties({ opacity: 50 });
-    await waitFor('div.atl-toggle-switch svg.fa-toggle-on');
+    await waitFor('div.atlm-toggle-switch svg.fa-toggle-on');
     assert.equal(this.project.allRastersHidden, false);
-    assert.dom('div.atl-toggle-switch svg').hasClass('fa-toggle-on');
-    assert.dom('div.atl-toggle-status').hasText('Hide all');
+    assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
+    assert.dom('div.atlm-toggle-status').hasText('Hide all');
   });
 });

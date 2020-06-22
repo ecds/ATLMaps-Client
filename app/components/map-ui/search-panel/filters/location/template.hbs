@@ -1,0 +1,16 @@
+<legend class="uk-legend">Spatial Filters</legend>
+<section class="uk-margin uk-grid-small uk-child-width-1-1" uk-grid>
+  <div>
+      <UkButton
+        @color="link"
+        {{on 'click' this.toggleBounds}}
+      >
+        <FaIcon @icon={{if this.searchParameters.searchBounds "check-square" "square"}} @prefix="far" /> Limit to visible area
+      </UkButton>
+  </div>
+  <div>
+      {{#if this.searchParameters.updateBounds}}
+        <UkButton @color="primary" {{on 'click' this.updateBounds}}>Update Location Filter</UkButton>
+      {{/if}}
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<ul class="uk-pagination" uk-margin>
+  <li>
+    <label for="per-page">Show</label>
+  </li>
+  <li>
+    <select class="uk-select" id="per-page" {{on 'change' this.updateResultsPerPage}}>
+      {{#each this.options as |opt|}}
+        <option value={{opt}} selected={{eq opt this.searchParameters.limit}}>{{opt}}</option>
+      {{/each}}
+    </select>
+  </li>
+  {{#if (gt @meta.current_page 2)}}
+    <li class="atlm-test-first-page">
+      <UkButton @color="primary" {{on "click" (fn this.setOffset 1)}}>
+        1
+      </UkButton>
+    </li>
+    <li class="uk-disabled atlm-test-first-ellipsis"><span>...</span></li>
+  {{/if}}
+  {{#if @meta.prev_page}}
+    <li class="atlm-test-prev-page">
+      <UkButton @color="primary" {{on "click" (fn this.setOffset @meta.prev_page)}}>
+        {{@meta.prev_page}}
+      </UkButton>
+    </li>
+  {{/if}}
+    <li class="atlm-test-current-page">
+      <UkButton @color="secondary">
+        {{@meta.current_page}}
+      </UkButton>
+    </li>
+  {{#if @meta.next_page}}
+    <li class="atlm-test-next-page">
+      <UkButton @color="primary" {{on "click" (fn this.setOffset @meta.next_page)}}>
+        {{@meta.next_page}}
+      </UkButton>
+    </li>
+  {{/if}}
+  {{#if (and @meta.next_page (lt @meta.next_page @meta.total_pages))}}
+    <li class="uk-disabled atlm-test-last-ellipsis"><span>...</span></li>
+    <li class="atlm-test-last-page">
+      <UkButton @color="primary" {{on "click" (fn this.setOffset @meta.total_pages)}}>
+        {{@meta.total_pages}}
+      </UkButton>
+    </li>
+  {{/if}}
+</ul>

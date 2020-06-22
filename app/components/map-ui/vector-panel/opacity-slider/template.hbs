@@ -1,0 +1,9 @@
+<div class="uk-padding-small uk-padding-remove-horizontal">
+ <label for={{concat "opacity-" @vectorLayer.name}}>
+    Opacity
+  </label>
+  <Input id={{concat "opacity-" @vectorLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}} @value={{parseint @vectorLayer.opacity}} />%
+</div>
+<div class="uk-padding-small">
+  <Input class="uk-range atlm-opacity-range-input" type="range" @min={{0}} @max={{100}} @step={{1}} @value={{@vectorLayer.opacity}} />
+</div>

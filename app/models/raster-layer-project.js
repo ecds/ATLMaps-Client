@@ -18,11 +18,11 @@ export default class RasterLayerProjectModel extends Model {
 
   @computed('position')
   get isTop() {
-    return this.position == this.get('project.rasters').length + 10;
+    return this.position >= this.get('project.rasters').length + 10;
   }
 
   @computed('position')
   get isBottom() {
-    return this.position == 11;
+    return this.position <= 11;
   }
 }

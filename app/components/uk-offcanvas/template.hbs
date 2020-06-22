@@ -1,0 +1,8 @@
+<div id="atlm-layer-search-panel" {{did-insert (fn this.initOffcanvas)}} {{will-destroy (fn this.willDestroyNode)}}>
+    <div ...attributes class="uk-offcanvas-bar">
+      {{yield}}
+    </div>
+</div>
+<div class="atlm-toggle-layer-search">
+  <UkButton uk-toggle target="#atlm-layer-search-panel" @size="large" @color="primary">Find Layers</UkButton>
+</div>

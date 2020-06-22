@@ -15,7 +15,7 @@ module('Integration | Component | map-ui/opacity-slider', function(hooks) {
     // assert.expect(5);
     await render(hbs`<MapUi::OpacitySlider @opacity={{this.rlp.opacity}}/>`);
     assert.equal(this.element.querySelector('input').value, this.rlp.opacity);
-    await fillIn('input.atl-opacity-range-input', 50);
+    await fillIn('input.atlm-opacity-range-input', 50);
     assert.equal(this.rlp.opacity, 50);
   });
 });

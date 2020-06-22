@@ -1,0 +1,47 @@
+<footer class="uk-child-width-1-2 uk-margin uk-padding-small uk-flex-center uk-text-center atlm-share-buttons" uk-grid>
+  <div>
+    <UkButton @size="small" @color="secondary" uk-toggle target={{concat "#share-modal-" @layer.name}}>
+      <FaIcon @icon="share-alt" /> share
+    </UkButton>
+  </div>
+  <div>
+    <UkButton @size="small" @color="secondary" uk-toggle target={{concat "#embed-modal-" @layer.name}}>
+      <FaIcon @icon="code" /> embed
+    </UkButton>
+  </div>
+</footer>
+
+<div id={{concat "share-modal-" @layer.name}} class="uk-flex-top" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <h3>Layer Link</h3>
+    <Input class="uk-input" @type="text" @value={{this.shareUrl}} id={{concat "share-" @layer.name}} />
+    <UkButton @color="primary" {{on "click" (fn this.copyText "share")}}>copy link</UkButton>
+  </div>
+</div>
+
+<div id={{concat "embed-modal-" @layer.name}} class="uk-flex-top" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <h3>Layer Embed Code</h3>
+    <Input class="uk-input" @type="text" @value={{this.embedUrl}} id={{concat "embed-" @layer.name}} />
+    <hr>
+    <label class="uk-form-label">Pick a base map:</label>
+    <select class="uk-select" {{on 'change' this.setBase}}>
+      {{#each this.bases as |base|}}
+        <option value={{base}}>{{base}}</option>
+      {{/each}}
+    </select>
+    <hr>
+    {{#if @layer.dataType}}
+      <label class="uk-form-label">Pick a  color:</label>
+      <div class="uk-child-width-1-4@s uk-flex-center uk-text-center uk-padding uk-padding-remove-vertical uk-grid-small" uk-grid>
+        {{#each this.dataColors.embedColors as |color|}}
+          <UkButton @size="small" id={{concat "color-" color.name}} class={{concat "uk-padding-remove " color.name}} {{on 'click' (fn this.setColor color)}}>{{color.hex}}</UkButton>
+        {{/each}}
+      </div>
+      <hr>
+    {{/if}}
+    <UkButton @color="primary" {{on "click" (fn this.copyText "embed")}}>copy embed code</UkButton>
+  </div>
+</div>

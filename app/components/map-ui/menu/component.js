@@ -6,18 +6,22 @@ import UIkit from "uikit";
 
 export default class MapUiMenuComponent extends Component {
   @service fastboot;
-  
+  @service deviceContext;
+
   @tracked
   ukAccordion = null;
-  
+
   @tracked
   ukAccordionOpen = false;
 
   @tracked
   panelTitle = '';
-    
+
   @tracked
   showToggle = false;
+
+  @tracked
+  hideMenuPanel = true;
 
   checkIfOpen(accordion) {
     // I think this fires for the UIkit Accordion and for the
@@ -25,19 +29,21 @@ export default class MapUiMenuComponent extends Component {
     // UIKit::Accordion to report its true state.
     this.ukAccordionOpen = accordion.firstElementChild.classList.contains('uk-open');
   }
-  
+
   @action
   initUkAccordion(element) {
-    
+
     if (this.fastboot.isFastBoot) return;
     const accordionOptions = {
       toggle: "> div > .uk-accordion-title"
     };
     this.ukAccordion = UIkit.accordion(element, accordionOptions);
-    
+
     UIkit.util.on(this.ukAccordion.$el, 'show', event => {
       if (event.target.attributes['data-type'] && event.target.attributes['data-type'].value == 'panel') {
         this.panelTitle = event.target.attributes['data-panel-title'].value;
+        this.showToggle = true;
+      } else if (event.target.attributes['data-layer']) {
         this.showToggle = true;
       } else {
         this.panelTitle = '';
@@ -45,7 +51,7 @@ export default class MapUiMenuComponent extends Component {
       }
       this.checkIfOpen(element);
     });
-    
+
     UIkit.util.on(this.ukAccordion.$el, 'hide', () => {
       this.checkIfOpen(element);
     });

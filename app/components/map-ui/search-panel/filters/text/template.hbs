@@ -1,0 +1,16 @@
+<form
+  class="uk-form-stacked uk-grid-small uk-child-width-1-1" {{on 'submit' this.textSearch}} uk-grid>
+  <legend class="uk-legend">Text Filter</legend>
+  <section class="uk-margin">
+    <div class="uk-form-controls">
+      <Input class="uk-input" id="atlm-layer-text-search" @type="text" @value={{mut this.textToSearch}} @placeholder="Filter keywords and phrases." />
+      <UkButton @color="primary" type="submit"><FaIcon @icon="search" /> Search</UkButton>
+    </div>
+  </section>
+</form>
+
+<div class="testing">
+  <span id="text-to-search">
+    {{this.textToSearch}}
+  </span>
+</div>

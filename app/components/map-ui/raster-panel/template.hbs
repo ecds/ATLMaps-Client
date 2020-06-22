@@ -1,34 +1,31 @@
-<ul {{did-insert this.initUkSortable}}>
-  {{#each @rasters as |raster|}}
-    <li class="uk-margin-remove-left uk-padding-small atl-layer-list-item" data-layer={{raster.id}} data-position={{raster.position}} uk-grid>
+<ul {{did-insert this.initUkSortable}} id="raster-sortable-list">
+  {{#each @project.sortedRasters as |raster|}}
+    <li class="uk-margin-remove-left uk-padding-small atlm-layer-list-item" data-layer={{raster.id}}
+      data-position={{raster.position}} uk-grid>
       <div class="uk-width-1-6 uk-cover-container">
         <img class="uk-cover" src={{raster.rasterLayer.thumb.url}} alt="" role="presentation">
       </div>
       <div class="uk-width-2-3 uk-child-width-1-1 uk-grid-collapse" uk-gird>
-      <a class="uk-accordion-title" href="#">
-        <div class="uk-text-lead atl-text-lead">
-         {{raster.rasterLayer.title}}
-        </div>
-          </a>
-        <div>
+        <a class="uk-accordion-title" href="#">
+          <div class="uk-text-lead atlm-text-lead">
+            {{raster.position}}: {{raster.rasterLayer.title}}
+          </div>
+        </a>
+        <div class="uk-padding-small uk-padding-remove-horizontal">
           <label for={{concat "opacity-" raster.rasterLayer.name}}>
             Opacity
           </label>
-          <Input id={{concat "opacity-" raster.rasterLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}} @value={{mut raster.opacity}} />%
+          <Input id={{concat "opacity-" raster.rasterLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}}
+            @value={{mut raster.opacity}} />%
         </div>
         <div>
           <MapUi::OpacitySlider @opacity={{raster.opacity}} />
         </div>
       </div>
-      <div class="uk-width-1-6 atl-grip uk-grid-collapse uk-child-width-1-1" uk-grid>
+      <div class="uk-width-1-6 atlm-grip uk-grid-collapse uk-child-width-1-1" uk-grid>
         {{#unless raster.isTop}}
-          <div
-            role="button"
-            tabindex="0"
-            class="uk-text-center atl-reorder-button-up"
-            {{on 'keyup' (fn this.keyboardReorder raster 'up')}}
-            {{on 'click' (fn this.keyboardReorder raster 'up')}}
-          >
+          <div role="button" tabindex="0" class="uk-text-center atlm-reorder-button-up"
+            {{on 'keyup' (fn this.keyboardReorder raster 'up')}} {{on 'click' (fn this.keyboardReorder raster 'up')}}>
             <FaIcon @icon="chevron-up" />
           </div>
         {{/unless}}
@@ -37,23 +34,21 @@
         </div>
         <div class="uk-text-center">
           {{#unless raster.isBottom}}
-            <div
-              role="button"
-              tabindex="0"
-              class="uk-text-center atl-reorder-button-down"
+            <div role="button" tabindex="0" class="uk-text-center atlm-reorder-button-down"
               {{on 'keyup' (fn this.keyboardReorder raster 'down')}}
-              {{on 'click' (fn this.keyboardReorder raster 'down')}}
-            >
+              {{on 'click' (fn this.keyboardReorder raster 'down')}}>
               <FaIcon @icon="chevron-down" />
             </div>
           {{/unless}}
         </div>
       </div>
-        <div class="uk-accordion-content uk-width-1-1">
-          <article>
-            {{raster.rasterLayer.description}}
-          </article>
-        </div>
+      <div class="uk-accordion-content uk-width-1-1">
+        <article class="uk-article">
+          {{raster.rasterLayer.description}}
+          <p class="uk-article-meta">Layer provided by: {{raster.rasterLayer.institution.name}}</p>
+        </article>
+        <MapUi::ShareLayer @layer={{raster.rasterLayer}} />
+      </div>
     </li>
   {{/each}}
 </ul>

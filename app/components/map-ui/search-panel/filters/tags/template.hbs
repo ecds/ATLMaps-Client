@@ -1,0 +1,24 @@
+<legend class="uk-legend">Tag Filters</legend>
+<section class="uk-margin">
+  <ul class="uk-form-controls uk-padding-remove" id="atlm-tag-accordion" uk-accordion>
+    {{#each @categories as |category|}}
+      <li>
+        <UkButton @color="link" uk-tooltip="Filter by {{category.name}} tags" {{on 'click' (fn this.toggleCategory category)}}>
+          <FaIcon @icon={{if category.allChecked "check-square" "square"}} @prefix="far" />
+        </UkButton>
+        <UkButton @color="link" class="uk-accordion-title atlm-category-accordion-title" uk-tooltip="Expand to filter by {{category.name}} tags">
+          {{category.name}}
+        </UkButton>
+        <ul class="uk-accordion-content">
+          {{#each category.tags as |tag|}}
+            <li>
+              <UkButton {{on 'click' (fn this.toggleTag tag)}} @color="link">
+                <FaIcon @icon={{if tag.checked "check-square" "square"}} @prefix="far" /> {{tag.name}}
+              </UkButton>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+</section>

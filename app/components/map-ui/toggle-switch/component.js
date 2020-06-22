@@ -4,6 +4,11 @@ import { action } from '@ember/object';
 export default class MapUiToggleSwitchComponent extends Component {
 
   @action
+  initToggle() {
+    // console.log(this)
+  }
+
+  @action
   toggleVisible() {
     let layers;
     if (this.args.type.toLowerCase().includes('map')) {

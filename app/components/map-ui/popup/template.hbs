@@ -1,0 +1,42 @@
+<div class="uk-border-rounded uk-box-shadow-xlarge uk-card uk-card-default uk-width-1-2@m atlm-popup {{unless @activeFeature "uk-hidden"}}" {{did-insert this.initDraggable}}>
+  <div class="uk-card-header atlm-popup-handle">
+    <div class="uk-grid-small  uk-flex-middle" uk-grid uk-height-match>
+      <div class="uk-width-auto atlm-popup-icon" style={{@activeFeature.style}}>
+        <FaIcon @icon={{@activeFeature.vectorLayer.icon}} />
+      </div>
+      <div class="uk-width-expand">
+        <h3 class="uk-card-title uk-margin-remove-bottom">
+          {{@activeFeature.name}}
+        </h3>
+        <p class="uk-text-meta uk-margin-remove-top">{{@activeFeature.vectorLayer.title}}</p>
+      </div>
+      <div class="uk-width-auto atlm-popup-close-button">
+        <UkButton id="atlm-close-popup-button" @color="link" {{on 'click' @close}}  {{on 'keyup' @closeKey}}>
+          <FaIcon @icon="times-circle" />
+        </UkButton>
+      </div>
+    </div>
+  </div>
+  <div class="uk-card-body uk-panel uk-panel-scrollable atlm-popup-content">
+    {{#if @activeFeature.youtube}}
+      <MapUi::Popup::Youtube @video={{@activeFeature.youtube}} />
+    {{/if}}
+
+    {{#if @activeFeature.vimeo}}
+      <MapUi::Popup::Vimeo @video={{@activeFeature.vimeo}} />
+    {{/if}}
+
+    {{#if @activeFeature.images}}
+      <MapUi::Popup::Images @images={{@activeFeature.images}} />
+    {{/if}}
+
+      {{#if @activeFeature.description}}
+        <article class="uk-padding">
+          {{@activeFeature.safeDescription}}
+        </article>
+      {{/if}}
+  </div>
+  {{!-- <div class="uk-card-footer">
+    <a href="#" class="uk-button uk-button-text" title="readmore">Read more stuff</a>
+  </div> --}}
+</div>

@@ -7,10 +7,7 @@ module.exports = function(defaults) {
     'ember-uikit': {
       useIcons: false
     },
-    'free-solid-svg-icons': [
-      'fa-plus',
-      'fa-minus'
-    ]
+    'free-solid-svg-icons': 'all'
   });
 
   // Use `app.import` to add additional libraries to the generated

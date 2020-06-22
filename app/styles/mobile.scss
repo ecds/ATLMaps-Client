@@ -1,0 +1,53 @@
+.atlm-mobile-project-menu,
+.atlm-mobile-panels {
+  background-color: $primary-dark-gray;
+  bottom: 0;
+  position: absolute;
+  z-index: 1000;
+
+  .atlm-mobile-project-menu-buttons {
+    background-color: inherit;
+    bottom: 0;
+    height: 2rem;
+    position: fixed;
+    z-index: 1001;
+  }
+
+  .atlm-mobile-project-panels {
+    background-color: $secondary-light-gray;
+    bottom: 2.25rem;
+    overflow: hidden;
+    position: relative;
+
+    li {
+      height: 25vh;
+      opacity: 1;
+      transition: height .5s, opacity .5s;
+    }
+    img {
+      height: 25vh;
+    }
+  }
+
+  .atlm-mobile-project-panel-close {
+    background-color: $primary-dark-gray;
+    // bottom: calc(25vh + 80px);
+    height: 60px;
+    position: relative;
+  }
+}
+
+.panel-collapsed {
+  .atlm-mobile-project-panel-close {
+    // bottom: 0;
+    height: 60px;
+  }
+
+  .atlm-mobile-project-panels {
+    li {
+      height: 0;
+      opacity: 0;
+      z-index: 0;
+    }
+  }
+}

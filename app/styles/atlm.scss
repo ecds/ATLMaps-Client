@@ -1,0 +1,279 @@
+.atlm-project-title {
+  background-color: $secondary-light-gray;
+
+  h1 {
+    font-size: 1.625rem;
+  }
+}
+
+.atlm-text-lead {
+  font-size: 1.25rem;
+}
+
+.atlm-opacity-range-input {
+  width: 100%;
+}
+
+.atlm-toggle-switch {
+  font-size: 1.5rem;
+}
+
+.atlm-data-type {
+  font-size: 2rem;
+}
+
+.atlm-popup {
+  background-color: white;
+  // font-size: 1rem;
+  left: 200px;
+  // min-height: 25vh;
+  max-width: 33vw;
+  position: absolute;
+  top: 200px;
+  z-index: 500;
+
+  .atlm-popup-icon {
+    font-size: 2.5rem;
+  }
+
+  .atlm-popup-content {
+    height: auto;
+    max-height: 40vh;
+    min-height: 25vh;
+    resize: unset;
+  }
+
+  .atlm-popup-handle {
+    cursor: grab;
+
+    .atlm-popup-close-button {
+      cursor: pointer;
+    }
+  }
+}
+
+.atlm-map-marker {
+  // Moves the tip of the marker icon to the correct location.
+  height: 3.5rem !important;
+  width: 2.5rem !important;
+  margin-top: -3rem !important;
+  margin-left: 2rem !important;
+  font-size: 2.5rem;
+  text-shadow: 0 0 3px #fff;
+
+  &::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    content: "\f3c5";
+  }
+
+  &.active {
+    font-size: 3.5rem;
+    margin-left: 1.5 !important;
+    margin-top: -4rem !important;
+  }
+}
+
+.atlm-map-ui-project-menu {
+  font-size: .75rem;
+  left: 59px;
+  position: absolute;
+  top: 100px;
+  width: 33vw;
+  z-index: 450;
+
+  .uk-accordion-title {
+    &:before {
+      content: unset;
+    }
+  }
+
+  a.atlm-map-menu-button {
+    color: white;
+    font-size: 1em;
+    min-height: 40px;
+    max-width: 100px;
+    min-width: 80px;
+
+    &.uk-accordion-title {
+      background-color: $primary-light-gray;
+      border-radius: 20% 0% 0% 0%;
+
+      &:hover {
+        background-color: #b0bec5;
+      }
+
+      &:focus {
+        color: white;
+      }
+    }
+  }
+
+  li {
+    span {
+      font-size: 2em;
+      display: block;
+    }
+  }
+
+  .atlm-map-ui-project-menu-options {
+
+    li {
+      background-color: $primary-light-gray;
+      width: 110px;
+
+      &:hover {
+        background-color: #b0bec5;
+      }
+
+      &.uk-active {
+        background-color: $peach;
+
+        a.atlm-map-menu-button {
+          border: none;
+          color: white;
+        }
+      }
+    }
+
+    li:last-of-type {
+      border-radius: 0 0 0 20%;
+    }
+  }
+
+  .uk-panel-scrollable {
+    height: auto;
+    max-height: 66vh;
+  }
+}
+
+.atlm-grip {
+  font-size: 1.5rem;
+}
+
+.atlm-layer-list-item {
+  border-color: lightgray;
+  border-style: solid;
+}
+
+.atlm-search-panel {
+  background-color: $primary-light-gray;
+  height: calc(100vh - 100px);
+  top: 100px;
+  width: 33vw;
+}
+
+.atlm-search-nav {
+  position: fixed;
+  width: 33vw;
+  z-index: 2;
+}
+
+.atlm-toggle-layer-search {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  z-index: 700;
+}
+
+.atlm-search-panel-tab {
+  background-color: $secondary-dark-gray;
+  color: white !important;
+
+  &:hover {
+    color: $dark-text;
+  }
+  div {
+    font-size: 1.5rem;
+
+  }
+
+  &.uk-active {
+    border-bottom-style: solid;
+    border-block-end-color: $peach;
+    div {
+      color: $subnav-pill-item-active-color;
+    }
+  }
+}
+
+.atlm-search-content-panel {
+  margin-bottom: 6rem;
+  margin-top: 6rem;
+
+  .uk-button-link {
+    color: $primary-dark-gray;
+    font-size: 1.25rem;
+    text-transform: capitalize;
+
+
+    .fa-plus-circle {
+      color: $secondary-light-gray;
+    }
+
+    .fa-check-circle,
+    .fa-check-square {
+      color: $peach;
+    }
+
+    .atlm-add-remove-icon {
+      font-size: 3.5rem;
+    }
+  }
+
+  .uk-panel-scrollable {
+    height: calc(100vh - 20px);
+  }
+
+  .uk-accordion-content {
+    .uk-button-link {
+      font-size: 1rem;
+    }
+  }
+}
+
+.atlm-search-panel-top {
+  background-color: $primary-light-gray;
+  height: 2rem;
+  width: 100%;
+}
+
+.atlm-pagination {
+  background-color: $secondary-light-gray;
+  bottom: 0;
+  position: fixed;
+  width: 33vw;
+
+  button {
+    font-size: 1rem;
+    font-weight: 900;
+  }
+
+  label,
+  select {
+    color: unset;
+  }
+}
+
+.atlm-category-accordion-title {
+  display: inline;
+}
+
+.atlm-notification {
+  position: absolute;
+  top: 110px;
+  width: 100vw;
+  z-index: 1000;
+}
+
+.atlm-base-map-selector {
+  bottom: 10px;
+  left: 60px;
+  position: absolute;
+  z-index: 10001;
+
+  button {
+    &:after {
+      background: unset;
+    }
+  }
+}
