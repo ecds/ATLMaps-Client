@@ -37,7 +37,7 @@ export default class BaseMapsService extends Service {
   };
 
   city1928 = {
-    label: '1928',
+    label: 'city1928',
     layers: A([
       'https://s3.amazonaws.com/tilemaps/ATL28_1000tiles/{z}/{x}/{y}.png',
       'https://s3.amazonaws.com/tilemaps/ATL28_200tiles/{z}/{x}/{y}.png'

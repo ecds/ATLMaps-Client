@@ -59,4 +59,8 @@ export default class SearchParametersService extends Service {
       this.tags.removeObject(tag.slug);
     }
   }
+
+  setLimit(limit) {
+    this.limit = limit;
+  }
 }

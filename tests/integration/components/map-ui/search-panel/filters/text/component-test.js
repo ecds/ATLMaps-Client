@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { fillIn, render } from '@ember/test-helpers';
+import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | map-ui/search-panel/filters/text', function(hooks) {
@@ -15,6 +15,7 @@ module('Integration | Component | map-ui/search-panel/filters/text', function(ho
   test('it updates textToSearch', async function(assert) {
     await render(hbs`<MapUi::SearchPanel::Filters::Text />`);
     await fillIn('input#atlm-layer-text-search', 'Don\'t Panic');
+    await click('button');
     assert.dom('.testing #text-to-search').hasText('Don\'t Panic');
   });
 });

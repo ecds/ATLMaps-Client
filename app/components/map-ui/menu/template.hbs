@@ -16,7 +16,11 @@
           <div class="uk-grid-small uk-flex-middle" uk-grid>
             <div class="uk-width-expand">
               <h3 class="uk-card-title uk-margin-remove-bottom">{{@project.name}}</h3>
-              <p class="uk-text-meta uk-margin-remove-top">{{this.panelTitle}}</p>
+                {{#if this.panelTitle}}
+              <p class="uk-text-meta uk-margin-remove-top atlm-panel-title">
+                  {{this.panelTitle}}
+              </p>
+                {{/if}}
             </div>
             {{!-- TODO: There has to be a better way than this conditional. --}}
             {{#if (and this.showToggle (contains "Map" (w this.panelTitle)))}}
@@ -42,22 +46,26 @@
               info
             </a>
           </li>
-          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
-            <a class="atlm-map-menu-button" href="#">
-              <span>
-                <FaIcon @icon="map" />
-              </span>
-              maps
-            </a>
-          </li>
-          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
-            <a class="atlm-map-menu-button" href="#">
-              <span>
-                <FaIcon @icon="database" />
-              </span>
-              data
-            </a>
-          </li>
+          {{#if @project.hasRasters}}
+            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-raster-menu-button">
+              <a class="atlm-map-menu-button" href="#">
+                <span>
+                  <FaIcon @icon="map" />
+                </span>
+                maps
+              </a>
+            </li>
+          {{/if}}
+          {{#if @project.hasVectors}}
+            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-vector-menu-button">
+              <a class="atlm-map-menu-button" href="#">
+                <span>
+                  <FaIcon @icon="database" />
+                </span>
+                data
+              </a>
+            </li>
+          {{/if}}
         </ul>
       </div>
       <div class="uk-width-expand@m uk-panel uk-panel-scrollable">

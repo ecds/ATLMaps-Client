@@ -30,12 +30,12 @@ export default class MapComponent extends Component {
     });
   }
 
-  get _center() {
-    if (!this.map) {
-      return null;
-    }
-    return {lat: this.map.getCenter().lat.toString(), lng: this.map.getCenter().lng.toString()};
-  }
+  // get _center() {
+  //   if (!this.map) {
+  //     return null;
+  //   }
+  //   return {lat: this.map.getCenter().lat.toString(), lng: this.map.getCenter().lng.toString()};
+  // }
 
   @action
   onEachFeature(vectorFeature, color, feature, layer) {
@@ -49,36 +49,36 @@ export default class MapComponent extends Component {
     vectorFeature.get('vectorLayer').setProperties({ onMap: true });
 
     if (vectorFeature.geometryType == 'Point') {
-      vectorFeature.leafletMarker.setIcon(
-        this.inactiveIcon(vectorFeature)
-      );
+      if (vectorFeature.active) {
+        this.activeFeature.leafletMarker.setIcon(
+          this.activeIcon(this.activeFeature)
+        );
+      } else {
+        vectorFeature.leafletMarker.setIcon(
+          this.inactiveIcon(vectorFeature)
+        );
+      }
     }
 
     layer.on('click', () => {
       this.clearActiveFeature();
-
       vectorFeature.setProperties({
         active: true
       });
       this.activeFeature = vectorFeature;
-
-      if (vectorFeature.geometryType == 'Point') {
-        this.activatePoint();
-      }
     });
 
     layer.on('keyup', event => {
       if (event.originalEvent.key == 'Enter') {
         this.clearActiveFeature();
         this.activeFeature = vectorFeature;
-      }
+        if (vectorFeature.geometryType == 'Point') {
+          this.activeFeature.leafletMarker.setIcon(
+            this.activeIcon(this.activeFeature)
+          );
+        }
+     }
     });
-  }
-
-  activatePoint() {
-    this.activeFeature.leafletMarker.setIcon(
-      this.activeIcon(this.activeFeature)
-    );
   }
 
   @action
@@ -133,11 +133,6 @@ export default class MapComponent extends Component {
   }
 
   @action
-  addZoomControl() {
-    // if (this.deviceContext.isDesktop) this.map.zoomControl.addTo(this.map);
-  }
-
-  @action
   initMap(event) {
     const map = event.target;
     this.args.project.setProperties({
@@ -152,7 +147,7 @@ export default class MapComponent extends Component {
       map.createPane(
         vector.get('vectorLayer.name')
       );
-      let pane = map.getPane( vector.get('vectorLayer.name'));
+      let pane = map.getPane(vector.get('vectorLayer.name'));
       pane.style.zIndex = 500 - (vector.order * 10);
       pane.classList.add('leaflet-overlay-pane');
       vector.setProperties({
@@ -167,7 +162,7 @@ export default class MapComponent extends Component {
   baseChange(newBaseLayer) {
     if (!this.baseLayer) {
       this.baseLayer = newBaseLayer;
-    } else {
+    } else if (newBaseLayer != this.baseLayer) {
       this.baseLayer.leafletObjects.forEach(layer => {
         layer.remove();
       });

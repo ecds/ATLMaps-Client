@@ -10,12 +10,8 @@ export default class MapUiToggleSwitchComponent extends Component {
 
   @action
   toggleVisible() {
-    let layers;
-    if (this.args.type.toLowerCase().includes('map')) {
-      layers = this.args.project.rasters;
-    } else {
-      layers = this.args.project.vectors;
-    }
+    let layers = this.args.project.rasters;
+
     if (this.args.status) {
       layers.forEach(layer => {
         layer.setProperties({ opacity: 100 });

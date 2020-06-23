@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-// import { tracked } from '@glimmer/tracking';
 
 export default class MapUiSearchPanelFiltersLocationComponent extends Component {
   @service searchParameters;
@@ -19,10 +18,10 @@ export default class MapUiSearchPanelFiltersLocationComponent extends Component 
   }
 
   @action
-  limitToBoundsKey(event) {
+  toggleBoundsKey(event) {
     event.preventDefault();
     if(event.key == 'Enter') {
-      this.limitToBounds();
+      this.toggleBounds();
     }
   }
 }

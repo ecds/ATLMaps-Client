@@ -37,7 +37,7 @@ module('Integration | Component | map-ui/search-panel/filters/tags', function(ho
     assert.equal(findAll('li').length, 8);
   });
 
-  test('it toggles clicked', async function(assert) {
+  test('it toggles when clicked', async function(assert) {
     await render(hbs`<MapUi::SearchPanel::Filters::Tags @categories={{this.categories}} />`);
     let tags = findAll('ul.uk-accordion-content li button');
     assert.dom('button svg').hasClass('fa-square');
@@ -57,6 +57,9 @@ module('Integration | Component | map-ui/search-panel/filters/tags', function(ho
     assert.dom(tags[1].querySelector('svg')).hasClass('fa-square');
     await click(tags[2]);
     assert.dom(tags[2].querySelector('svg')).hasClass('fa-square');
+    assert.dom('button svg').hasClass('fa-square');
+    await click('button');
+    await click('button');
     assert.dom('button svg').hasClass('fa-square');
    });
 

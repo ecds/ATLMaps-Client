@@ -41,9 +41,9 @@ export default class ProjectModel extends Model {
     return this.baseMaps[this.defaultBaseMap];
   }
 
-  set base(baseObj) {
-    return baseObj;
-  }
+  // set base(baseObj) {
+  //   return baseObj;
+  // }
 
   @computed('rasters')
   get hasRasters() {

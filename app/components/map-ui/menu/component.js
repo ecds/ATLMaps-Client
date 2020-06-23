@@ -43,8 +43,6 @@ export default class MapUiMenuComponent extends Component {
       if (event.target.attributes['data-type'] && event.target.attributes['data-type'].value == 'panel') {
         this.panelTitle = event.target.attributes['data-panel-title'].value;
         this.showToggle = true;
-      } else if (event.target.attributes['data-layer']) {
-        this.showToggle = true;
       } else {
         this.panelTitle = '';
         this.showToggle = false;

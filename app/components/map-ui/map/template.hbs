@@ -15,6 +15,7 @@ as |layers|>
     <layers.tile
       @url={{layer}}
       @zIndex={{index}}
+      @className={{concat "base-" @project.base.label}}
       @onLoading={{fn this.baseChange @project.base}}
       @onLoad={{this.baseChanged}}
     />
@@ -28,6 +29,7 @@ as |layers|>
         @transparent={{true}}
         @zIndex={{raster.position}}
         @opacity={{raster.opacityTenths}}
+        @className={{concat "raster-" raster.rasterLayer.name}}
         @onLoad={{fn this.rasterAdded raster.rasterLayer}}
       />
     {{/each}}

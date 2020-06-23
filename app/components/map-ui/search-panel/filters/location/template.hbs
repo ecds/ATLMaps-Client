@@ -4,6 +4,7 @@
       <UkButton
         @color="link"
         {{on 'click' this.toggleBounds}}
+        {{on 'keyup' this.toggleBoundsKey}}
       >
         <FaIcon @icon={{if this.searchParameters.searchBounds "check-square" "square"}} @prefix="far" /> Limit to visible area
       </UkButton>

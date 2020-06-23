@@ -1,9 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
 import { tracked } from '@glimmer/tracking';
 
 class SearchParametersStub extends Service {
@@ -30,6 +29,8 @@ module('Integration | Component | map-ui/search-panel/filters/location', functio
     assert.dom('button.uk-button svg').hasClass('fa-square');
     await click('button.uk-button');
     assert.dom('button.uk-button svg').hasClass('fa-check-square');
+    await triggerKeyEvent('button.uk-button', 'keyup', 'Enter');
+    assert.dom('button.uk-button svg').hasClass('fa-square');
   });
 
   test('it shows update button when updateBounds is true', async function(assert) {
@@ -38,6 +39,8 @@ module('Integration | Component | map-ui/search-panel/filters/location', functio
     assert.dom('button.uk-button-primary').doesNotExist();
     this.set('searchParametersService.updateBounds', true);
     assert.dom('button.uk-button-primary').hasText('Update Location Filter');
-
-  })
+    await click('button.uk-button-primary');
+    this.set('searchParametersService.updateBounds', false);
+    assert.dom('button.uk-button-primary').doesNotExist();
+  });
 });

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, fillIn, render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | map-ui/search-panel/pagination', function(hooks) {
@@ -10,9 +10,9 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     await render(hbs`<MapUi::SearchPanel::Pagination />`);
     assert.dom('ul.uk-pagination').exists();
   });
-  
+
   test('first page of results', async function(assert) {
-    
+
     this.set('meta', {
       current_page: '1',
       next_page: '2',
@@ -20,7 +20,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_count: '2945',
       total_pages: '59'
     });
-    
+
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').doesNotExist();
@@ -36,7 +36,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
   });
 
   test('second page of results', async function(assert) {
-    
+
     this.set('meta', {
       current_page: '2',
       next_page: '3',
@@ -44,7 +44,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_count: '2945',
       total_pages: '59'
     });
-    
+
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').doesNotExist();
@@ -61,7 +61,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
   });
 
   test('fourth page of results', async function(assert) {
-    
+
     this.set('meta', {
       current_page: '4',
       next_page: '5',
@@ -69,7 +69,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_count: '2945',
       total_pages: '59'
     });
-    
+
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').exists();
@@ -87,7 +87,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
   });
 
   test('fourth last of results', async function(assert) {
-    
+
     this.set('meta', {
       current_page: '59',
       next_page: null,
@@ -95,7 +95,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_count: '2945',
       total_pages: '59'
     });
-    
+
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').exists();
@@ -108,5 +108,57 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     assert.dom('li.atlm-test-next-page').doesNotExist();
     assert.dom('li.atlm-test-last-ellipsis').doesNotExist();
     assert.dom('li.atlm-test-last-page').doesNotExist();
+  });
+
+  test('it updates search parameters for rasters', async function(assert) {
+
+    this.set('meta', {
+      current_page: '3',
+      next_page: '4',
+      prev_page: '2',
+      total_count: '2945',
+      total_pages: '59'
+    });
+
+    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="rasters" />`);
+    assert.dom('select').hasValue('50');
+    assert.dom('#offset').hasText('50');
+    await fillIn('select', '100');
+    assert.dom('#offset').hasText('100');
+
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
+    assert.dom('div.testing #raster-page').hasText('0');
+    await click('li.atlm-test-next-page button');
+    assert.dom('div.testing #raster-page').hasText('4');
+    await click('li.atlm-test-last-page button');
+    assert.dom('div.testing #raster-page').hasText('59');
+    await click('li.atlm-test-first-page button');
+    assert.dom('div.testing #raster-page').hasText('1');
+  });
+
+  test('it updates search parameters for vectors', async function(assert) {
+
+    this.set('meta', {
+      current_page: '5',
+      next_page: '6',
+      prev_page: '4',
+      total_count: '2945',
+      total_pages: '69'
+    });
+
+    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="vectors" />`);
+    assert.dom('select').hasValue('50');
+    assert.dom('#offset').hasText('50');
+    await fillIn('select', '200');
+    assert.dom('#offset').hasText('200');
+
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
+    assert.dom('div.testing #vector-page').hasText('0');
+    await click('li.atlm-test-next-page button');
+    assert.dom('div.testing #vector-page').hasText('6');
+    await click('li.atlm-test-last-page button');
+    assert.dom('div.testing #vector-page').hasText('69');
+    await click('li.atlm-test-first-page button');
+    assert.dom('div.testing #vector-page').hasText('1');
   });
 });
