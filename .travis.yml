@@ -25,5 +25,6 @@ env:
 script:
   - COVERAGE=true ember test
 
-after_success:
-  - yarn run coveralls
+after_script:
+  - yarn coveralls
+  - cat coverage/lcov.info | node_modules/.bin/coveralls
