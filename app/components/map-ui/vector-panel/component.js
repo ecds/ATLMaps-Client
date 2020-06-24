@@ -22,9 +22,9 @@ export default class MapUiVectorPanelComponent extends Component {
       } else {
         vector.setProperties({ order: vector.order + 1 });
       }
-      if (vectorLayerProject.leafletPane) {
-        vector.leafletPane.style.zIndex = 500 - (vector.order * 10);
-      }
+      // if (vector.leafletPane) {
+      //   vector.leafletPane.style.zIndex = 500 - (vector.order * 10);
+      // }
     });
   }
 

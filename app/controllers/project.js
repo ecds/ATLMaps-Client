@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency-decorators';
 
@@ -11,24 +10,20 @@ export default class ProjectController extends Controller {
   @service store;
   @service fastboot;
 
-  setLimit(newLimit) {
-    this.limit = newLimit;
-  }
+  // setLimit(newLimit) {
+  //   this.limit = newLimit;
+  // }
 
   @task
   *addRemoveRasterLayer(raster) {
-    let projectRasters = yield this.model.project.sortedRasters;
-    if (raster.leafletObject) {
-      // raster.setProperties({ onMap: false });
+    let projectRasters = yield this.model.project.rasters;
+    if (raster.onMap) {
+      raster.setProperties({ onMap: false });
       const rasterProject = this.store.peekAll('rasterLayerProject').findBy(
         'position', raster.leafletObject.options.zIndex
         );
         projectRasters.removeObject(rasterProject);
         rasterProject.deleteRecord();
-        const elementToDelete = document.querySelectorAll(`[data-layer="${rasterProject.id}"]`);
-        if (elementToDelete) {
-          elementToDelete[0].remove();
-        }
         let index = 10;
         projectRasters.forEach(raster => {
           raster.setProperties({
@@ -39,13 +34,13 @@ export default class ProjectController extends Controller {
         raster.setProperties({
           leafletObject: null
         });
-        rasterProject.deleteRecord();
     } else {
       let newRaster = yield this.store.createRecord('raster-layer-project',
       {
         rasterLayer: raster,
         project: this.model.project
       });
+      raster.setProperties({ onMap: true });
       projectRasters.pushObject(newRaster);
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
@@ -64,13 +59,9 @@ export default class ProjectController extends Controller {
       }).firstObject;
         projectVectors.removeObject(vectorProject);
       vectorProject.deleteRecord();
-        // const elementToDelete = document.querySelectorAll(`[data-layer="${vectorProject.id}"]`);
-        // if (elementToDelete) {
-        //   elementToDelete[0].remove();
-        // }
-        // vectorProject.deleteRecord();
         vector.setProperties({ onMap: false });
     } else {
+      vector.setProperties({ onMap: true });
       let newVector = yield this.store.createRecord('vector-layer-project',
       {
         vectorLayer: vector,

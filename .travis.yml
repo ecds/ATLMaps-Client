@@ -23,4 +23,7 @@ env:
     - JOBS=1
 
 script:
-  - ember t
+  - COVERAGE=true ember test
+
+  after_success:
+  - coveralls

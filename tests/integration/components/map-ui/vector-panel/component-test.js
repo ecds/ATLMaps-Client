@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, findAll, render } from '@ember/test-helpers';
+import { click, fillIn, findAll, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | map-ui/vector-panel', function(hooks) {
@@ -15,7 +15,11 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
         'vector-layer-project',
         {
           project,
-          vectorLayer: this.store.createRecord('vectorLayer', { id: i }),
+          vectorLayer: this.store.createRecord('vectorLayer', {
+            id: i,
+            name: `layer-${i}`,
+            leafletPane: { style: { zIndex: i }}
+          }),
           id: i,
           order: i,
           marker: i
@@ -24,6 +28,18 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
       project.get('vectors').pushObject(vlp);
     });
 
+    project.get('vectors').pushObject(
+      this.store.createRecord('vector-layer-project', {
+        project,
+        vectorLayer: this.store.createRecord('vectorLayer', {
+          id: 4,
+          name: 'polygon',
+          dataType: 'MultiPolygon'
+        }),
+        order: 4,
+        marker: 4
+      })
+    );
 
     this.set('project', project);
   });
@@ -39,7 +55,7 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
     await render(hbs`<MapUi::VectorPanel @project={{this.project}} />`);
 
     const vectorCount = findAll('.atlm-layer-list-item').length;
-    assert.equal(vectorCount, 3);
+    assert.equal(vectorCount, 4);
 
     assert.dom('li[data-layer="1"] svg.fa-map-marker-alt').exists();
     assert.dom('li[data-layer="2"] svg.fa-wave-square').exists();
@@ -54,5 +70,22 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
     assert.dom('li[data-layer="2"] div[role="button"]').exists();
     await click('li[data-layer="2"] div[role="button"]');
     assert.dom('li[data-layer="2"] div[role="button"]').doesNotExist();
+  });
+
+  test('it shows hidden layer', async function(assert) {
+    // await this.project.get('vectors').forEach(vlp => {
+    //   vlp.get('vectorLayer').setProperties({ opacity: 0 });
+    // });
+    await render(hbs`<MapUi::VectorPanel @project={{this.project}} />`);
+    await fillIn('input#opacity-layer-1', 0);
+    assert.dom('input#opacity-layer-1').doesNotExist();
+    await click('button#show-layer-1');
+    assert.dom('input#opacity-layer-1').exists();
+    assert.dom('input#opacity-layer-1').hasValue('100.1');
+    await fillIn('input#opacity-polygon', 0);
+    assert.dom('input#opacity-polygon').doesNotExist();
+    await click('button#show-polygon');
+    assert.dom('input#opacity-polygon').exists();
+    assert.dom('input#opacity-polygon').hasValue('30.1');
   });
 });

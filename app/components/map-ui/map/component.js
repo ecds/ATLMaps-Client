@@ -83,8 +83,8 @@ export default class MapComponent extends Component {
 
   @action
   clearActiveFeatureKey(event) {
-    if (!event || event.type != 'keyup') return;
-    if (event.key == 'Escape' || event.key == 'Enter' && event.target.id == 'atlm-close-popup-button') {
+    // if (!event || event.type != 'keyup') return;
+    if (event && event.type == 'keyup' && event.key == 'Escape' || event.key == 'Enter' && event.target.id == 'atlm-close-popup-button') {
       this.clearActiveFeature();
     }
   }
@@ -127,8 +127,6 @@ export default class MapComponent extends Component {
 
   @action
   rasterAdded(raster, event) {
-    // I don't really understand why this fails on with fastboot.
-    if (this.fastboot.isFastBoot) return;
     raster.setProperties({ leafletObject: event.sourceTarget, onMap: true });
   }
 

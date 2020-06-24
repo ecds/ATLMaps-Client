@@ -1,5 +1,6 @@
 <ul {{did-insert this.initUkSortable}} id="raster-sortable-list">
   {{#each @project.sortedRasters as |raster|}}
+    {{#if raster.rasterLayer.onMap}}
     <li class="uk-margin-remove-left uk-padding-small atlm-layer-list-item" data-layer={{raster.id}}
       data-position={{raster.position}} uk-grid>
       <div class="uk-width-1-6 uk-cover-container">
@@ -50,5 +51,6 @@
         <MapUi::ShareLayer @layer={{raster.rasterLayer}} />
       </div>
     </li>
+    {{/if}}
   {{/each}}
 </ul>

@@ -7,7 +7,13 @@ module('Integration | Component | map-ui/popup', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
-    this.set('feature', this.server.create('vector-feature'));
+    this.set('store', this.owner.lookup('service:store'));
+    const feature = this.store.createRecord('vectorFeature', {
+      name: 'something smart',
+      description: 'maybe not that smart',
+      color: { name: 'pink', hex: 'noMatter' }
+    });
+    this.set('feature', feature);
     this.set('close', function(){});
   });
 
@@ -15,9 +21,9 @@ module('Integration | Component | map-ui/popup', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<MapUi::Popup @activeFeature={{this.feature.attrs.properties}} @close={{this.close}} @closeKey={{this.close}} />`);
+    await render(hbs`<MapUi::Popup @activeFeature={{this.feature}} @close={{this.close}} @closeKey={{this.close}} />`);
 
-    assert.dom('h3.uk-card-title').hasText(this.feature.properties.name);
+    assert.dom('h3.uk-card-title').hasText(this.feature.name);
 
   });
 });

@@ -33,7 +33,6 @@ export default class MapUiMenuComponent extends Component {
   @action
   initUkAccordion(element) {
 
-    if (this.fastboot.isFastBoot) return;
     const accordionOptions = {
       toggle: "> div > .uk-accordion-title"
     };
@@ -59,7 +58,6 @@ export default class MapUiMenuComponent extends Component {
 
   @action
   initUkTabs(element) {
-    if (this.fastboot.isFastBoot) return;
     const tabOptions = {
       connect: "#component-tab-left",
       animation: "uk-animation-fade uk-animation-fast"

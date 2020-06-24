@@ -7,10 +7,10 @@ export default class MapUiPopupComponent extends Component {
 
   popupWindow = null;
 
-  @action
-  close() {
-    this.args.activeFeature = null;
-  }
+  // @action
+  // close() {
+  //   this.args.activeFeature = null;
+  // }
 
   @action
   initDraggable(element) {

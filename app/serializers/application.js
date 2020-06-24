@@ -10,7 +10,7 @@ export default class ApplicationSerializer extends JSONAPISerializer {
     return underscore(key);
   }
 
-  extractMeta(store, typeClass, payload) {
-    console.log("ApplicationSerializer -> extractMeta -> store, typeClass, payload", store, typeClass, payload);
-  }
+  // extractMeta(store, typeClass, payload) {
+  //   console.log("ApplicationSerializer -> extractMeta -> store, typeClass, payload", store, typeClass, payload);
+  // }
 }

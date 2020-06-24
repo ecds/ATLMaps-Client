@@ -15,7 +15,7 @@ module('Integration | Component | map-ui/raster-panel', function(hooks) {
         'raster-layer-project',
         {
           project,
-          rasterLayer: this.store.createRecord('rasterLayer'),
+          rasterLayer: this.store.createRecord('rasterLayer', { onMap: true }),
           id: i,
           position: i + 10
         }

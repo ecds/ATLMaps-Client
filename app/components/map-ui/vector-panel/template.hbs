@@ -12,7 +12,7 @@
           <MapUi::VectorPanel::OpacitySlider @vectorLayer={{vector.vectorLayer}} />
         {{else}}
         <div class="uk-padding-small">
-          <UkButton @size="small" @color="secondary" {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
+          <UkButton @size="small" @color="secondary" id={{concat "show-" vector.vectorLayer.name}} {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
         </div>
         {{/if}}
       </div>

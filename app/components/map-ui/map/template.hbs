@@ -48,6 +48,7 @@ as |layers|>
           @fillOpacity={{feature.opacity}}
           @weight={{feature.weight}}
           @pane={{vector.vectorLayer.name}}
+          @className={{concat "shape-" vector.vectorLayer.name}}
         />
       {{/each}}
       {{/if}}

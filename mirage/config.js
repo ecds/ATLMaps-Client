@@ -18,6 +18,7 @@ export default function() {
     this.get('/raster-layers/:id');
     this.get('/raster-layers');
     this.get('/vector-layers');
+    this.get('/categories');
     // this.post('/posts');
     // this.get('/posts/:id');
     // this.put('/posts/:id'); // or this.patch
