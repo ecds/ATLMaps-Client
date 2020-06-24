@@ -26,4 +26,4 @@ script:
   - COVERAGE=true ember test
 
 after_success:
-  - coveralls
+  - yarn run coveralls
