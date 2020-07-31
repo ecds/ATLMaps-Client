@@ -40,7 +40,7 @@ module('Integration | Component | map-ui/share-layer', function(hooks) {
     const bases = findAll(`div#embed-modal-${this.vectorLayer.name} select option`);
     await fillIn(`div#embed-modal-${this.vectorLayer.name} select`, bases[1].value);
     assert.dom(`div#embed-modal-${this.vectorLayer.name} input`).hasValue(`<iframe height=600 width=800 src=${window.location.origin}/embed/${this.vectorLayer.name}?base=grayscale />`);
-    await click('button#color-purple');
+    await click('button.purple');
     await click('button.uk-button-primary');
     assert.dom(`div#embed-modal-${this.vectorLayer.name} input`).hasValue(`<iframe height=600 width=800 src=${window.location.origin}/embed/${this.vectorLayer.name}?base=grayscale&color=purple />`);
   });

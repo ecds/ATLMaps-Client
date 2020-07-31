@@ -1,0 +1,68 @@
+import fetch from 'fetch';
+import { inject as service } from '@ember/service';
+import Torii from 'ember-simple-auth/authenticators/torii';
+// import ENV from '../config/environment';
+import { task } from 'ember-concurrency';
+
+export default Torii.extend({
+  torii: service(),
+  session: service(),
+  store: service(),
+  cookies: service(),
+
+  authenticate(/*provider, options*/) {
+    // return this._super(...arguments).then(data => {
+    //   console.log("authenticate -> data", data)
+    //   return this.get('setAuthData').perform(data);
+    // });
+    return this._super(...arguments).then((data) => {
+      return fetch('https://api.atlmaps-dev.com:3000/auth/tokens', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${data.access_token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        response.json().then(data => {
+          console.log("authenticate -> data", data.data.attributes.token)
+          return {
+            access_token: data.data.attributes.token,
+            provider: 'ecds'
+          }
+        });
+        // return {
+        //   access_token: response.data.attributes.token,
+        //   provider: 'ecds'
+        // }
+      });
+    })
+  },
+
+  setAuthData: task(function * (data) {
+    console.log('torri', data.access_token);
+    let response = yield fetch(`https://api.atlmaps-dev.com:3000/auth/tokens`, {
+      type: 'GET',
+      headers: {
+        'Authorization': `Bearer ${data.access_token}`
+      }
+    });
+    console.log("setAuthData:task -> response", response)
+
+    let responseData = yield response.json();
+    console.log("setAuthData:task -> responseData", responseData.data.attributes.token)
+
+    // It is VERY important that `provider` match the name of the Torii provider.
+    // Otherwise, the auth status will not persist on reload.
+    let session = {
+      access_token: responseData.data.attributes.token,
+      provider: 'ecds',
+      email: responseData.email,
+      user: responseData.user,
+      authService: responseData.provider
+    }
+    console.log("setAuthData:task -> session", JSON.stringify(session))
+
+    // this.cookies.write('ember_simple_auth-session', JSON.stringify({authenticated: session}), { path: '/' });
+    return session;
+  })
+});

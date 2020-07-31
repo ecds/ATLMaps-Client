@@ -122,18 +122,18 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
 
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="rasters" />`);
     assert.dom('select').hasValue('50');
-    assert.dom('#offset').hasText('50');
+    assert.dom('.offset').hasText('50');
     await fillIn('select', '100');
-    assert.dom('#offset').hasText('100');
+    assert.dom('.offset').hasText('100');
 
     assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
-    assert.dom('div.testing #raster-page').hasText('0');
+    assert.dom('div.testing .raster-page').hasText('0');
     await click('li.atlm-test-next-page button');
-    assert.dom('div.testing #raster-page').hasText('4');
+    assert.dom('div.testing .raster-page').hasText('4');
     await click('li.atlm-test-last-page button');
-    assert.dom('div.testing #raster-page').hasText('59');
+    assert.dom('div.testing .raster-page').hasText('59');
     await click('li.atlm-test-first-page button');
-    assert.dom('div.testing #raster-page').hasText('1');
+    assert.dom('div.testing .raster-page').hasText('1');
   });
 
   test('it updates search parameters for vectors', async function(assert) {
@@ -148,17 +148,17 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
 
     await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="vectors" />`);
     assert.dom('select').hasValue('50');
-    assert.dom('#offset').hasText('50');
+    assert.dom('.offset').hasText('50');
     await fillIn('select', '200');
-    assert.dom('#offset').hasText('200');
+    assert.dom('.offset').hasText('200');
 
     assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
-    assert.dom('div.testing #vector-page').hasText('0');
+    assert.dom('div.testing .vector-page').hasText('0');
     await click('li.atlm-test-next-page button');
-    assert.dom('div.testing #vector-page').hasText('6');
+    assert.dom('div.testing .vector-page').hasText('6');
     await click('li.atlm-test-last-page button');
-    assert.dom('div.testing #vector-page').hasText('69');
+    assert.dom('div.testing .vector-page').hasText('69');
     await click('li.atlm-test-first-page button');
-    assert.dom('div.testing #vector-page').hasText('1');
+    assert.dom('div.testing .vector-page').hasText('1');
   });
 });

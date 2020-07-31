@@ -7,8 +7,14 @@ export default class ProjectRoute extends Route {
 
   model(params) {
     // Search results are loaded through the SearchResultsService.
+    let project = null;
+    if (params.project_id == 'explore') {
+      project = this.store.createRecord('project', { name: 'Explore', mine: true, isExploring: true  });
+    } else {
+      project = this.store.findRecord('project', params.project_id);
+    }
     return RSVP.hash({
-      project: this.store.find('project', params.project_id),
+      project,
       categories: this.store.findAll('category')
     });
   }

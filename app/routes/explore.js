@@ -1,11 +1,12 @@
 import Route from '@ember/routing/route';
-import RSVP from 'rsvp';
+import { inject as service } from '@ember/service';
+
 
 export default class ExploreRoute extends Route {
-  model() {
-    return RSVP.hash({
-      rasters: this.store.findAll('rasterLayer'),
-      vectors: this.store.findAll('vectorLayer')
-    });
+  @service fastboot;
+
+  beforeModel() {
+    if (this.fastboot.isFastBoot) return;
+    this.transitionTo('project', 'explore');
   }
 }

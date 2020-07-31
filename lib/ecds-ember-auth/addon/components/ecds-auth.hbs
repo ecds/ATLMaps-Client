@@ -1,0 +1,39 @@
+<div uk-grid class="uk-child-width-1-1 uk-grid-small">
+  <div class="uk-width-1-1 uk-text-center">
+    <h1>Sign in</h1>
+  </div>
+  <div></div>
+  <LoginButton @provider="emory" @providerTitle="shibboleth" @icon="icon-emory_shield">
+    Emory
+  </LoginButton>
+  <div></div>
+  <LoginButton @provider="google" @providerTitle="google_oauth2" >
+    Google
+  </LoginButton>
+  <div></div>
+  <LoginButton @provider="facebook" @providerTitle="facebook">
+    Facebook
+  </LoginButton>
+  <div></div>
+  <LoginButton @provider="github" @providerTitle="github">
+    GitHub
+  </LoginButton>
+  <div></div>
+  <LoginButton @provider="twitter" @providerTitle="twitter">
+    Twitter
+  </LoginButton>
+  <div></div>
+
+  <div>
+    By signing in you agree to Emory Center for Digital Scholarship"s
+    <a href="http://digitalscholarship.emory.edu/about/center/privacy-policy.html" target="_blank" rel="noopener noreferrer">Terms of Service and Privacy Policy</a>.
+  </div>
+  <div></div>
+  {{#if this.errorMessage}}
+    <div class="alert alert-danger">
+      <section>
+        <strong>Login failed:</strong> <code>{{this.errorMessage}}</code>
+      </section>
+    </div>
+  {{/if}}
+</div>

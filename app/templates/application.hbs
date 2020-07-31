@@ -1,5 +1,10 @@
+<div id="auth-modal" class="" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <EcdsAuth />
+  </div>
+</div>
 <div uk-sticky>
-    <nav class="uk-navbar-container" uk-navbar>
+    <nav class="uk-navbar-container" id="main-navigation" aria-label="main-navigation" uk-navbar>
        <div class="uk-navbar-left">
         <LinkTo @route="index" class="home uk-margin-left">
           <img src="/assets/images/atl.png" alt="ATLMaps branding - map marker that looks like a peach">
@@ -18,10 +23,14 @@
           </li>
         </ul>
        </div>
-       <div class="uk-navbar-right uk-visible@m">
+       <div class="uk-navbar-right uk-visible@m uk-margin-right">
          <ul class="uk-navbar-nav">
            <li>
-             Sign In
+             {{#if this.session.isAuthenticated}}
+              <UkButton @color="link" {{on 'click' this.signOut}}><FaIcon @icon="sign-out-alt" /> Sign Out</UkButton>
+            {{else}}
+              <UkButton @color="link" uk-toggle target="#auth-modal"><FaIcon @icon="sign-in-alt" /> Sign In</UkButton>
+          {{/if}}
            </li>
          </ul>
        </div>
@@ -31,7 +40,7 @@
              <a href="#">
                <FaIcon @icon="bars" />
              </a>
-             <nav class="uk-navbar-dropdown" mode="click">
+             <section class="uk-navbar-dropdown" mode="click">
                <ul class="uk-nav uk uk-navbar-dropdown-nav">
                 <li>
                   <LinkTo @route="projects" class="projects">
@@ -47,7 +56,7 @@
                   Sign In
                 </li>
               </ul>
-             </nav>
+             </section>
            </li>
          </ul>
        </div>

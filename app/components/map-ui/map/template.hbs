@@ -1,22 +1,22 @@
 <MapUi::Popup @activeFeature={{this.activeFeature}} @close={{this.clearActiveFeature}} @closeKey={{this.clearActiveFeatureKey}} />
 <LeafletMap
-  @lat = {{@project.centerLat}}
-  @lng = {{@project.centerLng}}
-  @zoom = {{@project.zoomLevel}}
-  @onLoad = {{this.initMap}}
-  @onMoveend = {{this.captureBounds}}
-  @onZoomend = {{this.captureBounds}}
-  @onResize = {{this.addZoomControl}}
+  @lat={{@project.centerLat}}
+  @lng={{@project.centerLng}}
+  @zoom={{@project.zoomLevel}}
+  @onLoad={{this.initMap}}
+  @onMoveend={{this.captureBounds}}
+  @onZoomend={{this.captureBounds}}
+  @onResize={{this.addZoomControl}}
   {{on 'keyup' this.clearActiveFeatureKey}}
 as |layers|>
 
 {{#if this.map}}
-  {{#each @project.base.layers as |layer index|}}
+  {{#each @project._defaultBaseMap.layers as |layer index|}}
     <layers.tile
       @url={{layer}}
       @zIndex={{index}}
-      @className={{concat "base-" @project.base.label}}
-      @onLoading={{fn this.baseChange @project.base}}
+      @className={{concat "base-" @project._defaultBaseMap.label}}
+      @onLoading={{fn this.baseChange @project._defaultBaseMap}}
       @onLoad={{this.baseChanged}}
     />
   {{/each}}
@@ -37,20 +37,31 @@ as |layers|>
 
   {{#if @project.hasVectors}}
     {{#each @project.reverseVectors as |vector|}}
-    {{#if vector.show }}
-      {{#each vector.vectorLayer.vectorFeatures as |feature|}}
-        <layers.geojson
-          @geoJSON={{feature.geojson}}
-          @onEachFeature={{fn this.onEachFeature feature vector.color}}
-          @pointToLayer={{fn this.addMarker feature}}
-          @color={{if (eq feature.geometryType 'LineString') (vector-color vector feature this.dataColors) "#263238"}}
-          @fillColor={{vector-color vector feature this.dataColors}}
-          @fillOpacity={{feature.opacity}}
-          @weight={{feature.weight}}
-          @pane={{vector.vectorLayer.name}}
-          @className={{concat "shape-" vector.vectorLayer.name}}
-        />
-      {{/each}}
+      {{#if vector.show }}
+        {{#if (eq vector.vectorLayer.dataFormat 'pbf')}}
+          <layers.vectorTile
+            @url={{concat vector.vectorLayer.institution.geoserver "/gwc/service/tms/1.0.0/" vector.vectorLayer.workspace ":" vector.vectorLayer.name "@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"}}
+            @zIndex="600"
+            @idProperty={{vector.vectorLayer.propertyId}}
+            @styleFeatures={{fn this.styleVectorTile vector vector.colorMap}}
+            @layerName={{vector.vectorLayer.name}}
+            @onClick={{fn this.activateVT vector}}
+          />
+        {{else}}
+          {{#each vector.vectorLayer.vectorFeatures as |feature|}}
+              <layers.geojson
+                @geoJSON={{feature.geojson}}
+                @onEachFeature={{fn this.onEachFeature feature vector.color}}
+                @pointToLayer={{fn this.addMarker feature}}
+                @color={{if (eq feature.geometryType 'LineString') (vector-color vector feature this.dataColors) "#263238"}}
+                @fillColor={{vector-color vector feature this.dataColors}}
+                @fillOpacity={{feature.opacity}}
+                @weight={{feature.weight}}
+                @pane={{vector.vectorLayer.name}}
+                @className={{concat "shape-" vector.vectorLayer.name}}
+              />
+          {{/each}}
+        {{/if}}
       {{/if}}
     {{/each}}
   {{/if}}
@@ -65,4 +76,3 @@ as |layers|>
     {{@project.zoomLevel}}
   </span>
 </div>
-

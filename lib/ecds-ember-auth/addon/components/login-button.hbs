@@ -1,0 +1,12 @@
+<UkButton class="uk-padding-small login-button {{@provider}} uk-grid-collapse" @disabled={{this.session.isAuthenticated}} @color="primary" uk-grid @on-click={{action "signin" @providerTitle}}>
+  <div class="uk-width-1-6">
+    {{#if @icon}}
+      <i class="demo-icon {{@icon}}"></i>
+    {{else}}
+      <FaIcon @icon={{@provider}} @prefix="fab"></FaIcon>
+    {{/if}}
+  </div>
+  <div class="uk-width-expand uk-text-left">
+    {{yield}}
+  </div>
+</UkButton>

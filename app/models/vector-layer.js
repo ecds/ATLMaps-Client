@@ -12,7 +12,12 @@ export default class VectorLayerModel extends Model {
   @attr('string') name;
   @attr('string') description;
   @attr('string') dataType;
+  @attr('string') dataFormat;
+  @attr('string') workspace;
+  @attr('string') geoUrl;
+  @attr('string') propertyId;
   @attr('string') url;
+  @attr() featureIds;
   @attr('boolean', {
     defaultValue() { return false; }
   }) onMap;

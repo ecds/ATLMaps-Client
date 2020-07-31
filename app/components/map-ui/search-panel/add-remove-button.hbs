@@ -1,5 +1,5 @@
 <div class="uk-width-1-6 uk uk-text-center uk-margin-small-top">
-  <UkButton @color="link" class="uk-text-left" {{on "click" (perform @addRemove @layer)}}>
+  <UkButton @color="link" class="uk-text-left" {{on "click" (perform @addRemove @layer)}} aria-label={{concat (if @layer.onMap "Remove " "Add ") @layer.title " to map."}} uk-tooltip={{concat (if @layer.onMap "Remove " "Add ") @layer.title " to map."}}>
     {{#if @layer.onMap}}
       <FaIcon @icon="check-circle" @prefix="far" class="uk-margin-small-right atlm-add-remove-icon" />
     {{else}}

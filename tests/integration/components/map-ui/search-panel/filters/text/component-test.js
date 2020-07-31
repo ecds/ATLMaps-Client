@@ -8,7 +8,7 @@ module('Integration | Component | map-ui/search-panel/filters/text', function(ho
 
   test('it renders', async function(assert) {
     await render(hbs`<MapUi::SearchPanel::Filters::Text />`);
-    assert.dom('form legend').hasText('Text Filter');
+    assert.dom('form label').hasText('Text Filter');
     assert.dom('form section div input').exists();
   });
 

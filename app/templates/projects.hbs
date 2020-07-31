@@ -1,7 +1,7 @@
 <ol>
   {{#each @model as |project|}}
     <li>
-      <LinkTo @route="project" @model={{project}}>
+      <LinkTo @route="project" @model={{project.id}}>
         {{project.name}}
       </LinkTo>
     </li>

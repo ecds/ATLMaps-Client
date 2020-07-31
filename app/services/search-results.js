@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { restartableTask } from 'ember-concurrency-decorators';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
@@ -47,11 +46,6 @@ export default class SearchResultsService extends Service {
       'vectorLayer',
       params
     );
-  }
-
-  @computed
-  get rasterPagination() {
-    return this.rasters.meta;
   }
 
   updateResults() {

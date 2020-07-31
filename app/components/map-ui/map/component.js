@@ -3,18 +3,20 @@ import { action } from '@ember/object';
 import { A } from '@ember/array';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import EmberObject from '@ember/object';
 import L from "leaflet";
 
 export default class MapComponent extends Component {
 
-  @tracked map;
-  @tracked activeFeature = null;
   @service searchParameters;
   @service dataColors;
   @service deviceContext;
   @service fastboot;
 
-  baseLayer = null;
+  @tracked activeFeature = null;
+  @tracked activeVectorTile = null;
+  @tracked baseLayer;
+  @tracked map;
 
   inactiveIcon(vectorFeature) {
     return L.divIcon({
@@ -91,6 +93,10 @@ export default class MapComponent extends Component {
 
   @action
   clearActiveFeature() {
+    if (this.activeVectorTile) {
+      this.deactivateVT();
+    }
+
     if (this.activeFeature) {
       if (this.activeFeature.geometryType == 'Point') {
         this.clearActivePoint();
@@ -172,5 +178,65 @@ export default class MapComponent extends Component {
   @action
   baseChanged(event) {
     this.baseLayer.leafletObjects.push(event.target);
+  }
+
+  @action
+  styleVectorTile(layer, colorMap, properties) {
+    let style = L.Path.prototype.options;
+    const prop = layer.property;
+    Object.keys(colorMap).forEach(key => {
+      if (isNaN(properties[prop]) && properties[prop] == key) {
+        return {
+          color: colorMap[key].color,
+          fillColor: colorMap[key].color,
+          fill: true,
+          fillOpacity:layer.get('vectorLayer.opacity') / 100
+        };
+      }
+      else if (properties[prop] >= colorMap[key].bottom && properties[prop] <= colorMap[key].top) {
+        style = {
+          color: 'darkgray',
+          fillColor: colorMap[key].color,
+          fill: true,
+          fillOpacity: layer.get('vectorLayer.opacity') / 100
+        };
+      }
+    });
+    return style;
+  }
+
+  @action
+  activateVT(vector, event) {
+    let layer = EmberObject.create(event.layer);
+
+    layer.setProperties(
+      {
+        name: layer.properties.NAME,
+        layer: event.target
+      }
+    );
+
+    layer.vectorLayer = vector.get('vectorLayer');
+    let style = layer.options;
+    console.log("MapComponent -> activateVT -> style", style)
+    style.fillOpacity = 1;
+
+    if (this.activeVectorTile) {
+      event.target.resetFeatureStyle(this.activeVectorTile);
+    }
+
+    this.activeFeature = layer;
+
+    this.activeVectorTile = layer.properties.NAME;
+
+    event.target.setFeatureStyle(
+      event.layer.properties.NAME,
+      style
+    );
+  }
+
+  deactivateVT() {
+    this.activeFeature.layer.resetFeatureStyle(this.activeVectorTile);
+    this.activeVectorTile = null;
   }
 }

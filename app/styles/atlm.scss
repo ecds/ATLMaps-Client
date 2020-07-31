@@ -130,7 +130,8 @@
 
         a.atlm-map-menu-button {
           border: none;
-          color: white;
+          // color: $primary-dark-gray;
+          // color: white;
         }
       }
     }
@@ -187,11 +188,23 @@
 
   }
 
+  .uk-badge {
+    background: $white-text;
+    color: $primary-dark-gray;
+  }
+
   &.uk-active {
+    background-color: white;
     border-bottom-style: solid;
     border-block-end-color: $peach;
+
     div {
       color: $subnav-pill-item-active-color;
+    }
+
+    .uk-badge {
+      background-color: $primary-dark-gray;
+      color: $white-text;
     }
   }
 }
@@ -207,7 +220,7 @@
 
 
     .fa-plus-circle {
-      color: $secondary-light-gray;
+      color: $secondary-dark-gray;
     }
 
     .fa-check-circle,
@@ -244,8 +257,8 @@
   width: 33vw;
 
   button {
-    font-size: 1rem;
-    font-weight: 900;
+    font-size: 1.25rem;
+    // font-weight: 900;
   }
 
   label,
@@ -253,6 +266,12 @@
     color: unset;
   }
 }
+
+// .atlm-test-current-page {
+//   .uk-button-link {
+//     font-size: 1.5rem;
+//   }
+// }
 
 .atlm-category-accordion-title {
   display: inline;
@@ -276,4 +295,18 @@
       background: unset;
     }
   }
+}
+
+.atlm-large-button {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.atlm-project-intro-modal {
+  z-index: 10002;
+}
+
+.atlm-project-intro-panel {
+  max-height: 75vh;
+  min-height: 50vh;
 }

@@ -25,6 +25,10 @@
     "atlm",
     "bottomleft",
     "pamal",
-    "search"
+    "search",
+    "tileerror",
+    "tileload",
+    "tileloadstart",
+    "tileunload"
   ]
 }

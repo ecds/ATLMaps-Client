@@ -10,6 +10,7 @@ export default class ProjectModel extends Model {
   @attr('string') name;
   @attr('string') description;
   @attr('string') intro;
+  @attr('string') media;
 
   @attr('number', {
     defaultValue() { return ENV.APP.CENTER_LAT; }
@@ -29,17 +30,61 @@ export default class ProjectModel extends Model {
 
   @attr('boolean', {
     defaultValue() { return false; }
+  }) mine;
+
+  @attr('boolean', {
+    defaultValue() { return false; }
+  }) mayEdit;
+
+  @attr('boolean', {
+    defaultValue() { return false; }
   }) published;
 
+  @attr('boolean', {
+    defaultValue() { return false; }
+  }) isExploring;
+
   @attr() leafletMap;
+  @attr() introModal;
 
   @hasMany('rasterLayerProject') rasters;
   @hasMany('vectorLayerProject') vectors;
 
   @computed('defaultBaseMap')
-  get base() {
+  get _defaultBaseMap() {
     return this.baseMaps[this.defaultBaseMap];
   }
+
+  set _defaultBaseMap(value) {
+    return this.baseMaps[value];
+  }
+
+  // @computed('zoomLevel')
+  // get _zoomLevel() {
+  //   return this.zoomLevel;
+  // }
+
+  // set _zoomLevel(value) {
+  //   return value;
+  // }
+
+  // @computed('centerLat')
+  // get _centerLat() {
+  //   return this.centerLat;
+  // }
+
+  // set _centerLat(value) {
+  //   return value;
+  // }
+
+  // @computed('centerLng')
+  // get _centerLng() {
+  //   return this.centerLng;
+  // }
+
+  // set _centerLng(value) {
+  //   return value;
+  // }
 
   // set base(baseObj) {
   //   return baseObj;
@@ -63,6 +108,11 @@ export default class ProjectModel extends Model {
   @computed('vectors.@each.show')
   get allVectorsHidden() {
     return this.get('vectors').isEvery('show', false);
+  }
+
+  @computed('name', 'description', 'published', 'centerLat', 'centerLng', 'zoomLevel', 'defaultBaseMap')
+  get unSaved() {
+    return Object.keys(this.changedAttributes()).length > 1;
   }
 
   @sort('rasters', '_rasterPositionSort')

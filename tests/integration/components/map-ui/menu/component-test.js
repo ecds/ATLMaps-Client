@@ -41,7 +41,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
     assert.dom('#uk-accordion.uk-accordion').exists();
     assert.dom('.atlm-map-ui-project-menu-options.uk-tab').exists();
     assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide Menu');
-    assert.dom('.atlm-project-title h3').hasText(this.project.name);
+    assert.dom('.atlm-project-title h1').hasText(this.project.name);
     assert.dom('article.atlm-project-description').hasText(this.project.description);
     assert.dom('.atlm-raster-menu-button').doesNotExist();
     assert.dom('.atlm-vector-menu-button').doesNotExist();

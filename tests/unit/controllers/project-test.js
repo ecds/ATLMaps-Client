@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import L from 'leaflet';
 
 module('Unit | Controller | project', function(hooks) {
   setupTest(hooks);
@@ -11,7 +12,13 @@ module('Unit | Controller | project', function(hooks) {
     this.set('rasterLayer', rasterLayer);
     const vectorLayer = this.store.createRecord('vectorLayer');
     this.set('vectorLayer', vectorLayer);
-    this.set('project', this.store.createRecord('project'));
+    this.set('project', this.store.createRecord('project', {
+      leafletMap: {
+        bounds: 'atlanta',
+        getBounds: function() { return { extend: function() { return true; }}; },
+        fitBounds: function() { return true; }
+      }
+    }));
     this.set('controller', this.owner.lookup('controller:project'));
     this.controller.model = { project: this.project };
   });

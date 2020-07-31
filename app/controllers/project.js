@@ -16,61 +16,97 @@ export default class ProjectController extends Controller {
 
   @task
   *addRemoveRasterLayer(raster) {
-    let projectRasters = yield this.model.project.rasters;
+    let projectRasters = yield this.model.project.sortedRasters;
+    let layerToEdit = null;
     if (raster.onMap) {
       raster.setProperties({ onMap: false });
-      const rasterProject = this.store.peekAll('rasterLayerProject').findBy(
+      layerToEdit = this.store.peekAll('rasterLayerProject').findBy(
         'position', raster.leafletObject.options.zIndex
         );
-        projectRasters.removeObject(rasterProject);
-        rasterProject.deleteRecord();
-        let index = 10;
+        projectRasters.removeObject(layerToEdit);
+        layerToEdit.deleteRecord();
+        let offset = 10;
         projectRasters.forEach(raster => {
           raster.setProperties({
-            position: index + projectRasters.length
+            position: offset + projectRasters.length
           });
-          index -= 1;
+          offset -= 1;
         });
         raster.setProperties({
           leafletObject: null
         });
     } else {
-      let newRaster = yield this.store.createRecord('raster-layer-project',
+      layerToEdit = yield this.store.createRecord('raster-layer-project',
       {
         rasterLayer: raster,
         project: this.model.project
       });
       raster.setProperties({ onMap: true });
-      projectRasters.pushObject(newRaster);
+      projectRasters.pushObject(layerToEdit);
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
-      newRaster.setProperties({ position: this.model.project.rasters.length + 10 });
+      layerToEdit.setProperties({ position: this.model.project.rasters.length + 10 });
+      let bounds = this.model.project.leafletMap.getBounds();
+      bounds.extend(raster.latLngBounds);
+      this.model.project.leafletMap.fitBounds(bounds);
+    }
+    if (this.model.project.mayEdit) {
+      yield layerToEdit.save();
+      yield this.saveProject.perform();
     }
   }
 
   @task
   *addRemoveVectorLayer(vector) {
     let projectVectors = yield this.model.project.vectors;
+    let layerToEdit = null;
     if (vector.onMap) {
-      const vectorProject = this.store.peekAll('vectorLayerProject').filter( vlp => {
+      layerToEdit = this.store.peekAll('vectorLayerProject').filter( vlp => {
         if (vlp.vectorLayer.get('id') == vector.id) {
           return vlp;
         }
       }).firstObject;
-        projectVectors.removeObject(vectorProject);
-      vectorProject.deleteRecord();
+        projectVectors.removeObject(layerToEdit);
+      layerToEdit.deleteRecord();
         vector.setProperties({ onMap: false });
     } else {
       vector.setProperties({ onMap: true });
-      let newVector = yield this.store.createRecord('vector-layer-project',
+      layerToEdit = yield this.store.createRecord('vector-layer-project',
       {
         vectorLayer: vector,
         project: this.model.project
       });
-      projectVectors.pushObject(newVector);
+      projectVectors.pushObject(layerToEdit);
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
-      newVector.setProperties({ position: this.model.project.vectors.length + 10 });
+      layerToEdit.setProperties({ position: this.model.project.vectors.length + 10 });
+    }
+    if (this.model.project.mayEdit) {
+      yield layerToEdit.save();
+      yield this.saveProject.perform();
+    }
+  }
+
+  @task
+  *saveProject() {
+    try {
+      yield this.model.project.save();
+      this.notification.setNote.perform(
+        {
+          note: 'Your changes have been saved.',
+          type: 'success'
+        }
+      );
+    } catch(error) {
+      if (error.errors[0].status == '401') {
+        this.model.project.rollbackAttributes();
+        this.notification.setNote.perform(
+          {
+            note: 'You do not have permission to edit this project.',
+            type: 'danger'
+          }
+        );
+      }
     }
   }
 }

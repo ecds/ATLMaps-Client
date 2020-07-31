@@ -15,7 +15,7 @@
         <div class="uk-card-header uk-padding-remove">
           <div class="uk-grid-small uk-flex-middle" uk-grid>
             <div class="uk-width-expand">
-              <h3 class="uk-card-title uk-margin-remove-bottom">{{@project.name}}</h3>
+              <h1 class="uk-card-title uk-margin-remove-bottom">{{@project.name}}</h1>
                 {{#if this.panelTitle}}
               <p class="uk-text-meta uk-margin-remove-top atlm-panel-title">
                   {{this.panelTitle}}
@@ -28,6 +28,21 @@
             {{else if (and this.showToggle (contains "Data" (w this.panelTitle)))}}
               {{!-- New thing to set opacity of vector layers and remove leaflet objects. --}}
               <MapUi::VectorPanel::ToggleSwitch @project={{@project}} @status={{@project.allVectorsHidden}} />
+            {{else if (and @project.unSaved (contains "Edit" (w this.panelTitle)))}}
+              <div
+                class="uk-text-center uk-grid-collapse uk-child-width-1-1 atlm-toggle"
+                tabindex="0"
+                role="button"
+                uk-grid
+                {{on "click" (perform @save)}}
+              >
+                <div class="atlm-toggle-switch">
+                  <FaIcon @icon="save" />
+                </div>
+                <div class="atlm-toggle-status">
+                  Save
+                </div>
+              </div>
             {{else}}
               <div></div>
             {{/if}}
@@ -66,6 +81,16 @@
               </a>
             </li>
           {{/if}}
+          {{#if @project.mayEdit}}
+            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+              <a class="atlm-map-menu-button" href="#">
+                <span>
+                  <FaIcon @icon="edit" />
+                </span>
+                edit
+              </a>
+            </li>
+          {{/if}}
         </ul>
       </div>
       <div class="uk-width-expand@m uk-panel uk-panel-scrollable">
@@ -74,6 +99,11 @@
             <article class="uk-card-body atlm-project-description">
               {{@project.description}}
             </article>
+            {{#if @project.introModal}}
+            <section class="uk-padding uk-padding-remove-top">
+              <UkButton @color="secondary" @size="small" uk-toggle target={{concat "#modal-" @project.id}}>Show Project Introduction</UkButton>
+            </section>
+            {{/if}}
           </li>
           {{#if @project.hasRasters}}
             <li data-panel-title="Map Layers" data-type="panel">
@@ -83,6 +113,11 @@
           {{#if @project.hasVectors}}
             <li data-panel-title="Data Layers" data-type="panel">
               <MapUi::VectorPanel @project={{@project}} />
+            </li>
+          {{/if}}
+          {{#if @project.mayEdit}}
+            <li data-panel-title="Edit" data-type="panel">
+              <MapUi::EditPanel @project={{@project}} />
             </li>
           {{/if}}
         </ul>

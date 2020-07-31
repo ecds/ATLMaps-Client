@@ -8,6 +8,7 @@ import { tracked } from '@glimmer/tracking';
 export default class MapUiShareLayerComponent extends Component {
   @service notification;
   @service dataColors;
+  @service fastboot;
 
   @tracked
   base = this.bases.firstObject;
@@ -35,6 +36,7 @@ export default class MapUiShareLayerComponent extends Component {
 
   @action
   copyText(input) {
+    if (this.fastboot.isFastBoot) return;
     document.getElementById(`${input}-${this.args.layer.get('name')}`).select();
     document.execCommand('copy');
     this.notification.setNote.perform({note: 'link copied'});

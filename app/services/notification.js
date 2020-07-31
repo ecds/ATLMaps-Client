@@ -1,9 +1,7 @@
 import Service from '@ember/service';
-import { computed } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 import { timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
-
 
 export default class NotificationService extends Service {
   @tracked note = null;

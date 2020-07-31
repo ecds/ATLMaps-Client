@@ -1,0 +1,71 @@
+<form class="uk-form-stacked">
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend">Edit Project</legend>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-title">Title</label>
+        <div class="uk-form-controls">
+            <Input class="uk-input" id="project-title" @type="text" @placeholder="Project title..." @value={{mut @project.name}} />
+        </div>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-description">Description</label>
+        <div class="uk-form-controls">
+            <Textarea class="uk-textarea" id="project-description" cols="80" rows="6" @value={{mut @project.description}} />
+        </div>
+      </div>
+
+      <div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>
+        <div class="uk-form-controls">
+            <Input class="uk-checkbox" id="project-published" @type="checkbox" @checked={{mut @project.published}} />
+        </div>
+        <label class="uk-form-label" for="project-published">Published</label>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-latitude">Center Latitude</label>
+        <div class="uk-form-controls">
+            <Input class="uk-input" id="project-latitude" @type="text" @value={{mut @project.centerLat}} />
+        </div>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-longitude">Center Longitude</label>
+        <div class="uk-form-controls">
+            <Input class="uk-input" id="project-longitude" @type="text" @value={{mut @project.centerLng}} />
+        </div>
+      </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="zoom-level">Select</label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="zoom-level" {{on 'change' this.updateZoomLevel}}>
+              {{#each this.zoomLevels as |level|}}
+                <option value={{level}} selected={{if (eq level @project.zoomLevel) true false}}>{{level}}</option>
+              {{/each}}
+            </select>
+        </div>
+    </div>
+
+    <UkButton @color="secondary" {{on 'click' this.updateMapDefaults}}>Set to current view</UkButton>
+
+    <div class="uk-margin uk-grid-small uk-child-width-1-1" uk-grid>
+        <div class="uk-form-label">Base Map</div>
+        {{#each this.baseMaps.baseMaps as |base|}}
+          <div class="uk-width-1-6 uk-text-center uk-inline">
+            <div class="uk-position-center">
+              <input class="uk-radio" type="radio" name="set-base-map" id={{concat 'set-base-map-' base.label}} value={{base.label}} checked={{eq base.label @project.defaultBaseMap}} {{on 'change' this.updateBaseMap}}>
+            </div>
+          </div>
+          <div class="uk-width-5-6">
+            <label class="uk-form-label" for={{concat 'set-base-map-' base.label}}>
+              <img src={{base.thumbnail}} width="150" alt={{base.label}}>
+            </label>
+          </div>
+        {{/each}}
+      </div>
+
+    </fieldset>
+</form>

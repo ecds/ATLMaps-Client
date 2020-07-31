@@ -37,7 +37,7 @@
       <label class="uk-form-label">Pick a  color:</label>
       <div class="uk-child-width-1-4@s uk-flex-center uk-text-center uk-padding uk-padding-remove-vertical uk-grid-small" uk-grid>
         {{#each this.dataColors.embedColors as |color|}}
-          <UkButton @size="small" id={{concat "color-" color.name}} class={{concat "uk-padding-remove " color.name}} {{on 'click' (fn this.setColor color)}}>{{color.hex}}</UkButton>
+          <UkButton @size="small" class={{concat "uk-padding-remove " color.name}} {{on 'click' (fn this.setColor color)}} aria-label={{color.name}}>&nbsp;</UkButton>
         {{/each}}
       </div>
       <hr>

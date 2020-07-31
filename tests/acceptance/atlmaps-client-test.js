@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
-import { click, visit, currentURL } from '@ember/test-helpers';
+import { visit, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 module('Acceptance | atlmaps client', function(hooks) {
   setupApplicationTest(hooks);
@@ -11,6 +12,8 @@ module('Acceptance | atlmaps client', function(hooks) {
 
   test('visiting /', async function(assert) {
     await visit('/');
+    await a11yAudit();
+    assert.ok(true, 'no ally errors found!');
 
     assert.equal(currentURL(), '/');
     assert.dom('div nav.uk-navbar-container div.uk-navbar-left a.home').hasText('ATLMaps');
@@ -30,6 +33,8 @@ module('Acceptance | atlmaps client', function(hooks) {
 
   test('visiting /projects', async function(assert) {
     await visit('/projects');
+    await a11yAudit();
+    assert.ok(true, 'no ally errors found!');
     assert.equal(currentURL(), '/projects');
     assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.projects').hasClass('active');
     assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.explore').doesNotHaveClass('active');
@@ -37,13 +42,17 @@ module('Acceptance | atlmaps client', function(hooks) {
 
   test('visiting /explore', async assert => {
     await visit('/explore');
-    assert.equal(currentURL(), '/explore');
-    assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.explore').hasClass('active');
-    assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.projects').doesNotHaveClass('active');
+    await a11yAudit();
+    assert.ok(true, 'no ally errors found!');
+    assert.equal(currentURL(), '/projects/explore');
+    // assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.projects').hasClass('active');
+    // assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.explore').doesNotHaveClass('active');
   });
 
   test('visit /projects/1', async assert => {
     await visit('/projects/1');
+    await a11yAudit();
+    assert.ok(true, 'no ally errors found!');
     assert.equal(currentURL(), '/projects/1');
   });
 });

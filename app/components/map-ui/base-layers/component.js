@@ -8,7 +8,7 @@ export default class MapUiBaseLayersComponent extends Component {
   @action
   switchBase(base) {
     this.args.project.setProperties({
-      defaultBaseMap: base.label
+      _defaultBaseMap: base.label
     });
   }
 }

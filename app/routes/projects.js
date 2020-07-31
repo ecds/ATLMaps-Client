@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class ProjectsRoute extends Route {
   @service store;
-  
+
   async model() {
     return this.store.findAll('project');
   }

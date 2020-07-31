@@ -1,9 +1,9 @@
-$peach: #f58320;
-$primary-dark-gray: #263238;
+$peach: #f47404;
+$primary-dark-gray: #141414;
 $primary-light-gray: #546e7a;
 $secondary-light-gray: #cfd8dc;
 $secondary-dark-gray: #78909c;
-$dark-text: #333;
+$dark-text: #202020;
 $white-text: #fff;
 
 // UIKit overrides.
@@ -19,6 +19,10 @@ $navbar-background: $primary-dark-gray;
 $pagination-item-color: $white-text;
 $pagination-item-hover-color: $secondary-light-gray;
 $button-link-hover-color: $secondary-light-gray;
+$global-inverse-color: $white-text;
+// $inverse-button-primary-hover-color: $primary-dark-gray;
+$navbar-nav-item-color: $button-link-color;
+$base-link-color: #0D47A1;
 
 @import 'ember-uikit';
 
@@ -99,6 +103,10 @@ a.home {
 .leaflet-container {
   height: calc(100vh - 80px);
   width: 100vw;
+}
+
+.leaflet-control-attribution {
+  display: none;
 }
 
 // Fix for the scroll bar on the raster and vector panels.
