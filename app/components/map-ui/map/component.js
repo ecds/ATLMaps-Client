@@ -4,6 +4,8 @@ import { A } from '@ember/array';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import EmberObject from '@ember/object';
+import { task } from 'ember-concurrency-decorators';
+import { timeout } from 'ember-concurrency';
 import L from "leaflet";
 
 export default class MapComponent extends Component {
@@ -17,6 +19,7 @@ export default class MapComponent extends Component {
   @tracked activeVectorTile = null;
   @tracked baseLayer;
   @tracked map;
+  @tracked mapLoaded = false;
 
   inactiveIcon(vectorFeature) {
     return L.divIcon({
@@ -41,13 +44,14 @@ export default class MapComponent extends Component {
 
   @action
   onEachFeature(vectorFeature, color, feature, layer) {
+    console.log("MapComponent -> onEachFeature -> vectorFeature, color, feature, layer", vectorFeature, color, feature, layer)
     // TODO: This probably isn't the best/most obvious place to set
     // the color.
     if (!color) {
       color = layer.getLayers().firstObject.options.fillColor;
     }
     vectorFeature.setProperties({ leafletObject: layer, color });
-    vectorFeature.leafletObject.bringToBack();
+    // vectorFeature.leafletObject.bringToBack();
     vectorFeature.get('vectorLayer').setProperties({ onMap: true });
 
     if (vectorFeature.geometryType == 'Point') {
@@ -137,6 +141,12 @@ export default class MapComponent extends Component {
   }
 
   @action
+  geoJsonAdded(vectorLayer, leafletLayer) {
+    console.log("MapComponent -> geoJsonAdded -> leafletLayer", vectorLayer, leafletLayer)
+    vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
+  }
+
+  @action
   initMap(event) {
     const map = event.target;
     this.args.project.setProperties({
@@ -175,50 +185,59 @@ export default class MapComponent extends Component {
     }
   }
 
-  @action
-  baseChanged(event) {
+  @task
+  *baseChanged(event) {
+    console.log('adding layers');
+    yield timeout(500);
+    this.mapLoaded = true;
     this.baseLayer.leafletObjects.push(event.target);
   }
 
   @action
   styleVectorTile(layer, colorMap, properties) {
+    layer.get('vectorLayer').setProperties({ onMap: true });
     let style = L.Path.prototype.options;
     const prop = layer.property;
-    Object.keys(colorMap).forEach(key => {
-      if (isNaN(properties[prop]) && properties[prop] == key) {
-        return {
-          color: colorMap[key].color,
-          fillColor: colorMap[key].color,
-          fill: true,
-          fillOpacity:layer.get('vectorLayer.opacity') / 100
-        };
-      }
-      else if (properties[prop] >= colorMap[key].bottom && properties[prop] <= colorMap[key].top) {
-        style = {
-          color: 'darkgray',
-          fillColor: colorMap[key].color,
-          fill: true,
-          fillOpacity: layer.get('vectorLayer.opacity') / 100
-        };
-      }
-    });
+    if (Object.keys(colorMap).length > 1) {
+
+      Object.keys(colorMap).forEach(key => {
+        if (isNaN(properties[prop]) && properties[prop] == key) {
+          style = {
+            color: 'darkgray',
+            fillColor: colorMap[key].color,
+            fill: true,
+            fillOpacity: layer.get('vectorLayer.opacity') / 100
+          };
+        }
+        else if (properties[prop] >= colorMap[key].bottom && properties[prop] <= colorMap[key].top) {
+          style = {
+            color: 'darkgray',
+            fillColor: colorMap[key].color,
+            fill: true,
+            fillOpacity: layer.get('vectorLayer.opacity') / 100
+          };
+        }
+      });
+    }
     return style;
   }
 
   @action
   activateVT(vector, event) {
+    this.clearActiveFeature();
     let layer = EmberObject.create(event.layer);
+    let propertyId = vector.get('vectorLayer.propertyId');
 
     layer.setProperties(
       {
-        name: layer.properties.NAME,
-        layer: event.target
+        name: layer.properties[propertyId],
+        layer: event.target,
+        style: `color: ${event.layer.options.fillColor};`
       }
     );
 
     layer.vectorLayer = vector.get('vectorLayer');
     let style = layer.options;
-    console.log("MapComponent -> activateVT -> style", style)
     style.fillOpacity = 1;
 
     if (this.activeVectorTile) {
@@ -227,10 +246,10 @@ export default class MapComponent extends Component {
 
     this.activeFeature = layer;
 
-    this.activeVectorTile = layer.properties.NAME;
+    this.activeVectorTile = layer.properties[propertyId];
 
     event.target.setFeatureStyle(
-      event.layer.properties.NAME,
+      event.layer.properties[propertyId],
       style
     );
   }

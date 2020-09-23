@@ -12,6 +12,10 @@ export default class VectorLayerProjectModel extends Model {
   }) marker;
   @attr('number') order;
   @attr('string') property;
+  @attr('number') steps;
+  @attr('boolean') manualSteps;
+  @attr('string') brewerScheme;
+  @attr('string') brewerGroup;
 
   @computed('vectorLayer.opacity')
   get show() {
@@ -26,25 +30,25 @@ export default class VectorLayerProjectModel extends Model {
   @attr() colorMap;
   @attr() leafletPane;
 
-  @computed('marker')
+  @computed('marker', 'colorMap')
   get color() {
+    console.log('!!!!!!', this.colorMap, this.get('vectorLayer.dataType'))
     if (this.get('vectorLayer.dataType') == 'Point') {
       return this.dataColors.markerColors[this.marker];
+    } else if (Object.keys(this.colorMap).length > 0) {
+      const middleKeyIndex = Object.keys(this.colorMap).length / 2;
+      const middleKey = Object.keys(this.colorMap)[parseInt(middleKeyIndex)];
+      return { hex: this.colorMap[middleKey].color };
     }
     return this.dataColors.shapeColors[this.marker];
   }
 
   @computed('marker', 'colorMap', 'color')
   get style() {
-    let hex = null;
-    if (this.colorMap && !this.marker) {
-      const middleKeyIndex = Object.keys(this.colorMap).length / 2;
-      const middleKey = Object.keys(this.colorMap)[parseInt(middleKeyIndex)];
-      hex = this.colorMap[middleKey].color;
-    } else {
-      hex = this.color.hex;
+    if (this.color) {
+      return `color: ${this.color.hex};`;
     }
-    return `color: ${hex};`;
+    return `color: ${this.get('vectorLayer.tempColor').hex};`;
   }
 
   @computed('order')

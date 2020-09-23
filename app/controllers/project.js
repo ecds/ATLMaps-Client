@@ -1,14 +1,21 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
 import { task } from 'ember-concurrency-decorators';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { waitForProperty } from 'ember-concurrency';
 
 export default class ProjectController extends Controller {
   @service deviceContext;
   @service notification;
+  @service fastboot;
   @service searchParameters;
   @service searchResults;
+  @service session;
   @service store;
-  @service fastboot;
+
+  @tracked vectorToAdd = null;
 
   // setLimit(newLimit) {
   //   this.limit = newLimit;
@@ -16,6 +23,9 @@ export default class ProjectController extends Controller {
 
   @task
   *addRemoveRasterLayer(raster) {
+    if (!isNaN(raster)) {
+      raster = this.store.peekRecord('rasterLayer', raster);
+    }
     let projectRasters = yield this.model.project.sortedRasters;
     let layerToEdit = null;
     if (raster.onMap) {
@@ -24,7 +34,7 @@ export default class ProjectController extends Controller {
         'position', raster.leafletObject.options.zIndex
         );
         projectRasters.removeObject(layerToEdit);
-        layerToEdit.deleteRecord();
+        layerToEdit.destroyRecord();
         let offset = 10;
         projectRasters.forEach(raster => {
           raster.setProperties({
@@ -35,6 +45,7 @@ export default class ProjectController extends Controller {
         raster.setProperties({
           leafletObject: null
         });
+        return true;
     } else {
       layerToEdit = yield this.store.createRecord('raster-layer-project',
       {
@@ -46,9 +57,7 @@ export default class ProjectController extends Controller {
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
       layerToEdit.setProperties({ position: this.model.project.rasters.length + 10 });
-      let bounds = this.model.project.leafletMap.getBounds();
-      bounds.extend(raster.latLngBounds);
-      this.model.project.leafletMap.fitBounds(bounds);
+      this.fitBounds(raster);
     }
     if (this.model.project.mayEdit) {
       yield layerToEdit.save();
@@ -58,6 +67,9 @@ export default class ProjectController extends Controller {
 
   @task
   *addRemoveVectorLayer(vector) {
+    if (!isNaN(vector)) {
+      vector = this.store.peekRecord('vectorLayer', vector);
+    }
     let projectVectors = yield this.model.project.vectors;
     let layerToEdit = null;
     if (vector.onMap) {
@@ -66,24 +78,43 @@ export default class ProjectController extends Controller {
           return vlp;
         }
       }).firstObject;
-        projectVectors.removeObject(layerToEdit);
-      layerToEdit.deleteRecord();
-        vector.setProperties({ onMap: false });
+
+      // Remove the layer from the map
+      // We could call `invoke` on the layer group and remove, but this seems more clear.
+      vector.leafletLayerGroup.eachLayer(layer => { layer.remove(); });
+
+      projectVectors.removeObject(layerToEdit);
+      layerToEdit.destroyRecord();
+      vector.setProperties({ onMap: false });
+      return true;
     } else {
+      // The search results do not include the GeoJSON. So we need to get it.
+      if (!vector.geojson) {
+        vector = yield this.store.findRecord('vectorLayer', vector.id);
+      }
+      // Make extra sure we have the GeoJSON before trying to add it to the map.
+      yield waitForProperty(vector, 'geojson');
       vector.setProperties({ onMap: true });
       layerToEdit = yield this.store.createRecord('vector-layer-project',
       {
         vectorLayer: vector,
-        project: this.model.project
+        project: this.model.project,
+        colorMap: A([])
       });
       projectVectors.pushObject(layerToEdit);
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
       layerToEdit.setProperties({ position: this.model.project.vectors.length + 10 });
+
+      this.fitBounds(vector);
+      if (vector.dataType != 'Point') {
+        this.vectorToAdd = { vectorLayer: vector, vectorProject: layerToEdit };
+      }
     }
     if (this.model.project.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
+
     }
   }
 
@@ -108,5 +139,18 @@ export default class ProjectController extends Controller {
         );
       }
     }
+  }
+
+  @action
+  fitBounds(layer) {
+    if (!layer.latLngBounds) return;
+    let bounds = this.model.project.leafletMap.getBounds();
+    bounds.extend(layer.latLngBounds);
+    this.model.project.leafletMap.fitBounds(bounds);
+  }
+
+  @action
+  cancelColorMap() {
+    this.vectorToAdd = null;
   }
 }

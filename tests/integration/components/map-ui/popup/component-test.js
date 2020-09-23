@@ -9,9 +9,10 @@ module('Integration | Component | map-ui/popup', function(hooks) {
   hooks.beforeEach(function() {
     this.set('store', this.owner.lookup('service:store'));
     const feature = this.store.createRecord('vectorFeature', {
-      name: 'something smart',
+      geojson: { properties: { name: 'something smart' } },
       description: 'maybe not that smart',
-      color: { name: 'pink', hex: 'noMatter' }
+      color: { name: 'pink', hex: 'noMatter' },
+      vectorLayer: this.store.createRecord('vectorLayer', { dataType: 'Point' })
     });
     this.set('feature', feature);
     this.set('close', function(){});
@@ -23,7 +24,7 @@ module('Integration | Component | map-ui/popup', function(hooks) {
 
     await render(hbs`<MapUi::Popup @activeFeature={{this.feature}} @close={{this.close}} @closeKey={{this.close}} />`);
 
-    assert.dom('h3.uk-card-title').hasText(this.feature.name);
+    assert.dom('h3.uk-card-title').hasText(this.feature.geojson.properties.name);
 
   });
 });

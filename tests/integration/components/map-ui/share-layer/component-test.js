@@ -28,8 +28,8 @@ module('Integration | Component | map-ui/share-layer', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`<MapUi::ShareLayer @layer={{this.rasterLayer}} />`);
-    assert.dom(`footer button[target="#share-modal-${this.rasterLayer.name}"]`).exists();
-    assert.dom(`footer button[target="#embed-modal-${this.rasterLayer.name}"]`).exists();
+    assert.dom(`button[target="#share-modal-${this.rasterLayer.name}"]`).exists();
+    assert.dom(`button[target="#embed-modal-${this.rasterLayer.name}"]`).exists();
     assert.dom(`div#share-modal-${this.rasterLayer.name} input`).hasValue(`${window.location.origin}/layers/${this.rasterLayer.name}`);
     assert.dom(`div#embed-modal-${this.rasterLayer.name} input`).hasValue(`<iframe height=600 width=800 src=${window.location.origin}/embed/${this.rasterLayer.name}?base=street />`);
   });

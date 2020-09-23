@@ -1,8 +1,10 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import UIkit from "uikit";
 
 export default class MapUiVectorPanelComponent extends Component {
+  @tracked vectorToEdit = false;
 
   ukAccordion = null;
 
@@ -41,5 +43,15 @@ export default class MapUiVectorPanelComponent extends Component {
     } else {
       layer.setProperties({ opacity: 100.1 });
     }
+  }
+
+  @action
+  editLayer(vector) {
+    this.vectorToEdit = { vectorProject: vector, vectorLayer: vector.vectorLayer };
+  }
+
+  @action
+  cancelEdit() {
+    this.vectorToEdit = null;
   }
 }

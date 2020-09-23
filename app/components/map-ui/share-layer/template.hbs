@@ -1,15 +1,13 @@
-<footer class="uk-child-width-1-2 uk-margin uk-padding-small uk-flex-center uk-text-center atlm-share-buttons" uk-grid>
-  <div>
-    <UkButton @size="small" @color="secondary" uk-toggle target={{concat "#share-modal-" @layer.name}}>
-      <FaIcon @icon="share-alt" /> share
-    </UkButton>
-  </div>
-  <div>
-    <UkButton @size="small" @color="secondary" uk-toggle target={{concat "#embed-modal-" @layer.name}}>
-      <FaIcon @icon="code" /> embed
-    </UkButton>
-  </div>
-</footer>
+<div>
+  <UkButton @color="secondary" uk-toggle target={{concat "#share-modal-" @layer.name}}>
+    <FaIcon @icon="share-alt" /> share
+  </UkButton>
+</div>
+<div>
+  <UkButton @color="secondary" uk-toggle target={{concat "#embed-modal-" @layer.name}}>
+    <FaIcon @icon="code" /> embed
+  </UkButton>
+</div>
 
 <div id={{concat "share-modal-" @layer.name}} class="uk-flex-top" uk-modal>
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">

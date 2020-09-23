@@ -17,7 +17,7 @@ as |layers|>
       @zIndex={{index}}
       @className={{concat "base-" @project._defaultBaseMap.label}}
       @onLoading={{fn this.baseChange @project._defaultBaseMap}}
-      @onLoad={{this.baseChanged}}
+      @onLoad={{perform this.baseChanged}}
     />
   {{/each}}
   {{#if @project.hasRasters}}
@@ -35,6 +35,11 @@ as |layers|>
     {{/each}}
   {{/if}}
 
+  {{#each @project.vectors as |v|}}
+    {{#each v.vectorLayer.vectorFeature as |vf|}}
+    {{/each}}
+  {{/each}}
+
   {{#if @project.hasVectors}}
     {{#each @project.reverseVectors as |vector|}}
       {{#if vector.show }}
@@ -49,17 +54,17 @@ as |layers|>
           />
         {{else}}
           {{#each vector.vectorLayer.vectorFeatures as |feature|}}
-              <layers.geojson
-                @geoJSON={{feature.geojson}}
-                @onEachFeature={{fn this.onEachFeature feature vector.color}}
-                @pointToLayer={{fn this.addMarker feature}}
-                @color={{if (eq feature.geometryType 'LineString') (vector-color vector feature this.dataColors) "#263238"}}
-                @fillColor={{vector-color vector feature this.dataColors}}
-                @fillOpacity={{feature.opacity}}
-                @weight={{feature.weight}}
-                @pane={{vector.vectorLayer.name}}
-                @className={{concat "shape-" vector.vectorLayer.name}}
-              />
+            <layers.geojson
+              @geoJSON={{feature.geojson}}
+              @onEachFeature={{fn this.onEachFeature feature vector.color}}
+              @pointToLayer={{fn this.addMarker feature}}
+              @color={{vector-color vector feature this.dataColors}}
+              @fillColor={{vector-color vector feature this.dataColors}}
+              @fillOpacity={{feature.opacity}}
+              @weight={{feature.weight}}
+              @className={{concat "shape-" vector.vectorLayer.name}}
+              @onAdd={{fn this.geoJsonAdded vector.vectorLayer}}
+            />
           {{/each}}
         {{/if}}
       {{/if}}

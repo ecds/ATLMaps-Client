@@ -3,10 +3,10 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class ApplicationController extends Controller {
-  @service session;
+  @service ecdsSession;
 
   @action
   signOut() {
-    this.session.session.invalidate();
+    this.ecdsSession.invalidate();
   }
 }

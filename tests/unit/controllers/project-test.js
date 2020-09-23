@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import L from 'leaflet';
 
 module('Unit | Controller | project', function(hooks) {
   setupTest(hooks);
@@ -10,7 +9,7 @@ module('Unit | Controller | project', function(hooks) {
 
     const rasterLayer = this.store.createRecord('rasterLayer');
     this.set('rasterLayer', rasterLayer);
-    const vectorLayer = this.store.createRecord('vectorLayer');
+    const vectorLayer = this.store.createRecord('vectorLayer', { id: 1, geojson: {} });
     this.set('vectorLayer', vectorLayer);
     this.set('project', this.store.createRecord('project', {
       leafletMap: {
@@ -54,9 +53,9 @@ module('Unit | Controller | project', function(hooks) {
     await this.controller.addRemoveVectorLayer.perform(this.vectorLayer);
     assert.equal(this.vectorLayer.onMap, true);
     assert.equal(this.project.hasVectors, true);
-    this.rasterLayer.setProperties({
-      leafletObject: { options: { zIndex: 11 }}
-    });
+    // this.rasterLayer.setProperties({
+    //   leafletObject: { options: { zIndex: 11 }}
+    // });
     await this.controller.addRemoveVectorLayer.perform(this.vectorLayer);
     assert.equal(this.vectorLayer.onMap, false);
   });

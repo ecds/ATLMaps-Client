@@ -14,7 +14,7 @@ export default class VectorFeatureModel extends Model {
   @attr() images;
   @attr('string') image;
   @attr('string') description;
-  @attr() string;
+  // @attr() string;
 
   @attr('boolean', {
     defaultValue() {
@@ -49,6 +49,10 @@ export default class VectorFeatureModel extends Model {
       return `color: ${this.color};`;
     }
     return `color: ${this.color.hex};`;
+  }
+
+  set style(style) {
+    return style;
   }
 
   // @computed

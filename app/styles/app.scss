@@ -7,7 +7,8 @@ $dark-text: #202020;
 $white-text: #fff;
 
 // UIKit overrides.
-$global-primary-background: $peach !default;
+$global-primary-background: lighten($peach, 10%) !default;
+$inverse-button-primary-background: $peach !default;
 $global-secondary-background: $primary-light-gray !default;
 $offcanvas-bar-background: #fff;
 $offcanvas-bar-color-mode: "dark";
@@ -19,7 +20,9 @@ $navbar-background: $primary-dark-gray;
 $pagination-item-color: $white-text;
 $pagination-item-hover-color: $secondary-light-gray;
 $button-link-hover-color: $secondary-light-gray;
-$global-inverse-color: $white-text;
+$button-primary-color: #000 !default;
+// $base-selection-background: deeppink !default;
+
 // $inverse-button-primary-hover-color: $primary-dark-gray;
 $navbar-nav-item-color: $button-link-color;
 $base-link-color: #0D47A1;
@@ -59,18 +62,58 @@ $base-link-color: #0D47A1;
   border-top-color: $dark-text;
 }
 
+.uk-navbar-nav {
+  li {
+    a {
+      font-size: 1.25rem;
+
+      &:hover,
+      &:focus {
+        background-color: lighten($primary-dark-gray, 10);
+        color: white;
+      }
+    }
+  }
+}
+
 // End UIKit overrides
 
 
 @import 'data-colors';
 @import 'embeds';
 @import 'atlm';
+@import 'atlm-site';
 @import 'mobile';
+// @import 'range-input';
 
 :root {
-  font-size: 18px;
+  font-size: 16px;
 }
 
+// input[type='range'] {
+//   // overflow: hidden;
+//   width: 100%;
+//   -webkit-appearance: none;
+//   background-color: $secondary-light-gray;
+//   border-radius: 1rem;
+// }
+
+// input[type='range']::-webkit-slider-runnable-track {
+//   height: .5rem;
+//   -webkit-appearance: none;
+//   color: $peach;
+//   margin-top: -1px;
+// }
+
+// input[type='range']::-webkit-slider-thumb {
+//   width: .2rem;
+//   margin-top: .25rem;
+//   -webkit-appearance: none;
+//   height: .2rem;
+//   cursor: ew-resize;
+//   background: $primary-dark-gray;
+//   box-shadow: -.5rem 0 0 .5rem $peach;
+// }
 
 article {
   font-size: 1rem;;
@@ -120,3 +163,7 @@ a.home {
   background-color: rgba(0, 0, 0, .5);
   box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
+
+// footer {
+//   max-width: 100vw !important;
+// }

@@ -11,6 +11,7 @@ export default class ProjectModel extends Model {
   @attr('string') description;
   @attr('string') intro;
   @attr('string') media;
+  @attr('string') photo;
 
   @attr('number', {
     defaultValue() { return ENV.APP.CENTER_LAT; }

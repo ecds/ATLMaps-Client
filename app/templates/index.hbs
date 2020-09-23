@@ -1,0 +1,116 @@
+{{outlet}}
+{{!-- DESKTOP --}}
+<section class="atlm-hero-desktop uk-visible@l">
+  <section class="uk-inline atlm-intro-desktop">
+    <video src="https://atlmaps-prod.s3.amazonaws.com/intro2.mp4" type="video/mp4" autoplay loop playsinline muted></video>
+    <section class="uk-flex-center uk-text-center uk-grid-small uk-position-fixed atlm-intro-content" uk-grid uk-height-match
+      target="> section > .uk-card" row="false">
+      <section class="uk-width-1-5"></section>
+      <section class="uk-width-3-5 atlm-tagline">
+        <section class="uk-padding">
+          <h3 class="uk-heading-medium uk-text-bolder">{{this.title}}</h3>
+          <p class="uk-heading-small uk-text-bolder">{{this.tagLine}}</p>
+        </section>
+      </section>
+      <section class="uk-width-1-5@m uk-width-auto@s"></section>
+      {{#each this.activities as |activity|}}
+        <section class="uk-width-1-5@l uk-width-1-2">
+          <section class="uk-card uk-card-small uk-card-primary uk-card-body uk-box-shadow-xlarge">
+            <h3 class="uk-card-title uk-margin-remove-bottom">
+              <FaIcon @icon={{activity.icon}} />
+              <span class="sr-only">{{concat activity.title " icon"}}</span>
+            </h3>
+            <h3 class="uk-card-title uk-margin-remove-top">{{activity.title}}</h3>
+            <p class="uk-text-lead uk-text-bolder">{{activity.copy}}</p>
+          </section>
+        </section>
+      {{/each}}
+      <section class="uk-width-1-1 uk-padding">
+        <LinkTo @route="explore">
+          <UkButton @size="large" class="atlm-xlarge-button uk-box-shadow-xlarge" @color="secondary">
+            get started
+          </UkButton>
+        </LinkTo>
+      </section>
+    </section>
+  </section>
+</section>
+{{!-- MOBILE/SMALLER SCREENS --}}
+<section class="uk-hidden@l">
+  <section class="uk-background-cover atlm-intro-background"></section>
+  <section class="atlm-intro-small uk-container">
+    <section class="uk-flex-center uk-flex-middle uk-text-center uk-grid-large atlm-intro-content-small" uk-grid
+      uk-height-match target="> section > .uk-card" row="false">
+      <section class="uk-width-1-1 uk-padding atlm-tagline">
+          <h3 class="uk-heading-small uk-text-bold">{{this.title}}</h3>
+          <p class="uk-text-lead">{{this.tagLine}}</p>
+      </section>
+      {{#each this.activities as |activity|}}
+        <section class="uk-width-1-2@m uk-width-1-1@small uk-margin-bottom">
+          <section class="uk-card uk-card-primary uk-card-body uk-margin">
+            <h3 class="uk-text-uppercase"><FaIcon @icon={{activity.icon}} /> {{activity.title}}</h3>
+            <p class="uk-text-lead">{{activity.copy}}</p>
+          </section>
+        </section>
+      {{/each}}
+    </section>
+  </section>
+</section>
+{{!-- ALL SCREENS --}}
+<section class="uk-background-cover atlm-site-content">
+  {{!-- FEATURED PROJECTS --}}
+  <section class="uk-container uk-container-xlarge atlm-featured-projects">
+    <h2 class="uk-heading-large uk-margin-large-top">Featured Projects</h2>
+    <section class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="masonry: true">
+      {{#each this.model as |project|}}
+        <section>
+          <LinkTo class="atm-featured-project-card-link" @route="project" @model={{project.id}}>
+            <section class="uk-card uk-card-default">
+              <section class="uk-card-media-top">
+                <img src={{project.photo}} alt="TODO: Add alt text to db and require it" />
+              </section>
+              <section class="uk-card-body">
+                <h3 class="uk-card-title">{{project.name}}</h3>
+                <p>{{project.description}}</p>
+              </section>
+            </section>
+          </LinkTo>
+        </section>
+      {{/each}}
+    </section>
+  </section>
+  {{!-- ABOUT --}}
+  <hr>
+  <section id="about-anchor" class="atlm-about uk-margin uk-margin-remove-bottom">
+    <section class="uk-container uk-container-medium">
+      <article class="uk-article">
+        <h2 class="uk-heading-large uk-padding">About</h2>
+        <h3 class="uk-heading-medium">Vision</h3>
+        <p class="uk-text-lead">
+          The ATLMaps platform, a collaboration between Georgia State University and Emory University, combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta. While currently focused on one city to demonstrate the power of stacking thousands of layers of information on one place, this innovative online platform will eventually allow users to layer an increasing number of interdisciplinary data to address the complex issues that any city poses. The project looks to offer a framework that incorporates storytelling reliant on geospatial data and for normalizing input across a range of data sets about so that material can be cross-compared in novel ways, allowing users to make connections between seemingly unrelated data sources and ask questions that would not be apparent when only looking at one particular project. The ATLMaps project will also encourage knowledgeable members of the university and local communities to curate data on the site to demonstrate the possibilities for synthesizing material across projects and data types.
+        </p>
+        <h3 class="uk-heading-medium">Support</h3>
+        <p class="uk-text-lead">
+          ATLMaps is made possible with the generous support of Georgia State University, Emory University, and the Knight Foundation. That support began with two consecutive CITIES awards for funding by Georgia State in 2012 and 2013, continuing support from Emory University Libraries & Information Technology and the Emory Center for Digital Scholarship, and a Knight Foundation Knight News Challenge Award in 2016. If you or your organization like the work we're doing and have an idea about how to support and further it, please get in touch!
+        </p>
+        <section class="uk-section uk-margin-remove-bottom"></section>
+      </article>
+    </section>
+  </section>
+</section>
+<footer class="atlm-footer">
+  {{!-- DESKTOP FOOTER --}}
+  <div class="uk-flex-center uk-flex-middle uk-text-center uk-grid-large uk-padding uk-child-width-1-1@s uk-child-width-1-3@m  uk-visible@l" uk-grid uk-height-match target="> section > .uk-card" row="false">
+    {{#each this.partners as |partner|}}
+      <div>
+        <a href={{partner.link}}>
+          <img src={{partner.image}} alt={{concat partner.name " Branding"}} />
+        </a>
+      </div>
+   {{/each}}
+  </div>
+  {{!-- SMALL SCREEN FOOTER --}}
+  <div class=" uk-hidden@l">
+    Footer
+  </div>
+</footer>

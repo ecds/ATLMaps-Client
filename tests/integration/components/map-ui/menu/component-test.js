@@ -15,7 +15,8 @@ module('Integration | Component | map-ui/menu', function(hooks) {
     const projectWithRasters = this.store.createRecord('project');
     const projectWithVectors = this.store.createRecord('project');
     const vectorLayer = this.store.createRecord('vectorLayer', {
-      show: true
+      show: true,
+      dataType: 'Point'
     });
     const rasterLayer = this.store.createRecord('rasterLayer', {
       show: true

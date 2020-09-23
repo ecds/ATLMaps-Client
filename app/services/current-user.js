@@ -7,16 +7,25 @@ export default class CurrentUserService extends Service {
 
   async checkCurrentUser() {
     if (!this.session.isAuthenticated) return null;
-    let response = await fetch('https://api.atlmaps-dev.com:3000/users/me', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${this.session.data.authenticated.access_token}`
-      }
-    });
+    try {
+      let response = await fetch('https://api.atlmaps-dev.com:3000/users/me', {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include'
+      });
 
-    let user = await response.json();
-    if (!user) {
-      this.session.session.invalidate();
+      if (response.ok) {
+        let user = await response.json();
+        if (!user) {
+          this.session.session.invalidate();
+        }
+      } else {
+        this.session.session.invalidate();
+      }
+    } catch(error) {
+      console.log(error);
+    } finally {
+      // reload model?
     }
   }
 }

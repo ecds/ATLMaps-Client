@@ -18,11 +18,13 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
           vectorLayer: this.store.createRecord('vectorLayer', {
             id: i,
             name: `layer-${i}`,
-            leafletPane: { style: { zIndex: i }}
+            leafletPane: { style: { zIndex: i }},
+            dataType: 'Point'
           }),
           id: i,
           order: i,
-          marker: i
+          marker: i,
+          colorMap: {}
         }
       );
       project.get('vectors').pushObject(vlp);
@@ -37,7 +39,8 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
           dataType: 'MultiPolygon'
         }),
         order: 4,
-        marker: 4
+        marker: 4,
+        colorMap: {}
       })
     );
 

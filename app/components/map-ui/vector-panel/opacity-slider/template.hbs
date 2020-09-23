@@ -5,5 +5,7 @@
   <Input id={{concat "opacity-" @vectorLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}} @value={{@vectorLayer.opacity}} />%
 </div>
 <div class="uk-padding-small">
-  <Input class="uk-range atlm-opacity-range-input" type="range" @min={{0}} @max={{100}} @step={{1}} @value={{@vectorLayer.opacity}} />
+  <style>{{concat "#opacity-slider-" @vectorLayer.name}} { background: {{concat "linear-gradient(to right, #f47404 0%, #f47404 " @vectorLayer.opacity "%, #fff " @vectorLayer.opacity "%, white 100%)"}}</style>
+  <Input id={{concat "opacity-slider-" @vectorLayer.name}} class="atlm-slider" type="range" @min={{0}} @max={{100}} @step={{1}} @value={{@vectorLayer.opacity}} />
 </div>
+<label class="atlm-opacity-slider-label" for={{concat "opacity-slider-" @vectorLayer.name}}>Opacity Slider</label>

@@ -54,12 +54,13 @@
 
 .atlm-map-marker {
   // Moves the tip of the marker icon to the correct location.
-  height: 3.5rem !important;
-  width: 2.5rem !important;
-  margin-top: -3rem !important;
-  margin-left: 2rem !important;
+  // height: 3.5rem !important;
+  // width: 2.5rem !important;
+  // margin-top: -3rem !important;
+  // margin-right: -500px !important;
   font-size: 2.5rem;
   text-shadow: 0 0 3px #fff;
+  border: solid;
 
   &::before {
     font-family: "Font Awesome 5 Free"; font-weight: 900;
@@ -68,8 +69,8 @@
 
   &.active {
     font-size: 3.5rem;
-    margin-left: 1.5 !important;
-    margin-top: -4rem !important;
+    // margin-left: 1.5 !important;
+    // margin-top: -4rem !important;
   }
 }
 
@@ -91,8 +92,8 @@
     color: white;
     font-size: 1em;
     min-height: 40px;
-    max-width: 100px;
-    min-width: 80px;
+    max-width: 90px;
+    min-width: 60px;
 
     &.uk-accordion-title {
       background-color: $primary-light-gray;
@@ -119,7 +120,7 @@
 
     li {
       background-color: $primary-light-gray;
-      width: 110px;
+      width: 90px;
 
       &:hover {
         background-color: #b0bec5;
@@ -184,8 +185,8 @@
     color: $dark-text;
   }
   div {
+    cursor: pointer;
     font-size: 1.5rem;
-
   }
 
   .uk-badge {
@@ -309,4 +310,52 @@
 .atlm-project-intro-panel {
   max-height: 75vh;
   min-height: 50vh;
+}
+
+.atlm-xlarge-button {
+  background-color: #00C853;
+  color: $primary-dark-gray;
+  font-size: 3rem;
+  padding: 2rem;
+
+  &:hover,
+  &:focus {
+    color: $primary-dark-gray;
+    background-color: #64DD17;
+  }
+}
+
+@mixin slider-thumb {
+  background-color: $peach;
+  border-radius: 50%;
+  cursor: ew-resize;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.atlm-opacity-slider-label {
+  opacity: 0;
+}
+
+.atlm-slider {
+  border: solid 1px $peach;
+  border-radius: .5rem;
+  height: .2rem;
+  width: 100%;
+  outline: none;
+  transition: background 450ms ease-in;
+  -webkit-appearance: none;
+
+  &::-moz-range-thumb {
+    @include slider-thumb;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @include slider-thumb;
+  }
+
+  &::-webkit-slider-runnable-track {
+    // height: 5px;
+}
 }

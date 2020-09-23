@@ -1,0 +1,114 @@
+.atlm-hero-desktop {
+  .atlm-intro-content {
+    // z-index: 1;
+  }
+}
+
+.atlm-intro-desktop {
+  background-color: $primary-dark-gray;
+  height: 100vh;
+  width: 100vw;
+
+  .atlm-intro-content {
+    align-items: center;
+    display: flex;
+    height: 60vh;
+    left: 0;
+    justify-content: center;
+    position: relative;
+    top: 80px;
+    width: 100vw;
+
+    .uk-card-title {
+      font-size: 3rem;
+      text-transform: uppercase;
+
+      svg {
+        font-size: 5rem;
+      }
+    }
+
+  }
+
+  video {
+    height: calc(100vh - 80px);
+    left: 0;
+    object-fit: cover;
+    opacity: .75;
+    position: fixed;
+    top: 80px;
+    width: 100vw;
+  }
+}
+
+.atlm-tagline {
+  h3,
+  p {
+    color: white;
+  }
+}
+
+.atlm-intro-background {
+  background-image: url(/assets/images/bg.jpg);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+
+.atlm-intro-small {
+
+  .atlm-intro-content-small {
+    min-height: 85vh;
+    position: relative;
+  }
+}
+
+.atlm-site-content {
+  background-color: $primary-dark-gray;
+  color: white;
+  position: relative;
+
+  h2,
+  h3,
+  .uk-text-lead {
+    color: white;
+  }
+
+  .atlm-about {
+    background-image: url(/assets/images/bg.jpg);
+
+    .uk-container {
+      background-color: rgba($primary-dark-gray, 0.75);
+    }
+  }
+}
+
+.atm-featured-project-card-link {
+  text-decoration: none !important;
+
+  .uk-card {
+    transition-property: transform;
+  }
+
+  &:focus,
+  &:hover {
+  .uk-card {
+    border-color: blue;
+    border-width: 1px;
+    border-style: solid;
+    transform: scale(1.1);
+    }
+  }
+}
+
+.atlm-footer {
+  background-color: $primary-light-gray;
+  position: relative;
+  z-index: 2;
+
+  img {
+    width: 25vw;
+  }
+}

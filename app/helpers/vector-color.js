@@ -15,16 +15,21 @@ export default helper(function vectorColor([vectorLayerProject, vectorFeature, d
   const property = vectorFeature.geojson.properties[vectorLayerProject.property];
   const colorMap = vectorLayerProject.colorMap;
   let color = 'deeppink';
-  if (Object.keys.length > 0) {
+  if (Object.keys(colorMap).length > 0) {
     Object.keys(colorMap).forEach(key => {
-      if (isNaN(property) && property == key) {
+      if (isNaN(property) && property.toUpperCase() == key.toUpperCase()) {
         color = colorMap[key].color;
       }
       else if (property >= colorMap[key].bottom && property <= colorMap[key].top) {
         color = colorMap[key].color;
       }
     });
-    vectorFeature.setProperties({ color });
+    vectorFeature.setProperties(
+      {
+        color,
+        style: `color: ${color};`
+      }
+    );
   }
   return color;
 });

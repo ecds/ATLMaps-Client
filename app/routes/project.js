@@ -9,7 +9,15 @@ export default class ProjectRoute extends Route {
     // Search results are loaded through the SearchResultsService.
     let project = null;
     if (params.project_id == 'explore') {
-      project = this.store.createRecord('project', { name: 'Explore', mine: true, isExploring: true  });
+      project = this.store.createRecord(
+        'project',
+        {
+          name: 'Explore',
+          mine: true,
+          isExploring: true,
+          description: 'Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must sign in.'
+        }
+      );
     } else {
       project = this.store.findRecord('project', params.project_id);
     }

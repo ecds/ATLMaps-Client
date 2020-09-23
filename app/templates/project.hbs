@@ -1,7 +1,7 @@
   {{#if this.fastboot.isFastBoot}}
   loading...
   {{else}}
-  <MapUi::Menu @project={{this.model.project}} @save={{this.saveProject}} />
+  <MapUi::Menu @project={{this.model.project}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
   {{#if this.deviceContext.isDesktop}}
     {{#if this.model.project.mine}}
       <UkOffcanvas @open={{this.model.project.isExploring}} class="uk-padding-remove atlm-search-panel uk-visible@m">
@@ -19,9 +19,9 @@
             <section class="uk-panel uk-panel-scrollable">
               <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getRasters}}>
                 {{#each this.searchResults.rasters as |raster|}}
-                  <li class="uk-padding uk-grid-small" uk-grid>
+                  <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
                     <MapUi::SearchPanel::AddRemoveButton @layer={{raster}} @addRemove={{this.addRemoveRasterLayer}}>
-                      <div class="uk-width-5-6 uk-grid-small" uk-grid>
+                      <div class="uk-width-expand uk-grid-small" uk-grid>
                         <div class="uk-width-1-1 uk-text-lead">{{raster.title}}</div>
                         <div class="uk-width-1-3">
                           <img class="" src={{raster.thumb.url}} alt="" role="presentation">
@@ -43,9 +43,9 @@
             <section class="uk-panel uk-panel-scrollable">
               <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getVectors}}>
                 {{#each this.searchResults.vectors as |vector|}}
-                  <li class="uk-padding uk-grid-small" uk-grid>
+                  <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
                     <MapUi::SearchPanel::AddRemoveButton @layer={{vector}} @addRemove={{this.addRemoveVectorLayer}}>
-                      <div class="uk-width-5-6 uk-grid-small" uk-grid>
+                      <div class="uk-width-expand uk-grid-small" uk-grid>
                         <div class="uk-width-1-1 uk-text-lead"><FaIcon @icon={{vector.icon}} class={{vector.tempColor.name}} /> {{vector.title}}</div>
                         <div class="uk-text-light uk-width-1-1">
                           {{vector.safeDescription}}
@@ -78,4 +78,8 @@
   </div>
 {{/if}}
 {{outlet}}
+{{/if}}
+
+{{#if this.vectorToAdd}}
+  <MapUi::DefineColorMap @layer={{this.vectorToAdd}} @cancel={{this.cancelColorMap}} />
 {{/if}}

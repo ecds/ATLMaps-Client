@@ -107,12 +107,12 @@
           </li>
           {{#if @project.hasRasters}}
             <li data-panel-title="Map Layers" data-type="panel">
-              <MapUi::RasterPanel @project={{@project}} />
+              <MapUi::RasterPanel @project={{@project}} @remove={{@removeRaster}}/>
             </li>
           {{/if}}
           {{#if @project.hasVectors}}
             <li data-panel-title="Data Layers" data-type="panel">
-              <MapUi::VectorPanel @project={{@project}} />
+              <MapUi::VectorPanel @project={{@project}} @remove={{@removeVector}}/>
             </li>
           {{/if}}
           {{#if @project.mayEdit}}
