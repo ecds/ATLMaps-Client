@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 export default class BaseMapsService extends Service {
   grayscale = {
     label: 'grayscale',
+    displayLabel: 'Light Gray',
     layers: A([
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
     ]),
@@ -16,6 +17,7 @@ export default class BaseMapsService extends Service {
 
   satellite = {
     label: 'satellite',
+    displayLabel: 'Satellite',
     layers: A([
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
     ]),
@@ -27,17 +29,18 @@ export default class BaseMapsService extends Service {
 
   street = {
     label: 'street',
-    attribution:
-    '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    displayLabel: 'Street',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     thumbnail: '/assets/images/street_map.png',
     layers: A([
-      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png'
     ]),
     leafletObjects: A([])
   };
 
   city1928 = {
     label: 'city1928',
+    displayLabel: '1928 Atlas',
     layers: A([
       'https://s3.amazonaws.com/tilemaps/ATL28_1000tiles/{z}/{x}/{y}.png',
       'https://s3.amazonaws.com/tilemaps/ATL28_200tiles/{z}/{x}/{y}.png'

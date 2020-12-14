@@ -4,7 +4,6 @@ import { inject as service } from '@ember/service';
 import UIkit from 'uikit';
 
 export default class MapUiIntroModalComponent extends Component {
-
   @service cookies;
 
   hideCookieName = `hideIntroFor-${this.args.project.id}`;
@@ -22,11 +21,15 @@ export default class MapUiIntroModalComponent extends Component {
 
   @action
   initModal(element) {
-    this.introModal = UIkit.modal(element);
-    this.args.project.setProperties({ introModal: this.introModal });
-    if (!this.hideIntro) {
-      this.introModal.show();
+    let modalOptions = {};
+    if (this.args.isTesting) {
+      modalOptions.container = '#container';
     }
+      this.introModal = UIkit.modal(element, modalOptions);
+      this.args.project.setProperties({ introModal: this.introModal });
+      if (!this.hideIntro) {
+        this.introModal.show();
+      }
   }
 
   @action
@@ -37,10 +40,5 @@ export default class MapUiIntroModalComponent extends Component {
     } else {
       this.cookies.clear(this.hideCookieName);
     }
-  }
-
-  @action
-  closeModal() {
-    this.introModal.hide();
   }
 }

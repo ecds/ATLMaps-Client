@@ -1,0 +1,17 @@
+{{#if @properties.images}}
+  <MapUi::Popup::Images @properties={{@properties}} />
+{{/if}}
+{{#if @properties.youtube}}
+  <MapUi::Popup::Youtube @video={{@properties.youtube}} />
+{{/if}}
+{{#if @properties.description}}
+  <article class="uk-padding">
+    {{html-safe @properties.description}}
+  </article>
+{{/if}}
+{{#if @properties.breakProperty}}
+  <section class="uk-child-width-1-2 uk-text-center" uk-grid>
+    <div class="uk-text-large uk-text-bold">{{@properties.breakProperty}}</div>
+    <div class="uk-text-large uk-text-bold">{{@properties.breakValue}}</div>
+  </section>
+{{/if}}

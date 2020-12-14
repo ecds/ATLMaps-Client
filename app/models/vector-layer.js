@@ -4,7 +4,7 @@ import { htmlSafe } from '@ember/template';
 import { inject as service } from '@ember/service';
 
 export default class VectorLayerModel extends Model {
-  @service dataColors;
+  @service colorBrewer;
   @service fastboot;
   @service store;
 
@@ -22,18 +22,22 @@ export default class VectorLayerModel extends Model {
   @attr('string') title;
   @attr('string') name;
   @attr('string') description;
-  @attr('string') dataType;
+  @attr('string') geometryType;
   @attr('string') dataFormat;
   @attr('string') workspace;
   @attr('string') geoUrl;
   @attr('string') propertyId;
   @attr('string') url;
+  @attr('string') defaultBreakProperty;
+  @attr('string') tmpColor;
+  @attr('string') dataType;
   @attr() properties;
   @attr() maxx;
   @attr() maxy;
   @attr() minx;
   @attr() miny;
   @attr() geojson;
+  @attr() colorMap;
   @attr('boolean', {
     defaultValue() { return false; }
   }) onMap;
@@ -48,9 +52,9 @@ export default class VectorLayerModel extends Model {
     defaultValue() { return []; }
   }) leafletMarkers;
 
-  @computed('dataType')
+  @computed('geometryType')
   get opacity() {
-    if (this.dataType == 'MultiPolygon') return 40;
+    if (this.geometryType == 'MultiPolygon') return 40;
     return 100;
   }
 
@@ -62,7 +66,6 @@ export default class VectorLayerModel extends Model {
   get vectorFeatures() {
     let features = [];
     this.geojson.features.forEach((feature, index) => {
-    console.log("VectorLayerModel -> getvectorFeatures -> feature", feature)
       let geometryType = null;
       if (feature.geometry) {
         geometryType = feature.geometry.type;
@@ -93,38 +96,30 @@ export default class VectorLayerModel extends Model {
     return htmlSafe(this.description);
   }
 
-  @computed('dataType')
+  @computed('geometryType')
   get icon() {
-    if (this.dataType == 'MultiPolygon') return 'draw-polygon';
-    if (this.dataType == 'LineString') return 'wave-square';
+    if (!this.geometryType) return null;
+    if (this.dataType == 'quantitative') return 'database';
+    if (this.geometryType.includes('Polygon')) return 'draw-polygon';
+    if (this.geometryType.includes('LineString')) return 'wave-square';
     return 'map-marker-alt';
   }
 
-  @computed
+  @computed().readOnly()
   get leafletLayerGroup() {
     if (this.fastboot.isFastBoot) return null;
+    if (!this.L) return null;
     return this.L.layerGroup();
   }
 
-  @computed('dataType')
-  get tempColorIndex() {
-    if (this.dataType == 'Point') {
-      return parseInt(Math.random() * this.dataColors.markerColors.length);
-    }
-      return parseInt(Math.random() * this.dataColors.shapeColors.length);
+  @computed('tmpColor')
+  get tmpStyle() {
+    return htmlSafe(`color: ${this.tmpColor}`);
   }
 
-  @computed('tempColorIndex')
-  get tempColor() {
-    if (this.dataType == 'Point') {
-      return this.dataColors.markerColors[this.tempColorIndex];
-    }
-    return this.dataColors.shapeColors[this.tempColorIndex];
-  }
-
-  set tempColor(color) {
-    return color;
-  }
+  // set tempColor(color) {
+  //   return color;
+  // }
 
   @computed('minx', 'maxx', 'miny', 'maxy')
   get latLngBounds() {
@@ -135,6 +130,14 @@ export default class VectorLayerModel extends Model {
       this.L.latLng(this.miny, this.minx)
     );
   }
+
+  // Specific properties for VectorTile Layers
+
+  // @computed('properties', 'propertyId')
+  // get vectorTilePropertyIds() {
+  //   if (this.dataFormat != 'pbf') return null;
+  //   return this.properties.find(p => Object.keys(p).includes(this.propertyId))[this.propertyId]
+  // }
 
   // @computed('leafletLayerGroup')
   // get onMap() {

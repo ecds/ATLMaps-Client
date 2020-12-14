@@ -5,7 +5,7 @@
     </UkButton>
   </section>
 
-<ul class="uk-subnav uk-subnav-pill uk-child-width-1-3 uk-margin-remove atlm-search-nav" connect=".atlm-search-content-panel" role="menubar" uk-switcher uk-gird>
+<ul class="uk-subnav uk-subnav-pill uk-child-width-1-4 uk-margin-remove atlm-search-nav" connect=".atlm-search-content-panel" role="menubar" uk-switcher uk-gird>
     <li class="atlm-search-panel-tab uk-padding-remove-left" id="filters" role="menuitem">
       <span>
         <div class="uk-child-width-1-1 uk-grid-collapse uk-text-center" uk-grid>
@@ -35,15 +35,31 @@
         </div>
      </span>
     </li>
-    <li class="atlm-search-panel-tab uk-padding-remove-left" id="data" {{did-insert (perform this.searchResults.getVectors)}} role="menuitem">
+    <li class="atlm-search-panel-tab uk-padding-remove-left" id="places" {{did-insert (perform this.searchResults.getPlaces)}} role="menuitem">
       <span>
         <div class="uk-grid-collapse uk-text-center" uk-grid>
           <div class="uk-width-1-3"></div>
           <div class="uk-width-1-3">
-            <FaIcon @icon="database" @spin={{this.searchResults.getVectors.isRunning}} />
+            <FaIcon @icon="map-marker-alt" @spin={{this.searchResults.getPlaces.isRunning}} />
           </div>
           <div class="uk-width-1-3">
-            <span class="uk-badge">{{this.searchResults.vectors.meta.total_count}}</span>
+            <span class="uk-badge">{{this.searchResults.places.meta.total_count}}</span>
+          </div>
+          <div class="uk-width-1-1">
+            Places
+          </div>
+        </div>
+      </span>
+    </li>
+    <li class="atlm-search-panel-tab uk-padding-remove-left" id="data" {{did-insert (perform this.searchResults.getData)}} role="menuitem">
+      <span>
+        <div class="uk-grid-collapse uk-text-center" uk-grid>
+          <div class="uk-width-1-3"></div>
+          <div class="uk-width-1-3">
+            <FaIcon @icon="database" @spin={{this.searchResults.getData.isRunning}} />
+          </div>
+          <div class="uk-width-1-3">
+            <span class="uk-badge">{{this.searchResults.data.meta.total_count}}</span>
           </div>
           <div class="uk-width-1-1">
             Data

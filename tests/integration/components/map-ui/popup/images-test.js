@@ -11,8 +11,8 @@ module('Integration | Component | map-ui/popup/images', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::Popup::Images @images={{this.feature.images}} />`);
+    await render(hbs`<MapUi::Popup::Images @feature={{this.feature}} />`);
     const imageCount = findAll('img').length;
-    assert.equal(imageCount, 2);
+    assert.equal(imageCount, 4);
   });
 });

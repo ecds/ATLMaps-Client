@@ -1,122 +1,126 @@
 <div {{did-insert this.initModal}}>
-  <div class="uk-modal-dialog">
-    <div class="uk-modal-header">
-      <h2 class="uk-modal-title">Set Colors Based on Data</h2>
-    </div>
+  {{#if this.reloadLayer.isRunning}}
+    Saving Color Scheme
+  {{else}}
+    <div class="uk-modal-dialog">
+      <div class="uk-modal-header">
+        <h2 class="uk-modal-title">Set Colors Based on Data</h2>
+      </div>
 
 
-    <div class="uk-modal-body" uk-overflow-auto>
-      {{#if this.start}}
-        <div class="uk-margin uk-gird-small uk-child-width-1-1" uk-grid>
-          {{#each-in @layer.vectorLayer.properties as |index properties|}}
-            {{#each-in properties as |property values|}}
-              {{#if (and values (gt values.length 1))}}
-                <div>
-                  <Input
-                    id={{concat "option-" index}}
-                    @type="radio"
-                    @name="property"
-                    @value={{property}}
-                    {{on "change" (fn this.setProperty values)}}
-                  />
-                  <label for={{concat "option-" index}}>
-                    {{property}}
-                  </label>
-                </div>
-              {{/if}}
-            {{/each-in}}
-          {{/each-in}}
-        </div>
-      {{else if @layer.vectorProject.property}}
-          {{#if this.numberValues}}
-            <form class="uk-form-stacked">
-
-              <div class="uk-margin">
-                <label class="uk-form-label" for="set-step">How many steps? {{@layer.vectorProject.steps}}</label>
-                <div class="uk-form-controls">
-                  <Input id="set-step" class="uk-form-width-xsmall" @type="number" @value={{@layer.vectorProject.steps}} @disabled={{this.manualSteps}} />
-                </div>
-              </div>
-
-              <div class="uk-margin">
-                <div class="uk-form-controls">
-                  <Input id="manual" class="uk-checkbox" @type="checkbox" @checked={{@layer.vectorProject.manualSteps}} />
-                  <label for="manual">Manual Steps</label>
-                </div>
-              </div>
-
-              {{#if @layer.vectorProject.manualSteps}}
-                <MapUi::DefineColorMap::ManualSteps @layer={{@layer}} @property={{this.property}} />
-              {{/if}}
-
-
-              <div class="uk-margin">
-                <div class="uk-form-label">ColorBrewer Groups: {{@layer.vectorProject.brewerGroup}} {{eq @layer.vectorProject.brewerGroup "sequential"}}</div>
-
-                <div class="uk-form-controls">
-                  <Input id="seq" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="sequential" checked={{eq @layer.vectorProject.brewerGroup "sequential"}} {{on "change" this.setGroup}} />
-                  <label for="seq">Sequential</label>
-                </div>
-
-                <div class="uk-form-controls">
-                  <Input id="div" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="diverging" checked={{eq @layer.vectorProject.brewerGroup "diverging"}} {{on "change" this.setGroup}} />
-                  <label for="div">Diverging</label>
-                </div>
-
-                <div class="uk-form-controls">
-                  <Input id="qual" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="qualitative" checked={{eq @layer.vectorProject.brewerGroup "qualitative"}} {{on "change" this.setGroup}} />
-                  <label for="qual">Qualitative</label>
-                </div>
-              </div>
-
-              {{#if (and @layer.vectorProject.steps @layer.vectorProject.brewerGroup)}}
-                <hr>
-                  {{#each-in this.colorBrewerColors as |scheme seq|}}
-                    <div class="uk-form-controls uk-child-width-auto uk-margin-small-top" uk-grid>
-                      <div>
-                        <Input id={{scheme}} class="uk-radio" @type="radio" @name="scheme" @value={{scheme}} checked={{eq @layer.vectorProject.brewerScheme scheme}} {{on "change" this.setBrewerScheme}} aria-label={{concat "Radio button to select color scheme " seq}} />
-                      </div>
-                      <div>
-                        <label class="uk-child-width-auto" uk-grid for={{scheme}}>
-                          <div>&nbsp;</div>
-                            {{#each seq as |color|}}
-                              <div style={{html-safe (concat "background-color: " color ";")}}>&nbsp;</div>
-                            {{/each}}
-                        </label>
-                      </div>
-                    </div>
-                  {{/each-in}}
-              {{/if}}
-
-            </form>
-
-          {{else}}
-            <div class="uk-form-controls uk-margin-small-top" uk-grid>
-              {{#each-in @layer.vectorProject.colorMap as |index value|}}
-                  <div class="uk-width-1-6">
-                    <Input id={{concat "value-option-" index "-color"}} @type="color" @value={{value.color}} />
+      <div class="uk-modal-body" uk-overflow-auto>
+        {{#if (not @layer.vectorProject.property)}}
+          <div class="uk-margin uk-gird-small uk-child-width-1-1" uk-grid>
+            {{#each-in @layer.vectorLayer.properties as |index properties|}}
+              {{#each-in properties as |property values|}}
+                {{#if (and values (gt values.length 1))}}
+                  <div>
+                    <Input
+                      id={{concat "option-" index}}
+                      @type="radio"
+                      @name="property"
+                      @value={{property}}
+                      {{on "change" (fn this.setProperty values)}}
+                    />
+                    <label for={{concat "option-" index}}>
+                      {{property}}
+                    </label>
                   </div>
-                  <label class="uk-text-truncate uk-width-3-4" for={{concat "value-option-" index "-color"}}>{{index}}</label>
-                {{/each-in}}
-            </div>
-        {{/if}}
-      {{/if}}
-    </div>
+                {{/if}}
+              {{/each-in}}
+            {{/each-in}}
+          </div>
+        {{else if @layer.vectorProject.property}}
+            {{#if this.numberValues}}
+              <form class="uk-form-stacked">
 
-    <footer class="uk-modal-footer uk-clear-fix">
-      <div class="uk-float-left">
-        <UkButton @color="secondary" @size="large" {{on "click" this.back}}>
-          Start Over
-        </UkButton>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="set-step">How many steps? {{@layer.vectorProject.steps}}</label>
+                  <div class="uk-form-controls">
+                    <Input id="set-step" class="uk-form-width-xsmall" @type="number" @value={{@layer.vectorProject.steps}} @disabled={{this.manualSteps}} />
+                  </div>
+                </div>
+
+                <div class="uk-margin">
+                  <div class="uk-form-controls">
+                    <Input id="manual" class="uk-checkbox" @type="checkbox" @checked={{@layer.vectorProject.manualSteps}} />
+                    <label for="manual">Manual Steps</label>
+                  </div>
+                </div>
+
+                {{#if @layer.vectorProject.manualSteps}}
+                  <MapUi::DefineColorMap::ManualSteps @layer={{@layer}} @values={{this.values}} />
+                {{/if}}
+
+
+                <div class="uk-margin">
+                  <div class="uk-form-label">ColorBrewer Groups: {{@layer.vectorProject.brewerGroup}} {{eq @layer.vectorProject.brewerGroup "sequential"}}</div>
+
+                  <div class="uk-form-controls">
+                    <Input id="seq" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="sequential" checked={{eq @layer.vectorProject.brewerGroup "sequential"}} {{on "change" this.setGroup}} />
+                    <label for="seq">Sequential</label>
+                  </div>
+
+                  <div class="uk-form-controls">
+                    <Input id="div" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="diverging" checked={{eq @layer.vectorProject.brewerGroup "diverging"}} {{on "change" this.setGroup}} />
+                    <label for="div">Diverging</label>
+                  </div>
+
+                  <div class="uk-form-controls">
+                    <Input id="qual" class="uk-radio" @type="radio" @name="color-brewer-groups" @value="qualitative" checked={{eq @layer.vectorProject.brewerGroup "qualitative"}} {{on "change" this.setGroup}} />
+                    <label for="qual">Qualitative</label>
+                  </div>
+                </div>
+
+                {{#if (and @layer.vectorProject.steps @layer.vectorProject.brewerGroup)}}
+                  <hr>
+                    {{#each-in this.colorBrewerColors as |scheme seq|}}
+                      <div class="uk-form-controls uk-child-width-auto uk-margin-small-top" uk-grid>
+                        <div>
+                          <Input id={{scheme}} class="uk-radio" @type="radio" @name="scheme" @value={{scheme}} checked={{eq @layer.vectorProject.brewerScheme scheme}} {{on "change" this.setBrewerScheme}} aria-label={{concat "Radio button to select color scheme " seq}} />
+                        </div>
+                        <div>
+                          <label class="uk-child-width-auto" uk-grid for={{scheme}}>
+                            <div>&nbsp;</div>
+                              {{#each seq as |color|}}
+                                <div class={{concat "cb-scheme-" scheme}} style={{html-safe (concat "background-color: " color ";")}}>&nbsp;</div>
+                              {{/each}}
+                          </label>
+                        </div>
+                      </div>
+                    {{/each-in}}
+                {{/if}}
+
+              </form>
+
+            {{else}}
+              <div class="uk-form-controls uk-margin-small-top" uk-grid>
+                {{#each-in @layer.vectorProject.colorMap as |index value|}}
+                    <div class="uk-width-1-6">
+                      <Input id={{concat "value-option-" index "-color"}} @type="color" @value={{value.color}} />
+                    </div>
+                    <label class="uk-text-truncate uk-width-3-4" for={{concat "value-option-" index "-color"}}>{{index}}</label>
+                  {{/each-in}}
+              </div>
+          {{/if}}
+        {{/if}}
       </div>
-      <div class="uk-float-right">
-        <UkButton class="uk-modal-close" @color="secondary" @size="large" {{on "click" @cancel}}>
-          Cancel
-        </UkButton>
-        <UkButton @color="primary" @size="large" {{on "click" (perform this.reloadLayer)}}>
-          Save
-        </UkButton>
-      </div>
-    </footer>
-  </div>
+
+      <footer class="uk-modal-footer uk-clear-fix">
+        <div class="uk-float-left">
+          <UkButton id="back" @color="secondary" @size="large" {{on "click" this.back}}>
+            Start Over
+          </UkButton>
+        </div>
+        <div class="uk-float-right">
+          <UkButton id="cancel-color-map" class="uk-modal-close" @color="secondary" @size="large" {{on "click" @cancel}}>
+            Cancel
+          </UkButton>
+          <UkButton id="reload-layer" @color="primary" @size="large" {{on "click" (perform this.reloadLayer)}}>
+            Save
+          </UkButton>
+        </div>
+      </footer>
+    </div>
+  {{/if}}
 </div>

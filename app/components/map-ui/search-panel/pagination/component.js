@@ -15,10 +15,15 @@ export default class MapUiSearchPanelPaginationComponent extends Component {
   setOffset(offset) {
     this.searchParameters.setOffset(parseInt(offset), this.args.type);
     this.searchParameters.setOffset(offset, this.args.type);
-    if (this.args.type == 'rasters') {
-      this.searchResults.getRasters.perform();
-    } else {
-      this.searchResults.getVectors.perform();
+    switch (this.args.type) {
+      case 'rasters':
+        this.searchResults.getRasters.perform();
+        break;
+      case 'places':
+        this.searchResults.getPlaces.perform();
+        break;
+      case 'data':
+        this.searchResults.getData.perform();
     }
   }
 
