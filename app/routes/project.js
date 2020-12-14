@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default class ProjectRoute extends Route {
   @service deviceContext;
@@ -27,7 +28,31 @@ export default class ProjectRoute extends Route {
     });
   }
 
+  // beforeModel() {
+  //   this.store.unloadAll('project');
+  // }
+
   afterModel() {
     this.deviceContext.setDeviceContext();
   }
+
+  @action
+  willTransition() {
+    // this.store.unloadAll('vectorLayerProject');
+    // this.store.unloadAll('rasterLayerProject');
+    // this.store.peekAll('vectorLayer').forEach( layer => {
+    //   if (layer.get('hasDirtyAttributes')) {
+    //     layer.rollBackAttributes();
+    //   }
+    // });
+
+    // this.store.peekAll('vectorLayer').forEach((layer) => {
+    //   console.log(layer.onMap);
+    //   // layer.setProperties({ onMap: false });
+    //   console.log(layer.onMap);
+    // });
+
+    // this.store.unloadRecord(this.currentModel.project);
+  }
+
 }

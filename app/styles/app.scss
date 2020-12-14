@@ -21,6 +21,8 @@ $pagination-item-color: $white-text;
 $pagination-item-hover-color: $secondary-light-gray;
 $button-link-hover-color: $secondary-light-gray;
 $button-primary-color: #000 !default;
+$article-meta-color: #2d2d2d;
+$form-color: black;
 // $base-selection-background: deeppink !default;
 
 // $inverse-button-primary-hover-color: $primary-dark-gray;
@@ -76,10 +78,24 @@ $base-link-color: #0D47A1;
   }
 }
 
+.uk-pagination {
+  a,
+  span {
+    color: $primary-dark-gray !important;
+    font-size: 1.25rem;
+  }
+
+  .uk-active {
+    span {
+      color: black !important;
+      font-weight: 900;
+    }
+  }
+}
+
 // End UIKit overrides
 
 
-@import 'data-colors';
 @import 'embeds';
 @import 'atlm';
 @import 'atlm-site';
@@ -141,11 +157,6 @@ a.home {
 .leaflet-div-icon {
   background: none;
   border: none;
-}
-
-.leaflet-container {
-  height: calc(100vh - 80px);
-  width: 100vw;
 }
 
 .leaflet-control-attribution {

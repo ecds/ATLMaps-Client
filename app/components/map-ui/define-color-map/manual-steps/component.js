@@ -13,18 +13,23 @@ export default class MapUiDefineColorMapManualStepsComponent extends Component {
     })
   ]);
 
-  set stepsMap(stepMap) {
-    return stepMap;
-  }
+  // set stepsMap(stepMap) {
+  //   return stepMap;
+  // }
 
-  @computed('property', 'geojson')
+  @computed('args.{layer.vectorProject.property,values}')
   get range() {
-    let values = [];
-    this.args.layer.vectorLayer.geojson.features.forEach(feature => values.push(feature.properties[this.args.property]));
+    if (!this.args.values) {
+      this.stepsMap = this.args.layer.vectorProject.colorMap;
+      return {
+        min: this.args.layer.vectorProject.colorMap.firstObject.bottom,
+        max: this.args.layer.vectorProject.colorMap.lastObject.top
+      };
+    }
 
     return {
-      min: Math.floor(Math.min(...values)),
-      max: Math.ceil(Math.max(...values))
+      min: Math.floor(Math.min(...this.args.values)),
+      max: Math.ceil(Math.max(...this.args.values))
     };
   }
 
@@ -46,23 +51,6 @@ export default class MapUiDefineColorMapManualStepsComponent extends Component {
         _step.setProperties({ bottom: parseInt(this.stepsMap[index - 1].top) + 1});
       });
     }
-
-    this.args.layer.vectorProject.setProperties(
-      {
-        colorMap: this.stepsMap,
-        steps: this.stepsMap.length
-      }
-    );
-  }
-
-  @action
-  addStep() {
-    this.stepsMap.addObject(
-      {
-        bottom: parseInt(this.stepsMap.lastObject.top) + 1,
-        top: Math.ceil(this.range.max)
-      }
-    );
 
     this.args.layer.vectorProject.setProperties(
       {

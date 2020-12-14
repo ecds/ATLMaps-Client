@@ -35,7 +35,7 @@ export default class MapComponent extends Component {
 
   getMappedColor(vector, feature) {
     let color = '#263238';
-    if (vector.marker && vector.get('vectorLayer.dataType') != 'Point') {
+    if (vector.marker && vector.get('vectorLayer.geometryType') != 'Point') {
       return this.dataColors.shapeColors[vector.marker].hex;
     } else if (vector.colorMap && Object.keys(vector.colorMap).length > 0) {
       const property = feature.geometry.properties[vector.property];
@@ -52,7 +52,7 @@ export default class MapComponent extends Component {
   }
 
   getLineColor(vector, feature) {
-    if (vector.get('vectorLayer.dataType') == 'LineString') {
+    if (vector.get('vectorLayer.geometryType') == 'LineString') {
       return this.getMappedColor(vector, feature);
     } else {
       return '#263238';

@@ -7,14 +7,13 @@ import { tracked } from '@glimmer/tracking';
 
 export default class MapUiShareLayerComponent extends Component {
   @service notification;
-  @service dataColors;
   @service fastboot;
 
   @tracked
   base = this.bases.firstObject;
 
   @tracked
-  color = null;
+  color = '#1e88e5';
 
   @computed
   get shareUrl() {
@@ -23,7 +22,7 @@ export default class MapUiShareLayerComponent extends Component {
 
   @computed('base', 'color')
   get embedUrl() {
-    if (this.color) return `<iframe height=600 width=800 src=${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}&color=${this.color.name} />`;
+    if (this.color) return `<iframe height=600 width=800 src=${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}&color=${this.color} />`;
 
     return `<iframe height=600 width=800 src=${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base} />`;
   }
@@ -47,8 +46,8 @@ export default class MapUiShareLayerComponent extends Component {
     this.base = event.srcElement.selectedOptions[0].value;
   }
 
-  @action
-  setColor(color) {
-    this.color = color;
-  }
+  // @action
+  // setColor(color) {
+  //   this.color = color;
+  // }
 }

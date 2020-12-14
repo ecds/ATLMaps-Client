@@ -53,7 +53,11 @@ export default class ColorBrewerService extends Service {
   }
 
   getGroup(group, size) {
-    console.log("ColorBrewerService -> getGroup -> group, size", group, size)
     return this[group](size);
+  }
+
+  getRandom() {
+    const paired = this.qualitative(12).Paired;
+    return paired[Math.floor((Math.random()*paired.length))];
   }
 }

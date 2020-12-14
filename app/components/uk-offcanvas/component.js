@@ -4,7 +4,7 @@ import UIkit from "uikit";
 
 export default class UkOffcanvasComponent extends Component {
   offcanvas = null;
-  
+
   @action
   initOffcanvas(element) {
     this.offcanvas = UIkit.offcanvas(element, { flip: true });
@@ -12,9 +12,10 @@ export default class UkOffcanvasComponent extends Component {
       this.offcanvas.toggle();
     }
   }
-  
+
   @action
   willDestroyNode() {
+    console.log('destroying')
     this.offcanvas.toggle();
     this.offcanvas.$destroy(true);
   }

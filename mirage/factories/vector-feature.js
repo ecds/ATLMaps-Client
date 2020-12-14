@@ -9,7 +9,14 @@ export default Factory.extend({
   },
 
   withImages: trait({
-    images: [faker.image.imageUrl(), faker.image.imageUrl()]
+    images: [
+        {
+          url: faker.image.imageUrl()
+        },
+        {
+          url: faker.image.imageUrl()
+        }
+      ]
   }),
 
   withVimeo: trait({

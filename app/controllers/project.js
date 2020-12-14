@@ -7,6 +7,7 @@ import { tracked } from '@glimmer/tracking';
 import { waitForProperty } from 'ember-concurrency';
 
 export default class ProjectController extends Controller {
+  @service colorBrewer;
   @service deviceContext;
   @service notification;
   @service fastboot;
@@ -16,6 +17,8 @@ export default class ProjectController extends Controller {
   @service store;
 
   @tracked vectorToAdd = null;
+  @tracked currentAction = null;
+  @tracked layerAddingOrRemoving = null;
 
   // setLimit(newLimit) {
   //   this.limit = newLimit;
@@ -26,9 +29,11 @@ export default class ProjectController extends Controller {
     if (!isNaN(raster)) {
       raster = this.store.peekRecord('rasterLayer', raster);
     }
+    this.layerAddingOrRemoving = raster.title;
     let projectRasters = yield this.model.project.sortedRasters;
     let layerToEdit = null;
     if (raster.onMap) {
+      this.currentAction = 'Removing';
       raster.setProperties({ onMap: false });
       layerToEdit = this.store.peekAll('rasterLayerProject').findBy(
         'position', raster.leafletObject.options.zIndex
@@ -47,6 +52,7 @@ export default class ProjectController extends Controller {
         });
         return true;
     } else {
+      this.currentAction = 'Adding';
       layerToEdit = yield this.store.createRecord('raster-layer-project',
       {
         rasterLayer: raster,
@@ -63,6 +69,8 @@ export default class ProjectController extends Controller {
       yield layerToEdit.save();
       yield this.saveProject.perform();
     }
+    this.layerAddingOrRemoving = null;
+    this.currentAction = null;
   }
 
   @task
@@ -70,9 +78,11 @@ export default class ProjectController extends Controller {
     if (!isNaN(vector)) {
       vector = this.store.peekRecord('vectorLayer', vector);
     }
+    this.layerAddingOrRemoving = vector.title;
     let projectVectors = yield this.model.project.vectors;
     let layerToEdit = null;
     if (vector.onMap) {
+      this.currentAction = 'Removing';
       layerToEdit = this.store.peekAll('vectorLayerProject').filter( vlp => {
         if (vlp.vectorLayer.get('id') == vector.id) {
           return vlp;
@@ -84,38 +94,89 @@ export default class ProjectController extends Controller {
       vector.leafletLayerGroup.eachLayer(layer => { layer.remove(); });
 
       projectVectors.removeObject(layerToEdit);
+
+      switch(layerToEdit.dataType) {
+        case 'qualitative':
+          this.model.project.places.removeObject(layerToEdit);
+        break;
+        case 'quantitative':
+      this.model.project.data.removeObject(layerToEdit);
+          break;
+      }
+
+
       layerToEdit.destroyRecord();
       vector.setProperties({ onMap: false });
       return true;
     } else {
+      this.currentAction = "Adding";
+      const tmpColor = vector.tmpColor;
       // The search results do not include the GeoJSON. So we need to get it.
       if (!vector.geojson) {
         vector = yield this.store.findRecord('vectorLayer', vector.id);
       }
       // Make extra sure we have the GeoJSON before trying to add it to the map.
       yield waitForProperty(vector, 'geojson');
-      vector.setProperties({ onMap: true });
-      layerToEdit = yield this.store.createRecord('vector-layer-project',
-      {
-        vectorLayer: vector,
-        project: this.model.project,
-        colorMap: A([])
-      });
-      projectVectors.pushObject(layerToEdit);
+      vector.setProperties({ tmpColor });
+      layerToEdit = yield this.store.createRecord(
+        'vector-layer-project',
+        {
+          vectorLayer: vector,
+          project: this.model.project,
+          show: false,
+          color: tmpColor,
+          dataType: vector.dataType,
+          colorMap: vector.colorMap,
+          property: vector.defaultBreakProperty
+        }
+        );
+
+      if (vector.defaultBreakProperty && !vector.colorMap) {
+        layerToEdit.setProperties({
+          colorMap: A([]),
+          property: vector.defaultBreakProperty,
+          steps: 5,
+          brewerGroup: 'sequential',
+          brewerScheme: Object.keys(this.colorBrewer.sequential())[Math.floor(Math.random() * 19)]
+        });
+      }
+
+      if (this.model.project.mayEdit) {
+        yield layerToEdit.save();
+      }
+
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
-      layerToEdit.setProperties({ position: this.model.project.vectors.length + 10 });
+      layerToEdit.setProperties(
+        {
+          position: this.model.project.vectors.length + 10,
+          show: true
+        }
+      );
+
+      vector.setProperties({ onMap: true });
+      projectVectors.pushObject(layerToEdit);
+
 
       this.fitBounds(vector);
-      if (vector.dataType != 'Point') {
+      if (vector.dataType == 'quantitative' && !vector.colorMap && this.model.project.mayEdit) {
         this.vectorToAdd = { vectorLayer: vector, vectorProject: layerToEdit };
       }
     }
     if (this.model.project.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
-
     }
+    switch(layerToEdit.dataType) {
+      case 'qualitative':
+        // this.model.project.get('places').pushObject(layerToEdit);
+        break;
+      case 'quantitative':
+        // this.model.project.get('data').pushObject(layerToEdit);
+        break;
+    }
+    this.layerAddingOrRemoving = null;
+    this.currentAction = null;
   }
 
   @task

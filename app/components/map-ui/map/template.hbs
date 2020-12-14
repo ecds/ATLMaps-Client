@@ -35,11 +35,6 @@ as |layers|>
     {{/each}}
   {{/if}}
 
-  {{#each @project.vectors as |v|}}
-    {{#each v.vectorLayer.vectorFeature as |vf|}}
-    {{/each}}
-  {{/each}}
-
   {{#if @project.hasVectors}}
     {{#each @project.reverseVectors as |vector|}}
       {{#if vector.show }}
@@ -51,15 +46,17 @@ as |layers|>
             @styleFeatures={{fn this.styleVectorTile vector vector.colorMap}}
             @layerName={{vector.vectorLayer.name}}
             @onClick={{fn this.activateVT vector}}
+            @onTileload={{fn this.loadVectorTile vector}}
+            @onAdd={{fn this.addVectorTileLayer vector}}
           />
         {{else}}
           {{#each vector.vectorLayer.vectorFeatures as |feature|}}
             <layers.geojson
               @geoJSON={{feature.geojson}}
-              @onEachFeature={{fn this.onEachFeature feature vector.color}}
-              @pointToLayer={{fn this.addMarker feature}}
-              @color={{vector-color vector feature this.dataColors}}
-              @fillColor={{vector-color vector feature this.dataColors}}
+              @onEachFeature={{fn this.onEachFeature feature vector}}
+              @pointToLayer={{fn this.addMarker feature vector}}
+              @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color vector feature) "darkgray" }}
+              @fillColor={{vector-color vector feature}}
               @fillOpacity={{feature.opacity}}
               @weight={{feature.weight}}
               @className={{concat "shape-" vector.vectorLayer.name}}

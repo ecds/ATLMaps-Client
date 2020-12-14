@@ -11,7 +11,6 @@ import L from "leaflet";
 export default class MapComponent extends Component {
 
   @service searchParameters;
-  @service dataColors;
   @service deviceContext;
   @service fastboot;
 
@@ -20,131 +19,6 @@ export default class MapComponent extends Component {
   @tracked baseLayer;
   @tracked map;
   @tracked mapLoaded = false;
-
-  inactiveIcon(vectorFeature) {
-    return L.divIcon({
-      html: `<div id="data-layer-${vectorFeature.id}"><i class="fas fa-map-marker-alt"></i></div>`,
-      className: `leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive atlm-map-marker ${vectorFeature.color.name}`
-    });
-  }
-
-  activeIcon(vectorFeature) {
-    return L.divIcon({
-      html: `<div id="data-layer-${vectorFeature.id}"><i class="fas fa-map-marker-alt"></i></div>`,
-      className: `leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive atlm-map-marker ${vectorFeature.color.name} active`
-    });
-  }
-
-  // get _center() {
-  //   if (!this.map) {
-  //     return null;
-  //   }
-  //   return {lat: this.map.getCenter().lat.toString(), lng: this.map.getCenter().lng.toString()};
-  // }
-
-  @action
-  onEachFeature(vectorFeature, color, feature, layer) {
-    console.log("MapComponent -> onEachFeature -> vectorFeature, color, feature, layer", vectorFeature, color, feature, layer)
-    // TODO: This probably isn't the best/most obvious place to set
-    // the color.
-    if (!color) {
-      color = layer.getLayers().firstObject.options.fillColor;
-    }
-    vectorFeature.setProperties({ leafletObject: layer, color });
-    // vectorFeature.leafletObject.bringToBack();
-    vectorFeature.get('vectorLayer').setProperties({ onMap: true });
-
-    if (vectorFeature.geometryType == 'Point') {
-      if (vectorFeature.active) {
-        this.activeFeature.leafletMarker.setIcon(
-          this.activeIcon(this.activeFeature)
-        );
-      } else {
-        vectorFeature.leafletMarker.setIcon(
-          this.inactiveIcon(vectorFeature)
-        );
-      }
-    }
-
-    layer.on('click', () => {
-      this.clearActiveFeature();
-      vectorFeature.setProperties({
-        active: true
-      });
-      this.activeFeature = vectorFeature;
-    });
-
-    layer.on('keyup', event => {
-      if (event.originalEvent.key == 'Enter') {
-        this.clearActiveFeature();
-        this.activeFeature = vectorFeature;
-        if (vectorFeature.geometryType == 'Point') {
-          this.activeFeature.leafletMarker.setIcon(
-            this.activeIcon(this.activeFeature)
-          );
-        }
-     }
-    });
-  }
-
-  @action
-  clearActiveFeatureKey(event) {
-    // if (!event || event.type != 'keyup') return;
-    if (event && event.type == 'keyup' && event.key == 'Escape' || event.key == 'Enter' && event.target.id == 'atlm-close-popup-button') {
-      this.clearActiveFeature();
-    }
-  }
-
-  @action
-  clearActiveFeature() {
-    if (this.activeVectorTile) {
-      this.deactivateVT();
-    }
-
-    if (this.activeFeature) {
-      if (this.activeFeature.geometryType == 'Point') {
-        this.clearActivePoint();
-      }
-      this.activeFeature.setProperties({
-        active: false
-      });
-    }
-    this.activeFeature = null;
-  }
-
-  clearActivePoint() {
-    this.activeFeature.leafletMarker.setIcon(
-      this.inactiveIcon(this.activeFeature)
-    );
-  }
-
-  @action
-  captureBounds() {
-    if (this.map) {
-      this.searchParameters.currentBounds = this.map.getBounds();
-    }
-  }
-
-  @action
-  addMarker(vectorFeature, layer, feature/*, point*/) {
-    if (vectorFeature.geometryType == 'Point') {
-      let marker = L.marker(feature);
-      vectorFeature.setProperties({ leafletMarker: marker });
-      // This function has to return the marker object.
-      return marker;
-    }
-  }
-
-  @action
-  rasterAdded(raster, event) {
-    raster.setProperties({ leafletObject: event.sourceTarget, onMap: true });
-  }
-
-  @action
-  geoJsonAdded(vectorLayer, leafletLayer) {
-    console.log("MapComponent -> geoJsonAdded -> leafletLayer", vectorLayer, leafletLayer)
-    vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
-  }
 
   @action
   initMap(event) {
@@ -173,6 +47,83 @@ export default class MapComponent extends Component {
   }
 
   @action
+  rasterAdded(raster, event) {
+    raster.setProperties({ leafletObject: event.sourceTarget, onMap: true });
+  }
+
+  @action
+  geoJsonAdded(vectorLayer, leafletLayer) {
+    vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
+  }
+
+  @action
+  onEachFeature(vectorFeature, vector, feature, layer) {
+    vectorFeature.get('vectorLayer').setProperties({ onMap: true });
+    layer.on('click', () => {
+      this.clearActiveFeature();
+      vectorFeature.setProperties({
+        active: true
+      });
+      this.activeFeature = vectorFeature;
+    });
+
+    layer.on('keyup', event => {
+      if (event.originalEvent.key == 'Enter') {
+        this.clearActiveFeature();
+        this.activeFeature = vectorFeature;
+        vectorFeature.setProperties({
+          active: true
+        });
+     }
+    });
+  }
+
+  @action
+  addMarker(vectorFeature, vector, layer, feature/*, point*/) {
+    if (vectorFeature.geometryType == 'Point') {
+      let marker = L.marker(feature);
+      vectorFeature.setProperties(
+        {
+          leafletMarker: marker,
+          style: `color: ${vector.color};`
+        }
+      );
+      vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
+      // This function has to return the marker object.
+      return marker;
+    }
+  }
+
+  @action
+  clearActiveFeatureKey(event) {
+    // if (!event || event.type != 'keyup') return;
+    if (event && event.type == 'keyup' && event.key == 'Escape' || event.key == 'Enter' && event.target.id == 'atlm-close-popup-button') {
+      this.clearActiveFeature();
+    }
+  }
+
+  @action
+  clearActiveFeature() {
+    if (this.activeVectorTile) {
+      this.deactivateVT();
+    }
+
+    if (this.activeFeature) {
+      this.activeFeature.setProperties({
+        active: false
+      });
+    }
+    this.activeFeature = null;
+  }
+
+  @action
+  captureBounds() {
+    if (this.map) {
+      this.searchParameters.currentBounds = this.map.getBounds();
+    }
+  }
+
+  @action
   baseChange(newBaseLayer) {
     if (!this.baseLayer) {
       this.baseLayer = newBaseLayer;
@@ -187,7 +138,6 @@ export default class MapComponent extends Component {
 
   @task
   *baseChanged(event) {
-    console.log('adding layers');
     yield timeout(500);
     this.mapLoaded = true;
     this.baseLayer.leafletObjects.push(event.target);
@@ -203,7 +153,7 @@ export default class MapComponent extends Component {
       Object.keys(colorMap).forEach(key => {
         if (isNaN(properties[prop]) && properties[prop] == key) {
           style = {
-            color: 'darkgray',
+            color: 'lightgray',
             fillColor: colorMap[key].color,
             fill: true,
             fillOpacity: layer.get('vectorLayer.opacity') / 100
@@ -211,7 +161,7 @@ export default class MapComponent extends Component {
         }
         else if (properties[prop] >= colorMap[key].bottom && properties[prop] <= colorMap[key].top) {
           style = {
-            color: 'darkgray',
+            color: 'lightgray',
             fillColor: colorMap[key].color,
             fill: true,
             fillOpacity: layer.get('vectorLayer.opacity') / 100
@@ -219,7 +169,23 @@ export default class MapComponent extends Component {
         }
       });
     }
+    layer.vectorTileStyles.addObject(
+      {
+        id: properties[layer.get('vectorLayer.propertyId')],
+        style
+      }
+    );
     return style;
+  }
+
+  @action
+  loadVectorTile(vector, event) {
+    vector.get('vectorLayer.leafletFeatures').push(event.target);
+  }
+
+  @action
+  addVectorTileLayer(vector, event) {
+    vector.get('vectorLayer').setProperties({ leafletObject: event.target });
   }
 
   @action

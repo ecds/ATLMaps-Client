@@ -1,84 +1,118 @@
+<div  role="main">
   {{#if this.fastboot.isFastBoot}}
-  loading...
+    loading...
   {{else}}
-  <MapUi::Menu @project={{this.model.project}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
-  {{#if this.deviceContext.isDesktop}}
-    {{#if this.model.project.mine}}
-      <UkOffcanvas @open={{this.model.project.isExploring}} class="uk-padding-remove atlm-search-panel uk-visible@m">
-        <MapUi::SearchPanel @model={{this.model}}>
-          <li>
-            <section class="uk-panel uk-panel-scrollable uk-padding">
-              <MapUi::SearchPanel::Filters::Text />
-              <hr>
-              <MapUi::SearchPanel::Filters::Location />
-              <hr>
-              <MapUi::SearchPanel::Filters::Tags @categories={{this.model.categories}} />
-            </section>
-          </li>
-          <li class="uk-margin-remove">
-            <section class="uk-panel uk-panel-scrollable">
-              <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getRasters}}>
-                {{#each this.searchResults.rasters as |raster|}}
-                  <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
-                    <MapUi::SearchPanel::AddRemoveButton @layer={{raster}} @addRemove={{this.addRemoveRasterLayer}}>
-                      <div class="uk-width-expand uk-grid-small" uk-grid>
-                        <div class="uk-width-1-1 uk-text-lead">{{raster.title}}</div>
-                        <div class="uk-width-1-3">
-                          <img class="" src={{raster.thumb.url}} alt="" role="presentation">
-                        </div>
-                        <div class="uk-text-light uk-width-2-3">
-                          {{raster.description}}
-                        </div>
-                      </div>
-                    </MapUi::SearchPanel::AddRemoveButton>
-                  </li>
-                {{/each}}
-              </MapUi::SearchPanel::Results>
-            </section>
-            <section class="uk-padding atlm-pagination">
-              <MapUi::SearchPanel::Pagination @meta={{this.searchResults.rasters.meta}} @type="rasters" />
-            </section>
-          </li>
-          <li class="uk-margin-remove">
-            <section class="uk-panel uk-panel-scrollable">
-              <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getVectors}}>
-                {{#each this.searchResults.vectors as |vector|}}
-                  <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
-                    <MapUi::SearchPanel::AddRemoveButton @layer={{vector}} @addRemove={{this.addRemoveVectorLayer}}>
-                      <div class="uk-width-expand uk-grid-small" uk-grid>
-                        <div class="uk-width-1-1 uk-text-lead"><FaIcon @icon={{vector.icon}} class={{vector.tempColor.name}} /> {{vector.title}}</div>
-                        <div class="uk-text-light uk-width-1-1">
-                          {{vector.safeDescription}}
-                        </div>
-                      </div>
-                    </MapUi::SearchPanel::AddRemoveButton>
-                  </li>
-                {{/each}}
-              </MapUi::SearchPanel::Results>
-            </section>
-            <section class="uk-padding atlm-pagination">
-              <MapUi::SearchPanel::Pagination @meta={{this.searchResults.vectors.meta}} @type="vectors" />
-            </section>
-          </li>
-        </MapUi::SearchPanel>
-      </UkOffcanvas>
+    {{#if (or this.addRemoveVectorLayer.isRunning this.addRemoveRasterLayer.isRunning)}}
+      <div class="uk-modal uk-open atlm-loading-modal">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center">
+            <p>
+              {{this.currentAction}} Layer {{this.layerAddingOrRemoving}} to Map
+            </p>
+        </div>
+      </div>
     {{/if}}
-    {{#if this.model.project.intro}}
-      <MapUi::IntroModal @project={{this.model.project}} />
+    <MapUi::Menu @project={{this.model.project}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
+    {{#if this.deviceContext.isDesktop}}
+      {{#if this.model.project.mine}}
+        <UkOffcanvas @open={{this.model.project.isExploring}} class="uk-padding-remove atlm-search-panel uk-visible@m">
+          <MapUi::SearchPanel @model={{this.model}}>
+            <li>
+              <section class="uk-panel uk-panel-scrollable uk-padding">
+                <MapUi::SearchPanel::Filters::Text />
+                <hr>
+                <MapUi::SearchPanel::Filters::Location />
+                <hr>
+                <MapUi::SearchPanel::Filters::Tags @categories={{this.model.categories}} />
+              </section>
+            </li>
+            <li class="uk-margin-remove">
+              <section class="uk-panel uk-panel-scrollable">
+                <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getRasters}}>
+                  {{#each this.searchResults.rasters as |raster|}}
+                    <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
+                      <MapUi::SearchPanel::AddRemoveButton @layer={{raster}} @addRemove={{this.addRemoveRasterLayer}}>
+                        <div class="uk-width-expand uk-grid-small" uk-grid>
+                          <div class="uk-width-1-1 uk-text-lead">{{raster.title}}</div>
+                          <div class="uk-width-1-3">
+                            <img class="" src={{raster.thumb_url}} alt="" role="presentation">
+                          </div>
+                          <div class="uk-text-light uk-width-2-3">
+                            {{raster.description}}
+                          </div>
+                        </div>
+                      </MapUi::SearchPanel::AddRemoveButton>
+                    </li>
+                  {{/each}}
+                </MapUi::SearchPanel::Results>
+              </section>
+              <section class="uk-padding atlm-pagination">
+                <MapUi::SearchPanel::Pagination @meta={{this.searchResults.rasters.meta}} @type="rasters" />
+              </section>
+            </li>
+            <li class="uk-margin-remove">
+              <section class="uk-panel uk-panel-scrollable">
+                <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getPlaces}}>
+                  {{#each this.searchResults.places as |vector|}}
+                    <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
+                      <MapUi::SearchPanel::AddRemoveButton @layer={{vector}} @addRemove={{this.addRemoveVectorLayer}}>
+                        <div class="uk-width-expand uk-grid-small" uk-grid>
+                          <div class="uk-width-1-1 uk-text-lead"><FaIcon @icon={{vector.icon}} style={{vector.tmpStyle}} /> {{vector.title}}</div>
+                          <div class="uk-text-light uk-width-1-1">
+                            {{vector.safeDescription}}
+                          </div>
+                        </div>
+                      </MapUi::SearchPanel::AddRemoveButton>
+                    </li>
+                  {{/each}}
+                </MapUi::SearchPanel::Results>
+              </section>
+              <section class="uk-padding atlm-pagination">
+                <MapUi::SearchPanel::Pagination @meta={{this.searchResults.places.meta}} @type="places" />
+              </section>
+            </li>
+            <li class="uk-margin-remove">
+              <section class="uk-panel uk-panel-scrollable">
+                <MapUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getData}}>
+                  {{#each this.searchResults.data as |vector|}}
+                    <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
+                      <MapUi::SearchPanel::AddRemoveButton @layer={{vector}} @addRemove={{this.addRemoveVectorLayer}}>
+                        <div class="uk-width-expand uk-grid-small" uk-grid>
+                          <div class="uk-width-1-1 uk-text-lead"><FaIcon @icon={{vector.icon}} style={{vector.tmpStyle}} /> {{vector.title}}</div>
+                          <div class="uk-text-light uk-width-1-1">
+                            {{vector.safeDescription}}
+                          </div>
+                        </div>
+                      </MapUi::SearchPanel::AddRemoveButton>
+                    </li>
+                  {{/each}}
+                </MapUi::SearchPanel::Results>
+              </section>
+              <section class="uk-padding atlm-pagination">
+                <MapUi::SearchPanel::Pagination @meta={{this.searchResults.data.meta}} @type="data" />
+              </section>
+            </li>
+          </MapUi::SearchPanel>
+        </UkOffcanvas>
+      {{/if}}
+      {{#if this.model.project.intro}}
+        <MapUi::IntroModal @project={{this.model.project}} />
+      {{/if}}
     {{/if}}
-  {{/if}}
-<MapUi::Map @project={{this.model.project}} />
-<MapUi::BaseLayers @project={{this.model.project}} />
-{{#if this.notification.note}}
-  <div class="uk-flex-center uk-child-width-1-3 atlm-notification" uk-grid>
-    <div class={{concat "uk-animation-slide-top uk-alert-" this.notification.noteClass}} uk-alert>
-      <a href="#" class="uk-alert-close" uk-close></a>
-      <p>{{this.notification.note}}</p>
+    <div class="atlm-project-map">
+      <MapUi::Map @project={{this.model.project}} />
     </div>
-  </div>
-{{/if}}
-{{outlet}}
-{{/if}}
+    <MapUi::BaseLayers @project={{this.model.project}} />
+    {{#if this.notification.note}}
+      <div class="uk-flex-center uk-child-width-1-3 atlm-notification" uk-grid>
+        <div class={{concat "uk-animation-slide-top uk-alert-" this.notification.noteClass}} uk-alert>
+          <a href="#" class="uk-alert-close" uk-close></a>
+          <p>{{this.notification.note}}</p>
+        </div>
+      </div>
+    {{/if}}
+    {{outlet}}
+  {{/if}}
+</div>
 
 {{#if this.vectorToAdd}}
   <MapUi::DefineColorMap @layer={{this.vectorToAdd}} @cancel={{this.cancelColorMap}} />

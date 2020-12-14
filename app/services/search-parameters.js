@@ -6,7 +6,8 @@ import { A } from '@ember/array';
 export default class SearchParametersService extends Service {
   // bounds = this.formatBounds();
   @tracked rasterPage = 0;
-  @tracked vectorPage = 0;
+  @tracked placePage = 0;
+  @tracked dataPage = 0;
   @tracked limit = '50';
   @tracked textSearch = null;
   @tracked institution = null;
@@ -37,11 +38,16 @@ export default class SearchParametersService extends Service {
   }
 
   setOffset(offset, type) {
-    if (type == 'rasters') {
-      this.rasterPage = offset;
-    } else {
-      this.vectorPage = offset;
-    }
+    switch (type) {
+      case 'rasters':
+        this.rasterPage = offset;
+        break;
+      case 'places':
+        this.placePage = offset;
+        break;
+      case 'data':
+        this.dataPage = offset;
+      }
   }
 
   setSearchBounds() {
