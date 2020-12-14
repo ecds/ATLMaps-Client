@@ -1,5 +1,5 @@
 {{#if this.deviceContext.isDesktop}}
-<ul class="atlm-map-ui-project-menu" id="uk-accordion" ...attributes {{did-insert this.initUkAccordion}}>
+<ul class="atlm-project-ui-project-menu" id="uk-accordion" ...attributes {{did-insert this.initUkAccordion}}>
   <li class="main-menu-toggle uk-text-center uk-text-middle uk-open">
     <div class="uk-margin-remove" uk-grid>
       <a class="uk-accordion-title uk-padding-small atlm-map-menu-button" href="#">
@@ -24,10 +24,10 @@
             </div>
             {{!-- TODO: There has to be a better way than this conditional. --}}
             {{#if (and this.showToggle (contains "Map" (w this.panelTitle)))}}
-              <MapUi::ToggleSwitch @project={{@project}} @status={{@project.allRastersHidden}} @type={{this.panelTitle}} />
+              <ProjectUi::ToggleSwitch @project={{@project}} @status={{@project.allRastersHidden}} @type={{this.panelTitle}} />
             {{else if (and this.showToggle (contains "Data" (w this.panelTitle)))}}
               {{!-- New thing to set opacity of vector layers and remove leaflet objects. --}}
-              <MapUi::VectorPanel::ToggleSwitch @project={{@project}} @status={{@project.allVectorsHidden}} />
+              <ProjectUi::VectorPanel::ToggleSwitch @project={{@project}} @status={{@project.allVectorsHidden}} />
             {{else if (and @project.unSaved (contains "Edit" (w this.panelTitle)))}}
               <div
                 class="uk-text-center uk-grid-collapse uk-child-width-1-1 atlm-toggle"
@@ -52,7 +52,7 @@
     </div>
     <div class="uk-accordion-content atlm-project-panel uk-margin-remove-top" uk-grid>
       <div class="uk-width-auto@m">
-        <ul class="atlm-map-ui-project-menu-options uk-tab-left" {{did-insert this.initUkTabs}}>
+        <ul class="atlm-project-ui-project-menu-options uk-tab-left" {{did-insert this.initUkTabs}}>
           <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
             <a href="#" class="uk-child-width-1-1 atlm-map-menu-button">
               <span>
@@ -122,22 +122,22 @@
           </li>
           {{#if @project.hasRasters}}
             <li data-panel-title="Map Layers" data-type="panel">
-              <MapUi::RasterPanel @project={{@project}} @remove={{@removeRaster}}/>
+              <ProjectUi::RasterPanel @project={{@project}} @remove={{@removeRaster}}/>
             </li>
           {{/if}}
           {{#if @project.hasPlaces}}
             <li data-panel-title="Data Layers" data-type="panel">
-              <MapUi::VectorPanel @project={{@project}} @layers={{@project.places}} @remove={{@removeVector}}/>
+              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.places}} @remove={{@removeVector}}/>
             </li>
           {{/if}}
           {{#if @project.hasData}}
             <li data-panel-title="Data Layers" data-type="panel">
-              <MapUi::VectorPanel @project={{@project}} @layers={{@project.data}} @remove={{@removeVector}}/>
+              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.data}} @remove={{@removeVector}}/>
             </li>
           {{/if}}
           {{#if @project.mayEdit}}
             <li data-panel-title="Edit" data-type="panel">
-              <MapUi::EditPanel @project={{@project}} />
+              <ProjectUi::EditPanel @project={{@project}} />
             </li>
           {{/if}}
         </ul>

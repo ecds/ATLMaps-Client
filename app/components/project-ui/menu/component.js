@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import UIkit from "uikit";
 
-export default class MapUiMenuComponent extends Component {
+export default class ProjectUiMenuComponent extends Component {
   @service fastboot;
   @service deviceContext;
 

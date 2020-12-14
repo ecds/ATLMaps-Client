@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 // import { tracked } from '@glimmer/tracking';
 import Draggabilly from 'draggabilly';
 
-export default class MapUiPopupComponent extends Component {
+export default class ProjectUiPopupComponent extends Component {
 
   popupWindow = null;
 

@@ -3,7 +3,7 @@ import { click, render, settled, waitFor /*, waitUntil */ } from '@ember/test-he
 import { setupRenderingTest } from 'ember-qunit';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/menu', function(hooks) {
+module('Integration | Component | project-ui/menu', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -36,11 +36,11 @@ module('Integration | Component | map-ui/menu', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::Menu @project={{this.project}}/>`);
+    await render(hbs`<ProjectUi::Menu @project={{this.project}}/>`);
     await settled();
     await waitFor('.uk-open');
     assert.dom('#uk-accordion.uk-accordion').exists();
-    assert.dom('.atlm-map-ui-project-menu-options.uk-tab').exists();
+    assert.dom('.atlm-project-ui-project-menu-options.uk-tab').exists();
     assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide Menu');
     assert.dom('.atlm-project-title h1').hasText(this.project.name);
     assert.dom('article.atlm-project-description').containsText(this.project.description);
@@ -49,7 +49,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
   });
 
   test('it expands the menu when clicked', async function(assert) {
-    await render(hbs`<MapUi::Menu @project={{this.project}}/>`);
+    await render(hbs`<ProjectUi::Menu @project={{this.project}}/>`);
     await settled();
     // Menu Shows
     assert.dom('li.main-menu-toggle').hasClass('uk-open');
@@ -64,7 +64,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
   });
 
   test('it shows raster menu option', async function(assert) {
-    await render(hbs`<MapUi::Menu @project={{this.projectWithRasters}}/>`);
+    await render(hbs`<ProjectUi::Menu @project={{this.projectWithRasters}}/>`);
     assert.dom('.atlm-raster-menu-button').exists();
     await click('.atlm-raster-menu-button a');
     await waitFor('.atlm-panel-title');
@@ -72,7 +72,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
   });
 
   test('it shows vector menu option', async function(assert) {
-    await render(hbs`<MapUi::Menu @project={{this.projectWithVectors}}/>`);
+    await render(hbs`<ProjectUi::Menu @project={{this.projectWithVectors}}/>`);
     assert.dom('.atlm-vector-menu-button').exists();
     await click('.atlm-vector-menu-button a');
     await waitFor('.atlm-panel-title');

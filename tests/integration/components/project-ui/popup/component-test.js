@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/popup', function(hooks) {
+module('Integration | Component | project-ui/popup', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -22,7 +22,7 @@ module('Integration | Component | map-ui/popup', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<MapUi::Popup @activeFeature={{this.feature}} @close={{this.close}} @closeKey={{this.close}} />`);
+    await render(hbs`<ProjectUi::Popup @activeFeature={{this.feature}} @close={{this.close}} @closeKey={{this.close}} />`);
 
     assert.dom('h3.uk-card-title').hasText(this.feature.geojson.properties.name);
 

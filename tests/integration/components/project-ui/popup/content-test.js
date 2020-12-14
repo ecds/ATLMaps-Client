@@ -3,24 +3,16 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/popup/content', function(hooks) {
+module('Integration | Component | project-ui/popup/content', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<MapUi::Popup::Content />`);
+    await render(hbs`<ProjectUi::Popup::Content />`);
 
     assert.equal(this.element.textContent.trim(), '');
 
-    // Template block usage:
-    await render(hbs`
-      <MapUi::Popup::Content>
-        template block text
-      </MapUi::Popup::Content>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });

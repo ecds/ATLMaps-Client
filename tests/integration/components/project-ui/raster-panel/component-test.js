@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render, settled, triggerEvent, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/raster-panel', function(hooks) {
+module('Integration | Component | project-ui/raster-panel', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -31,7 +31,7 @@ module('Integration | Component | map-ui/raster-panel', function(hooks) {
     let raster1 = await this.store.peekRecord('raster-layer-project', 1);
     let raster2 = await this.store.peekRecord('raster-layer-project', 2);
     let raster3 = await this.store.peekRecord('raster-layer-project', 3);
-    await render(hbs`<MapUi::RasterPanel @project={{this.project}} />`);
+    await render(hbs`<ProjectUi::RasterPanel @project={{this.project}} />`);
     await settled();
     assert.dom('li[data-layer="1"]').exists();
     assert.dom('li[data-layer="2"]').exists();

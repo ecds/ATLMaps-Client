@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class MapUiToggleSwitchComponent extends Component {
+export default class ProjectUiToggleSwitchComponent extends Component {
 
   @action
   initToggle() {

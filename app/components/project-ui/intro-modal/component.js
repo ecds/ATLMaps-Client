@@ -3,7 +3,7 @@ import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import UIkit from 'uikit';
 
-export default class MapUiIntroModalComponent extends Component {
+export default class ProjectUiIntroModalComponent extends Component {
   @service cookies;
 
   hideCookieName = `hideIntroFor-${this.args.project.id}`;

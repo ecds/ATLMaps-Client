@@ -5,7 +5,7 @@ import { hbs } from 'ember-cli-htmlbars';
 import EmberObject from '@ember/object';
 import { A } from '@ember/array';
 
-module('Integration | Component | map-ui/vector-panel/opacity-slider', function(hooks) {
+module('Integration | Component | project-ui/vector-panel/opacity-slider', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -36,13 +36,13 @@ module('Integration | Component | map-ui/vector-panel/opacity-slider', function(
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::VectorPanel::OpacitySlider @vector={{this.layer}} />`);
+    await render(hbs`<ProjectUi::VectorPanel::OpacitySlider @vector={{this.layer}} />`);
     assert.dom('input[type="number"]').hasValue('30');
     assert.dom('input[type="range"]').hasValue('30');
   });
 
   test('it updates vector tile feature style', async function(assert) {
-    await render(hbs`<MapUi::VectorPanel::OpacitySlider @vector={{this.vectorTile}} />`);
+    await render(hbs`<ProjectUi::VectorPanel::OpacitySlider @vector={{this.vectorTile}} />`);
     await fillIn('input[type="number"]', 30);
     this.set('opacityValue', this.element.querySelector('input[type="number"]').value / 100);
     assert.equal(this.vectorTile.vectorTileStyles.firstObject.style.fillOpacity, this.opacityValue);

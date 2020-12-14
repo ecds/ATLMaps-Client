@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
 
-export default class MapUiDefineColorMapManualStepsComponent extends Component {
+export default class ProjectUiDefineColorMapManualStepsComponent extends Component {
   @tracked
   stepsMap = A([
     EmberObject.create({

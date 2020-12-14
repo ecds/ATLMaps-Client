@@ -17,7 +17,7 @@ class SearchParametersStub extends Service {
   }
 }
 
-module('Integration | Component | map-ui/search-panel/filters/location', function(hooks) {
+module('Integration | Component | project-ui/search-panel/filters/location', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function(/*assert*/) {
@@ -25,7 +25,7 @@ module('Integration | Component | map-ui/search-panel/filters/location', functio
   });
 
   test('it toggles on click', async function(assert) {
-    await render(hbs`<MapUi::SearchPanel::Filters::Location />`);
+    await render(hbs`<ProjectUi::SearchPanel::Filters::Location />`);
     assert.dom('button.uk-button svg').hasClass('fa-square');
     await click('button.uk-button');
     assert.dom('button.uk-button svg').hasClass('fa-check-square');
@@ -35,7 +35,7 @@ module('Integration | Component | map-ui/search-panel/filters/location', functio
 
   test('it shows update button when updateBounds is true', async function(assert) {
     this.searchParametersService = this.owner.lookup('service:search-parameters');
-    await render(hbs`<MapUi::SearchPanel::Filters::Location />`);
+    await render(hbs`<ProjectUi::SearchPanel::Filters::Location />`);
     assert.dom('button.uk-button-primary').doesNotExist();
     this.set('searchParametersService.updateBounds', true);
     assert.dom('button.uk-button-primary').hasText('Update Location Filter');

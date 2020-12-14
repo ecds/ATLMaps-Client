@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { find, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/popup/vimeo', function(hooks) {
+module('Integration | Component | project-ui/popup/vimeo', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -11,7 +11,7 @@ module('Integration | Component | map-ui/popup/vimeo', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::Popup::Vimeo @video={{this.feature.vimeo}} />`);
+    await render(hbs`<ProjectUi::Popup::Vimeo @video={{this.feature.vimeo}} />`);
 
     const iFrameSrc = find('iframe').src.replace(/\/$/, '');
     assert.equal(iFrameSrc, this.feature.vimeo.replace(/\/$/, ''));

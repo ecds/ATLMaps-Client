@@ -3,11 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/vector-panel/key', function(hooks) {
+module('Integration | Component | project-ui/vector-panel/key', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::VectorPanel::Key />`);
+    await render(hbs`<ProjectUi::VectorPanel::Key />`);
     assert.equal(this.element.textContent.trim(), '');
   });
 
@@ -27,7 +27,7 @@ module('Integration | Component | map-ui/vector-panel/key', function(hooks) {
       }
     };
     this.set('layer', layer);
-    await render(hbs`<MapUi::VectorPanel::Key @layer={{this.layer}}/>`);
+    await render(hbs`<ProjectUi::VectorPanel::Key @layer={{this.layer}}/>`);
     assert.dom('section.uk-width-1-1').hasText('STATUS');
     assert.dom('div#color-renamed[style="background-color: #4daf4a;"]').exists();
     assert.dom('div#color-existing[style="background-color: #377eb8;"]').exists();
@@ -59,7 +59,7 @@ module('Integration | Component | map-ui/vector-panel/key', function(hooks) {
       }
     };
     this.set('layer2', layer2);
-    await render(hbs`<MapUi::VectorPanel::Key @layer={{this.layer2}}/>`);
+    await render(hbs`<ProjectUi::VectorPanel::Key @layer={{this.layer2}}/>`);
     assert.dom('section.uk-width-1-1').hasText('AREA');
     assert.dom('div[style="background-color: #f7f4f9;"]').exists();
     assert.dom('div#color-1[style="background-color: #e7e1ef;"]').exists();

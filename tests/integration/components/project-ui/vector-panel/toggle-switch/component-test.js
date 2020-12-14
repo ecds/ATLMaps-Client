@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/vector-panel/toggle-switch', function(hooks) {
+module('Integration | Component | project-ui/vector-panel/toggle-switch', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -23,20 +23,20 @@ module('Integration | Component | map-ui/vector-panel/toggle-switch', function(h
 
   test('it renders', async function(assert) {
     this.set('simpleProject', { allVectorsHidden: false });
-    await render(hbs`<MapUi::VectorPanel::ToggleSwitch />`);
+    await render(hbs`<ProjectUi::VectorPanel::ToggleSwitch />`);
     assert.equal(this.element.textContent.trim(), 'Hide all');
 
     this.set('simpleProject', { allVectorsHidden: true });
-    await render(hbs`<MapUi::VectorPanel::ToggleSwitch @project={{this.simpleProject}} />`);
+    await render(hbs`<ProjectUi::VectorPanel::ToggleSwitch @project={{this.simpleProject}} />`);
     assert.equal(this.element.textContent.trim(), 'Show all');
   });
 
   test('it toggles the layers', async function(assert) {
-    await render(hbs`<MapUi::VectorPanel::ToggleSwitch @project={{this.project}} />`);
+    await render(hbs`<ProjectUi::VectorPanel::ToggleSwitch @project={{this.project}} />`);
     assert.equal(this.element.textContent.trim(), 'Hide all');
     await click('.atlm-toggle');
     assert.equal(this.element.textContent.trim(), 'Show all');
-    await render(hbs`<MapUi::VectorPanel::ToggleSwitch @project={{this.project}} @status={{true}} />`);
+    await render(hbs`<ProjectUi::VectorPanel::ToggleSwitch @project={{this.project}} @status={{true}} />`);
     assert.equal(this.element.textContent.trim(), 'Show all');
     await click('.atlm-toggle');
     assert.equal(this.element.textContent.trim(), 'Hide all');

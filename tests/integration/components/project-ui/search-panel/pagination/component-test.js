@@ -3,11 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/search-panel/pagination', function(hooks) {
+module('Integration | Component | project-ui/search-panel/pagination', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::SearchPanel::Pagination />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination />`);
     assert.dom('ul.uk-pagination').exists();
   });
 
@@ -21,7 +21,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '59'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').doesNotExist();
     assert.dom('li.atlm-test-first-ellipsis').doesNotExist();
@@ -45,7 +45,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '59'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').doesNotExist();
     assert.dom('li.atlm-test-first-ellipsis').doesNotExist();
@@ -70,7 +70,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '59'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').exists();
     assert.dom('li.atlm-test-first-page').hasText('1');
@@ -96,7 +96,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '59'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} />`);
     assert.dom('ul.uk-pagination').exists();
     assert.dom('li.atlm-test-first-page').exists();
     assert.dom('li.atlm-test-first-page').hasText('1');
@@ -120,7 +120,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '59'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="rasters" />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} @type="rasters" />`);
     assert.dom('select').hasValue('50');
     assert.dom('.offset').hasText('50');
     await fillIn('select', '100');
@@ -146,7 +146,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '69'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="places" />`);
+    await render(hbs`<ProjectUi::SearchPanel::Pagination @meta={{this.meta}} @type="places" />`);
     assert.dom('select').hasValue('50');
     assert.dom('.offset').hasText('50');
     await fillIn('select', '200');

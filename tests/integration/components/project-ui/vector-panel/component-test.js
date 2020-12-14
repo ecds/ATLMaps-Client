@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, findAll, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/vector-panel', function(hooks) {
+module('Integration | Component | project-ui/vector-panel', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -79,7 +79,7 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
     const vector3 = await this.store.peekRecord('vector-layer', 3);
     vector3.setProperties({ geometryType: 'MultiPolygon' });
 
-    await render(hbs`<MapUi::VectorPanel @layers={{this.project.vectors}} />`);
+    await render(hbs`<ProjectUi::VectorPanel @layers={{this.project.vectors}} />`);
 
     const vectorCount = findAll('.atlm-layer-list-item').length;
     assert.equal(vectorCount, this.project.vectors.length);
@@ -95,14 +95,14 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
 
   // Reordering vector layers have been removed for now.
   // test('it bumps layer to top', async function(assert) {
-  //   await render(hbs`<MapUi::VectorPanel @project={{this.project}} />`);
+  //   await render(hbs`<ProjectUi::VectorPanel @project={{this.project}} />`);
   //   assert.dom('li[data-layer="2"] div[role="button"]').exists();
   //   await click('li[data-layer="2"] div[role="button"]');
   //   assert.dom('li[data-layer="2"] div[role="button"]').doesNotExist();
   // });
 
   test('it shows hidden layer', async function(assert) {
-    await render(hbs`<MapUi::VectorPanel @layers={{this.project.vectors}} />`);
+    await render(hbs`<ProjectUi::VectorPanel @layers={{this.project.vectors}} />`);
     await fillIn('input#opacity-layer-1', 0);
     assert.dom('input#opacity-layer-1').doesNotExist();
     await click('button#show-layer-1');
@@ -117,7 +117,7 @@ module('Integration | Component | map-ui/vector-panel', function(hooks) {
 
   test('it opens and closes color map editing modal', async function(assert) {
     this.project.setProperties({ mayEdit: true });
-    await render(hbs`<div id="container"><MapUi::VectorPanel @project={{this.project}} @layers={{this.project.vectors}} @isTesting={{true}}/></div>`);
+    await render(hbs`<div id="container"><ProjectUi::VectorPanel @project={{this.project}} @layers={{this.project.vectors}} @isTesting={{true}}/></div>`);
     await click('#data-layer-title-4');
     await click('#edit-colors-4');
     assert.dom('.uk-modal-title').exists();

@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { find, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/popup/youtube', function(hooks) {
+module('Integration | Component | project-ui/popup/youtube', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -11,7 +11,7 @@ module('Integration | Component | map-ui/popup/youtube', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::Popup::Youtube @video={{this.feature.youtube}} />`);
+    await render(hbs`<ProjectUi::Popup::Youtube @video={{this.feature.youtube}} />`);
 
     const iFrameSrc = find('iframe').src.replace(/\/$/, '');
     assert.equal(iFrameSrc, this.feature.youtube.replace(/\/$/, ''));

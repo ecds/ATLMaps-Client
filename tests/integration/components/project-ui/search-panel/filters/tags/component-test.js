@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, findAll, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/search-panel/filters/tags', function(hooks) {
+module('Integration | Component | project-ui/search-panel/filters/tags', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -33,12 +33,12 @@ module('Integration | Component | map-ui/search-panel/filters/tags', function(ho
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::SearchPanel::Filters::Tags @categories={{this.categories}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Filters::Tags @categories={{this.categories}} />`);
     assert.equal(findAll('li').length, 8);
   });
 
   test('it toggles when clicked', async function(assert) {
-    await render(hbs`<MapUi::SearchPanel::Filters::Tags @categories={{this.categories}} />`);
+    await render(hbs`<ProjectUi::SearchPanel::Filters::Tags @categories={{this.categories}} />`);
     let tags = findAll('ul.uk-accordion-content li button');
     assert.dom('button svg').hasClass('fa-square');
     assert.dom('ul.uk-accordion-content li button svg').hasClass('fa-square');

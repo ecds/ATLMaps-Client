@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import UIkit from 'uikit';
 
-export default class MapUiSearchPanelFiltersTagsComponent extends Component {
+export default class ProjectUiSearchPanelFiltersTagsComponent extends Component {
   @service searchParameters;
   @service searchResults;
 

@@ -53,7 +53,7 @@
           <p class="uk-article-meta">Layer provided by: {{raster.rasterLayer.institution.name}}</p>
         </article>
         <footer class="uk-child-width-auto uk-margin uk-padding-small uk-flex-center uk-grid-small uk-text-center atlm-share-buttons" uk-grid>
-          <MapUi::ShareLayer @project={{@project}} @remove={{@remove}} @layer={{raster.rasterLayer}} />
+          <ProjectUi::ShareLayer @project={{@project}} @remove={{@remove}} @layer={{raster.rasterLayer}} />
           {{#if @project.mayEdit}}
             <div>
               <UkButton @color="primary" {{on "click" (perform @remove raster.rasterLayer.id)}}>

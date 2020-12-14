@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default class MapUiSearchPanelPaginationComponent extends Component {
+export default class ProjectUiSearchPanelPaginationComponent extends Component {
 
   // Array.from({length:10},(v,k)=>(k+1))
 

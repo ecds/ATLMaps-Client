@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { click, triggerKeyEvent, waitFor } from '@ember/test-helpers';
 
-module('Integration | Component | map-ui/toggle-switch', function(hooks) {
+module('Integration | Component | project-ui/toggle-switch', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -27,7 +27,7 @@ module('Integration | Component | map-ui/toggle-switch', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::ToggleSwitch @project={{this.project}} @status={{this.project.allRastersHidden}} @type={{"map"}} />`);
+    await render(hbs`<ProjectUi::ToggleSwitch @project={{this.project}} @status={{this.project.allRastersHidden}} @type={{"map"}} />`);
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
     assert.dom('div.atlm-toggle-status').hasText('Hide all');
 
@@ -35,7 +35,7 @@ module('Integration | Component | map-ui/toggle-switch', function(hooks) {
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
     assert.dom('div.atlm-toggle-status').hasText('Show all');
     assert.equal(this.project.allRastersHidden, true);
-    
+
     await click('div.atlm-toggle');
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
     assert.dom('div.atlm-toggle-status').hasText('Hide all');
@@ -45,7 +45,7 @@ module('Integration | Component | map-ui/toggle-switch', function(hooks) {
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
     assert.dom('div.atlm-toggle-status').hasText('Show all');
     assert.equal(this.project.allRastersHidden, true);
-    
+
     let layer = this.store.peekRecord('rasterLayerProject', 2);
     layer.setProperties({ opacity: 50 });
     await waitFor('div.atlm-toggle-switch svg.fa-toggle-on');

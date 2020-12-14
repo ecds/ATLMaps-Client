@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/edit-panel', function(hooks) {
+module('Integration | Component | project-ui/edit-panel', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -30,12 +30,12 @@ module('Integration | Component | map-ui/edit-panel', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::EditPanel @project={{this.project}} />`);
+    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} />`);
     assert.dom('form').containsText('Edit Project Title');
   });
 
   test('it updates project properties', async function(assert) {
-    await render(hbs`<MapUi::EditPanel @project={{this.project}} />`);
+    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} />`);
     assert.dom('#project-title').hasValue(this.project.name);
     assert.dom('#project-description').hasValue(this.project.description);
     assert.dom('#project-published').isNotChecked();
@@ -61,7 +61,7 @@ module('Integration | Component | map-ui/edit-panel', function(hooks) {
   });
 
   test('it updates project map defaults based on current map position', async function(assert) {
-    await render(hbs`<MapUi::EditPanel @project={{this.project}} /> <LeafletMap @lat={{this.project.centerLat}} @lng={{this.project.centerLng}} @zoom={{this.project.zoomLevel}} @onLoad={{this.setMap}} />`);
+    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} /> <LeafletMap @lat={{this.project.centerLat}} @lng={{this.project.centerLng}} @zoom={{this.project.zoomLevel}} @onLoad={{this.setMap}} />`);
     this.project.leafletMap.setView([33.8, -84.4], 18);
     await click('#update-map-defaults');
     assert.equal(this.project.centerLat, 33.8);

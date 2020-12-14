@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render, waitFor } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/intro-modal', function(hooks) {
+module('Integration | Component | project-ui/intro-modal', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -20,14 +20,14 @@ module('Integration | Component | map-ui/intro-modal', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
     assert.dom('h2').hasText(this.project.name);
     assert.dom('#intro-modal-text').hasText(this.project.intro);
   });
 
   test('it sets a cookie to suppress intro modal', async function(assert) {
     assert.equal(document.cookie, '');
-    await render(hbs`<div id="container"><MapUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
     await click('#toggle-hide-cookie');
     assert.equal(document.cookie, `hideIntroFor-${this.project.id}=yup`);
     document.cookie = `hideIntroFor-${this.project.id}=yup; expires=${new Date(0).toUTCString()};`;
@@ -36,7 +36,7 @@ module('Integration | Component | map-ui/intro-modal', function(hooks) {
 
   test('it clears the cookie to suppress intro modal', async function(assert) {
     assert.equal(document.cookie, '');
-    await render(hbs`<div id="container"><MapUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
     await click('#toggle-hide-cookie');
     assert.equal(document.cookie, `hideIntroFor-${this.project.id}=yup`);
     await click('#toggle-hide-cookie');
@@ -44,7 +44,7 @@ module('Integration | Component | map-ui/intro-modal', function(hooks) {
   });
 
   test('it renders a UIKit Modal', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::IntroModal @project={{this.project}} @isTesting={{true}} /></div>`);
     assert.dom('.uk-modal').exists();
   });
 });

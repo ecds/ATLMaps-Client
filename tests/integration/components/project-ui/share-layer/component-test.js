@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, findAll, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/share-layer', function(hooks) {
+module('Integration | Component | project-ui/share-layer', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -30,7 +30,7 @@ module('Integration | Component | map-ui/share-layer', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::ShareLayer @layer={{this.rasterLayer}} />`);
+    await render(hbs`<ProjectUi::ShareLayer @layer={{this.rasterLayer}} />`);
     assert.dom(`button[target="#share-modal-${this.rasterLayer.name}"]`).exists();
     assert.dom(`button[target="#embed-modal-${this.rasterLayer.name}"]`).exists();
     assert.dom(`div#share-modal-${this.rasterLayer.name} input`).hasValue(`${window.location.origin}/layers/${this.rasterLayer.name}`);
@@ -38,7 +38,7 @@ module('Integration | Component | map-ui/share-layer', function(hooks) {
   });
 
   test('it updates parameters', async function(assert) {
-    await render(hbs`<MapUi::ShareLayer @layer={{this.vectorLayer}} />`);
+    await render(hbs`<ProjectUi::ShareLayer @layer={{this.vectorLayer}} />`);
     assert.dom(`div#embed-modal-${this.vectorLayer.name} input`).hasValue(`<iframe height=600 width=800 src=${window.location.origin}/embed/${this.vectorLayer.name}?base=street&color=#1e88e5 />`);
     const bases = findAll(`div#embed-modal-${this.vectorLayer.name} select option`);
     await fillIn(`div#embed-modal-${this.vectorLayer.name} select`, bases[1].value);

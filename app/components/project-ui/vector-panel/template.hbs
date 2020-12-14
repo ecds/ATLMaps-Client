@@ -9,7 +9,7 @@
           {{vector.vectorLayer.title}}
         </a>
         {{#if vector.show}}
-          <MapUi::VectorPanel::OpacitySlider @vector={{vector}} />
+          <ProjectUi::VectorPanel::OpacitySlider @vector={{vector}} />
         {{else}}
         <div class="uk-padding-small">
           <UkButton @size="small" @color="secondary" id={{concat "show-" vector.vectorLayer.name}} {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
@@ -32,13 +32,13 @@
       <div class="uk-accordion-content uk-width-1-1">
         <article class="uk-article">
           {{vector.vectorLayer.safeDescription}}
-          <MapUi::VectorPanel::Key @layer={{vector}} />
+          <ProjectUi::VectorPanel::Key @layer={{vector}} />
           {{#if vector.vectorLayer.institution}}
             <p class="uk-article-meta">Layer provided by: {{vector.vectorLayer.institution.name}}</p>
           {{/if}}
         </article>
         <footer class="uk-child-width-auto uk-margin uk-padding-small uk-flex-center uk-grid-small uk-text-center atlm-share-buttons" uk-grid>
-          <MapUi::ShareLayer @layer={{vector.vectorLayer}} @project={{@project}} @remove={{@remove}} />
+          <ProjectUi::ShareLayer @layer={{vector.vectorLayer}} @project={{@project}} @remove={{@remove}} />
           {{#if @project.mayEdit}}
             <div>
               <UkButton @color="primary" {{on "click" (perform @remove vector.vectorLayer.id)}}>
@@ -62,5 +62,5 @@
   {{/each}}
 </ul>
 {{#if this.vectorToEdit}}
-  <MapUi::DefineColorMap @layer={{this.vectorToEdit}} @cancel={{this.cancelEdit}} @edit={{true}} @isTesting={{@isTesting}} />
+  <ProjectUi::DefineColorMap @layer={{this.vectorToEdit}} @cancel={{this.cancelEdit}} @edit={{true}} @isTesting={{@isTesting}} />
 {{/if}}

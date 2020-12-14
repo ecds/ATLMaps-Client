@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class MapUiVectorPanelToggleSwitchComponent extends Component {
+export default class ProjectUiVectorPanelToggleSwitchComponent extends Component {
   @action
   toggleVisible() {
     if (this.args.status) {

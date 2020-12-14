@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/define-color-map/manual-steps', function(hooks) {
+module('Integration | Component | project-ui/define-color-map/manual-steps', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -47,21 +47,21 @@ module('Integration | Component | map-ui/define-color-map/manual-steps', functio
   });
 
   test('it renders setting range', async function(assert) {
-    await render(hbs`<MapUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
+    await render(hbs`<ProjectUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
 
     assert.equal(this.element.querySelector('#step-0-bottom').value, '111');
     assert.equal(this.element.querySelector('#step-0-top').value, '222');
   });
 
   test('it adds a new step when top value is changed', async function(assert) {
-    await render(hbs`<MapUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
+    await render(hbs`<ProjectUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
     await fillIn('#step-0-top', 151);
     assert.equal(this.element.querySelector('#step-1-bottom').value, '152');
     assert.equal(this.element.querySelector('#step-1-top').value, '222');
   });
 
   test('it corrects when middle step is updated', async function(assert) {
-    await render(hbs`<MapUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
+    await render(hbs`<ProjectUi::DefineColorMap::ManualSteps @layer={{this.layer}} @values={{this.values}} />`);
     await fillIn('#step-0-top', 151);
     await fillIn('#step-1-top', 181);
     assert.equal(this.element.querySelector('#step-2-bottom').value, '182');

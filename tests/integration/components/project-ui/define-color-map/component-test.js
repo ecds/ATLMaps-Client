@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, findAll, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | map-ui/define-color-map', function(hooks) {
+module('Integration | Component | project-ui/define-color-map', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
@@ -52,20 +52,20 @@ module('Integration | Component | map-ui/define-color-map', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
     const labels = findAll('label');
     assert.dom(labels[0]).hasText('prop1');
     assert.dom(labels[1]).hasText('prop2');
   });
 
   test('it selects int property', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
     await click('input#option-0');
     assert.dom('input#set-step').exists();
   });
 
   test('setting steps and color brewer group shows color options', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
     await click('input#option-0');
     await fillIn('input#set-step', '5');
     assert.equal(this.layer.vectorProject.steps, 5);
@@ -78,7 +78,7 @@ module('Integration | Component | map-ui/define-color-map', function(hooks) {
   });
 
   test('it selects a string', async function(assert) {
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} /></div>`);
     await click('input#option-1');
     const labels = findAll('label');
     const colorGroup = this.colorBrewer.getGroup('qualitative', 12).Paired;
@@ -110,7 +110,7 @@ module('Integration | Component | map-ui/define-color-map', function(hooks) {
         manualSteps: true
       }
     );
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
     await click('#Reds');
     assert.equal(this.layer.vectorProject.colorMap[0].color, '#a50f15');
     assert.equal(this.layer.vectorProject.colorMap[1].color, '#67000d');
@@ -126,7 +126,7 @@ module('Integration | Component | map-ui/define-color-map', function(hooks) {
         manualSteps: true
       }
     );
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
     await click('#back');
     assert.equal(this.layer.vectorProject.brewerGroup, null);
     assert.equal(this.layer.vectorProject.steps, null);
@@ -144,7 +144,7 @@ module('Integration | Component | map-ui/define-color-map', function(hooks) {
         manualSteps: true
       }
     );
-    await render(hbs`<div id="container"><MapUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
+    await render(hbs`<div id="container"><ProjectUi::DefineColorMap @layer={{this.layer}} @cancel={{this.cancel}} @isTesting={{true}} @edit={{true}} /></div>`);
     await click('#reload-layer');
     assert.equal(1, 1);
   });

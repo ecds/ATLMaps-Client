@@ -6,7 +6,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 import { modal, util } from 'uikit';
 
-export default class MapUiDefineColorMapComponent extends Component {
+export default class ProjectUiDefineColorMapComponent extends Component {
   @service colorBrewer;
   @service fastboot;
 

@@ -106,7 +106,7 @@ module('Integration | Component | map', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-container').exists();
     assert.dom('.leaflet-tile-pane .base-street').exists();
     assert.dom('div#map-component span#center').hasText(`${ENV.APP.CENTER_LAT} : ${ENV.APP.CENTER_LNG}`);
@@ -115,21 +115,21 @@ module('Integration | Component | map', function(hooks) {
   });
 
   test('map has zoomControl at bottomLeft', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     // Leaflet's default is top left.
     assert.dom('div.leaflet-top.leaflet-left div.leaflet-control-zoom').doesNotExist();
     assert.dom('div.leaflet-bottom.leaflet-left div').hasClass('leaflet-control-zoom');
   });
 
   test('it adds layers to map', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-marker-icon').exists();
     assert.dom('div.leaflet-reynoldstown-pane').exists();
     assert.dom('.raster-atlanta').exists();
   });
 
   test('it activates feature when marker clicked', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     await settled();
     assert.equal(findAll('.leaflet-marker-icon').length, 2);
     assert.dom('.leaflet-marker-icon.active').doesNotExist();
@@ -148,12 +148,12 @@ module('Integration | Component | map', function(hooks) {
   });
 
   test('it adds raster layer', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-tile-pane .raster-atlanta').exists();
   });
 
   test('it switches base map', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-tile-pane .base-street').exists();
     this.model.setProperties({ defaultBaseMap: 'satellite'});
     await settled();
@@ -162,7 +162,7 @@ module('Integration | Component | map', function(hooks) {
   });
 
   test('it shades polygon based on data colorMap', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     await settled();
     assert.dom('.shape-emory').hasStyle({
       fill: 'rgb(152, 0, 67)',
@@ -182,12 +182,12 @@ module('Integration | Component | map', function(hooks) {
   });
 
   test('it creates Leaflet panes for each vector layer', async function(assert) {
-    await render(hbs`<MapUi::Map @project={{this.model}} />`);
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-pane.leaflet-oxford-pane').exists();
   });
 
   // test('it removes Leaflet pane for layer when `show` is false', async function(assert) {
-  //   await render(hbs`<MapUi::Map @project={{this.model}} />`);
+  //   await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
   //   assert.dom('.leaflet-pane.leaflet-emory-pane g path').exists();
   //   await this.model.get('vectors').forEach(v => {
   //     v.setProperties({ show: false });

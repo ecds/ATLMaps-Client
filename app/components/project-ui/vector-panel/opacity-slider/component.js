@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class MapUiVectorPanelOpacitySliderComponent extends Component {
+export default class ProjectUiVectorPanelOpacitySliderComponent extends Component {
   @action
   updateOpacity(event) {
     if (this.args.vector.get('vectorLayer.dataFormat') != 'pbf') return;

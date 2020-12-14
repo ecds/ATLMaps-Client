@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import UIkit from "uikit";
 
-export default class MapUiVectorPanelComponent extends Component {
+export default class ProjectUiVectorPanelComponent extends Component {
   @tracked vectorToEdit = false;
 
   ukAccordion = null;
@@ -32,7 +32,7 @@ export default class MapUiVectorPanelComponent extends Component {
 
 /**
  *
- * @memberof MapUiVectorPanelComponent
+ * @memberof ProjectUiVectorPanelComponent
  * This is a little hacky. We add the `.1` so that the property changes and updates the
  * `show` property on the `vectorLayerProject` objects.
  */

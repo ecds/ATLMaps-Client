@@ -5,7 +5,7 @@ import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-export default class MapUiShareLayerComponent extends Component {
+export default class ProjectUiShareLayerComponent extends Component {
   @service notification;
   @service fastboot;
 
