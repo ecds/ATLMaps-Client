@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
-import ENV from 'atlmaps-client/config/environment';
 
 export default class CurrentUserService extends Service {
   @service session;
@@ -8,16 +7,15 @@ export default class CurrentUserService extends Service {
 
   async checkCurrentUser() {
     if (!this.session.isAuthenticated) return null;
-    let user = null;
     try {
-      let response = await fetch(`${ENV.APP.API_HOST}/users/me`, {
+      let response = await fetch('https://api.atlmaps-dev.com:3000/users/me', {
         method: 'GET',
         mode: 'cors',
         credentials: 'include'
       });
 
       if (response.ok) {
-        user = await response.json();
+        let user = await response.json();
         if (!user) {
           this.session.session.invalidate();
         }
@@ -25,10 +23,9 @@ export default class CurrentUserService extends Service {
         this.session.session.invalidate();
       }
     } catch(error) {
-      // Do Something?
+      console.log(error);
     } finally {
       // reload model?
     }
-    return user;
   }
 }

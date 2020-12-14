@@ -11,10 +11,10 @@
           </div>
         </p>
       {{/if}}
-      <p id="intro-modal-text">{{html-safe @project.intro}}</p>
+      <p>{{html-safe @project.intro}}</p>
     </section>
     <p class="uk-text-right">
-      <UkButton id="toggle-hide-cookie" {{on "click" this.toggleHideCookie}}>
+      <UkButton {{on "click" this.toggleHideCookie}}>
         {{#if this.hideIntro}}
           <FaIcon @icon="check-square" />
         {{else}}

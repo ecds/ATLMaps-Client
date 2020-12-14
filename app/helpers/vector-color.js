@@ -1,16 +1,26 @@
 import { helper } from '@ember/component/helper';
 
-export default helper(function vectorColor([vectorLayerProject, vectorFeature]) {
+export default helper(function vectorColor([vectorLayerProject, vectorFeature, dataColors]) {
+  if (vectorLayerProject.marker) {
+    let color = null;
+    if (vectorFeature.geometryType == 'Point'){
+      color = dataColors.markerColors[vectorLayerProject.marker];
+    } else {
+      color = dataColors.shapeColors[vectorLayerProject.marker];
+    }
+    vectorFeature.setProperties({ color });
+    vectorFeature.get('vectorLayer').setProperties({ tempColor: color });
+    return color.hex;
+  }
   const property = vectorFeature.geojson.properties[vectorLayerProject.property];
-  const roundedProperty = Math.round(property);
   const colorMap = vectorLayerProject.colorMap;
-  if (colorMap && Object.keys(colorMap).length > 0) {
-    let color = 'blue';
+  let color = 'deeppink';
+  if (Object.keys(colorMap).length > 0) {
     Object.keys(colorMap).forEach(key => {
       if (isNaN(property) && property.toUpperCase() == key.toUpperCase()) {
         color = colorMap[key].color;
       }
-      else if (roundedProperty >= colorMap[key].bottom && roundedProperty <= colorMap[key].top) {
+      else if (property >= colorMap[key].bottom && property <= colorMap[key].top) {
         color = colorMap[key].color;
       }
     });
@@ -20,7 +30,6 @@ export default helper(function vectorColor([vectorLayerProject, vectorFeature]) 
         style: `color: ${color};`
       }
     );
-    return color;
   }
-  return vectorLayerProject.color;
+  return color;
 });

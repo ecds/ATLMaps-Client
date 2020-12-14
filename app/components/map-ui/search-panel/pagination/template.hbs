@@ -1,58 +1,53 @@
-<div class="uk-width-1-1" uk-grid>
-  <div class="uk-width-1-4">
+<ul class="uk-pagination" uk-margin>
+  <li>
+    <label for={{concat @type "-per-page"}}>Show</label>
+  </li>
+  <li>
     <select class="uk-select" id={{concat @type "-per-page"}} {{on 'change' this.updateResultsPerPage}}>
       {{#each this.options as |opt|}}
-        <option value={{opt}} selected={{eq opt this.searchParameters.limit}} aria-label="Number of results per page">{{concat opt " per page"}}</option>
+        <option value={{opt}} selected={{eq opt this.searchParameters.limit}}>{{opt}}</option>
       {{/each}}
     </select>
-  </div>
-  <nav class="uk-width-expand uk-flex-center" role="navigation" aria-label="Pagination">
-    <ul class="uk-pagination" uk-margin>
-      {{#if (gt @meta.current_page 2)}}
-        <li class="atlm-test-first-page">
-          <a href="#" {{on "click" (fn this.setOffset 1)}}>
-            1
-          </a>
-        </li>
-        {{!-- template-lint-disable no-invalid-role --}}
-        <li class="uk-disabled atlm-test-first-ellipsis" role="presentation"><span>...</span></li>
-        {{!-- template-lint-enable no-invalid-role --}}
-      {{/if}}
-      {{#if @meta.prev_page}}
-        <li class="atlm-test-prev-page">
-          <a href="#" {{on "click" (fn this.setOffset @meta.prev_page)}}>
-            {{@meta.prev_page}}
-          </a>
-        </li>
-      {{/if}}
-        <li class="uk-active atlm-test-current-page">
-          <span aria-label={{concat "Page " @meta.current_page ", Current set of results"}} aria-current="true">
-            {{@meta.current_page}}
-          </span>
-        </li>
-      {{#if @meta.next_page}}
-        <li class="atlm-test-next-page">
-          <a href="#" {{on "click" (fn this.setOffset @meta.next_page)}} aria-label={{concat "Page " @meta.next_page}}>
-            {{@meta.next_page}}
-          </a>
-        </li>
-      {{/if}}
-      {{#if (and @meta.next_page (lt @meta.next_page @meta.total_pages))}}
-        {{!-- template-lint-disable no-invalid-role --}}
-        <li class="uk-disabled atlm-test-last-ellipsis" role="presentation"><span>...</span></li>
-        {{!-- template-lint-enable no-invalid-role --}}
-        <li class="atlm-test-last-page">
-          <a href="#" {{on "click" (fn this.setOffset @meta.total_pages)}} aria-label={{concat "Page " @meta.total_pages}}>
-            {{@meta.total_pages}}
-          </a>
-        </li>
-      {{/if}}
-    </ul>
-  </nav>
-</div>
+  </li>
+  {{#if (gt @meta.current_page 2)}}
+    <li class="atlm-test-first-page">
+      <UkButton @color="link" {{on "click" (fn this.setOffset 1)}}>
+        1
+      </UkButton>
+    </li>
+    <li class="uk-disabled atlm-test-first-ellipsis"><span>...</span></li>
+  {{/if}}
+  {{#if @meta.prev_page}}
+    <li class="atlm-test-prev-page">
+      <UkButton @color="link" {{on "click" (fn this.setOffset @meta.prev_page)}}>
+        {{@meta.prev_page}}
+      </UkButton>
+    </li>
+  {{/if}}
+    <li class="atlm-test-current-page">
+      <UkButton @color="secondary" aria-label="Current set of results">
+        {{@meta.current_page}}
+      </UkButton>
+    </li>
+  {{#if @meta.next_page}}
+    <li class="atlm-test-next-page">
+      <UkButton @color="link" {{on "click" (fn this.setOffset @meta.next_page)}}>
+        {{@meta.next_page}}
+      </UkButton>
+    </li>
+  {{/if}}
+  {{#if (and @meta.next_page (lt @meta.next_page @meta.total_pages))}}
+    <li class="uk-disabled atlm-test-last-ellipsis"><span>...</span></li>
+    <li class="atlm-test-last-page">
+      <UkButton @color="link" {{on "click" (fn this.setOffset @meta.total_pages)}}>
+        {{@meta.total_pages}}
+      </UkButton>
+    </li>
+  {{/if}}
+</ul>
 
 <div class="testing">
   <span class="raster-page">{{this.searchParameters.rasterPage}}</span>
-  <span class="vector-page">{{this.searchParameters.placePage}}</span>
+  <span class="vector-page">{{this.searchParameters.vectorPage}}</span>
   <span class="offset">{{this.searchParameters.limit}}</span>
 </div>

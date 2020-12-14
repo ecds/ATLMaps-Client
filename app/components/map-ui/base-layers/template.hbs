@@ -1,7 +1,7 @@
 <ul class="uk-thumbnav atlm-base-map-selector" uk-margin>
   {{#each this.baseMaps.baseMaps as |base|}}
     <li class="uk-box-shadow-xlarge {{if (eq base.label @project._defaultBaseMap.label) "active"}}" id={{concat "base-" base.label}}>
-      <UkButton class="uk-box-shadow-xlarge" @color="link" {{on 'click' (fn this.switchBase base)}} uk-tooltip={{concat "Switch base map to " base.displayLabel}}>
+      <UkButton @color="link" {{on 'click' (fn this.switchBase base)}}>
         <img src={{base.thumbnail}} width="150" alt={{base.label}}>
       </UkButton>
     </li>

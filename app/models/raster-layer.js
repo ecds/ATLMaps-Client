@@ -21,7 +21,7 @@ export default class RasterLayerModel extends Model {
   @attr('string') url;
   @attr('string') layers;
   @attr('string') description;
-  @attr('string') thumb_url;
+  @attr() thumb;
   @hasMany('rasterLayerProject') rasterLayerProjects;
   @belongsTo('institution') institution;
   @attr('boolean', {

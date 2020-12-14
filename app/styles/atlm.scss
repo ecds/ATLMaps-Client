@@ -1,22 +1,3 @@
-.atlm-project-map {
-  .leaflet-container {
-    height: calc(100vh - 80px);
-    width: 100vw;
-  }
-}
-
-.atlm-share-layer-map {
-  .leaflet-container {
-    height: calc(100vh - 80px);
-    width: 66vw;
-  }
-}
-
-.atlm-share-layer-meta {
-  height: calc(100vh - 80px);
-  width: 33vw;
-}
-
 .atlm-project-title {
   background-color: $secondary-light-gray;
 
@@ -58,6 +39,7 @@
   .atlm-popup-content {
     height: auto;
     max-height: 40vh;
+    min-height: 25vh;
     resize: unset;
   }
 
@@ -72,28 +54,23 @@
 
 .atlm-map-marker {
   // Moves the tip of the marker icon to the correct location.
-  height: 3.5rem !important;
-  width: 2.5rem !important;
+  // height: 3.5rem !important;
+  // width: 2.5rem !important;
   // margin-top: -3rem !important;
   // margin-right: -500px !important;
   font-size: 2.5rem;
   text-shadow: 0 0 3px #fff;
   border: solid;
 
-  svg {
-    stroke: white;
-    stroke-width: 10;
+  &::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    content: "\f3c5";
   }
 
-  // &::before {
-  //   font-family: "Font Awesome 5 Free"; font-weight: 900;
-  //   content: "\f3c5";
-  // }
-
   &.active {
-    font-size: 5rem;
-    margin-left: -.5rem !important;
-    margin-top: -1.75rem !important;
+    font-size: 3.5rem;
+    // margin-left: 1.5 !important;
+    // margin-top: -4rem !important;
   }
 }
 
@@ -154,7 +131,6 @@
 
         a.atlm-map-menu-button {
           border: none;
-          color: black;
           // color: $primary-dark-gray;
           // color: white;
         }
@@ -313,7 +289,7 @@
   bottom: 10px;
   left: 60px;
   position: absolute;
-  z-index: 1000;
+  z-index: 10001;
 
   button {
     &:after {
@@ -382,14 +358,4 @@
   &::-webkit-slider-runnable-track {
     // height: 5px;
 }
-}
-
-.atlm-loading-modal {
-  display: block;
-}
-
-.atlm-popup-gallery {
-  img {
-    height: 100%
-  }
 }

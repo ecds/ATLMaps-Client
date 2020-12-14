@@ -21,9 +21,8 @@
 <div id={{concat "embed-modal-" @layer.name}} class="uk-flex-top" uk-modal>
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
     <button class="uk-modal-close-default" type="button" uk-close></button>
-    <h3>Layer Embed</h3>
-    <label id={{concat 'embed-' @layer.id}} for={{concat 'embed-' @layer.id}}>Embed Code</label>
-    <Input class="uk-input" @type="text" readonly @value={{this.embedUrl}} id={{concat "embed-" @layer.name}} />
+    <h3>Layer Embed Code</h3>
+    <Input class="uk-input" @type="text" @value={{this.embedUrl}} id={{concat "embed-" @layer.name}} />
     <hr>
     <label class="uk-form-label">Pick a base map:</label>
     <select class="uk-select" {{on 'change' this.setBase}}>
@@ -32,9 +31,13 @@
       {{/each}}
     </select>
     <hr>
-    {{#if @layer.geometryType}}
-      <label class="uk-form-label" for={{concat 'layer-' @layer.id}}>Pick a  color:</label>
-      <Input id={{concat 'layer-' @layer.id}} @type="color" @value={{this.color}} />
+    {{#if @layer.dataType}}
+      <label class="uk-form-label">Pick a  color:</label>
+      <div class="uk-child-width-1-4@s uk-flex-center uk-text-center uk-padding uk-padding-remove-vertical uk-grid-small" uk-grid>
+        {{#each this.dataColors.embedColors as |color|}}
+          <UkButton @size="small" class={{concat "uk-padding-remove " color.name}} {{on 'click' (fn this.setColor color)}} aria-label={{color.name}}>&nbsp;</UkButton>
+        {{/each}}
+      </div>
       <hr>
     {{/if}}
     <UkButton @color="primary" {{on "click" (fn this.copyText "embed")}}>copy embed code</UkButton>

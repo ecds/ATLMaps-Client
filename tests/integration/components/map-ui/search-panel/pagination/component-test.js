@@ -27,7 +27,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     assert.dom('li.atlm-test-first-ellipsis').doesNotExist();
     assert.dom('li.atlm-test-prev-page').doesNotExist();
     assert.dom('li.atlm-test-current-page').exists();
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('li.atlm-test-next-page').exists();
     assert.dom('li.atlm-test-next-page').hasText(this.meta.next_page);
     assert.dom('li.atlm-test-last-ellipsis').exists();
@@ -52,7 +52,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     assert.dom('li.atlm-test-prev-page').exists();
     assert.dom('li.atlm-test-prev-page').hasText(this.meta.prev_page);
     assert.dom('li.atlm-test-current-page').exists();
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('li.atlm-test-next-page').exists();
     assert.dom('li.atlm-test-next-page').hasText(this.meta.next_page);
     assert.dom('li.atlm-test-last-ellipsis').exists();
@@ -78,7 +78,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     assert.dom('li.atlm-test-prev-page').exists();
     assert.dom('li.atlm-test-prev-page').hasText(this.meta.prev_page);
     assert.dom('li.atlm-test-current-page').exists();
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('li.atlm-test-next-page').exists();
     assert.dom('li.atlm-test-next-page').hasText(this.meta.next_page);
     assert.dom('li.atlm-test-last-ellipsis').exists();
@@ -104,7 +104,7 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     assert.dom('li.atlm-test-prev-page').exists();
     assert.dom('li.atlm-test-prev-page').hasText(this.meta.prev_page);
     assert.dom('li.atlm-test-current-page').exists();
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('li.atlm-test-next-page').doesNotExist();
     assert.dom('li.atlm-test-last-ellipsis').doesNotExist();
     assert.dom('li.atlm-test-last-page').doesNotExist();
@@ -126,13 +126,13 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
     await fillIn('select', '100');
     assert.dom('.offset').hasText('100');
 
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('div.testing .raster-page').hasText('0');
-    await click('li.atlm-test-next-page a');
+    await click('li.atlm-test-next-page button');
     assert.dom('div.testing .raster-page').hasText('4');
-    await click('li.atlm-test-last-page a');
+    await click('li.atlm-test-last-page button');
     assert.dom('div.testing .raster-page').hasText('59');
-    await click('li.atlm-test-first-page a');
+    await click('li.atlm-test-first-page button');
     assert.dom('div.testing .raster-page').hasText('1');
   });
 
@@ -146,19 +146,19 @@ module('Integration | Component | map-ui/search-panel/pagination', function(hook
       total_pages: '69'
     });
 
-    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="places" />`);
+    await render(hbs`<MapUi::SearchPanel::Pagination @meta={{this.meta}} @type="vectors" />`);
     assert.dom('select').hasValue('50');
     assert.dom('.offset').hasText('50');
     await fillIn('select', '200');
     assert.dom('.offset').hasText('200');
 
-    assert.dom('li.atlm-test-current-page span').hasText(this.meta.current_page);
+    assert.dom('li.atlm-test-current-page button').hasText(this.meta.current_page);
     assert.dom('div.testing .vector-page').hasText('0');
-    await click('li.atlm-test-next-page a');
+    await click('li.atlm-test-next-page button');
     assert.dom('div.testing .vector-page').hasText('6');
-    await click('li.atlm-test-last-page a');
+    await click('li.atlm-test-last-page button');
     assert.dom('div.testing .vector-page').hasText('69');
-    await click('li.atlm-test-first-page a');
+    await click('li.atlm-test-first-page button');
     assert.dom('div.testing .vector-page').hasText('1');
   });
 });

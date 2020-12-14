@@ -16,13 +16,13 @@ module('Integration | Component | map-ui/menu', function(hooks) {
     const projectWithVectors = this.store.createRecord('project');
     const vectorLayer = this.store.createRecord('vectorLayer', {
       show: true,
-      dataType: 'qualitative'
+      dataType: 'Point'
     });
     const rasterLayer = this.store.createRecord('rasterLayer', {
       show: true
     });
     let rlp = this.store.createRecord('rasterLayerProject', {projectWithRasters, rasterLayer});
-    let vlp = this.store.createRecord('vectorLayerProject', {projectWithVectors, vectorLayer, dataType: 'qualitative'});
+    let vlp = this.store.createRecord('vectorLayerProject', {projectWithVectors, vectorLayer});
 
     let withRasters = projectWithRasters.get('rasters');
     withRasters.pushObject(rlp);
@@ -43,7 +43,7 @@ module('Integration | Component | map-ui/menu', function(hooks) {
     assert.dom('.atlm-map-ui-project-menu-options.uk-tab').exists();
     assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide Menu');
     assert.dom('.atlm-project-title h1').hasText(this.project.name);
-    assert.dom('article.atlm-project-description').containsText(this.project.description);
+    assert.dom('article.atlm-project-description').hasText(this.project.description);
     assert.dom('.atlm-raster-menu-button').doesNotExist();
     assert.dom('.atlm-vector-menu-button').doesNotExist();
   });

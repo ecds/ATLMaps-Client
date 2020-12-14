@@ -1,16 +1,21 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/template';
-import L from 'leaflet';
-import { library, icon as faIcon } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+// import L from 'leaflet';
 
 export default class VectorFeatureModel extends Model {
   @attr('string') geometryType;
+  @attr() properties;
   @attr() geojson;
   @attr('string') layerTitle;
   @attr('string') name;
-  @attr('string') style;
+  @attr('string') youtube;
+  @attr('string') vimeo;
+  @attr() images;
+  @attr('string') image;
+  @attr('string') description;
+  // @attr() string;
+
   @attr('boolean', {
     defaultValue() {
       return false;
@@ -20,16 +25,9 @@ export default class VectorFeatureModel extends Model {
   @attr() leafletMarker;
   @belongsTo('vectorLayer') vectorLayer;
 
-  @computed('geojson')
+  @computed('description')
   get safeDescription() {
-    return htmlSafe(this.geojson.properties.description);
-  }
-
-  @computed('geojson')
-  get images() {
-    if (this.geojson.properties.images) return this.geojson.properties.images;
-    if (this.geojson.properties.image) return [this.geojson.properties.image];
-    return null;
+    return htmlSafe(this.description);
   }
 
   @computed('vectorLayer.opacity', 'active')
@@ -45,24 +43,24 @@ export default class VectorFeatureModel extends Model {
     return 3;
   }
 
-  @computed('style', 'active', 'leafletMarker')
-  get divIcon() {
-    if (this.geometryType != 'Point') return null;
-
-    library.add(faMapMarkerAlt);
-    const markerIcon = faIcon({ prefix: 'fas', iconName: 'map-marker-alt' });
-    const html = `<span id="data-layer-${this.id}" style="${this.style};">${markerIcon.html[0]}</span>`;
-
-    let classList = 'leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive atlm-map-marker';
-
-    if (this.active) {
-      classList = `${classList} active`;
+  @computed('color')
+  get style() {
+    if (typeof this.color == 'string') {
+      return `color: ${this.color};`;
     }
-    const newIcon = L.divIcon({
-      html,
-      className: classList
-    });
-    this.leafletMarker.setIcon(newIcon);
-    return newIcon;
+    return `color: ${this.color.hex};`;
   }
+
+  set style(style) {
+    return style;
+  }
+
+  // @computed
+  // get latLng() {
+  //   if (this.geometryType == 'Point') {
+  //     const [lng, lat] = this.geojson.geometries.firstObject.coordinates;
+  //     return L.latLng(lat, lng);
+  //   }
+  //   return null;
+  // }
 }

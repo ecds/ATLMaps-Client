@@ -1,5 +1,5 @@
 {{yield}}
-<p id="range">
+<p>
   Range {{this.range.min}} - {{this.range.max}}
 </p>
 <form class="uk-margin uk-child-width-1-2" uk-grid>
@@ -12,5 +12,10 @@
     <div>
       <Input id={{concat "step-" index "-top"}} class="uk-input" @type="number" @value={{step.top}} @min={{step.bottom}} @max={{step.top}} aria-label={{concat "Top value for step " index}} {{on "change" (fn this.updateTop step)}} {{on "keyup" (fn this.updateTop step)}} />
     </div>
+    {{!-- <div>
+      {{#if (and (eq this.stepsMap.lastObject step) (lt step.top this.range.max) )}}
+        <UkButton @color="primary" {{on "click" this.addStep}}>Add Step</UkButton>
+      {{/if}}
+    </div> --}}
   {{/each-in}}
 </form>

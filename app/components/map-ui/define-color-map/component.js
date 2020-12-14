@@ -14,18 +14,19 @@ export default class MapUiDefineColorMapComponent extends Component {
   @tracked numberValues = true;
   @tracked values = null;
 
+  colorModal = null;
+
   @computed('args.layer.vectorProject.{brewerGroup,steps}')
   get colorBrewerColors() {
-    // if (this.args.layer) {
-    return this.colorBrewer.getGroup(this.args.layer.vectorProject.brewerGroup, this.args.layer.vectorProject.steps);
-    // }
-    // return null;
+    if (this.args.layer) {
+      return this.colorBrewer.getGroup(this.args.layer.vectorProject.brewerGroup, this.args.layer.vectorProject.steps);
+    }
+    return null;
   }
 
   @action
   initModal(element) {
     if (this.fastboot.isFastBoot) return;
-
     if (this.args.edit) {
       this.start = false;
       this.args.layer.vectorLayer
@@ -36,22 +37,26 @@ export default class MapUiDefineColorMapComponent extends Component {
             this.setValues(prop);
           }
         });
+    }
+
+    /*
+      TODO: Until we figure out how to test UIKit Modals, we're going
+      to skip initializing the modal during testing.
+    */
+    if (this.args.test) {
+      this.colorModal = {
+        show: function() { return true; },
+        hide: function() { return true; }
+      };
     } else {
-      this.args.layer.vectorProject.setProperties({ colorMap: {} });
+      this.colorModal = modal(element, { bgClose: false });
+      util.on(element, 'beforehide', () => {
+        this.start = true;
+        this.numberValues = true;
+        this.args.cancel();
+      });
+      this.colorModal.show();
     }
-
-    let modalOptions = { bgClose: false };
-
-    if (this.args.isTesting) {
-      modalOptions.container = '#container';
-    }
-    this.colorModal = modal(element, modalOptions);
-    util.on(element, 'beforehide', () => {
-      this.start = true;
-      this.numberValues = true;
-      this.args.cancel();
-    });
-    this.colorModal.show();
   }
 
   @action
@@ -62,7 +67,7 @@ export default class MapUiDefineColorMapComponent extends Component {
           brewerGroup: null,
           steps: null,
           property: null,
-          colorMap: {}
+          colorMap: null
         }
       );
       // this.args.layer.vectorProject.rollbackAttributes();
@@ -80,8 +85,13 @@ export default class MapUiDefineColorMapComponent extends Component {
   }
 
   @action
+  setColor(propertyKey, event) {
+    this.args.layer.vectorProject.colorMap[propertyKey.toLowerCase()] = { color: event.target.value };
+  }
+
+  @action
   setBrewerScheme(event) {
-    if (this.args.layer.vectorProject.manualSteps) {
+    if (this.manualSteps) {
       let colors = this.colorBrewer.getGroup(this.args.layer.vectorProject.brewerGroup, this.args.layer.vectorProject.steps)[event.target.value];
       let _colorMap = this.args.layer.vectorProject.colorMap;
       _colorMap.forEach((step, index) => {
@@ -116,7 +126,7 @@ export default class MapUiDefineColorMapComponent extends Component {
   setUpColorMap() {
     let colorMap = {};
     this.values.sort().forEach(value => {
-      colorMap[value.toLowerCase()] = { color: this.colorBrewer.getRandom() };
+      colorMap[value.toLowerCase()] = { color: this.args.layer.vectorLayer.get('tempColor.hex') };
     });
     this.args.layer.vectorProject.setProperties({ colorMap });
   }

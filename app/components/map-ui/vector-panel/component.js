@@ -38,7 +38,7 @@ export default class MapUiVectorPanelComponent extends Component {
  */
   @action
   showLayer(layer) {
-    if (layer.get('geometryType') == 'MultiPolygon') {
+    if (layer.get('dataType') == 'MultiPolygon') {
       layer.setProperties({ opacity: 30.1 });
     } else {
       layer.setProperties({ opacity: 100.1 });
@@ -46,22 +46,8 @@ export default class MapUiVectorPanelComponent extends Component {
   }
 
   @action
-  editLayerColors(vector) {
+  editLayer(vector) {
     this.vectorToEdit = { vectorProject: vector, vectorLayer: vector.vectorLayer };
-  }
-
-  @action
-  updatePointColor(vector) {
-    vector.get('vectorLayer.vectorFeatures').forEach( feature => {
-      feature.setProperties({ style: `color: ${vector.color};`});
-      // Not sure why we have to call `divIcon` to get the icon on the map to update.
-      feature.divIcon;
-    });
-  }
-
-  @action
-  saveColor(vector) {
-    vector.save();
   }
 
   @action

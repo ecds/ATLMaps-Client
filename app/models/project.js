@@ -91,38 +91,14 @@ export default class ProjectModel extends Model {
   //   return baseObj;
   // }
 
-  @computed('vectors.@each')
-  get places() {
-    return this.get('vectors').filter(layer => {
-      return layer.dataType == 'qualitative';
-    });
-  }
-
-  @computed('vectors.@each')
-  get data() {
-    return this.vectors.filter(layer => {
-      return layer.dataType == 'quantitative';
-    });
-  }
-
   @computed('rasters')
   get hasRasters() {
     return this.rasters.length > 0;
   }
 
-  @computed('vectors.@each')
+  @computed('vectors')
   get hasVectors() {
     return this.vectors.length > 0;
-  }
-
-  @computed('vectors.@each', 'places')
-  get hasPlaces() {
-    return this.places.length > 0;
-  }
-
-  @computed('vectors.@each', 'data')
-  get hasData() {
-    return this.data.length > 0;
   }
 
   @computed('rasters.@each.opacity')

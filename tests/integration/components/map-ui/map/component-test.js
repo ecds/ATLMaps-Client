@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, findAll, render, settled, triggerKeyEvent } from '@ember/test-helpers';
+import { click, findAll, render, settled, triggerKeyEvent, waitFor } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 // import MapComponent from 'atlmaps-client/components/map';
 import ENV from 'atlmaps-client/config/environment';
@@ -64,8 +64,7 @@ module('Integration | Component | map', function(hooks) {
       dataType: 'MultiPolygon',
       geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Woodruff Park","description": "Downtown park", "data": "2"},"geometry": {"type": "Polygon","coordinates": [[[-84.38957780599594,33.75454664293867],[-84.38853710889815,33.75453995276731],[-84.38792288303375,33.755717414886966],[-84.38849955797195,33.75621247935816],[-84.38957780599594,33.75454664293867]]]}}]},
       dataFormat: 'vector',
-      onMap: true,
-      opacity: 40
+      onMap: true
     });
 
     const vlp3 = this.store.createRecord('vectorLayerProject', {
@@ -86,8 +85,7 @@ module('Integration | Component | map', function(hooks) {
       dataType: 'MultiPolygon',
       geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Emory Library","description": "library", "grade": "b"},"geometry": {"type": "Polygon","coordinates": [[[-84.32297587394714,33.79003065321512],[-84.32229459285736,33.79044081281942],[-84.32324409484863,33.79094013490301],[-84.32297587394714,33.79003065321512]]]}}]},
       dataFormat: 'vector',
-      onMap: true,
-      opacity: 40
+      onMap: true
     });
 
     const vlp4 = this.store.createRecord('vectorLayerProject', {

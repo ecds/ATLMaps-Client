@@ -1,27 +1,14 @@
 <div class="uk-card-media-top">
   <div uk-slideshow>
-    <ul class="uk-slideshow-items atlm-popup-gallery">
-      {{#each-in @properties.images as |index image|}}
-        <li class="uk-text-center">
-          <a href={{concat "#image-modal-" @properties.images.id "-" index}} title={{image.caption}} uk-toggle>
-            <img src="{{image.url}}" alt="" role="presentation">
-          </a>
+    <ul class="uk-slideshow-items">
+      {{#each @images as |image|}}
+        <li>
+          <img src="{{image}}" alt="" role="presentation" uk-cover>
         </li>
-      {{/each-in}}
+      {{/each}}
     </ul>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
   </div>
 </div>
-{{#each-in @properties.images as |index image|}}
-  <div id={{concat "image-modal-" @properties.images.id "-" index}} class="uk-flex-top" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-      <button class="uk-modal-close-outside" type="button" uk-close></button>
-      <img src={{image.url}} alt="" role="presentation">
-      {{#if image.caption}}
-        <p class="uk-text-center">
-          {{image.caption}}
-        </p>
-      {{/if}}
-    </div>
-  </div>
-{{/each-in}}

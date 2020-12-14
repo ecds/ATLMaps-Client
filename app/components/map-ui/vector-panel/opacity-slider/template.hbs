@@ -1,25 +1,11 @@
 <div class="uk-padding-small uk-padding-remove-horizontal">
- <label for={{concat "opacity-" @vector.vectorLayer.name}}>
+ <label for={{concat "opacity-" @vectorLayer.name}}>
     Opacity
   </label>
-  <Input
-    id={{concat "opacity-" @vector.vectorLayer.name}}
-    @type="number"
-    @min={{0}}
-    @max={{100}}
-    @step={{5}}
-    {{on "change" this.updateOpacity}}
-    @value={{@vector.vectorLayer.opacity}} />%
+  <Input id={{concat "opacity-" @vectorLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}} @value={{@vectorLayer.opacity}} />%
 </div>
 <div class="uk-padding-small">
-  <style>{{concat "#opacity-slider-" @vector.vectorLayer.name}} { background: {{concat "linear-gradient(to right, #f47404 0%, #f47404 " @vector.vectorLayer.opacity "%, #fff " @vector.vectorLayer.opacity "%, white 100%)"}}</style>
-  <Input
-    id={{concat "opacity-slider-" @vector.vectorLayer.name}}
-    class="atlm-slider" type="range"
-    @min={{0}}
-    @max={{100}}
-    @step={{1}}
-    @value={{@vector.vectorLayer.opacity}}
-    {{on "change" this.updateOpacity}}
-    aria-label={{concat "Change Opacity of " @vector.vectorLayer.name}} />
+  <style>{{concat "#opacity-slider-" @vectorLayer.name}} { background: {{concat "linear-gradient(to right, #f47404 0%, #f47404 " @vectorLayer.opacity "%, #fff " @vectorLayer.opacity "%, white 100%)"}}</style>
+  <Input id={{concat "opacity-slider-" @vectorLayer.name}} class="atlm-slider" type="range" @min={{0}} @max={{100}} @step={{1}} @value={{@vectorLayer.opacity}} />
 </div>
+<label class="atlm-opacity-slider-label" for={{concat "opacity-slider-" @vectorLayer.name}}>Opacity Slider</label>

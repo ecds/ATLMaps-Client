@@ -13,24 +13,12 @@ export default function() {
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
     this.get('/projects');
-    this.post('/projects');
     this.get('/projects/:id');
-    this.put('/projects/:id');
     this.get('/raster-layer-projects/:id');
     this.get('/raster-layers/:id');
     this.get('/raster-layers');
     this.get('/vector-layers');
     this.get('/categories');
-    this.put('/vector-layer-projects/:id');
-    this.post('/vector-layer-projects');
-    this.del('/vector-layer-projects/:id');
-    this.post('/raster-layer-projects');
-    this.post('/raster-layer-projects/:id');
-    this.del('/raster-layer-projects/:id');
-    this.put('/raster-layer-projects/:id');
-    this.del('/tokens/')
-
-
     // this.post('/posts');
     // this.get('/posts/:id');
     // this.put('/posts/:id'); // or this.patch

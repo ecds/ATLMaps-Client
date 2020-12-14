@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import { enqueueTask, restartableTask } from 'ember-concurrency-decorators';
+import { restartableTask } from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
@@ -9,12 +9,7 @@ export default class SearchResultsService extends Service {
 
   @tracked
   rasters = null; //this.store.query('rasterLayer', this.getSearchParams());
-
-  @tracked
-  places = null;
-
-  @tracked
-  data = null;
+  // rasters = this.setRasters();
 
   @tracked
   vectors = null; //this.store.query('vectorLayer', this.getSearchParams());
@@ -44,31 +39,13 @@ export default class SearchResultsService extends Service {
   }
 
   @restartableTask
-  *getPlaces() {
-    let params = this.getSearchParams();
-    params.page = this.searchParameters.placePage;
-    params.type = 'qualitative';
-    this.places = yield this.store.query(
-      'vectorLayer',
-      params
-    );
-  }
-
-  @restartableTask
-  *getData() {
-    let params = this.getSearchParams();
-    params.page = this.searchParameters.dataPage;
-    params.type = 'quantitative';
-    this.data = yield this.store.query(
-      'vectorLayer',
-      params
-    );
-  }
-
-  @enqueueTask
   *getVectors() {
-    yield this.getPlaces.perform();
-    yield this.getData.perform();
+    const params = this.getSearchParams();
+    params.page = this.searchParameters.vectorPage;
+    this.vectors = yield this.store.query(
+      'vectorLayer',
+      params
+    );
   }
 
   updateResults() {
