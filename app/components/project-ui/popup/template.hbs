@@ -1,7 +1,7 @@
 <div class="uk-border-rounded uk-box-shadow-xlarge uk-card uk-card-default uk-width-1-2@m atlm-popup {{unless @activeFeature "uk-hidden"}}" {{did-insert this.initDraggable}}>
   <div class="uk-card-header atlm-popup-handle">
     <div class="uk-grid-small  uk-flex-middle" uk-grid uk-height-match>
-      <div class="uk-width-auto atlm-popup-icon" style={{@activeFeature.style}}>
+      <div class="uk-width-auto atlm-popup-icon" style={{html-safe @activeFeature.style}}>
         <FaIcon @icon={{@activeFeature.vectorLayer.icon}} />
       </div>
       <div class="uk-width-expand">

@@ -38,6 +38,19 @@ module.exports = function(environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
+    ENV['fauxOAuth'].tokenAuthUrl = '/tokens/';
+    ENV['ember-a11y-testing'] = {
+      componentOptions: {
+        axeOptions: {
+          rules: {
+            'color-contrast': { enabled: false } // enable region rule
+          },
+          checks: {
+            'color-contrast': { options: { noScroll: true } } // disable scrolling of color-contrast check
+          }
+        }
+      }
+    }
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

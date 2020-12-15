@@ -8,10 +8,9 @@ module('Unit | Controller | application', function(hooks) {
     this.set('session', this.owner.lookup('service:session'));
     this.session.invalidate = () => {
       this.session.isAuthenticated = false;
-    }
+    };
   });
 
-  // Replace this with your real tests.
   test('it invalidates the session', function(assert) {
     this.session.isAuthenticated = true;
     assert.ok(this.session.isAuthenticated);

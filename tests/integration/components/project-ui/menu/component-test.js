@@ -41,7 +41,7 @@ module('Integration | Component | project-ui/menu', function(hooks) {
     await waitFor('.uk-open');
     assert.dom('#uk-accordion.uk-accordion').exists();
     assert.dom('.atlm-project-ui-project-menu-options.uk-tab').exists();
-    assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide Menu');
+    assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide');
     assert.dom('.atlm-project-title h1').hasText(this.project.name);
     assert.dom('article.atlm-project-description').containsText(this.project.description);
     assert.dom('.atlm-raster-menu-button').doesNotExist();
@@ -60,7 +60,7 @@ module('Integration | Component | project-ui/menu', function(hooks) {
     await settled();
     assert.dom('.atlm-project-title').hasClass('uk-animation-slide-right-small');
     assert.dom('li.main-menu-toggle').doesNotHaveClass('uk-open');
-    assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Show Menu');
+    assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Show');
   });
 
   test('it shows raster menu option', async function(assert) {
