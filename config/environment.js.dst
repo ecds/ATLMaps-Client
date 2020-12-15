@@ -24,6 +24,10 @@ module.exports = function(environment) {
       CENTER_LNG: -84.3898100,
       INITIAL_ZOOM: 14,
       DEFAULT_BASE_MAP: 'grayscale'
+    },
+
+    fauxOAuth: {
+      baseUrl: 'http://auth.digitalscholarship.emory.edu/auth/'
     }
   };
 
