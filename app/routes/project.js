@@ -5,11 +5,15 @@ import { action } from '@ember/object';
 
 export default class ProjectRoute extends Route {
   @service deviceContext;
+  @service fastboot;
 
   model(params) {
     // Search results are loaded through the SearchResultsService.
     let project = null;
-    if (params.project_id == 'explore') {
+    if (this.fastboot.isFastBoot) {
+      project = {};
+    }
+    else if (params.project_id == 'explore') {
       project = this.store.createRecord(
         'project',
         {
@@ -35,24 +39,4 @@ export default class ProjectRoute extends Route {
   afterModel() {
     this.deviceContext.setDeviceContext();
   }
-
-  @action
-  willTransition() {
-    // this.store.unloadAll('vectorLayerProject');
-    // this.store.unloadAll('rasterLayerProject');
-    // this.store.peekAll('vectorLayer').forEach( layer => {
-    //   if (layer.get('hasDirtyAttributes')) {
-    //     layer.rollBackAttributes();
-    //   }
-    // });
-
-    // this.store.peekAll('vectorLayer').forEach((layer) => {
-    //   console.log(layer.onMap);
-    //   // layer.setProperties({ onMap: false });
-    //   console.log(layer.onMap);
-    // });
-
-    // this.store.unloadRecord(this.currentModel.project);
-  }
-
 }

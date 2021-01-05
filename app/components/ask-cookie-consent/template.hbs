@@ -1,0 +1,14 @@
+<span {{did-insert this.checkConsent}}></span>
+{{#unless this.cookieConsent}}
+  <section class="uk-animation-slide-bottom atlm-cookie-consent">
+    <section class="uk-position-center uk-text-center">
+      <p>
+        We use cookies to improve the user experience and mange sessions. We do not share or track any data stored in a cookie. You can review <a href="https://digitalscholarship.emory.edu/about/privacy-policy.html">our privacy policy</a> for more information.
+      </p>
+      <p>
+        <UkButton id="decline-cookies" @color="secondary" {{on "click" this.decline}}>Decline</UkButton>
+        <UkButton id="allow-cookies" @color="primary" {{on "click" this.consent}}>Allow</UkButton>
+      </p>
+    </section>
+  </section>
+{{/unless}}

@@ -1,6 +1,7 @@
+<AskCookieConsent />
 <div id="auth-modal" class="" uk-modal>
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-    <EcdsAuth />
+    <EcdsAuth @modelsToReload={{array 'project'}} />
   </div>
 </div>
 <div uk-sticky>
@@ -17,9 +18,13 @@
             </LinkTo>
           </li>
           <li>
-            <LinkTo @route="explore" class="explore">
-              Explore
-            </LinkTo>
+            {{#if this.session.isAuthenticated}}
+              <a href="#" {{on "click" (perform this.newProject)}}>New Project</a>
+            {{else}}
+              <LinkTo @route="explore" class="explore">
+                Explore
+              </LinkTo>
+            {{/if}}
           </li>
         </ul>
        </div>
@@ -66,6 +71,6 @@
        </div>
     </nav>
 </div>
-<div id="main">
+<div id="main" class={{this.deviceContext.deviceContextClass}}>
   {{outlet}}
 </div>

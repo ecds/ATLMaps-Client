@@ -21,7 +21,7 @@ export default class ProjectUiMenuComponent extends Component {
   showToggle = false;
 
   @tracked
-  hideMenuPanel = true;
+  hideMenuPanel = false;
 
   checkIfOpen(accordion) {
     // I think this fires for the UIkit Accordion and for the
@@ -64,5 +64,15 @@ export default class ProjectUiMenuComponent extends Component {
     };
 
     this.ukTabs = UIkit.tab(element, tabOptions);
+  }
+
+  @action
+  initMobilePanel(element) {
+    this.mobilePanel = UIkit.switcher(element);
+  }
+
+  @action
+  closeMobilePanel() {
+    this.hideMenuPanel = true;
   }
 }

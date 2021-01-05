@@ -14,14 +14,16 @@
       <p id="intro-modal-text">{{html-safe @project.intro}}</p>
     </section>
     <p class="uk-text-right">
-      <UkButton id="toggle-hide-cookie" {{on "click" this.toggleHideCookie}}>
-        {{#if this.hideIntro}}
-          <FaIcon @icon="check-square" />
-        {{else}}
-          <FaIcon @icon="square" @prefix="far" />
-        {{/if}}
-        Don't show each time
-      </UkButton>
+      {{#if this.cookieConsent}}
+        <UkButton id="toggle-hide-cookie" {{on "click" this.toggleHideCookie}}>
+          {{#if this.hideIntro}}
+            <FaIcon @icon="check-square" />
+          {{else}}
+            <FaIcon @icon="square" @prefix="far" />
+          {{/if}}
+          Don't show each time
+        </UkButton>
+      {{/if}}
       <UkButton @color="secondary" uk-toggle target={{concat "#modal-" @project.id}}>
         Explore Project
       </UkButton>

@@ -3,11 +3,13 @@
     <h1>Sign in</h1>
   </div>
   <div></div>
-  <LoginButton @provider="emory" @providerTitle="shibboleth" @icon="icon-emory_shield">
-    Emory
-  </LoginButton>
-  <div></div>
-  <LoginButton @provider="google" @providerTitle="google_oauth2" >
+  {{#each this.providers as |provider|}}
+    <LoginButton @provider={{provider}} @reloadModels={{this.reloadModels}}>
+      {{provider.provider}}
+    </LoginButton>
+    <div></div>
+  {{/each}}
+  {{!-- <LoginButton @provider="google" @providerTitle="google_oauth2" >
     Google
   </LoginButton>
   <div></div>
@@ -22,7 +24,7 @@
   <LoginButton @provider="twitter" @providerTitle="twitter">
     Twitter
   </LoginButton>
-  <div></div>
+  <div></div> --}}
 
   <div>
     By signing in you agree to Emory Center for Digital Scholarship"s

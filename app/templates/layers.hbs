@@ -1,7 +1,7 @@
 <div class="uk-flex uk-position-fixed">
   <article class="uk-article uk-padding uk-overflow-hidden uk-overflow-auto atlm-share-layer-meta">
     <h1 class="uk-article-title">{{this.layer.title}}</h1>
-    <p>{{this.layer.description}}</p>
+    <p>{{html-safe this.layer.description}}</p>
     {{#if (eq this.type 'raster')}}
       <section>
         <Input id={{concat "opacity-slider-" this.layer.name}} class="atlm-slider" type="range" @min={{0}} @max={{100}} @step={{5}} @value={{this.opacity}} aria-label={{concat "opacity-slider-" this.layer.name}} />
@@ -36,6 +36,8 @@
         <layers.geojson
           @geoJSON={{feature.geojson}}
           @onEachFeature={{this.onEachFeature}}
+          @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color this.layer feature) "darkgray" }}
+          @fillColor={{vector-color this.layer feature}}
         />
         {{/each}}
       {{/if}}

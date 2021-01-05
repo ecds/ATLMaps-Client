@@ -6,8 +6,11 @@ import { inject as service } from '@ember/service';
 
 export default class ProjectModel extends Model {
   @service baseMaps;
+  @service store;
 
-  @attr('string') name;
+  @attr('string', {
+    defaultValue() { return 'untitled'; }
+  }) name;
   @attr('string') description;
   @attr('string') intro;
   @attr('string') media;
@@ -60,37 +63,6 @@ export default class ProjectModel extends Model {
     return this.baseMaps[value];
   }
 
-  // @computed('zoomLevel')
-  // get _zoomLevel() {
-  //   return this.zoomLevel;
-  // }
-
-  // set _zoomLevel(value) {
-  //   return value;
-  // }
-
-  // @computed('centerLat')
-  // get _centerLat() {
-  //   return this.centerLat;
-  // }
-
-  // set _centerLat(value) {
-  //   return value;
-  // }
-
-  // @computed('centerLng')
-  // get _centerLng() {
-  //   return this.centerLng;
-  // }
-
-  // set _centerLng(value) {
-  //   return value;
-  // }
-
-  // set base(baseObj) {
-  //   return baseObj;
-  // }
-
   @computed('vectors.@each')
   get places() {
     return this.get('vectors').filter(layer => {
@@ -135,9 +107,19 @@ export default class ProjectModel extends Model {
     return this.get('vectors').isEvery('show', false);
   }
 
+  @computed('rasters.@each.opacity', 'vectors.@each.show')
+  get allLayersHidden() {
+    return this.allRastersHidden && this.allVectorsHidden;
+  }
+
   @computed('name', 'description', 'published', 'centerLat', 'centerLng', 'zoomLevel', 'defaultBaseMap')
   get unSaved() {
     return Object.keys(this.changedAttributes()).length > 1;
+  }
+
+  @computed
+  get activeFeature() {
+    return this.store.peekAll('vectorFeature').filter(feature => feature.active).firstObject;
   }
 
   @sort('rasters', '_rasterPositionSort')

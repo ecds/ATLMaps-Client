@@ -7,19 +7,19 @@
   uk-grid
   {{did-insert this.initToggle}}
 >
-  {{#if @status}}
+  {{#if @project.allLayersHidden}}
     <div class="atlm-toggle-switch">
       <FaIcon @icon="toggle-off" />
     </div>
     <div class="atlm-toggle-status">
-      Show all
+      Show Layers
     </div>
   {{else}}
     <div class="atlm-toggle-switch">
       <FaIcon @icon="toggle-on" />
     </div>
     <div class="atlm-toggle-status">
-      Hide all
+      Hide Layers
     </div>
   {{/if}}
 </div>

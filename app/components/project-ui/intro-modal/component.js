@@ -19,6 +19,11 @@ export default class ProjectUiIntroModalComponent extends Component {
     return set;
   }
 
+  @computed
+  get cookieConsent() {
+    return this.cookies.exists('cookieConsent');
+  }
+
   @action
   initModal(element) {
     let modalOptions = {};

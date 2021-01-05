@@ -5,9 +5,12 @@ import { inject as service } from '@ember/service';
 export default class DeviceContextService extends Service {
   @service fastboot;
 
-  deviceContextClass = this.deviceContextClass || 'desktop';
   windowWidth = this.windowWidth || null;
+  windowHeight = this.windowHeight || null;
+  @tracked deviceContextClass = this.deviceContextClass || 'atlm-desktop';
   @tracked isDesktop = this.isDesktop || true;
+  @tracked isMobile = !this.isDesktop;
+  @tracked isLandscape = this.isLandscape || false;
 
   constructor() {
     super(...arguments);
@@ -20,15 +23,25 @@ export default class DeviceContextService extends Service {
     });
   }
 
-  setDeviceContext() {
-    this.windowWidth = window.innerWidth;
-
-    if (this.windowWidth > 640) {
-      this.deviceContextClass = 'atlm-desktop';
-      this.isDesktop = true;
+  setDeviceContext(context=null) {
+    if (context) {
+      this.isDesktop = context == 'desktop';
+      this.deviceContextClass = `atlm-${context}`;
     } else {
-      this.deviceContextClass = 'atlm-mobile';
-      this.isDesktop = false;
+      this.windowWidth = window.innerWidth;
+      this.windowHeight = window.innerHeight;
+
+      if (this.windowHeight < this.windowWidth) {
+        this.isLandscape = true;
+      }
+
+      if (this.windowWidth > 1080) {
+        this.deviceContextClass = 'atlm-desktop';
+        this.isDesktop = true;
+      } else {
+        this.deviceContextClass = 'atlm-mobile';
+        this.isDesktop = false;
+      }
     }
   }
 }

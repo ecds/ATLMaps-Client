@@ -131,6 +131,11 @@ export default class VectorLayerModel extends Model {
     );
   }
 
+  @computed
+  get property() {
+    return this.defaultBreakProperty;
+  }
+
   // Specific properties for VectorTile Layers
 
   // @computed('properties', 'propertyId')

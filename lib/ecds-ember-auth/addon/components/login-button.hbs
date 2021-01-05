@@ -1,9 +1,9 @@
-<UkButton class="uk-padding-small login-button {{@provider}} uk-grid-collapse" @disabled={{this.session.isAuthenticated}} @color="primary" uk-grid @on-click={{action "signin" @providerTitle}}>
+<UkButton class="uk-padding-small login-button {{@provider.provider}} uk-grid-collapse" @disabled={{this.session.isAuthenticated}} @color="primary" uk-grid {{on "click" this.signin}}>
   <div class="uk-width-1-6">
-    {{#if @icon}}
+    {{#if @provider.icon}}
       <i class="demo-icon {{@icon}}"></i>
     {{else}}
-      <FaIcon @icon={{@provider}} @prefix="fab"></FaIcon>
+      <FaIcon @icon={{@provider.provider}} @prefix="fab"></FaIcon>
     {{/if}}
   </div>
   <div class="uk-width-expand uk-text-left">

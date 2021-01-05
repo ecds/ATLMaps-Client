@@ -6,7 +6,9 @@ export default class CurrentUserService extends Service {
   @service session;
   @service store;
 
-  async checkCurrentUser() {
+  user = this.user || null;
+
+  async setCurrentUser() {
     if (!this.session.isAuthenticated) return null;
     let user = null;
     try {
@@ -29,6 +31,7 @@ export default class CurrentUserService extends Service {
     } finally {
       // reload model?
     }
-    return user;
+    this.user = this.store.createRecord('user', user.data);
+    return this.user;
   }
 }

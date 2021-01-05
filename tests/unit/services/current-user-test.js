@@ -19,13 +19,13 @@ module('Unit | Service | current_user', function(hooks) {
       return { name: 'Ford Prefect' };
     });
     this.session.isAuthenticated = true;
-    let user = await this.service.checkCurrentUser();
+    let user = await this.service.setCurrentUser();
     assert.equal(user.name, 'Ford Prefect');
   });
 
   test('it gets null when not authenticated', async function(assert) {
     this.session.isAuthenticated = false;
-    let user = await this.service.checkCurrentUser();
+    let user = await this.service.setCurrentUser();
     assert.equal(user, null);
   });
 
@@ -37,7 +37,7 @@ module('Unit | Service | current_user', function(hooks) {
     this.server.get('/users/me', () => {
       return new Response(404);
     });
-    await this.service.checkCurrentUser();
+    await this.service.setCurrentUser();
     assert.notOk(this.session.isAuthenticated);
   });
 
@@ -49,7 +49,7 @@ module('Unit | Service | current_user', function(hooks) {
     this.server.get('/users/me', () => {
       return null;
     });
-    await this.service.checkCurrentUser();
+    await this.service.setCurrentUser();
     assert.notOk(this.session.isAuthenticated);
   });
 

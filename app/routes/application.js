@@ -7,6 +7,6 @@ export default class ApplicationRoute extends Route {
   @service fastboot;
 
   afterModel(/* model, transition */) {
-    this.currentUser.checkCurrentUser();
+    this.currentUser.setCurrentUser();
   }
 }

@@ -8,9 +8,4 @@ export default class ProjectsRoute extends Route {
   async model() {
     return this.store.findAll('project');
   }
-
-  @action
-  willTransition() {
-    // this.store.unloadAll('project');
-  }
 }

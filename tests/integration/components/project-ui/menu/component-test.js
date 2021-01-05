@@ -8,6 +8,7 @@ module('Integration | Component | project-ui/menu', function(hooks) {
 
   hooks.beforeEach(function() {
     this.set('store', this.owner.lookup('service:store'));
+    this.set('deviceContext', this.owner.lookup('service:deviceContext'));
     const project = this.store.createRecord('project', {
       name: 'Black Lives Matter',
       description: 'Why is that controversial?'
@@ -79,4 +80,10 @@ module('Integration | Component | project-ui/menu', function(hooks) {
     assert.dom('.atlm-panel-title').hasText('Data Layers');
   });
 
+  test('it shows buttons for mobile view', async function(assert) {
+    this.deviceContext.setDeviceContext('mobile');
+    await render(hbs`<ProjectUi::Menu @project={{this.project}}/>`);
+    assert.dom('.atlm-project-ui-project-menu').doesNotExist();
+    assert.dom('.atlm-mobile-project-menu').exists();
+  });
 });

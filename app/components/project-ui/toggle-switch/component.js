@@ -10,15 +10,21 @@ export default class ProjectUiToggleSwitchComponent extends Component {
 
   @action
   toggleVisible() {
-    let layers = this.args.project.rasters;
+    // let layers = this.args.project.rasters;
 
-    if (this.args.status) {
-      layers.forEach(layer => {
+    if (this.args.project.allLayersHidden) {
+      this.args.project.rasters.forEach(layer => {
         layer.setProperties({ opacity: 100 });
       });
+      this.args.project.vectors.forEach(vector => {
+        vector.setProperties({ show: true });
+      });
     } else {
-      layers.forEach(layer => {
+      this.args.project.rasters.forEach(layer => {
         layer.setProperties({ opacity: 0 });
+      });
+      this.args.project.vectors.forEach(vector => {
+        vector.setProperties({ show: false });
       });
     }
   }
