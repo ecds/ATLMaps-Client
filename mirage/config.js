@@ -28,7 +28,8 @@ export default function() {
     this.post('/raster-layer-projects/:id');
     this.del('/raster-layer-projects/:id');
     this.put('/raster-layer-projects/:id');
-    this.del('/tokens/')
+    this.del('/tokens/');
+    this.get('/users/me');
 
 
     // this.post('/posts');

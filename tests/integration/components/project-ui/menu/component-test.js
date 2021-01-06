@@ -39,7 +39,7 @@ module('Integration | Component | project-ui/menu', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<ProjectUi::Menu @project={{this.project}}/>`);
     await settled();
-    await waitFor('.uk-open');
+    await waitFor('li.uk-open');
     assert.dom('#uk-accordion.uk-accordion').exists();
     assert.dom('.atlm-project-ui-project-menu-options.uk-tab').exists();
     assert.dom('#uk-accordion.uk-accordion li a.uk-accordion-title').hasText('Hide');

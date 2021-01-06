@@ -16,11 +16,11 @@ module('Unit | Service | current_user', function(hooks) {
 
   test('it gets current user when authenticated', async function(assert) {
     this.server.get('/users/me', () => {
-      return { name: 'Ford Prefect' };
+      return { data: { displayName: 'Ford Prefect' }};
     });
     this.session.isAuthenticated = true;
     let user = await this.service.setCurrentUser();
-    assert.equal(user.name, 'Ford Prefect');
+    assert.equal(user.displayName, 'Ford Prefect');
   });
 
   test('it gets null when not authenticated', async function(assert) {

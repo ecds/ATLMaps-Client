@@ -7,7 +7,13 @@ export default class UkOffcanvasComponent extends Component {
 
   @action
   initOffcanvas(element) {
-    this.offcanvas = UIkit.offcanvas(element, { flip: true });
+    this.offcanvas = UIkit.offcanvas(
+      element,
+      {
+        flip: true,
+        container: '#off-canvas-container'
+      }
+    );
     if (this.args.open) {
       this.offcanvas.toggle();
     }
@@ -15,7 +21,6 @@ export default class UkOffcanvasComponent extends Component {
 
   @action
   willDestroyNode() {
-    console.log('destroying')
     this.offcanvas.toggle();
     this.offcanvas.$destroy(true);
   }

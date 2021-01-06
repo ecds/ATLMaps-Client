@@ -21,17 +21,24 @@ export default class CurrentUserService extends Service {
       if (response.ok) {
         user = await response.json();
         if (!user) {
-          this.session.session.invalidate();
+          this._invalidateSession();
+        } else {
+          this.user = this.store.createRecord('user', user.data);
         }
       } else {
-        this.session.session.invalidate();
+        this._invalidateSession();
       }
     } catch(error) {
       // Do Something?
     } finally {
       // reload model?
     }
-    this.user = this.store.createRecord('user', user.data);
     return this.user;
+  }
+
+  _invalidateSession() {
+    this.session.session.invalidate();
+    this.store.unloadAll('user');
+    this.user = null;
   }
 }

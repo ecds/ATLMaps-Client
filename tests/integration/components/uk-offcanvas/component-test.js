@@ -8,9 +8,6 @@ module('Integration | Component | uk-offcanvas', function(hooks) {
   setupRenderingTest(hooks);
 
   test('toggles on interactions', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
     await render(hbs`<UkOffcanvas />`);
     await settled();
     assert.equal(this.element.textContent.trim(), 'Add Layers');

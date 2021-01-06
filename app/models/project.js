@@ -46,6 +46,10 @@ export default class ProjectModel extends Model {
 
   @attr('boolean', {
     defaultValue() { return false; }
+  }) featured;
+
+  @attr('boolean', {
+    defaultValue() { return false; }
   }) isExploring;
 
   @attr() leafletMap;
