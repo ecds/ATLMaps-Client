@@ -22,9 +22,8 @@
               </p>
                 {{/if}}
             </div>
-            {{!-- TODO: There has to be a better way than this conditional. --}}
             <ProjectUi::ToggleSwitch @project={{@project}} />
-            {{#if (and @project.unSaved (contains "Edit" (w this.panelTitle)))}}
+            {{#if @project.unSaved}}
               <div
                 class="uk-text-center uk-grid-collapse uk-child-width-1-1 atlm-toggle"
                 tabindex="0"
@@ -104,7 +103,10 @@
           <li>
             <article class="uk-card-body atlm-project-description">
               <p>
-                {{@project.description}}
+                {{html-safe @project.description}}
+              </p>
+              <p>
+                Project Created By: {{@project.owner}}
               </p>
               <p>
                 Base map provided by: {{html-safe @project._defaultBaseMap.attribution}}
@@ -142,92 +144,85 @@
   </li>
 </ul>
 {{else}}
-  {{!-- <div class="uk-text-center atlm-mobile-project-panel-close" role="button" {{on "click" (toggle "hideMenuPanel" this)}}>
-    {{#if this.hideMenuPanel}}
-      <FaIcon @icon="chevron-up" /> Open
-    {{else}}
-      <FaIcon @icon="chevron-down" /> Close
-    {{/if}}
-  </div> --}}
-<section class="atlm-mobile-project-menu">
-  <ul class="uk-flex-center uk-subnav atlm-mobile-project-menu-buttons" {{did-insert this.initMobilePanel}} uk-switcher>
-      <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
-      {{#if @project.hasRasters}}
-        <li><a href="#" class="uk-text-center"><FaIcon @icon="map" /></a></li>
-      {{/if}}
-      {{#if @project.hasPlaces}}
-        <li><a href="#" class="uk-text-center"><FaIcon @icon="map-marker-alt" /></a></li>
-      {{/if}}
-      {{#if @project.hasData}}
-        <li><a href="#" class="uk-text-center"><FaIcon @icon="database" /></a></li>
-      {{/if}}
-  </ul>
+  <section class="atlm-mobile-project-menu">
+    <ul class="uk-flex-center uk-subnav atlm-mobile-project-menu-buttons" {{did-insert this.initMobilePanel}} uk-switcher>
+        <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
+        {{#if @project.hasRasters}}
+          <li><a href="#" class="uk-text-center"><FaIcon @icon="map" /></a></li>
+        {{/if}}
+        {{#if @project.hasPlaces}}
+          <li><a href="#" class="uk-text-center"><FaIcon @icon="map-marker-alt" /></a></li>
+        {{/if}}
+        {{#if @project.hasData}}
+          <li><a href="#" class="uk-text-center"><FaIcon @icon="database" /></a></li>
+        {{/if}}
+    </ul>
 
-  <ul class="uk-switcher atlm-mobile-project-panels">
-      <li class="atlm-mobile-project-panel">
-        <section class="uk-padding-small">
-          {{@project.description}}
-        </section>
-      </li>
-      {{#if @project.hasRasters}}
-      <li class="atlm-mobile-project-panel atlm-mobile-project-panel-content {{if this.hideMenuPanel 'atlm-mobile-project-panels-hidden'}}">
-        <section>
-          <h3>Maps</h3>
-          <button type="button" class="uk-modal-close-default" uk-close {{on "click" (toggle "hideMenuPanel" this)}}></button>
-        </section>
-        <ul uk-accordion target="> p">
-          {{#each @project.sortedRasters as |raster|}}
+    <ul class="uk-switcher atlm-mobile-project-panels">
+        <li class="atlm-mobile-project-panel">
+          <section class="uk-padding-small">
+            {{@project.description}}
+          </section>
+        </li>
+        {{#if @project.hasRasters}}
+        <li class="atlm-mobile-project-panel atlm-mobile-project-panel-content {{if this.hideMenuPanel 'atlm-mobile-project-panels-hidden'}}">
+          <section>
+            <h3>Maps</h3>
+            <button type="button" class="uk-modal-close-default" uk-close {{on "click" (toggle "hideMenuPanel" this)}}></button>
+          </section>
+          <ul uk-accordion target="> p">
+            {{#each @project.sortedRasters as |raster|}}
+              <li>
+                <a href="#" class="uk-accordion-title">{{raster.rasterLayer.title}}</a>
+                <section class="uk-padding-small">
+                  <RasterOpacitySlider @raster={{raster}} />
+                </section>
+                <p class="uk-meta uk-accordion-content">
+                  {{raster.rasterLayer.description}}
+                </p>
+              </li>
+            {{/each}}
+          </ul>
+        </li>
+        {{/if}}
+        {{#if @project.hasPlaces}}
+          <li class="atlm-mobile-project-panel">
+            <ul uk-accordion>
+            {{#each @project.places as |place|}}
             <li>
-              <a href="#" class="uk-accordion-title">{{raster.rasterLayer.title}}</a>
-              <section class="uk-padding-small">
-                <RasterOpacitySlider @raster={{raster}} />
-              </section>
-              <p class="uk-meta uk-accordion-content">
-                {{raster.rasterLayer.description}}
+              <a href="#" class="uk-accordion-title">
+                <span style={{html-safe place.style}}>
+                  <FaIcon @icon={{place.vectorLayer.icon}} />
+                </span>
+                {{place.vectorLayer.title}}
+              </a>
+              <p class="uk-accordion-content">
+                {{place.vectorLayer.description}}
               </p>
             </li>
-          {{/each}}
-        </ul>
-      </li>
-      {{/if}}
-      {{#if @project.hasPlaces}}
-        <li class="atlm-mobile-project-panel">
+            {{/each}}
+          </ul>
+          </li>
+        {{/if}}
+        {{#if @project.hasData}}
+          <li class="atlm-mobile-project-panel">
           <ul uk-accordion>
-          {{#each @project.places as |place|}}
-          <li>
-            <a href="#" class="uk-accordion-title">
-              <span style={{html-safe place.style}}>
-                <FaIcon @icon={{place.vectorLayer.icon}} />
-              </span>
-              {{place.vectorLayer.title}}
-            </a>
-            <p class="uk-accordion-content">
-              {{place.vectorLayer.description}}
-            </p>
+            {{#each @project.data as |data|}}
+            <li>
+              <a href="#" class="uk-accordion-title">
+                <span style={{html-safe data.style}}>
+                  <FaIcon @icon={{data.vectorLayer.icon}} />
+                </span>
+                {{data.vectorLayer.title}}
+              </a>
+              <p class="uk-accordion-content">
+                {{data.vectorLayer.description}}
+              </p>
+            </li>
+            {{/each}}
+          </ul>
           </li>
-          {{/each}}
-        </ul>
-        </li>
-      {{/if}}
-      {{#if @project.hasData}}
-        <li class="atlm-mobile-project-panel">
-        <ul uk-accordion>
-          {{#each @project.data as |data|}}
-          <li>
-            <a href="#" class="uk-accordion-title">
-              <span style={{html-safe data.style}}>
-                <FaIcon @icon={{data.vectorLayer.icon}} />
-              </span>
-              {{data.vectorLayer.title}}
-            </a>
-            <p class="uk-accordion-content">
-              {{data.vectorLayer.description}}
-            </p>
-          </li>
-          {{/each}}
-        </ul>
-        </li>
-      {{/if}}
-  </ul>
-</section>
+        {{/if}}
+    </ul>
+  </section>
 {{/if}}

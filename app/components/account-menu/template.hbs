@@ -1,0 +1,21 @@
+<a href="#"><FaIcon @icon="user-circle" />&nbsp; Account</a>
+<div class="uk-navbar-dropdown atlm-account-menu" {{did-insert this.initDropdown}}>
+  <ul class="uk-nav uk-navbar-dropdown-nav">
+    <li class="uk-padding-small uk-text-large">
+      <LinkTo @route="projects" class="atlm-account-menu-link"  {{on "click" this.closeDropdown}}>
+        My Projects
+      </LinkTo> <span class="uk-badge">{{this.currentUser.user.projects.length}}</span>
+    </li>
+    <li class="uk-nav-divider"></li>
+    <li class="uk-padding-small">
+      <label class="uk-form-label" for="current-displayname">Display Name:</label> {{#if this.updateDisplayName.isRunning}}Saving <FaIcon @icon="spinner" @spin={{true}} />{{/if}}
+      <div>
+        <Input class="uk-input" @type="text" id="current-displayname" @value={{this.currentUser.user.displayname}} @placeholder="Type your name for display." {{on 'keyup' (perform this.updateDisplayName)}} />
+      </div>
+    </li>
+    <li class="uk-nav-divider"></li>
+    <li class="uk-padding-small">
+      <UkButton @color="secondary" {{on 'click' @signOut}}><FaIcon @icon="sign-out-alt" /> Sign Out</UkButton>
+    </li>
+  </ul>
+</div>

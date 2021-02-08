@@ -9,9 +9,17 @@
     {{html-safe @properties.description}}
   </article>
 {{/if}}
+{{#if @properties.dataAttributes}}
+  <section class="uk-child-width-1-2 uk-text-center" uk-grid>
+    {{#each-in @properties.dataAttributes as |key value|}}
+      <section>{{key}}</section>
+      <section>{{value}}</section>
+    {{/each-in}}
+  </section>
+{{/if}}
 {{#if @properties.breakProperty}}
   <section class="uk-child-width-1-2 uk-text-center" uk-grid>
-    <div class="uk-text-large uk-text-bold">{{@properties.breakProperty}}</div>
-    <div class="uk-text-large uk-text-bold">{{@properties.breakValue}}</div>
+    <section class="uk-text-large uk-text-bold">{{@properties.breakProperty}}</section>
+    <section class="uk-text-large uk-text-bold">{{@properties.breakValue}}</section>
   </section>
 {{/if}}

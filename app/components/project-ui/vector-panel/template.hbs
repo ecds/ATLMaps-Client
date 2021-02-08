@@ -8,16 +8,20 @@
         <a id={{concat "data-layer-title-" vector.id}} class="uk-text-lead atlm-text-lead uk-accordion-title" href="#">
           {{vector.vectorLayer.title}}
         </a>
-        {{#if vector.show}}
-          <ProjectUi::VectorPanel::OpacitySlider @vector={{vector}} />
-        {{else}}
+        {{!-- {{#if vector.show}} --}}
+          {{#if vector.vectorLayer.isPoints}}
+            <ProjectUi::VectorPanel::ToggleSwitch @vector={{vector}} />
+          {{else}}
+            <ProjectUi::VectorPanel::OpacitySlider @project={{@project}} @vector={{vector}} />
+          {{/if}}
+        {{!-- {{else}}
         <div class="uk-padding-small">
           <UkButton @size="small" @color="secondary" id={{concat "show-" vector.vectorLayer.name}} {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
         </div>
-        {{/if}}
+        {{/if}} --}}
       </div>
       <div class="uk-width-1-6 uk-text-center uk-grid-collapse uk-child-width-1-1 uk-padding-small uk-padding-remove-vertical" uk-grid>
-        {{!-- {{#unless vector.onTop}}
+        {{#if (and (not vector.onTop) (not vector.vectorLayer.isPoints) )}}
         <div role="button" tabindex="0" class="uk-text-center atlm-reorder-button-up uk-grid-collapse uk-child-width-1-1 uk-inline"
           {{on 'click' (fn this.bringToFront vector)}} uk-grid>
           <div class="uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">
@@ -27,7 +31,7 @@
             Move to Top
           </div>
         </div>
-        {{/unless}} --}}
+        {{/if}}
       </div>
       <div class="uk-accordion-content uk-width-1-1">
         <article class="uk-article">

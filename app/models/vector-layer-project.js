@@ -6,9 +6,6 @@ export default class VectorLayerProjectModel extends Model {
   @belongsTo('vectorLayer') vectorLayer;
   @belongsTo('project') project;
   @attr('string') color;
-  // @attr('number', {
-  //   defaultValue() { return 1; }
-  // }) marker;
   @attr('number') order;
   @attr('string', {
     defaultValue(_this) {
@@ -23,14 +20,9 @@ export default class VectorLayerProjectModel extends Model {
   @attr('string') brewerGroup;
   @attr('string') dataType;
 
-  @computed('vectorLayer.opacity')
+  @computed('vectorLayer.show')
   get show() {
-    if (this.get('vectorLayer.opacity') == 0) return false;
-    return true;
-  }
-
-  set show(set) {
-    return set;
+    return this.get('vectorLayer.show');
   }
 
   @attr({
@@ -68,9 +60,18 @@ export default class VectorLayerProjectModel extends Model {
     return `color: ${this.mainColor};`;
   }
 
-  @computed('order')
+  @computed('project.vectorOnTop')
   get onTop() {
-    return this.order == 1;
+    return this.get('project.vectorOnTop') == this;
+  }
+
+  @computed('order', 'onTop')
+  get zIndex() {
+    let value = 500 - (this.order * 10);
+    if (this.onTop) {
+      value += 100;
+    }
+    return value;
   }
 
   // VectorTile Specific Properties

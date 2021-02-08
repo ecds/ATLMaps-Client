@@ -102,17 +102,14 @@ module('Integration | Component | project-ui/vector-panel', function(hooks) {
   // });
 
   test('it shows hidden layer', async function(assert) {
+    const polyLayer = await this.store.peekRecord('vector-layer', 4);
     await render(hbs`<ProjectUi::VectorPanel @layers={{this.project.vectors}} />`);
-    await fillIn('input#opacity-layer-1', 0);
-    assert.dom('input#opacity-layer-1').doesNotExist();
-    await click('button#show-layer-1');
-    assert.dom('input#opacity-layer-1').exists();
-    assert.dom('input#opacity-layer-1').hasValue('100.1');
     await fillIn('input#opacity-polygon', 0);
-    assert.dom('input#opacity-polygon').doesNotExist();
-    await click('button#show-polygon');
-    assert.dom('input#opacity-polygon').exists();
-    assert.dom('input#opacity-polygon').hasValue('30.1');
+    assert.dom('input#opacity-polygon').hasValue('0');
+    assert.equal(polyLayer.opacity, 0);
+    await fillIn('input#opacity-polygon', 100);
+    assert.dom('input#opacity-polygon').hasValue('100');
+    assert.equal(polyLayer.opacity, 100);
   });
 
   test('it opens and closes color map editing modal', async function(assert) {

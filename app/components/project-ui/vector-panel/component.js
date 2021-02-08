@@ -17,17 +17,16 @@ export default class ProjectUiVectorPanelComponent extends Component {
 
   @action
   bringToFront(vectorLayerProject) {
-    const project = vectorLayerProject.get('project');
-    project.get('vectors').forEach(vector => {
-      if (vector == vectorLayerProject) {
-        vector.setProperties({ order: 1 });
-      } else {
-        vector.setProperties({ order: vector.order + 1 });
-      }
-      // if (vector.leafletPane) {
-      //   vector.leafletPane.style.zIndex = 500 - (vector.order * 10);
-      // }
-    });
+    if (this.args.project.vectorOnTop) this.sendBack();
+    this.args.project.setProperties({ vectorOnTop: vectorLayerProject });
+
+    vectorLayerProject.leafletPane.style.zIndex = vectorLayerProject.zIndex;
+  }
+
+  sendBack() {
+    const vlp = this.args.project.vectorOnTop;
+    this.args.project.setProperties({ vectorOnTop: null });
+    vlp.leafletPane.style.zIndex = vlp.zIndex;
   }
 
 /**

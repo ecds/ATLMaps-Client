@@ -9,7 +9,7 @@ module('Integration | Component | project-ui/popup', function(hooks) {
   hooks.beforeEach(function() {
     this.set('store', this.owner.lookup('service:store'));
     const feature = this.store.createRecord('vectorFeature', {
-      geojson: { properties: { name: 'something smart' } },
+      geojson: { properties: { title: 'something smart' } },
       description: 'maybe not that smart',
       color: { name: 'pink', hex: 'noMatter' },
       vectorLayer: this.store.createRecord('vectorLayer', { dataType: 'Point' })
@@ -24,7 +24,7 @@ module('Integration | Component | project-ui/popup', function(hooks) {
 
     await render(hbs`<ProjectUi::Popup @activeFeature={{this.feature}} @close={{this.close}} @closeKey={{this.close}} />`);
 
-    assert.dom('h3.uk-card-title').hasText(this.feature.geojson.properties.name);
+    assert.dom('h3.uk-card-title').hasText(this.feature.geojson.properties.title);
 
   });
 });

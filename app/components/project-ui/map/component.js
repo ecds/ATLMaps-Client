@@ -33,10 +33,10 @@ export default class MapComponent extends Component {
     }
     this.args.project.get('vectors').forEach(vector => {
       map.createPane(
-        vector.get('vectorLayer.name')
+        `vector-layer-${vector.id}`
       );
-      let pane = map.getPane(vector.get('vectorLayer.name'));
-      pane.style.zIndex = 500 - (vector.order * 10);
+      let pane = map.getPane(`vector-layer-${vector.id}`);
+      pane.style.zIndex = vector.zIndex;
       pane.classList.add('leaflet-overlay-pane');
       vector.setProperties({
         leafletPane: pane
@@ -53,7 +53,7 @@ export default class MapComponent extends Component {
 
   @action
   geoJsonAdded(vectorLayer, leafletLayer) {
-    vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
+    // vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
   }
 
   @action
@@ -96,7 +96,6 @@ export default class MapComponent extends Component {
 
   @action
   clearActiveFeatureKey(event) {
-    // if (!event || event.type != 'keyup') return;
     if (event && event.type == 'keyup' && event.key == 'Escape' || event.key == 'Enter' && event.target.id == 'atlm-close-popup-button') {
       this.clearActiveFeature();
     }

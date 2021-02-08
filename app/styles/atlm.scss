@@ -184,7 +184,7 @@
 .atlm-search-panel {
   background-color: $primary-light-gray;
   height: calc(100vh - 100px);
-  top: 100px;
+  top: 80px;
   width: 33vw;
 }
 
@@ -378,10 +378,6 @@
     -webkit-appearance: none;
     @include slider-thumb;
   }
-
-  &::-webkit-slider-runnable-track {
-    // height: 5px;
-}
 }
 
 .atlm-loading-modal {
@@ -391,5 +387,28 @@
 .atlm-popup-gallery {
   img {
     height: 100%
+  }
+}
+
+.atlm-account-menu {
+  min-width: 33vw;
+
+  li {
+    a {
+      color: $primary-dark-gray;
+      display: inline;
+      &:hover {
+        background-color: white;
+        color: $primary-dark-gray;
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+.atlm-popup-close-button {
+  .uk-button-link {
+    color: $primary-dark-gray;
   }
 }

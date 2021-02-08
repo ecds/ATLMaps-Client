@@ -22,7 +22,9 @@ export default class VectorLayerModel extends Model {
   @attr('string') title;
   @attr('string') name;
   @attr('string') description;
-  @attr('string') geometryType;
+  @attr('string', {
+    defaultValue() { return 'Point'; }
+  }) geometryType;
   @attr('string') dataFormat;
   @attr('string') workspace;
   @attr('string') geoUrl;
@@ -54,12 +56,26 @@ export default class VectorLayerModel extends Model {
 
   @computed('geometryType')
   get opacity() {
-    if (this.geometryType == 'MultiPolygon') return 40;
+    if (this.geometryType.includes('Polygon') || this.geometryType == 'GeometryCollection') return 40;
     return 100;
   }
 
   set opacity(num) {
     return num;
+  }
+
+  @computed('opacity')
+  get show() {
+    if (this.opacity == 0) return false;
+    return true;
+  }
+
+  set show(set) {
+    if (set == false) {
+      this.setProperties({ opacity: 0 });
+      return;
+    }
+    return set;
   }
 
   @computed('geojson')
@@ -105,11 +121,16 @@ export default class VectorLayerModel extends Model {
     return 'map-marker-alt';
   }
 
+  @computed('geometryType')
+  get isPoints() {
+    return this.geometryType.includes('Point');
+  }
+
   @computed().readOnly()
   get leafletLayerGroup() {
     if (this.fastboot.isFastBoot) return null;
     if (!this.L) return null;
-    return this.L.layerGroup();
+    return this.L.featureGroup();
   }
 
   @computed('tmpColor')
@@ -135,6 +156,8 @@ export default class VectorLayerModel extends Model {
   get property() {
     return this.defaultBreakProperty;
   }
+
+
 
   // Specific properties for VectorTile Layers
 

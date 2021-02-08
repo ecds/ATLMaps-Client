@@ -18,7 +18,7 @@
     class="atlm-slider" type="range"
     @min={{0}}
     @max={{100}}
-    @step={{1}}
+    @step={{5}}
     @value={{@vector.vectorLayer.opacity}}
     {{on "change" this.updateOpacity}}
     aria-label={{concat "Change Opacity of " @vector.vectorLayer.name}} />

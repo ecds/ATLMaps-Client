@@ -31,8 +31,8 @@
        <div class="uk-navbar-right uk-visible@m uk-margin-right">
          <ul class="uk-navbar-nav">
            <li>
-             {{#if this.session.isAuthenticated}}
-              <UkButton @color="link" {{on 'click' this.signOut}}><FaIcon @icon="sign-out-alt" /> Sign Out</UkButton>
+            {{#if this.session.isAuthenticated}}
+               <AccountMenu @signOut={{this.signOut}} />
             {{else}}
               <UkButton @color="link" uk-toggle target="#auth-modal"><FaIcon @icon="sign-in-alt" /> Sign In</UkButton>
             {{/if}}
@@ -58,11 +58,7 @@
                   </LinkTo>
                 </li>
                 <li>
-                  {{#if this.session.isAuthenticated}}
-                    <UkButton @color="link" {{on 'click' this.signOut}}><FaIcon @icon="sign-out-alt" /> Sign Out</UkButton>
-                  {{else}}
-                    <UkButton @color="link" uk-toggle target="#auth-modal"><FaIcon @icon="sign-in-alt" /> Sign In</UkButton>
-                  {{/if}}
+
                 </li>
               </ul>
              </section>

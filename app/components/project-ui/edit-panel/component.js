@@ -8,6 +8,18 @@ export default class ProjectUiEditPanelComponent extends Component {
 
   zoomLevels = Array.from({length: (11)}, (v, k) => k + 10);
 
+  pellOptions = {
+    defaultParagraphSeparator: 'p',
+    styleWithCSS: false,
+    actions: [
+      'bold',
+      'italic',
+      'underline',
+      'link',
+      'image'
+    ]
+  }
+
   @action
   updateZoomLevel(event) {
     this.args.project.setProperties({ zoomLevel: parseInt(event.target.value) });

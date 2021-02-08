@@ -13,8 +13,22 @@
       <div class="uk-margin">
         <label class="uk-form-label" for="project-description">Description</label>
         <div class="uk-form-controls">
-            <Textarea class="uk-textarea" id="project-description" cols="80" rows="6" @value={{mut @project.description}} />
+            {{!-- <Textarea class="uk-textarea" id="project-description" cols="80" rows="6" @value={{mut @project.description}} /> --}}
+            <PellEditor @value={{@project.description}} @onChange={{fn (mut @project.description)}} @pellOptions={{this.pellOptions}} />
         </div>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-photo">Cover Photo URL</label>
+        <div class="uk-form-controls">
+            <Input class="uk-input" id="project-photo" @type="url" @placeholder="https://..." @value={{mut @project.photo}} />
+        </div>
+      </div>
+
+      <div class="uk-margin">
+        {{#if @project.photo}}
+          <img src={{@project.photo}} alt="" role="presentation" />
+        {{/if}}
       </div>
 
       <div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>

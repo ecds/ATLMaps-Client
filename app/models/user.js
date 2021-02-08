@@ -1,5 +1,6 @@
-import Model, { attr} from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class UserModel extends Model {
-  @attr('string') displayName;
+  @attr('string') displayname;
+  @hasMany('projects') projects;
 }

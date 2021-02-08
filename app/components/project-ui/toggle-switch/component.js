@@ -17,14 +17,14 @@ export default class ProjectUiToggleSwitchComponent extends Component {
         layer.setProperties({ opacity: 100 });
       });
       this.args.project.vectors.forEach(vector => {
-        vector.setProperties({ show: true });
+        vector.vectorLayer.setProperties({ show: true });
       });
     } else {
       this.args.project.rasters.forEach(layer => {
         layer.setProperties({ opacity: 0 });
       });
       this.args.project.vectors.forEach(vector => {
-        vector.setProperties({ show: false });
+        vector.vectorLayer.setProperties({ show: false });
       });
     }
   }

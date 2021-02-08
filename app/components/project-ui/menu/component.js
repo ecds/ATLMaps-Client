@@ -12,7 +12,7 @@ export default class ProjectUiMenuComponent extends Component {
   ukAccordion = null;
 
   @tracked
-  ukAccordionOpen = false;
+  ukAccordionOpen = true;
 
   @tracked
   panelTitle = '';
@@ -64,6 +64,9 @@ export default class ProjectUiMenuComponent extends Component {
     };
 
     this.ukTabs = UIkit.tab(element, tabOptions);
+    if (this.args.project.isNew) {
+      this.ukTabs.show(1);
+    }
   }
 
   @action

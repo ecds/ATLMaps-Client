@@ -11,7 +11,10 @@ module.exports = function(defaults) {
     'ember-uikit': {
       useIcons: false
     },
-    'free-solid-svg-icons': 'all'
+    'free-solid-svg-icons': 'all',
+    'ember-composable-helpers': {
+      only: ['toggle']
+    }
   });
 
 

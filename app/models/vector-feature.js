@@ -40,9 +40,9 @@ export default class VectorFeatureModel extends Model {
 
   @computed('vectorLayer.opacity', 'active')
   get weight() {
-    if (this.active) return 9;
+    if (this.active) return 6;
     if (this.opacity == 0) return 0;
-    return 3;
+    return 1;
   }
 
   @computed('style', 'active', 'leafletMarker')

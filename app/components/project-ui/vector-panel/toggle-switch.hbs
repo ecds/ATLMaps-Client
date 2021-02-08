@@ -1,0 +1,9 @@
+<UkButton {{on "click" (toggle "show" @vector.vectorLayer)}}>
+  {{#if @vector.vectorLayer.show}}
+      <FaIcon @icon="toggle-on" />
+    hide
+  {{else}}
+      <FaIcon @icon="toggle-off" />
+    show
+  {{/if}}
+</UkButton>

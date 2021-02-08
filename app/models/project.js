@@ -15,6 +15,7 @@ export default class ProjectModel extends Model {
   @attr('string') intro;
   @attr('string') media;
   @attr('string') photo;
+  @attr('string') owner;
 
   @attr('number', {
     defaultValue() { return ENV.APP.CENTER_LAT; }
@@ -124,6 +125,24 @@ export default class ProjectModel extends Model {
   @computed
   get activeFeature() {
     return this.store.peekAll('vectorFeature').filter(feature => feature.active).firstObject;
+  }
+
+  @computed('vectors.@each.order')
+  get vectorOnTop() {
+    return null;
+  }
+  set vectorOnTop(topVector) {
+    return topVector;
+  }
+
+  @computed
+  get isNew() {
+    if (
+      !this.name
+      && !this.description
+      && this.mayEdit
+    ) return true;
+    return false;
   }
 
   @sort('rasters', '_rasterPositionSort')

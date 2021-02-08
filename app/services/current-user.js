@@ -1,12 +1,20 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import ENV from 'atlmaps-client/config/environment';
+import { tracked } from '@glimmer/tracking';
 
 export default class CurrentUserService extends Service {
   @service session;
   @service store;
 
-  user = this.user || null;
+  @tracked user = null;
+
+  constructor() {
+    super(...arguments);
+    if (!this.user) {
+      this.setCurrentUser();
+    }
+  }
 
   async setCurrentUser() {
     if (!this.session.isAuthenticated) return null;
@@ -23,7 +31,7 @@ export default class CurrentUserService extends Service {
         if (!user) {
           this._invalidateSession();
         } else {
-          this.user = this.store.createRecord('user', user.data);
+          this.user = this.store.createRecord('user', { id: user.data.id, displayname: user.data.attributes.displayname });
         }
       } else {
         this._invalidateSession();
