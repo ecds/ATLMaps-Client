@@ -1,6 +1,6 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
-import { filterBy, sort } from '@ember/object/computed';
+import { filterBy } from '@ember/object/computed';
 
 export default class CategoryModel extends Model {
   @attr('string') name;

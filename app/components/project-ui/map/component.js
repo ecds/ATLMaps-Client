@@ -52,7 +52,7 @@ export default class MapComponent extends Component {
   }
 
   @action
-  geoJsonAdded(vectorLayer, leafletLayer) {
+  geoJsonAdded(/* vectorLayer, leafletLayer */) {
     // vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
   }
 

@@ -26,3 +26,5 @@
 
 /config/environment.js
 .ember-cli
+
+.circleci

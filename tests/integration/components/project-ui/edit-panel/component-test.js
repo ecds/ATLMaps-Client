@@ -36,7 +36,6 @@ module('Integration | Component | project-ui/edit-panel', function(hooks) {
 
   test('it updates project properties', async function(assert) {
     await render(hbs`<ProjectUi::EditPanel @project={{this.project}} />`);
-    console.log("🚀 ~ file: component-test.js ~ line 39 ~ test ~ this.project", this.project)
     assert.dom('#project-title').hasValue(this.project.name);
     assert.dom('.pell-content').hasText(this.project.description);
     assert.dom('#project-published').isNotChecked();

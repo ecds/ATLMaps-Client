@@ -18,6 +18,9 @@ module('Unit | Service | current_user', function(hooks) {
     this.server.get('/users/me', () => {
       return { data: { id: 1, type: 'users', attributes: { displayname: 'Ford Prefect' }}};
     });
+    this.server.get('/users/1', () => {
+      return { data: { id: 1, type: 'users', attributes: { displayname: 'Ford Prefect' }}};
+    });
     this.session.isAuthenticated = true;
     let user = await this.service.setCurrentUser();
     assert.equal(user.displayname, 'Ford Prefect');

@@ -31,7 +31,8 @@ export default class CurrentUserService extends Service {
         if (!user) {
           this._invalidateSession();
         } else {
-          this.user = this.store.createRecord('user', { id: user.data.id, displayname: user.data.attributes.displayname });
+          this.user = await this.store.findRecord('user', user.data.id);
+          // console.log("🚀 ~ file: current-user.js ~ line 35 ~ CurrentUserService ~ setCurrentUser ~ this.user", this.user)
         }
       } else {
         this._invalidateSession();

@@ -1,0 +1,20 @@
+<section class="uk-card uk-card-default">
+  <section class="uk-card-media-top">
+    <LinkTo @route="project" @model={{@project.id}}>
+      <img src={{if @project.photo @project.photo ""}} {{on "error" this.imageError}} alt="ATLMaps placeholder" />
+    </LinkTo>
+  </section>
+  <section class="uk-card-body">
+    <LinkTo @route="project" @model={{@project.id}}>
+      <h3 class="uk-card-title">{{@project.name}}</h3>
+    </LinkTo>
+    <p>
+      {{html-string @project.description}}
+    </p>
+  </section>
+  {{#if (and @project.mine @deleteProject)}}
+    <section class="uk-card-footer">
+      <ConfirmModal @onConfirm={{fn @deleteProject @project}} @message={{concat "Are you sure you want to delete " @project.name}}>Delete</ConfirmModal>
+    </section>
+  {{/if}}
+</section>
