@@ -24,7 +24,6 @@
 /bower.json.ember-try
 /package.json.ember-try
 
-/config/environment.js
 .ember-cli
 
 .circleci
