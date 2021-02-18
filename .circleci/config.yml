@@ -14,12 +14,12 @@ jobs:
       - browser-tools/install-chromedriver
       - checkout
       - run:
-          name: Yarn Install
-          command: yarn install --non-interactive
+          name: NPM Install
+          command: npm install --non-interactive
       - run: echo 'export PATH=~/atlmaps/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Run Tests
-          command: yarn test
+          command: npm test
       # - deploy:
       #     command: |
       #       if [ "${CIRCLE_BRANCH}" == "master" ]; then

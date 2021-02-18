@@ -28,7 +28,7 @@ as |layers|>
         @format="image/png"
         @transparent={{true}}
         @zIndex={{raster.position}}
-        @opacity={{raster.opacityTenths}}
+        @opacity={{raster.rasterLayer.opacityTenths}}
         @className={{concat "raster-" raster.rasterLayer.name}}
         @onLoad={{fn this.rasterAdded raster.rasterLayer}}
       />
@@ -61,8 +61,7 @@ as |layers|>
               @fillOpacity={{feature.opacity}}
               @weight={{feature.weight}}
               @className={{concat "shape-" vector.vectorLayer.name}}
-              @onAdd={{fn this.geoJsonAdded vector.vectorLayer}}
-              @pane={{concat "vector-layer-" vector.id}}
+              @pane={{concat "vector-layer-" vector.vectorLayer.id}}
             />
           {{/each}}
         {{/if}}

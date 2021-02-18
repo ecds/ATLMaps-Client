@@ -1,3 +1,5 @@
+[![ECDS](https://circleci.com/gh/ecds/ATLMaps-Client.svg?style=svg)](<LINK>)
+
 # atlmaps-client
 
 This README outlines the details of collaborating on this Ember application.

@@ -70,16 +70,18 @@ export default class ProjectModel extends Model {
 
   @computed('vectors.@each')
   get places() {
-    return this.get('vectors').filter(layer => {
+    const places = this.get('vectors').filter(layer => {
       return layer.dataType == 'qualitative';
     });
+    return [...new Set(places)];
   }
 
   @computed('vectors.@each')
   get data() {
-    return this.vectors.filter(layer => {
+    const data = this.vectors.filter(layer => {
       return layer.dataType == 'quantitative';
     });
+    return [...new Set(data)];
   }
 
   @computed('rasters')
@@ -129,7 +131,11 @@ export default class ProjectModel extends Model {
 
   @computed('vectors.@each.order')
   get vectorOnTop() {
-    return null;
+    const vectorPositions = this.vectors.map(v => {
+      return v.order;
+    });
+    const max = Math.max(...vectorPositions);
+    return this.vectors.filter(v => v.order == max).firstObject;
   }
   set vectorOnTop(topVector) {
     return topVector;

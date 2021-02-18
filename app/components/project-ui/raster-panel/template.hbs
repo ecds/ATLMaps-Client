@@ -17,10 +17,10 @@
             Opacity
           </label>
           <Input id={{concat "opacity-" raster.rasterLayer.name}} @type="number" @min={{0}} @max={{100}} @step={{5}}
-            @value={{mut raster.opacity}} />%
+            @value={{mut raster.rasterLayer.opacity}} />%
         </div>
         <div>
-          <RasterOpacitySlider @raster={{raster}} />
+          <RasterOpacitySlider @raster={{raster.rasterLayer}} />
         </div>
         <label for={{concat "opacity-slider-" raster.rasterLayer.name}} class="atlm-opacity-slider-label">opacity</label>
       </div>

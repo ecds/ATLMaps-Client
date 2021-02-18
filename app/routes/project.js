@@ -31,10 +31,6 @@ export default class ProjectRoute extends Route {
     });
   }
 
-  // beforeModel() {
-  //   this.store.unloadAll('project');
-  // }
-
   afterModel() {
     this.deviceContext.setDeviceContext();
   }

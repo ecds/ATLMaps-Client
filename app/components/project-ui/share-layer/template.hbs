@@ -9,16 +9,16 @@
   </UkButton>
 </div>
 
-<div id={{concat "share-modal-" @layer.name}} class="uk-flex-top" uk-modal>
+<div id={{concat "share-modal-" @layer.name}} class="uk-flex-top"  {{did-insert (fn this.initShareModal)}}>
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
     <button class="uk-modal-close-default" type="button" uk-close></button>
     <h3>Layer Link</h3>
-    <Input class="uk-input" @type="text" @value={{this.shareUrl}} id={{concat "share-" @layer.name}} />
+    <Input class="uk-input" @type="text" @value={{this.shareUrl}} id={{concat "share-" @layer.name}} aria-label={{concat "Shareable link for layer " @layer.title}} />
     <UkButton @color="primary" {{on "click" (fn this.copyText "share")}}>copy link</UkButton>
   </div>
 </div>
 
-<div id={{concat "embed-modal-" @layer.name}} class="uk-flex-top" uk-modal>
+<div id={{concat "embed-modal-" @layer.name}} class="uk-flex-top"  {{did-insert (fn this.initEmbedModal)}}>
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
     <button class="uk-modal-close-default" type="button" uk-close></button>
     <h3>Layer Embed</h3>

@@ -14,9 +14,9 @@
   </article>
   <section class="atlm-share-layer-map">
     <LeafletMap
-        @bounds={{this.center}}
-    as |layers|>
-
+      @bounds={{this.center}}
+      as |layers|
+    >
     <layers.tile
         @url={{this.baseMaps.grayscale.layers.firstObject}}
         @attribution={{this.baseMaps.grayscale.attribution}}

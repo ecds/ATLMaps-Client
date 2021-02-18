@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import UIkit from "uikit";
+import UIKit from "uikit";
 
 export default class ProjectUiMenuComponent extends Component {
   @service fastboot;
@@ -24,8 +24,8 @@ export default class ProjectUiMenuComponent extends Component {
   hideMenuPanel = false;
 
   checkIfOpen(accordion) {
-    // I think this fires for the UIkit Accordion and for the
-    // UIkit Tabs under it. Therefore, we can not rely on the
+    // I think this fires for the UIKit Accordion and for the
+    // UIKit Tabs under it. Therefore, we can not rely on the
     // UIKit::Accordion to report its true state.
     this.ukAccordionOpen = accordion.firstElementChild.classList.contains('uk-open');
   }
@@ -36,9 +36,9 @@ export default class ProjectUiMenuComponent extends Component {
     const accordionOptions = {
       toggle: "> div > .uk-accordion-title"
     };
-    this.ukAccordion = UIkit.accordion(element, accordionOptions);
+    this.ukAccordion = UIKit.accordion(element, accordionOptions);
 
-    UIkit.util.on(this.ukAccordion.$el, 'show', event => {
+    UIKit.util.on(this.ukAccordion.$el, 'show', event => {
       if (event.target.attributes['data-type'] && event.target.attributes['data-type'].value == 'panel') {
         this.panelTitle = event.target.attributes['data-panel-title'].value;
         this.showToggle = true;
@@ -49,7 +49,7 @@ export default class ProjectUiMenuComponent extends Component {
       this.checkIfOpen(element);
     });
 
-    UIkit.util.on(this.ukAccordion.$el, 'hide', () => {
+    UIKit.util.on(this.ukAccordion.$el, 'hide', () => {
       this.checkIfOpen(element);
     });
 
@@ -63,7 +63,7 @@ export default class ProjectUiMenuComponent extends Component {
       animation: "uk-animation-fade uk-animation-fast"
     };
 
-    this.ukTabs = UIkit.tab(element, tabOptions);
+    this.ukTabs = UIKit.tab(element, tabOptions);
     if (this.args.project.isNew) {
       this.ukTabs.show(1);
     }
@@ -71,7 +71,7 @@ export default class ProjectUiMenuComponent extends Component {
 
   @action
   initMobilePanel(element) {
-    this.mobilePanel = UIkit.switcher(element);
+    this.mobilePanel = UIKit.switcher(element);
   }
 
   @action

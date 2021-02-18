@@ -8,17 +8,13 @@
         <a id={{concat "data-layer-title-" vector.id}} class="uk-text-lead atlm-text-lead uk-accordion-title" href="#">
           {{vector.vectorLayer.title}}
         </a>
-        {{!-- {{#if vector.show}} --}}
+        <div>
           {{#if vector.vectorLayer.isPoints}}
             <ProjectUi::VectorPanel::ToggleSwitch @vector={{vector}} />
           {{else}}
             <ProjectUi::VectorPanel::OpacitySlider @project={{@project}} @vector={{vector}} />
           {{/if}}
-        {{!-- {{else}}
-        <div class="uk-padding-small">
-          <UkButton @size="small" @color="secondary" id={{concat "show-" vector.vectorLayer.name}} {{on 'click' (fn this.showLayer vector.vectorLayer)}}>Show</UkButton>
         </div>
-        {{/if}} --}}
       </div>
       <div class="uk-width-1-6 uk-text-center uk-grid-collapse uk-child-width-1-1 uk-padding-small uk-padding-remove-vertical" uk-grid>
         {{#if (and (not vector.onTop) (not vector.vectorLayer.isPoints) )}}

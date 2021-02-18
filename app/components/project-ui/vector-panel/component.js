@@ -1,17 +1,29 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import UIkit from "uikit";
+import UIKit from "uikit";
 
 export default class ProjectUiVectorPanelComponent extends Component {
   @tracked vectorToEdit = false;
+  @tracked layerCount = this.args.layers.length;
+
+  ukAccordion = null;
+
+  get updatedCount() {
+    if (this.ukAccordion && this.layerCount > 1) {
+      this.ukAccordion.$destroy();
+      this.initInteraction(this.ukAccordion.$el);
+    }
+    return this.args.layers.length;
+  }
 
   ukAccordion = null;
 
   @action
   initInteraction(element) {
-    this.ukAccordion = UIkit.accordion(element, {
-      toggle: '> > .uk-accordion-title'
+    this.ukAccordion = UIKit.accordion(element, {
+      toggle: '> > .uk-accordion-title',
+      animation: false
     });
   }
 

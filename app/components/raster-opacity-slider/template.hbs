@@ -1,2 +1,2 @@
-<style>{{concat "#opacity-slider-" @raster.rasterLayer.name}} { background: {{concat "linear-gradient(to right, #f47404 0%, #f47404 " @raster.opacity "%, #fff " @raster.opacity "%, white 100%)"}}</style>
-<Input id={{concat "opacity-slider-" @raster.rasterLayer.name}} class="atlm-slider" type="range" @min={{0}} @max={{100}} @step={{5}} @value={{@raster.opacity}} aria-label={{concat "opacity-slider-" @raster.rasterLayer.name}} />
+<style>{{concat "#opacity-slider-" @raster.name}} { background: {{concat "linear-gradient(to right, #f47404 0%, #f47404 " @raster.opacity "%, #fff " @raster.opacity "%, white 100%)"}}</style>
+<Input id={{concat "opacity-slider-" @raster.name}} class="atlm-slider" type="range" @min={{0}} @max={{100}} @step={{5}} @value={{@raster.opacity}} aria-label={{concat "opacity-slider-" @raster.name}} />

@@ -19,6 +19,7 @@ export default class ProjectController extends Controller {
   @tracked vectorToAdd = null;
   @tracked currentAction = null;
   @tracked layerAddingOrRemoving = null;
+  @tracked transitioning = false;
 
   // setLimit(newLimit) {
   //   this.limit = newLimit;
@@ -84,14 +85,14 @@ export default class ProjectController extends Controller {
     if (vector.onMap) {
       this.currentAction = 'Removing';
       layerToEdit = this.store.peekAll('vectorLayerProject').filter( vlp => {
-        if (vlp.vectorLayer.get('id') == vector.id) {
+        if (vlp.vectorLayer.get('id') == vector.id && vlp.project.get('id') == this.model.project.id) {
           return vlp;
         }
       }).firstObject;
 
       // Remove the layer from the map
       // We could call `invoke` on the layer group and remove, but this seems more clear.
-      vector.leafletLayerGroup.eachLayer(layer => { layer.remove(); });
+      // vector.leafletLayerGroup.eachLayer(layer => { layer.remove(); });
 
       projectVectors.removeObject(layerToEdit);
 
@@ -111,6 +112,8 @@ export default class ProjectController extends Controller {
     } else {
       this.currentAction = "Adding";
       const tmpColor = vector.tmpColor;
+      const pane = this.model.project.leafletMap.createPane(`vector-layer-${vector.id}`);
+      pane.classList.add('leaflet-overlay-pane');
       // The search results do not include the GeoJSON. So we need to get it.
       if (!vector.geojson) {
         vector = yield this.store.findRecord('vectorLayer', vector.id);
@@ -127,9 +130,13 @@ export default class ProjectController extends Controller {
           color: tmpColor,
           dataType: vector.dataType,
           colorMap: vector.colorMap,
-          property: vector.defaultBreakProperty
+          property: vector.defaultBreakProperty,
+          leafletPane: pane,
+          order: this.model.project.vectors.length + 1
         }
-        );
+      );
+
+      pane.style.zIndex = layerToEdit.zIndex;
 
       if (vector.defaultBreakProperty && !vector.colorMap) {
         layerToEdit.setProperties({
@@ -205,9 +212,11 @@ export default class ProjectController extends Controller {
   @action
   fitBounds(layer) {
     if (!layer.latLngBounds) return;
-    let bounds = this.model.project.leafletMap.getBounds();
+    const bounds = this.model.project.leafletMap.getBounds();
+    const layerCenter = layer.latLngBounds.getCenter();
     bounds.extend(layer.latLngBounds);
     this.model.project.leafletMap.fitBounds(bounds);
+    this.model.project.leafletMap.panTo(layerCenter);
   }
 
   @action

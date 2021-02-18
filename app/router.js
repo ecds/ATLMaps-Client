@@ -12,4 +12,5 @@ Router.map(function() {
   this.route('project', { path: 'projects/:project_id' });
   this.route('index', { path: '/' });
   this.route('layers', { path: 'layers/:name' });
+  this.route('embed', { path: 'embed/:maps' });
 });

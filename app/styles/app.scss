@@ -181,6 +181,10 @@ a.home {
   border-width: 1px;
 }
 
-// footer {
-//   max-width: 100vw !important;
-// }
+div[role=button] {
+  cursor: pointer;
+}
+
+svg[role=img] {
+  transition: transform .5s;
+}

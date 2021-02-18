@@ -126,12 +126,12 @@ export default class VectorLayerModel extends Model {
     return this.geometryType.includes('Point');
   }
 
-  @computed().readOnly()
-  get leafletLayerGroup() {
-    if (this.fastboot.isFastBoot) return null;
-    if (!this.L) return null;
-    return this.L.featureGroup();
-  }
+  // @computed().readOnly()
+  // get leafletLayerGroup() {
+  //   if (this.fastboot.isFastBoot) return null;
+  //   if (!this.L) return null;
+  //   return this.L.featureGroup();
+  // }
 
   @computed('tmpColor')
   get tmpStyle() {
@@ -145,7 +145,7 @@ export default class VectorLayerModel extends Model {
   @computed('minx', 'maxx', 'miny', 'maxy')
   get latLngBounds() {
     if (this.fastboot.isFastBoot) return null;
-    if ([this.maxx, this.maxy, this.minx, this.miny].any(prop => prop == null )) return null;
+    if ([this.maxx, this.maxy, this.minx, this.miny].any(i => !i )) return null;
     return this.L.latLngBounds(
       this.L.latLng(this.maxy, this.maxx),
       this.L.latLng(this.miny, this.minx)

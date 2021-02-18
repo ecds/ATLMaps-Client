@@ -1,11 +1,11 @@
 <div id="off-canvas-container"></div>
-<div id="atlm-layer-search-panel" {{did-insert (fn this.initOffcanvas)}} {{will-destroy (fn this.willDestroyNode)}}>
+<div id="atlm-layer-search-panel" uk-offcanvas="flip: true">
     <div ...attributes class="uk-offcanvas-bar">
       {{yield}}
     </div>
 </div>
 <div class="atlm-toggle-layer-search">
-  <UkButton uk-toggle class="atlm-large-button" target="#atlm-layer-search-panel" @size="large" @color="secondary">
+  <UkButton class="atlm-large-button" uk-toggle="target: #atlm-layer-search-panel" @size="large" @color="secondary">
     Add Layers
   </UkButton>
 </div>

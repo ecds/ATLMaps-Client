@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import UIkit from 'uikit';
+import UIKit from 'uikit';
 
 export default class ProjectUiIntroModalComponent extends Component {
   @service cookies;
@@ -30,7 +30,7 @@ export default class ProjectUiIntroModalComponent extends Component {
     if (this.args.isTesting) {
       modalOptions.container = '#container';
     }
-      this.introModal = UIkit.modal(element, modalOptions);
+      this.introModal = UIKit.modal(element, modalOptions);
       this.args.project.setProperties({ introModal: this.introModal });
       if (!this.hideIntro) {
         this.introModal.show();

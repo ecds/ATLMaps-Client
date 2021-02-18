@@ -7,7 +7,7 @@ module('Unit | Controller | project', function(hooks) {
   hooks.beforeEach(function() {
     this.set('store', this.owner.lookup('service:store'));
 
-    const rasterLayer = this.store.createRecord('rasterLayer', {id: 1 });
+    const rasterLayer = this.store.createRecord('rasterLayer', {id: 1, maxx: -84.37, maxy: 33.75, minx: -84.36, miny: 33.74 });
     this.set('rasterLayer', rasterLayer);
     const vectorLayer = this.store.createRecord('vectorLayer', { id: 1, geojson: {} });
     this.set('vectorLayer', vectorLayer);
@@ -15,7 +15,9 @@ module('Unit | Controller | project', function(hooks) {
       leafletMap: {
         bounds: 'atlanta',
         getBounds: function() { return { extend: function() { return true; }}; },
-        fitBounds: function() { return true; }
+        fitBounds: function() { return true; },
+        createPane: function() { return document.createElement('div'); },
+        panTo: function() { return true; }
       }
     }));
     this.set('controller', this.owner.lookup('controller:project'));
@@ -31,7 +33,7 @@ module('Unit | Controller | project', function(hooks) {
     this.project.get('rasters').pushObject(
       this.store.createRecord('rasterLayerProject', {
         project: this.project,
-        rasterLayer: this.store.createRecord('rasterLayer', { id: 111 }),
+        rasterLayer: this.store.createRecord('rasterLayer', { id: 111, maxx: -84.37, maxy: 33.75, minx: -84.36, miny: 33.74 }),
         position: 11
       })
     );

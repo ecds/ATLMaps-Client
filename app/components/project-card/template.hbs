@@ -1,8 +1,15 @@
 <section class="uk-card uk-card-default">
   <section class="uk-card-media-top">
-    <LinkTo @route="project" @model={{@project.id}}>
+    {{!--
+      We have a hard link here to force a full load of the project.
+      This is really only needed to make sure the UIKit Offcanvas
+      component get properly initialized. Otherwise, it would be better
+      to use `<LinkTo @route="project" @model={{@project.id}}></LinkTo>`.
+      Maybe future updates to UIKit will fix this.
+    --}}
+    <a href={{concat "/projects/" @project.id}}>
       <img src={{if @project.photo @project.photo ""}} {{on "error" this.imageError}} alt="ATLMaps placeholder" />
-    </LinkTo>
+    </a>
   </section>
   <section class="uk-card-body">
     <LinkTo @route="project" @model={{@project.id}}>

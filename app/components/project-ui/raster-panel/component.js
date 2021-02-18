@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import UIkit from "uikit";
+import UIKit from "uikit";
 
 export default class ProjectUiRasterPanelComponent extends Component {
   @service store;
@@ -20,7 +20,7 @@ export default class ProjectUiRasterPanelComponent extends Component {
 
   @action
   initUkSortable(element) {
-    this.ukSortable = UIkit.sortable(
+    this.ukSortable = UIKit.sortable(
       element,
       {
         handle: '.atlm-grip',
@@ -28,14 +28,15 @@ export default class ProjectUiRasterPanelComponent extends Component {
       }
     );
 
-    UIkit.util.on(this.ukSortable.$el, 'moved', event => {
+    UIKit.util.on(this.ukSortable.$el, 'moved', event => {
       this.reorder(event.target.children);
     });
 
-    this.ukAccordion = UIkit.accordion(
+    this.ukAccordion = UIKit.accordion(
       element,
       {
-        toggle: '> > .uk-accordion-title'
+        toggle: '> > .uk-accordion-title',
+        animation: false
       }
     );
   }

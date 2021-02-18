@@ -33,9 +33,9 @@ export default class MapComponent extends Component {
     }
     this.args.project.get('vectors').forEach(vector => {
       map.createPane(
-        `vector-layer-${vector.id}`
+        `vector-layer-${vector.get('vectorLayer.id')}`
       );
-      let pane = map.getPane(`vector-layer-${vector.id}`);
+      let pane = map.getPane(`vector-layer-${vector.get('vectorLayer.id')}`);
       pane.style.zIndex = vector.zIndex;
       pane.classList.add('leaflet-overlay-pane');
       vector.setProperties({
@@ -49,11 +49,6 @@ export default class MapComponent extends Component {
   @action
   rasterAdded(raster, event) {
     raster.setProperties({ leafletObject: event.sourceTarget, onMap: true });
-  }
-
-  @action
-  geoJsonAdded(/* vectorLayer, leafletLayer */) {
-    // vectorLayer.get('leafletLayerGroup').addLayer(leafletLayer.target);
   }
 
   @action

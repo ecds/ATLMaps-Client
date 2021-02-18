@@ -1,0 +1,59 @@
+<div class="uk-position-relative">
+
+  <nav class="uk-navbar-container atlm-embed-nav" uk-navbar="dropbar: true">
+
+    <div class="uk-navbar-left">
+
+      <ul class="uk-navbar-nav">
+        <li>
+          <a href="#">
+            <FaIcon class="uk-margin-small-right" @icon="caret-down" @rotation={{if this.showDropDown 180 0}} /> About Layers
+          </a>
+          <div class="uk-navbar-dropdown" {{on "show" (toggle "showDropDown" this)}} {{on "hide" (toggle "showDropDown" this)}}>
+            <ul class="uk-nav uk-navbar-dropdown-nav" uk-accordion>
+              {{#each this.model.rasters as |raster|}}
+                <li>
+                    <a class="uk-accordion-title" href="#">{{raster.title}}</a>
+                    <div class="uk-accordion-content">
+                      <RasterOpacitySlider @raster={{raster}} />
+                        {{html-safe raster.description}}
+                    </div>
+                </li>
+              {{/each}}
+              {{#each this.model.vectors as |vector|}}
+                <li>
+                    <a class="uk-accordion-title" href="#">{{vector.title}}</a>
+                    <div class="uk-accordion-content">
+                        {{html-safe vector.description}}
+                    </div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
+
+  <div class="uk-navbar-dropbar"></div>
+
+</div>
+
+<div class="atlm-embed-map">
+  <LeafletMap @lat={{this.lat}} @lng={{this.lng}} @zoom={{this.zoom}} @onLoad={{this.initMap}} as |layers|>
+    {{#each this.baseLayer.layers as |base|}}
+      <layers.tile @url={{base}} />
+    {{/each}}
+
+    {{#each this.model.rasters as |raster|}}
+      <layers.wmsTile @url={{raster.url}} @layers={{raster.layers}} @format="image/png" @transparent={{true}}
+        @opacity={{raster.opacityTenths}} @onAdd={{perform this.layerAdded raster}} />
+    {{/each}}
+
+    {{#each this.model.vectors as |vector|}}
+      <layers.geojson @geoJSON={{vector.geojson}} @onAdd={{perform this.layerAdded vector}} />
+    {{/each}}
+  </LeafletMap>
+</div>
