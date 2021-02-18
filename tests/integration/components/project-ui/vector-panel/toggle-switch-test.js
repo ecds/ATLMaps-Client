@@ -34,10 +34,10 @@ module('Integration | Component | project-ui/vector-panel/toggle-switch', functi
 
   test('it renders', async function(assert) {
     await render(hbs`<ProjectUi::VectorPanel::ToggleSwitch @vector={{this.vlp}} />`);
-    assert.true(this.vlp.get('vectorLayer.show'));
+    assert.equal(this.vlp.get('vectorLayer.show'), true);
     assert.dom('button').hasText('hide');
     await click('button');
-    assert.false(this.vlp.get('vectorLayer.show'));
+    assert.equal(this.vlp.get('vectorLayer.show'), false);
     assert.dom('button').hasText('show');
   });
 });
