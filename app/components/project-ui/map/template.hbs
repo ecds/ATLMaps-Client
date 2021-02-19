@@ -22,7 +22,7 @@ as |layers|>
   {{/each}}
   {{#if @project.hasRasters}}
     {{#each @project.sortedRasters as |raster|}}
-      <layers.wmsTile
+      <layers.wms-tile
         @url={{raster.rasterLayer.url}}
         @layers={{raster.rasterLayer.layers}}
         @format="image/png"
@@ -52,16 +52,14 @@ as |layers|>
           />
         {{else}}
           {{#each vector.vectorLayer.vectorFeatures as |feature|}}
+            <span class="uk-hidden">{{vector-color vector feature}}</span>
             <layers.geojson
               @geoJSON={{feature.geojson}}
               @onEachFeature={{fn this.onEachFeature feature vector}}
               @pointToLayer={{fn this.addMarker feature vector}}
               @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color vector feature) "darkslategray" }}
-              @fillColor={{vector-color vector feature}}
-              @fillOpacity={{feature.opacity}}
-              @weight={{feature.weight}}
-              @className={{concat "shape-" vector.vectorLayer.name}}
               @pane={{concat "vector-layer-" vector.vectorLayer.id}}
+              @style={{feature.style}}
             />
           {{/each}}
         {{/if}}

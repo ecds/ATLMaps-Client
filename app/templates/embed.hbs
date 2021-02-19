@@ -48,7 +48,7 @@
     {{/each}}
 
     {{#each this.model.rasters as |raster|}}
-      <layers.wmsTile @url={{raster.url}} @layers={{raster.layers}} @format="image/png" @transparent={{true}}
+      <layers.wms-tile @url={{raster.url}} @layers={{raster.layers}} @format="image/png" @transparent={{true}}
         @opacity={{raster.opacityTenths}} @onAdd={{perform this.layerAdded raster}} role="button" />
     {{/each}}
 

@@ -1,46 +1,57 @@
-.atlm-mobile-project-menu,
-.atlm-mobile-project-menu-buttons {
-  bottom: 0;
-  position: absolute;
-  width: 100vw;
+.atlm-mobile-project-menu {
+  background-color: $primary-dark-gray;
+  width: 50vw;
 }
 
-.atlm-mobile-project-menu {
-  background-color: white;
+.atlm-mobile-project-menu-button {
+  color: $peach;
+  position: absolute;
+  font-size: 4rem;
   z-index: 1000;
 }
+// .atlm-mobile-project-menu,
+// .atlm-mobile-project-menu-buttons {
+//   bottom: 0;
+//   position: absolute;
+//   width: 100vw;
+// }
 
-.atlm-mobile-project-menu-buttons {
-  margin-left: 0;
+// .atlm-mobile-project-menu {
+//   background-color: white;
+//   z-index: 1000;
+// }
 
-  li {
-    a {
-      font-size: 2rem !important;
-      padding: 0 1rem .2rem 1rem;
-    }
+// .atlm-mobile-project-menu-buttons {
+//   margin-left: 0;
 
-    &.uk-active {
-      a {
-        border-bottom: solid;
-      }
-    }
-  }
-}
+//   li {
+//     a {
+//       font-size: 2rem !important;
+//       padding: 0 1rem .2rem 1rem;
+//     }
 
-.atlm-mobile-project-panels {
-  margin-bottom: 4rem;
+//     &.uk-active {
+//       a {
+//         border-bottom: solid;
+//       }
+//     }
+//   }
+// }
 
-  .atlm-mobile-project-panel {
-    overflow: hidden;
-    padding: .5rem;
-  }
+// .atlm-mobile-project-panels {
+//   margin-bottom: 4rem;
 
-  ul {
-    max-height: 33vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-}
+//   .atlm-mobile-project-panel {
+//     overflow: hidden;
+//     padding: .5rem;
+//   }
+
+//   ul {
+//     max-height: 33vh;
+//     overflow-x: hidden;
+//     overflow-y: auto;
+//   }
+// }
 
 
 // .atlm-mobile-project-menu,
@@ -137,7 +148,7 @@
   // }
 
   .atlm-popup {
-    left: 0;
+    left: 8rem;
     top: 0;
     height: 33vh;
     max-width: 100vw;

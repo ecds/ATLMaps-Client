@@ -12,7 +12,7 @@ export default class UkOffcanvasComponent extends Component {
     this.offcanvas = UIKit.offcanvas(
       element,
       {
-        flip: true,
+        flip: this.args.flip,
         container: '#off-canvas-container'
       }
     );

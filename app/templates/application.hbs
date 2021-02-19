@@ -10,36 +10,44 @@
         <div class="uk-navbar-left">
           <LinkTo @route="index" class="home uk-margin-left">
             <img src="/assets/images/atl.png" alt="ATLMaps branding - map marker that looks like a peach">
-            ATLMaps
           </LinkTo>
-          <ul class="uk-navbar-nav uk-visible@m">
-            <li>
-              <LinkTo @route="projects" class="projects">
-                Projects
-              </LinkTo>
-            </li>
-            <li>
-              {{#if this.session.isAuthenticated}}
-                <a href="#" {{on "click" (perform this.newProject)}}>New Project</a>
-              {{else}}
-                <LinkTo @route="explore" class="explore">
-                  Explore
+          {{#if this.deviceContext.isDesktop}}
+            <LinkTo @route="index" class="home uk-margin-left">
+              ATLMaps
+            </LinkTo>
+            <ul class="uk-navbar-nav uk-visible@m">
+              <li>
+                <LinkTo @route="projects" class="projects">
+                  Projects
                 </LinkTo>
-              {{/if}}
-            </li>
-          </ul>
+              </li>
+              <li>
+                {{#if this.session.isAuthenticated}}
+                  <a href="#" {{on "click" (perform this.newProject)}}>New Project</a>
+                {{else}}
+                  <LinkTo @route="explore" class="explore">
+                    Explore
+                  </LinkTo>
+                {{/if}}
+              </li>
+            </ul>
+          {{else}}
+            <span class="home uk-margin-left">
+              {{this.project}}
+            </span>
+          {{/if}}
         </div>
-        <div class="uk-navbar-right uk-visible@m uk-margin-right">
-          <ul class="uk-navbar-nav">
-            <li>
-              {{#if this.session.isAuthenticated}}
-                <AccountMenu @signOut={{this.signOut}} />
-              {{else}}
-                <UkButton @color="link" uk-toggle target="#auth-modal"><FaIcon @icon="sign-in-alt" /> Sign In</UkButton>
-              {{/if}}
-            </li>
-          </ul>
-        </div>
+          <div class="uk-navbar-right uk-visible@m uk-margin-right">
+            <ul class="uk-navbar-nav">
+              <li>
+                {{#if this.session.isAuthenticated}}
+                  <AccountMenu @signOut={{this.signOut}} />
+                {{else}}
+                  <UkButton @color="link" uk-toggle target="#auth-modal"><FaIcon @icon="sign-in-alt" /> Sign In</UkButton>
+                {{/if}}
+              </li>
+            </ul>
+          </div>
         <div class="uk-navbar-right uk-hidden@s">
           <ul class="uk-navbar-nav">
             <li>

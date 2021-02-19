@@ -15,7 +15,12 @@
       <ProjectUi::Menu @project={{this.model.project}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
       {{#if this.deviceContext.isDesktop}}
         {{#if this.model.project.mine}}
-          <UkOffcanvas @open={{this.model.project.isExploring}} class="uk-padding-remove atlm-search-panel uk-visible@m">
+          <div class="atlm-toggle-layer-search">
+            <UkButton class="atlm-large-button" uk-toggle="target: #atlm-layer-search-panel" @size="large" @color="secondary">
+              Add Layers
+            </UkButton>
+          </div>
+          <UkOffcanvas @open={{this.model.project.isExploring}} @id="atlm-layer-search-panel" @flip={{true}} class="uk-padding-remove atlm-search-panel uk-visible@m">
             <ProjectUi::SearchPanel @model={{this.model}}>
               <li>
                 <section class="uk-panel uk-panel-scrollable uk-padding">

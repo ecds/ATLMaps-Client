@@ -10,7 +10,6 @@ export default class VectorFeatureModel extends Model {
   @attr() geojson;
   @attr('string') layerTitle;
   @attr('string') name;
-  @attr('string') style;
   @attr('boolean', {
     defaultValue() {
       return false;
@@ -32,6 +31,21 @@ export default class VectorFeatureModel extends Model {
     return null;
   }
 
+  @computed('color', 'opacity', 'weight')
+  get style() {
+    return {
+      color: this.color,
+      fillColor: this.color,
+      weight: 1,
+      fillOpacity: this.opacity
+    };
+  }
+
+  @computed('style')
+  get styleString() {
+    return JSON.stringify(this.style).replace('{', '').replace('}', '').replace(/,/g, ';').replace(/"/g, '');
+  }
+
   @computed('vectorLayer.opacity', 'active')
   get opacity() {
     if (this.active) return 1;
@@ -51,7 +65,7 @@ export default class VectorFeatureModel extends Model {
 
     library.add(faMapMarkerAlt);
     const markerIcon = faIcon({ prefix: 'fas', iconName: 'map-marker-alt' });
-    const html = `<span id="data-layer-${this.id}" style="${this.style};">${markerIcon.html[0]}</span>`;
+    const html = `<span id="data-layer-${this.id}" style=${this.styleString};">${markerIcon.html[0]}</span>`;
 
     let classList = 'leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive atlm-map-marker';
 

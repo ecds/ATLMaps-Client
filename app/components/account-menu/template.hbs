@@ -1,4 +1,8 @@
-<a href="#"><FaIcon @icon="user-circle" />&nbsp; Account</a>
+{{#if this.deviceContext.isDesktop}}
+  <a href="#"><FaIcon @icon="user-circle" />&nbsp; Account</a>
+{{else}}
+  <a href="#"><FaIcon @icon="bars" /></a>
+{{/if}}
 <div class="uk-navbar-dropdown atlm-account-menu" {{did-insert this.initDropdown}}>
   <ul class="uk-nav uk-navbar-dropdown-nav">
     <li class="uk-padding-small uk-text-large">

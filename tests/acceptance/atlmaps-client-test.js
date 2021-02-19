@@ -16,7 +16,6 @@ module('Acceptance | atlmaps client', function(hooks) {
     assert.ok(true, 'no ally errors found!');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div nav.uk-navbar-container div.uk-navbar-left a.home').hasText('ATLMaps');
 
     assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.projects').hasText('Projects');
     assert.dom('div nav.uk-navbar-container ul.uk-navbar-nav li a.explore').hasText('Explore');

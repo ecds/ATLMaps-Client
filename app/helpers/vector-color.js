@@ -14,10 +14,11 @@ export default helper(function vectorColor([vectorLayerProject, vectorFeature]) 
         color = colorMap[key].color;
       }
     });
+    const strokeColor = vectorFeature.geometryType.includes('Poly') ? 'darkslategray' : color;
     vectorFeature.setProperties(
       {
         color,
-        style: `color: ${color};`
+        style: { fillColor: color, color: strokeColor, weight: 1, fillOpacity: vectorFeature.opacity }
       }
     );
     return color;

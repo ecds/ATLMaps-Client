@@ -59,6 +59,7 @@ export default class MapComponent extends Component {
       vectorFeature.setProperties({
         active: true
       });
+      vectorFeature.get('divIcon');
       this.activeFeature = vectorFeature;
     });
 
@@ -69,6 +70,7 @@ export default class MapComponent extends Component {
         vectorFeature.setProperties({
           active: true
         });
+        vectorFeature.get('divIcon');
      }
     });
   }
@@ -80,7 +82,7 @@ export default class MapComponent extends Component {
       vectorFeature.setProperties(
         {
           leafletMarker: marker,
-          style: `color: ${vector.color};`
+          color: vector.color
         }
       );
       vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
@@ -106,6 +108,7 @@ export default class MapComponent extends Component {
       this.activeFeature.setProperties({
         active: false
       });
+      this.activeFeature.get('divIcon');
     }
     this.activeFeature = null;
   }

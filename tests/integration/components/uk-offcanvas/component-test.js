@@ -8,12 +8,10 @@ module('Integration | Component | uk-offcanvas', function(hooks) {
   setupRenderingTest(hooks);
 
   test('toggles on interactions', async function(assert) {
-    await render(hbs`<UkOffcanvas />`);
+    await render(hbs`<button uk-toggle="target: #offcanvas">big boi</button><UkOffcanvas @id="offcanvas" />`);
     await settled();
-    assert.equal(this.element.textContent.trim(), 'Add Layers');
-    assert.dom('#atlm-layer-search-panel').doesNotHaveClass('uk-open');
-    // await click('button.uk-button');
-    // await waitFor('div.uk-offcanvas.uk-open');
-    // assert.dom('#atlm-layer-search-panel').hasClass('uk-open');
+    assert.dom('#off-canvas-container').exists();
+    assert.dom('#offcanvas').exists();
+    assert.dom('#offcanvas').doesNotHaveClass('uk-open');
   });
 });

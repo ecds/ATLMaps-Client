@@ -7,6 +7,7 @@ import UIKit from 'uikit';
 
 export default class AccountMenuComponent extends Component {
   @service currentUser;
+  @service deviceContext;
   dropdown = null;
 
   @action

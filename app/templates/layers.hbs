@@ -23,7 +23,7 @@
       />
 
       {{#if (eq this.type 'raster')}}
-        <layers.wmsTile
+        <layers.wms-tile
           @url={{this.layer.url}}
           @layers={{this.layer.layers}}
           @format="image/png"

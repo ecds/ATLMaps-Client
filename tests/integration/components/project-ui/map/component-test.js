@@ -134,6 +134,7 @@ module('Integration | Component | map', function(hooks) {
     assert.equal(findAll('.leaflet-marker-icon').length, 2);
     assert.dom('.leaflet-marker-icon.active').doesNotExist();
     await click('.leaflet-marker-icon');
+    await settled();
     assert.equal(findAll('.leaflet-marker-icon.active').length, 1);
     assert.dom('.leaflet-marker-icon.active').exists();
     triggerKeyEvent('div.leaflet-container', 'keyup', 'Escape');
@@ -164,20 +165,21 @@ module('Integration | Component | map', function(hooks) {
   test('it shades polygon based on data colorMap', async function(assert) {
     await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     await settled();
-    assert.dom('.shape-emory').hasStyle({
+    assert.dom('.leaflet-vector-layer-3-pane path').hasStyle({
       fill: 'rgb(152, 0, 67)',
       fillOpacity: '0.4',
       strokeWidth: '1px'
     });
-    assert.dom('.shape-oxford').hasStyle({
-      fill: 'rgb(255, 20, 147)',
-      fillOpacity: '0.4',
-      strokeWidth: '1px'
-    });
-    await click('.shape-emory');
-    assert.dom('.shape-emory').hasStyle({
+  });
+
+  test('it highlights polygon when clicked', async function(assert) {
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
+    await settled();
+    await click('.leaflet-vector-layer-3-pane path');
+    assert.dom('.leaflet-vector-layer-3-pane path').hasStyle({
+      fill: 'rgb(152, 0, 67)',
       fillOpacity: '1',
-      strokeWidth: '6px'
+      strokeWidth: '1px'
     });
   });
 

@@ -31,7 +31,8 @@ export default class ProjectRoute extends Route {
     });
   }
 
-  afterModel() {
+  afterModel(model) {
     this.deviceContext.setDeviceContext();
+    this.controllerFor('application').set('project', model.project.name);
   }
 }

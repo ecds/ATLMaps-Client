@@ -144,8 +144,9 @@
   </li>
 </ul>
 {{else}}
-  <section class="atlm-mobile-project-menu">
+  {{!-- <section class="atlm-mobile-project-menu">
     <ul class="uk-flex-center uk-subnav atlm-mobile-project-menu-buttons" {{did-insert this.initMobilePanel}} uk-switcher>
+        <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
         <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
         {{#if @project.hasRasters}}
           <li><a href="#" class="uk-text-center"><FaIcon @icon="map" /></a></li>
@@ -159,9 +160,10 @@
     </ul>
 
     <ul class="uk-switcher atlm-mobile-project-panels">
+      <li></li>
         <li class="atlm-mobile-project-panel">
           <section class="uk-padding-small">
-            {{@project.description}}
+            {{html-safe @project.description}}
           </section>
         </li>
         {{#if @project.hasRasters}}
@@ -172,13 +174,13 @@
           </section>
           <ul uk-accordion target="> p">
             {{#each @project.sortedRasters as |raster|}}
-              <li>
+              <li class="uk-padding">
                 <a href="#" class="uk-accordion-title">{{raster.rasterLayer.title}}</a>
                 <section class="uk-padding-small">
-                  <RasterOpacitySlider @raster={{raster}} />
+                  <RasterOpacitySlider @raster={{raster.rasterLayer}} />
                 </section>
                 <p class="uk-meta uk-accordion-content">
-                  {{raster.rasterLayer.description}}
+                  {{html-safe raster.rasterLayer.description}}
                 </p>
               </li>
             {{/each}}
@@ -189,7 +191,7 @@
           <li class="atlm-mobile-project-panel">
             <ul uk-accordion>
             {{#each @project.places as |place|}}
-            <li>
+            <li class="uk-padding">
               <a href="#" class="uk-accordion-title">
                 <span style={{html-safe place.style}}>
                   <FaIcon @icon={{place.vectorLayer.icon}} />
@@ -197,7 +199,7 @@
                 {{place.vectorLayer.title}}
               </a>
               <p class="uk-accordion-content">
-                {{place.vectorLayer.description}}
+                {{html-safe place.vectorLayer.description}}
               </p>
             </li>
             {{/each}}
@@ -208,7 +210,7 @@
           <li class="atlm-mobile-project-panel">
           <ul uk-accordion>
             {{#each @project.data as |data|}}
-            <li>
+            <li class="uk-padding">
               <a href="#" class="uk-accordion-title">
                 <span style={{html-safe data.style}}>
                   <FaIcon @icon={{data.vectorLayer.icon}} />
@@ -224,5 +226,45 @@
           </li>
         {{/if}}
     </ul>
-  </section>
+  </section> --}}
+  <button class="uk-button uk-button-link uk-button-default uk-padding-small atlm-mobile-project-menu-button" type="button" uk-toggle="target: #offcanvas-usage">
+    <FaIcon @icon="chevron-circle-down" @rotation={{270}} />
+  </button>
+
+<UkOffcanvas @id="offcanvas-usage" class="uk-offcanvas-bar uk-background-secondary uk-light atlm-mobile-project-menu">
+
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+      <ul uk-accordion>
+          <li class="uk-open">
+              <a class="uk-accordion-title" href="#">{{@project.name}}</a>
+              <div class="uk-accordion-content">
+                {{html-safe @project.description}}
+              </div>
+          </li>
+          {{#each @project.rasters as |raster|}}
+            <li>
+                <a class="uk-accordion-title" href="#"><FaIcon @icon="map" /> {{raster.rasterLayer.title}}</a>
+                <div class="uk-accordion-content">
+                  <div class="uk-cover-container uk-height-small">
+                    <img src={{raster.rasterLayer.thumb_url}} alt="" role="presentation" />
+                  </div>
+                <div class="uk-margin">
+                  <RasterOpacitySlider @raster={{raster.rasterLayer}} />
+                </div>
+
+                    {{html-safe raster.rasterLayer.description}}
+                </div>
+            </li>
+          {{/each}}
+          {{#each @project.vectors as |vector|}}
+            <li>
+                <a class="uk-accordion-title" href="#"><FaIcon @icon={{vector.vectorLayer.icon}} style={{html-safe vector.style}} /> {{vector.vectorLayer.title}}</a>
+                <div class="uk-accordion-content">
+                    {{html-safe vector.vectorLayer.description}}
+                </div>
+            </li>
+          {{/each}}
+      </ul>
+</UkOffcanvas>
 {{/if}}
