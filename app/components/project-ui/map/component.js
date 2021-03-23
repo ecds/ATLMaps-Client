@@ -7,7 +7,6 @@ import EmberObject from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 import { timeout } from 'ember-concurrency';
 import L from "leaflet";
-
 export default class MapComponent extends Component {
 
   @service searchParameters;
@@ -78,16 +77,14 @@ export default class MapComponent extends Component {
   @action
   addMarker(vectorFeature, vector, layer, feature/*, point*/) {
     if (vectorFeature.geometryType == 'Point') {
-      let marker = L.marker(feature);
       vectorFeature.setProperties(
         {
-          leafletMarker: marker,
-          color: vector.color
+          geometry: feature
         }
       );
       vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
       // This function has to return the marker object.
-      return marker;
+      return vectorFeature.leafletMarker;
     }
   }
 

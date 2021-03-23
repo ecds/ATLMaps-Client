@@ -10,7 +10,8 @@ Router.map(function() {
   this.route('explore');
   this.route('projects');
   this.route('project', { path: 'projects/:project_id' });
-  this.route('index', { path: '/' });
+  this.route('index', { path: '/' }, function() {});
   this.route('layers', { path: 'layers/:name' });
   this.route('embed', { path: 'embed/:maps' });
+  this.route('about');
 });

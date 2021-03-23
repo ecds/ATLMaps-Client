@@ -1,8 +1,9 @@
+import { defineProperty } from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, fillIn, render } from '@ember/test-helpers';
+import { click, fillIn, render, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-
+import { task, timeout } from 'ember-concurrency';
 module('Integration | Component | project-ui/edit-panel', function(hooks) {
   setupRenderingTest(hooks);
 
@@ -27,6 +28,9 @@ module('Integration | Component | project-ui/edit-panel', function(hooks) {
     this.set('setMap', event => {
       project.setProperties({'leafletMap': event.target });
     });
+
+
+    defineProperty(this, 'save', task(function * () { return yield timeout(3); }));
   });
 
   test('it renders', async function(assert) {
@@ -35,7 +39,7 @@ module('Integration | Component | project-ui/edit-panel', function(hooks) {
   });
 
   test('it updates project properties', async function(assert) {
-    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} />`);
+    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} @save={{this.save}} />`);
     assert.dom('#project-title').hasValue(this.project.name);
     assert.dom('.pell-content').hasText(this.project.description);
     assert.dom('#project-published').isNotChecked();
@@ -45,6 +49,7 @@ module('Integration | Component | project-ui/edit-panel', function(hooks) {
     assert.dom('#set-base-map-street').isChecked();
 
     await fillIn('#project-title', 'Bell Street Burritos are the Best');
+    await triggerKeyEvent('#project-title', 'keyup', 'KeyT');
     assert.equal(this.project.name, 'Bell Street Burritos are the Best');
     // await fillIn('#project-description', 'I still love burritos.');
     // assert.equal(this.project.description, 'I still love burritos.');
@@ -61,7 +66,7 @@ module('Integration | Component | project-ui/edit-panel', function(hooks) {
   });
 
   test('it updates project map defaults based on current map position', async function(assert) {
-    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} /> <LeafletMap @lat={{this.project.centerLat}} @lng={{this.project.centerLng}} @zoom={{this.project.zoomLevel}} @onLoad={{this.setMap}} />`);
+    await render(hbs`<ProjectUi::EditPanel @project={{this.project}} @save={{this.save}} /> <LeafletMap @lat={{this.project.centerLat}} @lng={{this.project.centerLng}} @zoom={{this.project.zoomLevel}} @onLoad={{this.setMap}} />`);
     this.project.leafletMap.setView([33.8, -84.4], 18);
     await click('#update-map-defaults');
     assert.equal(this.project.centerLat, 33.8);

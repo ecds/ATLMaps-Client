@@ -87,6 +87,35 @@
     .uk-container {
       background-color: rgba($primary-dark-gray, 0.75);
     }
+
+    h3 {
+      a {
+        color: white;
+      }
+    }
+
+    h5 {
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .atlm-about-heading {
+      &.uk-accordion-title {
+        color: white;
+        cursor: pointer;
+        // font-size: 4rem;
+        text-decoration: underline;
+      }
+    }
+
+    a {
+      color: white;
+      text-decoration: underline;
+
+      &:hover {
+        color: $secondary-light-gray;
+      }
+    }
   }
 }
 
@@ -114,7 +143,31 @@
   z-index: 2;
 
   img {
-    width: 25vw;
+    width: 15vw;
+  }
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      color: $secondary-light-gray;
+    }
+
+  }
+
+  .atlm-sub-footer {
+    background-color: black;
+    // height: 100%;
+    width: 100vw;
+
+    .uk-float-right {
+      font-size: 2rem;
+    }
+  }
+
+  .atlm-small-logo {
+    width: 2rem;
   }
 }
 

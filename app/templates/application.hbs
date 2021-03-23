@@ -1,8 +1,12 @@
+<HeadLayout />
+{{#if (not this.fastboot.isFastBoot)}}
 {{#if (not-eq this.target.currentPath 'embed')}}
   <AskCookieConsent />
   <div id="auth-modal" class="" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-      <EcdsAuth @modelsToReload={{array 'project'}} />
+      {{#if (not this.fastboot.isFastBoot)}}
+        <EcdsAuth @modelsToReload={{array 'project'}} />
+      {{/if}}
     </div>
   </div>
   <div uk-sticky>
@@ -30,8 +34,11 @@
                   </LinkTo>
                 {{/if}}
               </li>
+              <li>
+                <LinkTo @route="about">About</LinkTo>
+              </li>
             </ul>
-          {{else}}
+          {{else if this.project}}
             <span class="home uk-margin-left">
               {{this.project}}
             </span>
@@ -79,6 +86,9 @@
   <div id="main" class={{this.deviceContext.deviceContextClass}}>
     {{outlet}}
   </div>
+{{else}}
+  {{outlet}}
+{{/if}}
 {{else}}
   {{outlet}}
 {{/if}}

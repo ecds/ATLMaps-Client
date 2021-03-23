@@ -6,22 +6,21 @@
       <div class="uk-margin">
         <label class="uk-form-label" for="project-title">Title</label>
         <div class="uk-form-controls">
-            <Input class="uk-input" id="project-title" @type="text" @placeholder="Project title..." @value={{mut @project.name}} />
+            <Input class="uk-input" id="project-title" @type="text" @placeholder="Project title..." @value={{mut @project.name}} {{on 'keyup' (perform @save)}} />
         </div>
       </div>
 
       <div class="uk-margin">
         <label class="uk-form-label" for="project-description">Description</label>
         <div class="uk-form-controls">
-            {{!-- <Textarea class="uk-textarea" id="project-description" cols="80" rows="6" @value={{mut @project.description}} /> --}}
-            <PellEditor @value={{@project.description}} @onChange={{fn (mut @project.description)}} @pellOptions={{this.pellOptions}} />
+            <PellEditor @value={{@project.description}} @onChange={{fn (mut @project.description)}} {{on 'keyup' (perform @save)}} @pellOptions={{this.pellOptions}} />
         </div>
       </div>
 
       <div class="uk-margin">
         <label class="uk-form-label" for="project-photo">Cover Photo URL</label>
         <div class="uk-form-controls">
-            <Input class="uk-input" id="project-photo" @type="url" @placeholder="https://..." @value={{mut @project.photo}} />
+            <Input class="uk-input" id="project-photo" @type="url" @placeholder="https://..." @value={{mut @project.photo}} {{on 'change' (perform @save)}} />
         </div>
       </div>
 
@@ -31,31 +30,35 @@
         {{/if}}
       </div>
 
+      <div class="uk-margin">
+        <UkButton @color="secondary" @size="small" uk-toggle target="#edit-intro-modal">Project Introduction</UkButton>
+      </div>
+
       <div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>
-        <div class="uk-form-controls">
-            <Input class="uk-checkbox" id="project-published" @type="checkbox" @checked={{mut @project.published}} />
-        </div>
-        <label class="uk-form-label" for="project-published">Published</label>
+        <label class="uk-form-label" for="project-published">
+          <Input class="uk-checkbox" id="project-published" @type="checkbox" @checked={{mut @project.published}} {{on 'change' (perform @save)}} />
+          Published
+        </label>
       </div>
 
       <div class="uk-margin">
         <label class="uk-form-label" for="project-latitude">Center Latitude</label>
         <div class="uk-form-controls">
-            <Input class="uk-input" id="project-latitude" @type="text" @value={{mut @project.centerLat}} />
+            <Input class="uk-input" id="project-latitude" @type="text" @value={{mut @project.centerLat}} {{on 'change' (perform @save)}} />
         </div>
       </div>
 
       <div class="uk-margin">
         <label class="uk-form-label" for="project-longitude">Center Longitude</label>
         <div class="uk-form-controls">
-            <Input class="uk-input" id="project-longitude" @type="text" @value={{mut @project.centerLng}} />
+            <Input class="uk-input" id="project-longitude" @type="text" @value={{mut @project.centerLng}} {{on 'change' (perform @save)}}/>
         </div>
       </div>
 
     <div class="uk-margin">
         <label class="uk-form-label" for="zoom-level">Select</label>
         <div class="uk-form-controls">
-            <select class="uk-select" id="zoom-level" {{on 'change' this.updateZoomLevel}}>
+            <select class="uk-select" id="zoom-level" {{on 'change' (pipe this.updateZoomLevel (perform @save))}}>
               {{#each this.zoomLevels as |level|}}
                 <option value={{level}} selected={{if (eq level @project.zoomLevel) true false}}>{{level}}</option>
               {{/each}}
@@ -63,14 +66,14 @@
         </div>
     </div>
 
-    <UkButton id="update-map-defaults" @color="secondary" {{on 'click' this.updateMapDefaults}}>Set to current view</UkButton>
+    <UkButton id="update-map-defaults" @color="secondary" {{on 'click' (pipe this.updateMapDefaults (perform @save))}}>Set to current view</UkButton>
 
     <div class="uk-margin uk-grid-small uk-child-width-1-1" uk-grid>
         <div class="uk-form-label">Base Map</div>
         {{#each this.baseMaps.baseMaps as |base|}}
           <div class="uk-width-1-6 uk-text-center uk-inline">
             <div class="uk-position-center">
-              <input class="uk-radio" type="radio" name="set-base-map" id={{concat 'set-base-map-' base.label}} value={{base.label}} checked={{eq base.label @project.defaultBaseMap}} {{on 'change' this.updateBaseMap}}>
+              <input class="uk-radio" type="radio" name="set-base-map" id={{concat 'set-base-map-' base.label}} value={{base.label}} checked={{eq base.label @project.defaultBaseMap}} {{on 'change' (pipe this.updateBaseMap (perform @save))}}>
             </div>
           </div>
           <div class="uk-width-5-6">
@@ -83,3 +86,5 @@
 
     </fieldset>
 </form>
+
+<ProjectUi::IntroModalEdit @project={{@project}} />

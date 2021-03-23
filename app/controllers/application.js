@@ -4,10 +4,11 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 
 export default class ApplicationController extends Controller {
-  @service deviceContext;
   @service ecdsSession;
+  @service deviceContext;
   @service store;
   @service currentUser;
+  @service fastboot;
 
   @task
   *newProject() {

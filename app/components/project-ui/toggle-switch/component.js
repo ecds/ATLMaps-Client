@@ -14,14 +14,14 @@ export default class ProjectUiToggleSwitchComponent extends Component {
 
     if (this.args.project.allLayersHidden) {
       this.args.project.rasters.forEach(layer => {
-        layer.setProperties({ opacity: 100 });
+        layer.get('rasterLayer').setProperties({ opacity: 100 });
       });
       this.args.project.vectors.forEach(vector => {
         vector.vectorLayer.setProperties({ show: true, opacity: 40 });
       });
     } else {
       this.args.project.rasters.forEach(layer => {
-        layer.setProperties({ opacity: 0 });
+        layer.get('rasterLayer').setProperties({ opacity: 0 });
       });
       this.args.project.vectors.forEach(vector => {
         vector.vectorLayer.setProperties({ show: false });

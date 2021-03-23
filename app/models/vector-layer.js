@@ -97,7 +97,6 @@ export default class VectorLayerModel extends Model {
             geojson: feature,
             geometryType,
             layerTitle: this.title,
-            description: feature.properties.description,
             vectorLayer: this
           }
         );
@@ -138,9 +137,10 @@ export default class VectorLayerModel extends Model {
     return htmlSafe(`color: ${this.tmpColor}`);
   }
 
-  // set tempColor(color) {
-  //   return color;
-  // }
+  @computed('tmpColor')
+  get color() {
+    return this.tmpColor;
+  }
 
   @computed('minx', 'maxx', 'miny', 'maxy')
   get latLngBounds() {

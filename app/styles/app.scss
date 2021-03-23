@@ -93,6 +93,10 @@ $base-link-color: #0D47A1;
   }
 }
 
+.uk-offcanvas {
+  z-index: 1005;
+}
+
 
 // End UIKit overrides
 
@@ -145,6 +149,10 @@ article {
 
   img {
     height: 2.5rem;
+  }
+
+  &:hover {
+    color: $secondary-light-gray;
   }
 }
 

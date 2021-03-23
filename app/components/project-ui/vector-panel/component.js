@@ -64,10 +64,11 @@ export default class ProjectUiVectorPanelComponent extends Component {
   @action
   updatePointColor(vector) {
     vector.get('vectorLayer.vectorFeatures').forEach( feature => {
-      feature.setProperties({ style: `color: ${vector.color};`});
+      feature.setProperties({ color: vector.color });
       // Not sure why we have to call `divIcon` to get the icon on the map to update.
       feature.divIcon;
     });
+    // this.saveColor(vector);
   }
 
   @action

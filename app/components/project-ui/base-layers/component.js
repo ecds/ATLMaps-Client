@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 export default class ProjectUiBaseLayersComponent extends Component {
   @service baseMaps;
+  @service deviceContext;
 
   @action
   switchBase(base) {

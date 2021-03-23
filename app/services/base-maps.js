@@ -42,10 +42,11 @@ export default class BaseMapsService extends Service {
     label: 'city1928',
     displayLabel: '1928 Atlas',
     layers: A([
+      'https://stamen-tiles-{s}.a.ssl.fastly.net/toposm-color-relief/{z}/{x}/{y}.jpg',
       'https://s3.amazonaws.com/tilemaps/ATL28_1000tiles/{z}/{x}/{y}.png',
       'https://s3.amazonaws.com/tilemaps/ATL28_200tiles/{z}/{x}/{y}.png'
     ]),
-    attribution: 'Emory University',
+    attribution: 'Emory University and <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     thumbnail: '/assets/images/1928.png',
     leafletObjects: A([])
   };

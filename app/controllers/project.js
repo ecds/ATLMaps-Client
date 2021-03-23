@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
-import { task } from 'ember-concurrency-decorators';
+import { keepLatestTask, task } from 'ember-concurrency-decorators';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { waitForProperty } from 'ember-concurrency';
@@ -21,17 +21,13 @@ export default class ProjectController extends Controller {
   @tracked layerAddingOrRemoving = null;
   @tracked transitioning = false;
 
-  // setLimit(newLimit) {
-  //   this.limit = newLimit;
-  // }
-
   @task
   *addRemoveRasterLayer(raster) {
     if (!isNaN(raster)) {
       raster = this.store.peekRecord('rasterLayer', raster);
     }
     this.layerAddingOrRemoving = raster.title;
-    let projectRasters = yield this.model.project.sortedRasters;
+    let projectRasters = yield this.model.sortedRasters;
     let layerToEdit = null;
     if (raster.onMap) {
       this.currentAction = 'Removing';
@@ -57,16 +53,16 @@ export default class ProjectController extends Controller {
       layerToEdit = yield this.store.createRecord('raster-layer-project',
       {
         rasterLayer: raster,
-        project: this.model.project
+        project: this.model
       });
       raster.setProperties({ onMap: true });
       projectRasters.pushObject(layerToEdit);
       // Don't set the position until after it has been added to the model.project.
       // For some reason, if you set it at creation, it screws up the reordering.
-      layerToEdit.setProperties({ position: this.model.project.rasters.length + 10 });
+      layerToEdit.setProperties({ position: this.model.rasters.length + 10 });
       this.fitBounds(raster);
     }
-    if (this.model.project.mayEdit) {
+    if (this.model.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
     }
@@ -80,12 +76,12 @@ export default class ProjectController extends Controller {
       vector = this.store.peekRecord('vectorLayer', vector);
     }
     this.layerAddingOrRemoving = vector.title;
-    let projectVectors = yield this.model.project.vectors;
+    let projectVectors = yield this.model.vectors;
     let layerToEdit = null;
     if (vector.onMap) {
       this.currentAction = 'Removing';
       layerToEdit = this.store.peekAll('vectorLayerProject').filter( vlp => {
-        if (vlp.vectorLayer.get('id') == vector.id && vlp.project.get('id') == this.model.project.id) {
+        if (vlp.vectorLayer.get('id') == vector.id && vlp.project.get('id') == this.model.id) {
           return vlp;
         }
       }).firstObject;
@@ -98,10 +94,10 @@ export default class ProjectController extends Controller {
 
       switch(layerToEdit.dataType) {
         case 'qualitative':
-          this.model.project.places.removeObject(layerToEdit);
+          this.model.places.removeObject(layerToEdit);
         break;
         case 'quantitative':
-      this.model.project.data.removeObject(layerToEdit);
+      this.model.data.removeObject(layerToEdit);
           break;
       }
 
@@ -112,7 +108,7 @@ export default class ProjectController extends Controller {
     } else {
       this.currentAction = "Adding";
       const tmpColor = vector.tmpColor;
-      const pane = this.model.project.leafletMap.createPane(`vector-layer-${vector.id}`);
+      const pane = this.model.leafletMap.createPane(`vector-layer-${vector.id}`);
       pane.classList.add('leaflet-overlay-pane');
       // The search results do not include the GeoJSON. So we need to get it.
       if (!vector.geojson) {
@@ -125,14 +121,14 @@ export default class ProjectController extends Controller {
         'vector-layer-project',
         {
           vectorLayer: vector,
-          project: this.model.project,
+          project: this.model,
           show: false,
           color: tmpColor,
           dataType: vector.dataType,
           colorMap: vector.colorMap,
           property: vector.defaultBreakProperty,
           leafletPane: pane,
-          order: this.model.project.vectors.length + 1
+          order: this.model.vectors.length + 1
         }
       );
 
@@ -148,7 +144,7 @@ export default class ProjectController extends Controller {
         });
       }
 
-      if (this.model.project.mayEdit) {
+      if (this.model.mayEdit) {
         yield layerToEdit.save();
       }
 
@@ -156,7 +152,7 @@ export default class ProjectController extends Controller {
       // For some reason, if you set it at creation, it screws up the reordering.
       layerToEdit.setProperties(
         {
-          position: this.model.project.vectors.length + 10,
+          position: this.model.vectors.length + 10,
           show: true
         }
       );
@@ -166,39 +162,39 @@ export default class ProjectController extends Controller {
 
 
       this.fitBounds(vector);
-      if (vector.dataType == 'quantitative' && !vector.colorMap && this.model.project.mayEdit) {
+      if (vector.dataType == 'quantitative' && !vector.colorMap && this.model.mayEdit) {
         this.vectorToAdd = { vectorLayer: vector, vectorProject: layerToEdit };
       }
     }
-    if (this.model.project.mayEdit) {
+    if (this.model.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
     }
     switch(layerToEdit.dataType) {
       case 'qualitative':
-        // this.model.project.get('places').pushObject(layerToEdit);
+        // this.model.get('places').pushObject(layerToEdit);
         break;
       case 'quantitative':
-        // this.model.project.get('data').pushObject(layerToEdit);
+        // this.model.get('data').pushObject(layerToEdit);
         break;
     }
     this.layerAddingOrRemoving = null;
     this.currentAction = null;
   }
 
-  @task
+  @keepLatestTask
   *saveProject() {
     try {
-      yield this.model.project.save();
-      this.notification.setNote.perform(
-        {
-          note: 'Your changes have been saved.',
-          type: 'success'
-        }
-      );
+      yield this.model.save();
+      // this.notification.setNote.perform(
+      //   {
+      //     note: 'Your changes have been saved.',
+      //     type: 'success'
+      //   }
+      // );
     } catch(error) {
       if (error.errors[0].status == '401') {
-        this.model.project.rollbackAttributes();
+        this.model.rollbackAttributes();
         this.notification.setNote.perform(
           {
             note: 'You do not have permission to edit this project.',
@@ -212,11 +208,11 @@ export default class ProjectController extends Controller {
   @action
   fitBounds(layer) {
     if (!layer.latLngBounds) return;
-    const bounds = this.model.project.leafletMap.getBounds();
+    const bounds = this.model.leafletMap.getBounds();
     const layerCenter = layer.latLngBounds.getCenter();
     bounds.extend(layer.latLngBounds);
-    this.model.project.leafletMap.fitBounds(bounds);
-    this.model.project.leafletMap.panTo(layerCenter);
+    this.model.leafletMap.fitBounds(bounds);
+    this.model.leafletMap.panTo(layerCenter);
   }
 
   @action

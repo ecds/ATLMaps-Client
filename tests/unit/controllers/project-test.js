@@ -21,7 +21,7 @@ module('Unit | Controller | project', function(hooks) {
       }
     }));
     this.set('controller', this.owner.lookup('controller:project'));
-    this.controller.model = { project: this.project };
+    this.controller.model = this.project;
   });
 
   // Replace this with your real tests.

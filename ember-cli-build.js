@@ -13,7 +13,7 @@ module.exports = function(defaults) {
     },
     'free-solid-svg-icons': 'all',
     'ember-composable-helpers': {
-      only: ['toggle']
+      only: ['toggle', 'pipe']
     }
   });
 

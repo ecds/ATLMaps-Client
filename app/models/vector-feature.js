@@ -16,8 +16,15 @@ export default class VectorFeatureModel extends Model {
     }
   }) active;
   @attr() leafletObject;
-  @attr() leafletMarker;
   @belongsTo('vectorLayer') vectorLayer;
+
+  @computed('vectorLayer.color')
+  get color() {
+    if (this.geojson.properties.color) {
+      return this.geojson.properties.color;
+    }
+    return this.get('vectorLayer.color');
+  }
 
   @computed('geojson')
   get safeDescription() {
@@ -57,6 +64,16 @@ export default class VectorFeatureModel extends Model {
     if (this.active) return 6;
     if (this.opacity == 0) return 0;
     return 1;
+  }
+
+  @computed
+  get geometry() {
+    return { lat: 0, lng: 0 };
+  }
+
+  @computed('geometry')
+  get leafletMarker() {
+    return L.marker(this.geometry);
   }
 
   @computed('style', 'active', 'leafletMarker')

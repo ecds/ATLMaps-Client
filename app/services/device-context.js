@@ -24,6 +24,10 @@ export default class DeviceContextService extends Service {
   }
 
   setDeviceContext(context=null) {
+    if (this.fastboot.isFastBoot) {
+      this.isDesktop = true;
+      return;
+    }
     if (context) {
       this.isDesktop = context == 'desktop';
       this.deviceContextClass = `atlm-${context}`;

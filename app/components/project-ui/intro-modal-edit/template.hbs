@@ -1,0 +1,33 @@
+<div id="edit-intro-modal" class="uk-flex-top" {{did-insert this.initModal}}>
+   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+   <button class="uk-modal-close-default" type="button" uk-close></button>
+    <form class="uk-form-stacked">
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="project-intro">Intro</label>
+        <div class="uk-form-controls">
+            <PellEditor @value={{@project.intro}} @onChange={{fn (mut @project.intro)}} @pellOptions={{this.pellOptions}} />
+        </div>
+      </div>
+
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="media">Media</label>
+            <div class="uk-form-controls">
+                <Input class="uk-input" id="media" @type="text" @placeholder="Youtube link" @value={{@project.media}} />
+            </div>
+        </div>
+
+        {{#if @project.media}}
+          <div class="uk-margin">
+            <div class='embed-container'>
+              <iframe src={{@project.embedUrl}} title="foobar" frameborder='0' allowfullscreen></iframe>
+            </div>
+          </div>
+        {{/if}}
+      <div class="uk-modal-footer uk-text-right">
+        <UkButton @color="primary" {{on "click" this.saveProject}}>Save</UkButton>
+      </div>
+    </form>
+  </div>
+</div>

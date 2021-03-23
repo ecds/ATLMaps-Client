@@ -22,19 +22,19 @@
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
     <button class="uk-modal-close-default" type="button" uk-close></button>
     <h3>Layer Embed</h3>
-    <label id={{concat 'embed-' @layer.id}} for={{concat 'embed-' @layer.id}}>Embed Code</label>
+    <label for={{concat 'embed-' @layer.name}}>Embed Code</label>
     <Input class="uk-input" @type="text" readonly @value={{this.embedUrl}} id={{concat "embed-" @layer.name}} />
     <hr>
-    <label class="uk-form-label">Pick a base map:</label>
-    <select class="uk-select" {{on 'change' this.setBase}}>
+    <label class="uk-form-label" for={{concat 'embed-base-' @layer.name}}>Pick a base map:</label>
+    <select id={{concat 'embed-base-' @layer.name}} class="uk-select" {{on 'change' this.setBase}}>
       {{#each this.bases as |base|}}
         <option value={{base}}>{{base}}</option>
       {{/each}}
     </select>
     <hr>
     {{#if @layer.geometryType}}
-      <label class="uk-form-label" for={{concat 'layer-' @layer.id}}>Pick a  color:</label>
-      <Input id={{concat 'layer-' @layer.id}} @type="color" @value={{this.color}} />
+      <label class="uk-form-label" for={{concat 'layer-' @layer.name}}>Pick a  color:</label>
+      <Input id={{concat 'layer-' @layer.name}} @type="color" @value={{this.color}} />
       <hr>
     {{/if}}
     <UkButton @color="primary" {{on "click" (fn this.copyText "embed")}}>copy embed code</UkButton>

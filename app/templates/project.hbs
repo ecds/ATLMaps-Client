@@ -12,15 +12,15 @@
           </div>
         </div>
       {{/if}}
-      <ProjectUi::Menu @project={{this.model.project}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
+      <ProjectUi::Menu @project={{this.model}} @save={{this.saveProject}} @removeRaster={{this.addRemoveRasterLayer}} @removeVector={{this.addRemoveVectorLayer}} />
       {{#if this.deviceContext.isDesktop}}
-        {{#if this.model.project.mine}}
+        {{#if this.model.mine}}
           <div class="atlm-toggle-layer-search">
             <UkButton class="atlm-large-button" uk-toggle="target: #atlm-layer-search-panel" @size="large" @color="secondary">
               Add Layers
             </UkButton>
           </div>
-          <UkOffcanvas @open={{this.model.project.isExploring}} @id="atlm-layer-search-panel" @flip={{true}} class="uk-padding-remove atlm-search-panel uk-visible@m">
+          <UkOffcanvas @open={{this.model.isExploring}} @id="atlm-layer-search-panel" @flip={{true}} class="uk-padding-remove atlm-search-panel uk-visible@m">
             <ProjectUi::SearchPanel @model={{this.model}}>
               <li>
                 <section class="uk-panel uk-panel-scrollable uk-padding">
@@ -28,7 +28,7 @@
                   <hr>
                   <ProjectUi::SearchPanel::Filters::Location />
                   <hr>
-                  <ProjectUi::SearchPanel::Filters::Tags @categories={{this.model.categories}} />
+                  <ProjectUi::SearchPanel::Filters::Tags @categories={{this.categories}} />
                 </section>
               </li>
               <li class="uk-margin-remove">
@@ -100,14 +100,14 @@
             </ProjectUi::SearchPanel>
           </UkOffcanvas>
         {{/if}}
-        {{#if this.model.project.intro}}
-          <ProjectUi::IntroModal @project={{this.model.project}} />
+        {{#if this.model.hasIntro}}
+          <ProjectUi::IntroModal @project={{this.model}} />
         {{/if}}
       {{/if}}
       <div class="atlm-project-map">
-        <ProjectUi::Map @project={{this.model.project}} />
+        <ProjectUi::Map @project={{this.model}} />
       </div>
-      <ProjectUi::BaseLayers @project={{this.model.project}} />
+      <ProjectUi::BaseLayers @project={{this.model}} />
       {{#if this.notification.note}}
         <div class="uk-flex-center uk-child-width-1-3 atlm-notification" uk-grid>
           <div class={{concat "uk-animation-slide-top uk-alert-" this.notification.noteClass}} uk-alert>
@@ -124,8 +124,18 @@
     <ProjectUi::DefineColorMap @layer={{this.vectorToAdd}} @cancel={{this.cancelColorMap}} />
   {{/if}}
 {{else}}
-  <ProjectUi::Menu @project={{this.model.project}} />
+  <ProjectUi::Menu @project={{this.model}} />
+    <button class="uk-button uk-button-link uk-padding-small atlm-mobile-project-menu-button atlm-mobile-project-menu-button-layers {{if (eq this.model._defaultBaseMap.label "satellite") " white" ""}}" type="button" uk-toggle="target: #base-layers-offcanvas">
+    <FaIcon @icon="layer-group" />
+  </button>
+
   <div class="atlm-project-map">
-    <ProjectUi::Map @project={{this.model.project}} />
+    <ProjectUi::Map @project={{this.model}} />
   </div>
+
+  <UkOffcanvas @id="base-layers-offcanvas" class="uk-offcanvas-bar uk-background-secondary uk-light">
+    <button class="uk-offcanvas-close" type="button" uk-close></button>
+    <h2>Change Base Map</h2>
+    <ProjectUi::BaseLayers @project={{this.model}} />
+  </UkOffcanvas>
 {{/if}}

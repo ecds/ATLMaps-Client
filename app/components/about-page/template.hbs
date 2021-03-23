@@ -1,0 +1,105 @@
+<section class={{if @showBackground "uk-background-cover atlm-site-content" ""}}>
+  <section id="about-anchor" class="uk-margin uk-margin-remove-bottom atlm-about">
+    <section class="uk-container uk-container-medium">
+      <article class="uk-article">
+        <h2 class="uk-padding">About</h2>
+
+        <ul uk-accordion>
+          <li class="uk-open">
+            <h3 class="uk-accordion-title atlm-about-heading">Vision</h3>
+            <div class="uk-accordion-content">
+              <p class="">
+                The ATLMaps platform, a collaboration between Georgia State University and Emory University, combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta. While currently focused on one city to demonstrate the power of stacking thousands of layers of information on one place, this innovative online platform will eventually allow users to layer an increasing number of interdisciplinary data to address the complex issues that any city poses. The project looks to offer a framework that incorporates storytelling reliant on geospatial data and for normalizing input across a range of data sets about so that material can be cross-compared in novel ways, allowing users to make connections between seemingly unrelated data sources and ask questions that would not be apparent when only looking at one particular project. The ATLMaps project will also encourage knowledgeable members of the university and local communities to curate data on the site to demonstrate the possibilities for synthesizing material across projects and data types.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <h3 class="uk-accordion-title atlm-about-heading">Support</h3>
+            <div class="uk-accordion-content">
+              <p class="">
+                ATLMaps is made possible with the generous support of Georgia State University, Emory University, and the Knight Foundation. That support began with two consecutive CITIES awards for funding by Georgia State in 2012 and 2013, continuing support from Emory University Libraries & Information Technology and the Emory Center for Digital Scholarship, and a Knight Foundation Knight News Challenge Award in 2016. If you or your organization like the work we're doing and have an idea about how to support and further it, please get in touch!
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <h3 class="uk-accordion-title atlm-about-heading">Team</h3>
+            <div class="uk-accordion-content">
+              <section class="uk-flex-center uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s" uk-grid>
+              {{#each this.team as |person|}}
+                <div>
+                <div class="uk-card uk-card-default uk-card-default">
+                  <div class="uk-card-header">
+                      <div class="uk-grid-small uk-flex-middle" uk-grid>
+                          <div class="uk-width-auto">
+                              <img class="uk-border-circle" width="120" height="120" src="{{person.photo}}">
+                          </div>
+                          <div class="uk-width-expand">
+                              <h3 class="uk-card-title uk-margin-remove-bottom">{{person.name}}</h3>
+                              <p class="uk-text-meta uk-margin-remove-top uk-margin-small">{{person.role}}</p>
+                              <p class="uk-text-meta uk-margin-remove-top">{{person.institution}}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="uk-card-body">
+                      <p>{{person.bio}}</p>
+                  </div>
+                  </div>
+              </div>
+              {{/each}}
+              </section>
+              <hr>
+              <section>
+                <h5>Contributors and Prior Team Members</h5>
+                <ul>
+                  {{#each this.pastTeam as |person|}}
+                    <li>
+                      <strong>{{person.name}}</strong>: {{person.about}}
+                    </li>
+                  {{/each}}
+                </ul>
+              </section>
+            </div>
+          </li>
+          <li>
+            <h3 class="uk-accordion-title atlm-about-heading">
+              Technologies
+            </h3>
+            <div class="uk-accordion-content">
+                <section>
+                  <h5>
+                    PLATFORMS/SOFTWARE/LIBRARIES
+                  </h5>
+                  <p>
+                    ATLMaps platform is an open source project made possible by the Open Source community. Here is a list of the core technologies that power the project.
+                  </p>
+                  <ul>
+                    {{#each this.technologies as |tech|}}
+                      <li>
+                        <a href={{tech.link}}>{{tech.name}}</a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                  <h5>
+                    BASE MAPS
+                  </h5>
+                  <p>
+                    The base maps used are generously provided by:
+                  </p>
+                  <ul>
+                    {{#each this.baseMaps.baseMaps as |base|}}
+                      <li>
+                        {{base.displayLabel}}: {{html-safe base.attribution}}
+                      </li>
+                    {{/each}}
+                  </ul>
+                </section>
+            </div>
+          </li>
+        </ul>
+      </article>
+      <section class="uk-section uk-margin-remove-bottom"></section>
+    </section>
+  </section>
+</section>

@@ -15,6 +15,7 @@ as |layers|>
     <layers.tile
       @url={{layer}}
       @zIndex={{index}}
+      @maxZoom={{20}}
       @className={{concat "base-" @project._defaultBaseMap.label}}
       @onLoading={{fn this.baseChange @project._defaultBaseMap}}
       @onLoad={{perform this.baseChanged}}
@@ -30,6 +31,7 @@ as |layers|>
         @zIndex={{raster.position}}
         @opacity={{raster.rasterLayer.opacityTenths}}
         @className={{concat "raster-" raster.rasterLayer.name}}
+        @maxZoom={{20}}
         @onLoad={{fn this.rasterAdded raster.rasterLayer}}
       />
     {{/each}}
@@ -57,7 +59,6 @@ as |layers|>
               @geoJSON={{feature.geojson}}
               @onEachFeature={{fn this.onEachFeature feature vector}}
               @pointToLayer={{fn this.addMarker feature vector}}
-              @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color vector feature) "darkslategray" }}
               @pane={{concat "vector-layer-" vector.vectorLayer.id}}
               @style={{feature.style}}
             />

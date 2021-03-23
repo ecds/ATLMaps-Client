@@ -13,7 +13,10 @@ export default class EmbedController extends Controller {
   queryParams = ['base', 'color'];
 
   @tracked
-  base = null
+  base = null;
+
+  @tracked
+  color = '#1e88e5';
 
   @tracked
   leafletMap = null;
@@ -23,6 +26,9 @@ export default class EmbedController extends Controller {
 
   @tracked
   bounds = [[0, 0], [0, 0]];
+
+  @tracked
+  activeFeature = null;
 
   lat = ENV.APP.CENTER_LAT;
   lng = ENV.APP.CENTER_LNG;
@@ -40,6 +46,35 @@ export default class EmbedController extends Controller {
     this.bounds = this.leafletMap.getBounds();
   }
 
+  @action
+  setIcon(vectorFeature, layer, feature) {
+    // console.log("🚀 ~ file: embed.js ~ line 45 ~ EmbedController ~ setIcon ~ vectorFeature, layer, feature", vectorFeature, layer, feature)
+    vectorFeature.setProperties({ geometry: feature, color: this.color });
+    vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
+    return vectorFeature.leafletMarker;
+  }
+
+  @action
+  onEachFeature(vectorFeature, leafletFeature, leafletLayer) {
+    leafletLayer.on('click', () => {
+      this.clearActiveFeature();
+      vectorFeature.setProperties({ active: true });
+      vectorFeature.divIcon;
+      this.activeFeature = vectorFeature;
+    });
+  }
+
+  @action
+  clearActiveFeature() {
+    if (this.activeFeature) {
+      this.activeFeature.setProperties({
+        active: false
+      });
+      this.activeFeature.get('divIcon');
+    }
+    this.activeFeature = null;
+  }
+
   @enqueueTask
   *layerAdded(layer) {
     // It's probably a timing issue, but this will not work
@@ -49,6 +84,6 @@ export default class EmbedController extends Controller {
      [layer.miny, layer.minx]
    ]);
    this.leafletMap.fitBounds(this.bounds);
-   yield timeout(300);
+   yield timeout(3);
   }
 }

@@ -52,6 +52,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV['ember-cli-mirage'] = { enabled: false, autostart: false };
     ENV.APP.API_HOST = 'https://api.atlmaps-dev.com:3000';
+    ENV.APP.HOST = 'https://lvh.me:4200';
     // ENV.APP.API_HOST = 'https://api.atlmaps.com';
     ENV['fauxOAuth'].tokenValidationUrl = 'https://api.atlmaps-dev.com:3000/auth/verify/';
     ENV['fauxOAuth'].tokenAuthUrl = 'https://api.atlmaps-dev.com:3000/auth/tokens/';

@@ -23,19 +23,17 @@
                 {{/if}}
             </div>
             <ProjectUi::ToggleSwitch @project={{@project}} />
-            {{#if @project.unSaved}}
+            {{#if @save.isRunning}}
               <div
                 class="uk-text-center uk-grid-collapse uk-child-width-1-1 atlm-toggle"
                 tabindex="0"
-                role="button"
                 uk-grid
-                {{on "click" (perform @save)}}
               >
                 <div class="atlm-toggle-switch">
                   <FaIcon @icon="save" />
                 </div>
                 <div class="atlm-toggle-status">
-                  Save
+                  Saving...
                 </div>
               </div>
             {{else}}
@@ -112,7 +110,7 @@
                 Base map provided by: {{html-safe @project._defaultBaseMap.attribution}}
               </p>
             </article>
-            {{#if @project.introModal}}
+            {{#if @project.hasIntro}}
             <section class="uk-padding uk-padding-remove-top">
               <UkButton @color="secondary" @size="small" uk-toggle target={{concat "#modal-" @project.id}}>Show Project Introduction</UkButton>
             </section>
@@ -135,7 +133,7 @@
           {{/if}}
           {{#if @project.mayEdit}}
             <li data-panel-title="Edit" data-type="panel">
-              <ProjectUi::EditPanel @project={{@project}} />
+              <ProjectUi::EditPanel @project={{@project}} @save={{@save}} />
             </li>
           {{/if}}
         </ul>
@@ -144,94 +142,12 @@
   </li>
 </ul>
 {{else}}
-  {{!-- <section class="atlm-mobile-project-menu">
-    <ul class="uk-flex-center uk-subnav atlm-mobile-project-menu-buttons" {{did-insert this.initMobilePanel}} uk-switcher>
-        <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
-        <li><a href="#" class="uk-text-center"><FaIcon @icon="info" /></a></li>
-        {{#if @project.hasRasters}}
-          <li><a href="#" class="uk-text-center"><FaIcon @icon="map" /></a></li>
-        {{/if}}
-        {{#if @project.hasPlaces}}
-          <li><a href="#" class="uk-text-center"><FaIcon @icon="map-marker-alt" /></a></li>
-        {{/if}}
-        {{#if @project.hasData}}
-          <li><a href="#" class="uk-text-center"><FaIcon @icon="database" /></a></li>
-        {{/if}}
-    </ul>
 
-    <ul class="uk-switcher atlm-mobile-project-panels">
-      <li></li>
-        <li class="atlm-mobile-project-panel">
-          <section class="uk-padding-small">
-            {{html-safe @project.description}}
-          </section>
-        </li>
-        {{#if @project.hasRasters}}
-        <li class="atlm-mobile-project-panel atlm-mobile-project-panel-content {{if this.hideMenuPanel 'atlm-mobile-project-panels-hidden'}}">
-          <section>
-            <h3>Maps</h3>
-            <button type="button" class="uk-modal-close-default" uk-close {{on "click" (toggle "hideMenuPanel" this)}}></button>
-          </section>
-          <ul uk-accordion target="> p">
-            {{#each @project.sortedRasters as |raster|}}
-              <li class="uk-padding">
-                <a href="#" class="uk-accordion-title">{{raster.rasterLayer.title}}</a>
-                <section class="uk-padding-small">
-                  <RasterOpacitySlider @raster={{raster.rasterLayer}} />
-                </section>
-                <p class="uk-meta uk-accordion-content">
-                  {{html-safe raster.rasterLayer.description}}
-                </p>
-              </li>
-            {{/each}}
-          </ul>
-        </li>
-        {{/if}}
-        {{#if @project.hasPlaces}}
-          <li class="atlm-mobile-project-panel">
-            <ul uk-accordion>
-            {{#each @project.places as |place|}}
-            <li class="uk-padding">
-              <a href="#" class="uk-accordion-title">
-                <span style={{html-safe place.style}}>
-                  <FaIcon @icon={{place.vectorLayer.icon}} />
-                </span>
-                {{place.vectorLayer.title}}
-              </a>
-              <p class="uk-accordion-content">
-                {{html-safe place.vectorLayer.description}}
-              </p>
-            </li>
-            {{/each}}
-          </ul>
-          </li>
-        {{/if}}
-        {{#if @project.hasData}}
-          <li class="atlm-mobile-project-panel">
-          <ul uk-accordion>
-            {{#each @project.data as |data|}}
-            <li class="uk-padding">
-              <a href="#" class="uk-accordion-title">
-                <span style={{html-safe data.style}}>
-                  <FaIcon @icon={{data.vectorLayer.icon}} />
-                </span>
-                {{data.vectorLayer.title}}
-              </a>
-              <p class="uk-accordion-content">
-                {{data.vectorLayer.description}}
-              </p>
-            </li>
-            {{/each}}
-          </ul>
-          </li>
-        {{/if}}
-    </ul>
-  </section> --}}
-  <button class="uk-button uk-button-link uk-button-default uk-padding-small atlm-mobile-project-menu-button" type="button" uk-toggle="target: #offcanvas-usage">
+  <button class="uk-button uk-button-link uk-padding-small atlm-mobile-project-menu-button {{if (eq @project._defaultBaseMap.label "satellite") " white" ""}}" type="button" uk-toggle="target: #project-layers">
     <FaIcon @icon="chevron-circle-down" @rotation={{270}} />
   </button>
 
-<UkOffcanvas @id="offcanvas-usage" class="uk-offcanvas-bar uk-background-secondary uk-light atlm-mobile-project-menu">
+<UkOffcanvas @id="project-layers" class="uk-offcanvas-bar uk-background-secondary uk-light atlm-mobile-project-menu">
 
       <button class="uk-offcanvas-close" type="button" uk-close></button>
 
@@ -267,4 +183,5 @@
           {{/each}}
       </ul>
 </UkOffcanvas>
+
 {{/if}}

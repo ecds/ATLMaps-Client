@@ -11,7 +11,7 @@ export default class ProjectUiPopupComponent extends Component {
 
   @action
   initDraggable(element) {
-    if (this.deviceContext.isMobile) return;
+    // if (this.deviceContext.isMobile) return;
     this.popupWindow = new Draggabilly(element, {
       handle: '.atlm-popup-handle'
     });

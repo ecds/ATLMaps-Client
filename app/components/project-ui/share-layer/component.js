@@ -26,9 +26,9 @@ export default class ProjectUiShareLayerComponent extends Component {
 
   @computed('base', 'color')
   get embedUrl() {
-    if (this.color) return `<iframe height=600 width=800 src=${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}&color=${this.color} />`;
+    if (this.color) return `<iframe height=600 width=800 src="${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}&color=${this.encodeColor()}" />`;
 
-    return `<iframe height=600 width=800 src=${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base} />`;
+    return `<iframe height=600 width=800 src="${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}" />`;
   }
 
   bases = A([
@@ -36,6 +36,10 @@ export default class ProjectUiShareLayerComponent extends Component {
     'grayscale',
     'satellite'
   ])
+
+  encodeColor() {
+    return this.color.replace('#', '%23');
+  }
 
   @action
   copyText(input) {

@@ -7,7 +7,7 @@
       <div class="uk-width-expand">
         <h3 class="uk-card-title uk-margin-remove-bottom">
           {{#if @activeFeature.geojson.properties.title}}
-              {{@activeFeature.geojson.properties.name}} {{@activeFeature.geojson.properties.title}}
+              {{@activeFeature.geojson.properties.title}}
           {{else if @activeFeature.geojson.properties.breakProperty}}
               {{@activeFeature.vectorLayer.property}}: {{@activeFeature.geojson.properties.breakValue}}
           {{/if}}

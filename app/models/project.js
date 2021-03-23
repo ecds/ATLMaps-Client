@@ -7,6 +7,7 @@ import { inject as service } from '@ember/service';
 export default class ProjectModel extends Model {
   @service baseMaps;
   @service store;
+  @service lazyEmbed;
 
   @attr('string', {
     defaultValue() { return 'untitled'; }
@@ -149,6 +150,16 @@ export default class ProjectModel extends Model {
       && this.mayEdit
     ) return true;
     return false;
+  }
+
+  @computed('intro', 'media')
+  get hasIntro() {
+    return this.intro != null || this.media != null;
+  }
+
+  @computed('media')
+  get embedUrl() {
+    return this.lazyEmbed.getEmbedUrl(this.media);
   }
 
   @sort('rasters', '_rasterPositionSort')

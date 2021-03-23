@@ -16,4 +16,9 @@ export default class RasterLayerProjectModel extends Model {
   get isBottom() {
     return this.position <= 11;
   }
+
+  @computed('rasterLayer.opacity')
+  get opacity() {
+    return this.get('rasterLayer.opacity');
+  }
 }

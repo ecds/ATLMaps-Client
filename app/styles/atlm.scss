@@ -1,12 +1,12 @@
 .atlm-project-map,
-.atlm-embed-map  {
+.atlm-embed-map {
   .leaflet-container {
     height: calc(100vh - 80px);
     width: 100vw;
   }
 }
 
-.atlm-share-layer-map{
+.atlm-share-layer-map {
   .leaflet-container {
     height: calc(100vh - 80px);
     width: 66vw;
@@ -217,6 +217,7 @@
   &:hover {
     color: $dark-text;
   }
+
   div {
     cursor: pointer;
     font-size: 1.5rem;
@@ -336,15 +337,6 @@
   font-weight: 300;
 }
 
-.atlm-project-intro-modal {
-  z-index: 10002;
-}
-
-.atlm-project-intro-panel {
-  max-height: 75vh;
-  min-height: 50vh;
-}
-
 .atlm-xlarge-button {
   background-color: #00C853;
   color: $primary-dark-gray;
@@ -406,6 +398,7 @@
     a {
       color: $primary-dark-gray;
       display: inline;
+
       &:hover {
         background-color: white;
         color: $primary-dark-gray;
@@ -440,6 +433,7 @@
 // }
 
 .atlm-embed-nav {
+
   // background-color: rgb(20 20 20 / 54%);
   li {
     .uk-accordion {
@@ -451,8 +445,31 @@
       }
     }
   }
+
   .uk-accordion,
   .uk-navbar-dropdown {
     width: 100%;
   }
+}
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.atlm-project-card {
+  min-height: 500px;
 }

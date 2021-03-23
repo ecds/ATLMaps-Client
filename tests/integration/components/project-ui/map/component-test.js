@@ -27,7 +27,7 @@ module('Integration | Component | map', function(hooks) {
       id: 1,
       name: 'reynoldstown',
       dataType: 'Point',
-      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "reynoldstown"},"geometry": {"type": "Point","coordinates": [-84.35593485832214,33.75110559588545]}}]},
+      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "reynoldstown", "color": "green"},"geometry": {"type": "Point","coordinates": [-84.35593485832214,33.75110559588545]}}]},
       dataFormat: 'vector',
       onMap: true
     });
@@ -44,7 +44,7 @@ module('Integration | Component | map', function(hooks) {
       id: 2,
       name: 'sweetwater',
       dataType: 'Point',
-      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Five Points","description": "Historic center of Atlanta"},"geometry": {"type": "Point","coordinates": [-84.39003646373749,33.75457117356251]}}]},
+      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Five Points","description": "Historic center of Atlanta", "color": "red"},"geometry": {"type": "Point","coordinates": [-84.39003646373749,33.75457117356251]}}]},
       dataFormat: 'vector',
       onMap: true
     });
@@ -62,7 +62,7 @@ module('Integration | Component | map', function(hooks) {
       id: 3,
       name: 'emory',
       dataType: 'MultiPolygon',
-      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Woodruff Park","description": "Downtown park", "data": "2"},"geometry": {"type": "Polygon","coordinates": [[[-84.38957780599594,33.75454664293867],[-84.38853710889815,33.75453995276731],[-84.38792288303375,33.755717414886966],[-84.38849955797195,33.75621247935816],[-84.38957780599594,33.75454664293867]]]}}]},
+      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Woodruff Park","description": "Downtown park", "data": "2", "color": "orange"},"geometry": {"type": "Polygon","coordinates": [[[-84.38957780599594,33.75454664293867],[-84.38853710889815,33.75453995276731],[-84.38792288303375,33.755717414886966],[-84.38849955797195,33.75621247935816],[-84.38957780599594,33.75454664293867]]]}}]},
       dataFormat: 'vector',
       onMap: true,
       opacity: 40
@@ -84,7 +84,7 @@ module('Integration | Component | map', function(hooks) {
       id: 4,
       name: 'oxford',
       dataType: 'MultiPolygon',
-      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Emory Library","description": "library", "grade": "b"},"geometry": {"type": "Polygon","coordinates": [[[-84.32297587394714,33.79003065321512],[-84.32229459285736,33.79044081281942],[-84.32324409484863,33.79094013490301],[-84.32297587394714,33.79003065321512]]]}}]},
+      geojson: {"type": "FeatureCollection","features": [{"type": "Feature","properties": {"title": "Emory Library","description": "library", "grade": "b", "color": "deeppink"},"geometry": {"type": "Polygon","coordinates": [[[-84.32297587394714,33.79003065321512],[-84.32229459285736,33.79044081281942],[-84.32324409484863,33.79094013490301],[-84.32297587394714,33.79003065321512]]]}}]},
       dataFormat: 'vector',
       onMap: true,
       opacity: 40
@@ -103,6 +103,8 @@ module('Integration | Component | map', function(hooks) {
     vectors.addObject(vlp4);
 
     this.set('model', project);
+    this.set('polygon', polygon1);
+    this.set('marker', polygon1);
   });
 
   test('it renders', async function(assert) {
@@ -124,7 +126,7 @@ module('Integration | Component | map', function(hooks) {
   test('it adds layers to map', async function(assert) {
     await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
     assert.dom('.leaflet-marker-icon').exists();
-    // assert.dom('div.leaflet-reynoldstown-pane').exists();
+    assert.dom('.leaflet-marker-icon span').hasStyle({ color: 'rgb(0, 128, 0)' });
     assert.dom('.raster-atlanta').exists();
   });
 
@@ -179,6 +181,19 @@ module('Integration | Component | map', function(hooks) {
     assert.dom('.leaflet-vector-layer-3-pane path').hasStyle({
       fill: 'rgb(152, 0, 67)',
       fillOpacity: '1',
+      strokeWidth: '1px'
+    });
+  });
+
+  test('it uses color from feature properties when the not overridden by project', async function(assert) {
+    await this.model.vectors.forEach(vlp => {
+      vlp.colorMap = null;
+      vlp.save();
+    });
+    await render(hbs`<ProjectUi::Map @project={{this.model}} />`);
+    assert.dom('.leaflet-vector-layer-3-pane path').hasStyle({
+      fill: 'rgb(255, 165, 0)',
+      fillOpacity: '0.4',
       strokeWidth: '1px'
     });
   });

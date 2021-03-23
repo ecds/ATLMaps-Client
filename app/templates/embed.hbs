@@ -7,7 +7,7 @@
       <ul class="uk-navbar-nav">
         <li>
           <a href="#">
-            <FaIcon class="uk-margin-small-right" @icon="caret-down" @rotation={{if this.showDropDown 180 0}} /> About Layers
+            <FaIcon class="uk-margin-small-right" @icon="caret-down" @rotation={{if this.showDropDown 180 0}} /> About Maps
           </a>
           <div class="uk-navbar-dropdown" {{on "show" (toggle "showDropDown" this)}} {{on "hide" (toggle "showDropDown" this)}}>
             <ul class="uk-nav uk-navbar-dropdown-nav" uk-accordion>
@@ -22,12 +22,18 @@
               {{/each}}
               {{#each this.model.vectors as |vector|}}
                 <li>
-                    <a class="uk-accordion-title" href="#">{{vector.title}}</a>
+                    <a class="uk-accordion-title" href="#">
+                      <span class="uk-width-1-6 uk-padding-small atlm-data-type" style={{html-safe (concat "color:" this.color ";")}}>
+                        <FaIcon @icon={{vector.icon}} />
+                      </span>
+                      {{vector.title}}
+                    </a>
                     <div class="uk-accordion-content">
                         {{html-safe vector.description}}
                     </div>
                 </li>
               {{/each}}
+
             </ul>
           </div>
         </li>
@@ -53,7 +59,18 @@
     {{/each}}
 
     {{#each this.model.vectors as |vector|}}
-      <layers.geojson @geoJSON={{vector.geojson}} @onAdd={{perform this.layerAdded vector}} role="button" />
+      {{#each vector.vectorFeatures as |feature|}}
+        <layers.geojson
+          @geoJSON={{feature.geojson}}
+          @onAdd={{perform this.layerAdded vector}}
+          @pointToLayer={{fn this.setIcon feature}}
+          @onEachFeature={{fn this.onEachFeature feature}}
+        />
+      {{/each}}
     {{/each}}
   </LeafletMap>
 </div>
+
+{{#if this.activeFeature}}
+  <ProjectUi::Popup @activeFeature={{this.activeFeature}} @close={{this.clearActiveFeature}} @closeKey={{this.clearActiveFeature}} />
+{{/if}}

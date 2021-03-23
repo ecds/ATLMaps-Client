@@ -23,5 +23,10 @@ export default helper(function vectorColor([vectorLayerProject, vectorFeature]) 
     );
     return color;
   }
-  return vectorLayerProject.color;
+  if (vectorFeature.geojson.properties.color) {
+    return vectorFeature.geojson.properties.color;
+  } else {
+    vectorFeature.setProperties({ color: vectorLayerProject.color });
+    return vectorLayerProject.color;
+  }
 });
