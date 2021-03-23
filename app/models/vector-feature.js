@@ -25,6 +25,9 @@ export default class VectorFeatureModel extends Model {
     }
     return this.get('vectorLayer.color');
   }
+  set color(value) {
+    return value;
+  }
 
   @computed('geojson')
   get safeDescription() {
@@ -46,6 +49,9 @@ export default class VectorFeatureModel extends Model {
       weight: 1,
       fillOpacity: this.opacity
     };
+  }
+  set style(value) {
+    return value;
   }
 
   @computed('style')
@@ -69,6 +75,9 @@ export default class VectorFeatureModel extends Model {
   @computed
   get geometry() {
     return { lat: 0, lng: 0 };
+  }
+  set geometry(value) {
+    return value;
   }
 
   @computed('geometry')

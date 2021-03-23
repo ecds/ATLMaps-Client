@@ -14,7 +14,7 @@ module('Integration | Component | project-ui/popup/youtube', function(hooks) {
     await render(hbs`<ProjectUi::Popup::Youtube @video={{this.video}} />`);
 
     const iFrameSrc = find('iframe').src.replace(/\/$/, '');
-    assert.equal(iFrameSrc, 'https://www.youtube.com/embed/lVehcuJXe6I');
+    assert.ok(iFrameSrc.includes('www.youtube.com/embed/lVehcuJXe6I'));
 
   });
 });
