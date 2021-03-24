@@ -31,6 +31,7 @@ export default function() {
     this.del('/tokens/');
     this.get('/users/me');
     this.get('users/:id');
+    this.get('/institutions');
 
 
     // this.post('/posts');

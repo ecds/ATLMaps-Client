@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Helper | floor', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
+
   test('it renders', async function(assert) {
     this.set('inputValue', '1234');
 

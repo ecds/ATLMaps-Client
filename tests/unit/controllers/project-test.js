@@ -17,14 +17,14 @@ module('Unit | Controller | project', function(hooks) {
         getBounds: function() { return { extend: function() { return true; }}; },
         fitBounds: function() { return true; },
         createPane: function() { return document.createElement('div'); },
-        panTo: function() { return true; }
+        flyToBounds: function() { return true; }
       }
     }));
     this.set('controller', this.owner.lookup('controller:project'));
     this.controller.model = this.project;
   });
 
-  // Replace this with your real tests.
+
   test('it exists', function(assert) {
     assert.ok(this.controller);
   });

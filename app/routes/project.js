@@ -35,7 +35,9 @@ export default class ProjectRoute extends Route {
     this.controllerFor('application').set('project', model.name);
     this.setHeadTags(model);
     const categories = await this.store.findAll('category');
+    const institutions = await this.store.query('institution', { limit: true });
     this.controllerFor('project').set('categories', categories);
+    this.controllerFor('project').set('institutions', institutions);
   }
 
   setHeadTags(model) {

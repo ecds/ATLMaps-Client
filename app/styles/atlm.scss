@@ -473,3 +473,9 @@
 .atlm-project-card {
   min-height: 500px;
 }
+
+.atlm-provider-button {
+  &.uk-button-link {
+    font-size: 0.875rem;
+  }
+}

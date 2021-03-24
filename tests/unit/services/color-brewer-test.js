@@ -4,7 +4,7 @@ import { setupTest } from 'ember-qunit';
 module('Unit | Service | color-brewer', function(hooks) {
   setupTest(hooks);
 
-  // Replace this with your real tests.
+
   test('it exists', function(assert) {
     let service = this.owner.lookup('service:color-brewer');
     assert.ok(service);

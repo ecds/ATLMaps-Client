@@ -81,6 +81,10 @@
     color: white;
   }
 
+  .uk-container-medium {
+    min-height: calc(100vh - 250px);
+  }
+
   .atlm-about {
     background-image: url(/assets/images/bg.jpg);
 

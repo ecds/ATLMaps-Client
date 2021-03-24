@@ -186,12 +186,6 @@ export default class ProjectController extends Controller {
   *saveProject() {
     try {
       yield this.model.save();
-      // this.notification.setNote.perform(
-      //   {
-      //     note: 'Your changes have been saved.',
-      //     type: 'success'
-      //   }
-      // );
     } catch(error) {
       if (error.errors[0].status == '401') {
         this.model.rollbackAttributes();
@@ -208,11 +202,11 @@ export default class ProjectController extends Controller {
   @action
   fitBounds(layer) {
     if (!layer.latLngBounds) return;
-    const bounds = this.model.leafletMap.getBounds();
-    const layerCenter = layer.latLngBounds.getCenter();
-    bounds.extend(layer.latLngBounds);
-    this.model.leafletMap.fitBounds(bounds);
-    this.model.leafletMap.panTo(layerCenter);
+    // const bounds = this.model.leafletMap.getBounds();
+    // const layerCenter = layer.latLngBounds.getCenter();
+    // bounds.extend(layer.latLngBounds);
+    this.model.leafletMap.flyToBounds(layer.latLngBounds);
+    // this.model.leafletMap.panTo(layerCenter);
   }
 
   @action

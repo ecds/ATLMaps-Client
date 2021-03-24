@@ -15,6 +15,7 @@ export default class SearchParametersService extends Service {
   @tracked currentBounds = null;
   @tracked filteredBounds = null;
   @tracked tags = A([]);
+  @tracked institutions = A([]);
 
   @computed('currentBounds', 'searchBounds')
   get bounds() {
@@ -64,6 +65,10 @@ export default class SearchParametersService extends Service {
     } else {
       this.tags.removeObject(tag.slug);
     }
+  }
+
+  updateInstitutions(institutions) {
+    this.institutions = institutions;
   }
 
   setLimit(limit) {

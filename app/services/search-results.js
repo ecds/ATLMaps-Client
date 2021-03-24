@@ -20,9 +20,9 @@ export default class SearchResultsService extends Service {
   vectors = null; //this.store.query('vectorLayer', this.getSearchParams());
 
   getSearchParams() {
-    const { institution, textSearch, bounds, limit, tags } = this.searchParameters;
+    const { institutions, textSearch, bounds, limit, tags } = this.searchParameters;
     const params = {
-      institution,
+      institutions,
       bounds,
       limit,
       tags,

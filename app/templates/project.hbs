@@ -29,6 +29,8 @@
                   <ProjectUi::SearchPanel::Filters::Location />
                   <hr>
                   <ProjectUi::SearchPanel::Filters::Tags @categories={{this.categories}} />
+                  <hr>
+                  <ProjectUi::SearchPanel::Filters::Providers @providers={{this.institutions}} />
                 </section>
               </li>
               <li class="uk-margin-remove">
@@ -51,7 +53,7 @@
                     {{/each}}
                   </ProjectUi::SearchPanel::Results>
                 </section>
-                <section class="uk-padding atlm-pagination">
+                <section class="uk-padding-small atlm-pagination">
                   <ProjectUi::SearchPanel::Pagination @meta={{this.searchResults.rasters.meta}} @type="rasters" />
                 </section>
               </li>
@@ -72,7 +74,7 @@
                     {{/each}}
                   </ProjectUi::SearchPanel::Results>
                 </section>
-                <section class="uk-padding atlm-pagination">
+                <section class="uk-padding-small atlm-pagination">
                   <ProjectUi::SearchPanel::Pagination @meta={{this.searchResults.places.meta}} @type="places" />
                 </section>
               </li>
@@ -93,7 +95,7 @@
                     {{/each}}
                   </ProjectUi::SearchPanel::Results>
                 </section>
-                <section class="uk-padding atlm-pagination">
+                <section class="uk-padding-small atlm-pagination">
                   <ProjectUi::SearchPanel::Pagination @meta={{this.searchResults.data.meta}} @type="data" />
                 </section>
               </li>

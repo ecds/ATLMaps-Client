@@ -1,0 +1,20 @@
+<legend class="uk-legend">Provider Filter</legend>
+<section class="uk-margin">
+  <div class="uk-child-width-auto">
+    {{#each this.selectedInstitutions as |selected|}}
+      <div class="uk-margin-small">
+        <UkButton @color="link" @size="small" class="atlm-provider-button" {{on "click" (fn this.removeProvider selected)}}>
+          <FaIcon @icon="times" /> {{selected.name}}
+        </UkButton>
+      </div>
+    {{/each}}
+  </div>
+  <div class="uk-margin">
+    <select class="uk-select" {{on 'change' this.selectProvider}} aria-label="Select Layer Provider">
+      <option value="" disabled selected>--Select Provider--</option>
+      {{#each @providers as |provider|}}
+        <option id={{concat 'provider-' provider.id}} value={{provider.id}}>{{if provider.selected "√ " ""}}{{provider.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+</section>

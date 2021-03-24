@@ -19,7 +19,7 @@ module('Unit | Instance Initializer | register-component', function(hooks) {
     run(this.application, 'destroy');
   });
 
-  // Replace this with your real tests.
+
   test('it works', async function(assert) {
     await this.instance.boot();
 
