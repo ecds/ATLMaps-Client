@@ -61,7 +61,7 @@
     "ember-metrics": "^1.2.0",
     "ember-pell": "^1.4.5",
     "ember-qunit": "^4.6.0",
-    "ember-resolver": "^7.0.0",
+    "ember-resolver": "^8.0.2",
     "ember-router-scroll": "^4.0.2",
     "ember-simple-auth": "^3.1.0",
     "ember-source": "~3.25.0",
