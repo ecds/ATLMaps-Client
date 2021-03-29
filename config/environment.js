@@ -41,7 +41,17 @@ module.exports = function(environment) {
 
     fauxOAuth: {
       baseUrl: 'http://auth.digitalscholarship.emory.edu/auth/'
-    }
+    },
+
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['staging'],
+        config: {
+          id: 'UA-71558106-1'
+        }
+      }
+    ]
   };
 
   if (environment === 'development') {

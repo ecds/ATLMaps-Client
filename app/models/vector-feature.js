@@ -46,7 +46,7 @@ export default class VectorFeatureModel extends Model {
     return {
       color: this.color,
       fillColor: this.color,
-      weight: 1,
+      weight: this.weight,
       fillOpacity: this.opacity
     };
   }
@@ -69,6 +69,9 @@ export default class VectorFeatureModel extends Model {
   get weight() {
     if (this.active) return 6;
     if (this.opacity == 0) return 0;
+    if (this.geometryType.includes('Line')) {
+      return 3;
+    }
     return 1;
   }
 

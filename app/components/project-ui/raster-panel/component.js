@@ -15,7 +15,11 @@ export default class ProjectUiRasterPanelComponent extends Component {
       const layer = this.store.peekRecord('rasterLayerProject', item.attributes['data-layer'].value);
       layer.setProperties({ position: layers.length - index + 11 });
       index += 1;
+      if (this.args.project.mayEdit) {
+        layer.save();
+      }
     }
+    this.saveOrder();
   }
 
   @action
@@ -62,22 +66,15 @@ export default class ProjectUiRasterPanelComponent extends Component {
           position: rasterUp.position + 1
         });
       }
-      // for (let layer of layers) {
-      //   if (direction == 'up') {
-      //     if (layer.attributes['data-position'].value == raster.position + 1) {
-      //       const layerDown = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
-      //       layerDown.setProperties({ position: raster.position});
-      //       raster.setProperties({ position: raster.position + 1 });
-      //     }
-      //   } else if (direction == 'down') {
-      //     if (layer.attributes['data-position'].value == raster.position - 1) {
-      //       const layerUp = this.store.peekRecord('raster-layer-project', layer.attributes['data-layer'].value);
-      //       layerUp.setProperties({ position: raster.position});
-      //       raster.setProperties({ position: raster.position - 1 });
-      //       break;
-      //     }
-      //   }
-      // }
+    }
+    this.saveOrder();
+  }
+
+  saveOrder() {
+    if (this.args.project.mayEdit) {
+      this.args.project.rasters.forEach(raster => {
+        raster.save();
+      });
     }
   }
 }

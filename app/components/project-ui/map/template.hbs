@@ -43,7 +43,7 @@ as |layers|>
         {{#if (eq vector.vectorLayer.dataFormat 'pbf')}}
           <layers.vectorTile
             @url={{concat vector.vectorLayer.institution.geoserver "/gwc/service/tms/1.0.0/" vector.vectorLayer.workspace ":" vector.vectorLayer.name "@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"}}
-            @zIndex="600"
+            @zIndex={{concat vector.zIndex}}
             @idProperty={{vector.vectorLayer.propertyId}}
             @styleFeatures={{fn this.styleVectorTile vector vector.colorMap}}
             @layerName={{vector.vectorLayer.name}}

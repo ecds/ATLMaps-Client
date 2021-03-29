@@ -9,7 +9,7 @@
           {{vector.vectorLayer.title}}
         </a>
         <div>
-          {{#if vector.vectorLayer.isPoints}}
+          {{#if vector.vectorLayer.isOpaque}}
             <ProjectUi::VectorPanel::ToggleSwitch @vector={{vector}} />
           {{else}}
             <ProjectUi::VectorPanel::OpacitySlider @project={{@project}} @vector={{vector}} />

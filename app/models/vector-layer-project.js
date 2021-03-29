@@ -60,9 +60,9 @@ export default class VectorLayerProjectModel extends Model {
     return `color: ${this.mainColor};`;
   }
 
-  @computed('project.vectorOnTop')
+  @computed('project.datumOnTop')
   get onTop() {
-    return this.get('project.vectorOnTop') == this;
+    return this.get('project.datumOnTop') == this;
   }
 
   @computed('order', 'onTop')
@@ -70,6 +70,9 @@ export default class VectorLayerProjectModel extends Model {
     let value = 500 - (this.order * 10);
     if (this.onTop) {
       value += 100;
+    }
+    if (this.leafletPane) {
+      this.leafletPane.style.zIndex = value;
     }
     return value;
   }

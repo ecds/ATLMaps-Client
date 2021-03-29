@@ -7,13 +7,24 @@ export default class ApplicationRoute extends Route {
   @service session;
   @service fastboot;
   @service headData;
+  @service metrics;
+  @service router;
+
+  constructor() {
+    super(...arguments);
+
+    this.router.on('routeDidChange', () => {
+      const page = this.router.currentURL;
+      const title = this.headData.title;
+      this.metrics.trackPage({ page, title });
+    });
+  }
 
   afterModel() {
     this.setHeadTags();
   }
 
   setHeadTags() {
-    this.headData.title = 'ATLMaps';
     this.headTags = [
       {
         type: 'meta',

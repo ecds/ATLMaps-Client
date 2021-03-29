@@ -70,19 +70,15 @@ export default class ProjectModel extends Model {
   }
 
   @computed('vectors.@each')
-  get places() {
-    const places = this.get('vectors').filter(layer => {
-      return layer.dataType == 'qualitative';
-    });
-    return [...new Set(places)];
+  get placeLayers() {
+    const places = this.get('vectors').filterBy('dataType', 'qualitative');
+    return places.sortBy('order');
   }
 
   @computed('vectors.@each')
-  get data() {
-    const data = this.vectors.filter(layer => {
-      return layer.dataType == 'quantitative';
-    });
-    return [...new Set(data)];
+  get datumLayers() {
+    const data = this.vectors.filterBy('dataType', 'quantitative');
+    return data.sortBy('order');
   }
 
   @computed('rasters')
@@ -97,12 +93,12 @@ export default class ProjectModel extends Model {
 
   @computed('vectors.@each', 'places')
   get hasPlaces() {
-    return this.places.length > 0;
+    return this.placeLayers.length > 0;
   }
 
   @computed('vectors.@each', 'data')
   get hasData() {
-    return this.data.length > 0;
+    return this.datumLayers.length > 0;
   }
 
   @computed('rasters.@each.opacity')
@@ -131,14 +127,14 @@ export default class ProjectModel extends Model {
   }
 
   @computed('vectors.@each.order')
-  get vectorOnTop() {
+  get datumOnTop() {
     const vectorPositions = this.vectors.map(v => {
       return v.order;
     });
     const max = Math.max(...vectorPositions);
     return this.vectors.filter(v => v.order == max).firstObject;
   }
-  set vectorOnTop(topVector) {
+  set datumOnTop(topVector) {
     return topVector;
   }
 

@@ -125,6 +125,11 @@ export default class VectorLayerModel extends Model {
     return this.geometryType.includes('Point');
   }
 
+  @computed('geometryType')
+  get isOpaque() {
+    return this.isPoints || this.geometryType.includes('Line');
+  }
+
   // @computed().readOnly()
   // get leafletLayerGroup() {
   //   if (this.fastboot.isFastBoot) return null;

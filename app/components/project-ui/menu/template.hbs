@@ -123,12 +123,12 @@
           {{/if}}
           {{#if @project.hasPlaces}}
             <li data-panel-title="Data Layers" data-type="panel">
-              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.places}} @remove={{@removeVector}}/>
+              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.placeLayers}} @remove={{@removeVector}}/>
             </li>
           {{/if}}
           {{#if @project.hasData}}
             <li data-panel-title="Data Layers" data-type="panel">
-              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.data}} @remove={{@removeVector}}/>
+              <ProjectUi::VectorPanel @project={{@project}} @layers={{@project.datumLayers}} @remove={{@removeVector}}/>
             </li>
           {{/if}}
           {{#if @project.mayEdit}}

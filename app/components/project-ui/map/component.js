@@ -76,7 +76,7 @@ export default class MapComponent extends Component {
 
   @action
   addMarker(vectorFeature, vector, layer, feature/*, point*/) {
-    if (vectorFeature.geometryType == 'Point') {
+    if (vectorFeature.geometryType.includes('Point')) {
       vectorFeature.setProperties(
         {
           geometry: feature

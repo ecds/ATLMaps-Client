@@ -94,10 +94,10 @@ export default class ProjectController extends Controller {
 
       switch(layerToEdit.dataType) {
         case 'qualitative':
-          this.model.places.removeObject(layerToEdit);
+          this.model.placeLayers.removeObject(layerToEdit);
         break;
         case 'quantitative':
-      this.model.data.removeObject(layerToEdit);
+      this.model.datumLayers.removeObject(layerToEdit);
           break;
       }
 

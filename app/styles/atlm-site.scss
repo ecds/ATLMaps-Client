@@ -190,3 +190,24 @@
     text-decoration: underline;
   }
 }
+
+.login-button {
+  color: white;
+  font-size: 2rem;
+
+  &.google {
+    background-color: #ea4435;
+  }
+
+  &.facebook {
+    background-color: #2d88ff;
+  }
+
+  &.github {
+    background-color: #302f2f;
+  }
+
+  &.twitter {
+    background-color: #1da1f1;
+  }
+}

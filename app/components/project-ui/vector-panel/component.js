@@ -29,15 +29,15 @@ export default class ProjectUiVectorPanelComponent extends Component {
 
   @action
   bringToFront(vectorLayerProject) {
-    if (this.args.project.vectorOnTop) this.sendBack();
-    this.args.project.setProperties({ vectorOnTop: vectorLayerProject });
+    if (this.args.project.datumOnTop) this.sendBack();
+    this.args.project.setProperties({ datumOnTop: vectorLayerProject });
 
     vectorLayerProject.leafletPane.style.zIndex = vectorLayerProject.zIndex;
   }
 
   sendBack() {
-    const vlp = this.args.project.vectorOnTop;
-    this.args.project.setProperties({ vectorOnTop: null });
+    const vlp = this.args.project.datumOnTop;
+    this.args.project.setProperties({ datumOnTop: null });
     vlp.leafletPane.style.zIndex = vlp.zIndex;
   }
 
