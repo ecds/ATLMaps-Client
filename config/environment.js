@@ -29,7 +29,7 @@ module.exports = function(environment) {
     },
 
     fastboot: {
-      hostWhitelist: ['api.atlmaps-dev.com', /^lvh.me:\d+$/, '192.168.1.22:4200']
+      hostWhitelist: ['atlmaps.ecdsdev.org', 'api.atlmaps-dev.com', /^lvh.me:\d+$/, '192.168.1.22:4200']
     },
 
     torii: {
