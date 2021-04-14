@@ -61,6 +61,7 @@
                 <section class="uk-panel uk-panel-scrollable">
                   <ProjectUi::SearchPanel::Results @resultType="maps" @getTask={{this.searchResults.getPlaces}}>
                     {{#each this.searchResults.places as |vector|}}
+                    {{#if vector.icon}}
                       <li class="uk-padding uk-grid-small uk-padding-remove-left" uk-grid>
                         <ProjectUi::SearchPanel::AddRemoveButton @layer={{vector}} @addRemove={{this.addRemoveVectorLayer}}>
                           <div class="uk-width-expand uk-grid-small" uk-grid>
@@ -71,6 +72,7 @@
                           </div>
                         </ProjectUi::SearchPanel::AddRemoveButton>
                       </li>
+                    {{/if}}
                     {{/each}}
                   </ProjectUi::SearchPanel::Results>
                 </section>

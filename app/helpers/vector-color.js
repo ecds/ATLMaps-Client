@@ -1,13 +1,14 @@
 import { helper } from '@ember/component/helper';
 
 export default helper(function vectorColor([vectorLayerProject, vectorFeature]) {
-  const property = vectorFeature.geojson.properties[vectorLayerProject.property];
-  const roundedProperty = Math.round(property);
-  const colorMap = vectorLayerProject.colorMap;
+  const property = vectorLayerProject.property || vectorLayerProject.get('vectorLayer.defaultBreakProperty');
+  const propertyValue = vectorFeature.geojson.properties[property];
+  const roundedProperty = Math.round(propertyValue);
+  const colorMap = vectorLayerProject.colorMap || vectorFeature.get('vectorLayer.colorMap');
   if (colorMap && Object.keys(colorMap).length > 0) {
     let color = 'blue';
     Object.keys(colorMap).forEach(key => {
-      if (isNaN(property) && property.toUpperCase() == key.toUpperCase()) {
+      if (isNaN(propertyValue) && propertyValue.toUpperCase() == key.toUpperCase()) {
         color = colorMap[key].color;
       }
       else if (roundedProperty >= colorMap[key].bottom && roundedProperty <= colorMap[key].top) {

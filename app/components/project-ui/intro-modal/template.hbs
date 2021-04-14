@@ -6,7 +6,7 @@
     </div>
     <article class="uk-modal-body" uk-overflow-auto>
       <section>
-        {{#if this.showingModal}}
+        {{#if (and this.showingModal @project.media)}}
           <div class='embed-container'>
             <iframe src={{@project.embedUrl}} title={{@project.name}} frameborder='0' allowfullscreen></iframe>
           </div>

@@ -32,7 +32,11 @@
       <div class="uk-accordion-content uk-width-1-1">
         <article class="uk-article">
           {{vector.vectorLayer.safeDescription}}
-          <ProjectUi::VectorPanel::Key @layer={{vector}} />
+          {{#if vector.colorMap}}
+            <ProjectUi::VectorPanel::Key @colorMap={{vector.colorMap}} @property={{vector.property}} />
+          {{else if vector.vectorLayer.colorMap}}
+            <ProjectUi::VectorPanel::Key @colorMap={{vector.vectorLayer.colorMap}} @property={{vector.vectorLayer.defaultBreakProperty}} />
+          {{/if}}
           {{#if vector.vectorLayer.institution}}
             <p class="uk-article-meta">Layer provided by: {{vector.vectorLayer.institution.name}}</p>
           {{/if}}

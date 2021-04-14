@@ -31,6 +31,10 @@ $base-link-color: #0D47A1;
 
 @import 'ember-uikit';
 
+html {
+  font-size: 2vh;
+}
+
 .uk-button:focus {
   outline-color: $primary-light-gray;
   outline-style: solid;

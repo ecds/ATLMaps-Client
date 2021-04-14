@@ -7,39 +7,24 @@ export default class VectorLayerProjectModel extends Model {
   @belongsTo('project') project;
   @attr('string') color;
   @attr('number') order;
-  @attr('string', {
-    defaultValue(_this) {
-      if (_this.get('vectorLayer.defaultBreakProperty')) {
-        return _this.get('vectorLayer.defaultBreakProperty');
-      }
-    }
-  }) property;
+  @attr('string') property;
   @attr('number') steps;
   @attr('boolean') manualSteps;
   @attr('string') brewerScheme;
   @attr('string') brewerGroup;
   @attr('string') dataType;
+  @attr() colorMap;
+  @attr() leafletPane;
 
   @computed('vectorLayer.show')
   get show() {
     return this.get('vectorLayer.show');
   }
 
-  @attr({
-    defaultValue(_this) {
-      if (_this.get('vectorLayer.colorMap')) {
-        return _this.get('vectorLayer.colorMap');
-      }
-      return null;
-    }
-  }) colorMap;
-
-  @attr() leafletPane;
-
   @computed('colorMap')
   get hasColorMap() {
     if (!this.colorMap) return false;
-    return Object.keys(this.colorMap).length > 0;
+    return Object.keys(this.get('vectorLayer.colorMap')).length > 0;
   }
 
   @computed('color', 'colorMap')
@@ -47,7 +32,7 @@ export default class VectorLayerProjectModel extends Model {
     if (this.colorMap && Object.keys(this.colorMap).length > 0) {
       const middleKeyIndex = Object.keys(this.colorMap).length / 2;
       const middleKey = Object.keys(this.colorMap)[parseInt(middleKeyIndex)];
-      return this.colorMap[middleKey].color ;
+      return this.colorMap[middleKey].color;
     }
     else if (this.dataType == 'qualitative' && this.color) {
       return this.color;
