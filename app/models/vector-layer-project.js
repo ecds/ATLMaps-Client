@@ -23,8 +23,13 @@ export default class VectorLayerProjectModel extends Model {
 
   @computed('colorMap')
   get hasColorMap() {
-    if (!this.colorMap) return false;
-    return Object.keys(this.get('vectorLayer.colorMap')).length > 0;
+    if (!this.colorMap && !this.get('vectorLayer.colorMap')) return false;
+    if (this.colorMap) {
+      return Object.keys(this.colorMap).length > 0 ;
+    } else if (this.get('vectorLayer.colorMap')) {
+      return Object.keys(this.get('vectorLayer.colorMap')).length > 0 ;
+    }
+    return false;
   }
 
   @computed('color', 'colorMap')
