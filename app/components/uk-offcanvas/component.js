@@ -29,12 +29,8 @@ export default class UkOffcanvasComponent extends Component {
   }
 
   @action
-  willDestroyNode() {
-    this.offcanvas.$destroy();
-    // if (this.offcanvas.isToggled()) {
-    //   console.log('closing canvas')
-    // } else {
-    //   console.log('not open?')
-    // }
+  willDestroy() {
+    this.offcanvas.hide();
+    this.offcanvas.$destroy(true);
   }
 }

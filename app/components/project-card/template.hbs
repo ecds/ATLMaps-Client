@@ -10,6 +10,9 @@
     <a href={{concat "/projects/" @project.id}}>
       <img src={{if @project.photo @project.photo ""}} {{on "error" this.imageError}} alt="ATLMaps placeholder" />
     </a>
+    {{!-- <LinkTo @route="project" @model={{@project.id}}>
+      <img src={{if @project.photo @project.photo ""}} {{on "error" this.imageError}} alt="ATLMaps placeholder" />
+    </LinkTo> --}}
   </section>
   <section class="uk-card-body">
     <LinkTo @route="project" @model={{@project.id}}>

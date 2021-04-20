@@ -6,11 +6,18 @@ export default class ProjectRoute extends Route {
   @service deviceContext;
   @service fastboot;
   @service headData;
+  @service router;
 
   init(...args) {
     super.init(...args);
-    this.on('routeWillChange', () => {
+    this.router.on('routeWillChange', () => {
       this.controllerFor('application').set('project', null);
+      this.store.peekAll('rasterLayer').forEach(raster => {
+        raster.setProperties({ onMap: false });
+      });
+      this.store.peekAll('vectorLayer').forEach(vector => {
+        vector.setProperties({ onMap: false });
+      });
     });
   }
 
