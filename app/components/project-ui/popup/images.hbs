@@ -5,7 +5,12 @@
         <li class="uk-text-center">
           {{#if image.link}}
             <a href={{image.link}} target="_blank">
-              <img src="{{image.url}}" alt="" role="presentation">
+              <figure>
+                <img src="{{image.url}}" alt="" role="presentation">
+                <figcaption class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                  LINK OPENS IN NEW TAB <FaIcon @icon="external-link-alt" />
+                </figcaption>
+              </figure>
             </a>
           {{else}}
             <a href={{concat "#image-modal-" @properties.images.id "-" index}} title={{image.caption}} uk-toggle>
