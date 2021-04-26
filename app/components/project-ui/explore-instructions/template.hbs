@@ -1,0 +1,25 @@
+{{#if (has-block)}}
+  <article {{did-insert this.watchForAuth}}>
+    Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers
+    {{#if this.session.isAuthenticated}}
+      . You can <UkButton @color="link" {{on 'click' this.consent}}>save this project</UkButton>.
+    {{else if this.cookiesAllowed}}
+      , you must <UkButton @color="link" {{on 'click' this.consent}}>sign in</UkButton>.
+    {{else}}
+      , you must <UkButton @color="link" {{on 'click' this.consent}}>allow cookies and sign in</UkButton>.
+    {{/if}}
+  </article>
+{{else}}
+  <div
+    class="uk-text-center uk-grid-collapse uk-child-width-1-1 atlm-toggle"
+    tabindex="0"
+    uk-grid
+  >
+    <div class="atlm-toggle-switch" role="button" {{on 'click' (perform this.saveAndTransition)}}>
+      <FaIcon @icon="save" />
+    </div>
+    <div class="atlm-toggle-status" role="button" {{on 'click' (perform this.saveAndTransition)}}>
+      Save
+    </div>
+  </div>
+{{/if}}

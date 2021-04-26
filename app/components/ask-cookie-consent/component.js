@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class AskCookieConsentComponent extends Component {
   @service cookies;
+  @service session
 
   @tracked
   cookieConsent = true;

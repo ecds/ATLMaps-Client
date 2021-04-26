@@ -16,12 +16,15 @@
           <div class="uk-grid-small uk-flex-middle" uk-grid>
             <div class="uk-width-expand">
               <h1 class="uk-card-title uk-margin-remove-bottom">{{@project.name}}</h1>
-                {{#if this.panelTitle}}
-              <p class="uk-text-meta uk-margin-remove-top atlm-panel-title">
+              {{#if this.panelTitle}}
+                <p class="uk-text-meta uk-margin-remove-top atlm-panel-title">
                   {{this.panelTitle}}
-              </p>
-                {{/if}}
+                </p>
+              {{/if}}
             </div>
+            {{#if (and this.session.isAuthenticated @project.isExploring)}}
+              <ProjectUi::ExploreInstructions @project={{@project}} />
+            {{/if}}
             <ProjectUi::ToggleSwitch @project={{@project}} />
             {{#if @save.isRunning}}
               <div
@@ -100,12 +103,16 @@
         <ul id="component-tab-left" class="uk-switcher uk-text-left">
           <li>
             <article class="uk-card-body atlm-project-description">
-              <p>
-                {{html-safe @project.description}}
-              </p>
-              <p>
-                Project Created By: {{@project.owner}}
-              </p>
+              {{#if @project.isExploring}}
+                <ProjectUi::ExploreInstructions @project={{@project}}></ProjectUi::ExploreInstructions>
+              {{else}}
+                <p>
+                  {{html-safe @project.description}}
+                </p>
+                <p>
+                  Project Created By: {{@project.owner}}
+                </p>
+              {{/if}}
               <p>
                 Base map provided by: {{html-safe @project._defaultBaseMap.attribution}}
               </p>

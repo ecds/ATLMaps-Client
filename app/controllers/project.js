@@ -4,10 +4,11 @@ import { A } from '@ember/array';
 import { keepLatestTask, task } from 'ember-concurrency-decorators';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { waitForProperty } from 'ember-concurrency';
+import { timeout, waitForProperty } from 'ember-concurrency';
 
 export default class ProjectController extends Controller {
   @service colorBrewer;
+  @service exploreProject;
   @service deviceContext;
   @service notification;
   @service fastboot;
@@ -65,6 +66,8 @@ export default class ProjectController extends Controller {
     if (this.model.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
+    } else {
+      this.exploreProject.updateLayers('rasters', this.model.rasters.map(r => r.get('rasterLayer.id')));
     }
     this.layerAddingOrRemoving = null;
     this.currentAction = null;
@@ -169,6 +172,8 @@ export default class ProjectController extends Controller {
     if (this.model.mayEdit) {
       yield layerToEdit.save();
       yield this.saveProject.perform();
+    } else {
+      this.exploreProject.updateLayers('vectors', this.model.vectors.map(r => r.get('vectorLayer.id')));
     }
     switch(layerToEdit.dataType) {
       case 'qualitative':
@@ -183,9 +188,10 @@ export default class ProjectController extends Controller {
   }
 
   @keepLatestTask
-  *saveProject() {
+  *saveProject(waitFor=0) {
     try {
       yield this.model.save();
+      yield timeout(waitFor);
     } catch(error) {
       if (error.errors[0].status == '401') {
         this.model.rollbackAttributes();

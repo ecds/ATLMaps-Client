@@ -1,1 +1,5 @@
-<UkButton {{on "click" (perform this.initModal)}}>{{yield}}</UkButton>
+{{#if (has-block)}}
+  <UkButton {{on "click" (perform this.initModal)}}>{{yield}}</UkButton>
+{{else}}
+  <div {{did-insert (perform this.delayModal)}}></div>
+{{/if}}

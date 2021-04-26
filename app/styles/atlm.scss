@@ -146,6 +146,17 @@
       font-size: 2em;
       display: block;
     }
+
+    h1 {
+      &.atlm-explore-title {
+        span {
+          cursor: pointer;
+          display: initial;
+          font-size: inherit;
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   .atlm-project-ui-project-menu-options {
@@ -164,8 +175,6 @@
         a.atlm-map-menu-button {
           border: none;
           color: black;
-          // color: $primary-dark-gray;
-          // color: white;
         }
       }
     }
@@ -178,6 +187,18 @@
   .uk-panel-scrollable {
     height: auto;
     max-height: 66vh;
+  }
+}
+
+.atlm-project-description {
+  button {
+    color: $primary-dark-gray;
+    font-size: 1rem;
+
+    &:hover {
+      color: $secondary-dark-gray;
+      text-decoration: underline;
+    }
   }
 }
 

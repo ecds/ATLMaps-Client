@@ -1,0 +1,3 @@
+{{#if this.exploreProject.canRestore}}
+  <ConfirmModal @onConfirm={{this.restoreLayers}} @onCancel={{this.clearLayers}} @message={{concat "Would you like to restore layers form your previous session?"}} />
+{{/if}}

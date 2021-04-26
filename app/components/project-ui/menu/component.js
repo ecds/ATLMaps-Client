@@ -5,8 +5,9 @@ import { tracked } from '@glimmer/tracking';
 import UIKit from "uikit";
 
 export default class ProjectUiMenuComponent extends Component {
-  @service fastboot;
   @service deviceContext;
+  @service fastboot;
+  @service session;
 
   @tracked
   ukAccordion = null;
@@ -64,8 +65,8 @@ export default class ProjectUiMenuComponent extends Component {
     };
 
     this.ukTabs = UIKit.tab(element, tabOptions);
-    if (this.args.project.isNew) {
-      this.ukTabs.show(1);
+    if (this.args.project.isNew || this.args.project.name == 'untitled') {
+      this.ukTabs.show(-1);
     }
   }
 

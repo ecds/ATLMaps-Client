@@ -22,6 +22,11 @@ export default class ProjectRoute extends Route {
   }
 
   async model(params) {
+    // For Fastboot, request the project without the associated layers.
+    // Loading the layers requires Leaflet which is not available to Fastboot.
+    if (this.fastboot.isFastBoot && params.project_id != 'explore') {
+      return this.store.findRecord('project-meta', params.project_id);
+    }
     // Search results are loaded through the SearchResultsService.
     if (params.project_id == 'explore') {
       return this.store.createRecord(
@@ -30,7 +35,6 @@ export default class ProjectRoute extends Route {
           name: 'Explore',
           mine: true,
           isExploring: true,
-          description: 'Here you can view and layer maps and data and share links to individual layers without an account. To save and share a collection of layers, you must sign in.'
         }
       );
     }
@@ -45,6 +49,11 @@ export default class ProjectRoute extends Route {
     const institutions = await this.store.query('institution', { limit: true });
     this.controllerFor('project').set('categories', categories);
     this.controllerFor('project').set('institutions', institutions);
+    // When transitioning from an explore project to a saved project, we need to
+    // ensure `isExploring` is set to `false`.
+    if (model.id && model.isExploring) {
+      model.setProperties({ isExploring: false });
+    }
   }
 
   setHeadTags(model) {

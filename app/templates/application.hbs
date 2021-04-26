@@ -26,13 +26,9 @@
                 </LinkTo>
               </li>
               <li>
-                {{#if this.session.isAuthenticated}}
-                  <a href="#" {{on "click" (perform this.newProject)}}>New Project</a>
-                {{else}}
-                  <LinkTo @route="explore" class="explore">
-                    Explore
-                  </LinkTo>
-                {{/if}}
+                <LinkTo @route="explore" class="explore">
+                  Explore
+                </LinkTo>
               </li>
               <li>
                 <LinkTo @route="about">About</LinkTo>

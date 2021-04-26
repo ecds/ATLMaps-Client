@@ -3,6 +3,9 @@
     {{#if this.fastboot.isFastBoot}}
       loading...
     {{else}}
+      {{#if this.model.isExploring}}
+        <ProjectUi::RestoreExplore @addRaster={{this.addRemoveRasterLayer}} @addVector={{this.addRemoveVectorLayer}} />
+      {{/if}}
       {{#if (or this.addRemoveVectorLayer.isRunning this.addRemoveRasterLayer.isRunning)}}
         <div class="uk-modal uk-open atlm-loading-modal">
           <div class="uk-modal-dialog uk-modal-body uk-text-center">
