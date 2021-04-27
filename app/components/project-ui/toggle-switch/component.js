@@ -24,7 +24,7 @@ export default class ProjectUiToggleSwitchComponent extends Component {
         layer.get('rasterLayer').setProperties({ opacity: 0 });
       });
       this.args.project.vectors.forEach(vector => {
-        vector.vectorLayer.setProperties({ show: false });
+        vector.vectorLayer.setProperties({ opacity: 0 });
       });
     }
   }

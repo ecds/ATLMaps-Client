@@ -102,9 +102,9 @@ export default class ProjectUiDefineColorMapComponent extends Component {
 
   @task
   *reloadLayer() {
-    this.args.layer.vectorProject.setProperties({ show: false });
+    this.args.layer.vectorProject.get('vectorLayer').setProperties({ opacity: 0 });
     yield this.args.layer.vectorProject.save();
-    this.args.layer.vectorProject.setProperties({ show: true });
+    this.args.layer.vectorProject.get('vectorLayer').setProperties({ opacity: 40 });
     this.colorModal.hide();
   }
 
