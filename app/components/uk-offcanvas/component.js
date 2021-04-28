@@ -21,12 +21,12 @@ export default class UkOffcanvasComponent extends Component {
     }
   }
 
-  @action
-  initToggle(element) {
-    this.offcanvas.$destroy();
-    this.initOffcanvas(this.offcanvas.$el);
-    UIKit.toggle(element, { target: this.offcanvas.$el });
-  }
+  // @action
+  // initToggle(element) {
+  //   this.offcanvas.$destroy();
+  //   this.initOffcanvas(this.offcanvas.$el);
+  //   UIKit.toggle(element, { target: this.offcanvas.$el });
+  // }
 
   @action
   willDestroy() {

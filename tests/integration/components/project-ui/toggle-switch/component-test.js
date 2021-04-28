@@ -38,6 +38,10 @@ module('Integration | Component | project-ui/toggle-switch', function(hooks) {
   });
 
   test('it renders', async function(assert) {
+    let vLayer3 = this.store.peekRecord('vectorLayerProject', 3);
+    let vLayer4 = this.store.peekRecord('vectorLayerProject', 4);
+    assert.ok(vLayer3.show);
+    assert.ok(vLayer4.show);
     await render(hbs`<ProjectUi::ToggleSwitch @project={{this.project}} />`);
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
     assert.dom('div.atlm-toggle-status').hasText('Hide Layers');
@@ -46,16 +50,22 @@ module('Integration | Component | project-ui/toggle-switch', function(hooks) {
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
     assert.dom('div.atlm-toggle-status').hasText('Show Layers');
     assert.equal(this.project.allLayersHidden, true);
+    assert.notOk(vLayer3.show);
+    assert.notOk(vLayer4.show);
 
     await click('div.atlm-toggle');
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-on');
     assert.dom('div.atlm-toggle-status').hasText('Hide Layers');
     assert.equal(this.project.allLayersHidden, false);
+    assert.ok(vLayer3.show);
+    assert.ok(vLayer4.show);
 
     await triggerKeyEvent('div.atlm-toggle', 'keyup', 'Enter');
     assert.dom('div.atlm-toggle-switch svg').hasClass('fa-toggle-off');
     assert.dom('div.atlm-toggle-status').hasText('Show Layers');
     assert.equal(this.project.allLayersHidden, true);
+    assert.notOk(vLayer3.show);
+    assert.notOk(vLayer4.show);
 
     let layer = this.store.peekRecord('rasterLayerProject', 2);
     layer.setProperties({ opacity: 50 });

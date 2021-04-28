@@ -70,12 +70,12 @@ export default class VectorLayerModel extends Model {
     return true;
   }
 
-  set show(set) {
-    if (set == false) {
+  set show(value) {
+    if (value == false) {
       this.setProperties({ opacity: 0 });
-      return;
+      return value;
     }
-    return set;
+    return value;
   }
 
   @computed('geojson')

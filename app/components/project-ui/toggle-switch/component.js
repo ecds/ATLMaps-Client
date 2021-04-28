@@ -4,14 +4,7 @@ import { action } from '@ember/object';
 export default class ProjectUiToggleSwitchComponent extends Component {
 
   @action
-  initToggle() {
-    // console.log(this)
-  }
-
-  @action
   toggleVisible() {
-    // let layers = this.args.project.rasters;
-
     if (this.args.project.allLayersHidden) {
       this.args.project.rasters.forEach(layer => {
         layer.get('rasterLayer').setProperties({ opacity: 100 });
@@ -24,7 +17,7 @@ export default class ProjectUiToggleSwitchComponent extends Component {
         layer.get('rasterLayer').setProperties({ opacity: 0 });
       });
       this.args.project.vectors.forEach(vector => {
-        vector.vectorLayer.setProperties({ opacity: 0 });
+        vector.vectorLayer.setProperties({ show: false, opacity: 0 });
       });
     }
   }

@@ -54,7 +54,7 @@ export default class VectorFeatureModel extends Model {
     return value;
   }
 
-  @computed('style')
+  @computed('style', 'color', 'opacity', 'weight')
   get styleString() {
     return JSON.stringify(this.style).replace('{', '').replace('}', '').replace(/,/g, ';').replace(/"/g, '');
   }
@@ -68,10 +68,8 @@ export default class VectorFeatureModel extends Model {
   @computed('vectorLayer.opacity', 'active')
   get weight() {
     if (this.active) return 6;
-    if (this.opacity == 0) return 0;
-    if (this.geometryType.includes('Line')) {
-      return 3;
-    }
+    if (this.get('vectorLayer.opacity') == 0) return 0;
+    if (this.geometryType.includes('Line')) return 3;
     return 1;
   }
 
