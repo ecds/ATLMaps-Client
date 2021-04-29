@@ -38,6 +38,7 @@
           @onEachFeature={{this.onEachFeature}}
           @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color this.layer feature) "darkgray" }}
           @fillColor={{vector-color this.layer feature}}
+          @style={{feature.style}}
         />
         {{/each}}
       {{/if}}

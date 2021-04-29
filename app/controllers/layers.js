@@ -3,10 +3,10 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-// import L from 'leaflet';
 
 export default class LayersController extends Controller {
   @service baseMaps;
+  @service fastboot;
 
   @tracked activeFeature = null;
   @tracked opacity = 100;
