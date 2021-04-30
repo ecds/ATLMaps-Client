@@ -436,6 +436,22 @@
   }
 }
 
+.atlm-watermark {
+  bottom: 20px;
+  position: absolute;
+  right: 20px;
+  z-index: 10000;
+
+  img {
+    height: 10vh;
+    opacity: .7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 // .atlm-loading-overlay {
 //   background: rgba(0,0,0,0.6);
 //   color: black;

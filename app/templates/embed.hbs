@@ -13,7 +13,12 @@
             <ul class="uk-nav uk-navbar-dropdown-nav" uk-accordion>
               {{#each this.model.rasters as |raster|}}
                 <li>
-                    <a class="uk-accordion-title" href="#">{{raster.title}}</a>
+                    <a class="uk-accordion-title" href="#">
+                      <span class="uk-width-1-6 uk-padding-small">
+                        <FaIcon @icon="map" />
+                      </span>
+                      {{raster.title}}
+                    </a>
                     <div class="uk-accordion-content">
                       <RasterOpacitySlider @raster={{raster}} />
                         {{html-safe raster.description}}
@@ -65,10 +70,20 @@
           @onAdd={{perform this.layerAdded vector}}
           @pointToLayer={{fn this.setIcon feature}}
           @onEachFeature={{fn this.onEachFeature feature}}
+          @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color vector feature) "darkgray" }}
+          @fillColor={{vector-color vector feature}}
+          @style={{feature.style}}
         />
       {{/each}}
     {{/each}}
   </LeafletMap>
+
+  <div class="atlm-watermark">
+    <a href={{this.link}} target="_blank">
+      <img src='/assets/images/logo-trans.png' />
+    </a>
+
+  </div>
 </div>
 
 {{#if this.activeFeature}}

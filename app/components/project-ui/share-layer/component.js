@@ -19,16 +19,11 @@ export default class ProjectUiShareLayerComponent extends Component {
   shareModal = this.shareModal || null;
   embedModal = this.shareModal || null;
 
-  @computed
-  get shareUrl() {
-    return `${window.location.origin}/layers/${this.args.layer.get('name')}`;
-  }
-
   @computed('base', 'color')
-  get embedUrl() {
-    if (this.color) return `<iframe height=600 width=800 src="${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}&color=${this.encodeColor()}" />`;
+  get embedCode() {
+    if (this.color) return `<iframe height=600 width=800 src="${this.args.layer.get('embedUrl')}?base=${this.base}&color=${this.encodeColor()}" />`;
 
-    return `<iframe height=600 width=800 src="${window.location.origin}/embed/${this.args.layer.get('name')}?base=${this.base}" />`;
+    return `<iframe height=600 width=800 src="${this.args.layer.get('embedUrl')}?base=${this.base}" />`;
   }
 
   bases = A([

@@ -12,6 +12,8 @@ export default class EmbedController extends Controller {
 
   queryParams = ['base', 'color'];
 
+  link = ENV.absoluteBase;
+
   @tracked
   base = null;
 
@@ -48,7 +50,6 @@ export default class EmbedController extends Controller {
 
   @action
   setIcon(vectorFeature, layer, feature) {
-    // console.log("🚀 ~ file: embed.js ~ line 45 ~ EmbedController ~ setIcon ~ vectorFeature, layer, feature", vectorFeature, layer, feature)
     vectorFeature.setProperties({ geometry: feature, color: this.color });
     vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
     return vectorFeature.leafletMarker;

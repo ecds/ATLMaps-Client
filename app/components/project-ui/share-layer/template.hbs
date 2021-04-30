@@ -13,7 +13,7 @@
   <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
     <button class="uk-modal-close-default" type="button" uk-close></button>
     <h3>Layer Link</h3>
-    <Input class="uk-input" @type="text" @value={{this.shareUrl}} id={{concat "share-" @layer.name}} aria-label={{concat "Shareable link for layer " @layer.title}} />
+    <Input class="uk-input" @type="text" @value={{@layer.shareUrl}} id={{concat "share-" @layer.name}} aria-label={{concat "Shareable link for layer " @layer.title}} />
     <UkButton @color="primary" {{on "click" (fn this.copyText "share")}}>copy link</UkButton>
   </div>
 </div>
@@ -23,7 +23,7 @@
     <button class="uk-modal-close-default" type="button" uk-close></button>
     <h3>Layer Embed</h3>
     <label for={{concat 'embed-' @layer.name}}>Embed Code</label>
-    <Input class="uk-input" @type="text" readonly @value={{this.embedUrl}} id={{concat "embed-" @layer.name}} />
+    <Input class="uk-input" @type="text" readonly @value={{this.embedCode}} id={{concat "embed-" @layer.name}} />
     <hr>
     <label class="uk-form-label" for={{concat 'embed-base-' @layer.name}}>Pick a base map:</label>
     <select id={{concat 'embed-base-' @layer.name}} class="uk-select" {{on 'change' this.setBase}}>

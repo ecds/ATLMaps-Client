@@ -1,49 +1,23 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import LayerModel from './layer';
+import { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/template';
 import { inject as service } from '@ember/service';
 
-export default class VectorLayerModel extends Model {
+export default class VectorLayerModel extends LayerModel {
   @service colorBrewer;
-  @service fastboot;
   @service store;
 
-  constructor() {
-    super(...arguments);
-    this.checkFastBoot();
-  }
-
-  // Dynamic import for FastBoot
-  async checkFastBoot() {
-    if (this.fastboot.isFastBoot) return;
-    this.L = await import('leaflet');
-  }
-
-  @attr('string') title;
-  @attr('string') name;
-  @attr('string') description;
   @attr('string', {
     defaultValue() { return 'Point'; }
   }) geometryType;
-  @attr('string') dataFormat;
-  @attr('string') workspace;
-  @attr('string') geoUrl;
   @attr('string') propertyId;
-  @attr('string') url;
   @attr('string') defaultBreakProperty;
   @attr('string') tmpColor;
   @attr('string') dataType;
   @attr() properties;
-  @attr() maxx;
-  @attr() maxy;
-  @attr() minx;
-  @attr() miny;
   @attr() geojson;
   @attr() colorMap;
-  @attr('boolean', {
-    defaultValue() { return false; }
-  }) onMap;
-  @belongsTo('institution') institution;
   @hasMany('vectorLayerProject') vectorLayerProjects;
 
   @attr( {
@@ -130,13 +104,6 @@ export default class VectorLayerModel extends Model {
     return this.isPoints || this.geometryType.includes('Line');
   }
 
-  // @computed().readOnly()
-  // get leafletLayerGroup() {
-  //   if (this.fastboot.isFastBoot) return null;
-  //   if (!this.L) return null;
-  //   return this.L.featureGroup();
-  // }
-
   @computed('tmpColor')
   get tmpStyle() {
     return htmlSafe(`color: ${this.tmpColor}`);
@@ -145,16 +112,6 @@ export default class VectorLayerModel extends Model {
   @computed('tmpColor')
   get color() {
     return this.tmpColor;
-  }
-
-  @computed('minx', 'maxx', 'miny', 'maxy')
-  get latLngBounds() {
-    if (this.fastboot.isFastBoot) return null;
-    if ([this.maxx, this.maxy, this.minx, this.miny].any(i => !i )) return null;
-    return this.L.latLngBounds(
-      this.L.latLng(this.maxy, this.maxx),
-      this.L.latLng(this.miny, this.minx)
-    );
   }
 
   @computed

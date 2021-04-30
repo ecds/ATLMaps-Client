@@ -17,6 +17,8 @@ module.exports = function(environment) {
       }
     },
 
+    absoluteBase: 'localhost',
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
@@ -60,6 +62,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV['absoluteBase'] = 'https://lvh.me:4200';
     ENV['ember-cli-mirage'] = { enabled: false, autostart: false };
     ENV.APP.API_HOST = 'https://api.atlmaps-dev.com:3000';
     ENV.APP.HOST = 'https://lvh.me:4200';
@@ -102,6 +105,7 @@ module.exports = function(environment) {
   }
 
   if (environment == 'staging') {
+    ENV.absoluteBase = 'https://atlmaps.ecdsdev.org';
     ENV.APP.API_HOST = 'https://atlmaps-api.ecdsdev.org';
     // ENV.APP.API_HOST = 'https://api.atlmaps.com';
     ENV['fauxOAuth'].tokenValidationUrl = 'https://atlmaps-api.ecdsdev.org/auth/verify/';
