@@ -65,7 +65,7 @@
     "ember-router-scroll": "^4.0.2",
     "ember-simple-auth": "^3.1.0",
     "ember-source": "~3.25.0",
-    "ember-template-lint": "^2.4.0",
+    "ember-template-lint": "^3.3.1",
     "ember-truth-helpers": "^2.1.0",
     "ember-uikit": "^2.2.2",
     "ember-welcome-page": "^4.0.0",
