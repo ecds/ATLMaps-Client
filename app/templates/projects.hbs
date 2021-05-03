@@ -33,7 +33,7 @@
                   <Input @type="checkbox" @checked={{project.featured}} {{on 'change' (fn this.toggleFeatured project)}} aria-label="Featured Project" />
                 </td>
                 <td>
-                  <LinkTo @route='project' @model={{project}}>
+                  <LinkTo @route='project' @model={{project.id}}>
                     {{project.name}}
                   </LinkTo>
                 </td>
