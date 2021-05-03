@@ -24,6 +24,7 @@
   </section>
   {{#if (and @project.mine @deleteProject)}}
     <section class="uk-card-footer">
+      <UkButton {{on 'click' (fn @publish @project)}} uk-tooltip={{if @project.published this.unPublishTip this.publishTip}}>{{if @project.published 'Un-publish' 'Publish'}}</UkButton>
       <ConfirmModal @onConfirm={{fn @deleteProject @project}} @message={{concat "Are you sure you want to delete " @project.name}}>Delete</ConfirmModal>
     </section>
   {{/if}}

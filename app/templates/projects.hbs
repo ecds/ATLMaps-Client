@@ -3,7 +3,7 @@
     <h2>My Projects</h2>
     <section class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="masonry: true">
       {{#each this.currentUser.user.projects as |project|}}
-        <ProjectCard @project={{project}} @deleteProject={{this.deleteProject}} />
+        <ProjectCard @project={{project}} @deleteProject={{this.deleteProject}} @publish={{this.togglePublished}} />
       {{/each}}
     </section>
     <hr>
@@ -15,6 +15,34 @@
         <ProjectCard @project={{project}} />
       {{/if}}
     {{/each}}
+  </section>
+  <section>
+    <table class="uk-table uk-table-striped">
+      <thead>
+          <tr>
+              <th>Featured</th>
+              <th>Title</th>
+              <th>Creator</th>
+          </tr>
+      </thead>
+      <tbody>
+        {{#each this.model as |project|}}
+          {{#if (not-eq project.name 'Explore')}}
+            <tr>
+                <td>
+                  <Input @type="checkbox" @checked={{project.featured}} {{on 'change' (fn this.toggleFeatured project)}} aria-label="Featured Project" />
+                </td>
+                <td>
+                  <LinkTo @route='project' @model={{project}}>
+                    {{project.name}}
+                  </LinkTo>
+                </td>
+                <td>{{project.owner}}</td>
+            </tr>
+          {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
   </section>
 </section>
 <SiteFooter />
