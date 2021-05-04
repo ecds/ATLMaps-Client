@@ -31,7 +31,7 @@ module.exports = function(environment) {
     },
 
     fastboot: {
-      hostWhitelist: ['atlmaps.ecdsdev.org', 'api.atlmaps-dev.com', /^lvh.me:\d+$/, '192.168.1.22:4200']
+      hostWhitelist: ['atlmaps.org', 'atlmaps.ecdsdev.org', 'api.atlmaps-dev.com', /^lvh.me:\d+$/, '192.168.1.22:4200']
     },
 
     torii: {
@@ -101,13 +101,16 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV.absoluteBase = 'https://atlmaps.org';
+    ENV.APP.API_HOST = 'https://api.atlmaps.org';
+    ENV['fauxOAuth'].tokenValidationUrl = 'https://api.atlmaps.org/auth/verify/';
+    ENV['fauxOAuth'].tokenAuthUrl = 'https://api.atlmaps.org/auth/tokens/';
+    ENV['fauxOAuth'].redirectUrl = 'https://atlmaps.org/torii/redirect.html';
   }
 
   if (environment == 'staging') {
     ENV.absoluteBase = 'https://atlmaps.ecdsdev.org';
     ENV.APP.API_HOST = 'https://atlmaps-api.ecdsdev.org';
-    // ENV.APP.API_HOST = 'https://api.atlmaps.com';
     ENV['fauxOAuth'].tokenValidationUrl = 'https://atlmaps-api.ecdsdev.org/auth/verify/';
     ENV['fauxOAuth'].tokenAuthUrl = 'https://atlmaps-api.ecdsdev.org/auth/tokens/';
     ENV['fauxOAuth'].redirectUrl = 'https://atlmaps.ecdsdev.org/torii/redirect.html';
