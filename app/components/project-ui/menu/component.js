@@ -2,8 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { keyResponder, onKey } from 'ember-keyboard';
 import UIKit from "uikit";
 
+@keyResponder
 export default class ProjectUiMenuComponent extends Component {
   @service deviceContext;
   @service fastboot;
@@ -23,6 +25,47 @@ export default class ProjectUiMenuComponent extends Component {
 
   @tracked
   hideMenuPanel = false;
+
+  @onKey('alt+shift+KeyO')
+  hideMenu() {
+    this.ukAccordion.toggle();
+  }
+
+  @onKey('alt+shift+KeyI')
+  showInfo() {
+    let tab = this.ukTabs.children.findIndex(el => el.id == 'info-menu');
+    this.showTab(tab);
+  }
+
+  @onKey('alt+shift+KeyM')
+  showMaps() {
+    let tab = this.ukTabs.children.findIndex(el => el.id == 'maps-menu');
+    this.showTab(tab);
+  }
+
+  @onKey('alt+shift+KeyP')
+  showPlaces() {
+    let tab = this.ukTabs.children.findIndex(el => el.id == 'places-menu');
+    this.showTab(tab);
+  }
+
+  @onKey('alt+shift+KeyD')
+  showData() {
+    let tab = this.ukTabs.children.findIndex(el => el.id == 'data-menu');
+    this.showTab(tab);
+  }
+
+  @onKey('alt+shift+KeyE')
+  showEdit() {
+    let tab = this.ukTabs.children.findIndex(el => el.id == 'edit-menu');
+    this.showTab(tab);
+  }
+
+  showTab(tab) {
+    if (tab >= 0) {
+      this.ukTabs.show(tab);
+    }
+  }
 
   checkIfOpen(accordion) {
     // I think this fires for the UIKit Accordion and for the

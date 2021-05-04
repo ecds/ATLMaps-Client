@@ -1,6 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { keyResponder, onKey } from 'ember-keyboard';
 
+@keyResponder
 export default class ProjectUiToggleSwitchComponent extends Component {
 
   @action
@@ -20,5 +22,10 @@ export default class ProjectUiToggleSwitchComponent extends Component {
         vector.vectorLayer.setProperties({ show: false, opacity: 0 });
       });
     }
+  }
+
+  @onKey('alt+shift+KeyC')
+  toggleByKey() {
+    this.toggleVisible();
   }
 }

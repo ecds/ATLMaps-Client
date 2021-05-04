@@ -49,7 +49,7 @@
     <div class="uk-accordion-content atlm-project-panel uk-margin-remove-top" uk-grid>
       <div class="uk-width-auto@m">
         <ul class="atlm-project-ui-project-menu-options uk-tab-left" {{did-insert this.initUkTabs}}>
-          <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+          <li id="info-menu" class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
             <a href="#" class="uk-child-width-1-1 atlm-map-menu-button">
               <span>
                 <FaIcon @icon="info" />
@@ -58,7 +58,7 @@
             </a>
           </li>
           {{#if @project.hasRasters}}
-            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-raster-menu-button">
+            <li id="maps-menu" class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-raster-menu-button">
               <a class="atlm-map-menu-button" href="#">
                 <span>
                   <FaIcon @icon="map" />
@@ -68,7 +68,7 @@
             </li>
           {{/if}}
           {{#if @project.hasPlaces}}
-            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-vector-menu-button">
+            <li id="places-menu" class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-vector-menu-button">
               <a class="atlm-map-menu-button" href="#">
                 <span>
                   <FaIcon @icon="map-marker-alt" />
@@ -78,7 +78,7 @@
             </li>
           {{/if}}
           {{#if @project.hasData}}
-            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-vector-menu-button">
+            <li id="data-menu" class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal atlm-vector-menu-button">
               <a class="atlm-map-menu-button" href="#">
                 <span>
                   <FaIcon @icon="database" />
@@ -88,7 +88,7 @@
             </li>
           {{/if}}
           {{#if @project.mayEdit}}
-            <li class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
+            <li id="edit-menu" class="uk-text-center uk-text-middle uk-padding-small uk-padding-remove-horizontal">
               <a class="atlm-map-menu-button" href="#">
                 <span>
                   <FaIcon @icon="edit" />

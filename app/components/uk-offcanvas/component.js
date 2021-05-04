@@ -1,8 +1,10 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { keyResponder, onKey } from 'ember-keyboard';
 import UIKit from "uikit";
 
+@keyResponder
 export default class UkOffcanvasComponent extends Component {
   @tracked
   offcanvas = null;
@@ -21,16 +23,14 @@ export default class UkOffcanvasComponent extends Component {
     }
   }
 
-  // @action
-  // initToggle(element) {
-  //   this.offcanvas.$destroy();
-  //   this.initOffcanvas(this.offcanvas.$el);
-  //   UIKit.toggle(element, { target: this.offcanvas.$el });
-  // }
-
   @action
   willDestroy() {
     this.offcanvas.hide();
     this.offcanvas.$destroy(true);
+  }
+
+  @onKey('alt+shift+KeyS')
+  showOffcanvas() {
+    this.offcanvas.show();
   }
 }

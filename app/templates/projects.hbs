@@ -17,32 +17,34 @@
     {{/each}}
   </section>
   <section>
-    <table class="uk-table uk-table-striped">
-      <thead>
-          <tr>
-              <th>Featured</th>
-              <th>Title</th>
-              <th>Creator</th>
-          </tr>
-      </thead>
-      <tbody>
-        {{#each this.model as |project|}}
-          {{#if (not-eq project.name 'Explore')}}
+    {{#if this.currentUser.user.admin}}
+      <table class="uk-table uk-table-striped">
+        <thead>
             <tr>
-                <td>
-                  <Input @type="checkbox" @checked={{project.featured}} {{on 'change' (fn this.toggleFeatured project)}} aria-label="Featured Project" />
-                </td>
-                <td>
-                  <LinkTo @route='project' @model={{project.id}}>
-                    {{project.name}}
-                  </LinkTo>
-                </td>
-                <td>{{project.owner}}</td>
+                <th>Featured</th>
+                <th>Title</th>
+                <th>Creator</th>
             </tr>
-          {{/if}}
-        {{/each}}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {{#each this.model as |project|}}
+            {{#if (not-eq project.name 'Explore')}}
+              <tr>
+                  <td>
+                    <Input @type="checkbox" @checked={{project.featured}} {{on 'change' (fn this.toggleFeatured project)}} aria-label="Featured Project" />
+                  </td>
+                  <td>
+                    <LinkTo @route='project' @model={{project.id}}>
+                      {{project.name}}
+                    </LinkTo>
+                  </td>
+                  <td>{{project.owner}}</td>
+              </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
   </section>
 </section>
 <SiteFooter />

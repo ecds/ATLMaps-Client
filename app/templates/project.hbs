@@ -24,7 +24,7 @@
             </UkButton>
           </div>
           <UkOffcanvas @open={{this.model.isExploring}} @id="atlm-layer-search-panel" @flip={{true}} class="uk-padding-remove atlm-search-panel uk-visible@m">
-            <ProjectUi::SearchPanel @model={{this.model}}>
+            <ProjectUi::SearchPanel @model={{this.model}} @ukOffcanvasId='atlm-layer-search-panel'>
               <li>
                 <section class="uk-panel uk-panel-scrollable uk-padding">
                   <ProjectUi::SearchPanel::Filters::Text />

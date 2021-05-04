@@ -9,6 +9,7 @@ export default class ApplicationController extends Controller {
   @service store;
   @service currentUser;
   @service fastboot;
+  @service router;
 
   @task
   *newProject() {

@@ -31,8 +31,24 @@
                 </LinkTo>
               </li>
               <li>
-                <LinkTo @route="about">About</LinkTo>
+                <LinkTo @route="about">
+                  About
+                </LinkTo>
               </li>
+              {{#if (eq this.router.currentRoute.name 'project')}}
+                <li>
+                  <a href="#">Help</a>
+                  <div class="uk-navbar-dropdown uk-width-large">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                      <li>
+                        <a href="#" uk-toggle="target: #shortcuts-modal">
+                          Keyboard Shortcuts
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              {{/if}}
             </ul>
           {{else if this.project}}
             <span class="home uk-margin-left">
@@ -82,6 +98,14 @@
   <div id="main" class={{this.deviceContext.deviceContextClass}}>
     {{outlet}}
   </div>
+  {{#if (eq this.router.currentRoute.name 'project')}}
+    <div id="shortcuts-modal" class="uk-flex-top" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <ProjectUi::ShortcutHelp />
+      </div>
+    </div>
+  {{/if}}
 {{else}}
   {{outlet}}
 {{/if}}
