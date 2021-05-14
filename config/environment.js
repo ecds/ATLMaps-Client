@@ -27,7 +27,8 @@ module.exports = function(environment) {
       INITIAL_ZOOM: 14,
       DEFAULT_BASE_MAP: 'grayscale',
       API_HOST: 'https://api.atlmaps-dev.com',
-      DEFAULT_IMAGE: '/assets/images/logo-med.jpg'
+      DEFAULT_IMAGE: '/assets/images/logo-med.jpg',
+      HOST: 'localhost'
     },
 
     fastboot: {
@@ -101,7 +102,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.absoluteBase = 'https://atlmaps.org';
+    ENV.APP.HOST = 'https://atlmaps.org';
     ENV.APP.API_HOST = 'https://api.atlmaps.org';
     ENV['fauxOAuth'].tokenValidationUrl = 'https://api.atlmaps.org/auth/verify/';
     ENV['fauxOAuth'].tokenAuthUrl = 'https://api.atlmaps.org/auth/tokens/';
@@ -109,7 +110,7 @@ module.exports = function(environment) {
   }
 
   if (environment == 'staging') {
-    ENV.absoluteBase = 'https://atlmaps.ecdsdev.org';
+    ENV.APP.HOST = 'https://atlmaps.ecdsdev.org';
     ENV.APP.API_HOST = 'https://atlmaps-api.ecdsdev.org';
     ENV['fauxOAuth'].tokenValidationUrl = 'https://atlmaps-api.ecdsdev.org/auth/verify/';
     ENV['fauxOAuth'].tokenAuthUrl = 'https://atlmaps-api.ecdsdev.org/auth/tokens/';
