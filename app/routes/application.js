@@ -55,6 +55,22 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
       },
       {
         type: 'meta',
+        tagId: 'meta-og-title',
+        attrs: {
+          property: 'og:title',
+          content: 'ATLMaps'
+        }
+      },
+      {
+        type: 'meta',
+        tagId: 'meta-og-description',
+        attrs: {
+          property: 'og:description',
+          content: 'The ATLMaps platform, a collaboration between Georgia State University and Emory University, combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta.'
+        }
+      },
+      {
+        type: 'meta',
         tagId: 'meta-twitter-card',
         attrs: {
           property: 'twitter:card',
