@@ -42,7 +42,7 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
         tagId: 'meta-og-image',
         attrs: {
           property: 'og:image',
-          content: '/assets/images/logo-med.jpg'
+          content: `${ENV.APP.HOST}${ENV.APP.DEFAULT_IMAGE}`
         }
       },
       {
@@ -51,6 +51,22 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
         attrs: {
           property: 'og:url',
           content: `${ENV.APP.HOST}`
+        }
+      },
+      {
+        type: 'meta',
+        tagId: 'meta-og-title',
+        attrs: {
+          property: 'og:title',
+          content: 'ATLMaps'
+        }
+      },
+      {
+        type: 'meta',
+        tagId: 'meta-og-description',
+        attrs: {
+          property: 'og:description',
+          content: 'The ATLMaps platform, a collaboration between Georgia State University and Emory University, combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta.'
         }
       },
       {
@@ -74,7 +90,7 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
         tagId: 'meta-twitter-description',
         attrs: {
           property: 'twitter:description',
-          content: 'ATLMaps'
+          content: 'The ATLMaps platform, a collaboration between Georgia State University and Emory University, combines archival maps, geospatial data visualization, and user contributed multimedia location pinpoints to promote investigation into any number of issues about Atlanta.'
         }
       },
       {
@@ -82,7 +98,7 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
         tagId: 'meta-twitter-image',
         attrs: {
           property: 'twitter:image',
-          content: '/assets/images/logo-med.jpg'
+          content: `${ENV.APP.HOST}${ENV.APP.DEFAULT_IMAGE}`
         }
       }
     ];

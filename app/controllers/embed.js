@@ -12,7 +12,7 @@ export default class EmbedController extends Controller {
 
   queryParams = ['base', 'color'];
 
-  link = ENV.absoluteBase;
+  link = ENV.APP.HOST;
 
   @tracked
   base = null;

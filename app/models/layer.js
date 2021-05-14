@@ -33,12 +33,12 @@ export default class LayerModel extends LayerMetaModel {
 
   @computed('name')
   get shareUrl() {
-    return `${ENV.absoluteBase}/layers/${this.name}`;
+    return `${ENV.APP.HOST}/layers/${this.name}`;
   }
 
   @computed('name')
   get embedUrl() {
-    return `${ENV.absoluteBase}/embed/${this.name}`;
+    return `${ENV.APP.HOST}/embed/${this.name}`;
   }
 
   @computed('minx', 'maxx', 'miny', 'maxy')

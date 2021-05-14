@@ -73,7 +73,7 @@ export default class ProjectRoute extends Route {
         tagId: 'meta-og-image',
         attrs: {
           property: 'og:image',
-          content: model.photo || '/assets/images/logo-med.jpg'
+          content: model.photo || `${ENV.APP.HOST}${ENV.APP.DEFAULT_IMAGE}`
         }
       },
       {
@@ -113,7 +113,7 @@ export default class ProjectRoute extends Route {
         tagId: 'meta-twitter-image',
         attrs: {
           property: 'twitter:image',
-          content: model.photo || '/assets/images/logo-med.jpg'
+          content: model.photo || `${ENV.APP.HOST}${ENV.APP.DEFAULT_IMAGE}`
         }
       }
     ]);
