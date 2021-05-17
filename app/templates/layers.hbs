@@ -39,6 +39,7 @@
           @color={{if (or (eq feature.geometryType 'LineString') (eq feature.geometryType 'MultiLineString')) (vector-color this.layer feature) "darkgray" }}
           @fillColor={{vector-color this.layer feature}}
           @style={{feature.style}}
+          @pointToLayer={{fn this.addMarker feature this.layer}}
         />
         {{/each}}
       {{/if}}
