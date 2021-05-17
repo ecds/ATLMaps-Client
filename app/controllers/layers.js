@@ -34,4 +34,17 @@ export default class LayersController extends Controller {
       this.activeFeature = feature;
     });
   }
-}
+
+  @action
+  addMarker(vectorFeature, vector, layer, feature/*, point*/) {
+    if (vectorFeature.geometryType.includes('Point')) {
+      vectorFeature.setProperties(
+        {
+          geometry: feature
+        }
+      );
+      vectorFeature.leafletMarker.setIcon(vectorFeature.divIcon);
+      // This function has to return the marker object.
+      return vectorFeature.leafletMarker;
+    }
+  }}
